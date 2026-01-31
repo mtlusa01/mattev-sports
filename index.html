@@ -310,6 +310,40 @@
     .game-pick-value.best-bet { color: var(--accent-light); }
     .game-proj-updated { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 16px; }
 
+    /* ── Game Status Filter ── */
+    .game-status-filter {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .game-status-filter .filter-label {
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
+    }
+
+    /* ── Final Game Card ── */
+    .game-card.final-card { border-color: rgba(113, 113, 122, 0.25); opacity: 0.92; }
+    .game-card.final-card:hover { border-color: rgba(113, 113, 122, 0.4); }
+    .final-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      background: var(--bg-tertiary); color: var(--text-muted);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    }
+    .game-final-scores { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+    .game-final-score-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px; font-weight: 600;
+    }
+    .game-final-score-row .team-name { color: var(--text-primary); min-width: 40px; }
+    .game-final-score-row .actual-score { color: var(--text-primary); font-size: 18px; font-weight: 700; min-width: 40px; }
+    .game-final-score-row .proj-score-label { color: var(--text-muted); font-size: 12px; font-weight: 400; }
+    .game-final-score-row .winner-team { color: var(--accent-light); }
+    .pick-result-badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .pick-result-badge.win { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .pick-result-badge.loss { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
+
     /* (Results section moved to results.html) */
 
     /* Empty State */
@@ -440,6 +474,7 @@
       </div>
 
       <div id="game-projections-view" style="display:none;">
+        <div class="game-status-filter" id="game-status-filter"></div>
         <div class="game-cards-grid" id="game-cards-container"></div>
         <div class="game-proj-updated" id="game-proj-updated"></div>
       </div>
@@ -465,6 +500,7 @@
     let currentConfFilter = 'all';
     let currentDirFilter = 'all';
     let currentGameFilter = null; // null = all, or "AWAY@HOME" key
+    let currentStatusFilter = 'all'; // all, upcoming, live, final
     let currentSearch = '';
     let teamToGame = {};  // team abbr -> game object
     let expandedRowId = null;  // currently expanded row
@@ -883,9 +919,18 @@
     });
 
     // ── Game Projections View ──
+    function renderResultBadge(result) {
+      if (result === 'win') return '<span class="pick-result-badge win">&#10003; W</span>';
+      if (result === 'loss') return '<span class="pick-result-badge loss">&#10007; L</span>';
+      return '';
+    }
+
     function renderGameCard(g) {
       const confColor = c => c >= 65 ? 'var(--accent-light)' : c >= 55 ? 'var(--accent)' : 'var(--text-muted)';
       const pickClass = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
+
+      const status = getGameStatus(g);
+      const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
 
       const spreadStr = g.spread_pick || 'N/A';
       const spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
@@ -895,7 +940,60 @@
       const mlStr = g.ml_pick || 'N/A';
       const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
 
-      const status = getGameStatus(g);
+      // Final card layout
+      if (isFinal) {
+        const projParts = (g.proj_score || '').split('-');
+        const projAway = projParts[0] || '?';
+        const projHome = projParts[1] || '?';
+        const awayWon = g.away_score > g.home_score;
+        const awayClass = awayWon ? ' winner-team' : '';
+        const homeClass = !awayWon ? ' winner-team' : '';
+
+        return `
+          <div class="game-card final-card">
+            <div class="game-card-header">
+              <div>
+                <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
+                <div class="game-card-time"><span class="final-badge">FINAL</span></div>
+              </div>
+              <div class="game-card-score">Proj: ${g.proj_score}</div>
+            </div>
+            <div class="game-final-scores">
+              <div class="game-final-score-row">
+                <span class="team-name${awayClass}">${g.away_team}</span>
+                <span class="actual-score${awayClass}">${g.away_score}</span>
+                <span class="proj-score-label">Proj: ${projAway}</span>
+              </div>
+              <div class="game-final-score-row">
+                <span class="team-name${homeClass}">${g.home_team}</span>
+                <span class="actual-score${homeClass}">${g.home_score}</span>
+                <span class="proj-score-label">Proj: ${projHome}</span>
+              </div>
+            </div>
+            <div class="game-card-picks">
+              <div class="game-pick-row">
+                <span class="game-pick-label">Spread</span>
+                <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
+                <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+                ${renderResultBadge(g.spread_result)}
+              </div>
+              <div class="game-pick-row">
+                <span class="game-pick-label">Total</span>
+                <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
+                <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+                ${renderResultBadge(g.total_result)}
+              </div>
+              <div class="game-pick-row">
+                <span class="game-pick-label">ML</span>
+                <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
+                <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+                ${renderResultBadge(g.ml_result)}
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // Non-final card layout (scheduled/live/soon)
       const time = formatGameTime(g.commence_time);
       let timeHtml = '';
       let cardCls = '';
@@ -937,20 +1035,76 @@
         </div>`;
     }
 
+    function renderGameStatusFilter() {
+      const filterEl = document.getElementById('game-status-filter');
+      if (gameProjections.length === 0) { filterEl.innerHTML = ''; return; }
+
+      // Count games by status category
+      const counts = { all: gameProjections.length, upcoming: 0, live: 0, final: 0 };
+      for (const g of gameProjections) {
+        const s = getGameStatus(g);
+        if (s === 'scheduled' || s === 'soon') counts.upcoming++;
+        else if (s === 'live') counts.live++;
+        else if (s === 'final') counts.final++;
+      }
+
+      const tabs = [
+        { key: 'all', label: 'All' },
+        { key: 'upcoming', label: 'Upcoming' },
+        { key: 'live', label: 'Live' },
+        { key: 'final', label: 'Final' },
+      ];
+
+      let html = '<span class="filter-label">Status</span>';
+      for (const tab of tabs) {
+        const active = currentStatusFilter === tab.key ? ' active' : '';
+        html += `<button class="filter-pill${active}" data-status-filter="${tab.key}">${tab.label} (${counts[tab.key]})</button>`;
+      }
+      filterEl.innerHTML = html;
+
+      filterEl.querySelectorAll('[data-status-filter]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentStatusFilter = pill.dataset.statusFilter;
+          filterEl.querySelectorAll('[data-status-filter]').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          renderGameProjections();
+        });
+      });
+    }
+
     function renderGameProjections() {
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
+
+      renderGameStatusFilter();
+
       if (gameProjections.length === 0) {
         container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No game projections available</div><div class="empty-state-text">Game projections will appear here when today's games are loaded.</div></div>`;
         updatedEl.textContent = '';
         return;
       }
+
       const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
-      const sorted = [...gameProjections].sort((a, b) => {
+      let sorted = [...gameProjections].sort((a, b) => {
         const sa = getGameStatus(a), sb = getGameStatus(b);
         if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
         return (a.commence_time || '').localeCompare(b.commence_time || '');
       });
+
+      // Apply status filter
+      if (currentStatusFilter !== 'all') {
+        sorted = sorted.filter(g => {
+          const s = getGameStatus(g);
+          if (currentStatusFilter === 'upcoming') return s === 'scheduled' || s === 'soon';
+          return s === currentStatusFilter;
+        });
+      }
+
+      if (sorted.length === 0) {
+        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No ${currentStatusFilter} games</div><div class="empty-state-text">Try a different filter to see more games.</div></div>`;
+        return;
+      }
+
       container.innerHTML = sorted.map(renderGameCard).join('');
     }
 
