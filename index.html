@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MattEV Sports AI | AI-Powered Sports Predictions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #05060a;
+      --bg-secondary: #0a0c12;
+      --bg-card: rgba(15, 18, 30, 0.6);
+      --accent-gold: #f0b90b;
+      --accent-fire: #ff5722;
+      --accent-green: #00ff88;
+      --accent-red: #ff4757;
+      --accent-blue: #00d4ff;
+      --accent-purple: #a855f7;
+      --accent-gray: #6b7280;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Background Effects */
+    .bg-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .grid-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(240,185,11,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240,185,11,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+    }
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(240,185,11,0.12), transparent 70%);
+      top: -200px;
+      right: -100px;
+    }
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,87,34,0.08), transparent 70%);
+      bottom: 20%;
+      left: -150px;
+    }
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0,212,255,0.06), transparent 70%);
+      top: 50%;
+      right: -100px;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 24px;
+      background: rgba(5,6,10,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-gold);
+    }
+    .nav-logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-gold);
+    }
+    .nav-cta {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(240,185,11,0.4);
+    }
+    
+    /* Hero Section */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(0,255,136,0.1);
+      border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      color: var(--accent-green);
+      margin-bottom: 24px;
+    }
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-fire) 50%, var(--accent-gold) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(240,185,11,0.4);
+    }
+    .btn-secondary {
+      padding: 14px 32px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--accent-gold);
+    }
+    
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 40px 24px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 42px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 22px;
+    }
+    .section-icon.gold {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+    }
+    .section-icon.green {
+      background: linear-gradient(135deg, var(--accent-green), #00b368);
+    }
+    .section-icon.blue {
+      background: linear-gradient(135deg, var(--accent-blue), #0099cc);
+    }
+    .section-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+    
+    /* Today's Picks Section */
+    .picks-section {
+      margin-bottom: 60px;
+    }
+    
+    /* Sport Tabs */
+    .sport-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .sport-tab {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .sport-tab:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    .sport-tab.active {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+    }
+    
+    /* Pick Type Filter */
+    .pick-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .pick-filter {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pick-filter:hover {
+      border-color: var(--accent-gold);
+    }
+    .pick-filter.active {
+      background: rgba(240,185,11,0.15);
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+    
+    /* Picks Grid */
+    .picks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+    }
+    
+    /* Pick Card */
+    .pick-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pick-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-fire));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .pick-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(240,185,11,0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .pick-card:hover::before {
+      opacity: 1;
+    }
+    .pick-card.featured {
+      border-color: rgba(240,185,11,0.3);
+    }
+    .pick-card.featured::before {
+      opacity: 1;
+    }
+    
+    .pick-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .pick-sport {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .pick-confidence {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pick-confidence.high {
+      background: rgba(0,255,136,0.15);
+      color: var(--accent-green);
+    }
+    .pick-confidence.medium {
+      background: rgba(240,185,11,0.15);
+      color: var(--accent-gold);
+    }
+    .pick-confidence.low {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-secondary);
+    }
+    
+    .pick-matchup {
+      margin-bottom: 16px;
+    }
+    .pick-teams {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .pick-time {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .pick-selection {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+    .pick-type {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .pick-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .pick-value.over {
+      color: var(--accent-green);
+    }
+    .pick-value.under {
+      color: var(--accent-fire);
+    }
+    
+    .pick-analysis {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-top: 12px;
+      border-top: 1px solid var(--glass-border);
+    }
+    
+    /* Result Badge */
+    .pick-result {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .pick-result.win {
+      background: rgba(0,255,136,0.2);
+      color: var(--accent-green);
+    }
+    .pick-result.loss {
+      background: rgba(255,71,87,0.2);
+      color: var(--accent-red);
+    }
+    .pick-result.push {
+      background: rgba(168,85,247,0.2);
+      color: var(--accent-purple);
+    }
+    .pick-result.pending {
+      background: rgba(240,185,11,0.2);
+      color: var(--accent-gold);
+    }
+    
+    /* Performance Section */
+    .performance-section {
+      margin-bottom: 60px;
+    }
+    .performance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .performance-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .performance-card h3 {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .performance-value {
+      font-size: 36px;
+      font-weight: 800;
+    }
+    .performance-value.positive {
+      color: var(--accent-green);
+    }
+    .performance-value.negative {
+      color: var(--accent-red);
+    }
+    .performance-change {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .performance-change.up {
+      color: var(--accent-green);
+    }
+    .performance-change.down {
+      color: var(--accent-red);
+    }
+    
+    /* Recent Results */
+    .results-section {
+      margin-bottom: 60px;
+    }
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .result-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+    }
+    .result-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .result-status.win {
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+    }
+    .result-status.loss {
+      background: var(--accent-red);
+      box-shadow: 0 0 10px var(--accent-red);
+    }
+    .result-status.push {
+      background: var(--accent-purple);
+    }
+    .result-info h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .result-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .result-pick {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .result-outcome {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+    .result-outcome.win {
+      background: rgba(0,255,136,0.15);
+      color: var(--accent-green);
+    }
+    .result-outcome.loss {
+      background: rgba(255,71,87,0.15);
+      color: var(--accent-red);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--glass-border);
+      padding: 60px 24px 30px;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .footer-links h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--accent-gold);
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-bottom p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-disclaimer {
+      font-size: 11px;
+      color: var(--text-muted);
+      max-width: 600px;
+      line-height: 1.5;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      .stats-bar {
+        gap: 24px;
+      }
+      .stat-value {
+        font-size: 32px;
+      }
+      .picks-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-item {
+        grid-template-columns: auto 1fr;
+        gap: 12px;
+      }
+      .result-pick, .result-outcome {
+        grid-column: 2;
+      }
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-effects">
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f0b90b'/%3E%3Ctext x='50' y='62' font-size='32' font-weight='bold' text-anchor='middle' fill='%23000'%3EM%3C/text%3E%3C/svg%3E" alt="MattEV">
+        <span class="nav-logo-text">MattEV</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Today's Picks</a></li>
+        <li><a href="#performance">Performance</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <button class="nav-cta" onclick="window.location.href='admin.html'">Admin Panel</button>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Model Updated Today
+    </div>
+    <h1>AI-Powered<br><span class="highlight">Sports Predictions</span></h1>
+    <p>Advanced machine learning models analyzing player stats, matchups, and trends to deliver high-confidence betting picks daily.</p>
+    <div class="hero-buttons">
+      <a href="#picks" class="btn-primary">View Today's Picks</a>
+      <a href="#performance" class="btn-secondary">See Our Track Record</a>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value" id="stat-record">127-89</div>
+      <div class="stat-label">Season Record</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-winrate">58.8%</div>
+      <div class="stat-label">Win Rate</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-roi">+14.2%</div>
+      <div class="stat-label">ROI</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="stat-streak">🔥 5W</div>
+      <div class="stat-label">Current Streak</div>
+    </div>
+  </div>
+
+  <main>
+    <section class="picks-section" id="picks">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon gold">🎯</span>
+          Today's Picks
+        </h2>
+        <span class="section-date" id="current-date"></span>
+      </div>
+      
+      <div class="sport-tabs">
+        <button class="sport-tab active" data-sport="all">All Sports</button>
+        <button class="sport-tab" data-sport="nba">🏀 NBA</button>
+        <button class="sport-tab" data-sport="nfl">🏈 NFL</button>
+        <button class="sport-tab" data-sport="mlb">⚾ MLB</button>
+        <button class="sport-tab" data-sport="nhl">🏒 NHL</button>
+      </div>
+      
+      <div class="pick-filters">
+        <button class="pick-filter active" data-type="all">All Picks</button>
+        <button class="pick-filter" data-type="spread">Spreads</button>
+        <button class="pick-filter" data-type="total">Totals</button>
+        <button class="pick-filter" data-type="prop">Player Props</button>
+        <button class="pick-filter" data-type="moneyline">Moneyline</button>
+      </div>
+      
+      <div class="picks-grid" id="picks-container">
+        <!-- Picks will be loaded dynamically -->
+      </div>
+    </section>
+
+    <section class="performance-section" id="performance">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon green">📊</span>
+          Model Performance
+        </h2>
+      </div>
+      
+      <div class="performance-grid">
+        <div class="performance-card">
+          <h3>This Week</h3>
+          <div class="performance-value positive" id="perf-week">+8.4 Units</div>
+          <div class="performance-change up">
+            ↑ 12-6 Record
+          </div>
+        </div>
+        <div class="performance-card">
+          <h3>This Month</h3>
+          <div class="performance-value positive" id="perf-month">+24.7 Units</div>
+          <div class="performance-change up">
+            ↑ 47-31 Record
+          </div>
+        </div>
+        <div class="performance-card">
+          <h3>Season Total</h3>
+          <div class="performance-value positive" id="perf-season">+52.3 Units</div>
+          <div class="performance-change up">
+            ↑ 127-89 Record
+          </div>
+        </div>
+        <div class="performance-card">
+          <h3>Best Sport</h3>
+          <div class="performance-value">NBA Props</div>
+          <div class="performance-change up">
+            64.2% Win Rate
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section" id="results">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon blue">📋</span>
+          Recent Results
+        </h2>
+      </div>
+      
+      <div class="results-list" id="results-container">
+        <!-- Results will be loaded dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>MattEV Sports AI</h3>
+        <p>AI-powered sports predictions built on advanced machine learning models. Making data-driven betting accessible to everyone.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#picks">Today's Picks</a></li>
+          <li><a href="#performance">Performance</a></li>
+          <li><a href="#results">Results</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Sports</h4>
+        <ul>
+          <li><a href="#">NBA Picks</a></li>
+          <li><a href="#">NFL Picks</a></li>
+          <li><a href="#">MLB Picks</a></li>
+          <li><a href="#">NHL Picks</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MattEV Sports AI. All rights reserved.</p>
+      <p class="footer-disclaimer">For entertainment purposes only. Please gamble responsibly. Past performance does not guarantee future results.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current date
+    const today = new Date();
+    document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', { 
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+    });
+
+    // Sample data - in production, this would come from your backend/database
+    let picks = JSON.parse(localStorage.getItem('mattev_picks') || '[]');
+    let results = JSON.parse(localStorage.getItem('mattev_results') || '[]');
+
+    // If no data, load sample data
+    if (picks.length === 0) {
+      picks = [
+        {
+          id: 1,
+          sport: 'nba',
+          type: 'prop',
+          teams: 'Lakers vs Celtics',
+          time: '7:30 PM ET',
+          pickType: 'Player Prop',
+          pick: 'LeBron James O 27.5 PTS',
+          value: 'OVER 27.5',
+          confidence: 'high',
+          analysis: 'LeBron averaging 29.3 PPG in last 10 games vs Boston. Favorable matchup against their interior defense.',
+          status: 'pending',
+          featured: true
+        },
+        {
+          id: 2,
+          sport: 'nba',
+          type: 'total',
+          teams: 'Warriors vs Suns',
+          time: '10:00 PM ET',
+          pickType: 'Game Total',
+          pick: 'UNDER 234.5',
+          value: 'UNDER 234.5',
+          confidence: 'high',
+          analysis: 'Both teams rank bottom 10 in pace this month. Defensive adjustments expected after high-scoring first meeting.',
+          status: 'pending',
+          featured: false
+        },
+        {
+          id: 3,
+          sport: 'nba',
+          type: 'prop',
+          teams: 'Knicks vs Heat',
+          time: '8:00 PM ET',
+          pickType: 'Player Prop',
+          pick: 'Jalen Brunson O 24.5 PTS',
+          value: 'OVER 24.5',
+          confidence: 'medium',
+          analysis: 'Brunson has exceeded this line in 7 of last 10 games. Heat allowing 4th most points to PGs.',
+          status: 'pending',
+          featured: false
+        }
+      ];
+      localStorage.setItem('mattev_picks', JSON.stringify(picks));
+    }
+
+    if (results.length === 0) {
+      results = [
+        { id: 1, teams: 'Nuggets vs Clippers', pick: 'Jokic O 11.5 REB', outcome: 'win', actual: '14 REB' },
+        { id: 2, teams: 'Bucks vs Cavaliers', pick: 'UNDER 224.5', outcome: 'win', actual: '218 Total' },
+        { id: 3, teams: '76ers vs Nets', pick: 'Embiid O 32.5 PTS', outcome: 'loss', actual: '28 PTS' },
+        { id: 4, teams: 'Celtics vs Pacers', pick: 'Tatum O 27.5 PTS', outcome: 'win', actual: '31 PTS' },
+        { id: 5, teams: 'Thunder vs Mavs', pick: 'OVER 228.5', outcome: 'win', actual: '241 Total' }
+      ];
+      localStorage.setItem('mattev_results', JSON.stringify(results));
+    }
+
+    // Render picks
+    function renderPicks(filteredPicks = picks) {
+      const container = document.getElementById('picks-container');
+      
+      if (filteredPicks.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+            <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
+            <div style="font-size: 18px; margin-bottom: 8px;">No picks available</div>
+            <div style="font-size: 14px;">Check back later for today's model projections</div>
+          </div>
+        `;
+        return;
+      }
+      
+      container.innerHTML = filteredPicks.map(pick => `
+        <div class="pick-card ${pick.featured ? 'featured' : ''}">
+          ${pick.status !== 'pending' ? `<span class="pick-result ${pick.status}">${pick.status}</span>` : ''}
+          <div class="pick-header">
+            <span class="pick-sport">${pick.sport.toUpperCase()} • ${pick.type.toUpperCase()}</span>
+            <span class="pick-confidence ${pick.confidence}">
+              ${pick.confidence === 'high' ? '🔥' : pick.confidence === 'medium' ? '⚡' : '○'}
+              ${pick.confidence.charAt(0).toUpperCase() + pick.confidence.slice(1)}
+            </span>
+          </div>
+          <div class="pick-matchup">
+            <div class="pick-teams">${pick.teams}</div>
+            <div class="pick-time">${pick.time}</div>
+          </div>
+          <div class="pick-selection">
+            <span class="pick-type">${pick.pickType}</span>
+            <span class="pick-value ${pick.value.includes('OVER') ? 'over' : 'under'}">${pick.value}</span>
+          </div>
+          <div class="pick-analysis">${pick.analysis}</div>
+        </div>
+      `).join('');
+    }
+
+    // Render results
+    function renderResults() {
+      const container = document.getElementById('results-container');
+      container.innerHTML = results.slice(0, 10).map(result => `
+        <div class="result-item">
+          <div class="result-status ${result.outcome}"></div>
+          <div class="result-info">
+            <h4>${result.teams}</h4>
+            <p>Yesterday</p>
+          </div>
+          <div class="result-pick">${result.pick}</div>
+          <span class="result-outcome ${result.outcome}">
+            ${result.outcome === 'win' ? '✓ WIN' : result.outcome === 'loss' ? '✗ LOSS' : '↔ PUSH'} (${result.actual})
+          </span>
+        </div>
+      `).join('');
+    }
+
+    // Filter functionality
+    document.querySelectorAll('.sport-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.sport-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const sport = tab.dataset.sport;
+        const filtered = sport === 'all' ? picks : picks.filter(p => p.sport === sport);
+        renderPicks(filtered);
+      });
+    });
+
+    document.querySelectorAll('.pick-filter').forEach(filter => {
+      filter.addEventListener('click', () => {
+        document.querySelectorAll('.pick-filter').forEach(f => f.classList.remove('active'));
+        filter.classList.add('active');
+        const type = filter.dataset.type;
+        const filtered = type === 'all' ? picks : picks.filter(p => p.type === type);
+        renderPicks(filtered);
+      });
+    });
+
+    // Calculate and update stats
+    function updateStats() {
+      const wins = results.filter(r => r.outcome === 'win').length;
+      const losses = results.filter(r => r.outcome === 'loss').length;
+      const total = wins + losses;
+      const winRate = total > 0 ? ((wins / total) * 100).toFixed(1) : 0;
+      
+      // These would come from your actual tracking in production
+      document.getElementById('stat-record').textContent = `${wins + 120}-${losses + 80}`;
+      document.getElementById('stat-winrate').textContent = `${winRate}%`;
+    }
+
+    // Initialize
+    renderPicks();
+    renderResults();
+    updateStats();
+  </script>
+</body>
+</html>
