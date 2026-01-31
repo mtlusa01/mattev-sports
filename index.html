@@ -869,6 +869,76 @@
       border-color: var(--border-light);
     }
 
+    .game-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .game-card-matchup {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .game-card-score {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .game-card-picks {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .game-pick-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .game-pick-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      min-width: 70px;
+    }
+
+    .game-pick-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .game-pick-conf {
+      font-size: 12px;
+      color: var(--text-secondary);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .game-pick-value.no-play {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .game-pick-value.best-bet {
+      color: var(--accent-light);
+    }
+
+    .game-proj-updated {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 16px;
+    }
+
     /* Mobile responsive additions */
     @media (max-width: 768px) {
       .sub-tabs {
@@ -984,11 +1054,8 @@
       </div>
 
       <div id="game-projections-view" style="display:none;">
-        <div class="coming-soon-card">
-          <div class="empty-state-icon">&#127944;</div>
-          <div class="empty-state-title">Game Projections Coming Soon</div>
-          <div class="empty-state-text">We're building AI-powered game projections including spreads, totals, and moneylines. Stay tuned for launch.</div>
-        </div>
+        <div class="game-cards-grid" id="game-cards-container"></div>
+        <div class="game-proj-updated" id="game-proj-updated"></div>
       </div>
     </section>
 
@@ -1011,7 +1078,9 @@
 
   <script>
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
+    const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     let projections = [];
+    let gameProjections = [];
     let currentSport = 'all';
     let currentView = 'player-props';
     let currentConfFilter = 'all';
@@ -1125,6 +1194,7 @@
         propsView.style.display = 'none';
         gameView.style.display = 'block';
         filterRow.style.display = 'none';
+        renderGameProjections();
         return;
       }
 
@@ -1209,6 +1279,92 @@
       });
     });
 
+    function renderGameCard(g) {
+      const confColor = (conf) => {
+        if (conf >= 65) return 'var(--accent-light)';
+        if (conf >= 55) return 'var(--accent)';
+        return 'var(--text-muted)';
+      };
+
+      const pickClass = (pick, conf) => {
+        if (!pick || pick === 'NO PLAY') return 'no-play';
+        if (conf >= 60) return 'best-bet';
+        return '';
+      };
+
+      const spreadStr = g.spread_pick || 'N/A';
+      const spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
+      const totalStr = g.total_pick && g.total_line != null
+        ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line)
+        : 'N/A';
+      const totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
+      const mlStr = g.ml_pick || 'N/A';
+      const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
+
+      return `
+        <div class="game-card">
+          <div class="game-card-header">
+            <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
+            <div class="game-card-score">Proj: ${g.proj_score}</div>
+          </div>
+          <div class="game-card-picks">
+            <div class="game-pick-row">
+              <span class="game-pick-label">Spread</span>
+              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
+              <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+            </div>
+            <div class="game-pick-row">
+              <span class="game-pick-label">Total</span>
+              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
+              <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+            </div>
+            <div class="game-pick-row">
+              <span class="game-pick-label">ML</span>
+              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
+              <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderGameProjections() {
+      const container = document.getElementById('game-cards-container');
+      const updatedEl = document.getElementById('game-proj-updated');
+
+      if (gameProjections.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <div class="empty-state-icon">&#127936;</div>
+            <div class="empty-state-title">No game projections available</div>
+            <div class="empty-state-text">Game projections will appear here when today's games are loaded.</div>
+          </div>`;
+        updatedEl.textContent = '';
+        return;
+      }
+
+      container.innerHTML = gameProjections.map(renderGameCard).join('');
+    }
+
+    async function loadGameProjections() {
+      try {
+        const resp = await fetch(GAME_DATA_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch game projections');
+        const data = await resp.json();
+        gameProjections = data.games || [];
+
+        const updatedEl = document.getElementById('game-proj-updated');
+        if (data.updated) {
+          updatedEl.textContent = 'Updated ' + new Date(data.updated).toLocaleString('en-US', {
+            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+          }) + ' \u00B7 ' + gameProjections.length + ' games';
+        }
+
+        if (currentView === 'game-projections') renderGameProjections();
+      } catch (err) {
+        console.error('Failed to load game projections:', err);
+      }
+    }
+
     // Fetch and render
     async function loadProjections() {
       try {
@@ -1252,6 +1408,7 @@
     }
 
     loadProjections();
+    loadGameProjections();
   </script>
 </body>
 </html>
