@@ -28,11 +28,7 @@
       --purple: #8b5cf6;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,1092 +39,336 @@
     }
 
     .page-gradient {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60vh;
+      position: fixed; top: 0; left: 0; right: 0; height: 60vh;
       background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.08), transparent);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
+    /* ── Nav ── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 0 24px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      background: rgba(9, 9, 11, 0.8);
-      backdrop-filter: blur(12px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px; height: 64px; display: flex; align-items: center;
+      background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
+    .nav-inner { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #000; }
+    .logo-text { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 6px; transition: all 0.15s; }
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-elevated); }
+    .nav-links a.active { color: var(--text-primary); }
+    .nav-cta { padding: 8px 16px; background: var(--text-primary); color: var(--bg-primary); border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; text-decoration: none; }
+    .nav-cta:hover { opacity: 0.9; }
+    .mobile-menu { display: none; background: none; border: none; color: var(--text-primary); font-size: 24px; cursor: pointer; }
 
-    .nav-inner {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 14px;
-      color: #000;
-    }
-
-    .logo-text {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      padding: 8px 14px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 6px;
-      transition: all 0.15s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-primary);
-      background: var(--bg-elevated);
-    }
-
-    .nav-links a.active {
-      color: var(--text-primary);
-    }
-
-    .nav-cta {
-      padding: 8px 16px;
-      background: var(--text-primary);
-      color: var(--bg-primary);
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.15s;
-      text-decoration: none;
-    }
-
-    .nav-cta:hover {
-      opacity: 0.9;
-    }
-
-    .hero {
-      padding: 140px 24px 80px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: var(--accent-glow);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent-light);
-      margin-bottom: 24px;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .hero h1 {
-      font-size: clamp(40px, 6vw, 64px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-light), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 540px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
+    /* ── Hero ── */
+    .hero { padding: 140px 24px 40px; text-align: center; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--accent-glow); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--accent-light); margin-bottom: 24px; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent-light), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-subtitle { font-size: 18px; color: var(--text-secondary); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
 
     /* Stats Grid */
-    .stats-grid {
+    .stats-grid { display: none; justify-content: center; gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; max-width: 700px; margin: 0 auto 24px; }
+    .stats-grid.visible { display: flex; }
+    .stat { flex: 1; padding: 24px 20px; background: var(--bg-secondary); text-align: center; }
+    .stat-value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .stat-value.green { color: var(--accent-light); }
+    .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+
+    /* Yesterday's Record Bar (in hero) */
+    .yesterday-bar {
       display: none;
       justify-content: center;
-      gap: 1px;
-      background: var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      gap: 24px;
       max-width: 700px;
-      margin: 0 auto 60px;
-    }
-
-    .stats-grid.visible {
-      display: flex;
-    }
-
-    .stat {
-      flex: 1;
-      padding: 24px 20px;
+      margin: 0 auto 40px;
+      padding: 14px 20px;
       background: var(--bg-secondary);
-      text-align: center;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .stat-value.green { color: var(--accent-light); }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px 100px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 13px;
       flex-wrap: wrap;
-      gap: 12px;
     }
+    .yesterday-bar.visible { display: flex; }
+    .yesterday-bar .yb-label { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+    .yesterday-bar .yb-item { color: var(--text-secondary); }
+    .yesterday-bar .yb-item .yb-val { font-weight: 700; color: var(--text-primary); }
+    .yesterday-bar .yb-item .yb-pct { font-weight: 600; margin-left: 4px; }
+    .yesterday-bar .yb-item .yb-pct.green { color: var(--accent-light); }
+    .yesterday-bar .yb-item .yb-pct.red { color: var(--red-light); }
+    .yesterday-bar .yb-item .yb-pct.neutral { color: var(--text-muted); }
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
+    /* ── Main ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 1; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .section-title { font-size: 14px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ''; width: 3px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .section-meta { font-size: 13px; color: var(--text-muted); }
+
+    /* Sub-tabs */
+    .sub-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
+    .sub-tab { padding: 10px 20px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .sub-tab:hover { color: var(--text-secondary); }
+    .sub-tab.active { color: var(--accent-light); border-bottom-color: var(--accent); }
+
+    /* ── Game Filter Bar ── */
+    .game-filter-bar {
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
     }
-
-    .section-title::before {
-      content: '';
-      width: 3px;
-      height: 16px;
-      background: var(--accent);
-      border-radius: 2px;
+    .game-filter-bar .filter-label {
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
     }
-
-    .section-meta {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .filter-tabs {
-      display: flex;
-      gap: 4px;
-      padding: 4px;
+    .game-pill {
+      padding: 6px 14px;
       background: var(--bg-secondary);
-      border-radius: 8px;
-      margin-bottom: 24px;
-      width: fit-content;
-    }
-
-    .filter-tab {
-      padding: 8px 16px;
-      background: transparent;
-      border: none;
-      border-radius: 6px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
       color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
       font-family: inherit;
+      white-space: nowrap;
     }
+    .game-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .game-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
 
-    .filter-tab:hover {
-      color: var(--text-primary);
+    /* ── Search Bar ── */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 16px;
+      max-width: 360px;
     }
-
-    .filter-tab.active {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
+    .search-wrap svg {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      width: 16px; height: 16px; color: var(--text-muted); pointer-events: none;
     }
-
-    .picks-table {
+    .search-input {
+      width: 100%;
+      padding: 9px 12px 9px 36px;
       background: var(--bg-secondary);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 48px;
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
     }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-input:focus { border-color: var(--accent); }
 
+    /* Filter row */
+    .filter-row { display: flex; align-items: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+    .filter-group { display: flex; align-items: center; gap: 8px; }
+    .filter-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .filter-pill { padding: 5px 14px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 100px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .filter-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .filter-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+
+    /* ── Selected Game Card (inline) ── */
+    .selected-game-card {
+      display: none;
+      background: var(--bg-secondary);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .selected-game-card.visible { display: block; }
+    .sgc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .sgc-matchup { font-size: 16px; font-weight: 700; }
+    .sgc-score { font-size: 13px; color: var(--text-muted); }
+    .sgc-picks { display: flex; gap: 24px; flex-wrap: wrap; }
+    .sgc-pick { display: flex; flex-direction: column; gap: 2px; }
+    .sgc-pick-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .sgc-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .sgc-pick-value.best-bet { color: var(--accent-light); }
+    .sgc-pick-value.no-play { color: var(--text-muted); font-weight: 400; }
+    .sgc-pick-conf { font-size: 11px; color: var(--text-secondary); }
+
+    /* ── Prop Table ── */
+    .picks-table { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 48px; }
     .table-header {
       display: grid;
-      grid-template-columns: 2fr 0.6fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
+      grid-template-columns: 2fr 0.8fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
       padding: 12px 20px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
     }
-
     .pick-row {
       display: grid;
-      grid-template-columns: 2fr 0.6fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
+      grid-template-columns: 2fr 0.8fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
       padding: 14px 20px;
       border-bottom: 1px solid var(--border);
       align-items: center;
       transition: background 0.15s;
+      cursor: pointer;
     }
+    .pick-row:last-child { border-bottom: none; }
+    .pick-row:hover { background: var(--bg-elevated); }
+    .pick-row.positive-ev { background: rgba(16, 185, 129, 0.04); }
+    .pick-row.positive-ev:hover { background: rgba(16, 185, 129, 0.08); }
 
-    .pick-row:last-child {
-      border-bottom: none;
-    }
+    /* Team color dot */
+    .team-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; flex-shrink: 0; }
+    .team-label { display: inline-flex; align-items: center; color: var(--text-secondary); font-size: 13px; }
 
-    .pick-row:hover {
-      background: var(--bg-elevated);
-    }
+    /* Player cell */
+    .player-cell { display: flex; flex-direction: column; gap: 1px; }
+    .player-name { font-weight: 600; font-size: 14px; }
+    .player-matchup { font-size: 11px; color: var(--text-muted); }
 
-    .pick-matchup {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .pick-teams {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-primary);
-    }
-
-    .pick-time {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .pick-selection {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .pick-value {
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .pick-value.over {
-      color: var(--accent-light);
-    }
-
-    .pick-value.under {
-      color: var(--red-light);
-    }
-
-    .pick-type {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .pick-confidence {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .confidence-bar {
-      width: 60px;
-      height: 4px;
-      background: var(--bg-tertiary);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .confidence-fill {
-      height: 100%;
-      border-radius: 2px;
-    }
-
-    .confidence-fill.high {
-      width: 90%;
-      background: var(--accent);
-    }
-
-    .confidence-fill.medium {
-      width: 70%;
-      background: var(--yellow);
-    }
-
-    .confidence-fill.low {
-      width: 50%;
-      background: var(--text-muted);
-    }
-
-    .confidence-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-
-    .pick-status {
-      text-align: right;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .status-badge.pending {
-      background: rgba(234, 179, 8, 0.1);
-      color: var(--yellow);
-    }
-
-    .status-badge.win {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--accent-light);
-    }
-
-    .status-badge.loss {
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--red-light);
-    }
-
-    /* Results Section - Hidden until we have data */
-    .results-section {
+    /* Expandable detail row */
+    .pick-row-detail {
       display: none;
+      padding: 0 20px 16px;
+      border-bottom: 1px solid var(--border);
+      animation: slideDown 0.15s ease;
     }
-
-    .results-section.visible {
-      display: block;
-    }
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 12px;
-    }
-
-    .result-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      transition: border-color 0.15s;
-    }
-
-    .result-card:hover {
-      border-color: var(--border-light);
-    }
-
-    .result-indicator {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .result-indicator.win {
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-    }
-
-    .result-indicator.loss {
-      background: var(--red);
-    }
-
-    .result-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .result-pick {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .result-meta {
+    .pick-row-detail.open { display: block; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .detail-inner {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
       font-size: 12px;
-      color: var(--text-muted);
     }
+    .detail-item { display: flex; flex-direction: column; gap: 2px; }
+    .detail-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .detail-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .detail-bar-wrap { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+    .detail-bar { height: 6px; border-radius: 3px; background: var(--bg-primary); width: 100px; overflow: hidden; }
+    .detail-bar-fill { height: 100%; border-radius: 3px; }
 
-    .result-outcome {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
+    .pick-value { font-weight: 600; font-size: 14px; }
+    .pick-value.over { color: var(--accent-light); }
+    .pick-value.under { color: var(--red-light); }
 
-    .result-outcome.win {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--accent-light);
-    }
+    /* Edge badges */
+    .edge-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; vertical-align: middle; margin-left: 6px; }
+    .edge-badge.strong { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .edge-badge.good { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+    .edge-badge.lean { background: rgba(234, 179, 8, 0.1); color: var(--yellow); }
 
-    .result-outcome.loss {
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--red-light);
-    }
+    /* Prop categories */
+    .prop-category { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .category-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; cursor: pointer; user-select: none; transition: background 0.15s; }
+    .category-header:hover { background: var(--bg-elevated); }
+    .category-chevron { font-size: 12px; color: var(--text-muted); transition: transform 0.2s; }
+    .category-title { font-size: 14px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
+    .category-count { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; background: var(--bg-tertiary); color: var(--text-muted); }
+    .category-body { max-height: 5000px; overflow: hidden; transition: max-height 0.3s ease; }
+    .prop-category.collapsed .category-body { max-height: 0; }
+    .prop-category.collapsed .category-chevron { transform: rotate(-90deg); }
+
+    /* TOP PICKS accent */
+    .prop-category[data-category="top"] .category-header { border-bottom: 2px solid var(--accent); }
+    .prop-category[data-category="top"] .category-title { color: var(--accent-light); }
+    .prop-category[data-category="top"] .category-count { background: var(--accent-glow); color: var(--accent-light); }
+
+    /* ── Game Cards ── */
+    .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+    .game-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.15s; }
+    .game-card:hover { border-color: var(--border-light); }
+    .game-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .game-card-matchup { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+    .game-card-score { font-size: 13px; color: var(--text-muted); }
+    .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
+    .game-pick-row { display: flex; justify-content: space-between; align-items: center; }
+    .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 70px; }
+    .game-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
+    .game-pick-value.no-play { color: var(--text-muted); font-weight: 400; }
+    .game-pick-value.best-bet { color: var(--accent-light); }
+    .game-proj-updated { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 16px; }
+
+    /* ── Results Section ── */
+    .results-section { display: none; }
+    .results-section.visible { display: block; }
+    .results-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+    .results-stat-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+    .results-stat-card .stat-value { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
+    .results-stat-card .stat-pct { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .results-stat-card .stat-pct.green { color: var(--accent-light); }
+    .results-stat-card .stat-pct.red { color: var(--red-light); }
+    .results-stat-card .stat-pct.neutral { color: var(--text-secondary); }
+    .results-stat-card .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+    .results-table-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table thead th { padding: 12px 16px; background: var(--bg-tertiary); font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; text-align: left; border-bottom: 1px solid var(--border); }
+    .results-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .results-table tbody tr:last-child { border-bottom: none; }
+    .results-table tbody tr:hover { background: var(--bg-elevated); }
+    .results-table td { padding: 12px 16px; font-size: 13px; color: var(--text-primary); }
+    .result-type-badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+    .result-type-badge.prop { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
+    .result-type-badge.spread { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+    .result-type-badge.total { background: rgba(234, 179, 8, 0.12); color: var(--yellow); }
+    .result-type-badge.ml { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .result-hit { font-size: 16px; font-weight: 700; color: var(--accent-light); }
+    .result-miss { font-size: 16px; font-weight: 700; color: var(--red-light); }
+
+    .alltime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
+    .alltime-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .alltime-card .alltime-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 8px; }
+    .alltime-card .alltime-record { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .alltime-card .alltime-detail { font-size: 13px; color: var(--text-secondary); }
+    .alltime-card .alltime-detail .green { color: var(--accent-light); }
+    .alltime-card .alltime-detail .red { color: var(--red-light); }
 
     /* Empty State */
-    .empty-state {
-      text-align: center;
-      padding: 80px 20px;
-    }
+    .empty-state { text-align: center; padding: 80px 20px; }
+    .empty-state-icon { width: 64px; height: 64px; margin: 0 auto 20px; background: var(--bg-tertiary); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    .empty-state-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+    .empty-state-text { font-size: 14px; color: var(--text-muted); max-width: 400px; margin: 0 auto; }
 
-    .empty-state-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 20px;
-      background: var(--bg-tertiary);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-    }
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-brand { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .footer-disclaimer { font-size: 12px; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
 
-    .empty-state-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .empty-state-text {
-      font-size: 14px;
-      color: var(--text-muted);
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 24px;
-      text-align: center;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-brand {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .footer-disclaimer {
-      font-size: 12px;
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
+    /* ── Mobile ── */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .table-header,
-      .pick-row {
+      .nav-links { display: none; }
+      .mobile-menu { display: block; }
+      .table-header, .pick-row {
         grid-template-columns: 1.5fr 0.6fr 0.7fr 0.8fr 0.7fr;
-        gap: 4px;
-        font-size: 12px;
+        gap: 4px; font-size: 12px;
       }
-
-      /* Hide Proj, Conf, EV% on mobile */
       .table-header > *:nth-child(6),
       .table-header > *:nth-child(7),
       .table-header > *:nth-child(8),
       .pick-row > *:nth-child(6),
       .pick-row > *:nth-child(7),
-      .pick-row > *:nth-child(8) {
-        display: none;
-      }
-    }
-
-    .mobile-menu {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .mobile-menu {
-        display: block;
-      }
-    }
-
-    /* Sub-tabs */
-    .sub-tabs {
-      display: flex;
-      gap: 0;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 20px;
-    }
-
-    .sub-tab {
-      padding: 10px 20px;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
-    }
-
-    .sub-tab:hover {
-      color: var(--text-secondary);
-    }
-
-    .sub-tab.active {
-      color: var(--accent-light);
-      border-bottom-color: var(--accent);
-    }
-
-    /* Filter row */
-    .filter-row {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filter-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .filter-pill {
-      padding: 5px 14px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
-    }
-
-    .filter-pill:hover {
-      border-color: var(--border-light);
-      color: var(--text-primary);
-    }
-
-    .filter-pill.active {
-      background: var(--accent-glow);
-      border-color: rgba(16, 185, 129, 0.3);
-      color: var(--accent-light);
-    }
-
-    /* Prop categories */
-    .prop-category {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.15s;
-    }
-
-    .category-header:hover {
-      background: var(--bg-elevated);
-    }
-
-    .category-chevron {
-      font-size: 12px;
-      color: var(--text-muted);
-      transition: transform 0.2s;
-    }
-
-    .category-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: 0.02em;
-    }
-
-    .category-count {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 100px;
-      background: var(--bg-tertiary);
-      color: var(--text-muted);
-    }
-
-    .category-body {
-      max-height: 2000px;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .prop-category.collapsed .category-body {
-      max-height: 0;
-    }
-
-    .prop-category.collapsed .category-chevron {
-      transform: rotate(-90deg);
-    }
-
-    /* TOP PICKS accent */
-    .prop-category[data-category="top"] .category-header {
-      border-bottom: 2px solid var(--accent);
-    }
-
-    .prop-category[data-category="top"] .category-title {
-      color: var(--accent-light);
-    }
-
-    .prop-category[data-category="top"] .category-count {
-      background: var(--accent-glow);
-      color: var(--accent-light);
-    }
-
-    /* Edge badges */
-    .edge-badge {
-      display: inline-block;
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      vertical-align: middle;
-      margin-left: 6px;
-    }
-
-    .edge-badge.strong {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-light);
-    }
-
-    .edge-badge.good {
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--blue);
-    }
-
-    .edge-badge.lean {
-      background: rgba(234, 179, 8, 0.1);
-      color: var(--yellow);
-    }
-
-    /* Positive EV row highlight */
-    .pick-row.positive-ev {
-      background: rgba(16, 185, 129, 0.04);
-    }
-
-    .pick-row.positive-ev:hover {
-      background: rgba(16, 185, 129, 0.08);
-    }
-
-    /* Coming Soon card */
-    .coming-soon-card {
-      text-align: center;
-      padding: 80px 24px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .coming-soon-card .empty-state-icon {
-      font-size: 36px;
-    }
-
-    .coming-soon-card .empty-state-title {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .coming-soon-card .empty-state-text {
-      max-width: 460px;
-    }
-
-    /* Game cards grid (future use) */
-    .game-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-    }
-
-    .game-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      transition: border-color 0.15s;
-    }
-
-    .game-card:hover {
-      border-color: var(--border-light);
-    }
-
-    .game-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .game-card-matchup {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .game-card-score {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .game-card-picks {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .game-pick-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .game-pick-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      min-width: 70px;
-    }
-
-    .game-pick-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .game-pick-conf {
-      font-size: 12px;
-      color: var(--text-secondary);
-      min-width: 40px;
-      text-align: right;
-    }
-
-    .game-pick-value.no-play {
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    .game-pick-value.best-bet {
-      color: var(--accent-light);
-    }
-
-    .game-proj-updated {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 12px;
-      margin-top: 16px;
-    }
-
-    /* Mobile responsive additions */
-    @media (max-width: 768px) {
-      .sub-tabs {
-        gap: 0;
-      }
-
-      .sub-tab {
-        padding: 8px 14px;
-        font-size: 11px;
-      }
-
-      .filter-row {
-        gap: 12px;
-      }
-
-      .filter-pill {
-        padding: 4px 10px;
-        font-size: 11px;
-      }
-
-      .game-cards-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* ── Results Section ── */
-    .results-summary-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .results-stat-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .results-stat-card .stat-value {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .results-stat-card .stat-pct {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .results-stat-card .stat-pct.green { color: var(--accent-light); }
-    .results-stat-card .stat-pct.red { color: var(--red-light); }
-    .results-stat-card .stat-pct.neutral { color: var(--text-secondary); }
-
-    .results-stat-card .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-
-    .results-table-wrap {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 32px;
-    }
-
-    .results-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .results-table thead th {
-      padding: 12px 16px;
-      background: var(--bg-tertiary);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .results-table tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
-
-    .results-table tbody tr:last-child {
-      border-bottom: none;
-    }
-
-    .results-table tbody tr:hover {
-      background: var(--bg-elevated);
-    }
-
-    .results-table td {
-      padding: 12px 16px;
-      font-size: 13px;
-      color: var(--text-primary);
-    }
-
-    .result-type-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .result-type-badge.prop { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
-    .result-type-badge.spread { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
-    .result-type-badge.total { background: rgba(234, 179, 8, 0.12); color: var(--yellow); }
-    .result-type-badge.ml { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-
-    .result-hit {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--accent-light);
-    }
-
-    .result-miss {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--red-light);
-    }
-
-    .alltime-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .alltime-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-    }
-
-    .alltime-card .alltime-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .alltime-card .alltime-record {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .alltime-card .alltime-detail {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .alltime-card .alltime-detail .green { color: var(--accent-light); }
-    .alltime-card .alltime-detail .red { color: var(--red-light); }
-
-    @media (max-width: 768px) {
-      .results-summary-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .alltime-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .results-table-wrap {
-        overflow-x: auto;
-      }
-
-      .results-table {
-        min-width: 500px;
-      }
+      .pick-row > *:nth-child(8) { display: none; }
+      .sub-tab { padding: 8px 14px; font-size: 11px; }
+      .filter-row { gap: 12px; }
+      .filter-pill { padding: 4px 10px; font-size: 11px; }
+      .game-cards-grid { grid-template-columns: 1fr; }
+      .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .alltime-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-table-wrap { overflow-x: auto; }
+      .results-table { min-width: 500px; }
+      .yesterday-bar { gap: 12px; font-size: 12px; }
+      .sgc-picks { gap: 16px; }
+      .search-wrap { max-width: 100%; }
     }
   </style>
 </head>
@@ -1174,6 +414,8 @@
         <div class="stat-label">Avg Confidence</div>
       </div>
     </div>
+
+    <div class="yesterday-bar" id="yesterday-bar"></div>
   </section>
 
   <main>
@@ -1183,17 +425,16 @@
         <span class="section-meta" id="current-date"></span>
       </div>
 
-      <div class="filter-tabs" id="sport-tabs">
-        <button class="filter-tab active" data-sport="all">All</button>
-        <button class="filter-tab" data-sport="nba">NBA</button>
-        <button class="filter-tab" data-sport="nfl">NFL</button>
-        <button class="filter-tab" data-sport="mlb">MLB</button>
-        <button class="filter-tab" data-sport="nhl">NHL</button>
-      </div>
-
       <div class="sub-tabs" id="sub-tabs">
         <button class="sub-tab active" data-view="player-props">PLAYER PROPS</button>
         <button class="sub-tab" data-view="game-projections">GAME PROJECTIONS</button>
+      </div>
+
+      <div id="game-filter-bar" class="game-filter-bar" style="display:none;"></div>
+
+      <div class="search-wrap" id="search-wrap" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="search-input" id="search-input" placeholder="Search players...">
       </div>
 
       <div class="filter-row" id="filter-row">
@@ -1211,6 +452,8 @@
           <button class="filter-pill" data-dir="under">Unders</button>
         </div>
       </div>
+
+      <div id="selected-game-card" class="selected-game-card"></div>
 
       <div id="player-props-view">
         <div class="empty-state">
@@ -1240,13 +483,7 @@
       <div class="results-table-wrap">
         <table class="results-table">
           <thead>
-            <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Pick</th>
-              <th>Result</th>
-              <th>Hit</th>
-            </tr>
+            <tr><th>Date</th><th>Type</th><th>Pick</th><th>Result</th><th>Hit</th></tr>
           </thead>
           <tbody id="results-table-body"></tbody>
         </table>
@@ -1270,12 +507,16 @@
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     const RESULTS_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
+
     let projections = [];
     let gameProjections = [];
-    let currentSport = 'all';
     let currentView = 'player-props';
     let currentConfFilter = 'all';
     let currentDirFilter = 'all';
+    let currentGameFilter = null; // null = all, or "AWAY@HOME" key
+    let currentSearch = '';
+    let teamToGame = {};  // team abbr -> game object
+    let expandedRowId = null;  // currently expanded row
 
     const PROP_CATEGORIES = [
       { key: 'top', label: 'TOP PICKS' },
@@ -1286,24 +527,54 @@
     ];
     const TOP_PICKS_COUNT = 10;
 
+    // NBA team colors
+    const TEAM_COLORS = {
+      ATL:'#E03A3E', BOS:'#007A33', BKN:'#FFFFFF', CHA:'#1D1160', CHI:'#CE1141',
+      CLE:'#860038', DAL:'#00538C', DEN:'#0E2240', DET:'#C8102E', GSW:'#1D428A',
+      HOU:'#CE1141', IND:'#002D62', LAC:'#C8102E', LAL:'#552583', MEM:'#5D76A9',
+      MIA:'#98002E', MIL:'#00471B', MIN:'#0C2340', NOP:'#0C2340', NYK:'#F58426',
+      OKC:'#007AC1', ORL:'#0077C0', PHI:'#006BB6', PHX:'#1D1160', POR:'#E03A3E',
+      SAC:'#5A2D81', SAS:'#C4CED4', TOR:'#CE1141', UTA:'#002B5C', WAS:'#002B5C'
+    };
+
     // Set current date
-    const today = new Date();
-    document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', {
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
       weekday: 'long', month: 'short', day: 'numeric'
     });
 
+    // ── Helpers ──
     function getConfLevel(conf) {
       if (conf >= 51) return 'high';
       if (conf >= 50) return 'medium';
       return 'low';
     }
 
+    function getGameForTeam(team) { return teamToGame[team] || null; }
+
+    function getOpponent(team) {
+      const g = getGameForTeam(team);
+      if (!g) return null;
+      return g.away_team === team ? g.home_team : g.away_team;
+    }
+
+    function gameKey(g) { return g.away_team + '@' + g.home_team; }
+
+    // ── Filters ──
     function applyFilters(data) {
       let filtered = data;
 
-      // Sport filter
-      if (currentSport === 'nba') filtered = data;
-      else if (currentSport !== 'all') filtered = [];
+      // Game filter
+      if (currentGameFilter) {
+        const parts = currentGameFilter.split('@');
+        const teams = new Set(parts);
+        filtered = filtered.filter(p => teams.has(p.team));
+      }
+
+      // Search filter
+      if (currentSearch) {
+        const q = currentSearch.toLowerCase();
+        filtered = filtered.filter(p => p.player.toLowerCase().includes(q));
+      }
 
       // Confidence filter
       if (currentConfFilter !== 'all') {
@@ -1312,14 +583,82 @@
 
       // Direction filter
       if (currentDirFilter !== 'all') {
-        const dir = currentDirFilter.toUpperCase();
-        filtered = filtered.filter(p => p.direction === dir);
+        filtered = filtered.filter(p => p.direction === currentDirFilter.toUpperCase());
       }
 
       return filtered;
     }
 
-    function renderRow(p) {
+    // ── Game Filter Bar ──
+    function renderGameFilterBar() {
+      const bar = document.getElementById('game-filter-bar');
+      if (gameProjections.length === 0) { bar.style.display = 'none'; return; }
+
+      let html = '<span class="filter-label">Game</span>';
+      html += `<button class="game-pill${currentGameFilter === null ? ' active' : ''}" data-game="all">All Games</button>`;
+      for (const g of gameProjections) {
+        const key = gameKey(g);
+        const active = currentGameFilter === key ? ' active' : '';
+        html += `<button class="game-pill${active}" data-game="${key}">${g.away_team} @ ${g.home_team}</button>`;
+      }
+      bar.innerHTML = html;
+      bar.style.display = 'flex';
+
+      bar.querySelectorAll('.game-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const game = pill.dataset.game;
+          currentGameFilter = game === 'all' ? null : game;
+          bar.querySelectorAll('.game-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          expandedRowId = null;
+          render();
+        });
+      });
+    }
+
+    // ── Selected Game Card ──
+    function renderSelectedGameCard() {
+      const el = document.getElementById('selected-game-card');
+      if (!currentGameFilter) { el.classList.remove('visible'); return; }
+
+      const g = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
+      if (!g) { el.classList.remove('visible'); return; }
+
+      const confColor = c => c >= 65 ? 'var(--accent-light)' : c >= 55 ? 'var(--accent)' : 'var(--text-muted)';
+      const pickCls = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
+
+      const spreadStr = g.spread_pick || 'N/A';
+      const totalStr = g.total_pick && g.total_line != null
+        ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line)
+        : 'N/A';
+
+      el.innerHTML = `
+        <div class="sgc-header">
+          <div class="sgc-matchup">${g.away_team} @ ${g.home_team}</div>
+          <div class="sgc-score">Proj: ${g.proj_score}</div>
+        </div>
+        <div class="sgc-picks">
+          <div class="sgc-pick">
+            <span class="sgc-pick-label">Spread</span>
+            <span class="sgc-pick-value ${pickCls(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
+            ${g.spread_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.spread_conf)}">${g.spread_conf}%</span>` : ''}
+          </div>
+          <div class="sgc-pick">
+            <span class="sgc-pick-label">Total</span>
+            <span class="sgc-pick-value ${pickCls(g.total_pick, g.total_conf)}">${totalStr}</span>
+            ${g.total_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.total_conf)}">${g.total_conf}%</span>` : ''}
+          </div>
+          <div class="sgc-pick">
+            <span class="sgc-pick-label">Moneyline</span>
+            <span class="sgc-pick-value ${pickCls(g.ml_pick, g.ml_conf)}">${g.ml_pick || 'N/A'}</span>
+            ${g.ml_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.ml_conf)}">${g.ml_conf}%</span>` : ''}
+          </div>
+        </div>`;
+      el.classList.add('visible');
+    }
+
+    // ── Render Prop Row ──
+    function renderRow(p, idx) {
       const isOver = p.direction === 'OVER';
       const dirClass = isOver ? 'over' : 'under';
       const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
@@ -1328,27 +667,83 @@
       const posEvClass = p.ev > 0 ? ' positive-ev' : '';
       const edgeBadge = p.edge === 'STRONG' ? '<span class="edge-badge strong">STRONG</span>'
         : p.edge === 'GOOD' ? '<span class="edge-badge good">GOOD</span>'
-        : p.edge === 'LEAN' ? '<span class="edge-badge lean">LEAN</span>'
-        : '';
+        : p.edge === 'LEAN' ? '<span class="edge-badge lean">LEAN</span>' : '';
+
+      const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
+      const opp = getOpponent(p.team);
+      const g = getGameForTeam(p.team);
+      const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
+
+      const rowId = 'row-' + idx;
+      const isExpanded = expandedRowId === rowId;
+
+      // Detail panel data
+      const diffStr = p.diff != null ? (p.diff >= 0 ? '+' : '') + p.diff.toFixed(1) : '--';
+      const diffColor = p.diff > 0 ? 'var(--accent-light)' : p.diff < 0 ? 'var(--red-light)' : 'var(--text-secondary)';
+      const confPct = Math.min(Math.max(p.confidence || 0, 40), 60);
+      const confBarW = ((confPct - 40) / 20 * 100);
+      const confBarColor = p.confidence >= 51 ? 'var(--accent)' : p.confidence >= 50 ? 'var(--yellow)' : 'var(--text-muted)';
+
       return `
-        <div class="pick-row${posEvClass}">
-          <div style="font-weight:600;font-size:14px">${p.player} ${edgeBadge}</div>
-          <div style="color:var(--text-secondary);font-size:13px">${p.team}</div>
+        <div class="pick-row${posEvClass}" data-row-id="${rowId}" onclick="toggleRow('${rowId}')">
+          <div class="player-cell">
+            <span class="player-name">${p.player} ${edgeBadge}</span>
+            ${matchupStr ? `<span class="player-matchup">${matchupStr}</span>` : ''}
+          </div>
+          <div class="team-label"><span class="team-dot" style="background:${teamColor}"></span>${p.team}</div>
           <div style="font-weight:500;font-size:13px">${p.prop}</div>
           <div><span class="pick-value ${dirClass}" style="font-size:13px">${p.direction}</span></div>
           <div style="font-size:13px;color:var(--text-secondary)">${p.line}</div>
           <div style="font-weight:600;font-size:13px">${p.projection}</div>
           <div style="font-size:13px;color:var(--text-secondary)">${confStr}</div>
           <div style="font-weight:600;font-size:13px;color:${evColor}">${evStr}</div>
+        </div>
+        <div class="pick-row-detail${isExpanded ? ' open' : ''}" id="detail-${rowId}">
+          <div class="detail-inner">
+            <div class="detail-item">
+              <span class="detail-label">Projection vs Line</span>
+              <span class="detail-value">${p.projection} vs ${p.line} <span style="color:${diffColor}">(${diffStr})</span></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Confidence</span>
+              <div class="detail-bar-wrap">
+                <div class="detail-bar"><div class="detail-bar-fill" style="width:${confBarW}%;background:${confBarColor}"></div></div>
+                <span class="detail-value">${confStr}</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Expected Value</span>
+              <span class="detail-value" style="color:${evColor}">${evStr}</span>
+            </div>
+            ${matchupStr ? `<div class="detail-item"><span class="detail-label">Matchup</span><span class="detail-value">${p.team} ${matchupStr}</span></div>` : ''}
+            ${p.edge ? `<div class="detail-item"><span class="detail-label">Edge</span><span class="detail-value">${p.edge}</span></div>` : ''}
+          </div>
         </div>`;
     }
 
-    function renderCategory(cat, items) {
+    function toggleRow(rowId) {
+      if (expandedRowId === rowId) {
+        document.getElementById('detail-' + rowId)?.classList.remove('open');
+        expandedRowId = null;
+      } else {
+        if (expandedRowId) document.getElementById('detail-' + expandedRowId)?.classList.remove('open');
+        document.getElementById('detail-' + rowId)?.classList.add('open');
+        expandedRowId = rowId;
+      }
+    }
+
+    // ── Render Category ──
+    let globalRowIdx = 0;
+
+    function renderCategory(cat, items, startOpen) {
       if (items.length === 0) return '';
       const sorted = [...items].sort((a, b) => (b.ev || 0) - (a.ev || 0));
       const dataCat = cat.key === 'top' ? 'data-category="top"' : '';
+      const collapsedClass = startOpen ? '' : ' collapsed';
+      const rows = sorted.map(p => { const html = renderRow(p, globalRowIdx); globalRowIdx++; return html; }).join('');
+
       return `
-        <div class="prop-category" ${dataCat}>
+        <div class="prop-category${collapsedClass}" ${dataCat}>
           <div class="category-header" onclick="toggleCategory(this)">
             <span class="category-chevron">&#9660;</span>
             <span class="category-title">${cat.label}</span>
@@ -1366,7 +761,7 @@
                 <div>Conf</div>
                 <div>EV%</div>
               </div>
-              ${sorted.map(renderRow).join('')}
+              ${rows}
             </div>
           </div>
         </div>`;
@@ -1376,15 +771,22 @@
       el.closest('.prop-category').classList.toggle('collapsed');
     }
 
+    // ── Main Render ──
     function render() {
       const propsView = document.getElementById('player-props-view');
       const gameView = document.getElementById('game-projections-view');
       const filterRow = document.getElementById('filter-row');
+      const gameFilterBar = document.getElementById('game-filter-bar');
+      const searchWrap = document.getElementById('search-wrap');
+      const selectedCard = document.getElementById('selected-game-card');
 
       if (currentView === 'game-projections') {
         propsView.style.display = 'none';
         gameView.style.display = 'block';
         filterRow.style.display = 'none';
+        gameFilterBar.style.display = 'none';
+        searchWrap.style.display = 'none';
+        selectedCard.classList.remove('visible');
         renderGameProjections();
         return;
       }
@@ -1392,6 +794,10 @@
       propsView.style.display = 'block';
       gameView.style.display = 'none';
       filterRow.style.display = 'flex';
+      if (gameProjections.length > 0) gameFilterBar.style.display = 'flex';
+      searchWrap.style.display = 'block';
+
+      renderSelectedGameCard();
 
       const filtered = applyFilters(projections);
 
@@ -1400,10 +806,13 @@
           <div class="empty-state">
             <div class="empty-state-icon">&#128202;</div>
             <div class="empty-state-title">No projections match</div>
-            <div class="empty-state-text">Try adjusting your filters to see more projections.</div>
+            <div class="empty-state-text">Try adjusting your filters or search to see more projections.</div>
           </div>`;
         return;
       }
+
+      globalRowIdx = 0;
+      const isFiltered = currentGameFilter || currentSearch;
 
       // Build TOP PICKS: best N by EV%
       const allSorted = [...filtered].sort((a, b) => (b.ev || 0) - (a.ev || 0));
@@ -1419,33 +828,24 @@
       }
 
       let html = '';
-      // TOP PICKS
-      html += renderCategory(PROP_CATEGORIES[0], topPicks);
-      // Prop categories
+      // TOP PICKS always open
+      html += renderCategory(PROP_CATEGORIES[0], topPicks, true);
+      // Other categories: open when filtering, collapsed otherwise
       for (let i = 1; i < PROP_CATEGORIES.length; i++) {
         const cat = PROP_CATEGORIES[i];
-        html += renderCategory(cat, propGroups[cat.key] || []);
+        html += renderCategory(cat, propGroups[cat.key] || [], !!isFiltered);
       }
 
       propsView.innerHTML = html;
     }
 
-    // Sport tabs
-    document.querySelectorAll('#sport-tabs .filter-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('#sport-tabs .filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentSport = tab.dataset.sport;
-        render();
-      });
-    });
-
-    // Sub-tabs
+    // ── Sub-tabs ──
     document.querySelectorAll('#sub-tabs .sub-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('#sub-tabs .sub-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         currentView = tab.dataset.view;
+        expandedRowId = null;
         render();
       });
     });
@@ -1456,6 +856,7 @@
         document.querySelectorAll('[data-conf]').forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         currentConfFilter = pill.dataset.conf;
+        expandedRowId = null;
         render();
       });
     });
@@ -1466,28 +867,27 @@
         document.querySelectorAll('[data-dir]').forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         currentDirFilter = pill.dataset.dir;
+        expandedRowId = null;
         render();
       });
     });
 
-    function renderGameCard(g) {
-      const confColor = (conf) => {
-        if (conf >= 65) return 'var(--accent-light)';
-        if (conf >= 55) return 'var(--accent)';
-        return 'var(--text-muted)';
-      };
+    // Search input
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim();
+      expandedRowId = null;
+      render();
+    });
 
-      const pickClass = (pick, conf) => {
-        if (!pick || pick === 'NO PLAY') return 'no-play';
-        if (conf >= 60) return 'best-bet';
-        return '';
-      };
+    // ── Game Projections View ──
+    function renderGameCard(g) {
+      const confColor = c => c >= 65 ? 'var(--accent-light)' : c >= 55 ? 'var(--accent)' : 'var(--text-muted)';
+      const pickClass = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
 
       const spreadStr = g.spread_pick || 'N/A';
       const spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
       const totalStr = g.total_pick && g.total_line != null
-        ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line)
-        : 'N/A';
+        ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line) : 'N/A';
       const totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
       const mlStr = g.ml_pick || 'N/A';
       const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
@@ -1521,27 +921,28 @@
     function renderGameProjections() {
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
-
       if (gameProjections.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state" style="grid-column:1/-1">
-            <div class="empty-state-icon">&#127936;</div>
-            <div class="empty-state-title">No game projections available</div>
-            <div class="empty-state-text">Game projections will appear here when today's games are loaded.</div>
-          </div>`;
+        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No game projections available</div><div class="empty-state-text">Game projections will appear here when today's games are loaded.</div></div>`;
         updatedEl.textContent = '';
         return;
       }
-
       container.innerHTML = gameProjections.map(renderGameCard).join('');
     }
 
+    // ── Data Loading ──
     async function loadGameProjections() {
       try {
         const resp = await fetch(GAME_DATA_URL + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch game projections');
         const data = await resp.json();
         gameProjections = data.games || [];
+
+        // Build team lookup
+        teamToGame = {};
+        for (const g of gameProjections) {
+          teamToGame[g.away_team] = g;
+          teamToGame[g.home_team] = g;
+        }
 
         const updatedEl = document.getElementById('game-proj-updated');
         if (data.updated) {
@@ -1550,13 +951,14 @@
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
 
+        renderGameFilterBar();
         if (currentView === 'game-projections') renderGameProjections();
+        else render(); // re-render props with matchup info
       } catch (err) {
         console.error('Failed to load game projections:', err);
       }
     }
 
-    // Fetch and render
     async function loadProjections() {
       try {
         const resp = await fetch(DATA_URL + '?t=' + Date.now());
@@ -1564,7 +966,6 @@
         const data = await resp.json();
         projections = data.projections || [];
 
-        // Update date/meta
         if (data.date) {
           const d = new Date(data.date + 'T12:00:00');
           document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', {
@@ -1577,12 +978,10 @@
           });
         }
 
-        // Update 4 stats
         const posEV = projections.filter(p => p.ev > 0).length;
         const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
         const avgConf = projections.length > 0
-          ? projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length
-          : 0;
+          ? projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length : 0;
 
         const statsGrid = document.getElementById('stats-grid');
         statsGrid.classList.add('visible');
@@ -1598,6 +997,7 @@
       }
     }
 
+    // ── Results ──
     function pctClass(pct) {
       if (pct >= 55) return 'green';
       if (pct > 0 && pct < 50) return 'red';
@@ -1605,25 +1005,13 @@
     }
 
     function renderSummaryCard(label, stats) {
-      return `
-        <div class="results-stat-card">
-          <div class="stat-value">${stats.record}</div>
-          <div class="stat-pct ${pctClass(stats.pct)}">${stats.pct > 0 ? stats.pct + '%' : '--'}</div>
-          <div class="stat-label">${label}</div>
-        </div>`;
+      return `<div class="results-stat-card"><div class="stat-value">${stats.record}</div><div class="stat-pct ${pctClass(stats.pct)}">${stats.pct > 0 ? stats.pct + '%' : '--'}</div><div class="stat-label">${label}</div></div>`;
     }
 
     function renderResultRow(pick) {
       const typeClass = pick.type.toLowerCase();
       const hitIcon = pick.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
-      return `
-        <tr>
-          <td style="color:var(--text-muted)">${pick.date}</td>
-          <td><span class="result-type-badge ${typeClass}">${pick.type}</span></td>
-          <td>${pick.pick}</td>
-          <td style="color:var(--text-secondary)">${pick.result || '--'}</td>
-          <td>${hitIcon}</td>
-        </tr>`;
+      return `<tr><td style="color:var(--text-muted)">${pick.date}</td><td><span class="result-type-badge ${typeClass}">${pick.type}</span></td><td>${pick.pick}</td><td style="color:var(--text-secondary)">${pick.result || '--'}</td><td>${hitIcon}</td></tr>`;
     }
 
     function renderAlltimeCard(label, stats) {
@@ -1631,12 +1019,13 @@
       const pct = stats.pct > 0 ? `${stats.pct}%` : '--';
       const roiStr = stats.roi !== 0 ? `${stats.roi > 0 ? '+' : ''}${stats.roi}%` : '--';
       const roiClass = stats.roi > 0 ? 'green' : stats.roi < 0 ? 'red' : '';
-      return `
-        <div class="alltime-card">
-          <div class="alltime-label">${label}</div>
-          <div class="alltime-record">${record}</div>
-          <div class="alltime-detail">${pct} win rate &middot; ROI: <span class="${roiClass}">${roiStr}</span></div>
-        </div>`;
+      return `<div class="alltime-card"><div class="alltime-label">${label}</div><div class="alltime-record">${record}</div><div class="alltime-detail">${pct} win rate &middot; ROI: <span class="${roiClass}">${roiStr}</span></div></div>`;
+    }
+
+    function renderYesterdayBarItem(label, stats) {
+      if (stats.wins + stats.losses === 0) return '';
+      const cls = pctClass(stats.pct);
+      return `<span class="yb-item">${label} <span class="yb-val">${stats.record}</span><span class="yb-pct ${cls}">(${stats.pct}%)</span></span>`;
     }
 
     async function loadResults() {
@@ -1645,10 +1034,9 @@
         if (!resp.ok) throw new Error('Failed to fetch results');
         const data = await resp.json();
 
-        // Show section
         document.getElementById('results').classList.add('visible');
 
-        // Yesterday's date
+        // Yesterday date
         const dateEl = document.getElementById('results-date');
         if (data.yesterday && data.yesterday.date) {
           const d = new Date(data.yesterday.date + 'T12:00:00');
@@ -1656,14 +1044,26 @@
         }
 
         // Summary cards
-        const summaryEl = document.getElementById('results-summary');
         if (data.yesterday) {
           const y = data.yesterday;
-          summaryEl.innerHTML =
+          document.getElementById('results-summary').innerHTML =
             renderSummaryCard('Props', y.props) +
             renderSummaryCard('Spreads', y.spreads) +
             renderSummaryCard('Totals', y.totals) +
             renderSummaryCard('Moneylines', y.moneylines);
+
+          // Hero yesterday bar
+          const bar = document.getElementById('yesterday-bar');
+          const items = [
+            renderYesterdayBarItem('Props', y.props),
+            renderYesterdayBarItem('Spreads', y.spreads),
+            renderYesterdayBarItem('Totals', y.totals),
+            renderYesterdayBarItem('ML', y.moneylines),
+          ].filter(Boolean);
+          if (items.length > 0) {
+            bar.innerHTML = '<span class="yb-label">Yesterday</span>' + items.join('');
+            bar.classList.add('visible');
+          }
         }
 
         // Results table
@@ -1674,32 +1074,22 @@
           tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:40px">No results yet</td></tr>';
         }
 
-        // All-time stats
-        const alltimeEl = document.getElementById('alltime-grid');
+        // All-time
         if (data.alltime) {
           const a = data.alltime;
-          let html = '';
-          html += renderAlltimeCard('Props', a.props);
-          html += renderAlltimeCard('Spreads', a.spreads);
-          html += renderAlltimeCard('Totals', a.totals);
-          html += renderAlltimeCard('Moneylines', a.moneylines);
-
+          let html = renderAlltimeCard('Props', a.props) + renderAlltimeCard('Spreads', a.spreads) +
+            renderAlltimeCard('Totals', a.totals) + renderAlltimeCard('Moneylines', a.moneylines);
           if (a.best_prop_type) {
-            html += `
-              <div class="alltime-card">
-                <div class="alltime-label">Best Prop Category</div>
-                <div class="alltime-record" style="text-transform:capitalize">${a.best_prop_type.replace('_', ' ')}</div>
-                <div class="alltime-detail"><span class="green">${a.best_prop_pct}%</span> win rate</div>
-              </div>`;
+            html += `<div class="alltime-card"><div class="alltime-label">Best Prop Category</div><div class="alltime-record" style="text-transform:capitalize">${a.best_prop_type.replace('_', ' ')}</div><div class="alltime-detail"><span class="green">${a.best_prop_pct}%</span> win rate</div></div>`;
           }
-          alltimeEl.innerHTML = html;
+          document.getElementById('alltime-grid').innerHTML = html;
         }
-
       } catch (err) {
         console.error('Failed to load results:', err);
       }
     }
 
+    // ── Init ──
     loadProjections();
     loadGameProjections();
     loadResults();
