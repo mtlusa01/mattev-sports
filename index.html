@@ -792,6 +792,33 @@
       color: var(--accent-light);
     }
 
+    /* Edge badges */
+    .edge-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .edge-badge.strong {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-light);
+    }
+
+    .edge-badge.good {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--blue);
+    }
+
+    .edge-badge.lean {
+      background: rgba(234, 179, 8, 0.1);
+      color: var(--yellow);
+    }
+
     /* Positive EV row highlight */
     .pick-row.positive-ev {
       background: rgba(16, 185, 129, 0.04);
@@ -1036,12 +1063,16 @@
       const isOver = p.direction === 'OVER';
       const dirClass = isOver ? 'over' : 'under';
       const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
-      const evColor = p.ev > 0 ? 'var(--accent-light)' : p.ev > -2 ? 'var(--yellow)' : 'var(--text-muted)';
+      const evColor = p.ev > 5 ? 'var(--accent-light)' : p.ev >= 2 ? 'var(--accent)' : p.ev >= 0 ? 'var(--yellow)' : 'var(--text-muted)';
       const confStr = p.confidence != null ? p.confidence.toFixed(1) + '%' : '--';
       const posEvClass = p.ev > 0 ? ' positive-ev' : '';
+      const edgeBadge = p.edge === 'STRONG' ? '<span class="edge-badge strong">STRONG</span>'
+        : p.edge === 'GOOD' ? '<span class="edge-badge good">GOOD</span>'
+        : p.edge === 'LEAN' ? '<span class="edge-badge lean">LEAN</span>'
+        : '';
       return `
         <div class="pick-row${posEvClass}">
-          <div style="font-weight:600;font-size:14px">${p.player}</div>
+          <div style="font-weight:600;font-size:14px">${p.player} ${edgeBadge}</div>
           <div style="color:var(--text-secondary);font-size:13px">${p.team}</div>
           <div style="font-weight:500;font-size:13px">${p.prop}</div>
           <div><span class="pick-value ${dirClass}" style="font-size:13px">${p.direction}</span></div>
