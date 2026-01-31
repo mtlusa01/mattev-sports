@@ -345,6 +345,23 @@
       color: var(--text-muted);
       font-size: 13px;
     }
+    
+    .clear-data-btn {
+      margin-top: 16px;
+      padding: 8px 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    
+    .clear-data-btn:hover {
+      border-color: var(--red);
+      color: #f87171;
+    }
   </style>
 </head>
 <body>
@@ -448,6 +465,7 @@
               <div class="stat-card-label">Losses</div>
             </div>
           </div>
+          <button class="clear-data-btn" onclick="clearAllData()">Clear All Data</button>
         </div>
         
         <div class="picks-list" id="picks-list">
@@ -460,6 +478,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // Start with empty data
     let picks = JSON.parse(localStorage.getItem('mattev_picks') || '[]');
     let results = JSON.parse(localStorage.getItem('mattev_results') || '[]');
 
@@ -467,7 +486,7 @@
       const container = document.getElementById('picks-list');
       
       if (picks.length === 0) {
-        container.innerHTML = '<div class="empty-state">No projections yet. Add your first one above.</div>';
+        container.innerHTML = '<div class="empty-state">No projections yet.<br>Add your first one using the form.</div>';
         updateStats();
         return;
       }
@@ -533,7 +552,6 @@
         pick.status = status;
         
         if (status === 'win' || status === 'loss') {
-          // Add to results
           const existingResult = results.find(r => r.id === id);
           if (!existingResult) {
             results.unshift({
@@ -543,6 +561,10 @@
               outcome: status,
               actual: status === 'win' ? 'Hit' : 'Miss'
             });
+            localStorage.setItem('mattev_results', JSON.stringify(results));
+          } else {
+            existingResult.outcome = status;
+            existingResult.actual = status === 'win' ? 'Hit' : 'Miss';
             localStorage.setItem('mattev_results', JSON.stringify(results));
           }
         }
@@ -556,9 +578,22 @@
     function deletePick(id) {
       if (confirm('Delete this projection?')) {
         picks = picks.filter(p => p.id !== id);
+        results = results.filter(r => r.id !== id);
         localStorage.setItem('mattev_picks', JSON.stringify(picks));
+        localStorage.setItem('mattev_results', JSON.stringify(results));
         renderPicks();
         showToast('Deleted');
+      }
+    }
+
+    function clearAllData() {
+      if (confirm('Clear ALL projections and results? This cannot be undone.')) {
+        picks = [];
+        results = [];
+        localStorage.setItem('mattev_picks', JSON.stringify(picks));
+        localStorage.setItem('mattev_results', JSON.stringify(results));
+        renderPicks();
+        showToast('All data cleared');
       }
     }
 
