@@ -308,8 +308,9 @@
     .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 70px; }
     .game-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
-    .game-pick-value.no-play { color: var(--text-muted); font-weight: 400; }
+    .game-pick-value.low-conf { color: var(--text-muted); font-weight: 400; }
     .game-pick-value.best-bet { color: var(--accent-light); }
+    .game-pick-best-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.03em; background: rgba(16, 185, 129, 0.15); color: var(--accent-light); margin-left: 6px; vertical-align: middle; }
     .game-proj-updated { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 16px; }
 
     /* ── Game Status Filter ── */
@@ -1020,8 +1021,15 @@
     }
 
     function renderGameCard(g) {
-      const confColor = c => c >= 65 ? 'var(--accent-light)' : c >= 55 ? 'var(--accent)' : 'var(--text-muted)';
-      const pickClass = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
+      // 3-tier confidence colors: green (>60), white (52-60), gray (<52)
+      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 52 ? 'var(--text-primary)' : 'var(--text-muted)';
+      const pickClass = (pick, conf) => {
+        if (!pick || pick === 'N/A') return 'low-conf';
+        if (conf >= 60) return 'best-bet';
+        if (conf < 52) return 'low-conf';
+        return '';
+      };
+      const bestBetBadge = conf => conf >= 60 ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
 
       const status = getGameStatus(g);
       const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
@@ -1029,7 +1037,7 @@
       const spreadStr = g.spread_pick || 'N/A';
       const spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
       const totalStr = g.total_pick && g.total_line != null
-        ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line) : 'N/A';
+        ? (g.total_pick + ' ' + g.total_line) : 'N/A';
       const totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
       const mlStr = g.ml_pick || 'N/A';
       const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
@@ -1112,17 +1120,17 @@
           <div class="game-card-picks">
             <div class="game-pick-row">
               <span class="game-pick-label">Spread</span>
-              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
+              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge(g.spread_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
             </div>
             <div class="game-pick-row">
               <span class="game-pick-label">Total</span>
-              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
+              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge(g.total_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
             </div>
             <div class="game-pick-row">
               <span class="game-pick-label">ML</span>
-              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
+              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge(g.ml_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
             </div>
           </div>
