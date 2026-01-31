@@ -963,6 +963,173 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ── Results Section ── */
+    .results-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .results-stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .results-stat-card .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .results-stat-card .stat-pct {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .results-stat-card .stat-pct.green { color: var(--accent-light); }
+    .results-stat-card .stat-pct.red { color: var(--red-light); }
+    .results-stat-card .stat-pct.neutral { color: var(--text-secondary); }
+
+    .results-stat-card .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .results-table-wrap {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .results-table thead th {
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .results-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .results-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .results-table tbody tr:hover {
+      background: var(--bg-elevated);
+    }
+
+    .results-table td {
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .result-type-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .result-type-badge.prop { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
+    .result-type-badge.spread { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+    .result-type-badge.total { background: rgba(234, 179, 8, 0.12); color: var(--yellow); }
+    .result-type-badge.ml { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+
+    .result-hit {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-light);
+    }
+
+    .result-miss {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--red-light);
+    }
+
+    .alltime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .alltime-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .alltime-card .alltime-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .alltime-card .alltime-record {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .alltime-card .alltime-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .alltime-card .alltime-detail .green { color: var(--accent-light); }
+    .alltime-card .alltime-detail .red { color: var(--red-light); }
+
+    @media (max-width: 768px) {
+      .results-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .alltime-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .results-table-wrap {
+        overflow-x: auto;
+      }
+
+      .results-table {
+        min-width: 500px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1061,11 +1228,34 @@
 
     <section class="results-section" id="results">
       <div class="section-header">
-        <h2 class="section-title">Recent Results</h2>
+        <h2 class="section-title">Yesterday's Record</h2>
+        <span class="section-meta" id="results-date"></span>
       </div>
-      <div class="results-grid" id="results-container">
-        <!-- Results loaded via JS when available -->
+      <div class="results-summary-grid" id="results-summary"></div>
+
+      <div class="section-header">
+        <h2 class="section-title">Results History</h2>
+        <span class="section-meta">Last 7 days</span>
       </div>
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Pick</th>
+              <th>Result</th>
+              <th>Hit</th>
+            </tr>
+          </thead>
+          <tbody id="results-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="section-header">
+        <h2 class="section-title">All-Time Stats</h2>
+      </div>
+      <div class="alltime-grid" id="alltime-grid"></div>
     </section>
   </main>
 
@@ -1079,6 +1269,7 @@
   <script>
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
+    const RESULTS_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     let projections = [];
     let gameProjections = [];
     let currentSport = 'all';
@@ -1407,8 +1598,111 @@
       }
     }
 
+    function pctClass(pct) {
+      if (pct >= 55) return 'green';
+      if (pct > 0 && pct < 50) return 'red';
+      return 'neutral';
+    }
+
+    function renderSummaryCard(label, stats) {
+      return `
+        <div class="results-stat-card">
+          <div class="stat-value">${stats.record}</div>
+          <div class="stat-pct ${pctClass(stats.pct)}">${stats.pct > 0 ? stats.pct + '%' : '--'}</div>
+          <div class="stat-label">${label}</div>
+        </div>`;
+    }
+
+    function renderResultRow(pick) {
+      const typeClass = pick.type.toLowerCase();
+      const hitIcon = pick.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
+      return `
+        <tr>
+          <td style="color:var(--text-muted)">${pick.date}</td>
+          <td><span class="result-type-badge ${typeClass}">${pick.type}</span></td>
+          <td>${pick.pick}</td>
+          <td style="color:var(--text-secondary)">${pick.result || '--'}</td>
+          <td>${hitIcon}</td>
+        </tr>`;
+    }
+
+    function renderAlltimeCard(label, stats) {
+      const record = `${stats.wins}-${stats.losses}`;
+      const pct = stats.pct > 0 ? `${stats.pct}%` : '--';
+      const roiStr = stats.roi !== 0 ? `${stats.roi > 0 ? '+' : ''}${stats.roi}%` : '--';
+      const roiClass = stats.roi > 0 ? 'green' : stats.roi < 0 ? 'red' : '';
+      return `
+        <div class="alltime-card">
+          <div class="alltime-label">${label}</div>
+          <div class="alltime-record">${record}</div>
+          <div class="alltime-detail">${pct} win rate &middot; ROI: <span class="${roiClass}">${roiStr}</span></div>
+        </div>`;
+    }
+
+    async function loadResults() {
+      try {
+        const resp = await fetch(RESULTS_DATA_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch results');
+        const data = await resp.json();
+
+        // Show section
+        document.getElementById('results').classList.add('visible');
+
+        // Yesterday's date
+        const dateEl = document.getElementById('results-date');
+        if (data.yesterday && data.yesterday.date) {
+          const d = new Date(data.yesterday.date + 'T12:00:00');
+          dateEl.textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+        }
+
+        // Summary cards
+        const summaryEl = document.getElementById('results-summary');
+        if (data.yesterday) {
+          const y = data.yesterday;
+          summaryEl.innerHTML =
+            renderSummaryCard('Props', y.props) +
+            renderSummaryCard('Spreads', y.spreads) +
+            renderSummaryCard('Totals', y.totals) +
+            renderSummaryCard('Moneylines', y.moneylines);
+        }
+
+        // Results table
+        const tbody = document.getElementById('results-table-body');
+        if (data.picks && data.picks.length > 0) {
+          tbody.innerHTML = data.picks.map(renderResultRow).join('');
+        } else {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:40px">No results yet</td></tr>';
+        }
+
+        // All-time stats
+        const alltimeEl = document.getElementById('alltime-grid');
+        if (data.alltime) {
+          const a = data.alltime;
+          let html = '';
+          html += renderAlltimeCard('Props', a.props);
+          html += renderAlltimeCard('Spreads', a.spreads);
+          html += renderAlltimeCard('Totals', a.totals);
+          html += renderAlltimeCard('Moneylines', a.moneylines);
+
+          if (a.best_prop_type) {
+            html += `
+              <div class="alltime-card">
+                <div class="alltime-label">Best Prop Category</div>
+                <div class="alltime-record" style="text-transform:capitalize">${a.best_prop_type.replace('_', ' ')}</div>
+                <div class="alltime-detail"><span class="green">${a.best_prop_pct}%</span> win rate</div>
+              </div>`;
+          }
+          alltimeEl.innerHTML = html;
+        }
+
+      } catch (err) {
+        console.error('Failed to load results:', err);
+      }
+    }
+
     loadProjections();
     loadGameProjections();
+    loadResults();
   </script>
 </body>
 </html>
