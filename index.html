@@ -314,21 +314,29 @@
     .results-section { display: none; }
     .results-section.visible { display: block; }
 
-    /* Overall Stats Banner */
-    .results-banner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+    /* All-Time Stats Banner */
+    .results-banner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
     .results-banner-stat { padding: 20px; background: var(--bg-secondary); text-align: center; }
     .results-banner-stat .rbs-value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
     .results-banner-stat .rbs-value.green { color: var(--accent-light); }
     .results-banner-stat .rbs-value.red { color: var(--red-light); }
     .results-banner-stat .rbs-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
 
-    /* Date Picker */
-    .date-picker { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-    .date-picker-btn { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); padding: 8px 12px; font-size: 14px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
-    .date-picker-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .date-picker-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .date-picker-date { font-size: 16px; font-weight: 700; color: var(--text-primary); min-width: 180px; text-align: center; }
-    .date-picker-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+    /* Date Selector Pills */
+    .date-selector { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .date-selector .ds-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
+    .date-pill {
+      padding: 7px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 100px; color: var(--text-secondary); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit; white-space: nowrap;
+    }
+    .date-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .date-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .date-pill .dp-count { font-size: 11px; font-weight: 400; color: var(--text-muted); margin-left: 4px; }
+    .date-pill.active .dp-count { color: rgba(52, 211, 153, 0.7); }
+
+    /* Day Header */
+    .day-header { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
 
     /* Daily Summary Cards */
     .results-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
@@ -362,15 +370,6 @@
     .result-game { font-size: 12px; color: var(--text-muted); }
     .result-conf { font-size: 12px; color: var(--text-muted); }
 
-    /* All-Time Stats */
-    .alltime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
-    .alltime-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
-    .alltime-card .alltime-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 8px; }
-    .alltime-card .alltime-record { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-    .alltime-card .alltime-detail { font-size: 13px; color: var(--text-secondary); }
-    .alltime-card .alltime-detail .green { color: var(--accent-light); }
-    .alltime-card .alltime-detail .red { color: var(--red-light); }
-
     /* Empty State */
     .empty-state { text-align: center; padding: 80px 20px; }
     .empty-state-icon { width: 64px; height: 64px; margin: 0 auto 20px; background: var(--bg-tertiary); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
@@ -403,10 +402,11 @@
       .game-cards-grid { grid-template-columns: 1fr; }
       .results-banner { grid-template-columns: repeat(2, 1fr); }
       .results-banner-stat .rbs-value { font-size: 22px; }
+      .date-selector { gap: 6px; }
+      .date-pill { padding: 6px 10px; font-size: 12px; }
       .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
-      .alltime-grid { grid-template-columns: repeat(2, 1fr); }
       .results-table-wrap { overflow-x: auto; }
-      .results-table { min-width: 560px; }
+      .results-table { min-width: 520px; }
       .results-filter-row { gap: 12px; }
       .yesterday-bar { gap: 12px; font-size: 12px; }
       .sgc-picks { gap: 16px; }
@@ -512,54 +512,45 @@
     </section>
 
     <section class="results-section" id="results">
-      <!-- Overall Stats Banner -->
+      <!-- All-Time Stats Banner (always visible) -->
       <div class="section-header">
-        <h2 class="section-title">Performance Overview</h2>
+        <h2 class="section-title">All-Time Performance</h2>
       </div>
       <div class="results-banner" id="results-banner"></div>
 
-      <!-- Date Picker -->
-      <div class="date-picker" id="date-picker">
-        <button class="date-picker-btn" id="dp-prev" title="Previous day">&#8592;</button>
-        <div class="date-picker-date" id="dp-date">--</div>
-        <button class="date-picker-btn" id="dp-next" title="Next day">&#8594;</button>
-      </div>
+      <!-- Date Selector Pills -->
+      <div class="date-selector" id="date-selector"></div>
 
-      <!-- Daily Summary Cards -->
-      <div class="results-summary-grid" id="results-summary"></div>
+      <!-- Selected Day Content -->
+      <div id="day-view">
+        <div class="day-header" id="day-header"></div>
+        <div class="results-summary-grid" id="results-summary"></div>
 
-      <!-- Filters -->
-      <div class="results-filter-row" id="results-filter-row">
-        <div class="filter-group">
-          <span class="filter-label">Type</span>
-          <button class="filter-pill active" data-rtype="all">All</button>
-          <button class="filter-pill" data-rtype="prop">Props</button>
-          <button class="filter-pill" data-rtype="spread">Spreads</button>
-          <button class="filter-pill" data-rtype="ml">MLs</button>
+        <div class="results-filter-row" id="results-filter-row">
+          <div class="filter-group">
+            <span class="filter-label">Type</span>
+            <button class="filter-pill active" data-rtype="all">All</button>
+            <button class="filter-pill" data-rtype="prop">Props</button>
+            <button class="filter-pill" data-rtype="spread">Spreads</button>
+            <button class="filter-pill" data-rtype="ml">MLs</button>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Result</span>
+            <button class="filter-pill active" data-rresult="all">All</button>
+            <button class="filter-pill" data-rresult="win">Wins</button>
+            <button class="filter-pill" data-rresult="loss">Losses</button>
+          </div>
         </div>
-        <div class="filter-group">
-          <span class="filter-label">Result</span>
-          <button class="filter-pill active" data-rresult="all">All</button>
-          <button class="filter-pill" data-rresult="win">Wins</button>
-          <button class="filter-pill" data-rresult="loss">Losses</button>
+
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr><th>Type</th><th>Pick</th><th>Line</th><th>Result</th><th>Conf</th><th>Hit</th></tr>
+            </thead>
+            <tbody id="results-table-body"></tbody>
+          </table>
         </div>
       </div>
-
-      <!-- Detailed Results Table -->
-      <div class="results-table-wrap">
-        <table class="results-table">
-          <thead>
-            <tr><th>Type</th><th>Pick</th><th>Line</th><th>Result</th><th>Conf</th><th>Hit</th></tr>
-          </thead>
-          <tbody id="results-table-body"></tbody>
-        </table>
-      </div>
-
-      <!-- All-Time Stats -->
-      <div class="section-header">
-        <h2 class="section-title">All-Time Stats</h2>
-      </div>
-      <div class="alltime-grid" id="alltime-grid"></div>
     </section>
   </main>
 
@@ -1140,7 +1131,7 @@
 
     // ── Results ──
     let resultsData = null;
-    let resultsDayIdx = 0;  // index into resultsData.days
+    let resultsDayIdx = 0;
     let resultsTypeFilter = 'all';
     let resultsResultFilter = 'all';
 
@@ -1150,17 +1141,21 @@
       return 'neutral';
     }
 
-    function formatDateStr(dateStr) {
+    function formatDateShort(dateStr) {
       const d = new Date(dateStr + 'T12:00:00');
-      return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
 
-    // Overall stats banner
+    function formatDateFull(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    // All-time stats banner (always visible)
     function renderResultsBanner(data) {
       const at = data.allTime;
       if (!at) return;
 
-      // Total record across all categories
       const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
       const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
       const totalT = totalW + totalL;
@@ -1168,27 +1163,12 @@
       const totalProfit = totalW * 90.91 - totalL * 100;
       const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
 
-      // Find best category
       const cats = [
         { name: 'Props', ...at.props },
         { name: 'Spreads', ...at.spreads },
         { name: 'MLs', ...at.moneylines },
       ];
-      let bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
-
-      // Current streak from days
-      let streak = 0, streakType = '';
-      if (data.days && data.days.length > 0) {
-        for (const day of data.days) {
-          for (const p of (day.picks || [])) {
-            if (streakType === '') streakType = p.hit ? 'W' : 'L';
-            if ((p.hit && streakType === 'W') || (!p.hit && streakType === 'L')) streak++;
-            else break;
-          }
-          if (streak > 0) break;
-        }
-      }
-
+      const bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
       const roiCls = parseFloat(totalRoi) > 0 ? 'green' : parseFloat(totalRoi) < 0 ? 'red' : '';
 
       document.getElementById('results-banner').innerHTML = `
@@ -1210,16 +1190,31 @@
         </div>`;
     }
 
-    // Date picker
-    function renderDatePicker() {
+    // Date selector pills
+    function renderDateSelector() {
       if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
-      const day = resultsData.days[resultsDayIdx];
-      const dateStr = formatDateStr(day.date);
-      const total = resultsData.days.length;
+      const container = document.getElementById('date-selector');
+      let html = '<span class="ds-label">Date</span>';
+      resultsData.days.forEach((day, i) => {
+        const count = (day.picks || []).length;
+        const active = i === resultsDayIdx ? ' active' : '';
+        html += `<button class="date-pill${active}" data-didx="${i}">${formatDateShort(day.date)}<span class="dp-count">${count}</span></button>`;
+      });
+      container.innerHTML = html;
 
-      document.getElementById('dp-date').innerHTML = `${dateStr}<div class="date-picker-sub">${resultsDayIdx === 0 ? 'Most Recent' : (resultsDayIdx + 1) + ' of ' + total + ' days'}</div>`;
-      document.getElementById('dp-prev').disabled = (resultsDayIdx >= total - 1);
-      document.getElementById('dp-next').disabled = (resultsDayIdx <= 0);
+      container.querySelectorAll('.date-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          resultsDayIdx = parseInt(pill.dataset.didx);
+          resultsTypeFilter = 'all';
+          resultsResultFilter = 'all';
+          renderSelectedDay();
+        });
+      });
+    }
+
+    // Day header
+    function renderDayHeader(day) {
+      document.getElementById('day-header').textContent = formatDateFull(day.date);
     }
 
     // Daily summary cards
@@ -1227,9 +1222,8 @@
       function card(label, stats) {
         const w = stats.wins, l = stats.losses, t = w + l;
         const pct = t > 0 ? (w / t * 100).toFixed(1) : 0;
-        const record = `${w}-${l}`;
         return `<div class="results-stat-card">
-          <div class="rsc-record">${record}</div>
+          <div class="rsc-record">${w}-${l}</div>
           <div class="rsc-pct ${pctClass(parseFloat(pct))}">${t > 0 ? pct + '%' : '--'}</div>
           <div class="rsc-label">${label}</div>
         </div>`;
@@ -1239,16 +1233,13 @@
         card('Totals', day.totals) + card('Moneylines', day.moneylines);
     }
 
-    // Results table
+    // Results table for selected day
     function renderResultsTable(day) {
       let picks = day.picks || [];
 
-      // Apply type filter
       if (resultsTypeFilter !== 'all') {
         picks = picks.filter(p => p.type === resultsTypeFilter);
       }
-
-      // Apply result filter
       if (resultsResultFilter === 'win') picks = picks.filter(p => p.hit);
       else if (resultsResultFilter === 'loss') picks = picks.filter(p => !p.hit);
 
@@ -1263,7 +1254,6 @@
         const typeLabel = p.type === 'ml' ? 'ML' : p.type.toUpperCase();
         const hitIcon = p.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
 
-        // Build pick display
         let pickHtml = '';
         if (p.type === 'prop') {
           pickHtml = `<span class="result-player">${p.player || ''}</span><br><span class="result-game">${p.team || ''}</span>`;
@@ -1286,39 +1276,16 @@
       }).join('');
     }
 
-    // All-time stats
-    function renderAlltimeStats(data) {
-      const at = data.allTime;
-      if (!at) return;
-
-      function card(label, stats) {
-        const record = `${stats.wins}-${stats.losses}`;
-        const pct = stats.pct > 0 ? `${stats.pct}%` : '--';
-        const roiStr = stats.roi !== 0 ? `${stats.roi > 0 ? '+' : ''}${stats.roi}%` : '--';
-        const roiClass = stats.roi > 0 ? 'green' : stats.roi < 0 ? 'red' : '';
-        return `<div class="alltime-card"><div class="alltime-label">${label}</div><div class="alltime-record">${record}</div><div class="alltime-detail">${pct} win rate &middot; ROI: <span class="${roiClass}">${roiStr}</span></div></div>`;
-      }
-
-      let html = card('Props', at.props) + card('Spreads', at.spreads) +
-        card('Totals', at.totals) + card('Moneylines', at.moneylines);
-
-      if (at.best_prop_type) {
-        html += `<div class="alltime-card"><div class="alltime-label">Best Prop Category</div><div class="alltime-record" style="text-transform:capitalize">${at.best_prop_type.replace('_', ' ')}</div><div class="alltime-detail"><span class="green">${at.best_prop_pct}%</span> win rate</div></div>`;
-      }
-      document.getElementById('alltime-grid').innerHTML = html;
-    }
-
     // Hero yesterday bar
     function renderYesterdayBar(data) {
       if (!data.days || data.days.length === 0) return;
-      const day = data.days[0]; // most recent
+      const day = data.days[0];
       const bar = document.getElementById('yesterday-bar');
 
       function item(label, stats) {
         if (stats.wins + stats.losses === 0) return '';
         const pct = stats.pct || 0;
-        const cls = pctClass(pct);
-        return `<span class="yb-item">${label} <span class="yb-val">${stats.record}</span><span class="yb-pct ${cls}">(${pct}%)</span></span>`;
+        return `<span class="yb-item">${label} <span class="yb-val">${stats.record}</span><span class="yb-pct ${pctClass(pct)}">(${pct}%)</span></span>`;
       }
 
       const items = [
@@ -1327,21 +1294,30 @@
       ].filter(Boolean);
 
       if (items.length > 0) {
-        bar.innerHTML = `<span class="yb-label">${formatDateStr(day.date)}</span>` + items.join('');
+        bar.innerHTML = `<span class="yb-label">${formatDateShort(day.date)}</span>` + items.join('');
         bar.classList.add('visible');
       }
     }
 
-    // Master render for results day
-    function renderResultsDay() {
+    // Master render for selected day
+    function renderSelectedDay() {
       if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
       const day = resultsData.days[resultsDayIdx];
-      renderDatePicker();
+
+      // Update date pill active state
+      document.querySelectorAll('.date-pill').forEach((pill, i) => {
+        pill.classList.toggle('active', parseInt(pill.dataset.didx) === resultsDayIdx);
+      });
+
+      // Reset filter pill UI
+      document.querySelectorAll('[data-rtype]').forEach(p => p.classList.toggle('active', p.dataset.rtype === resultsTypeFilter));
+      document.querySelectorAll('[data-rresult]').forEach(p => p.classList.toggle('active', p.dataset.rresult === resultsResultFilter));
+
+      renderDayHeader(day);
       renderDaySummary(day);
       renderResultsTable(day);
     }
 
-    // Nav link handling for Results section
     function showResultsSection() {
       if (resultsData) {
         document.getElementById('results').classList.add('visible');
@@ -1356,37 +1332,24 @@
 
         document.getElementById('results').classList.add('visible');
 
-        // Render all results components
         renderResultsBanner(resultsData);
-        renderResultsDay();
-        renderAlltimeStats(resultsData);
+        renderDateSelector();
+        renderSelectedDay();
         renderYesterdayBar(resultsData);
 
-        // Date picker navigation
-        document.getElementById('dp-prev').addEventListener('click', () => {
-          if (resultsDayIdx < resultsData.days.length - 1) { resultsDayIdx++; renderResultsDay(); }
-        });
-        document.getElementById('dp-next').addEventListener('click', () => {
-          if (resultsDayIdx > 0) { resultsDayIdx--; renderResultsDay(); }
-        });
-
-        // Results type filter
+        // Type filter pills
         document.querySelectorAll('[data-rtype]').forEach(pill => {
           pill.addEventListener('click', () => {
-            document.querySelectorAll('[data-rtype]').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
             resultsTypeFilter = pill.dataset.rtype;
-            renderResultsDay();
+            renderSelectedDay();
           });
         });
 
-        // Results result filter
+        // Result filter pills
         document.querySelectorAll('[data-rresult]').forEach(pill => {
           pill.addEventListener('click', () => {
-            document.querySelectorAll('[data-rresult]').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
             resultsResultFilter = pill.dataset.rresult;
-            renderResultsDay();
+            renderSelectedDay();
           });
         });
       } catch (err) {
