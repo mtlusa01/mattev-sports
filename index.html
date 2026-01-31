@@ -42,7 +42,6 @@
       -webkit-font-smoothing: antialiased;
     }
     
-    /* Subtle gradient background */
     .page-gradient {
       position: fixed;
       top: 0;
@@ -54,7 +53,6 @@
       z-index: 0;
     }
     
-    /* Navigation */
     nav {
       position: fixed;
       top: 0;
@@ -148,7 +146,6 @@
       opacity: 0.9;
     }
     
-    /* Hero */
     .hero {
       padding: 140px 24px 80px;
       text-align: center;
@@ -206,9 +203,9 @@
       line-height: 1.7;
     }
     
-    /* Stats Grid */
+    /* Stats Grid - Hidden until we have real data */
     .stats-grid {
-      display: flex;
+      display: none; /* Will show when we have real stats */
       justify-content: center;
       gap: 1px;
       background: var(--border);
@@ -216,6 +213,10 @@
       overflow: hidden;
       max-width: 600px;
       margin: 0 auto 60px;
+    }
+    
+    .stats-grid.visible {
+      display: flex;
     }
     
     .stat {
@@ -242,7 +243,6 @@
       font-weight: 500;
     }
     
-    /* Main Content */
     main {
       max-width: 1200px;
       margin: 0 auto;
@@ -251,7 +251,6 @@
       z-index: 1;
     }
     
-    /* Section Header */
     .section-header {
       display: flex;
       align-items: center;
@@ -283,7 +282,6 @@
       color: var(--text-muted);
     }
     
-    /* Filter Tabs */
     .filter-tabs {
       display: flex;
       gap: 4px;
@@ -316,7 +314,6 @@
       color: var(--text-primary);
     }
     
-    /* Picks Table */
     .picks-table {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -464,7 +461,15 @@
       color: var(--red-light);
     }
     
-    /* Recent Results */
+    /* Results Section - Hidden until we have data */
+    .results-section {
+      display: none;
+    }
+    
+    .results-section.visible {
+      display: block;
+    }
+    
     .results-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -542,21 +547,35 @@
     /* Empty State */
     .empty-state {
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
     
     .empty-state-icon {
-      font-size: 40px;
-      margin-bottom: 16px;
-      opacity: 0.5;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    
+    .empty-state-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
     }
     
     .empty-state-text {
       font-size: 14px;
       color: var(--text-muted);
+      max-width: 400px;
+      margin: 0 auto;
     }
     
-    /* Footer */
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 24px;
@@ -582,7 +601,6 @@
       margin: 0 auto;
     }
     
-    /* Responsive */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -603,13 +621,8 @@
       .pick-status {
         text-align: left;
       }
-      
-      .stats-grid {
-        flex-direction: column;
-      }
     }
     
-    /* Mobile menu button */
     .mobile-menu {
       display: none;
       background: none;
@@ -638,7 +651,6 @@
       <ul class="nav-links">
         <li><a href="#" class="active">Projections</a></li>
         <li><a href="#results">Results</a></li>
-        <li><a href="#performance">Performance</a></li>
         <li><a href="#about">About</a></li>
       </ul>
       <a href="admin.html" class="nav-cta">Admin</a>
@@ -647,21 +659,22 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-badge">Model Updated Today</div>
+    <div class="hero-badge">Coming Soon</div>
     <h1>Daily AI <span>Sports Projections</span></h1>
     <p class="hero-subtitle">Data-driven player props and game predictions. Our models analyze thousands of data points to find the highest-value plays, updated every morning.</p>
     
-    <div class="stats-grid">
+    <!-- Stats hidden until we have real data -->
+    <div class="stats-grid" id="stats-grid">
       <div class="stat">
-        <div class="stat-value" id="stat-record">147-96</div>
+        <div class="stat-value" id="stat-record">0-0</div>
         <div class="stat-label">Record</div>
       </div>
       <div class="stat">
-        <div class="stat-value green" id="stat-winrate">60.5%</div>
+        <div class="stat-value green" id="stat-winrate">--%</div>
         <div class="stat-label">Win Rate</div>
       </div>
       <div class="stat">
-        <div class="stat-value green" id="stat-roi">+18.2%</div>
+        <div class="stat-value green" id="stat-roi">--%</div>
         <div class="stat-label">ROI</div>
       </div>
     </div>
@@ -683,14 +696,18 @@
       </div>
       
       <div class="picks-table">
-        <div class="table-header">
+        <div class="table-header" id="table-header" style="display: none;">
           <div>Matchup</div>
           <div>Projection</div>
           <div>Confidence</div>
           <div>Status</div>
         </div>
         <div id="picks-container">
-          <!-- Picks loaded via JS -->
+          <div class="empty-state">
+            <div class="empty-state-icon">📊</div>
+            <div class="empty-state-title">No projections yet</div>
+            <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -700,7 +717,7 @@
         <h2 class="section-title">Recent Results</h2>
       </div>
       <div class="results-grid" id="results-container">
-        <!-- Results loaded via JS -->
+        <!-- Results loaded via JS when available -->
       </div>
     </section>
   </main>
@@ -719,64 +736,29 @@
       weekday: 'long', month: 'short', day: 'numeric' 
     });
 
-    // Sample data - replace with your actual data source
+    // Load data from localStorage (will be empty until admin adds picks)
     let picks = JSON.parse(localStorage.getItem('mattev_picks') || '[]');
     let results = JSON.parse(localStorage.getItem('mattev_results') || '[]');
-
-    // Default sample data
-    if (picks.length === 0) {
-      picks = [
-        {
-          id: 1, sport: 'nba', teams: 'Lakers vs Celtics', time: '7:30 PM ET',
-          value: 'LeBron James O 27.5 PTS', type: 'Player Prop', isOver: true,
-          confidence: 'high', status: 'pending', featured: true
-        },
-        {
-          id: 2, sport: 'nba', teams: 'Warriors vs Suns', time: '10:00 PM ET',
-          value: 'UNDER 232.5', type: 'Game Total', isOver: false,
-          confidence: 'high', status: 'pending', featured: false
-        },
-        {
-          id: 3, sport: 'nba', teams: 'Knicks vs Heat', time: '8:00 PM ET',
-          value: 'Jalen Brunson O 24.5 PTS', type: 'Player Prop', isOver: true,
-          confidence: 'medium', status: 'pending', featured: false
-        },
-        {
-          id: 4, sport: 'nba', teams: 'Nuggets vs Mavs', time: '9:30 PM ET',
-          value: 'Nikola Jokic O 11.5 REB', type: 'Player Prop', isOver: true,
-          confidence: 'high', status: 'pending', featured: false
-        }
-      ];
-      localStorage.setItem('mattev_picks', JSON.stringify(picks));
-    }
-
-    if (results.length === 0) {
-      results = [
-        { id: 1, pick: 'Jokic O 11.5 REB', teams: 'Nuggets vs Clippers', outcome: 'win', actual: '14 REB' },
-        { id: 2, pick: 'UNDER 224.5', teams: 'Bucks vs Cavaliers', outcome: 'win', actual: '218 Total' },
-        { id: 3, pick: 'Embiid O 32.5 PTS', teams: '76ers vs Nets', outcome: 'loss', actual: '28 PTS' },
-        { id: 4, pick: 'Tatum O 27.5 PTS', teams: 'Celtics vs Pacers', outcome: 'win', actual: '31 PTS' },
-        { id: 5, pick: 'OVER 228.5', teams: 'Thunder vs Mavs', outcome: 'win', actual: '241 Total' },
-        { id: 6, pick: 'Curry O 26.5 PTS', teams: 'Warriors vs Lakers', outcome: 'win', actual: '32 PTS' }
-      ];
-      localStorage.setItem('mattev_results', JSON.stringify(results));
-    }
 
     // Render picks
     function renderPicks(filter = 'all') {
       const container = document.getElementById('picks-container');
+      const tableHeader = document.getElementById('table-header');
       const filtered = filter === 'all' ? picks : picks.filter(p => p.sport === filter);
       
       if (filtered.length === 0) {
+        tableHeader.style.display = 'none';
         container.innerHTML = `
           <div class="empty-state">
             <div class="empty-state-icon">📊</div>
-            <p class="empty-state-text">No projections available. Check back soon.</p>
+            <div class="empty-state-title">No projections yet</div>
+            <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
           </div>
         `;
         return;
       }
       
+      tableHeader.style.display = 'grid';
       container.innerHTML = filtered.map(pick => `
         <div class="pick-row">
           <div class="pick-matchup">
@@ -802,7 +784,15 @@
 
     // Render results
     function renderResults() {
+      const section = document.getElementById('results');
       const container = document.getElementById('results-container');
+      
+      if (results.length === 0) {
+        section.classList.remove('visible');
+        return;
+      }
+      
+      section.classList.add('visible');
       container.innerHTML = results.slice(0, 6).map(result => `
         <div class="result-card">
           <div class="result-indicator ${result.outcome}"></div>
@@ -815,18 +805,24 @@
       `).join('');
     }
 
-    // Update stats
+    // Update stats (only show if we have completed picks)
     function updateStats() {
-      const wins = results.filter(r => r.outcome === 'win').length;
-      const losses = results.filter(r => r.outcome === 'loss').length;
+      const completedPicks = picks.filter(p => p.status === 'win' || p.status === 'loss');
+      const statsGrid = document.getElementById('stats-grid');
+      
+      if (completedPicks.length === 0) {
+        statsGrid.classList.remove('visible');
+        return;
+      }
+      
+      const wins = completedPicks.filter(p => p.status === 'win').length;
+      const losses = completedPicks.filter(p => p.status === 'loss').length;
       const total = wins + losses;
       
-      if (total > 0) {
-        const baseWins = 141;
-        const baseLosses = 90;
-        document.getElementById('stat-record').textContent = `${baseWins + wins}-${baseLosses + losses}`;
-        document.getElementById('stat-winrate').textContent = `${(((baseWins + wins) / (baseWins + wins + baseLosses + losses)) * 100).toFixed(1)}%`;
-      }
+      statsGrid.classList.add('visible');
+      document.getElementById('stat-record').textContent = `${wins}-${losses}`;
+      document.getElementById('stat-winrate').textContent = `${((wins / total) * 100).toFixed(1)}%`;
+      document.getElementById('stat-roi').textContent = total >= 10 ? `+${((wins / total - 0.5) * 100).toFixed(1)}%` : '--%';
     }
 
     // Filter tabs
