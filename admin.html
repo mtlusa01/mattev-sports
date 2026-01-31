@@ -3,156 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MattEV Admin | Manage Picks</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>MattEV Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #05060a;
-      --bg-secondary: #0a0c12;
-      --bg-card: rgba(15, 18, 30, 0.8);
-      --accent-gold: #f0b90b;
-      --accent-fire: #ff5722;
-      --accent-green: #00ff88;
-      --accent-red: #ff4757;
-      --accent-blue: #00d4ff;
-      --accent-purple: #a855f7;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --glass-border: rgba(255,255,255,0.1);
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --bg-tertiary: #27272a;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #10b981;
+      --accent-light: #34d399;
+      --red: #ef4444;
+      --yellow: #eab308;
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
-      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
     
-    .admin-header {
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--glass-border);
+    header {
       padding: 16px 24px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    .admin-header-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .admin-title {
+    
+    .header-title {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600;
     }
-    .admin-title h1 {
-      font-size: 20px;
+    
+    .header-title .icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
       font-weight: 700;
+      color: #000;
     }
-    .admin-title span {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .admin-nav {
+    
+    .header-nav {
       display: flex;
-      gap: 12px;
+      gap: 8px;
     }
-    .admin-nav a {
-      padding: 8px 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
+    
+    .header-nav a {
+      padding: 8px 14px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
       border-radius: 6px;
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 13px;
-      transition: all 0.2s;
-    }
-    .admin-nav a:hover {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-primary);
-    }
-    .admin-nav a.primary {
-      background: var(--accent-gold);
-      color: #000;
-      border-color: var(--accent-gold);
+      font-weight: 500;
+      transition: all 0.15s;
     }
     
-    .admin-container {
-      max-width: 1400px;
+    .header-nav a:hover {
+      color: var(--text-primary);
+      border-color: var(--border-light);
+    }
+    
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: 400px 1fr;
+      grid-template-columns: 380px 1fr;
       gap: 24px;
     }
     
-    @media (max-width: 1000px) {
-      .admin-container {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; }
     }
     
     .panel {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
     }
     
     .panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 600;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .panel-title {
-      font-size: 18px;
-      font-weight: 700;
+      gap: 8px;
     }
     
-    /* Form Styles */
+    .panel-content {
+      padding: 20px;
+    }
+    
     .form-group {
       margin-bottom: 16px;
     }
+    
     .form-label {
       display: block;
       font-size: 12px;
+      font-weight: 500;
       color: var(--text-muted);
+      margin-bottom: 6px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      letter-spacing: 0.03em;
     }
+    
     .form-input, .form-select, .form-textarea {
       width: 100%;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 8px;
+      padding: 10px 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
       color: var(--text-primary);
-      font-family: 'Outfit', sans-serif;
+      font-family: inherit;
       font-size: 14px;
-      transition: border-color 0.2s;
+      transition: border-color 0.15s;
     }
+    
     .form-input:focus, .form-select:focus, .form-textarea:focus {
       outline: none;
-      border-color: var(--accent-gold);
+      border-color: var(--accent);
     }
+    
     .form-select option {
       background: var(--bg-secondary);
     }
+    
     .form-textarea {
       min-height: 80px;
       resize: vertical;
     }
+    
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -160,378 +167,327 @@
     }
     
     .btn {
-      padding: 12px 24px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 8px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
     }
+    
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-fire));
+      background: var(--accent);
       color: #000;
       width: 100%;
     }
+    
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(240,185,11,0.4);
+      background: var(--accent-light);
     }
-    .btn-secondary {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-primary);
-      border: 1px solid var(--glass-border);
-    }
-    .btn-danger {
-      background: rgba(255,71,87,0.2);
-      color: var(--accent-red);
-      border: 1px solid var(--accent-red);
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-    .btn-success {
-      background: rgba(0,255,136,0.2);
-      color: var(--accent-green);
-      border: 1px solid var(--accent-green);
-      padding: 6px 12px;
+    
+    .btn-sm {
+      padding: 6px 10px;
       font-size: 12px;
     }
     
-    /* Picks List */
-    .picks-list {
-      display: flex;
-      flex-direction: column;
+    .btn-success {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-light);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      max-height: calc(100vh - 200px);
+      margin-bottom: 20px;
+    }
+    
+    .stat-card {
+      padding: 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .stat-card-value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .stat-card-value.green { color: var(--accent-light); }
+    .stat-card-value.red { color: #f87171; }
+    .stat-card-value.yellow { color: var(--yellow); }
+    
+    .stat-card-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-top: 4px;
+    }
+    
+    .picks-list {
+      max-height: calc(100vh - 300px);
       overflow-y: auto;
     }
+    
     .pick-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 16px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
     }
+    
+    .pick-item:hover {
+      background: var(--bg-primary);
+    }
+    
+    .pick-item:last-child {
+      border-bottom: none;
+    }
+    
     .pick-item-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
+      align-items: center;
+      margin-bottom: 6px;
     }
+    
     .pick-item-sport {
       font-size: 11px;
-      color: var(--accent-gold);
+      font-weight: 600;
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.03em;
     }
+    
     .pick-item-status {
-      padding: 4px 8px;
-      border-radius: 4px;
       font-size: 10px;
       font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 100px;
       text-transform: uppercase;
     }
-    .pick-item-status.pending {
-      background: rgba(240,185,11,0.2);
-      color: var(--accent-gold);
-    }
-    .pick-item-status.win {
-      background: rgba(0,255,136,0.2);
-      color: var(--accent-green);
-    }
-    .pick-item-status.loss {
-      background: rgba(255,71,87,0.2);
-      color: var(--accent-red);
-    }
+    
+    .pick-item-status.pending { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
+    .pick-item-status.win { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .pick-item-status.loss { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    
     .pick-item-teams {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .pick-item-pick {
-      font-family: 'Space Mono', monospace;
       font-size: 14px;
-      color: var(--accent-green);
-      margin-bottom: 12px;
+      font-weight: 500;
+      margin-bottom: 2px;
     }
+    
+    .pick-item-value {
+      font-size: 13px;
+      color: var(--accent-light);
+      margin-bottom: 10px;
+    }
+    
     .pick-item-actions {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
     
-    /* Stats Cards */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    @media (max-width: 1200px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    .stat-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-    }
-    .stat-card-value {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .stat-card-value.green { color: var(--accent-green); }
-    .stat-card-value.red { color: var(--accent-red); }
-    .stat-card-value.gold { color: var(--accent-gold); }
-    .stat-card-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    /* Quick Actions */
-    .quick-actions {
+    .checkbox-label {
       display: flex;
+      align-items: center;
       gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    .quick-btn {
-      padding: 8px 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 6px;
-      color: var(--text-secondary);
-      font-size: 12px;
+      font-size: 13px;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-    .quick-btn:hover {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-primary);
-    }
-    .quick-btn.active {
-      background: var(--accent-gold);
-      color: #000;
-      border-color: var(--accent-gold);
+      color: var(--text-secondary);
     }
     
-    /* Toast Notification */
+    .checkbox-label input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+    }
+    
     .toast {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      padding: 16px 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--accent-green);
-      border-radius: 12px;
-      color: var(--accent-green);
-      font-size: 14px;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      color: var(--accent-light);
+      font-size: 13px;
+      font-weight: 500;
       display: none;
       z-index: 1000;
-      animation: slideIn 0.3s ease;
-    }
-    .toast.show { display: block; }
-    .toast.error {
-      border-color: var(--accent-red);
-      color: var(--accent-red);
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
     }
     
-    /* Empty State */
+    .toast.show { display: block; }
+    .toast.error { border-color: var(--red); color: #f87171; }
+    
     .empty-state {
       text-align: center;
       padding: 40px 20px;
       color: var(--text-muted);
-    }
-    .empty-state-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
+      font-size: 13px;
     }
   </style>
 </head>
 <body>
-  <header class="admin-header">
-    <div class="admin-header-inner">
-      <div class="admin-title">
-        <h1>🎯 <span>MattEV</span> Admin Panel</h1>
-      </div>
-      <nav class="admin-nav">
-        <a href="index.html">← Back to Site</a>
-        <a href="#" onclick="exportData()">Export Data</a>
-        <a href="#" onclick="importData()" class="primary">Import Data</a>
-      </nav>
+  <header>
+    <div class="header-title">
+      <div class="icon">M</div>
+      MattEV Admin
     </div>
+    <nav class="header-nav">
+      <a href="index.html">← View Site</a>
+    </nav>
   </header>
 
-  <div class="admin-container">
-    <!-- Add New Pick Panel -->
+  <div class="container">
     <div class="panel">
-      <div class="panel-header">
-        <h2 class="panel-title">➕ Add New Pick</h2>
+      <div class="panel-header">+ Add Projection</div>
+      <div class="panel-content">
+        <form id="pick-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Sport</label>
+              <select class="form-select" id="pick-sport">
+                <option value="nba">NBA</option>
+                <option value="nfl">NFL</option>
+                <option value="mlb">MLB</option>
+                <option value="nhl">NHL</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select class="form-select" id="pick-type">
+                <option value="Player Prop">Player Prop</option>
+                <option value="Game Total">Game Total</option>
+                <option value="Spread">Spread</option>
+                <option value="Moneyline">Moneyline</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Matchup</label>
+            <input type="text" class="form-input" id="pick-teams" placeholder="Lakers vs Celtics" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <input type="text" class="form-input" id="pick-time" placeholder="7:30 PM ET" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confidence</label>
+              <select class="form-select" id="pick-confidence">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Projection</label>
+            <input type="text" class="form-input" id="pick-value" placeholder="LeBron James O 27.5 PTS" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="pick-over" checked>
+              Over (green) — uncheck for Under (red)
+            </label>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Analysis (optional)</label>
+            <textarea class="form-textarea" id="pick-analysis" placeholder="Brief reasoning..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Add Projection</button>
+        </form>
       </div>
-      
-      <form id="pick-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Sport</label>
-            <select class="form-select" id="pick-sport" required>
-              <option value="nba">🏀 NBA</option>
-              <option value="nfl">🏈 NFL</option>
-              <option value="mlb">⚾ MLB</option>
-              <option value="nhl">🏒 NHL</option>
-              <option value="ncaab">🏀 NCAAB</option>
-              <option value="ncaaf">🏈 NCAAF</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Pick Type</label>
-            <select class="form-select" id="pick-type" required>
-              <option value="prop">Player Prop</option>
-              <option value="total">Game Total</option>
-              <option value="spread">Spread</option>
-              <option value="moneyline">Moneyline</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Matchup / Teams</label>
-          <input type="text" class="form-input" id="pick-teams" placeholder="Lakers vs Celtics" required>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Game Time</label>
-            <input type="text" class="form-input" id="pick-time" placeholder="7:30 PM ET" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Confidence</label>
-            <select class="form-select" id="pick-confidence">
-              <option value="high">🔥 High</option>
-              <option value="medium">⚡ Medium</option>
-              <option value="low">○ Low</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Pick (e.g., "LeBron James O 27.5 PTS")</label>
-          <input type="text" class="form-input" id="pick-selection" placeholder="Enter your pick" required>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Display Value</label>
-          <input type="text" class="form-input" id="pick-value" placeholder="OVER 27.5 or UNDER 234.5">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Analysis / Reasoning</label>
-          <textarea class="form-textarea" id="pick-analysis" placeholder="Brief explanation of why this pick has value..."></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-            <input type="checkbox" id="pick-featured">
-            <span style="font-size: 14px;">⭐ Feature this pick</span>
-          </label>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Add Pick</button>
-      </form>
     </div>
 
-    <!-- Manage Picks Panel -->
     <div class="panel">
-      <div class="panel-header">
-        <h2 class="panel-title">📋 Manage Picks</h2>
-      </div>
-      
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-card-value" id="total-picks">0</div>
-          <div class="stat-card-label">Total Picks</div>
+      <div class="panel-header">Manage Projections</div>
+      <div class="panel-content" style="padding: 0;">
+        <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-card-value" id="total-picks">0</div>
+              <div class="stat-card-label">Total</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-value yellow" id="pending-picks">0</div>
+              <div class="stat-card-label">Pending</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-value green" id="wins">0</div>
+              <div class="stat-card-label">Wins</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-value red" id="losses">0</div>
+              <div class="stat-card-label">Losses</div>
+            </div>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-value gold" id="pending-picks">0</div>
-          <div class="stat-card-label">Pending</div>
+        
+        <div class="picks-list" id="picks-list">
+          <!-- Picks loaded here -->
         </div>
-        <div class="stat-card">
-          <div class="stat-card-value green" id="wins">0</div>
-          <div class="stat-card-label">Wins</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-value red" id="losses">0</div>
-          <div class="stat-card-label">Losses</div>
-        </div>
-      </div>
-      
-      <div class="quick-actions">
-        <button class="quick-btn active" onclick="filterPicks('all')">All</button>
-        <button class="quick-btn" onclick="filterPicks('pending')">Pending</button>
-        <button class="quick-btn" onclick="filterPicks('win')">Wins</button>
-        <button class="quick-btn" onclick="filterPicks('loss')">Losses</button>
-      </div>
-      
-      <div class="picks-list" id="picks-list">
-        <!-- Picks will be loaded here -->
       </div>
     </div>
   </div>
 
   <div class="toast" id="toast"></div>
-  
-  <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
 
   <script>
-    // Load picks from localStorage
     let picks = JSON.parse(localStorage.getItem('mattev_picks') || '[]');
     let results = JSON.parse(localStorage.getItem('mattev_results') || '[]');
 
-    // Render picks list
-    function renderPicks(filter = 'all') {
+    function renderPicks() {
       const container = document.getElementById('picks-list');
       
-      let filteredPicks = picks;
-      if (filter !== 'all') {
-        filteredPicks = picks.filter(p => p.status === filter);
-      }
-      
-      if (filteredPicks.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-state-icon">📭</div>
-            <div>No picks found</div>
-          </div>
-        `;
+      if (picks.length === 0) {
+        container.innerHTML = '<div class="empty-state">No projections yet. Add your first one above.</div>';
+        updateStats();
         return;
       }
       
-      container.innerHTML = filteredPicks.map(pick => `
-        <div class="pick-item" data-id="${pick.id}">
+      container.innerHTML = picks.map(pick => `
+        <div class="pick-item">
           <div class="pick-item-header">
-            <span class="pick-item-sport">${pick.sport.toUpperCase()} • ${pick.type}</span>
+            <span class="pick-item-sport">${pick.sport}</span>
             <span class="pick-item-status ${pick.status}">${pick.status}</span>
           </div>
           <div class="pick-item-teams">${pick.teams}</div>
-          <div class="pick-item-pick">${pick.pick || pick.value}</div>
+          <div class="pick-item-value">${pick.value}</div>
           <div class="pick-item-actions">
             ${pick.status === 'pending' ? `
-              <button class="btn btn-success" onclick="markResult(${pick.id}, 'win')">✓ Win</button>
-              <button class="btn btn-danger" onclick="markResult(${pick.id}, 'loss')">✗ Loss</button>
-              <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px" onclick="markResult(${pick.id}, 'push')">↔ Push</button>
+              <button class="btn btn-sm btn-success" onclick="markResult(${pick.id}, 'win')">✓ Win</button>
+              <button class="btn btn-sm btn-danger" onclick="markResult(${pick.id}, 'loss')">✗ Loss</button>
             ` : `
-              <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px" onclick="resetPick(${pick.id})">Reset</button>
+              <button class="btn btn-sm btn-secondary" onclick="markResult(${pick.id}, 'pending')">Reset</button>
             `}
-            <button class="btn btn-danger" onclick="deletePick(${pick.id})">🗑️ Delete</button>
+            <button class="btn btn-sm btn-danger" onclick="deletePick(${pick.id})">Delete</button>
           </div>
         </div>
       `).join('');
@@ -539,20 +495,13 @@
       updateStats();
     }
 
-    // Update statistics
     function updateStats() {
-      const total = picks.length;
-      const pending = picks.filter(p => p.status === 'pending').length;
-      const wins = picks.filter(p => p.status === 'win').length;
-      const losses = picks.filter(p => p.status === 'loss').length;
-      
-      document.getElementById('total-picks').textContent = total;
-      document.getElementById('pending-picks').textContent = pending;
-      document.getElementById('wins').textContent = wins;
-      document.getElementById('losses').textContent = losses;
+      document.getElementById('total-picks').textContent = picks.length;
+      document.getElementById('pending-picks').textContent = picks.filter(p => p.status === 'pending').length;
+      document.getElementById('wins').textContent = picks.filter(p => p.status === 'win').length;
+      document.getElementById('losses').textContent = picks.filter(p => p.status === 'loss').length;
     }
 
-    // Add new pick
     document.getElementById('pick-form').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -562,141 +511,64 @@
         type: document.getElementById('pick-type').value,
         teams: document.getElementById('pick-teams').value,
         time: document.getElementById('pick-time').value,
-        pickType: document.getElementById('pick-type').options[document.getElementById('pick-type').selectedIndex].text,
-        pick: document.getElementById('pick-selection').value,
-        value: document.getElementById('pick-value').value || document.getElementById('pick-selection').value,
+        value: document.getElementById('pick-value').value,
+        isOver: document.getElementById('pick-over').checked,
         confidence: document.getElementById('pick-confidence').value,
         analysis: document.getElementById('pick-analysis').value,
-        featured: document.getElementById('pick-featured').checked,
         status: 'pending',
         createdAt: new Date().toISOString()
       };
       
       picks.unshift(pick);
-      savePicks();
+      localStorage.setItem('mattev_picks', JSON.stringify(picks));
       renderPicks();
-      showToast('Pick added successfully!');
-      
-      // Reset form
+      showToast('Projection added!');
       this.reset();
+      document.getElementById('pick-over').checked = true;
     });
 
-    // Mark pick result
-    function markResult(id, result) {
+    function markResult(id, status) {
       const pick = picks.find(p => p.id === id);
       if (pick) {
-        pick.status = result;
+        pick.status = status;
         
-        // Add to results
-        results.unshift({
-          id: pick.id,
-          teams: pick.teams,
-          pick: pick.pick || pick.value,
-          outcome: result,
-          actual: result === 'win' ? 'Hit' : result === 'loss' ? 'Missed' : 'Push',
-          date: new Date().toISOString()
-        });
-        
-        savePicks();
-        saveResults();
-        renderPicks();
-        showToast(`Pick marked as ${result.toUpperCase()}`);
-      }
-    }
-
-    // Reset pick to pending
-    function resetPick(id) {
-      const pick = picks.find(p => p.id === id);
-      if (pick) {
-        pick.status = 'pending';
-        savePicks();
-        renderPicks();
-        showToast('Pick reset to pending');
-      }
-    }
-
-    // Delete pick
-    function deletePick(id) {
-      if (confirm('Are you sure you want to delete this pick?')) {
-        picks = picks.filter(p => p.id !== id);
-        savePicks();
-        renderPicks();
-        showToast('Pick deleted');
-      }
-    }
-
-    // Filter picks
-    function filterPicks(filter) {
-      document.querySelectorAll('.quick-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderPicks(filter);
-    }
-
-    // Save to localStorage
-    function savePicks() {
-      localStorage.setItem('mattev_picks', JSON.stringify(picks));
-    }
-
-    function saveResults() {
-      localStorage.setItem('mattev_results', JSON.stringify(results));
-    }
-
-    // Export data
-    function exportData() {
-      const data = {
-        picks: picks,
-        results: results,
-        exportedAt: new Date().toISOString()
-      };
-      
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `mattev-data-${new Date().toISOString().split('T')[0]}.json`;
-      a.click();
-      showToast('Data exported successfully!');
-    }
-
-    // Import data
-    function importData() {
-      document.getElementById('import-file').click();
-    }
-
-    function handleImport(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          try {
-            const data = JSON.parse(e.target.result);
-            if (data.picks) {
-              picks = data.picks;
-              savePicks();
-            }
-            if (data.results) {
-              results = data.results;
-              saveResults();
-            }
-            renderPicks();
-            showToast('Data imported successfully!');
-          } catch (err) {
-            showToast('Error importing data', true);
+        if (status === 'win' || status === 'loss') {
+          // Add to results
+          const existingResult = results.find(r => r.id === id);
+          if (!existingResult) {
+            results.unshift({
+              id: pick.id,
+              pick: pick.value,
+              teams: pick.teams,
+              outcome: status,
+              actual: status === 'win' ? 'Hit' : 'Miss'
+            });
+            localStorage.setItem('mattev_results', JSON.stringify(results));
           }
-        };
-        reader.readAsText(file);
+        }
+        
+        localStorage.setItem('mattev_picks', JSON.stringify(picks));
+        renderPicks();
+        showToast(`Marked as ${status}`);
       }
     }
 
-    // Toast notification
-    function showToast(message, isError = false) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.className = 'toast show' + (isError ? ' error' : '');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+    function deletePick(id) {
+      if (confirm('Delete this projection?')) {
+        picks = picks.filter(p => p.id !== id);
+        localStorage.setItem('mattev_picks', JSON.stringify(picks));
+        renderPicks();
+        showToast('Deleted');
+      }
     }
 
-    // Initialize
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
     renderPicks();
   </script>
 </body>
