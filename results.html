@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MattEV | Results</title>
+  <meta name="description" content="Track our AI model's prediction accuracy. Daily results, win rates, and ROI across props, spreads, and moneylines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --bg-tertiary: #27272a;
+      --bg-elevated: rgba(39, 39, 42, 0.5);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #10b981;
+      --accent-light: #34d399;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --red: #ef4444;
+      --red-light: #f87171;
+      --yellow: #eab308;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-gradient {
+      position: fixed; top: 0; left: 0; right: 0; height: 60vh;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.08), transparent);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px; height: 64px; display: flex; align-items: center;
+      background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #000; }
+    .logo-text { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 6px; transition: all 0.15s; }
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-elevated); }
+    .nav-links a.active { color: var(--text-primary); }
+    .nav-cta { padding: 8px 16px; background: var(--text-primary); color: var(--bg-primary); border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; text-decoration: none; }
+    .nav-cta:hover { opacity: 0.9; }
+    .mobile-menu { display: none; background: none; border: none; color: var(--text-primary); font-size: 24px; cursor: pointer; }
+
+    /* ── Main ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 100px 24px 100px; position: relative; z-index: 1; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .section-title { font-size: 14px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ''; width: 3px; height: 16px; background: var(--accent); border-radius: 2px; }
+
+    .page-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .page-title span { background: linear-gradient(135deg, var(--accent-light), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-subtitle { font-size: 15px; color: var(--text-secondary); margin-bottom: 32px; }
+
+    /* Filter pills */
+    .filter-group { display: flex; align-items: center; gap: 8px; }
+    .filter-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .filter-pill { padding: 5px 14px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 100px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .filter-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .filter-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+
+    /* All-Time Stats Banner */
+    .results-banner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+    .results-banner-stat { padding: 20px; background: var(--bg-secondary); text-align: center; }
+    .results-banner-stat .rbs-value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+    .results-banner-stat .rbs-value.green { color: var(--accent-light); }
+    .results-banner-stat .rbs-value.red { color: var(--red-light); }
+    .results-banner-stat .rbs-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+    /* Date Selector Pills */
+    .date-selector { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .date-selector .ds-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
+    .date-pill {
+      padding: 7px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 100px; color: var(--text-secondary); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit; white-space: nowrap;
+    }
+    .date-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .date-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .date-pill .dp-count { font-size: 11px; font-weight: 400; color: var(--text-muted); margin-left: 4px; }
+    .date-pill.active .dp-count { color: rgba(52, 211, 153, 0.7); }
+
+    /* Day Header */
+    .day-header { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+
+    /* Daily Summary Cards */
+    .results-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .results-stat-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+    .results-stat-card .rsc-record { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
+    .results-stat-card .rsc-pct { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .results-stat-card .rsc-pct.green { color: var(--accent-light); }
+    .results-stat-card .rsc-pct.red { color: var(--red-light); }
+    .results-stat-card .rsc-pct.neutral { color: var(--text-secondary); }
+    .results-stat-card .rsc-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+    /* Results Filters */
+    .results-filter-row { display: flex; align-items: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+
+    /* Results Table */
+    .results-table-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table thead th { padding: 12px 16px; background: var(--bg-tertiary); font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; text-align: left; border-bottom: 1px solid var(--border); }
+    .results-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .results-table tbody tr:last-child { border-bottom: none; }
+    .results-table tbody tr:hover { background: var(--bg-elevated); }
+    .results-table td { padding: 12px 16px; font-size: 13px; color: var(--text-primary); }
+    .result-type-badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+    .result-type-badge.prop { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
+    .result-type-badge.spread { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+    .result-type-badge.total { background: rgba(234, 179, 8, 0.12); color: var(--yellow); }
+    .result-type-badge.ml { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .result-hit { font-size: 16px; font-weight: 700; color: var(--accent-light); }
+    .result-miss { font-size: 16px; font-weight: 700; color: var(--red-light); }
+    .result-player { font-weight: 600; }
+    .result-game { font-size: 12px; color: var(--text-muted); }
+    .result-conf { font-size: 12px; color: var(--text-muted); }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-brand { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .footer-disclaimer { font-size: 12px; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu { display: block; }
+      .results-banner { grid-template-columns: repeat(2, 1fr); }
+      .results-banner-stat .rbs-value { font-size: 22px; }
+      .date-selector { gap: 6px; }
+      .date-pill { padding: 6px 10px; font-size: 12px; }
+      .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-table-wrap { overflow-x: auto; }
+      .results-table { min-width: 520px; }
+      .results-filter-row { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-gradient"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">MattEV</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Projections</a></li>
+        <li><a href="results.html" class="active">Results</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="admin.html" class="nav-cta">Admin</a>
+      <button class="mobile-menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <main>
+    <h1 class="page-title">Prediction <span>Results</span></h1>
+    <p class="page-subtitle">Track our model's accuracy across player props, spreads, and moneylines.</p>
+
+    <!-- All-Time Stats Banner -->
+    <div class="section-header">
+      <h2 class="section-title">All-Time Performance</h2>
+    </div>
+    <div class="results-banner" id="results-banner"></div>
+
+    <!-- Date Selector Pills -->
+    <div class="date-selector" id="date-selector"></div>
+
+    <!-- Selected Day Content -->
+    <div id="day-view">
+      <div class="day-header" id="day-header"></div>
+      <div class="results-summary-grid" id="results-summary"></div>
+
+      <div class="results-filter-row" id="results-filter-row">
+        <div class="filter-group">
+          <span class="filter-label">Type</span>
+          <button class="filter-pill active" data-rtype="all">All</button>
+          <button class="filter-pill" data-rtype="prop">Props</button>
+          <button class="filter-pill" data-rtype="spread">Spreads</button>
+          <button class="filter-pill" data-rtype="ml">MLs</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Result</span>
+          <button class="filter-pill active" data-rresult="all">All</button>
+          <button class="filter-pill" data-rresult="win">Wins</button>
+          <button class="filter-pill" data-rresult="loss">Losses</button>
+        </div>
+      </div>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr><th>Type</th><th>Pick</th><th>Line</th><th>Result</th><th>Conf</th><th>Hit</th></tr>
+          </thead>
+          <tbody id="results-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-brand">MattEV Sports Projections</p>
+      <p class="footer-disclaimer">For entertainment purposes only. Past performance does not guarantee future results. Please gamble responsibly.</p>
+    </div>
+  </footer>
+
+  <script>
+    const RESULTS_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
+
+    let resultsData = null;
+    let resultsDayIdx = 0;
+    let resultsTypeFilter = 'all';
+    let resultsResultFilter = 'all';
+
+    function pctClass(pct) {
+      if (pct >= 55) return 'green';
+      if (pct > 0 && pct < 50) return 'red';
+      return 'neutral';
+    }
+
+    function formatDateShort(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatDateFull(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function renderResultsBanner(data) {
+      const at = data.allTime;
+      if (!at) return;
+
+      const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
+      const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
+      const totalT = totalW + totalL;
+      const totalPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : 0;
+      const totalProfit = totalW * 90.91 - totalL * 100;
+      const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
+
+      const cats = [
+        { name: 'Props', ...at.props },
+        { name: 'Spreads', ...at.spreads },
+        { name: 'MLs', ...at.moneylines },
+      ];
+      const bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
+      const roiCls = parseFloat(totalRoi) > 0 ? 'green' : parseFloat(totalRoi) < 0 ? 'red' : '';
+
+      document.getElementById('results-banner').innerHTML = `
+        <div class="results-banner-stat">
+          <div class="rbs-value">${totalW}-${totalL}</div>
+          <div class="rbs-label">All-Time Record</div>
+        </div>
+        <div class="results-banner-stat">
+          <div class="rbs-value ${pctClass(parseFloat(totalPct))}">${totalPct}%</div>
+          <div class="rbs-label">Win Rate</div>
+        </div>
+        <div class="results-banner-stat">
+          <div class="rbs-value ${roiCls}">${parseFloat(totalRoi) > 0 ? '+' : ''}${totalRoi}%</div>
+          <div class="rbs-label">ROI (-110)</div>
+        </div>
+        <div class="results-banner-stat">
+          <div class="rbs-value">${bestCat ? bestCat.name : '--'}</div>
+          <div class="rbs-label">${bestCat ? bestCat.pct + '% Win Rate' : 'Best Category'}</div>
+        </div>`;
+    }
+
+    function renderDateSelector() {
+      if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
+      const container = document.getElementById('date-selector');
+      let html = '<span class="ds-label">Date</span>';
+      resultsData.days.forEach((day, i) => {
+        const count = (day.picks || []).length;
+        const active = i === resultsDayIdx ? ' active' : '';
+        html += `<button class="date-pill${active}" data-didx="${i}">${formatDateShort(day.date)}<span class="dp-count">${count}</span></button>`;
+      });
+      container.innerHTML = html;
+
+      container.querySelectorAll('.date-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          resultsDayIdx = parseInt(pill.dataset.didx);
+          resultsTypeFilter = 'all';
+          resultsResultFilter = 'all';
+          renderSelectedDay();
+        });
+      });
+    }
+
+    function renderDayHeader(day) {
+      document.getElementById('day-header').textContent = formatDateFull(day.date);
+    }
+
+    function renderDaySummary(day) {
+      function card(label, stats) {
+        const w = stats.wins, l = stats.losses, t = w + l;
+        const pct = t > 0 ? (w / t * 100).toFixed(1) : 0;
+        return `<div class="results-stat-card">
+          <div class="rsc-record">${w}-${l}</div>
+          <div class="rsc-pct ${pctClass(parseFloat(pct))}">${t > 0 ? pct + '%' : '--'}</div>
+          <div class="rsc-label">${label}</div>
+        </div>`;
+      }
+      document.getElementById('results-summary').innerHTML =
+        card('Props', day.props) + card('Spreads', day.spreads) +
+        card('Totals', day.totals) + card('Moneylines', day.moneylines);
+    }
+
+    function renderResultsTable(day) {
+      let picks = day.picks || [];
+
+      if (resultsTypeFilter !== 'all') {
+        picks = picks.filter(p => p.type === resultsTypeFilter);
+      }
+      if (resultsResultFilter === 'win') picks = picks.filter(p => p.hit);
+      else if (resultsResultFilter === 'loss') picks = picks.filter(p => !p.hit);
+
+      const tbody = document.getElementById('results-table-body');
+      if (picks.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:40px">No picks match filters</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = picks.map(p => {
+        const typeClass = p.type;
+        const typeLabel = p.type === 'ml' ? 'ML' : p.type.toUpperCase();
+        const hitIcon = p.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
+
+        let pickHtml = '';
+        if (p.type === 'prop') {
+          pickHtml = `<span class="result-player">${p.player || ''}</span><br><span class="result-game">${p.team || ''}</span>`;
+        } else {
+          pickHtml = `<span class="result-player">${p.pick || ''}</span>${p.game ? '<br><span class="result-game">' + p.game + '</span>' : ''}`;
+        }
+
+        const lineStr = p.type === 'prop' ? p.pick : (p.line != null ? p.line : '--');
+        const resultStr = p.result != null ? p.result : '--';
+        const confStr = p.confidence != null ? p.confidence + '%' : '--';
+
+        return `<tr>
+          <td><span class="result-type-badge ${typeClass}">${typeLabel}</span></td>
+          <td>${pickHtml}</td>
+          <td style="color:var(--text-secondary)">${lineStr}</td>
+          <td style="color:var(--text-secondary)">${resultStr}</td>
+          <td><span class="result-conf">${confStr}</span></td>
+          <td>${hitIcon}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    function renderSelectedDay() {
+      if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
+      const day = resultsData.days[resultsDayIdx];
+
+      document.querySelectorAll('.date-pill').forEach(pill => {
+        pill.classList.toggle('active', parseInt(pill.dataset.didx) === resultsDayIdx);
+      });
+      document.querySelectorAll('[data-rtype]').forEach(p => p.classList.toggle('active', p.dataset.rtype === resultsTypeFilter));
+      document.querySelectorAll('[data-rresult]').forEach(p => p.classList.toggle('active', p.dataset.rresult === resultsResultFilter));
+
+      renderDayHeader(day);
+      renderDaySummary(day);
+      renderResultsTable(day);
+    }
+
+    async function loadResults() {
+      try {
+        const resp = await fetch(RESULTS_DATA_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch results');
+        resultsData = await resp.json();
+
+        renderResultsBanner(resultsData);
+        renderDateSelector();
+        renderSelectedDay();
+
+        document.querySelectorAll('[data-rtype]').forEach(pill => {
+          pill.addEventListener('click', () => {
+            resultsTypeFilter = pill.dataset.rtype;
+            renderSelectedDay();
+          });
+        });
+
+        document.querySelectorAll('[data-rresult]').forEach(pill => {
+          pill.addEventListener('click', () => {
+            resultsResultFilter = pill.dataset.rresult;
+            renderSelectedDay();
+          });
+        });
+      } catch (err) {
+        console.error('Failed to load results:', err);
+      }
+    }
+
+    loadResults();
+  </script>
+</body>
+</html>
