@@ -809,6 +809,13 @@
       const confBarW = ((confPct - 40) / 20 * 100);
       const confBarColor = p.confidence >= 51 ? 'var(--accent)' : p.confidence >= 50 ? 'var(--yellow)' : 'var(--text-muted)';
 
+      // Odds display helpers
+      const fmtOdds = (v) => v == null ? '--' : (v > 0 ? '+' + v : '' + v);
+      const mktOddsStr = fmtOdds(p.market_odds);
+      const fairOddsStr = fmtOdds(p.fair_odds);
+      const probEdgeStr = p.prob_edge != null ? (p.prob_edge >= 0 ? '+' : '') + p.prob_edge.toFixed(1) + '%' : '--';
+      const edgeColor = p.prob_edge > 3 ? 'var(--accent-light)' : p.prob_edge > 0 ? 'var(--accent)' : p.prob_edge != null ? 'var(--red-light)' : 'var(--text-muted)';
+
       return `
         <div class="pick-row${posEvClass}" data-row-id="${rowId}" onclick="toggleRow('${rowId}')">
           <div class="player-cell">
@@ -839,6 +846,18 @@
             <div class="detail-item">
               <span class="detail-label">Expected Value</span>
               <span class="detail-value" style="color:${evColor}">${evStr}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Market Odds</span>
+              <span class="detail-value">${mktOddsStr}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Fair Odds (Model)</span>
+              <span class="detail-value">${fairOddsStr}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Prob Edge</span>
+              <span class="detail-value" style="color:${edgeColor}">${probEdgeStr}</span>
             </div>
             ${matchupStr ? `<div class="detail-item"><span class="detail-label">Matchup</span><span class="detail-value">${p.team} ${matchupStr}</span></div>` : ''}
             ${p.edge ? `<div class="detail-item"><span class="detail-label">Edge</span><span class="detail-value">${p.edge}</span></div>` : ''}
