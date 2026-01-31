@@ -92,22 +92,41 @@
     .calendar-wrap {
       position: relative;
       margin-bottom: 28px;
-      display: inline-block;
     }
+    .calendar-bar {
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .cal-step-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; font-family: inherit; flex-shrink: 0;
+    }
+    .cal-step-btn:hover:not(:disabled) { border-color: var(--border-light); color: var(--text-primary); }
+    .cal-step-btn:disabled { opacity: 0.25; cursor: default; }
+    .cal-today-jump {
+      padding: 0 14px; height: 36px; border-radius: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .cal-today-jump:hover { border-color: var(--border-light); color: var(--text-primary); }
     .calendar-trigger {
       display: flex; align-items: center; gap: 10px;
-      padding: 10px 16px;
+      padding: 8px 16px; height: 36px;
       background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 10px; cursor: pointer; transition: all 0.15s;
+      border-radius: 8px; cursor: pointer; transition: all 0.15s;
       font-family: inherit; color: var(--text-primary); font-size: 14px;
       user-select: none;
     }
     .calendar-trigger:hover { border-color: var(--border-light); }
     .calendar-trigger.open { border-color: rgba(16, 185, 129, 0.4); background: var(--bg-tertiary); }
-    .calendar-trigger .ct-icon { font-size: 16px; flex-shrink: 0; }
-    .calendar-trigger .ct-date { font-weight: 600; }
+    .calendar-trigger .ct-icon { font-size: 15px; flex-shrink: 0; }
+    .calendar-trigger .ct-date { font-weight: 600; white-space: nowrap; }
     .calendar-trigger .ct-arrow {
-      margin-left: 6px; font-size: 10px; color: var(--text-muted);
+      margin-left: 4px; font-size: 10px; color: var(--text-muted);
       transition: transform 0.2s;
     }
     .calendar-trigger.open .ct-arrow { transform: rotate(180deg); }
@@ -187,15 +206,7 @@
     .calendar-dot.win { background: var(--accent); }
     .calendar-dot.loss { background: var(--red); }
     .calendar-dot.mixed { background: var(--yellow); }
-    .calendar-today-btn {
-      display: block; width: 100%; margin-top: 10px;
-      padding: 7px 0; text-align: center;
-      background: var(--bg-tertiary); border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text-secondary); font-size: 12px;
-      font-weight: 600; cursor: pointer; transition: all 0.15s;
-      font-family: inherit;
-    }
-    .calendar-today-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
+    /* calendar-today-btn removed — Today button is now in the bar */
 
     /* ── No results state ── */
     .no-results {
@@ -255,6 +266,9 @@
       .results-table-wrap { overflow-x: auto; }
       .results-table { min-width: 520px; }
       .results-filter-row { gap: 12px; }
+      .calendar-bar { width: 100%; }
+      .calendar-trigger { flex: 1; min-width: 0; }
+      .calendar-trigger .ct-date { font-size: 13px; }
       .calendar-dropdown { width: calc(100vw - 48px); max-width: 310px; }
     }
   </style>
@@ -290,11 +304,16 @@
 
     <!-- Calendar Dropdown -->
     <div class="calendar-wrap" id="calendar-wrap">
-      <button class="calendar-trigger" id="calendar-trigger">
-        <span class="ct-icon">&#128197;</span>
-        <span class="ct-date" id="ct-date">Loading...</span>
-        <span class="ct-arrow">&#9660;</span>
-      </button>
+      <div class="calendar-bar">
+        <button class="cal-step-btn" id="cal-prev-day" title="Previous day with results">&#8249;</button>
+        <button class="calendar-trigger" id="calendar-trigger">
+          <span class="ct-icon">&#128197;</span>
+          <span class="ct-date" id="ct-date">Loading...</span>
+          <span class="ct-arrow">&#9660;</span>
+        </button>
+        <button class="cal-step-btn" id="cal-next-day" title="Next day with results">&#8250;</button>
+        <button class="cal-today-jump" id="cal-today-jump">Today</button>
+      </div>
       <div class="calendar-dropdown" id="calendar-dropdown"></div>
     </div>
 
@@ -348,6 +367,7 @@
     let resultsTypeFilter = 'all';
     let resultsResultFilter = 'all';
     let daysByDate = {};
+    let sortedDates = [];  // ascending order of dates with data
 
     function pctClass(pct) {
       if (pct >= 55) return 'green';
@@ -393,8 +413,23 @@
       resultsTypeFilter = 'all';
       resultsResultFilter = 'all';
       updateTriggerLabel();
+      updateArrowStates();
       toggleCalendar(false);
       renderSelectedDay();
+    }
+
+    function updateArrowStates() {
+      const idx = sortedDates.indexOf(selectedDate);
+      document.getElementById('cal-prev-day').disabled = (idx <= 0);
+      document.getElementById('cal-next-day').disabled = (idx < 0 || idx >= sortedDates.length - 1);
+    }
+
+    function stepDate(dir) {
+      const idx = sortedDates.indexOf(selectedDate);
+      const next = idx + dir;
+      if (next >= 0 && next < sortedDates.length) {
+        selectDate(sortedDates[next]);
+      }
     }
 
     // ── Calendar grid ──
@@ -443,8 +478,6 @@
       }
 
       html += '</div>';
-      html += '<button class="calendar-today-btn" id="cal-today-btn">Today</button>';
-
       container.innerHTML = html;
 
       // Listeners
@@ -459,16 +492,6 @@
         if (calViewMonth === 11) { calViewMonth = 0; calViewYear++; }
         else { calViewMonth++; }
         renderCalendarGrid();
-      });
-      document.getElementById('cal-today-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const tk = todayKey();
-        const t = new Date();
-        calViewYear = t.getFullYear();
-        calViewMonth = t.getMonth();
-        // Select today if it has data, otherwise select most recent date with data
-        const dates = Object.keys(daysByDate).sort().reverse();
-        selectDate(daysByDate[tk] ? tk : (dates[0] || tk));
       });
 
       container.querySelectorAll('.calendar-day.has-data').forEach(el => {
@@ -639,10 +662,10 @@
         (resultsData.days || []).forEach(day => {
           daysByDate[day.date] = day;
         });
+        sortedDates = Object.keys(daysByDate).sort(); // ascending
 
         // Default selected date: most recent day with data, or today
-        const dates = Object.keys(daysByDate).sort().reverse();
-        selectedDate = dates.length > 0 ? dates[0] : todayKey();
+        selectedDate = sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : todayKey();
 
         // Set calendar view to selected date's month
         const sd = new Date(selectedDate + 'T12:00:00');
@@ -650,12 +673,27 @@
         calViewMonth = sd.getMonth();
 
         updateTriggerLabel();
+        updateArrowStates();
         renderResultsBanner(resultsData);
         renderSelectedDay();
 
+        // Prev/next day arrows
+        document.getElementById('cal-prev-day').addEventListener('click', () => stepDate(-1));
+        document.getElementById('cal-next-day').addEventListener('click', () => stepDate(1));
+
+        // Today jump
+        document.getElementById('cal-today-jump').addEventListener('click', () => {
+          const tk = todayKey();
+          if (daysByDate[tk]) {
+            selectDate(tk);
+          } else {
+            // Jump to most recent date with data
+            selectDate(sortedDates[sortedDates.length - 1] || tk);
+          }
+        });
+
         // Trigger toggle
         document.getElementById('calendar-trigger').addEventListener('click', () => {
-          // Sync calendar view to selected date's month when opening
           if (!calOpen) {
             const sd = new Date(selectedDate + 'T12:00:00');
             calViewYear = sd.getFullYear();
