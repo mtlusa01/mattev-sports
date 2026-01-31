@@ -88,18 +88,92 @@
     .results-banner-stat .rbs-value.red { color: var(--red-light); }
     .results-banner-stat .rbs-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
 
-    /* Date Selector Pills */
-    .date-selector { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-    .date-selector .ds-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
-    .date-pill {
-      padding: 7px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 100px; color: var(--text-secondary); font-size: 13px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s; font-family: inherit; white-space: nowrap;
+    /* ── Calendar ── */
+    .calendar-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 28px;
+      max-width: 340px;
     }
-    .date-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .date-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
-    .date-pill .dp-count { font-size: 11px; font-weight: 400; color: var(--text-muted); margin-left: 4px; }
-    .date-pill.active .dp-count { color: rgba(52, 211, 153, 0.7); }
+    .calendar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .calendar-title {
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+    }
+    .calendar-nav {
+      display: flex; gap: 4px;
+    }
+    .calendar-nav button {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--bg-tertiary); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; font-family: inherit;
+    }
+    .calendar-nav button:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .calendar-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      margin-bottom: 4px;
+    }
+    .calendar-weekday {
+      text-align: center; font-size: 11px; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.03em; padding: 4px 0;
+    }
+    .calendar-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .calendar-day {
+      position: relative;
+      aspect-ratio: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      border-radius: 8px; cursor: default;
+      transition: all 0.15s; border: 1px solid transparent;
+    }
+    .calendar-day.other-month { color: rgba(113, 113, 122, 0.3); }
+    .calendar-day.has-data {
+      color: var(--text-secondary); cursor: pointer;
+    }
+    .calendar-day.has-data:hover {
+      background: var(--bg-tertiary); border-color: var(--border-light);
+    }
+    .calendar-day.selected {
+      background: var(--accent-glow);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--accent-light); font-weight: 700;
+    }
+    .calendar-day.today {
+      border-color: var(--border-light);
+    }
+    .calendar-day.today.selected {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .calendar-day.future { color: rgba(113, 113, 122, 0.2); }
+    .calendar-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      position: absolute; bottom: 4px;
+    }
+    .calendar-dot.win { background: var(--accent); }
+    .calendar-dot.loss { background: var(--red); }
+    .calendar-dot.mixed { background: var(--yellow); }
+    .calendar-today-label {
+      font-size: 9px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.04em;
+      position: absolute; top: 2px;
+    }
+
+    /* ── No results state ── */
+    .no-results {
+      text-align: center; padding: 48px 20px;
+      color: var(--text-muted); font-size: 14px;
+    }
+    .no-results .nr-date { font-size: 16px; font-weight: 700; color: var(--text-secondary); margin-bottom: 4px; }
 
     /* Day Header */
     .day-header { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
@@ -148,12 +222,11 @@
       .mobile-menu { display: block; }
       .results-banner { grid-template-columns: repeat(2, 1fr); }
       .results-banner-stat .rbs-value { font-size: 22px; }
-      .date-selector { gap: 6px; }
-      .date-pill { padding: 6px 10px; font-size: 12px; }
       .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
       .results-table-wrap { overflow-x: auto; }
       .results-table { min-width: 520px; }
       .results-filter-row { gap: 12px; }
+      .calendar-card { max-width: 100%; }
     }
   </style>
 </head>
@@ -186,8 +259,11 @@
     </div>
     <div class="results-banner" id="results-banner"></div>
 
-    <!-- Date Selector Pills -->
-    <div class="date-selector" id="date-selector"></div>
+    <!-- Calendar Date Picker -->
+    <div class="section-header">
+      <h2 class="section-title">Select Date</h2>
+    </div>
+    <div class="calendar-card" id="calendar-card"></div>
 
     <!-- Selected Day Content -->
     <div id="day-view">
@@ -232,9 +308,12 @@
     const RESULTS_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
 
     let resultsData = null;
-    let resultsDayIdx = 0;
+    let selectedDate = null;       // "YYYY-MM-DD" string
+    let calViewYear = null;        // calendar month being viewed
+    let calViewMonth = null;
     let resultsTypeFilter = 'all';
     let resultsResultFilter = 'all';
+    let daysByDate = {};           // lookup: "YYYY-MM-DD" -> day object
 
     function pctClass(pct) {
       if (pct >= 55) return 'green';
@@ -242,16 +321,137 @@
       return 'neutral';
     }
 
-    function formatDateShort(dateStr) {
-      const d = new Date(dateStr + 'T12:00:00');
-      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    }
-
     function formatDateFull(dateStr) {
       const d = new Date(dateStr + 'T12:00:00');
       return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
     }
 
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function dateKey(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
+    function todayKey() {
+      const t = new Date();
+      return dateKey(t.getFullYear(), t.getMonth(), t.getDate());
+    }
+
+    const MONTH_NAMES = ['January','February','March','April','May','June',
+                         'July','August','September','October','November','December'];
+    const DAY_LABELS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+    // ── Calendar ──
+    function renderCalendar() {
+      const container = document.getElementById('calendar-card');
+      const today = todayKey();
+
+      // Header with month/year and nav arrows
+      let html = `<div class="calendar-header">
+        <span class="calendar-title">${MONTH_NAMES[calViewMonth]} ${calViewYear}</span>
+        <div class="calendar-nav">
+          <button id="cal-prev">&#8249;</button>
+          <button id="cal-next">&#8250;</button>
+        </div>
+      </div>`;
+
+      // Weekday labels
+      html += '<div class="calendar-weekdays">';
+      DAY_LABELS.forEach(d => { html += `<div class="calendar-weekday">${d}</div>`; });
+      html += '</div>';
+
+      // Build grid
+      const firstDay = new Date(calViewYear, calViewMonth, 1).getDay(); // 0=Sun
+      const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+      const daysInPrev = new Date(calViewYear, calViewMonth, 0).getDate();
+
+      // Previous month year/month for keys
+      const prevM = calViewMonth === 0 ? 11 : calViewMonth - 1;
+      const prevY = calViewMonth === 0 ? calViewYear - 1 : calViewYear;
+      const nextM = calViewMonth === 11 ? 0 : calViewMonth + 1;
+      const nextY = calViewMonth === 11 ? calViewYear + 1 : calViewYear;
+
+      html += '<div class="calendar-grid">';
+
+      // Previous month trailing days
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const d = daysInPrev - i;
+        const key = dateKey(prevY, prevM, d);
+        const dayData = daysByDate[key];
+        const hasData = !!dayData;
+        let cls = 'calendar-day other-month';
+        if (hasData) cls += ' has-data';
+        if (key === selectedDate) cls += ' selected';
+        const dot = hasData ? dotHtml(dayData) : '';
+        html += `<div class="${cls}" data-date="${key}">${d}${dot}</div>`;
+      }
+
+      // Current month days
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key = dateKey(calViewYear, calViewMonth, d);
+        const dayData = daysByDate[key];
+        const hasData = !!dayData;
+        const isToday = key === today;
+        const isFuture = key > today;
+        let cls = 'calendar-day';
+        if (hasData) cls += ' has-data';
+        if (key === selectedDate) cls += ' selected';
+        if (isToday) cls += ' today';
+        if (isFuture && !hasData) cls += ' future';
+        const dot = hasData ? dotHtml(dayData) : '';
+        const todayLabel = isToday ? '<span class="calendar-today-label">Today</span>' : '';
+        html += `<div class="${cls}" data-date="${key}">${todayLabel}${d}${dot}</div>`;
+      }
+
+      // Next month leading days (fill to 6 rows = 42 cells)
+      const totalCells = firstDay + daysInMonth;
+      const remaining = (totalCells % 7 === 0) ? 0 : 7 - (totalCells % 7);
+      for (let d = 1; d <= remaining; d++) {
+        const key = dateKey(nextY, nextM, d);
+        const dayData = daysByDate[key];
+        const hasData = !!dayData;
+        let cls = 'calendar-day other-month';
+        if (hasData) cls += ' has-data';
+        if (key === selectedDate) cls += ' selected';
+        const dot = hasData ? dotHtml(dayData) : '';
+        html += `<div class="${cls}" data-date="${key}">${d}${dot}</div>`;
+      }
+
+      html += '</div>';
+      container.innerHTML = html;
+
+      // Event listeners
+      document.getElementById('cal-prev').addEventListener('click', () => {
+        if (calViewMonth === 0) { calViewMonth = 11; calViewYear--; }
+        else { calViewMonth--; }
+        renderCalendar();
+      });
+      document.getElementById('cal-next').addEventListener('click', () => {
+        if (calViewMonth === 11) { calViewMonth = 0; calViewYear++; }
+        else { calViewMonth++; }
+        renderCalendar();
+      });
+
+      container.querySelectorAll('.calendar-day.has-data').forEach(el => {
+        el.addEventListener('click', () => {
+          selectedDate = el.dataset.date;
+          resultsTypeFilter = 'all';
+          resultsResultFilter = 'all';
+          renderCalendar();
+          renderSelectedDay();
+        });
+      });
+    }
+
+    function dotHtml(dayData) {
+      const totalW = dayData.props.wins + dayData.spreads.wins + dayData.totals.wins + dayData.moneylines.wins;
+      const totalL = dayData.props.losses + dayData.spreads.losses + dayData.totals.losses + dayData.moneylines.losses;
+      if (totalW + totalL === 0) return '';
+      let cls = 'mixed';
+      if (totalL === 0) cls = 'win';
+      else if (totalW === 0) cls = 'loss';
+      else if (totalW > totalL) cls = 'win';
+      else if (totalL > totalW) cls = 'loss';
+      return `<span class="calendar-dot ${cls}"></span>`;
+    }
+
+    // ── Banner ──
     function renderResultsBanner(data) {
       const at = data.allTime;
       if (!at) return;
@@ -290,29 +490,29 @@
         </div>`;
     }
 
-    function renderDateSelector() {
-      if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
-      const container = document.getElementById('date-selector');
-      let html = '<span class="ds-label">Date</span>';
-      resultsData.days.forEach((day, i) => {
-        const count = (day.picks || []).length;
-        const active = i === resultsDayIdx ? ' active' : '';
-        html += `<button class="date-pill${active}" data-didx="${i}">${formatDateShort(day.date)}<span class="dp-count">${count}</span></button>`;
-      });
-      container.innerHTML = html;
+    // ── Day view ──
+    function renderSelectedDay() {
+      const dayView = document.getElementById('day-view');
+      const day = daysByDate[selectedDate];
 
-      container.querySelectorAll('.date-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-          resultsDayIdx = parseInt(pill.dataset.didx);
-          resultsTypeFilter = 'all';
-          resultsResultFilter = 'all';
-          renderSelectedDay();
-        });
-      });
-    }
+      if (!day) {
+        document.getElementById('day-header').textContent = formatDateFull(selectedDate);
+        document.getElementById('results-summary').innerHTML = '';
+        document.getElementById('results-table-body').innerHTML =
+          '<tr><td colspan="6" class="no-results"><div class="nr-date">' + formatDateFull(selectedDate) + '</div>No results for this date</td></tr>';
+        document.getElementById('results-filter-row').style.display = 'none';
+        return;
+      }
 
-    function renderDayHeader(day) {
+      document.getElementById('results-filter-row').style.display = '';
+
+      // Update filter pill active states
+      document.querySelectorAll('[data-rtype]').forEach(p => p.classList.toggle('active', p.dataset.rtype === resultsTypeFilter));
+      document.querySelectorAll('[data-rresult]').forEach(p => p.classList.toggle('active', p.dataset.rresult === resultsResultFilter));
+
       document.getElementById('day-header').textContent = formatDateFull(day.date);
+      renderDaySummary(day);
+      renderResultsTable(day);
     }
 
     function renderDaySummary(day) {
@@ -372,38 +572,39 @@
       }).join('');
     }
 
-    function renderSelectedDay() {
-      if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
-      const day = resultsData.days[resultsDayIdx];
-
-      document.querySelectorAll('.date-pill').forEach(pill => {
-        pill.classList.toggle('active', parseInt(pill.dataset.didx) === resultsDayIdx);
-      });
-      document.querySelectorAll('[data-rtype]').forEach(p => p.classList.toggle('active', p.dataset.rtype === resultsTypeFilter));
-      document.querySelectorAll('[data-rresult]').forEach(p => p.classList.toggle('active', p.dataset.rresult === resultsResultFilter));
-
-      renderDayHeader(day);
-      renderDaySummary(day);
-      renderResultsTable(day);
-    }
-
+    // ── Init ──
     async function loadResults() {
       try {
         const resp = await fetch(RESULTS_DATA_URL + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
         resultsData = await resp.json();
 
+        // Build date lookup
+        daysByDate = {};
+        (resultsData.days || []).forEach(day => {
+          daysByDate[day.date] = day;
+        });
+
+        // Default selected date: most recent day with data, or today
+        const dates = Object.keys(daysByDate).sort().reverse();
+        selectedDate = dates.length > 0 ? dates[0] : todayKey();
+
+        // Set calendar view to selected date's month
+        const sd = new Date(selectedDate + 'T12:00:00');
+        calViewYear = sd.getFullYear();
+        calViewMonth = sd.getMonth();
+
         renderResultsBanner(resultsData);
-        renderDateSelector();
+        renderCalendar();
         renderSelectedDay();
 
+        // Filter pill listeners
         document.querySelectorAll('[data-rtype]').forEach(pill => {
           pill.addEventListener('click', () => {
             resultsTypeFilter = pill.dataset.rtype;
             renderSelectedDay();
           });
         });
-
         document.querySelectorAll('[data-rresult]').forEach(pill => {
           pill.addEventListener('click', () => {
             resultsResultFilter = pill.dataset.rresult;
