@@ -143,6 +143,14 @@
     }
     .game-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
     .game-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .game-pill .pill-time { font-weight: 400; color: var(--text-muted); margin-left: 4px; font-size: 11px; }
+    .game-pill.active .pill-time { color: rgba(52, 211, 153, 0.7); }
+    .game-pill .pill-live { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; color: var(--red-light); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; }
+    .game-pill .pill-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
+    .game-pill .pill-soon { color: var(--yellow); margin-left: 4px; font-size: 10px; font-weight: 600; }
+    @keyframes pulse-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .game-pill.live-pill { border-color: rgba(239, 68, 68, 0.3); }
+    .game-pill.soon-pill { border-color: rgba(234, 179, 8, 0.2); }
 
     /* ── Search Bar ── */
     .search-wrap {
@@ -287,6 +295,11 @@
     .game-card:hover { border-color: var(--border-light); }
     .game-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
     .game-card-matchup { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+    .game-card-time { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .game-card-time .live-badge { display: inline-flex; align-items: center; gap: 4px; color: var(--red-light); font-weight: 700; font-size: 11px; }
+    .game-card-time .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
+    .game-card-time .soon-badge { color: var(--yellow); font-weight: 600; }
+    .game-card.live-card { border-color: rgba(239, 68, 68, 0.25); }
     .game-card-score { font-size: 13px; color: var(--text-muted); }
     .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
     .game-pick-row { display: flex; justify-content: space-between; align-items: center; }
@@ -559,6 +572,31 @@
 
     function gameKey(g) { return g.away_team + '@' + g.home_team; }
 
+    function formatGameTime(ct) {
+      if (!ct) return null;
+      const d = new Date(ct);
+      if (isNaN(d)) return null;
+      return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    }
+
+    function getGameStatus(g) {
+      // Use status from JSON if available
+      if (g.status === 'live') return 'live';
+      if (g.status === 'final') return 'final';
+      if (!g.commence_time) return 'scheduled';
+      const ct = new Date(g.commence_time);
+      if (isNaN(ct)) return 'scheduled';
+      const now = new Date();
+      const diff = ct - now;
+      const hoursUntil = diff / 3600000;
+      if (diff < 0) {
+        // Past start time — check if likely still playing
+        return (-hoursUntil) < 3 ? 'live' : 'final';
+      }
+      if (hoursUntil <= 1) return 'soon';
+      return 'scheduled';
+    }
+
     // ── Filters ──
     function applyFilters(data) {
       let filtered = data;
@@ -594,12 +632,33 @@
       const bar = document.getElementById('game-filter-bar');
       if (gameProjections.length === 0) { bar.style.display = 'none'; return; }
 
+      // Sort: live first, then soon, then by commence_time
+      const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
+      const sorted = [...gameProjections].sort((a, b) => {
+        const sa = getGameStatus(a), sb = getGameStatus(b);
+        if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
+        return (a.commence_time || '').localeCompare(b.commence_time || '');
+      });
+
       let html = '<span class="filter-label">Game</span>';
       html += `<button class="game-pill${currentGameFilter === null ? ' active' : ''}" data-game="all">All Games</button>`;
-      for (const g of gameProjections) {
+      for (const g of sorted) {
         const key = gameKey(g);
         const active = currentGameFilter === key ? ' active' : '';
-        html += `<button class="game-pill${active}" data-game="${key}">${g.away_team} @ ${g.home_team}</button>`;
+        const status = getGameStatus(g);
+        const time = formatGameTime(g.commence_time);
+        let extra = '';
+        let statusCls = '';
+        if (status === 'live') {
+          extra = '<span class="pill-live"><span class="pill-live-dot"></span>LIVE</span>';
+          statusCls = ' live-pill';
+        } else if (status === 'soon') {
+          extra = time ? `<span class="pill-soon">${time}</span>` : '';
+          statusCls = ' soon-pill';
+        } else if (time && status === 'scheduled') {
+          extra = `<span class="pill-time">${time}</span>`;
+        }
+        html += `<button class="game-pill${active}${statusCls}" data-game="${key}">${g.away_team} @ ${g.home_team}${extra}</button>`;
       }
       bar.innerHTML = html;
       bar.style.display = 'flex';
@@ -632,9 +691,15 @@
         ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line)
         : 'N/A';
 
+      const status = getGameStatus(g);
+      const time = formatGameTime(g.commence_time);
+      let sgcTime = '';
+      if (status === 'live') sgcTime = ' <span style="color:var(--red-light);font-size:12px;font-weight:700"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse-live 1.5s ease-in-out infinite;vertical-align:middle;margin-right:4px"></span>LIVE</span>';
+      else if (time) sgcTime = ` <span style="color:var(--text-muted);font-size:13px;font-weight:400">${time}</span>`;
+
       el.innerHTML = `
         <div class="sgc-header">
-          <div class="sgc-matchup">${g.away_team} @ ${g.home_team}</div>
+          <div class="sgc-matchup">${g.away_team} @ ${g.home_team}${sgcTime}</div>
           <div class="sgc-score">Proj: ${g.proj_score}</div>
         </div>
         <div class="sgc-picks">
@@ -892,10 +957,26 @@
       const mlStr = g.ml_pick || 'N/A';
       const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
 
+      const status = getGameStatus(g);
+      const time = formatGameTime(g.commence_time);
+      let timeHtml = '';
+      let cardCls = '';
+      if (status === 'live') {
+        timeHtml = '<div class="game-card-time"><span class="live-badge"><span class="live-dot"></span> LIVE</span></div>';
+        cardCls = ' live-card';
+      } else if (status === 'soon') {
+        timeHtml = time ? `<div class="game-card-time"><span class="soon-badge">${time} - Starting Soon</span></div>` : '';
+      } else if (time) {
+        timeHtml = `<div class="game-card-time">${time}</div>`;
+      }
+
       return `
-        <div class="game-card">
+        <div class="game-card${cardCls}">
           <div class="game-card-header">
-            <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
+            <div>
+              <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
+              ${timeHtml}
+            </div>
             <div class="game-card-score">Proj: ${g.proj_score}</div>
           </div>
           <div class="game-card-picks">
@@ -926,7 +1007,13 @@
         updatedEl.textContent = '';
         return;
       }
-      container.innerHTML = gameProjections.map(renderGameCard).join('');
+      const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
+      const sorted = [...gameProjections].sort((a, b) => {
+        const sa = getGameStatus(a), sb = getGameStatus(b);
+        if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
+        return (a.commence_time || '').localeCompare(b.commence_time || '');
+      });
+      container.innerHTML = sorted.map(renderGameCard).join('');
     }
 
     // ── Data Loading ──
