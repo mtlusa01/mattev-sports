@@ -313,15 +313,37 @@
     /* ── Results Section ── */
     .results-section { display: none; }
     .results-section.visible { display: block; }
-    .results-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
-    .results-stat-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
-    .results-stat-card .stat-value { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
-    .results-stat-card .stat-pct { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-    .results-stat-card .stat-pct.green { color: var(--accent-light); }
-    .results-stat-card .stat-pct.red { color: var(--red-light); }
-    .results-stat-card .stat-pct.neutral { color: var(--text-secondary); }
-    .results-stat-card .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
 
+    /* Overall Stats Banner */
+    .results-banner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+    .results-banner-stat { padding: 20px; background: var(--bg-secondary); text-align: center; }
+    .results-banner-stat .rbs-value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+    .results-banner-stat .rbs-value.green { color: var(--accent-light); }
+    .results-banner-stat .rbs-value.red { color: var(--red-light); }
+    .results-banner-stat .rbs-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+    /* Date Picker */
+    .date-picker { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .date-picker-btn { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); padding: 8px 12px; font-size: 14px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .date-picker-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .date-picker-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .date-picker-date { font-size: 16px; font-weight: 700; color: var(--text-primary); min-width: 180px; text-align: center; }
+    .date-picker-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+
+    /* Daily Summary Cards */
+    .results-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .results-stat-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+    .results-stat-card .rsc-record { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
+    .results-stat-card .rsc-pct { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .results-stat-card .rsc-pct.green { color: var(--accent-light); }
+    .results-stat-card .rsc-pct.red { color: var(--red-light); }
+    .results-stat-card .rsc-pct.neutral { color: var(--text-secondary); }
+    .results-stat-card .rsc-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+    /* Results Filters */
+    .results-filter-row { display: flex; align-items: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+
+    /* Results Table */
     .results-table-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
     .results-table { width: 100%; border-collapse: collapse; }
     .results-table thead th { padding: 12px 16px; background: var(--bg-tertiary); font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; text-align: left; border-bottom: 1px solid var(--border); }
@@ -336,7 +358,11 @@
     .result-type-badge.ml { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
     .result-hit { font-size: 16px; font-weight: 700; color: var(--accent-light); }
     .result-miss { font-size: 16px; font-weight: 700; color: var(--red-light); }
+    .result-player { font-weight: 600; }
+    .result-game { font-size: 12px; color: var(--text-muted); }
+    .result-conf { font-size: 12px; color: var(--text-muted); }
 
+    /* All-Time Stats */
     .alltime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
     .alltime-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
     .alltime-card .alltime-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 8px; }
@@ -375,10 +401,13 @@
       .filter-row { gap: 12px; }
       .filter-pill { padding: 4px 10px; font-size: 11px; }
       .game-cards-grid { grid-template-columns: 1fr; }
+      .results-banner { grid-template-columns: repeat(2, 1fr); }
+      .results-banner-stat .rbs-value { font-size: 22px; }
       .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
       .alltime-grid { grid-template-columns: repeat(2, 1fr); }
       .results-table-wrap { overflow-x: auto; }
-      .results-table { min-width: 500px; }
+      .results-table { min-width: 560px; }
+      .results-filter-row { gap: 12px; }
       .yesterday-bar { gap: 12px; font-size: 12px; }
       .sgc-picks { gap: 16px; }
       .search-wrap { max-width: 100%; }
@@ -483,25 +512,50 @@
     </section>
 
     <section class="results-section" id="results">
+      <!-- Overall Stats Banner -->
       <div class="section-header">
-        <h2 class="section-title">Yesterday's Record</h2>
-        <span class="section-meta" id="results-date"></span>
+        <h2 class="section-title">Performance Overview</h2>
       </div>
+      <div class="results-banner" id="results-banner"></div>
+
+      <!-- Date Picker -->
+      <div class="date-picker" id="date-picker">
+        <button class="date-picker-btn" id="dp-prev" title="Previous day">&#8592;</button>
+        <div class="date-picker-date" id="dp-date">--</div>
+        <button class="date-picker-btn" id="dp-next" title="Next day">&#8594;</button>
+      </div>
+
+      <!-- Daily Summary Cards -->
       <div class="results-summary-grid" id="results-summary"></div>
 
-      <div class="section-header">
-        <h2 class="section-title">Results History</h2>
-        <span class="section-meta">Last 7 days</span>
+      <!-- Filters -->
+      <div class="results-filter-row" id="results-filter-row">
+        <div class="filter-group">
+          <span class="filter-label">Type</span>
+          <button class="filter-pill active" data-rtype="all">All</button>
+          <button class="filter-pill" data-rtype="prop">Props</button>
+          <button class="filter-pill" data-rtype="spread">Spreads</button>
+          <button class="filter-pill" data-rtype="ml">MLs</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Result</span>
+          <button class="filter-pill active" data-rresult="all">All</button>
+          <button class="filter-pill" data-rresult="win">Wins</button>
+          <button class="filter-pill" data-rresult="loss">Losses</button>
+        </div>
       </div>
+
+      <!-- Detailed Results Table -->
       <div class="results-table-wrap">
         <table class="results-table">
           <thead>
-            <tr><th>Date</th><th>Type</th><th>Pick</th><th>Result</th><th>Hit</th></tr>
+            <tr><th>Type</th><th>Pick</th><th>Line</th><th>Result</th><th>Conf</th><th>Hit</th></tr>
           </thead>
           <tbody id="results-table-body"></tbody>
         </table>
       </div>
 
+      <!-- All-Time Stats -->
       <div class="section-header">
         <h2 class="section-title">All-Time Stats</h2>
       </div>
@@ -1085,96 +1139,271 @@
     }
 
     // ── Results ──
+    let resultsData = null;
+    let resultsDayIdx = 0;  // index into resultsData.days
+    let resultsTypeFilter = 'all';
+    let resultsResultFilter = 'all';
+
     function pctClass(pct) {
       if (pct >= 55) return 'green';
       if (pct > 0 && pct < 50) return 'red';
       return 'neutral';
     }
 
-    function renderSummaryCard(label, stats) {
-      return `<div class="results-stat-card"><div class="stat-value">${stats.record}</div><div class="stat-pct ${pctClass(stats.pct)}">${stats.pct > 0 ? stats.pct + '%' : '--'}</div><div class="stat-label">${label}</div></div>`;
+    function formatDateStr(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     }
 
-    function renderResultRow(pick) {
-      const typeClass = pick.type.toLowerCase();
-      const hitIcon = pick.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
-      return `<tr><td style="color:var(--text-muted)">${pick.date}</td><td><span class="result-type-badge ${typeClass}">${pick.type}</span></td><td>${pick.pick}</td><td style="color:var(--text-secondary)">${pick.result || '--'}</td><td>${hitIcon}</td></tr>`;
+    // Overall stats banner
+    function renderResultsBanner(data) {
+      const at = data.allTime;
+      if (!at) return;
+
+      // Total record across all categories
+      const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
+      const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
+      const totalT = totalW + totalL;
+      const totalPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : 0;
+      const totalProfit = totalW * 90.91 - totalL * 100;
+      const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
+
+      // Find best category
+      const cats = [
+        { name: 'Props', ...at.props },
+        { name: 'Spreads', ...at.spreads },
+        { name: 'MLs', ...at.moneylines },
+      ];
+      let bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
+
+      // Current streak from days
+      let streak = 0, streakType = '';
+      if (data.days && data.days.length > 0) {
+        for (const day of data.days) {
+          for (const p of (day.picks || [])) {
+            if (streakType === '') streakType = p.hit ? 'W' : 'L';
+            if ((p.hit && streakType === 'W') || (!p.hit && streakType === 'L')) streak++;
+            else break;
+          }
+          if (streak > 0) break;
+        }
+      }
+
+      const roiCls = parseFloat(totalRoi) > 0 ? 'green' : parseFloat(totalRoi) < 0 ? 'red' : '';
+
+      document.getElementById('results-banner').innerHTML = `
+        <div class="results-banner-stat">
+          <div class="rbs-value">${totalW}-${totalL}</div>
+          <div class="rbs-label">All-Time Record</div>
+        </div>
+        <div class="results-banner-stat">
+          <div class="rbs-value ${pctClass(parseFloat(totalPct))}">${totalPct}%</div>
+          <div class="rbs-label">Win Rate</div>
+        </div>
+        <div class="results-banner-stat">
+          <div class="rbs-value ${roiCls}">${parseFloat(totalRoi) > 0 ? '+' : ''}${totalRoi}%</div>
+          <div class="rbs-label">ROI (-110)</div>
+        </div>
+        <div class="results-banner-stat">
+          <div class="rbs-value">${bestCat ? bestCat.name : '--'}</div>
+          <div class="rbs-label">${bestCat ? bestCat.pct + '% Win Rate' : 'Best Category'}</div>
+        </div>`;
     }
 
-    function renderAlltimeCard(label, stats) {
-      const record = `${stats.wins}-${stats.losses}`;
-      const pct = stats.pct > 0 ? `${stats.pct}%` : '--';
-      const roiStr = stats.roi !== 0 ? `${stats.roi > 0 ? '+' : ''}${stats.roi}%` : '--';
-      const roiClass = stats.roi > 0 ? 'green' : stats.roi < 0 ? 'red' : '';
-      return `<div class="alltime-card"><div class="alltime-label">${label}</div><div class="alltime-record">${record}</div><div class="alltime-detail">${pct} win rate &middot; ROI: <span class="${roiClass}">${roiStr}</span></div></div>`;
+    // Date picker
+    function renderDatePicker() {
+      if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
+      const day = resultsData.days[resultsDayIdx];
+      const dateStr = formatDateStr(day.date);
+      const total = resultsData.days.length;
+
+      document.getElementById('dp-date').innerHTML = `${dateStr}<div class="date-picker-sub">${resultsDayIdx === 0 ? 'Most Recent' : (resultsDayIdx + 1) + ' of ' + total + ' days'}</div>`;
+      document.getElementById('dp-prev').disabled = (resultsDayIdx >= total - 1);
+      document.getElementById('dp-next').disabled = (resultsDayIdx <= 0);
     }
 
-    function renderYesterdayBarItem(label, stats) {
-      if (stats.wins + stats.losses === 0) return '';
-      const cls = pctClass(stats.pct);
-      return `<span class="yb-item">${label} <span class="yb-val">${stats.record}</span><span class="yb-pct ${cls}">(${stats.pct}%)</span></span>`;
+    // Daily summary cards
+    function renderDaySummary(day) {
+      function card(label, stats) {
+        const w = stats.wins, l = stats.losses, t = w + l;
+        const pct = t > 0 ? (w / t * 100).toFixed(1) : 0;
+        const record = `${w}-${l}`;
+        return `<div class="results-stat-card">
+          <div class="rsc-record">${record}</div>
+          <div class="rsc-pct ${pctClass(parseFloat(pct))}">${t > 0 ? pct + '%' : '--'}</div>
+          <div class="rsc-label">${label}</div>
+        </div>`;
+      }
+      document.getElementById('results-summary').innerHTML =
+        card('Props', day.props) + card('Spreads', day.spreads) +
+        card('Totals', day.totals) + card('Moneylines', day.moneylines);
+    }
+
+    // Results table
+    function renderResultsTable(day) {
+      let picks = day.picks || [];
+
+      // Apply type filter
+      if (resultsTypeFilter !== 'all') {
+        picks = picks.filter(p => p.type === resultsTypeFilter);
+      }
+
+      // Apply result filter
+      if (resultsResultFilter === 'win') picks = picks.filter(p => p.hit);
+      else if (resultsResultFilter === 'loss') picks = picks.filter(p => !p.hit);
+
+      const tbody = document.getElementById('results-table-body');
+      if (picks.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:40px">No picks match filters</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = picks.map(p => {
+        const typeClass = p.type;
+        const typeLabel = p.type === 'ml' ? 'ML' : p.type.toUpperCase();
+        const hitIcon = p.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
+
+        // Build pick display
+        let pickHtml = '';
+        if (p.type === 'prop') {
+          pickHtml = `<span class="result-player">${p.player || ''}</span><br><span class="result-game">${p.team || ''}</span>`;
+        } else {
+          pickHtml = `<span class="result-player">${p.pick || ''}</span>${p.game ? '<br><span class="result-game">' + p.game + '</span>' : ''}`;
+        }
+
+        const lineStr = p.type === 'prop' ? p.pick : (p.line != null ? p.line : '--');
+        const resultStr = p.result != null ? p.result : '--';
+        const confStr = p.confidence != null ? p.confidence + '%' : '--';
+
+        return `<tr>
+          <td><span class="result-type-badge ${typeClass}">${typeLabel}</span></td>
+          <td>${pickHtml}</td>
+          <td style="color:var(--text-secondary)">${lineStr}</td>
+          <td style="color:var(--text-secondary)">${resultStr}</td>
+          <td><span class="result-conf">${confStr}</span></td>
+          <td>${hitIcon}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // All-time stats
+    function renderAlltimeStats(data) {
+      const at = data.allTime;
+      if (!at) return;
+
+      function card(label, stats) {
+        const record = `${stats.wins}-${stats.losses}`;
+        const pct = stats.pct > 0 ? `${stats.pct}%` : '--';
+        const roiStr = stats.roi !== 0 ? `${stats.roi > 0 ? '+' : ''}${stats.roi}%` : '--';
+        const roiClass = stats.roi > 0 ? 'green' : stats.roi < 0 ? 'red' : '';
+        return `<div class="alltime-card"><div class="alltime-label">${label}</div><div class="alltime-record">${record}</div><div class="alltime-detail">${pct} win rate &middot; ROI: <span class="${roiClass}">${roiStr}</span></div></div>`;
+      }
+
+      let html = card('Props', at.props) + card('Spreads', at.spreads) +
+        card('Totals', at.totals) + card('Moneylines', at.moneylines);
+
+      if (at.best_prop_type) {
+        html += `<div class="alltime-card"><div class="alltime-label">Best Prop Category</div><div class="alltime-record" style="text-transform:capitalize">${at.best_prop_type.replace('_', ' ')}</div><div class="alltime-detail"><span class="green">${at.best_prop_pct}%</span> win rate</div></div>`;
+      }
+      document.getElementById('alltime-grid').innerHTML = html;
+    }
+
+    // Hero yesterday bar
+    function renderYesterdayBar(data) {
+      if (!data.days || data.days.length === 0) return;
+      const day = data.days[0]; // most recent
+      const bar = document.getElementById('yesterday-bar');
+
+      function item(label, stats) {
+        if (stats.wins + stats.losses === 0) return '';
+        const pct = stats.pct || 0;
+        const cls = pctClass(pct);
+        return `<span class="yb-item">${label} <span class="yb-val">${stats.record}</span><span class="yb-pct ${cls}">(${pct}%)</span></span>`;
+      }
+
+      const items = [
+        item('Props', day.props), item('Spreads', day.spreads),
+        item('Totals', day.totals), item('ML', day.moneylines),
+      ].filter(Boolean);
+
+      if (items.length > 0) {
+        bar.innerHTML = `<span class="yb-label">${formatDateStr(day.date)}</span>` + items.join('');
+        bar.classList.add('visible');
+      }
+    }
+
+    // Master render for results day
+    function renderResultsDay() {
+      if (!resultsData || !resultsData.days || resultsData.days.length === 0) return;
+      const day = resultsData.days[resultsDayIdx];
+      renderDatePicker();
+      renderDaySummary(day);
+      renderResultsTable(day);
+    }
+
+    // Nav link handling for Results section
+    function showResultsSection() {
+      if (resultsData) {
+        document.getElementById('results').classList.add('visible');
+      }
     }
 
     async function loadResults() {
       try {
         const resp = await fetch(RESULTS_DATA_URL + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
-        const data = await resp.json();
+        resultsData = await resp.json();
 
         document.getElementById('results').classList.add('visible');
 
-        // Yesterday date
-        const dateEl = document.getElementById('results-date');
-        if (data.yesterday && data.yesterday.date) {
-          const d = new Date(data.yesterday.date + 'T12:00:00');
-          dateEl.textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
-        }
+        // Render all results components
+        renderResultsBanner(resultsData);
+        renderResultsDay();
+        renderAlltimeStats(resultsData);
+        renderYesterdayBar(resultsData);
 
-        // Summary cards
-        if (data.yesterday) {
-          const y = data.yesterday;
-          document.getElementById('results-summary').innerHTML =
-            renderSummaryCard('Props', y.props) +
-            renderSummaryCard('Spreads', y.spreads) +
-            renderSummaryCard('Totals', y.totals) +
-            renderSummaryCard('Moneylines', y.moneylines);
+        // Date picker navigation
+        document.getElementById('dp-prev').addEventListener('click', () => {
+          if (resultsDayIdx < resultsData.days.length - 1) { resultsDayIdx++; renderResultsDay(); }
+        });
+        document.getElementById('dp-next').addEventListener('click', () => {
+          if (resultsDayIdx > 0) { resultsDayIdx--; renderResultsDay(); }
+        });
 
-          // Hero yesterday bar
-          const bar = document.getElementById('yesterday-bar');
-          const items = [
-            renderYesterdayBarItem('Props', y.props),
-            renderYesterdayBarItem('Spreads', y.spreads),
-            renderYesterdayBarItem('Totals', y.totals),
-            renderYesterdayBarItem('ML', y.moneylines),
-          ].filter(Boolean);
-          if (items.length > 0) {
-            bar.innerHTML = '<span class="yb-label">Yesterday</span>' + items.join('');
-            bar.classList.add('visible');
-          }
-        }
+        // Results type filter
+        document.querySelectorAll('[data-rtype]').forEach(pill => {
+          pill.addEventListener('click', () => {
+            document.querySelectorAll('[data-rtype]').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            resultsTypeFilter = pill.dataset.rtype;
+            renderResultsDay();
+          });
+        });
 
-        // Results table
-        const tbody = document.getElementById('results-table-body');
-        if (data.picks && data.picks.length > 0) {
-          tbody.innerHTML = data.picks.map(renderResultRow).join('');
-        } else {
-          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:40px">No results yet</td></tr>';
-        }
-
-        // All-time
-        if (data.alltime) {
-          const a = data.alltime;
-          let html = renderAlltimeCard('Props', a.props) + renderAlltimeCard('Spreads', a.spreads) +
-            renderAlltimeCard('Totals', a.totals) + renderAlltimeCard('Moneylines', a.moneylines);
-          if (a.best_prop_type) {
-            html += `<div class="alltime-card"><div class="alltime-label">Best Prop Category</div><div class="alltime-record" style="text-transform:capitalize">${a.best_prop_type.replace('_', ' ')}</div><div class="alltime-detail"><span class="green">${a.best_prop_pct}%</span> win rate</div></div>`;
-          }
-          document.getElementById('alltime-grid').innerHTML = html;
-        }
+        // Results result filter
+        document.querySelectorAll('[data-rresult]').forEach(pill => {
+          pill.addEventListener('click', () => {
+            document.querySelectorAll('[data-rresult]').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            resultsResultFilter = pill.dataset.rresult;
+            renderResultsDay();
+          });
+        });
       } catch (err) {
         console.error('Failed to load results:', err);
       }
     }
+
+    // ── Nav clicks ──
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        if (link.getAttribute('href') === '#results') {
+          showResultsSection();
+        }
+      });
+    });
 
     // ── Init ──
     loadProjections();
