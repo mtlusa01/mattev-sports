@@ -27,13 +27,13 @@
       --blue: #3b82f6;
       --purple: #8b5cf6;
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-primary);
@@ -41,7 +41,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
-    
+
     .page-gradient {
       position: fixed;
       top: 0;
@@ -52,7 +52,7 @@
       pointer-events: none;
       z-index: 0;
     }
-    
+
     nav {
       position: fixed;
       top: 0;
@@ -67,7 +67,7 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    
+
     .nav-inner {
       max-width: 1200px;
       width: 100%;
@@ -76,14 +76,14 @@
       align-items: center;
       justify-content: space-between;
     }
-    
+
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
     }
-    
+
     .logo-icon {
       width: 32px;
       height: 32px;
@@ -96,20 +96,20 @@
       font-size: 14px;
       color: #000;
     }
-    
+
     .logo-text {
       font-size: 18px;
       font-weight: 700;
       color: var(--text-primary);
     }
-    
+
     .nav-links {
       display: flex;
       align-items: center;
       gap: 8px;
       list-style: none;
     }
-    
+
     .nav-links a {
       padding: 8px 14px;
       color: var(--text-secondary);
@@ -119,16 +119,16 @@
       border-radius: 6px;
       transition: all 0.15s;
     }
-    
+
     .nav-links a:hover {
       color: var(--text-primary);
       background: var(--bg-elevated);
     }
-    
+
     .nav-links a.active {
       color: var(--text-primary);
     }
-    
+
     .nav-cta {
       padding: 8px 16px;
       background: var(--text-primary);
@@ -141,18 +141,18 @@
       transition: opacity 0.15s;
       text-decoration: none;
     }
-    
+
     .nav-cta:hover {
       opacity: 0.9;
     }
-    
+
     .hero {
       padding: 140px 24px 80px;
       text-align: center;
       position: relative;
       z-index: 1;
     }
-    
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -166,7 +166,7 @@
       color: var(--accent-light);
       margin-bottom: 24px;
     }
-    
+
     .hero-badge::before {
       content: '';
       width: 6px;
@@ -175,12 +175,12 @@
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
-    
+
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
     }
-    
+
     .hero h1 {
       font-size: clamp(40px, 6vw, 64px);
       font-weight: 800;
@@ -188,13 +188,13 @@
       line-height: 1.1;
       margin-bottom: 16px;
     }
-    
+
     .hero h1 span {
       background: linear-gradient(135deg, var(--accent-light), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    
+
     .hero-subtitle {
       font-size: 18px;
       color: var(--text-secondary);
@@ -202,39 +202,39 @@
       margin: 0 auto 40px;
       line-height: 1.7;
     }
-    
-    /* Stats Grid - Hidden until we have real data */
+
+    /* Stats Grid */
     .stats-grid {
-      display: none; /* Will show when we have real stats */
+      display: none;
       justify-content: center;
       gap: 1px;
       background: var(--border);
       border-radius: 12px;
       overflow: hidden;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto 60px;
     }
-    
+
     .stats-grid.visible {
       display: flex;
     }
-    
+
     .stat {
       flex: 1;
       padding: 24px 20px;
       background: var(--bg-secondary);
       text-align: center;
     }
-    
+
     .stat-value {
       font-size: 28px;
       font-weight: 700;
       color: var(--text-primary);
       margin-bottom: 4px;
     }
-    
+
     .stat-value.green { color: var(--accent-light); }
-    
+
     .stat-label {
       font-size: 12px;
       color: var(--text-muted);
@@ -242,7 +242,7 @@
       letter-spacing: 0.05em;
       font-weight: 500;
     }
-    
+
     main {
       max-width: 1200px;
       margin: 0 auto;
@@ -250,7 +250,7 @@
       position: relative;
       z-index: 1;
     }
-    
+
     .section-header {
       display: flex;
       align-items: center;
@@ -259,7 +259,7 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    
+
     .section-title {
       font-size: 14px;
       font-weight: 600;
@@ -268,7 +268,7 @@
       align-items: center;
       gap: 8px;
     }
-    
+
     .section-title::before {
       content: '';
       width: 3px;
@@ -276,12 +276,12 @@
       background: var(--accent);
       border-radius: 2px;
     }
-    
+
     .section-meta {
       font-size: 13px;
       color: var(--text-muted);
     }
-    
+
     .filter-tabs {
       display: flex;
       gap: 4px;
@@ -291,7 +291,7 @@
       margin-bottom: 24px;
       width: fit-content;
     }
-    
+
     .filter-tab {
       padding: 8px 16px;
       background: transparent;
@@ -304,16 +304,16 @@
       transition: all 0.15s;
       font-family: inherit;
     }
-    
+
     .filter-tab:hover {
       color: var(--text-primary);
     }
-    
+
     .filter-tab.active {
       background: var(--bg-tertiary);
       color: var(--text-primary);
     }
-    
+
     .picks-table {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -321,7 +321,7 @@
       overflow: hidden;
       margin-bottom: 48px;
     }
-    
+
     .table-header {
       display: grid;
       grid-template-columns: 2fr 0.6fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
@@ -343,62 +343,62 @@
       align-items: center;
       transition: background 0.15s;
     }
-    
+
     .pick-row:last-child {
       border-bottom: none;
     }
-    
+
     .pick-row:hover {
       background: var(--bg-elevated);
     }
-    
+
     .pick-matchup {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
-    
+
     .pick-teams {
       font-weight: 600;
       font-size: 14px;
       color: var(--text-primary);
     }
-    
+
     .pick-time {
       font-size: 12px;
       color: var(--text-muted);
     }
-    
+
     .pick-selection {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
-    
+
     .pick-value {
       font-weight: 600;
       font-size: 14px;
     }
-    
+
     .pick-value.over {
       color: var(--accent-light);
     }
-    
+
     .pick-value.under {
       color: var(--red-light);
     }
-    
+
     .pick-type {
       font-size: 12px;
       color: var(--text-muted);
     }
-    
+
     .pick-confidence {
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    
+
     .confidence-bar {
       width: 60px;
       height: 4px;
@@ -406,36 +406,36 @@
       border-radius: 2px;
       overflow: hidden;
     }
-    
+
     .confidence-fill {
       height: 100%;
       border-radius: 2px;
     }
-    
+
     .confidence-fill.high {
       width: 90%;
       background: var(--accent);
     }
-    
+
     .confidence-fill.medium {
       width: 70%;
       background: var(--yellow);
     }
-    
+
     .confidence-fill.low {
       width: 50%;
       background: var(--text-muted);
     }
-    
+
     .confidence-label {
       font-size: 12px;
       color: var(--text-secondary);
     }
-    
+
     .pick-status {
       text-align: right;
     }
-    
+
     .status-badge {
       display: inline-flex;
       padding: 4px 10px;
@@ -445,37 +445,37 @@
       text-transform: uppercase;
       letter-spacing: 0.03em;
     }
-    
+
     .status-badge.pending {
       background: rgba(234, 179, 8, 0.1);
       color: var(--yellow);
     }
-    
+
     .status-badge.win {
       background: rgba(16, 185, 129, 0.1);
       color: var(--accent-light);
     }
-    
+
     .status-badge.loss {
       background: rgba(239, 68, 68, 0.1);
       color: var(--red-light);
     }
-    
+
     /* Results Section - Hidden until we have data */
     .results-section {
       display: none;
     }
-    
+
     .results-section.visible {
       display: block;
     }
-    
+
     .results-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 12px;
     }
-    
+
     .result-card {
       display: flex;
       align-items: center;
@@ -486,32 +486,32 @@
       border-radius: 10px;
       transition: border-color 0.15s;
     }
-    
+
     .result-card:hover {
       border-color: var(--border-light);
     }
-    
+
     .result-indicator {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
     }
-    
+
     .result-indicator.win {
       background: var(--accent);
       box-shadow: 0 0 8px var(--accent);
     }
-    
+
     .result-indicator.loss {
       background: var(--red);
     }
-    
+
     .result-info {
       flex: 1;
       min-width: 0;
     }
-    
+
     .result-pick {
       font-size: 14px;
       font-weight: 500;
@@ -521,35 +521,35 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .result-meta {
       font-size: 12px;
       color: var(--text-muted);
     }
-    
+
     .result-outcome {
       font-size: 12px;
       font-weight: 600;
       padding: 4px 8px;
       border-radius: 4px;
     }
-    
+
     .result-outcome.win {
       background: rgba(16, 185, 129, 0.1);
       color: var(--accent-light);
     }
-    
+
     .result-outcome.loss {
       background: rgba(239, 68, 68, 0.1);
       color: var(--red-light);
     }
-    
+
     /* Empty State */
     .empty-state {
       text-align: center;
       padding: 80px 20px;
     }
-    
+
     .empty-state-icon {
       width: 64px;
       height: 64px;
@@ -561,46 +561,46 @@
       justify-content: center;
       font-size: 28px;
     }
-    
+
     .empty-state-title {
       font-size: 16px;
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 8px;
     }
-    
+
     .empty-state-text {
       font-size: 14px;
       color: var(--text-muted);
       max-width: 400px;
       margin: 0 auto;
     }
-    
+
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 24px;
       text-align: center;
     }
-    
+
     .footer-inner {
       max-width: 1200px;
       margin: 0 auto;
     }
-    
+
     .footer-brand {
       font-size: 14px;
       font-weight: 600;
       color: var(--text-secondary);
       margin-bottom: 8px;
     }
-    
+
     .footer-disclaimer {
       font-size: 12px;
       color: var(--text-muted);
       max-width: 500px;
       margin: 0 auto;
     }
-    
+
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -623,7 +623,7 @@
         display: none;
       }
     }
-    
+
     .mobile-menu {
       display: none;
       background: none;
@@ -632,17 +632,245 @@
       font-size: 24px;
       cursor: pointer;
     }
-    
+
     @media (max-width: 768px) {
       .mobile-menu {
         display: block;
+      }
+    }
+
+    /* Sub-tabs */
+    .sub-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .sub-tab {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .sub-tab:hover {
+      color: var(--text-secondary);
+    }
+
+    .sub-tab.active {
+      color: var(--accent-light);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Filter row */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-pill {
+      padding: 5px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--border-light);
+      color: var(--text-primary);
+    }
+
+    .filter-pill.active {
+      background: var(--accent-glow);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: var(--accent-light);
+    }
+
+    /* Prop categories */
+    .prop-category {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .category-header:hover {
+      background: var(--bg-elevated);
+    }
+
+    .category-chevron {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .category-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .category-count {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+    }
+
+    .category-body {
+      max-height: 2000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .prop-category.collapsed .category-body {
+      max-height: 0;
+    }
+
+    .prop-category.collapsed .category-chevron {
+      transform: rotate(-90deg);
+    }
+
+    /* TOP PICKS accent */
+    .prop-category[data-category="top"] .category-header {
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .prop-category[data-category="top"] .category-title {
+      color: var(--accent-light);
+    }
+
+    .prop-category[data-category="top"] .category-count {
+      background: var(--accent-glow);
+      color: var(--accent-light);
+    }
+
+    /* Positive EV row highlight */
+    .pick-row.positive-ev {
+      background: rgba(16, 185, 129, 0.04);
+    }
+
+    .pick-row.positive-ev:hover {
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    /* Coming Soon card */
+    .coming-soon-card {
+      text-align: center;
+      padding: 80px 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .coming-soon-card .empty-state-icon {
+      font-size: 36px;
+    }
+
+    .coming-soon-card .empty-state-title {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .coming-soon-card .empty-state-text {
+      max-width: 460px;
+    }
+
+    /* Game cards grid (future use) */
+    .game-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .game-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+
+    .game-card:hover {
+      border-color: var(--border-light);
+    }
+
+    /* Mobile responsive additions */
+    @media (max-width: 768px) {
+      .sub-tabs {
+        gap: 0;
+      }
+
+      .sub-tab {
+        padding: 8px 14px;
+        font-size: 11px;
+      }
+
+      .filter-row {
+        gap: 12px;
+      }
+
+      .filter-pill {
+        padding: 4px 10px;
+        font-size: 11px;
+      }
+
+      .game-cards-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
   <div class="page-gradient"></div>
-  
+
   <nav>
     <div class="nav-inner">
       <a href="#" class="logo">
@@ -655,7 +883,7 @@
         <li><a href="#about">About</a></li>
       </ul>
       <a href="admin.html" class="nav-cta">Admin</a>
-      <button class="mobile-menu">☰</button>
+      <button class="mobile-menu">&#9776;</button>
     </div>
   </nav>
 
@@ -663,20 +891,23 @@
     <div class="hero-badge">Live Projections</div>
     <h1>Daily AI <span>Sports Projections</span></h1>
     <p class="hero-subtitle">Data-driven player props and game predictions. Our models analyze thousands of data points to find the highest-value plays, updated every morning.</p>
-    
-    <!-- Stats hidden until we have real data -->
+
     <div class="stats-grid" id="stats-grid">
       <div class="stat">
-        <div class="stat-value" id="stat-record">0-0</div>
-        <div class="stat-label">Record</div>
+        <div class="stat-value" id="stat-total">--</div>
+        <div class="stat-label">Total Props</div>
       </div>
       <div class="stat">
-        <div class="stat-value green" id="stat-winrate">--%</div>
-        <div class="stat-label">Win Rate</div>
+        <div class="stat-value green" id="stat-posev">--</div>
+        <div class="stat-label">Positive EV</div>
       </div>
       <div class="stat">
-        <div class="stat-value green" id="stat-roi">--%</div>
-        <div class="stat-label">ROI</div>
+        <div class="stat-value green" id="stat-bestev">--</div>
+        <div class="stat-label">Best EV%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-avgconf">--</div>
+        <div class="stat-label">Avg Confidence</div>
       </div>
     </div>
   </section>
@@ -687,32 +918,49 @@
         <h2 class="section-title">Today's Projections</h2>
         <span class="section-meta" id="current-date"></span>
       </div>
-      
-      <div class="filter-tabs">
+
+      <div class="filter-tabs" id="sport-tabs">
         <button class="filter-tab active" data-sport="all">All</button>
         <button class="filter-tab" data-sport="nba">NBA</button>
         <button class="filter-tab" data-sport="nfl">NFL</button>
         <button class="filter-tab" data-sport="mlb">MLB</button>
         <button class="filter-tab" data-sport="nhl">NHL</button>
       </div>
-      
-      <div class="picks-table">
-        <div class="table-header" id="table-header" style="display: none;">
-          <div>Player</div>
-          <div>Team</div>
-          <div>Prop</div>
-          <div>Direction</div>
-          <div>Line</div>
-          <div>Proj</div>
-          <div>Conf</div>
-          <div>EV%</div>
+
+      <div class="sub-tabs" id="sub-tabs">
+        <button class="sub-tab active" data-view="player-props">PLAYER PROPS</button>
+        <button class="sub-tab" data-view="game-projections">GAME PROJECTIONS</button>
+      </div>
+
+      <div class="filter-row" id="filter-row">
+        <div class="filter-group">
+          <span class="filter-label">Confidence</span>
+          <button class="filter-pill active" data-conf="all">All</button>
+          <button class="filter-pill" data-conf="high">High</button>
+          <button class="filter-pill" data-conf="medium">Medium</button>
+          <button class="filter-pill" data-conf="low">Low</button>
         </div>
-        <div id="picks-container">
-          <div class="empty-state">
-            <div class="empty-state-icon">📊</div>
-            <div class="empty-state-title">No projections yet</div>
-            <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
-          </div>
+        <div class="filter-group">
+          <span class="filter-label">Direction</span>
+          <button class="filter-pill active" data-dir="all">All</button>
+          <button class="filter-pill" data-dir="over">Overs</button>
+          <button class="filter-pill" data-dir="under">Unders</button>
+        </div>
+      </div>
+
+      <div id="player-props-view">
+        <div class="empty-state">
+          <div class="empty-state-icon">&#128202;</div>
+          <div class="empty-state-title">No projections yet</div>
+          <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
+        </div>
+      </div>
+
+      <div id="game-projections-view" style="display:none;">
+        <div class="coming-soon-card">
+          <div class="empty-state-icon">&#127944;</div>
+          <div class="empty-state-title">Game Projections Coming Soon</div>
+          <div class="empty-state-text">We're building AI-powered game projections including spreads, totals, and moneylines. Stay tuned for launch.</div>
         </div>
       </div>
     </section>
@@ -737,6 +985,19 @@
   <script>
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
     let projections = [];
+    let currentSport = 'all';
+    let currentView = 'player-props';
+    let currentConfFilter = 'all';
+    let currentDirFilter = 'all';
+
+    const PROP_CATEGORIES = [
+      { key: 'top', label: 'TOP PICKS' },
+      { key: 'PTS', label: 'POINTS' },
+      { key: 'REB', label: 'REBOUNDS' },
+      { key: 'AST', label: 'ASSISTS' },
+      { key: 'PRA', label: 'PTS + REB + AST' }
+    ];
+    const TOP_PICKS_COUNT = 10;
 
     // Set current date
     const today = new Date();
@@ -744,55 +1005,176 @@
       weekday: 'long', month: 'short', day: 'numeric'
     });
 
-    function renderProjections(filter = 'all') {
-      const container = document.getElementById('picks-container');
-      const tableHeader = document.getElementById('table-header');
+    function getConfLevel(conf) {
+      if (conf >= 51) return 'high';
+      if (conf >= 50) return 'medium';
+      return 'low';
+    }
 
-      let filtered = projections;
-      if (filter === 'nba') filtered = projections;
-      else if (filter !== 'all') filtered = [];
+    function applyFilters(data) {
+      let filtered = data;
 
-      // Sort by EV% descending
-      filtered = [...filtered].sort((a, b) => (b.ev || 0) - (a.ev || 0));
+      // Sport filter
+      if (currentSport === 'nba') filtered = data;
+      else if (currentSport !== 'all') filtered = [];
+
+      // Confidence filter
+      if (currentConfFilter !== 'all') {
+        filtered = filtered.filter(p => getConfLevel(p.confidence || 0) === currentConfFilter);
+      }
+
+      // Direction filter
+      if (currentDirFilter !== 'all') {
+        const dir = currentDirFilter.toUpperCase();
+        filtered = filtered.filter(p => p.direction === dir);
+      }
+
+      return filtered;
+    }
+
+    function renderRow(p) {
+      const isOver = p.direction === 'OVER';
+      const dirClass = isOver ? 'over' : 'under';
+      const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
+      const evColor = p.ev > 0 ? 'var(--accent-light)' : p.ev > -2 ? 'var(--yellow)' : 'var(--text-muted)';
+      const confStr = p.confidence != null ? p.confidence.toFixed(1) + '%' : '--';
+      const posEvClass = p.ev > 0 ? ' positive-ev' : '';
+      return `
+        <div class="pick-row${posEvClass}">
+          <div style="font-weight:600;font-size:14px">${p.player}</div>
+          <div style="color:var(--text-secondary);font-size:13px">${p.team}</div>
+          <div style="font-weight:500;font-size:13px">${p.prop}</div>
+          <div><span class="pick-value ${dirClass}" style="font-size:13px">${p.direction}</span></div>
+          <div style="font-size:13px;color:var(--text-secondary)">${p.line}</div>
+          <div style="font-weight:600;font-size:13px">${p.projection}</div>
+          <div style="font-size:13px;color:var(--text-secondary)">${confStr}</div>
+          <div style="font-weight:600;font-size:13px;color:${evColor}">${evStr}</div>
+        </div>`;
+    }
+
+    function renderCategory(cat, items) {
+      if (items.length === 0) return '';
+      const sorted = [...items].sort((a, b) => (b.ev || 0) - (a.ev || 0));
+      const dataCat = cat.key === 'top' ? 'data-category="top"' : '';
+      return `
+        <div class="prop-category" ${dataCat}>
+          <div class="category-header" onclick="toggleCategory(this)">
+            <span class="category-chevron">&#9660;</span>
+            <span class="category-title">${cat.label}</span>
+            <span class="category-count">${items.length}</span>
+          </div>
+          <div class="category-body">
+            <div class="picks-table" style="margin-bottom:0;border:none;border-radius:0;">
+              <div class="table-header">
+                <div>Player</div>
+                <div>Team</div>
+                <div>Prop</div>
+                <div>Direction</div>
+                <div>Line</div>
+                <div>Proj</div>
+                <div>Conf</div>
+                <div>EV%</div>
+              </div>
+              ${sorted.map(renderRow).join('')}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function toggleCategory(el) {
+      el.closest('.prop-category').classList.toggle('collapsed');
+    }
+
+    function render() {
+      const propsView = document.getElementById('player-props-view');
+      const gameView = document.getElementById('game-projections-view');
+      const filterRow = document.getElementById('filter-row');
+
+      if (currentView === 'game-projections') {
+        propsView.style.display = 'none';
+        gameView.style.display = 'block';
+        filterRow.style.display = 'none';
+        return;
+      }
+
+      propsView.style.display = 'block';
+      gameView.style.display = 'none';
+      filterRow.style.display = 'flex';
+
+      const filtered = applyFilters(projections);
 
       if (filtered.length === 0) {
-        tableHeader.style.display = 'none';
-        container.innerHTML = `
+        propsView.innerHTML = `
           <div class="empty-state">
-            <div class="empty-state-icon">📊</div>
-            <div class="empty-state-title">No projections yet</div>
-            <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
+            <div class="empty-state-icon">&#128202;</div>
+            <div class="empty-state-title">No projections match</div>
+            <div class="empty-state-text">Try adjusting your filters to see more projections.</div>
           </div>`;
         return;
       }
 
-      tableHeader.style.display = 'grid';
-      container.innerHTML = filtered.map(p => {
-        const isOver = p.direction === 'OVER';
-        const dirClass = isOver ? 'over' : 'under';
-        const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
-        const evColor = p.ev > 0 ? 'var(--accent-light)' : p.ev > -2 ? 'var(--yellow)' : 'var(--text-muted)';
-        const confStr = p.confidence != null ? p.confidence.toFixed(0) + '%' : '--';
-        return `
-          <div class="pick-row">
-            <div style="font-weight:600;font-size:14px">${p.player}</div>
-            <div style="color:var(--text-secondary);font-size:13px">${p.team}</div>
-            <div style="font-weight:500;font-size:13px">${p.prop}</div>
-            <div><span class="pick-value ${dirClass}" style="font-size:13px">${p.direction}</span></div>
-            <div style="font-size:13px;color:var(--text-secondary)">${p.line}</div>
-            <div style="font-weight:600;font-size:13px">${p.projection}</div>
-            <div style="font-size:13px;color:var(--text-secondary)">${confStr}</div>
-            <div style="font-weight:600;font-size:13px;color:${evColor}">${evStr}</div>
-          </div>`;
-      }).join('');
+      // Build TOP PICKS: best N by EV%
+      const allSorted = [...filtered].sort((a, b) => (b.ev || 0) - (a.ev || 0));
+      const topPicks = allSorted.slice(0, TOP_PICKS_COUNT);
+
+      // Build per-prop categories
+      const propGroups = {};
+      for (const cat of PROP_CATEGORIES) {
+        if (cat.key !== 'top') propGroups[cat.key] = [];
+      }
+      for (const p of filtered) {
+        if (propGroups[p.prop]) propGroups[p.prop].push(p);
+      }
+
+      let html = '';
+      // TOP PICKS
+      html += renderCategory(PROP_CATEGORIES[0], topPicks);
+      // Prop categories
+      for (let i = 1; i < PROP_CATEGORIES.length; i++) {
+        const cat = PROP_CATEGORIES[i];
+        html += renderCategory(cat, propGroups[cat.key] || []);
+      }
+
+      propsView.innerHTML = html;
     }
 
-    // Filter tabs
-    document.querySelectorAll('.filter-tab').forEach(tab => {
+    // Sport tabs
+    document.querySelectorAll('#sport-tabs .filter-tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('#sport-tabs .filter-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        renderProjections(tab.dataset.sport);
+        currentSport = tab.dataset.sport;
+        render();
+      });
+    });
+
+    // Sub-tabs
+    document.querySelectorAll('#sub-tabs .sub-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('#sub-tabs .sub-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentView = tab.dataset.view;
+        render();
+      });
+    });
+
+    // Confidence pills
+    document.querySelectorAll('[data-conf]').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('[data-conf]').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentConfFilter = pill.dataset.conf;
+        render();
+      });
+    });
+
+    // Direction pills
+    document.querySelectorAll('[data-dir]').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('[data-dir]').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentDirFilter = pill.dataset.dir;
+        render();
       });
     });
 
@@ -817,22 +1199,24 @@
           });
         }
 
-        // Show stats summary
+        // Update 4 stats
         const posEV = projections.filter(p => p.ev > 0).length;
-        const avgConf = projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length;
+        const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
+        const avgConf = projections.length > 0
+          ? projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length
+          : 0;
+
         const statsGrid = document.getElementById('stats-grid');
         statsGrid.classList.add('visible');
-        document.getElementById('stat-record').textContent = projections.length;
-        document.querySelector('#stat-record + .stat-label').textContent = 'Projections';
-        document.getElementById('stat-winrate').textContent = avgConf.toFixed(1) + '%';
-        document.querySelector('#stat-winrate + .stat-label').textContent = 'Avg Confidence';
-        document.getElementById('stat-roi').textContent = posEV;
-        document.querySelector('#stat-roi + .stat-label').textContent = 'Positive EV';
+        document.getElementById('stat-total').textContent = projections.length;
+        document.getElementById('stat-posev').textContent = posEV;
+        document.getElementById('stat-bestev').textContent = bestEV > -Infinity ? (bestEV >= 0 ? '+' : '') + bestEV.toFixed(1) + '%' : '--';
+        document.getElementById('stat-avgconf').textContent = avgConf.toFixed(1) + '%';
 
-        renderProjections();
+        render();
       } catch (err) {
         console.error('Failed to load projections:', err);
-        renderProjections();
+        render();
       }
     }
 
