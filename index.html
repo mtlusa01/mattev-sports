@@ -324,7 +324,7 @@
     
     .table-header {
       display: grid;
-      grid-template-columns: 2fr 1.5fr 1fr 120px;
+      grid-template-columns: 2fr 0.6fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
       padding: 12px 20px;
       background: var(--bg-tertiary);
       border-bottom: 1px solid var(--border);
@@ -334,11 +334,11 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    
+
     .pick-row {
       display: grid;
-      grid-template-columns: 2fr 1.5fr 1fr 120px;
-      padding: 16px 20px;
+      grid-template-columns: 2fr 0.6fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
+      padding: 14px 20px;
       border-bottom: 1px solid var(--border);
       align-items: center;
       transition: background 0.15s;
@@ -605,21 +605,22 @@
       .nav-links {
         display: none;
       }
-      
+
       .table-header,
       .pick-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        grid-template-columns: 1.5fr 0.6fr 0.7fr 0.8fr 0.7fr;
+        gap: 4px;
+        font-size: 12px;
       }
-      
-      .table-header > *:nth-child(3),
-      .table-header > *:nth-child(4),
-      .pick-row > *:nth-child(3) {
+
+      /* Hide Proj, Conf, EV% on mobile */
+      .table-header > *:nth-child(6),
+      .table-header > *:nth-child(7),
+      .table-header > *:nth-child(8),
+      .pick-row > *:nth-child(6),
+      .pick-row > *:nth-child(7),
+      .pick-row > *:nth-child(8) {
         display: none;
-      }
-      
-      .pick-status {
-        text-align: left;
       }
     }
     
@@ -659,7 +660,7 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-badge">Coming Soon</div>
+    <div class="hero-badge">Live Projections</div>
     <h1>Daily AI <span>Sports Projections</span></h1>
     <p class="hero-subtitle">Data-driven player props and game predictions. Our models analyze thousands of data points to find the highest-value plays, updated every morning.</p>
     
@@ -697,10 +698,14 @@
       
       <div class="picks-table">
         <div class="table-header" id="table-header" style="display: none;">
-          <div>Matchup</div>
-          <div>Projection</div>
-          <div>Confidence</div>
-          <div>Status</div>
+          <div>Player</div>
+          <div>Team</div>
+          <div>Prop</div>
+          <div>Direction</div>
+          <div>Line</div>
+          <div>Proj</div>
+          <div>Conf</div>
+          <div>EV%</div>
         </div>
         <div id="picks-container">
           <div class="empty-state">
@@ -730,22 +735,26 @@
   </footer>
 
   <script>
+    const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
+    let projections = [];
+
     // Set current date
     const today = new Date();
-    document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', { 
-      weekday: 'long', month: 'short', day: 'numeric' 
+    document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'short', day: 'numeric'
     });
 
-    // Load data from localStorage (will be empty until admin adds picks)
-    let picks = JSON.parse(localStorage.getItem('mattev_picks') || '[]');
-    let results = JSON.parse(localStorage.getItem('mattev_results') || '[]');
-
-    // Render picks
-    function renderPicks(filter = 'all') {
+    function renderProjections(filter = 'all') {
       const container = document.getElementById('picks-container');
       const tableHeader = document.getElementById('table-header');
-      const filtered = filter === 'all' ? picks : picks.filter(p => p.sport === filter);
-      
+
+      let filtered = projections;
+      if (filter === 'nba') filtered = projections;
+      else if (filter !== 'all') filtered = [];
+
+      // Sort by EV% descending
+      filtered = [...filtered].sort((a, b) => (b.ev || 0) - (a.ev || 0));
+
       if (filtered.length === 0) {
         tableHeader.style.display = 'none';
         container.innerHTML = `
@@ -753,76 +762,29 @@
             <div class="empty-state-icon">📊</div>
             <div class="empty-state-title">No projections yet</div>
             <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
-          </div>
-        `;
+          </div>`;
         return;
       }
-      
+
       tableHeader.style.display = 'grid';
-      container.innerHTML = filtered.map(pick => `
-        <div class="pick-row">
-          <div class="pick-matchup">
-            <span class="pick-teams">${pick.teams}</span>
-            <span class="pick-time">${pick.sport.toUpperCase()} · ${pick.time}</span>
-          </div>
-          <div class="pick-selection">
-            <span class="pick-value ${pick.isOver ? 'over' : 'under'}">${pick.value}</span>
-            <span class="pick-type">${pick.type}</span>
-          </div>
-          <div class="pick-confidence">
-            <div class="confidence-bar">
-              <div class="confidence-fill ${pick.confidence}"></div>
-            </div>
-            <span class="confidence-label">${pick.confidence.charAt(0).toUpperCase() + pick.confidence.slice(1)}</span>
-          </div>
-          <div class="pick-status">
-            <span class="status-badge ${pick.status}">${pick.status}</span>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Render results
-    function renderResults() {
-      const section = document.getElementById('results');
-      const container = document.getElementById('results-container');
-      
-      if (results.length === 0) {
-        section.classList.remove('visible');
-        return;
-      }
-      
-      section.classList.add('visible');
-      container.innerHTML = results.slice(0, 6).map(result => `
-        <div class="result-card">
-          <div class="result-indicator ${result.outcome}"></div>
-          <div class="result-info">
-            <div class="result-pick">${result.pick}</div>
-            <div class="result-meta">${result.teams}</div>
-          </div>
-          <span class="result-outcome ${result.outcome}">${result.outcome === 'win' ? '✓ Hit' : '✗ Miss'}</span>
-        </div>
-      `).join('');
-    }
-
-    // Update stats (only show if we have completed picks)
-    function updateStats() {
-      const completedPicks = picks.filter(p => p.status === 'win' || p.status === 'loss');
-      const statsGrid = document.getElementById('stats-grid');
-      
-      if (completedPicks.length === 0) {
-        statsGrid.classList.remove('visible');
-        return;
-      }
-      
-      const wins = completedPicks.filter(p => p.status === 'win').length;
-      const losses = completedPicks.filter(p => p.status === 'loss').length;
-      const total = wins + losses;
-      
-      statsGrid.classList.add('visible');
-      document.getElementById('stat-record').textContent = `${wins}-${losses}`;
-      document.getElementById('stat-winrate').textContent = `${((wins / total) * 100).toFixed(1)}%`;
-      document.getElementById('stat-roi').textContent = total >= 10 ? `+${((wins / total - 0.5) * 100).toFixed(1)}%` : '--%';
+      container.innerHTML = filtered.map(p => {
+        const isOver = p.direction === 'OVER';
+        const dirClass = isOver ? 'over' : 'under';
+        const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
+        const evColor = p.ev > 0 ? 'var(--accent-light)' : p.ev > -2 ? 'var(--yellow)' : 'var(--text-muted)';
+        const confStr = p.confidence != null ? p.confidence.toFixed(0) + '%' : '--';
+        return `
+          <div class="pick-row">
+            <div style="font-weight:600;font-size:14px">${p.player}</div>
+            <div style="color:var(--text-secondary);font-size:13px">${p.team}</div>
+            <div style="font-weight:500;font-size:13px">${p.prop}</div>
+            <div><span class="pick-value ${dirClass}" style="font-size:13px">${p.direction}</span></div>
+            <div style="font-size:13px;color:var(--text-secondary)">${p.line}</div>
+            <div style="font-weight:600;font-size:13px">${p.projection}</div>
+            <div style="font-size:13px;color:var(--text-secondary)">${confStr}</div>
+            <div style="font-weight:600;font-size:13px;color:${evColor}">${evStr}</div>
+          </div>`;
+      }).join('');
     }
 
     // Filter tabs
@@ -830,14 +792,51 @@
       tab.addEventListener('click', () => {
         document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        renderPicks(tab.dataset.sport);
+        renderProjections(tab.dataset.sport);
       });
     });
 
-    // Initialize
-    renderPicks();
-    renderResults();
-    updateStats();
+    // Fetch and render
+    async function loadProjections() {
+      try {
+        const resp = await fetch(DATA_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch');
+        const data = await resp.json();
+        projections = data.projections || [];
+
+        // Update date/meta
+        if (data.date) {
+          const d = new Date(data.date + 'T12:00:00');
+          document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', {
+            weekday: 'long', month: 'short', day: 'numeric'
+          }) + ' \u00B7 ' + projections.length + ' projections';
+        }
+        if (data.updated) {
+          document.querySelector('.hero-badge').textContent = 'Updated ' + new Date(data.updated).toLocaleTimeString('en-US', {
+            hour: 'numeric', minute: '2-digit'
+          });
+        }
+
+        // Show stats summary
+        const posEV = projections.filter(p => p.ev > 0).length;
+        const avgConf = projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length;
+        const statsGrid = document.getElementById('stats-grid');
+        statsGrid.classList.add('visible');
+        document.getElementById('stat-record').textContent = projections.length;
+        document.querySelector('#stat-record + .stat-label').textContent = 'Projections';
+        document.getElementById('stat-winrate').textContent = avgConf.toFixed(1) + '%';
+        document.querySelector('#stat-winrate + .stat-label').textContent = 'Avg Confidence';
+        document.getElementById('stat-roi').textContent = posEV;
+        document.querySelector('#stat-roi + .stat-label').textContent = 'Positive EV';
+
+        renderProjections();
+      } catch (err) {
+        console.error('Failed to load projections:', err);
+        renderProjections();
+      }
+    }
+
+    loadProjections();
   </script>
 </body>
 </html>
