@@ -88,27 +88,55 @@
     .results-banner-stat .rbs-value.red { color: var(--red-light); }
     .results-banner-stat .rbs-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
 
-    /* ── Calendar ── */
-    .calendar-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+    /* ── Calendar Dropdown ── */
+    .calendar-wrap {
+      position: relative;
       margin-bottom: 28px;
-      max-width: 340px;
+      display: inline-block;
+    }
+    .calendar-trigger {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 10px; cursor: pointer; transition: all 0.15s;
+      font-family: inherit; color: var(--text-primary); font-size: 14px;
+      user-select: none;
+    }
+    .calendar-trigger:hover { border-color: var(--border-light); }
+    .calendar-trigger.open { border-color: rgba(16, 185, 129, 0.4); background: var(--bg-tertiary); }
+    .calendar-trigger .ct-icon { font-size: 16px; flex-shrink: 0; }
+    .calendar-trigger .ct-date { font-weight: 600; }
+    .calendar-trigger .ct-arrow {
+      margin-left: 6px; font-size: 10px; color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+    .calendar-trigger.open .ct-arrow { transform: rotate(180deg); }
+
+    .calendar-dropdown {
+      position: absolute; top: calc(100% + 6px); left: 0; z-index: 50;
+      background: var(--bg-secondary); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 16px;
+      width: 310px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      opacity: 0; visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+    }
+    .calendar-dropdown.open {
+      opacity: 1; visibility: visible; transform: translateY(0);
     }
     .calendar-header {
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .calendar-title {
-      font-size: 15px; font-weight: 700; color: var(--text-primary);
+      font-size: 14px; font-weight: 700; color: var(--text-primary);
     }
     .calendar-nav {
       display: flex; gap: 4px;
     }
     .calendar-nav button {
-      width: 32px; height: 32px; border-radius: 8px;
+      width: 28px; height: 28px; border-radius: 6px;
       background: var(--bg-tertiary); border: 1px solid var(--border);
       color: var(--text-secondary); font-size: 14px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -117,10 +145,10 @@
     .calendar-nav button:hover { border-color: var(--border-light); color: var(--text-primary); }
     .calendar-weekdays {
       display: grid; grid-template-columns: repeat(7, 1fr);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .calendar-weekday {
-      text-align: center; font-size: 11px; font-weight: 600;
+      text-align: center; font-size: 10px; font-weight: 600;
       color: var(--text-muted); text-transform: uppercase;
       letter-spacing: 0.03em; padding: 4px 0;
     }
@@ -130,43 +158,44 @@
     }
     .calendar-day {
       position: relative;
-      aspect-ratio: 1; display: flex; flex-direction: column;
+      width: 38px; height: 38px;
+      display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       font-size: 13px; font-weight: 500; color: var(--text-muted);
       border-radius: 8px; cursor: default;
-      transition: all 0.15s; border: 1px solid transparent;
+      transition: all 0.12s; border: 1px solid transparent;
     }
-    .calendar-day.other-month { color: rgba(113, 113, 122, 0.3); }
+    .calendar-day.other-month { color: rgba(113, 113, 122, 0.25); }
     .calendar-day.has-data {
       color: var(--text-secondary); cursor: pointer;
     }
     .calendar-day.has-data:hover {
-      background: var(--bg-tertiary); border-color: var(--border-light);
+      background: var(--bg-elevated); border-color: var(--border-light);
     }
     .calendar-day.selected {
       background: var(--accent-glow);
       border-color: rgba(16, 185, 129, 0.4);
       color: var(--accent-light); font-weight: 700;
     }
-    .calendar-day.today {
-      border-color: var(--border-light);
-    }
-    .calendar-day.today.selected {
-      border-color: rgba(16, 185, 129, 0.4);
-    }
-    .calendar-day.future { color: rgba(113, 113, 122, 0.2); }
+    .calendar-day.today { border-color: var(--border-light); }
+    .calendar-day.today.selected { border-color: rgba(16, 185, 129, 0.4); }
+    .calendar-day.future { color: rgba(113, 113, 122, 0.15); }
     .calendar-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      position: absolute; bottom: 4px;
+      width: 4px; height: 4px; border-radius: 50%;
+      position: absolute; bottom: 3px;
     }
     .calendar-dot.win { background: var(--accent); }
     .calendar-dot.loss { background: var(--red); }
     .calendar-dot.mixed { background: var(--yellow); }
-    .calendar-today-label {
-      font-size: 9px; font-weight: 700; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.04em;
-      position: absolute; top: 2px;
+    .calendar-today-btn {
+      display: block; width: 100%; margin-top: 10px;
+      padding: 7px 0; text-align: center;
+      background: var(--bg-tertiary); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--text-secondary); font-size: 12px;
+      font-weight: 600; cursor: pointer; transition: all 0.15s;
+      font-family: inherit;
     }
+    .calendar-today-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
 
     /* ── No results state ── */
     .no-results {
@@ -226,7 +255,7 @@
       .results-table-wrap { overflow-x: auto; }
       .results-table { min-width: 520px; }
       .results-filter-row { gap: 12px; }
-      .calendar-card { max-width: 100%; }
+      .calendar-dropdown { width: calc(100vw - 48px); max-width: 310px; }
     }
   </style>
 </head>
@@ -259,11 +288,15 @@
     </div>
     <div class="results-banner" id="results-banner"></div>
 
-    <!-- Calendar Date Picker -->
-    <div class="section-header">
-      <h2 class="section-title">Select Date</h2>
+    <!-- Calendar Dropdown -->
+    <div class="calendar-wrap" id="calendar-wrap">
+      <button class="calendar-trigger" id="calendar-trigger">
+        <span class="ct-icon">&#128197;</span>
+        <span class="ct-date" id="ct-date">Loading...</span>
+        <span class="ct-arrow">&#9660;</span>
+      </button>
+      <div class="calendar-dropdown" id="calendar-dropdown"></div>
     </div>
-    <div class="calendar-card" id="calendar-card"></div>
 
     <!-- Selected Day Content -->
     <div id="day-view">
@@ -308,12 +341,13 @@
     const RESULTS_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
 
     let resultsData = null;
-    let selectedDate = null;       // "YYYY-MM-DD" string
-    let calViewYear = null;        // calendar month being viewed
+    let selectedDate = null;
+    let calViewYear = null;
     let calViewMonth = null;
+    let calOpen = false;
     let resultsTypeFilter = 'all';
     let resultsResultFilter = 'all';
-    let daysByDate = {};           // lookup: "YYYY-MM-DD" -> day object
+    let daysByDate = {};
 
     function pctClass(pct) {
       if (pct >= 55) return 'green';
@@ -324,6 +358,11 @@
     function formatDateFull(dateStr) {
       const d = new Date(dateStr + 'T12:00:00');
       return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function formatTriggerDate(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     function pad(n) { return n < 10 ? '0' + n : '' + n; }
@@ -337,12 +376,32 @@
                          'July','August','September','October','November','December'];
     const DAY_LABELS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 
-    // ── Calendar ──
-    function renderCalendar() {
-      const container = document.getElementById('calendar-card');
+    // ── Calendar toggle ──
+    function toggleCalendar(forceState) {
+      calOpen = forceState !== undefined ? forceState : !calOpen;
+      document.getElementById('calendar-trigger').classList.toggle('open', calOpen);
+      document.getElementById('calendar-dropdown').classList.toggle('open', calOpen);
+      if (calOpen) renderCalendarGrid();
+    }
+
+    function updateTriggerLabel() {
+      document.getElementById('ct-date').textContent = formatTriggerDate(selectedDate);
+    }
+
+    function selectDate(key) {
+      selectedDate = key;
+      resultsTypeFilter = 'all';
+      resultsResultFilter = 'all';
+      updateTriggerLabel();
+      toggleCalendar(false);
+      renderSelectedDay();
+    }
+
+    // ── Calendar grid ──
+    function renderCalendarGrid() {
+      const container = document.getElementById('calendar-dropdown');
       const today = todayKey();
 
-      // Header with month/year and nav arrows
       let html = `<div class="calendar-header">
         <span class="calendar-title">${MONTH_NAMES[calViewMonth]} ${calViewYear}</span>
         <div class="calendar-nav">
@@ -351,17 +410,13 @@
         </div>
       </div>`;
 
-      // Weekday labels
       html += '<div class="calendar-weekdays">';
       DAY_LABELS.forEach(d => { html += `<div class="calendar-weekday">${d}</div>`; });
       html += '</div>';
 
-      // Build grid
-      const firstDay = new Date(calViewYear, calViewMonth, 1).getDay(); // 0=Sun
+      const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
       const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
       const daysInPrev = new Date(calViewYear, calViewMonth, 0).getDate();
-
-      // Previous month year/month for keys
       const prevM = calViewMonth === 0 ? 11 : calViewMonth - 1;
       const prevY = calViewMonth === 0 ? calViewYear - 1 : calViewYear;
       const nextM = calViewMonth === 11 ? 0 : calViewMonth + 1;
@@ -369,74 +424,74 @@
 
       html += '<div class="calendar-grid">';
 
-      // Previous month trailing days
       for (let i = firstDay - 1; i >= 0; i--) {
         const d = daysInPrev - i;
         const key = dateKey(prevY, prevM, d);
-        const dayData = daysByDate[key];
-        const hasData = !!dayData;
-        let cls = 'calendar-day other-month';
-        if (hasData) cls += ' has-data';
-        if (key === selectedDate) cls += ' selected';
-        const dot = hasData ? dotHtml(dayData) : '';
-        html += `<div class="${cls}" data-date="${key}">${d}${dot}</div>`;
+        html += calDayHtml(key, d, today, true);
       }
 
-      // Current month days
       for (let d = 1; d <= daysInMonth; d++) {
         const key = dateKey(calViewYear, calViewMonth, d);
-        const dayData = daysByDate[key];
-        const hasData = !!dayData;
-        const isToday = key === today;
-        const isFuture = key > today;
-        let cls = 'calendar-day';
-        if (hasData) cls += ' has-data';
-        if (key === selectedDate) cls += ' selected';
-        if (isToday) cls += ' today';
-        if (isFuture && !hasData) cls += ' future';
-        const dot = hasData ? dotHtml(dayData) : '';
-        const todayLabel = isToday ? '<span class="calendar-today-label">Today</span>' : '';
-        html += `<div class="${cls}" data-date="${key}">${todayLabel}${d}${dot}</div>`;
+        html += calDayHtml(key, d, today, false);
       }
 
-      // Next month leading days (fill to 6 rows = 42 cells)
       const totalCells = firstDay + daysInMonth;
       const remaining = (totalCells % 7 === 0) ? 0 : 7 - (totalCells % 7);
       for (let d = 1; d <= remaining; d++) {
         const key = dateKey(nextY, nextM, d);
-        const dayData = daysByDate[key];
-        const hasData = !!dayData;
-        let cls = 'calendar-day other-month';
-        if (hasData) cls += ' has-data';
-        if (key === selectedDate) cls += ' selected';
-        const dot = hasData ? dotHtml(dayData) : '';
-        html += `<div class="${cls}" data-date="${key}">${d}${dot}</div>`;
+        html += calDayHtml(key, d, today, true);
       }
 
       html += '</div>';
+      html += '<button class="calendar-today-btn" id="cal-today-btn">Today</button>';
+
       container.innerHTML = html;
 
-      // Event listeners
-      document.getElementById('cal-prev').addEventListener('click', () => {
+      // Listeners
+      document.getElementById('cal-prev').addEventListener('click', (e) => {
+        e.stopPropagation();
         if (calViewMonth === 0) { calViewMonth = 11; calViewYear--; }
         else { calViewMonth--; }
-        renderCalendar();
+        renderCalendarGrid();
       });
-      document.getElementById('cal-next').addEventListener('click', () => {
+      document.getElementById('cal-next').addEventListener('click', (e) => {
+        e.stopPropagation();
         if (calViewMonth === 11) { calViewMonth = 0; calViewYear++; }
         else { calViewMonth++; }
-        renderCalendar();
+        renderCalendarGrid();
+      });
+      document.getElementById('cal-today-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tk = todayKey();
+        const t = new Date();
+        calViewYear = t.getFullYear();
+        calViewMonth = t.getMonth();
+        // Select today if it has data, otherwise select most recent date with data
+        const dates = Object.keys(daysByDate).sort().reverse();
+        selectDate(daysByDate[tk] ? tk : (dates[0] || tk));
       });
 
       container.querySelectorAll('.calendar-day.has-data').forEach(el => {
-        el.addEventListener('click', () => {
-          selectedDate = el.dataset.date;
-          resultsTypeFilter = 'all';
-          resultsResultFilter = 'all';
-          renderCalendar();
-          renderSelectedDay();
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectDate(el.dataset.date);
         });
       });
+    }
+
+    function calDayHtml(key, d, today, isOtherMonth) {
+      const dayData = daysByDate[key];
+      const hasData = !!dayData;
+      const isToday = key === today;
+      const isFuture = key > today;
+      let cls = 'calendar-day';
+      if (isOtherMonth) cls += ' other-month';
+      if (hasData) cls += ' has-data';
+      if (key === selectedDate) cls += ' selected';
+      if (isToday) cls += ' today';
+      if (isFuture && !hasData) cls += ' future';
+      const dot = hasData ? dotHtml(dayData) : '';
+      return `<div class="${cls}" data-date="${key}">${d}${dot}</div>`;
     }
 
     function dotHtml(dayData) {
@@ -594,9 +649,27 @@
         calViewYear = sd.getFullYear();
         calViewMonth = sd.getMonth();
 
+        updateTriggerLabel();
         renderResultsBanner(resultsData);
-        renderCalendar();
         renderSelectedDay();
+
+        // Trigger toggle
+        document.getElementById('calendar-trigger').addEventListener('click', () => {
+          // Sync calendar view to selected date's month when opening
+          if (!calOpen) {
+            const sd = new Date(selectedDate + 'T12:00:00');
+            calViewYear = sd.getFullYear();
+            calViewMonth = sd.getMonth();
+          }
+          toggleCalendar();
+        });
+
+        // Click outside to close
+        document.addEventListener('click', (e) => {
+          if (calOpen && !document.getElementById('calendar-wrap').contains(e.target)) {
+            toggleCalendar(false);
+          }
+        });
 
         // Filter pill listeners
         document.querySelectorAll('[data-rtype]').forEach(pill => {
