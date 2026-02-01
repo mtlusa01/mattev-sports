@@ -1,53 +1,8 @@
 {
   "date": "2026-01-31",
   "sport": "NBA",
-  "updated": "2026-01-31T22:16:48",
+  "updated": "2026-01-31T23:18:45",
   "games": [
-    {
-      "away_team": "CHI",
-      "home_team": "MIA",
-      "proj_score": "116.4-121.4",
-      "spread_pick": "MIA +5.5",
-      "spread_conf": 63.4,
-      "total_line": 233.5,
-      "total_pick": "OVER",
-      "total_conf": 55.6,
-      "ml_pick": "MIA",
-      "ml_conf": 56.4,
-      "commence_time": "2026-02-01T01:11:00Z",
-      "status": "live",
-      "locked_at": "2026-02-01T03:04:53Z"
-    },
-    {
-      "away_team": "MIN",
-      "home_team": "MEM",
-      "proj_score": "116.2-115.4",
-      "spread_pick": "MEM +15.5",
-      "spread_conf": 71.3,
-      "total_line": 243.5,
-      "total_pick": "UNDER",
-      "total_conf": 68.1,
-      "ml_pick": "MIN",
-      "ml_conf": 52.6,
-      "commence_time": "2026-02-01T01:11:00Z",
-      "status": "live",
-      "locked_at": "2026-02-01T03:04:53Z"
-    },
-    {
-      "away_team": "DAL",
-      "home_team": "HOU",
-      "proj_score": "110.5-116.8",
-      "spread_pick": "DAL +12.5",
-      "spread_conf": 59.3,
-      "total_line": 217.5,
-      "total_pick": "OVER",
-      "total_conf": 61.8,
-      "ml_pick": "HOU",
-      "ml_conf": 57.4,
-      "commence_time": "2026-02-01T01:40:00Z",
-      "status": "live",
-      "locked_at": "2026-02-01T03:04:53Z"
-    },
     {
       "away_team": "SAS",
       "home_team": "CHA",
@@ -406,7 +361,12 @@
       "ml_pick": "ATL",
       "ml_conf": 51.2,
       "commence_time": "2026-02-01T00:10:00Z",
-      "status": "final"
+      "status": "final",
+      "away_score": 124,
+      "home_score": 129,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "loss"
     },
     {
       "away_team": "NOP",
@@ -420,7 +380,62 @@
       "ml_pick": "PHI",
       "ml_conf": 66.7,
       "commence_time": "2026-02-01T00:40:00Z",
-      "status": "final"
+      "status": "final",
+      "away_score": 114,
+      "home_score": 124,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "win"
+    },
+    {
+      "away_team": "CHI",
+      "home_team": "MIA",
+      "proj_score": "116.4-121.4",
+      "spread_pick": "MIA +5.5",
+      "spread_conf": 63.4,
+      "total_line": 233.5,
+      "total_pick": "OVER",
+      "total_conf": 55.6,
+      "ml_pick": "MIA",
+      "ml_conf": 56.4,
+      "commence_time": "2026-02-01T01:11:00Z",
+      "status": "live",
+      "locked_at": "2026-02-01T03:04:53Z"
+    },
+    {
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "proj_score": "116.2-115.4",
+      "spread_pick": "MEM +15.5",
+      "spread_conf": 71.3,
+      "total_line": 243.5,
+      "total_pick": "UNDER",
+      "total_conf": 68.1,
+      "ml_pick": "MIN",
+      "ml_conf": 52.6,
+      "commence_time": "2026-02-01T01:11:00Z",
+      "status": "final",
+      "locked_at": "2026-02-01T03:04:53Z",
+      "away_score": 131,
+      "home_score": 114,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win"
+    },
+    {
+      "away_team": "DAL",
+      "home_team": "HOU",
+      "proj_score": "110.5-116.8",
+      "spread_pick": "DAL +12.5",
+      "spread_conf": 59.3,
+      "total_line": 217.5,
+      "total_pick": "OVER",
+      "total_conf": 61.8,
+      "ml_pick": "HOU",
+      "ml_conf": 57.4,
+      "commence_time": "2026-02-01T01:40:00Z",
+      "status": "live",
+      "locked_at": "2026-02-01T03:04:53Z"
     }
   ]
 }
