@@ -358,8 +358,11 @@
     }
     .stat-badge.hit-rate { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
     .stat-badge.streak { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
-    .stat-badge.defense { background: rgba(239, 68, 68, 0.15); color: #f87171; }
     .stat-badge.home-away { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+    .stat-badge.matchup { display: inline-flex; align-items: center; gap: 3px; }
+    .stat-badge.matchup.favorable { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .stat-badge.matchup.neutral { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); }
+    .stat-badge.matchup.unfavorable { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); }
 
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
@@ -1213,7 +1216,7 @@
                         ${p.l10_avg != null ? `<span class="stat-badge">L10: ${p.l10_avg}</span>` : ''}
                         ${p.l10_hit_rate != null ? `<span class="stat-badge hit-rate">${p.l10_hit_rate}% hit rate</span>` : ''}
                         ${p.streak >= 3 ? `<span class="stat-badge streak">${p.streak} game streak</span>` : ''}
-                        ${p.opp_def_rank != null ? `<span class="stat-badge defense">DEF #${p.opp_def_rank}</span>` : ''}
+                        ${p.opp_def_rank != null ? (() => { const f = p.matchup_favorability || (p.direction === 'OVER' ? (p.opp_def_rank >= 20 ? 'favorable' : p.opp_def_rank <= 10 ? 'unfavorable' : 'neutral') : (p.opp_def_rank <= 10 ? 'favorable' : p.opp_def_rank >= 20 ? 'unfavorable' : 'neutral')); const icon = f === 'favorable' ? '&#9650;' : f === 'unfavorable' ? '&#9660;' : '&#8211;'; return `<span class="stat-badge matchup ${f}" title="${f.charAt(0).toUpperCase()+f.slice(1)} matchup">${icon} DEF #${p.opp_def_rank}</span>`; })() : ''}
                         ${p.home_avg != null && p.away_avg != null ? `<span class="stat-badge home-away">H: ${p.home_avg} / A: ${p.away_avg}</span>` : ''}
                       </div>
                     </div>
@@ -1225,7 +1228,7 @@
                     ${p.l10_avg != null ? `<span class="stat-badge">L10: ${p.l10_avg}</span>` : ''}
                     ${p.l10_hit_rate != null ? `<span class="stat-badge hit-rate">${p.l10_hit_rate}% hit rate</span>` : ''}
                     ${p.streak >= 3 ? `<span class="stat-badge streak">${p.streak} game streak</span>` : ''}
-                    ${p.opp_def_rank != null ? `<span class="stat-badge defense">DEF #${p.opp_def_rank}</span>` : ''}
+                    ${p.opp_def_rank != null ? (() => { const f = p.matchup_favorability || (p.direction === 'OVER' ? (p.opp_def_rank >= 20 ? 'favorable' : p.opp_def_rank <= 10 ? 'unfavorable' : 'neutral') : (p.opp_def_rank <= 10 ? 'favorable' : p.opp_def_rank >= 20 ? 'unfavorable' : 'neutral')); const icon = f === 'favorable' ? '&#9650;' : f === 'unfavorable' ? '&#9660;' : '&#8211;'; return `<span class="stat-badge matchup ${f}" title="${f.charAt(0).toUpperCase()+f.slice(1)} matchup">${icon} DEF #${p.opp_def_rank}</span>`; })() : ''}
                     ${p.home_avg != null && p.away_avg != null ? `<span class="stat-badge home-away">H: ${p.home_avg} / A: ${p.away_avg}</span>` : ''}
                   </div>
                 </div>` : '')}
