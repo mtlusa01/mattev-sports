@@ -39,23 +39,16 @@
       pointer-events: none; z-index: 0;
     }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 24px; height: 64px; display: flex; align-items: center;
-      background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #000; }
-    .logo-text { font-size: 18px; font-weight: 700; color: var(--text-primary); }
-    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
-    .nav-links a { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 6px; transition: all 0.15s; }
-    .nav-links a:hover { color: var(--text-primary); background: var(--bg-elevated); }
-    .nav-links a.active { color: var(--text-primary); }
-    .nav-cta { padding: 8px 16px; background: var(--text-primary); color: var(--bg-primary); border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; text-decoration: none; }
-    .nav-cta:hover { opacity: 0.9; }
-    .mobile-menu { display: none; background: none; border: none; color: var(--text-primary); font-size: 24px; cursor: pointer; }
+    /* ── Navbar ── */
+    .navbar { background: #0f0f0f; border-bottom: 1px solid #2a2a2a; padding: 0.75rem 0; position: sticky; top: 0; z-index: 100; }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1.25rem; color: white; }
+    .logo-icon { background: #10b981; color: black; padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: bold; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-link { color: #a0a0a0; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: #ffffff; }
+    .admin-btn { color: #a0a0a0; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid #333; border-radius: 6px; font-size: 0.9rem; transition: all 0.2s; }
+    .admin-btn:hover { border-color: #10b981; color: #10b981; }
 
     main { max-width: 800px; margin: 0 auto; padding: 100px 24px 100px; position: relative; z-index: 1; }
     .page-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
@@ -92,21 +85,20 @@
 <body>
   <div class="page-gradient"></div>
 
-  <nav>
-    <div class="nav-inner">
+  <header class="navbar">
+    <div class="nav-container">
       <a href="index.html" class="logo">
-        <div class="logo-icon">M</div>
+        <span class="logo-icon">M</span>
         <span class="logo-text">MattEV</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Projections</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-      </ul>
-      <a href="admin.html" class="nav-cta">Admin</a>
-      <button class="mobile-menu">&#9776;</button>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Projections</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="about.html" class="nav-link active">About</a>
+      </nav>
+      <a href="admin.html" class="admin-btn">Admin</a>
     </div>
-  </nav>
+  </header>
 
   <main>
     <h1 class="page-title">About <span>MattEV</span></h1>
