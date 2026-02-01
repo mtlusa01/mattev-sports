@@ -324,21 +324,114 @@
     .edge-badge.good { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
     .edge-badge.lean { background: rgba(234, 179, 8, 0.1); color: var(--yellow); }
 
-    /* Prop categories */
-    .prop-category { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
-    .category-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; cursor: pointer; user-select: none; transition: background 0.15s; }
-    .category-header:hover { background: var(--bg-elevated); }
-    .category-chevron { font-size: 12px; color: var(--text-muted); transition: transform 0.2s; }
-    .category-title { font-size: 14px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
-    .category-count { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; background: var(--bg-tertiary); color: var(--text-muted); }
-    .category-body { max-height: 5000px; overflow: hidden; transition: max-height 0.3s ease; }
-    .prop-category.collapsed .category-body { max-height: 0; }
-    .prop-category.collapsed .category-chevron { transform: rotate(-90deg); }
+    /* ── Top Picks Section ── */
+    .top-picks-section {
+      margin-bottom: 24px; padding: 20px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px;
+    }
+    .top-picks-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+      font-size: 14px; font-weight: 700; color: var(--accent-light);
+    }
+    .top-picks-cards {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    }
+    .top-pick-card {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; text-align: center;
+      transition: border-color 0.15s;
+    }
+    .top-pick-card:hover { border-color: rgba(16, 185, 129, 0.3); }
+    .top-pick-rank {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      margin-bottom: 6px; letter-spacing: 0.05em;
+    }
+    .top-pick-player { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+    .top-pick-team { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+    .top-pick-prop {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; background: var(--bg-tertiary);
+      color: var(--text-secondary); margin-bottom: 6px;
+    }
+    .top-pick-direction { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .top-pick-direction.over { color: var(--accent-light); }
+    .top-pick-direction.under { color: var(--red-light); }
+    .top-pick-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
+    .top-pick-proj .edge { font-weight: 600; }
+    .top-pick-proj .edge.pos { color: var(--accent-light); }
+    .top-pick-proj .edge.neg { color: var(--red-light); }
+    .top-pick-ev {
+      font-size: 15px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px;
+    }
+    .top-pick-conf { font-size: 11px; color: var(--text-muted); }
 
-    /* TOP PICKS accent */
-    .prop-category[data-category="top"] .category-header { border-bottom: 2px solid var(--accent); }
-    .prop-category[data-category="top"] .category-title { color: var(--accent-light); }
-    .prop-category[data-category="top"] .category-count { background: var(--accent-glow); color: var(--accent-light); }
+    @media (max-width: 768px) {
+      .top-picks-cards { grid-template-columns: repeat(2, 1fr); }
+      .top-picks-cards .top-pick-card:nth-child(5) { display: none; }
+    }
+
+    /* ── Category Tabs ── */
+    .prop-category-tabs {
+      display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .category-tab {
+      padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text-muted); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .category-tab:hover { border-color: var(--border-light); color: var(--text-secondary); }
+    .category-tab.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .category-tab .tab-count {
+      display: inline-block; padding: 1px 6px; border-radius: 100px;
+      background: var(--bg-tertiary); font-size: 10px; font-weight: 600;
+      color: var(--text-muted); margin-left: 6px;
+    }
+    .category-tab.active .tab-count { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
+
+    /* ── Sort Options ── */
+    .sort-options {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .sort-options .sort-label {
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .sort-btn {
+      padding: 5px 12px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--text-muted); font-size: 11px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .sort-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
+    .sort-btn.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+
+    /* ── Props Table (redesigned) ── */
+    .props-table-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .props-table { width: 100%; border-collapse: collapse; }
+    .props-table thead th {
+      padding: 10px 14px; font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em; text-align: left;
+      border-bottom: 1px solid var(--border); background: var(--bg-tertiary);
+    }
+    .props-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: pointer; }
+    .props-table tbody tr:last-child { border-bottom: none; }
+    .props-table tbody tr:hover { background: var(--bg-elevated); }
+    .props-table td { padding: 10px 14px; font-size: 13px; }
+    .props-table .pt-player { font-weight: 600; color: var(--text-primary); }
+    .props-table .pt-matchup { font-size: 11px; color: var(--text-muted); }
+    .props-table .pt-prop-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; background: var(--bg-tertiary); color: var(--text-secondary);
+    }
+    .props-table .pt-edge.positive { color: var(--accent-light); font-weight: 600; }
+    .props-table .pt-edge.negative { color: var(--red-light); }
+    .props-table .pt-ev.positive { color: var(--accent-light); font-weight: 700; }
+    .props-table .pt-ev.negative { color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .props-table .col-hide-mobile { display: none; }
+      .props-table td, .props-table thead th { padding: 8px 8px; font-size: 11px; }
+    }
 
     /* ── Game Cards ── */
     .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
@@ -683,13 +776,15 @@
     let betsSortDir = 'desc';  // 'asc' or 'desc'
 
     const PROP_CATEGORIES = [
-      { key: 'top', label: 'TOP PICKS' },
+      { key: 'all', label: 'ALL' },
       { key: 'PTS', label: 'POINTS' },
       { key: 'REB', label: 'REBOUNDS' },
       { key: 'AST', label: 'ASSISTS' },
-      { key: 'PRA', label: 'PTS + REB + AST' }
+      { key: 'PRA', label: 'PRA' }
     ];
-    const TOP_PICKS_COUNT = 10;
+    const TOP_PICKS_COUNT = 5;
+    let currentPropCategory = 'all';
+    let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
 
     // NBA team colors
     const TEAM_COLORS = {
@@ -903,139 +998,180 @@
       el.classList.add('visible');
     }
 
-    // ── Render Prop Row ──
-    function renderRow(p, idx) {
-      const isOver = p.direction === 'OVER';
-      const dirClass = isOver ? 'over' : 'under';
-      const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
-      const evColor = p.ev > 5 ? 'var(--accent-light)' : p.ev >= 2 ? 'var(--accent)' : p.ev >= 0 ? 'var(--yellow)' : 'var(--text-muted)';
-      const confStr = p.confidence != null ? p.confidence.toFixed(1) + '%' : '--';
-      const posEvClass = p.ev > 0 ? ' positive-ev' : '';
-      const edgeBadge = p.edge === 'STRONG' ? '<span class="edge-badge strong">STRONG</span>'
-        : p.edge === 'GOOD' ? '<span class="edge-badge good">GOOD</span>'
-        : p.edge === 'LEAN' ? '<span class="edge-badge lean">LEAN</span>' : '';
+    // ── Top 5 Picks ──
+    function renderTopPicks(filtered) {
+      const top = filtered.filter(p => p.ev && p.ev > 0)
+        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
+        .slice(0, TOP_PICKS_COUNT);
+      if (top.length === 0) return '';
 
-      const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
-      const opp = getOpponent(p.team);
-      const g = getGameForTeam(p.team);
-      const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
-
-      const rowId = 'row-' + idx;
-      const isExpanded = expandedRowId === rowId;
-
-      // Detail panel data
-      const diffStr = p.diff != null ? (p.diff >= 0 ? '+' : '') + p.diff.toFixed(1) : '--';
-      const diffColor = p.diff > 0 ? 'var(--accent-light)' : p.diff < 0 ? 'var(--red-light)' : 'var(--text-secondary)';
-      const confPct = Math.min(Math.max(p.confidence || 0, 40), 60);
-      const confBarW = ((confPct - 40) / 20 * 100);
-      const confBarColor = p.confidence >= 51 ? 'var(--accent)' : p.confidence >= 50 ? 'var(--yellow)' : 'var(--text-muted)';
-
-      // Odds display helpers — defensive: treat undefined, null, and NaN as missing
-      const isVal = (v) => v != null && !Number.isNaN(v);
-      const fmtOdds = (v) => !isVal(v) ? '--' : (v > 0 ? '+' + v : '' + v);
-      const mktOddsStr = fmtOdds(p.market_odds);
-      const fairOddsStr = fmtOdds(p.fair_odds);
-      const pe = p.prob_edge;
-      const probEdgeStr = isVal(pe) ? (pe >= 0 ? '+' : '') + pe.toFixed(1) + '%' : '--';
-      const edgeColor = !isVal(pe) ? 'var(--text-muted)' : pe > 3 ? 'var(--accent-light)' : pe > 0 ? 'var(--accent)' : 'var(--red-light)';
+      const cards = top.map((p, i) => {
+        const dirClass = p.direction === 'OVER' ? 'over' : 'under';
+        const diff = p.diff != null ? p.diff : (p.projection - p.line);
+        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
+        const diffCls = diff >= 0 ? 'pos' : 'neg';
+        const g = getGameForTeam(p.team);
+        const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
+        return `
+          <div class="top-pick-card">
+            <div class="top-pick-rank">#${i + 1}</div>
+            <div class="top-pick-player">${p.player}</div>
+            <div class="top-pick-team"><span class="team-dot" style="background:${TEAM_COLORS[p.team] || 'var(--text-muted)'}"></span>${p.team} ${matchupStr}</div>
+            <div class="top-pick-prop">${p.prop}</div>
+            <div class="top-pick-direction ${dirClass}">${p.direction} ${p.line}</div>
+            <div class="top-pick-proj">Proj: ${p.projection} <span class="edge ${diffCls}">(${diffStr})</span></div>
+            <div class="top-pick-ev">+${p.ev.toFixed(1)}% EV</div>
+            <div class="top-pick-conf">${p.confidence.toFixed(1)}% conf</div>
+          </div>`;
+      }).join('');
 
       return `
-        <div class="pick-row${posEvClass}" data-row-id="${rowId}" onclick="toggleRow('${rowId}')">
-          <div class="player-cell">
-            <span class="player-name">${p.player} ${edgeBadge}</span>
-            ${matchupStr ? `<span class="player-matchup">${matchupStr}</span>` : ''}
-          </div>
-          <div class="team-label"><span class="team-dot" style="background:${teamColor}"></span>${p.team}</div>
-          <div style="font-weight:500;font-size:13px">${p.prop}</div>
-          <div><span class="pick-value ${dirClass}" style="font-size:13px">${p.direction}</span></div>
-          <div style="font-size:13px;color:var(--text-secondary)">${p.line}</div>
-          <div style="font-weight:600;font-size:13px">${p.projection}</div>
-          <div style="font-size:13px;color:var(--text-secondary)">${confStr}</div>
-          <div style="font-weight:600;font-size:13px;color:${evColor}">${evStr}</div>
-        </div>
-        <div class="pick-row-detail${isExpanded ? ' open' : ''}" id="detail-${rowId}">
-          <div class="detail-inner">
-            <div class="detail-item">
-              <span class="detail-label">Projection vs Line</span>
-              <span class="detail-value">${p.projection} vs ${p.line} <span style="color:${diffColor}">(${diffStr})</span></span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Confidence</span>
-              <div class="detail-bar-wrap">
-                <div class="detail-bar"><div class="detail-bar-fill" style="width:${confBarW}%;background:${confBarColor}"></div></div>
-                <span class="detail-value">${confStr}</span>
+        <div class="top-picks-section">
+          <div class="top-picks-header">TOP ${top.length} AI PICKS</div>
+          <div class="top-picks-cards">${cards}</div>
+        </div>`;
+    }
+
+    // ── Category Tabs ──
+    function renderPropCategoryTabs(filtered) {
+      const counts = { all: filtered.length };
+      for (const cat of PROP_CATEGORIES) {
+        if (cat.key !== 'all') counts[cat.key] = filtered.filter(p => p.prop === cat.key).length;
+      }
+      return `
+        <div class="prop-category-tabs">
+          ${PROP_CATEGORIES.map(cat => {
+            const active = currentPropCategory === cat.key ? ' active' : '';
+            return `<button class="category-tab${active}" data-prop-cat="${cat.key}">${cat.label}<span class="tab-count">${counts[cat.key] || 0}</span></button>`;
+          }).join('')}
+        </div>`;
+    }
+
+    // ── Sort Options ──
+    function renderSortOptions() {
+      const sorts = [
+        { key: 'ev', label: 'EV%' },
+        { key: 'confidence', label: 'Confidence' },
+        { key: 'edge', label: 'Edge' },
+      ];
+      return `
+        <div class="sort-options">
+          <span class="sort-label">Sort by</span>
+          ${sorts.map(s => {
+            const active = currentPropSort === s.key ? ' active' : '';
+            return `<button class="sort-btn${active}" data-prop-sort="${s.key}">${s.label}</button>`;
+          }).join('')}
+        </div>`;
+    }
+
+    // ── Sort props ──
+    function sortPropsBy(props, sortBy) {
+      return [...props].sort((a, b) => {
+        if (sortBy === 'ev') return (b.ev || 0) - (a.ev || 0);
+        if (sortBy === 'confidence') return (b.confidence || 0) - (a.confidence || 0);
+        if (sortBy === 'edge') return Math.abs(b.diff || 0) - Math.abs(a.diff || 0);
+        return 0;
+      });
+    }
+
+    // ── Filter by category ──
+    function filterByPropCategory(props, cat) {
+      if (cat === 'all') return props;
+      return props.filter(p => p.prop === cat);
+    }
+
+    // ── Props Table ──
+    function renderPropsTable(props) {
+      if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div></div>';
+
+      const rows = props.map((p, idx) => {
+        const dirClass = p.direction === 'OVER' ? 'over' : 'under';
+        const diff = p.diff != null ? p.diff : (p.projection - p.line);
+        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
+        const diffCls = diff >= 0 ? 'positive' : 'negative';
+        const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
+        const evCls = p.ev > 0 ? 'positive' : 'negative';
+        const confStr = p.confidence != null ? p.confidence.toFixed(1) + '%' : '--';
+        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
+        const g = getGameForTeam(p.team);
+        const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
+        const edgeBadge = p.edge === 'STRONG' ? '<span class="edge-badge strong">STRONG</span>'
+          : p.edge === 'GOOD' ? '<span class="edge-badge good">GOOD</span>'
+          : p.edge === 'LEAN' ? '<span class="edge-badge lean">LEAN</span>' : '';
+
+        const rowId = 'row-' + idx;
+        const isExpanded = expandedRowId === rowId;
+
+        // Detail data
+        const isVal = (v) => v != null && !Number.isNaN(v);
+        const fmtOdds = (v) => !isVal(v) ? '--' : (v > 0 ? '+' + v : '' + v);
+        const mktOddsStr = fmtOdds(p.market_odds);
+        const fairOddsStr = fmtOdds(p.fair_odds);
+        const pe = p.prob_edge;
+        const probEdgeStr = isVal(pe) ? (pe >= 0 ? '+' : '') + pe.toFixed(1) + '%' : '--';
+        const edgeColor = !isVal(pe) ? 'var(--text-muted)' : pe > 3 ? 'var(--accent-light)' : pe > 0 ? 'var(--accent)' : 'var(--red-light)';
+
+        return `
+          <tr data-row-id="${rowId}" onclick="toggleRow('${rowId}')">
+            <td><span class="pt-player">${p.player}</span> ${edgeBadge}<br><span class="pt-matchup">${matchupStr}</span></td>
+            <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
+            <td><span class="pt-prop-badge">${p.prop}</span></td>
+            <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
+            <td>${p.line}</td>
+            <td style="font-weight:600">${p.projection}</td>
+            <td class="col-hide-mobile"><span class="pt-edge ${diffCls}">${diffStr}</span></td>
+            <td>${confStr}</td>
+            <td><span class="pt-ev ${evCls}">${evStr}</span></td>
+          </tr>
+          <tr class="pick-row-detail${isExpanded ? ' open' : ''}" id="detail-${rowId}" style="${isExpanded ? '' : 'display:none'}">
+            <td colspan="9" style="padding:0 14px 14px">
+              <div class="detail-inner">
+                <div class="detail-item"><span class="detail-label">Proj vs Line</span><span class="detail-value">${p.projection} vs ${p.line} <span style="color:${diff >= 0 ? 'var(--accent-light)' : 'var(--red-light)'}">(${diffStr})</span></span></div>
+                <div class="detail-item"><span class="detail-label">Market Odds</span><span class="detail-value">${mktOddsStr}</span></div>
+                <div class="detail-item"><span class="detail-label">Fair Odds</span><span class="detail-value">${fairOddsStr}</span></div>
+                <div class="detail-item"><span class="detail-label">Prob Edge</span><span class="detail-value" style="color:${edgeColor}">${probEdgeStr}</span></div>
+                <div class="detail-item"><span class="detail-label">EV%</span><span class="detail-value"><span class="pt-ev ${evCls}">${evStr}</span></span></div>
+                ${p.edge ? `<div class="detail-item"><span class="detail-label">Rating</span><span class="detail-value">${p.edge}</span></div>` : ''}
               </div>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Expected Value</span>
-              <span class="detail-value" style="color:${evColor}">${evStr}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Market Odds</span>
-              <span class="detail-value">${mktOddsStr}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Fair Odds (Model)</span>
-              <span class="detail-value">${fairOddsStr}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Prob Edge</span>
-              <span class="detail-value" style="color:${edgeColor}">${probEdgeStr}</span>
-            </div>
-            ${matchupStr ? `<div class="detail-item"><span class="detail-label">Matchup</span><span class="detail-value">${p.team} ${matchupStr}</span></div>` : ''}
-            ${p.edge ? `<div class="detail-item"><span class="detail-label">Edge</span><span class="detail-value">${p.edge}</span></div>` : ''}
-          </div>
+            </td>
+          </tr>`;
+      }).join('');
+
+      return `
+        <div class="props-table-wrap">
+          <table class="props-table">
+            <thead><tr>
+              <th>Player</th>
+              <th>Team</th>
+              <th>Prop</th>
+              <th>Pick</th>
+              <th>Line</th>
+              <th>Proj</th>
+              <th class="col-hide-mobile">Edge</th>
+              <th>Conf</th>
+              <th>EV%</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
         </div>`;
     }
 
     function toggleRow(rowId) {
+      const detail = document.getElementById('detail-' + rowId);
+      if (!detail) return;
       if (expandedRowId === rowId) {
-        document.getElementById('detail-' + rowId)?.classList.remove('open');
+        detail.style.display = 'none';
+        detail.classList.remove('open');
         expandedRowId = null;
       } else {
-        if (expandedRowId) document.getElementById('detail-' + expandedRowId)?.classList.remove('open');
-        document.getElementById('detail-' + rowId)?.classList.add('open');
+        if (expandedRowId) {
+          const prev = document.getElementById('detail-' + expandedRowId);
+          if (prev) { prev.style.display = 'none'; prev.classList.remove('open'); }
+        }
+        detail.style.display = '';
+        detail.classList.add('open');
         expandedRowId = rowId;
       }
-    }
-
-    // ── Render Category ──
-    let globalRowIdx = 0;
-
-    function renderCategory(cat, items, startOpen) {
-      if (items.length === 0) return '';
-      const sorted = [...items].sort((a, b) => (b.ev || 0) - (a.ev || 0));
-      const dataCat = cat.key === 'top' ? 'data-category="top"' : '';
-      const collapsedClass = startOpen ? '' : ' collapsed';
-      const rows = sorted.map(p => { const html = renderRow(p, globalRowIdx); globalRowIdx++; return html; }).join('');
-
-      return `
-        <div class="prop-category${collapsedClass}" ${dataCat}>
-          <div class="category-header" onclick="toggleCategory(this)">
-            <span class="category-chevron">&#9660;</span>
-            <span class="category-title">${cat.label}</span>
-            <span class="category-count">${items.length}</span>
-          </div>
-          <div class="category-body">
-            <div class="picks-table" style="margin-bottom:0;border:none;border-radius:0;">
-              <div class="table-header">
-                <div>Player</div>
-                <div>Team</div>
-                <div>Prop</div>
-                <div>Direction</div>
-                <div>Line</div>
-                <div>Proj</div>
-                <div>Conf</div>
-                <div>EV%</div>
-              </div>
-              ${rows}
-            </div>
-          </div>
-        </div>`;
-    }
-
-    function toggleCategory(el) {
-      el.closest('.prop-category').classList.toggle('collapsed');
     }
 
     // ── Graded Props for Finished Games ──
@@ -1144,32 +1280,42 @@
         return;
       }
 
-      globalRowIdx = 0;
-      const isFiltered = currentGameFilter || currentSearch;
+      // Top 5 AI Picks
+      let html = renderTopPicks(filtered);
 
-      // Build TOP PICKS: best N by EV%
-      const allSorted = [...filtered].sort((a, b) => (b.ev || 0) - (a.ev || 0));
-      const topPicks = allSorted.slice(0, TOP_PICKS_COUNT);
+      // Category tabs
+      html += renderPropCategoryTabs(filtered);
 
-      // Build per-prop categories
-      const propGroups = {};
-      for (const cat of PROP_CATEGORIES) {
-        if (cat.key !== 'top') propGroups[cat.key] = [];
-      }
-      for (const p of filtered) {
-        if (propGroups[p.prop]) propGroups[p.prop].push(p);
-      }
+      // Sort options
+      html += renderSortOptions();
 
-      let html = '';
-      // TOP PICKS always open
-      html += renderCategory(PROP_CATEGORIES[0], topPicks, true);
-      // Other categories: open when filtering, collapsed otherwise
-      for (let i = 1; i < PROP_CATEGORIES.length; i++) {
-        const cat = PROP_CATEGORIES[i];
-        html += renderCategory(cat, propGroups[cat.key] || [], !!isFiltered);
-      }
+      // Filter by category, then sort
+      const catFiltered = filterByPropCategory(filtered, currentPropCategory);
+      const sorted = sortPropsBy(catFiltered, currentPropSort);
+
+      // Props table
+      expandedRowId = null;
+      html += renderPropsTable(sorted);
 
       propsView.innerHTML = html;
+
+      // Attach category tab handlers
+      propsView.querySelectorAll('[data-prop-cat]').forEach(tab => {
+        tab.addEventListener('click', () => {
+          currentPropCategory = tab.dataset.propCat;
+          expandedRowId = null;
+          render();
+        });
+      });
+
+      // Attach sort handlers
+      propsView.querySelectorAll('[data-prop-sort]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentPropSort = btn.dataset.propSort;
+          expandedRowId = null;
+          render();
+        });
+      });
     }
 
     // ── Sub-tabs ──
