@@ -380,6 +380,20 @@
     .injury-status.day-to-day { background: rgba(234, 179, 8, 0.12); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.2); }
     .injury-player { color: var(--text-secondary); }
     .injury-note { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; font-style: italic; }
+    .injury-stats-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .injury-stat-box { text-align: center; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 6px 12px; min-width: 60px; }
+    .injury-stat-box.without { border: 1px solid rgba(16, 185, 129, 0.3); }
+    .injury-stat-box.with { border: 1px solid rgba(255,255,255,0.1); }
+    .injury-stat-box.boost-box { border: 1px solid rgba(99, 102, 241, 0.3); }
+    .injury-stat-label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.5px; }
+    .injury-stat-value { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+    .injury-stat-value.pos { color: #10b981; }
+    .injury-stat-value.neg { color: #ef4444; }
+    .injury-stat-sub { font-size: 0.65rem; color: var(--text-secondary); }
+    .injury-stat-arrow { color: var(--text-secondary); font-size: 1.1rem; }
+    .injury-insight-text { font-size: 0.78rem; color: var(--text-secondary); margin-top: 6px; line-height: 1.4; }
+    .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
+    .insight-type-badge.historical { background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
 
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
@@ -1378,7 +1392,29 @@
                           <span class="injury-player">${inj.player}</span>
                         </div>`).join('')}
                     </div>
-                    ${p.boosted_by ? `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>` : ''}
+                    ${p.injury_insight ? `
+                    <div class="injury-insight-text">
+                      <span class="insight-type-badge historical">Historical</span>
+                      ${p.injury_insight}
+                    </div>
+                    ${p.injury_details ? `
+                    <div class="injury-stats-row">
+                      <div class="injury-stat-box without">
+                        <div class="injury-stat-label">Without</div>
+                        <div class="injury-stat-value">${p.injury_details.avg_without}</div>
+                        <div class="injury-stat-sub">${p.injury_details.games_without} games</div>
+                      </div>
+                      <div class="injury-stat-arrow">&#x2192;</div>
+                      <div class="injury-stat-box with">
+                        <div class="injury-stat-label">With</div>
+                        <div class="injury-stat-value">${p.injury_details.avg_with}</div>
+                      </div>
+                      <div class="injury-stat-box boost-box">
+                        <div class="injury-stat-label">Boost</div>
+                        <div class="injury-stat-value ${p.injury_boost > 0 ? 'pos' : 'neg'}">${p.injury_boost > 0 ? '+' : ''}${p.injury_boost.toFixed(1)}</div>
+                      </div>
+                    </div>` : ''}
+                    ` : p.boosted_by ? `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>` : ''}
                   </div>
                 </div>` : ''}
                 ${p.insight ? `
