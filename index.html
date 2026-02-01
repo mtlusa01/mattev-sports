@@ -292,27 +292,58 @@
     .player-matchup { font-size: 11px; color: var(--text-muted); }
 
     /* Expandable detail row */
-    .pick-row-detail {
-      display: none;
-      padding: 0 20px 16px;
-      border-bottom: 1px solid var(--border);
-      animation: slideDown 0.15s ease;
-    }
-    .pick-row-detail.open { display: block; }
+    .pick-row-detail { animation: slideDown 0.15s ease; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-    .detail-inner {
-      display: flex; gap: 24px; flex-wrap: wrap;
-      padding: 12px 16px;
-      background: var(--bg-tertiary);
-      border-radius: 8px;
-      font-size: 12px;
+
+    .prop-details-expanded { background: var(--bg-primary); padding: 16px 20px; }
+    .details-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 800px;
     }
-    .detail-item { display: flex; flex-direction: column; gap: 2px; }
-    .detail-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .detail-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .detail-bar-wrap { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
-    .detail-bar { height: 6px; border-radius: 3px; background: var(--bg-primary); width: 100px; overflow: hidden; }
-    .detail-bar-fill { height: 100%; border-radius: 3px; }
+    .detail-card {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; text-align: center;
+    }
+    .detail-card .dc-label {
+      font-size: 10px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+    }
+    /* Projection card */
+    .proj-compare {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 20px; margin-bottom: 6px;
+    }
+    .proj-compare .proj-val { color: var(--accent-light); font-weight: 700; }
+    .proj-compare .proj-vs { color: var(--text-muted); font-size: 13px; }
+    .proj-compare .proj-line { color: var(--text-secondary); font-weight: 600; }
+    .dc-edge { font-size: 13px; font-weight: 600; }
+    .dc-edge.pos { color: var(--accent-light); }
+    .dc-edge.neg { color: var(--red-light); }
+    /* Odds card */
+    .odds-compare {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin-bottom: 6px;
+    }
+    .odds-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .odds-item .oi-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+    .odds-item .oi-value { font-size: 17px; font-weight: 700; color: var(--text-secondary); }
+    .odds-item .oi-value.fair { color: var(--accent-light); }
+    .odds-arrow { color: var(--accent); font-size: 18px; }
+    /* EV card */
+    .ev-display { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .ev-display.pos { color: var(--accent-light); }
+    .ev-display.neg { color: var(--red-light); }
+    .ev-display.neutral { color: var(--text-muted); }
+    .rating-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 4px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    }
+    .rating-badge.strong { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
+    .rating-badge.good { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
+    .rating-badge.lean { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
+
+    @media (max-width: 768px) {
+      .details-grid { grid-template-columns: 1fr; }
+    }
 
     .pick-value { font-weight: 600; font-size: 14px; }
     .pick-value.over { color: var(--accent-light); }
@@ -1124,14 +1155,33 @@
             <td><span class="pt-ev ${evCls}">${evStr}</span></td>
           </tr>
           <tr class="pick-row-detail${isExpanded ? ' open' : ''}" id="detail-${rowId}" style="${isExpanded ? '' : 'display:none'}">
-            <td colspan="9" style="padding:0 14px 14px">
-              <div class="detail-inner">
-                <div class="detail-item"><span class="detail-label">Proj vs Line</span><span class="detail-value">${p.projection} vs ${p.line} <span style="color:${diff >= 0 ? 'var(--accent-light)' : 'var(--red-light)'}">(${diffStr})</span></span></div>
-                <div class="detail-item"><span class="detail-label">Market Odds</span><span class="detail-value">${mktOddsStr}</span></div>
-                <div class="detail-item"><span class="detail-label">Fair Odds</span><span class="detail-value">${fairOddsStr}</span></div>
-                <div class="detail-item"><span class="detail-label">Prob Edge</span><span class="detail-value" style="color:${edgeColor}">${probEdgeStr}</span></div>
-                <div class="detail-item"><span class="detail-label">EV%</span><span class="detail-value"><span class="pt-ev ${evCls}">${evStr}</span></span></div>
-                ${p.edge ? `<div class="detail-item"><span class="detail-label">Rating</span><span class="detail-value">${p.edge}</span></div>` : ''}
+            <td colspan="9" style="padding:0">
+              <div class="prop-details-expanded">
+                <div class="details-grid">
+                  <div class="detail-card">
+                    <div class="dc-label">Projection vs Line</div>
+                    <div class="proj-compare">
+                      <span class="proj-val">${p.projection}</span>
+                      <span class="proj-vs">vs</span>
+                      <span class="proj-line">${p.line}</span>
+                    </div>
+                    <div class="dc-edge ${diff >= 0 ? 'pos' : 'neg'}">${diffStr} edge</div>
+                  </div>
+                  <div class="detail-card">
+                    <div class="dc-label">Odds Value</div>
+                    <div class="odds-compare">
+                      <div class="odds-item"><span class="oi-label">Market</span><span class="oi-value">${mktOddsStr}</span></div>
+                      <span class="odds-arrow">&rarr;</span>
+                      <div class="odds-item"><span class="oi-label">Fair</span><span class="oi-value fair">${fairOddsStr}</span></div>
+                    </div>
+                    <div class="dc-edge ${isVal(pe) && pe >= 0 ? 'pos' : 'neg'}">${probEdgeStr} prob edge</div>
+                  </div>
+                  <div class="detail-card">
+                    <div class="dc-label">Expected Value</div>
+                    <div class="ev-display ${p.ev > 0 ? 'pos' : p.ev < 0 ? 'neg' : 'neutral'}">${evStr}</div>
+                    ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
+                  </div>
+                </div>
               </div>
             </td>
           </tr>`;
