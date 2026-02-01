@@ -459,6 +459,49 @@
     .sort-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
     .sort-btn.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
 
+    /* ── Advanced Filters ── */
+    .advanced-filters {
+      display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .filter-dropdown { position: relative; }
+    .filter-btn {
+      display: flex; align-items: center; gap: 6px; padding: 5px 12px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+      font-size: 11px; font-weight: 600; font-family: inherit;
+    }
+    .filter-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
+    .filter-btn.active { border-color: rgba(16, 185, 129, 0.3); background: var(--accent-glow); color: var(--accent-light); }
+    .filter-icon { font-size: 12px; }
+    .filter-value { color: var(--accent-light); }
+    .dropdown-arrow { font-size: 8px; margin-left: 2px; transition: transform 0.2s; }
+    .filter-dropdown.open .dropdown-arrow { transform: rotate(180deg); }
+    .filter-menu {
+      position: absolute; top: calc(100% + 4px); left: 0; min-width: 170px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px;
+      padding: 4px 0; z-index: 100; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .filter-dropdown.open .filter-menu { display: block; }
+    .filter-option {
+      padding: 7px 12px; cursor: pointer; transition: background 0.15s;
+      font-size: 12px; color: var(--text-secondary);
+    }
+    .filter-option:hover { background: var(--bg-tertiary); }
+    .filter-option.active { background: var(--accent-glow); color: var(--accent-light); }
+    .filter-option.opt-favorable { color: #10b981; }
+    .filter-option.opt-neutral { color: #f59e0b; }
+    .filter-option.opt-unfavorable { color: #ef4444; }
+    .clear-filters-btn {
+      padding: 5px 12px; background: transparent; border: 1px solid rgba(239,68,68,0.4);
+      border-radius: 6px; color: #ef4444; cursor: pointer; font-size: 11px;
+      font-weight: 600; font-family: inherit; transition: all 0.15s;
+    }
+    .clear-filters-btn:hover { background: rgba(239,68,68,0.1); }
+    .results-info {
+      font-size: 12px; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .results-info strong { color: var(--accent-light); }
+
     /* ── Props Table (redesigned) ── */
     .props-table-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .props-table { width: 100%; border-collapse: collapse; }
@@ -839,6 +882,7 @@
     const TOP_PICKS_COUNT = 5;
     let currentPropCategory = 'all';
     let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
+    const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all' };
 
     // NBA team colors
     const TEAM_COLORS = {
@@ -934,6 +978,44 @@
       // Direction filter
       if (currentDirFilter !== 'all') {
         filtered = filtered.filter(p => p.direction === currentDirFilter.toUpperCase());
+      }
+
+      // Advanced: EV% filter
+      if (advancedFilters.ev !== 'all') {
+        const minEV = parseFloat(advancedFilters.ev);
+        filtered = filtered.filter(p => (p.ev || 0) >= minEV);
+      }
+
+      // Advanced: Hit Rate filter
+      if (advancedFilters.hitrate !== 'all') {
+        const minHR = parseFloat(advancedFilters.hitrate);
+        filtered = filtered.filter(p => {
+          if (p.direction === 'OVER') return (p.l10_hit_rate || 0) >= minHR;
+          return (100 - (p.l10_hit_rate || 100)) >= minHR;
+        });
+      }
+
+      // Advanced: Matchup filter
+      if (advancedFilters.matchup !== 'all') {
+        filtered = filtered.filter(p => {
+          const f = p.matchup_favorability || (p.opp_def_rank == null ? 'neutral' :
+            p.direction === 'OVER'
+              ? (p.opp_def_rank >= 20 ? 'favorable' : p.opp_def_rank <= 10 ? 'unfavorable' : 'neutral')
+              : (p.opp_def_rank <= 10 ? 'favorable' : p.opp_def_rank >= 20 ? 'unfavorable' : 'neutral'));
+          return f === advancedFilters.matchup;
+        });
+      }
+
+      // Advanced: Odds filter
+      if (advancedFilters.odds !== 'all') {
+        filtered = filtered.filter(p => {
+          const o = p.market_odds;
+          if (o == null) return false;
+          if (advancedFilters.odds === 'plus') return o >= 100;
+          if (advancedFilters.odds === 'even') return o >= -150 && o < 100;
+          if (advancedFilters.odds === 'minus') return o < -100 && o >= -200;
+          return true;
+        });
       }
 
       return filtered;
@@ -1116,6 +1198,50 @@
             return `<button class="sort-btn${active}" data-prop-sort="${s.key}">${s.label}</button>`;
           }).join('')}
         </div>`;
+    }
+
+    // ── Advanced Filters ──
+    function renderAdvancedFilters(totalCount, filteredCount) {
+      const FILTERS = [
+        { key: 'ev', icon: '&#128200;', label: 'EV%', options: [
+          { value: 'all', text: 'All' }, { value: '5', text: '5%+ EV' },
+          { value: '10', text: '10%+ EV' }, { value: '15', text: '15%+ EV' }, { value: '20', text: '20%+ EV' }
+        ]},
+        { key: 'hitrate', icon: '&#127919;', label: 'Hit Rate', options: [
+          { value: 'all', text: 'All' }, { value: '50', text: '50%+' },
+          { value: '60', text: '60%+' }, { value: '70', text: '70%+' }, { value: '80', text: '80%+' }
+        ]},
+        { key: 'matchup', icon: '&#127936;', label: 'Matchup', options: [
+          { value: 'all', text: 'All' },
+          { value: 'favorable', text: '\u2713 Favorable', cls: 'opt-favorable' },
+          { value: 'neutral', text: '\u2013 Neutral', cls: 'opt-neutral' },
+          { value: 'unfavorable', text: '\u2717 Unfavorable', cls: 'opt-unfavorable' }
+        ]},
+        { key: 'odds', icon: '&#128176;', label: 'Odds', options: [
+          { value: 'all', text: 'All' }, { value: 'plus', text: 'Plus Money (+100+)' },
+          { value: 'even', text: 'Even to -150' }, { value: 'minus', text: '-101 to -200' }
+        ]}
+      ];
+      const hasActive = Object.values(advancedFilters).some(v => v !== 'all');
+      const dropdowns = FILTERS.map(f => {
+        const cur = advancedFilters[f.key];
+        const curOpt = f.options.find(o => o.value === cur) || f.options[0];
+        const isActive = cur !== 'all';
+        return `<div class="filter-dropdown" data-filter-key="${f.key}">
+          <button class="filter-btn${isActive ? ' active' : ''}">
+            <span class="filter-icon">${f.icon}</span>
+            <span>${f.label}</span>
+            <span class="filter-value">${curOpt.text}</span>
+            <span class="dropdown-arrow">&#9660;</span>
+          </button>
+          <div class="filter-menu">
+            ${f.options.map(o => `<div class="filter-option${cur === o.value ? ' active' : ''}${o.cls ? ' ' + o.cls : ''}" data-value="${o.value}">${o.text}</div>`).join('')}
+          </div>
+        </div>`;
+      }).join('');
+      const clearBtn = hasActive ? `<button class="clear-filters-btn" data-clear-filters>&#10005; Clear</button>` : '';
+      const info = hasActive ? `<div class="results-info">Showing <strong>${filteredCount}</strong> of ${totalCount} props</div>` : '';
+      return `<div class="advanced-filters">${dropdowns}${clearBtn}</div>${info}`;
     }
 
     // ── Sort props ──
@@ -1386,12 +1512,15 @@
       // Category tabs
       html += renderPropCategoryTabs(filtered);
 
-      // Sort options
+      // Sort options + advanced filters
       html += renderSortOptions();
 
       // Filter by category, then sort
       const catFiltered = filterByPropCategory(filtered, currentPropCategory);
       const sorted = sortPropsBy(catFiltered, currentPropSort);
+
+      // Advanced filters (show counts based on category-filtered set)
+      html += renderAdvancedFilters(projections.length, filtered.length);
 
       // Props table
       expandedRowId = null;
@@ -1416,6 +1545,38 @@
           render();
         });
       });
+
+      // Attach advanced filter handlers
+      propsView.querySelectorAll('.filter-dropdown').forEach(dd => {
+        const key = dd.dataset.filterKey;
+        dd.querySelector('.filter-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          const wasOpen = dd.classList.contains('open');
+          propsView.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
+          if (!wasOpen) dd.classList.add('open');
+        });
+        dd.querySelectorAll('.filter-option').forEach(opt => {
+          opt.addEventListener('click', (e) => {
+            e.stopPropagation();
+            advancedFilters[key] = opt.dataset.value;
+            expandedRowId = null;
+            render();
+          });
+        });
+      });
+      // Close dropdowns on outside click
+      document.addEventListener('click', () => {
+        propsView.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
+      }, { once: true });
+      // Clear filters button
+      const clearBtn = propsView.querySelector('[data-clear-filters]');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          Object.keys(advancedFilters).forEach(k => advancedFilters[k] = 'all');
+          expandedRowId = null;
+          render();
+        });
+      }
     }
 
     // ── Sub-tabs ──
