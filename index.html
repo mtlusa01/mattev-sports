@@ -341,6 +341,24 @@
     .rating-badge.good { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
     .rating-badge.lean { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
 
+    /* ── Insight Section ── */
+    .insight-section { margin-top: 12px; }
+    .insight-card {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 12px 16px;
+    }
+    .insight-icon { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
+    .insight-content { flex: 1; }
+    .insight-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; margin-bottom: 8px; }
+    .insight-stats { display: flex; gap: 8px; flex-wrap: wrap; }
+    .stat-badge {
+      padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;
+      background: var(--bg-tertiary); color: var(--text-muted);
+    }
+    .stat-badge.hit-rate { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
+    .stat-badge.streak { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
+
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
     }
@@ -1182,6 +1200,29 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
+                ${p.insight ? `
+                <div class="insight-section">
+                  <div class="insight-card">
+                    <div class="insight-icon">&#128161;</div>
+                    <div class="insight-content">
+                      <div class="insight-text">${p.insight}</div>
+                      <div class="insight-stats">
+                        ${p.l5_avg != null ? `<span class="stat-badge">L5: ${p.l5_avg}</span>` : ''}
+                        ${p.l10_avg != null ? `<span class="stat-badge">L10: ${p.l10_avg}</span>` : ''}
+                        ${p.l10_hit_rate != null ? `<span class="stat-badge hit-rate">${p.l10_hit_rate}% hit rate</span>` : ''}
+                        ${p.streak >= 3 ? `<span class="stat-badge streak">${p.streak} game streak</span>` : ''}
+                      </div>
+                    </div>
+                  </div>
+                </div>` : (p.l5_avg != null ? `
+                <div class="insight-section">
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px;">
+                    ${p.l5_avg != null ? `<span class="stat-badge">L5: ${p.l5_avg}</span>` : ''}
+                    ${p.l10_avg != null ? `<span class="stat-badge">L10: ${p.l10_avg}</span>` : ''}
+                    ${p.l10_hit_rate != null ? `<span class="stat-badge hit-rate">${p.l10_hit_rate}% hit rate</span>` : ''}
+                    ${p.streak >= 3 ? `<span class="stat-badge streak">${p.streak} game streak</span>` : ''}
+                  </div>
+                </div>` : '')}
               </div>
             </td>
           </tr>`;
