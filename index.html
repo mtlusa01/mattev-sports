@@ -1056,13 +1056,25 @@
       const filtered = applyFilters(projections);
 
       if (filtered.length === 0) {
-        // If a final game is selected, show graded props instead of empty state
+        // If a game is selected, show graded props for final games or a helpful message
         if (currentGameFilter) {
           const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
           if (selGame && getGameStatus(selGame) === 'final' && selGame.graded_props) {
             renderGradedProps(selGame, propsView);
             return;
           }
+          // Game selected but no props — explain why
+          const status = selGame ? getGameStatus(selGame) : 'unknown';
+          const reason = status === 'live' || status === 'final'
+            ? 'Player props are generated before tip-off. This game was already in progress when projections were last updated.'
+            : 'No player prop lines were available for this game at the time projections were generated.';
+          propsView.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">&#127936;</div>
+              <div class="empty-state-title">No player props for this game</div>
+              <div class="empty-state-text">${reason}</div>
+            </div>`;
+          return;
         }
         propsView.innerHTML = `
           <div class="empty-state">
