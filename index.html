@@ -1380,9 +1380,13 @@
         tiers[getGameConfTier(g)].push(g);
       }
 
-      // Sort within each tier by max confidence descending
+      // Sort within each tier by game time (earliest first)
       for (const tier of Object.keys(tiers)) {
-        tiers[tier].sort((a, b) => getGameMaxConf(b) - getGameMaxConf(a));
+        tiers[tier].sort((a, b) => {
+          const timeA = new Date(a.commence_time || '9999');
+          const timeB = new Date(b.commence_time || '9999');
+          return timeA - timeB;
+        });
       }
 
       const tierLabels = {
