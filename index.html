@@ -1374,49 +1374,15 @@
         return;
       }
 
-      // Group by confidence tier
-      const tiers = { high: [], medium: [], low: [] };
-      for (const g of filtered) {
-        tiers[getGameConfTier(g)].push(g);
-      }
+      // Sort all filtered games by game time (earliest first)
+      filtered.sort((a, b) => {
+        const timeA = new Date(a.commence_time || '9999');
+        const timeB = new Date(b.commence_time || '9999');
+        return timeA - timeB;
+      });
 
-      // Sort within each tier by game time (earliest first)
-      for (const tier of Object.keys(tiers)) {
-        tiers[tier].sort((a, b) => {
-          const timeA = new Date(a.commence_time || '9999');
-          const timeB = new Date(b.commence_time || '9999');
-          return timeA - timeB;
-        });
-      }
-
-      const tierLabels = {
-        high: 'High Confidence',
-        medium: 'Medium Confidence',
-        low: 'Low Confidence'
-      };
-
-      // If filtering to a single tier, just show cards without section header
-      if (currentGameConfFilter !== 'all') {
-        const games = tiers[currentGameConfFilter] || [];
-        container.innerHTML = `<div class="game-conf-section ${currentGameConfFilter}">
-          <div class="game-cards-grid">${games.map(renderGameCard).join('')}</div>
-        </div>`;
-        return;
-      }
-
-      // Show all tiers with section headers
-      let html = '';
-      for (const tier of ['high', 'medium', 'low']) {
-        if (tiers[tier].length === 0) continue;
-        html += `<div class="game-conf-section ${tier}">
-          <div class="game-conf-section-header">
-            <span class="game-conf-section-title">${tierLabels[tier]}</span>
-            <span class="game-conf-section-count">${tiers[tier].length}</span>
-          </div>
-          <div class="game-cards-grid">${tiers[tier].map(renderGameCard).join('')}</div>
-        </div>`;
-      }
-      container.innerHTML = html;
+      // Flat list — no section headers, just games sorted by time
+      container.innerHTML = `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
     }
 
     // ── Data Loading ──
