@@ -364,6 +364,23 @@
     .stat-badge.matchup.neutral { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); }
     .stat-badge.matchup.unfavorable { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); }
 
+    /* Injury alert styles */
+    .injury-section { margin-top: 12px; }
+    .injury-alert { background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; border-radius: 8px; padding: 12px 14px; }
+    .injury-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); }
+    .injury-icon { font-size: 1rem; }
+    .injury-title { flex: 1; }
+    .boost-badge { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; }
+    .injury-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+    .teammate-injury { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; }
+    .injury-status { padding: 1px 7px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+    .injury-status.out { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .injury-status.doubtful { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .injury-status.questionable { background: rgba(234, 179, 8, 0.15); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.25); }
+    .injury-status.day-to-day { background: rgba(234, 179, 8, 0.12); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.2); }
+    .injury-player { color: var(--text-secondary); }
+    .injury-note { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; font-style: italic; }
+
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: 1fr; }
     }
@@ -882,7 +899,7 @@
     const TOP_PICKS_COUNT = 5;
     let currentPropCategory = 'all';
     let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
-    const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all' };
+    const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all', injury: 'all' };
 
     // NBA team colors
     const TEAM_COLORS = {
@@ -1014,6 +1031,16 @@
           if (advancedFilters.odds === 'plus') return o >= 100;
           if (advancedFilters.odds === 'even') return o >= -150 && o < 100;
           if (advancedFilters.odds === 'minus') return o < -100 && o >= -200;
+          return true;
+        });
+      }
+
+      // Advanced: Injury filter
+      if (advancedFilters.injury !== 'all') {
+        filtered = filtered.filter(p => {
+          const hasInjuryImpact = p.has_boost || (p.teammate_injuries && p.teammate_injuries.length > 0);
+          if (advancedFilters.injury === 'boosted') return hasInjuryImpact;
+          if (advancedFilters.injury === 'none') return !hasInjuryImpact;
           return true;
         });
       }
@@ -1220,6 +1247,11 @@
         { key: 'odds', icon: '&#128176;', label: 'Odds', options: [
           { value: 'all', text: 'All' }, { value: 'plus', text: 'Plus Money (+100+)' },
           { value: 'even', text: 'Even to -150' }, { value: 'minus', text: '-101 to -200' }
+        ]},
+        { key: 'injury', icon: '&#127973;', label: 'Injuries', options: [
+          { value: 'all', text: 'All' },
+          { value: 'boosted', text: 'Injury Boosted' },
+          { value: 'none', text: 'No Impact' }
         ]}
       ];
       const hasActive = Object.values(advancedFilters).some(v => v !== 'all');
@@ -1331,6 +1363,24 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
+                ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
+                <div class="injury-section">
+                  <div class="injury-alert">
+                    <div class="injury-header">
+                      <span class="injury-icon">&#9888;</span>
+                      <span class="injury-title">Team Injuries</span>
+                      ${p.injury_boost ? `<span class="boost-badge">+${p.injury_boost.toFixed(1)} boost</span>` : ''}
+                    </div>
+                    <div class="injury-list">
+                      ${p.teammate_injuries.map(inj => `
+                        <div class="teammate-injury">
+                          <span class="injury-status ${inj.status.toLowerCase().replace(/\s/g,'-')}">${inj.status}</span>
+                          <span class="injury-player">${inj.player}</span>
+                        </div>`).join('')}
+                    </div>
+                    ${p.boosted_by ? `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>` : ''}
+                  </div>
+                </div>` : ''}
                 ${p.insight ? `
                 <div class="insight-section">
                   <div class="insight-card">
