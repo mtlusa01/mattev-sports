@@ -480,6 +480,11 @@
       padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2);
       font-weight: 600; letter-spacing: 0.02em;
     }
+    .tp-type-badge {
+      display: inline-block; padding: 2px 6px; border-radius: 3px;
+      font-size: 9px; font-weight: 700; color: #000;
+      margin-bottom: 6px; letter-spacing: 0.05em;
+    }
 
     @media (max-width: 768px) {
       .top-picks-cards { grid-template-columns: repeat(2, 1fr); }
@@ -992,6 +997,7 @@
 
     let projections = [];
     let gameProjections = [];
+    let topPicks = [];
     let currentView = 'player-props';
     let currentConfFilter = 'all';
     let currentDirFilter = 'all';
@@ -1285,42 +1291,68 @@
 
     // ── Top 5 Picks ──
     function renderTopPicks(filtered) {
-      // Use composite pick_score if available, fallback to EV sort
-      const top = filtered.filter(p => p.ev && p.ev > 0)
-        .sort((a, b) => (b.pick_score || b.ev || 0) - (a.pick_score || a.ev || 0));
-      // Diversify: one pick per player
-      const picks = []; const seen = new Set();
-      for (const p of top) {
-        if (!seen.has(p.player)) { picks.push(p); seen.add(p.player); }
-        if (picks.length >= TOP_PICKS_COUNT) break;
+      // Use locked unified top picks if available, otherwise fall back to prop-only
+      let picks = [];
+      if (topPicks && topPicks.length > 0) {
+        picks = topPicks;
+      } else {
+        const top = filtered.filter(p => p.ev && p.ev > 0)
+          .sort((a, b) => (b.pick_score || b.ev || 0) - (a.pick_score || a.ev || 0));
+        const seen = new Set();
+        for (const p of top) {
+          if (!seen.has(p.player)) { picks.push({...p, type: 'prop'}); seen.add(p.player); }
+          if (picks.length >= TOP_PICKS_COUNT) break;
+        }
       }
       if (picks.length === 0) return '';
 
+      const typeColors = { prop: 'var(--accent)', spread: 'var(--blue)', total: 'var(--purple)', ml: 'var(--yellow)' };
+      const typeLabels = { prop: 'PROP', spread: 'SPREAD', total: 'TOTAL', ml: 'ML' };
+
       const cards = picks.map((p, i) => {
-        const dirClass = p.direction === 'OVER' ? 'over' : 'under';
-        const diff = p.diff != null ? p.diff : (p.projection - p.line);
-        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
-        const diffCls = diff >= 0 ? 'pos' : 'neg';
-        const g = getGameForTeam(p.team);
-        const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
+        const betType = p.type || 'prop';
+        const typeColor = typeColors[betType];
+        const typeLabel = typeLabels[betType];
         const res = p.result ? p.result.toUpperCase() : null;
-        const isGraded = res && ['WIN','LOSS','PUSH'].includes(res);
+        const isGraded = res && ['WIN', 'LOSS', 'PUSH'].includes(res);
         const rCls = res === 'WIN' ? 'tp-win' : res === 'LOSS' ? 'tp-loss' : 'tp-push';
         const rIcon = res === 'WIN' ? '&#10003;' : res === 'LOSS' ? '&#10007;' : '&mdash;';
         const factors = p.score_factors || [];
-        return `
-          <div class="top-pick-card${isGraded ? ' graded ' + rCls : ''}">
-            ${isGraded ? `<div class="tp-result-badge ${rCls}">${rIcon} ${res}${p.actual != null ? ` <span class="tp-actual">${p.actual}</span>` : ''}</div>` : ''}
-            <div class="top-pick-rank">#${i + 1}</div>
-            <div class="top-pick-player">${p.player}</div>
-            <div class="top-pick-team"><span class="team-dot" style="background:${TEAM_COLORS[p.team] || 'var(--text-muted)'}"></span>${p.team} ${matchupStr}</div>
-            <div class="top-pick-prop">${p.prop}</div>
-            <div class="top-pick-direction ${dirClass}">${p.direction} ${p.line}</div>
-            <div class="top-pick-proj">Proj: ${p.projection} <span class="edge ${diffCls}">(${diffStr})</span></div>
-            <div class="top-pick-ev">+${p.ev.toFixed(1)}% EV</div>
-            <div class="top-pick-conf">${p.confidence.toFixed(1)}% conf</div>
-            ${factors.length ? `<div class="top-pick-factors">${factors.map(f => `<span class="tp-factor">${f}</span>`).join('')}</div>` : ''}
-          </div>`;
+
+        if (betType === 'prop') {
+          const dirClass = p.direction === 'OVER' ? 'over' : 'under';
+          const diff = p.diff != null ? p.diff : ((p.projection || 0) - (p.line || 0));
+          const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
+          const diffCls = diff >= 0 ? 'pos' : 'neg';
+          const g = getGameForTeam(p.team);
+          const matchupStr = g ? (g.away_team === p.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
+          return `
+            <div class="top-pick-card${isGraded ? ' graded ' + rCls : ''}">
+              ${isGraded ? `<div class="tp-result-badge ${rCls}">${rIcon} ${res}${p.actual != null ? ` <span class="tp-actual">${p.actual}</span>` : ''}</div>` : ''}
+              <div class="top-pick-rank">#${p.top_pick_rank || (i + 1)}</div>
+              <div class="tp-type-badge" style="background:${typeColor}">${typeLabel}</div>
+              <div class="top-pick-player">${p.player}</div>
+              <div class="top-pick-team"><span class="team-dot" style="background:${TEAM_COLORS[p.team] || 'var(--text-muted)'}"></span>${p.team} ${matchupStr}</div>
+              <div class="top-pick-prop">${p.prop}</div>
+              <div class="top-pick-direction ${dirClass}">${p.direction} ${p.line}</div>
+              <div class="top-pick-proj">Proj: ${p.projection} <span class="edge ${diffCls}">(${diffStr})</span></div>
+              ${p.ev ? `<div class="top-pick-ev">+${p.ev.toFixed(1)}% EV</div>` : ''}
+              <div class="top-pick-conf">${(p.confidence || 0).toFixed(1)}% conf</div>
+              ${factors.length ? `<div class="top-pick-factors">${factors.map(f => `<span class="tp-factor">${f}</span>`).join('')}</div>` : ''}
+            </div>`;
+        } else {
+          // Game bet card (spread/total/ml)
+          return `
+            <div class="top-pick-card${isGraded ? ' graded ' + rCls : ''}">
+              ${isGraded ? `<div class="tp-result-badge ${rCls}">${rIcon} ${res}${p.actual ? ` <span class="tp-actual">${p.actual}</span>` : ''}</div>` : ''}
+              <div class="top-pick-rank">#${p.top_pick_rank || (i + 1)}</div>
+              <div class="tp-type-badge" style="background:${typeColor}">${typeLabel}</div>
+              <div class="top-pick-player" style="font-size:12px">${p.game || ''}</div>
+              <div class="top-pick-direction over">${p.pick}</div>
+              <div class="top-pick-conf">${(p.confidence || 0).toFixed(1)}% conf</div>
+              ${factors.length ? `<div class="top-pick-factors">${factors.map(f => `<span class="tp-factor">${f}</span>`).join('')}</div>` : ''}
+            </div>`;
+        }
       }).join('');
 
       return `
@@ -2292,6 +2324,7 @@
         if (!resp.ok) throw new Error('Failed to fetch');
         const data = await resp.json();
         projections = data.projections || [];
+        topPicks = data.top_picks || [];
 
         if (data.date) {
           const d = new Date(data.date + 'T12:00:00');

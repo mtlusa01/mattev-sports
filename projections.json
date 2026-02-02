@@ -1576,7 +1576,7 @@
         "Favorable matchup (#25 DEF)",
         "+4.1 edge"
       ],
-      "top_pick_rank": 1
+      "top_pick_rank": 4
     },
     {
       "player": "Ayo Dosunmu",
@@ -2123,8 +2123,7 @@
         "+11.9% EV",
         "60% L10 hit rate",
         "Favorable matchup (#21 DEF)"
-      ],
-      "top_pick_rank": 5
+      ]
     },
     {
       "player": "Immanuel Quickley",
@@ -2532,7 +2531,7 @@
         "+5.1 edge",
         "7-game streak"
       ],
-      "top_pick_rank": 2
+      "top_pick_rank": 5
     },
     {
       "player": "Zach LaVine",
@@ -7367,8 +7366,7 @@
         "90% L10 hit rate",
         "+4.7 edge",
         "5-game streak"
-      ],
-      "top_pick_rank": 4
+      ]
     },
     {
       "player": "Shai Gilgeous-Alexander",
@@ -7872,8 +7870,101 @@
       "score_factors": [
         "+17.2% EV",
         "60% L10 hit rate"
+      ]
+    }
+  ],
+  "top_picks": [
+    {
+      "type": "total",
+      "game": "LAC @ PHX",
+      "away_team": "LAC",
+      "home_team": "PHX",
+      "pick": "OVER 209.5",
+      "confidence": 90.2,
+      "pick_score": 55.0,
+      "score_factors": [
+        "90.2% total conf",
+        "Very high confidence"
       ],
+      "commence_time": "2026-02-02T01:10:00Z",
+      "top_pick_rank": 1
+    },
+    {
+      "type": "ml",
+      "game": "LAC @ PHX",
+      "away_team": "LAC",
+      "home_team": "PHX",
+      "pick": "PHX",
+      "confidence": 66.4,
+      "pick_score": 50.0,
+      "score_factors": [
+        "66.4% ML conf"
+      ],
+      "commence_time": "2026-02-02T01:10:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "spread",
+      "game": "OKC @ DEN",
+      "away_team": "OKC",
+      "home_team": "DEN",
+      "pick": "DEN +7.0",
+      "confidence": 65.8,
+      "pick_score": 50.0,
+      "score_factors": [
+        "65.8% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-02-02T02:42:00Z",
       "top_pick_rank": 3
+    },
+    {
+      "type": "prop",
+      "player": "Ayo Dosunmu",
+      "team": "CHI",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 17.0,
+      "projection": 21.1,
+      "diff": 4.1,
+      "ev": 3.0,
+      "confidence": 53.0,
+      "pick_score": 47.8,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup (#25 DEF)",
+        "+4.1 edge"
+      ],
+      "book_odds": null,
+      "best_book": null,
+      "insight": "Ayo Dosunmu has gone OVER 17.0 points in 7 of his last 10 games (17.9 avg). Currently on a 4-game streak of going OVER 17.0 points.",
+      "top_pick_rank": 4,
+      "result": "LOSS",
+      "actual": 10
+    },
+    {
+      "type": "prop",
+      "player": "Zach LaVine",
+      "team": "SAC",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 22.0,
+      "projection": 16.9,
+      "diff": -5.1,
+      "ev": 6.4,
+      "confidence": 55.5,
+      "pick_score": 44.6,
+      "score_factors": [
+        "+6.4% EV",
+        "+5.1 edge",
+        "7-game streak"
+      ],
+      "book_odds": null,
+      "best_book": null,
+      "insight": "Has stayed UNDER 22.0 points in 7 straight games. Averaging 17.7 points over his last 10 games (-4.3 below the line).",
+      "top_pick_rank": 5,
+      "result": "LOSS",
+      "actual": 35
     }
   ]
 }
