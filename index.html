@@ -425,9 +425,31 @@
     .top-pick-card {
       background: var(--bg-secondary); border: 1px solid var(--border);
       border-radius: 10px; padding: 14px; text-align: center;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s; position: relative; overflow: hidden;
     }
     .top-pick-card:hover { border-color: rgba(16, 185, 129, 0.3); }
+    .top-pick-card.graded { opacity: 0.92; }
+    .top-pick-card.graded.tp-win {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg-secondary) 100%);
+    }
+    .top-pick-card.graded.tp-loss {
+      border-color: var(--red);
+      background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, var(--bg-secondary) 100%);
+    }
+    .top-pick-card.graded.tp-push {
+      border-color: var(--yellow);
+      background: linear-gradient(135deg, rgba(234,179,8,0.1) 0%, var(--bg-secondary) 100%);
+    }
+    .tp-result-badge {
+      position: absolute; top: 0; right: 0; padding: 3px 8px;
+      border-radius: 0 10px 0 8px; display: flex; align-items: center;
+      gap: 4px; font-weight: 700; font-size: 11px;
+    }
+    .tp-result-badge.tp-win { background: var(--accent); color: #fff; }
+    .tp-result-badge.tp-loss { background: var(--red); color: #fff; }
+    .tp-result-badge.tp-push { background: var(--yellow); color: #000; }
+    .tp-actual { background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 3px; font-size: 10px; }
     .top-pick-rank {
       font-size: 11px; font-weight: 700; color: var(--accent);
       margin-bottom: 6px; letter-spacing: 0.05em;
@@ -450,6 +472,14 @@
       font-size: 15px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px;
     }
     .top-pick-conf { font-size: 11px; color: var(--text-muted); }
+    .top-pick-factors {
+      display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; justify-content: center;
+    }
+    .tp-factor {
+      background: var(--bg-tertiary); color: var(--accent); font-size: 9px;
+      padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2);
+      font-weight: 600; letter-spacing: 0.02em;
+    }
 
     @media (max-width: 768px) {
       .top-picks-cards { grid-template-columns: repeat(2, 1fr); }
@@ -1255,20 +1285,32 @@
 
     // ── Top 5 Picks ──
     function renderTopPicks(filtered) {
+      // Use composite pick_score if available, fallback to EV sort
       const top = filtered.filter(p => p.ev && p.ev > 0)
-        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
-        .slice(0, TOP_PICKS_COUNT);
-      if (top.length === 0) return '';
+        .sort((a, b) => (b.pick_score || b.ev || 0) - (a.pick_score || a.ev || 0));
+      // Diversify: one pick per player
+      const picks = []; const seen = new Set();
+      for (const p of top) {
+        if (!seen.has(p.player)) { picks.push(p); seen.add(p.player); }
+        if (picks.length >= TOP_PICKS_COUNT) break;
+      }
+      if (picks.length === 0) return '';
 
-      const cards = top.map((p, i) => {
+      const cards = picks.map((p, i) => {
         const dirClass = p.direction === 'OVER' ? 'over' : 'under';
         const diff = p.diff != null ? p.diff : (p.projection - p.line);
         const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
         const diffCls = diff >= 0 ? 'pos' : 'neg';
         const g = getGameForTeam(p.team);
         const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
+        const res = p.result ? p.result.toUpperCase() : null;
+        const isGraded = res && ['WIN','LOSS','PUSH'].includes(res);
+        const rCls = res === 'WIN' ? 'tp-win' : res === 'LOSS' ? 'tp-loss' : 'tp-push';
+        const rIcon = res === 'WIN' ? '&#10003;' : res === 'LOSS' ? '&#10007;' : '&mdash;';
+        const factors = p.score_factors || [];
         return `
-          <div class="top-pick-card">
+          <div class="top-pick-card${isGraded ? ' graded ' + rCls : ''}">
+            ${isGraded ? `<div class="tp-result-badge ${rCls}">${rIcon} ${res}${p.actual != null ? ` <span class="tp-actual">${p.actual}</span>` : ''}</div>` : ''}
             <div class="top-pick-rank">#${i + 1}</div>
             <div class="top-pick-player">${p.player}</div>
             <div class="top-pick-team"><span class="team-dot" style="background:${TEAM_COLORS[p.team] || 'var(--text-muted)'}"></span>${p.team} ${matchupStr}</div>
@@ -1277,12 +1319,13 @@
             <div class="top-pick-proj">Proj: ${p.projection} <span class="edge ${diffCls}">(${diffStr})</span></div>
             <div class="top-pick-ev">+${p.ev.toFixed(1)}% EV</div>
             <div class="top-pick-conf">${p.confidence.toFixed(1)}% conf</div>
+            ${factors.length ? `<div class="top-pick-factors">${factors.map(f => `<span class="tp-factor">${f}</span>`).join('')}</div>` : ''}
           </div>`;
       }).join('');
 
       return `
         <div class="top-picks-section">
-          <div class="top-picks-header">TOP ${top.length} AI PICKS</div>
+          <div class="top-picks-header">TOP ${picks.length} AI PICKS</div>
           <div class="top-picks-cards">${cards}</div>
         </div>`;
     }
