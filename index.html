@@ -986,7 +986,61 @@
     .no-recs-overall p { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
     @media (max-width: 768px) {
       .rec-cards { grid-template-columns: repeat(2, 1fr); }
+      .game-specific-cards { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ── Game-Specific Props ── */
+    .game-specific-section {
+      background: var(--bg-secondary);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .game-specific-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .game-specific-title {
+      font-size: 14px; font-weight: 700; color: var(--blue);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .game-specific-count {
+      background: rgba(59, 130, 246, 0.15); color: var(--blue);
+      padding: 2px 10px; border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+    }
+    .game-specific-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;
+    }
+    .game-prop-card {
+      background: var(--bg-primary); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px; position: relative;
+      transition: border-color 0.15s;
+    }
+    .game-prop-card:hover { border-color: rgba(59, 130, 246, 0.3); }
+    .game-prop-card .gpc-rank {
+      position: absolute; top: 8px; right: 10px;
+      font-size: 11px; color: var(--text-muted); font-weight: 700;
+    }
+    .game-prop-card .gpc-player { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; padding-right: 1.5rem; }
+    .game-prop-card .gpc-team { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .game-prop-card .gpc-prop-type {
+      display: inline-block; background: var(--bg-tertiary); padding: 2px 6px;
+      border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;
+    }
+    .game-prop-card .gpc-pick { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .game-prop-card .gpc-pick.over { color: var(--accent-light); }
+    .game-prop-card .gpc-pick.under { color: var(--red-light); }
+    .game-prop-card .gpc-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+    .game-prop-card .gpc-proj .pos { color: var(--accent-light); }
+    .game-prop-card .gpc-proj .neg { color: var(--red-light); }
+    .game-prop-card .gpc-ev { font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px; }
+    .game-prop-card .gpc-conf { font-size: 11px; }
+    .game-prop-card .gpc-conf.high { color: var(--accent-light); }
+    .game-prop-card .gpc-conf.medium { color: var(--yellow); }
+    .game-prop-card .gpc-conf.low { color: var(--red-light); }
 
     /* Empty State */
     .empty-state { text-align: center; padding: 80px 20px; }
@@ -1661,6 +1715,52 @@
       </div>`;
     }
 
+    function renderGameSpecificProps(filtered) {
+      // Show top props for the selected game, sorted by EV
+      const sorted = [...filtered].filter(p => (p.ev || 0) > 0)
+        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
+        .slice(0, 8);
+
+      const parts = currentGameFilter.split('@');
+      const label = parts.join(' @ ');
+
+      if (sorted.length === 0) {
+        return `<div class="game-specific-section">
+          <div class="game-specific-header">
+            <span class="game-specific-title">&#128202; Top Props for ${label}</span>
+          </div>
+          <div class="no-recs">No positive-EV props available for this game.</div>
+        </div>`;
+      }
+
+      const cards = sorted.map((p, i) => {
+        const confLvl = getConfLevel(p.confidence || 0);
+        const dirClass = (p.direction || '').toLowerCase();
+        const diff = p.diff != null ? p.diff : ((p.projection || 0) - (p.line || 0));
+        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
+        const diffCls = diff >= 0 ? 'pos' : 'neg';
+        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
+        return `<div class="game-prop-card">
+          <div class="gpc-rank">#${i + 1}</div>
+          <div class="gpc-player">${p.player}</div>
+          <div class="gpc-team"><span class="team-dot" style="background:${teamColor}"></span>${p.team}</div>
+          <div class="gpc-prop-type">${p.prop}</div>
+          <div class="gpc-pick ${dirClass}">${p.direction} ${p.line}</div>
+          <div class="gpc-proj">Proj: ${p.projection} <span class="${diffCls}">(${diffStr})</span></div>
+          ${p.ev ? `<div class="gpc-ev">+${p.ev.toFixed(1)}% EV</div>` : ''}
+          <div class="gpc-conf ${confLvl}">${(p.confidence || 0).toFixed(1)}% conf</div>
+        </div>`;
+      }).join('');
+
+      return `<div class="game-specific-section">
+        <div class="game-specific-header">
+          <span class="game-specific-title">&#128202; Top Props for ${label}</span>
+          <span class="game-specific-count">${sorted.length} prop${sorted.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="game-specific-cards">${cards}</div>
+      </div>`;
+    }
+
     // ── Category Tabs ──
     function renderPropCategoryTabs(filtered) {
       const counts = { all: filtered.length };
@@ -2111,8 +2211,10 @@
         return;
       }
 
-      // Prop recommendations (game recs show in game projections tab)
-      let html = renderPropRecommendations();
+      // Show game-specific top props when a game is selected, otherwise show overall prop recommendations
+      let html = currentGameFilter
+        ? renderGameSpecificProps(filtered)
+        : renderPropRecommendations();
 
       // Category tabs
       html += renderPropCategoryTabs(filtered);
