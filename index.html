@@ -745,6 +745,7 @@
     .game-card-score { font-size: 13px; color: var(--text-muted); }
     .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
     .game-pick-row { display: flex; justify-content: space-between; align-items: center; }
+    .game-pick-row.dimmed { opacity: 0.35; }
     .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 70px; }
     .game-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
@@ -1383,11 +1384,7 @@
     });
 
     // ── Helpers ──
-    function getConfLevel(conf) {
-      if (conf >= 60) return 'high';
-      if (conf >= 50) return 'medium';
-      return 'low';
-    }
+    const getConfLevel = getConfTier; // alias for props
 
     function getGameForTeam(team) { return teamToGame[team] || null; }
 
@@ -1424,12 +1421,15 @@
       return 'scheduled';
     }
 
-    function getGameConfTier(g) {
-      const confs = [g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0];
-      const maxConf = Math.max(...confs);
-      if (maxConf >= 60) return 'high';
-      if (maxConf >= 50) return 'medium';
+    function getConfTier(conf) {
+      if (conf >= 60) return 'high';
+      if (conf >= 50) return 'medium';
       return 'low';
+    }
+
+    function gameHasConfTier(g, tier) {
+      const confs = [g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0];
+      return confs.some(c => getConfTier(c) === tier);
     }
 
     function getGameMaxConf(g) {
@@ -2334,7 +2334,7 @@
     }
 
     function renderGameCard(g) {
-      // 3-tier confidence colors: green (>60), white (52-60), gray (<52)
+      // 3-tier confidence colors: green (>60), yellow (50-59), red (<50)
       const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
       const pickClass = (pick, conf) => {
         if (!pick || pick === 'N/A') return 'low-conf';
@@ -2343,6 +2343,7 @@
         return '';
       };
       const bestBetBadge = conf => conf >= 60 ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
+      const dimClass = conf => currentGameConfFilter !== 'all' && getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
 
       const status = getGameStatus(g);
       const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
@@ -2386,19 +2387,19 @@
               </div>
             </div>
             <div class="game-card-picks">
-              <div class="game-pick-row">
+              <div class="game-pick-row${dimClass(g.spread_conf)}">
                 <span class="game-pick-label">Spread</span>
                 <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
                 ${renderResultBadge(g.spread_result)}
               </div>
-              <div class="game-pick-row">
+              <div class="game-pick-row${dimClass(g.total_conf)}">
                 <span class="game-pick-label">Total</span>
                 <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
                 ${renderResultBadge(g.total_result)}
               </div>
-              <div class="game-pick-row">
+              <div class="game-pick-row${dimClass(g.ml_conf)}">
                 <span class="game-pick-label">ML</span>
                 <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
@@ -2431,17 +2432,17 @@
             <div class="game-card-score">Proj: ${g.proj_score}</div>
           </div>
           <div class="game-card-picks">
-            <div class="game-pick-row">
+            <div class="game-pick-row${dimClass(g.spread_conf)}">
               <span class="game-pick-label">Spread</span>
               <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge(g.spread_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
             </div>
-            <div class="game-pick-row">
+            <div class="game-pick-row${dimClass(g.total_conf)}">
               <span class="game-pick-label">Total</span>
               <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge(g.total_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
             </div>
-            <div class="game-pick-row">
+            <div class="game-pick-row${dimClass(g.ml_conf)}">
               <span class="game-pick-label">ML</span>
               <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge(g.ml_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
@@ -2647,7 +2648,7 @@
 
       // Apply confidence filter
       if (currentGameConfFilter !== 'all') {
-        filtered = filtered.filter(g => getGameConfTier(g) === currentGameConfFilter);
+        filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter));
       }
 
       if (filtered.length === 0) {
