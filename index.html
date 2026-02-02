@@ -902,6 +902,92 @@
 
     /* (Results section moved to results.html) */
 
+    /* ── Recommendations Section ── */
+    .rec-section { margin-bottom: 24px; }
+    .rec-category {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .rec-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rec-header-title {
+      font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+    }
+    .rec-header-title.game-recs { color: var(--blue); }
+    .rec-header-title.prop-recs { color: var(--accent-light); }
+    .rec-count {
+      background: var(--accent-glow); color: var(--accent-light);
+      padding: 2px 10px; border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+    }
+    .rec-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
+    }
+    .rec-card {
+      background: var(--bg-primary); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; position: relative;
+      transition: border-color 0.15s;
+    }
+    .rec-card:hover { border-color: rgba(16, 185, 129, 0.3); }
+    .rec-card.game-rec { border-left: 3px solid var(--blue); }
+    .rec-card.prop-rec { border-left: 3px solid var(--accent); }
+    .rec-rank {
+      position: absolute; top: 8px; right: 10px;
+      font-size: 11px; color: var(--text-muted); font-weight: 700;
+    }
+    .rec-badge {
+      display: inline-block; padding: 2px 6px; border-radius: 4px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 6px;
+    }
+    .rec-badge.spread { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
+    .rec-badge.total { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+    .rec-badge.ml { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
+    .rec-badge.prop { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .rec-matchup { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .rec-player { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+    .rec-team { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .rec-prop-type {
+      display: inline-block; background: var(--bg-tertiary); padding: 2px 6px;
+      border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;
+    }
+    .rec-pick { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .rec-pick.over { color: var(--accent-light); }
+    .rec-pick.under { color: var(--red-light); }
+    .rec-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+    .rec-proj .pos { color: var(--accent-light); }
+    .rec-proj .neg { color: var(--red-light); }
+    .rec-ev { font-size: 15px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px; }
+    .rec-conf { font-size: 11px; margin-bottom: 6px; }
+    .rec-conf.high { color: var(--accent-light); }
+    .rec-conf.medium { color: var(--yellow); }
+    .rec-conf.low { color: var(--red-light); }
+    .rec-reasons { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+    .rec-reason {
+      background: var(--bg-tertiary); color: var(--accent);
+      font-size: 9px; padding: 2px 6px; border-radius: 4px;
+      border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600;
+    }
+    .no-recs {
+      text-align: center; padding: 20px; color: var(--text-secondary); font-size: 13px;
+    }
+    .no-recs-overall {
+      text-align: center; padding: 40px 20px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 24px;
+    }
+    .no-recs-icon { font-size: 32px; margin-bottom: 12px; }
+    .no-recs-overall h3 { font-size: 16px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600; }
+    .no-recs-overall p { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    @media (max-width: 768px) {
+      .rec-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* Empty State */
     .empty-state { text-align: center; padding: 80px 20px; }
     .empty-state-icon { width: 64px; height: 64px; margin: 0 auto 20px; background: var(--bg-tertiary); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
@@ -1223,7 +1309,6 @@
       { key: 'AST', label: 'ASSISTS' },
       { key: 'PRA', label: 'PRA' }
     ];
-    const TOP_PICKS_COUNT = 5;
     let currentPropCategory = 'all';
     let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
     const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all', injury: 'all', sportsbook: 'all' };
@@ -1497,76 +1582,85 @@
     }
 
     // ── Top 5 Picks ──
-    function renderTopPicks(filtered) {
-      // Use locked unified top picks if available, otherwise fall back to prop-only
-      let picks = [];
-      if (topPicks && topPicks.length > 0) {
-        picks = topPicks;
-      } else {
-        const top = filtered.filter(p => p.ev && p.ev > 0)
-          .sort((a, b) => (b.pick_score || b.ev || 0) - (a.pick_score || a.ev || 0));
-        const seen = new Set();
-        for (const p of top) {
-          if (!seen.has(p.player)) { picks.push({...p, type: 'prop'}); seen.add(p.player); }
-          if (picks.length >= TOP_PICKS_COUNT) break;
+    // ── Recommendations ──
+    let recommendations = null;
+
+    function renderRecommendations() {
+      const recs = recommendations;
+      if (!recs || !recs.has_recommendations) {
+        if (recs && recs.message) {
+          return `<div class="no-recs-overall">
+            <div class="no-recs-icon">&#128270;</div>
+            <h3>No Recommended Bets Today</h3>
+            <p>${recs.message}</p>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Browse all projections below.</p>
+          </div>`;
         }
+        return '';
       }
-      if (picks.length === 0) return '';
 
-      const typeColors = { prop: 'var(--accent)', spread: 'var(--blue)', total: 'var(--purple)', ml: 'var(--yellow)' };
-      const typeLabels = { prop: 'PROP', spread: 'SPREAD', total: 'TOTAL', ml: 'ML' };
+      let html = '<div class="rec-section">';
 
-      const cards = picks.map((p, i) => {
-        const betType = p.type || 'prop';
-        const typeColor = typeColors[betType];
-        const typeLabel = typeLabels[betType];
-        const res = p.result ? p.result.toUpperCase() : null;
-        const isGraded = res && ['WIN', 'LOSS', 'PUSH'].includes(res);
-        const rCls = res === 'WIN' ? 'tp-win' : res === 'LOSS' ? 'tp-loss' : 'tp-push';
-        const rIcon = res === 'WIN' ? '&#10003;' : res === 'LOSS' ? '&#10007;' : '&mdash;';
-        const factors = p.score_factors || [];
+      // Game bet recommendations
+      const gameRecs = recs.game_bets || [];
+      if (gameRecs.length > 0) {
+        const gameCards = gameRecs.map((r, i) => {
+          const confLvl = getConfLevel(r.confidence || 0);
+          const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
+          return `<div class="rec-card game-rec">
+            <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
+            <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
+            <div class="rec-matchup">${r.game || ''}</div>
+            <div class="rec-pick">${r.pick}</div>
+            <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
+            ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
+          </div>`;
+        }).join('');
+        html += `<div class="rec-category">
+          <div class="rec-header">
+            <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
+            <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="rec-cards">${gameCards}</div>
+        </div>`;
+      }
 
-        if (betType === 'prop') {
-          const dirClass = p.direction === 'OVER' ? 'over' : 'under';
-          const diff = p.diff != null ? p.diff : ((p.projection || 0) - (p.line || 0));
+      // Prop recommendations
+      const propRecs = recs.props || [];
+      if (propRecs.length > 0) {
+        const propCards = propRecs.map((r, i) => {
+          const confLvl = getConfLevel(r.confidence || 0);
+          const dirClass = (r.direction || '').toLowerCase();
+          const diff = r.diff != null ? r.diff : ((r.projection || 0) - (r.line || 0));
           const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
           const diffCls = diff >= 0 ? 'pos' : 'neg';
-          const g = getGameForTeam(p.team);
-          const matchupStr = g ? (g.away_team === p.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
-          return `
-            <div class="top-pick-card${isGraded ? ' graded ' + rCls : ''}">
-              ${isGraded ? `<div class="tp-result-badge ${rCls}">${rIcon} ${res}${p.actual != null ? ` <span class="tp-actual">${p.actual}</span>` : ''}</div>` : ''}
-              <div class="top-pick-rank">#${p.top_pick_rank || (i + 1)}</div>
-              <div class="tp-type-badge" style="background:${typeColor}">${typeLabel}</div>
-              <div class="top-pick-player">${p.player}</div>
-              <div class="top-pick-team"><span class="team-dot" style="background:${TEAM_COLORS[p.team] || 'var(--text-muted)'}"></span>${p.team} ${matchupStr}</div>
-              <div class="top-pick-prop">${p.prop}</div>
-              <div class="top-pick-direction ${dirClass}">${p.direction} ${p.line}</div>
-              <div class="top-pick-proj">Proj: ${p.projection} <span class="edge ${diffCls}">(${diffStr})</span></div>
-              ${p.ev ? `<div class="top-pick-ev">+${p.ev.toFixed(1)}% EV</div>` : ''}
-              <div class="top-pick-conf">${(p.confidence || 0).toFixed(1)}% conf</div>
-              ${factors.length ? `<div class="top-pick-factors">${factors.map(f => `<span class="tp-factor">${f}</span>`).join('')}</div>` : ''}
-            </div>`;
-        } else {
-          // Game bet card (spread/total/ml)
-          return `
-            <div class="top-pick-card${isGraded ? ' graded ' + rCls : ''}">
-              ${isGraded ? `<div class="tp-result-badge ${rCls}">${rIcon} ${res}${p.actual ? ` <span class="tp-actual">${p.actual}</span>` : ''}</div>` : ''}
-              <div class="top-pick-rank">#${p.top_pick_rank || (i + 1)}</div>
-              <div class="tp-type-badge" style="background:${typeColor}">${typeLabel}</div>
-              <div class="top-pick-player" style="font-size:12px">${p.game || ''}</div>
-              <div class="top-pick-direction over">${p.pick}</div>
-              <div class="top-pick-conf">${(p.confidence || 0).toFixed(1)}% conf</div>
-              ${factors.length ? `<div class="top-pick-factors">${factors.map(f => `<span class="tp-factor">${f}</span>`).join('')}</div>` : ''}
-            </div>`;
-        }
-      }).join('');
-
-      return `
-        <div class="top-picks-section">
-          <div class="top-picks-header">TOP ${picks.length} AI PICKS</div>
-          <div class="top-picks-cards">${cards}</div>
+          const g = getGameForTeam(r.team);
+          const matchupStr = g ? (g.away_team === r.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
+          const reasons = (r.reasons || r.score_factors || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
+          return `<div class="rec-card prop-rec">
+            <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
+            <div class="rec-badge prop">PROP</div>
+            <div class="rec-player">${r.player}</div>
+            <div class="rec-team"><span class="team-dot" style="background:${TEAM_COLORS[r.team] || 'var(--text-muted)'}"></span>${r.team} ${matchupStr}</div>
+            <div class="rec-prop-type">${r.prop}</div>
+            <div class="rec-pick ${dirClass}">${r.direction} ${r.line}</div>
+            <div class="rec-proj">Proj: ${r.projection} <span class="${diffCls}">(${diffStr})</span></div>
+            ${r.ev ? `<div class="rec-ev">+${r.ev.toFixed(1)}% EV</div>` : ''}
+            <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
+            ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
+          </div>`;
+        }).join('');
+        html += `<div class="rec-category">
+          <div class="rec-header">
+            <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
+            <span class="rec-count">${propRecs.length} pick${propRecs.length !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="rec-cards">${propCards}</div>
         </div>`;
+      }
+
+      html += '</div>';
+      return html;
     }
 
     // ── Category Tabs ──
@@ -2019,8 +2113,8 @@
         return;
       }
 
-      // Top 5 AI Picks
-      let html = renderTopPicks(filtered);
+      // Recommendations
+      let html = renderRecommendations();
 
       // Category tabs
       html += renderPropCategoryTabs(filtered);
@@ -2545,6 +2639,7 @@
         const data = await resp.json();
         projections = data.projections || [];
         topPicks = data.top_picks || [];
+        recommendations = data.recommendations || null;
 
         if (data.date) {
           const d = new Date(data.date + 'T12:00:00');
