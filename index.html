@@ -485,6 +485,20 @@
       font-size: 9px; font-weight: 700; color: #000;
       margin-bottom: 6px; letter-spacing: 0.05em;
     }
+    .injury-badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 2px 6px; border-radius: 4px;
+      font-size: 10px; font-weight: 600; margin-left: 6px;
+      vertical-align: middle; cursor: help;
+    }
+    .injury-badge.inj-out { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .injury-badge.inj-doubtful { background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+    .injury-badge.inj-questionable { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+    .injury-badge.inj-probable { background: rgba(132,204,22,0.15); color: #84cc16; border: 1px solid rgba(132,204,22,0.3); }
+    .injury-type { color: var(--text-muted); font-weight: 400; }
+    tr.player-out td { opacity: 0.45; }
+    tr.player-out td:first-child { text-decoration: line-through; text-decoration-color: var(--red); }
+    tr.player-questionable { background: rgba(245,158,11,0.04); }
 
     @media (max-width: 768px) {
       .top-picks-cards { grid-template-columns: repeat(2, 1fr); }
@@ -1161,8 +1175,10 @@
       if (advancedFilters.injury !== 'all') {
         filtered = filtered.filter(p => {
           const hasInjuryImpact = p.has_boost || (p.teammate_injuries && p.teammate_injuries.length > 0);
+          const status = p.injury_status;
+          if (advancedFilters.injury === 'healthy') return !status || status === 'Probable';
           if (advancedFilters.injury === 'boosted') return hasInjuryImpact;
-          if (advancedFilters.injury === 'none') return !hasInjuryImpact;
+          if (advancedFilters.injury === 'questionable') return status === 'Questionable' || status === 'Doubtful';
           return true;
         });
       }
@@ -1417,8 +1433,9 @@
         ]},
         { key: 'injury', icon: '&#127973;', label: 'Injuries', options: [
           { value: 'all', text: 'All' },
+          { value: 'healthy', text: 'Healthy Only' },
           { value: 'boosted', text: 'Injury Boosted' },
-          { value: 'none', text: 'No Impact' }
+          { value: 'questionable', text: 'Questionable' }
         ]},
         { key: 'sportsbook', icon: '&#128218;', label: 'Best Book', options: [
           { value: 'all', text: 'All' },
@@ -1466,6 +1483,15 @@
       return props.filter(p => p.prop === cat);
     }
 
+    function injuryBadge(p) {
+      const s = p.injury_status;
+      if (!s) return '';
+      const cfg = { Out: 'inj-out', Doubtful: 'inj-doubtful', Questionable: 'inj-questionable', Probable: 'inj-probable' };
+      const cls = cfg[s] || '';
+      const tip = p.injury_type ? `${s} — ${p.injury_type}` : s;
+      return `<span class="injury-badge ${cls}" title="${p.injury_headline || tip}">${s.toUpperCase()}${p.injury_type ? ` <span class="injury-type">${p.injury_type}</span>` : ''}</span>`;
+    }
+
     // ── Props Table ──
     function renderPropsTable(props) {
       if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div></div>';
@@ -1497,9 +1523,12 @@
         const probEdgeStr = isVal(pe) ? (pe >= 0 ? '+' : '') + pe.toFixed(1) + '%' : '--';
         const edgeColor = !isVal(pe) ? 'var(--text-muted)' : pe > 3 ? 'var(--accent-light)' : pe > 0 ? 'var(--accent)' : 'var(--red-light)';
 
+        const injBadge = injuryBadge(p);
+        const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
+
         return `
-          <tr data-row-id="${rowId}" onclick="toggleRow('${rowId}')">
-            <td><span class="pt-player">${p.player}</span> ${edgeBadge}<br><span class="pt-matchup">${matchupStr}</span></td>
+          <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')">
+            <td><span class="pt-player">${p.player}</span>${injBadge} ${edgeBadge}<br><span class="pt-matchup">${matchupStr}</span></td>
             <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
             <td><span class="pt-prop-badge">${p.prop}</span></td>
             <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
