@@ -1,77 +1,115 @@
 {
   "date": "2026-02-02",
-  "generated_at": "2026-02-02T15:45:36",
+  "generated_at": "2026-02-02T11:02:46",
   "picks": [
     {
-      "type": "total",
-      "game": "LAC @ PHX",
-      "away_team": "LAC",
-      "home_team": "PHX",
-      "pick": "OVER 209.5",
-      "confidence": 90.2,
-      "pick_score": 55.0,
+      "type": "ml",
+      "game": "NOP @ CHA",
+      "away_team": "NOP",
+      "home_team": "CHA",
+      "pick": "CHA",
+      "confidence": 65.7,
+      "pick_score": 50.0,
       "score_factors": [
-        "90.2% total conf",
-        "Very high confidence"
+        "65.7% ML conf"
       ],
-      "commence_time": "2026-02-02T01:10:00Z",
+      "commence_time": "2026-02-02T20:10:00Z",
       "top_pick_rank": 1
     },
     {
-      "type": "ml",
-      "game": "BKN @ DET",
-      "away_team": "BKN",
-      "home_team": "DET",
-      "pick": "DET",
-      "confidence": 66.3,
+      "type": "spread",
+      "game": "MIN @ MEM",
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "pick": "MEM +7.5",
+      "confidence": 66.9,
       "pick_score": 50.0,
       "score_factors": [
-        "66.3% ML conf"
+        "66.9% spread conf",
+        "High confidence"
       ],
-      "commence_time": "2026-02-01T23:10:00Z",
+      "commence_time": "2026-02-03T02:40:00Z",
       "top_pick_rank": 2
     },
     {
-      "type": "ml",
-      "game": "UTA @ TOR",
-      "away_team": "UTA",
-      "home_team": "TOR",
-      "pick": "TOR",
-      "confidence": 66.4,
-      "pick_score": 50.0,
+      "type": "total",
+      "game": "HOU @ IND",
+      "away_team": "HOU",
+      "home_team": "IND",
+      "pick": "OVER 219.5",
+      "confidence": 65.9,
+      "pick_score": 40.0,
       "score_factors": [
-        "66.4% ML conf"
+        "65.9% total conf"
       ],
-      "commence_time": "2026-02-01T23:10:00Z",
+      "commence_time": "2026-02-03T00:10:00Z",
       "top_pick_rank": 3
     },
     {
-      "type": "ml",
-      "game": "LAC @ PHX",
-      "away_team": "LAC",
-      "home_team": "PHX",
-      "pick": "PHX",
-      "confidence": 66.4,
-      "pick_score": 50.0,
+      "type": "total",
+      "game": "PHI @ LAC",
+      "away_team": "PHI",
+      "home_team": "LAC",
+      "pick": "OVER 220.5",
+      "confidence": 67.4,
+      "pick_score": 40.0,
       "score_factors": [
-        "66.4% ML conf"
+        "67.4% total conf"
       ],
-      "commence_time": "2026-02-02T01:10:00Z",
+      "commence_time": "2026-02-03T03:40:00Z",
       "top_pick_rank": 4
     },
     {
-      "type": "spread",
-      "game": "OKC @ DEN",
-      "away_team": "OKC",
-      "home_team": "DEN",
-      "pick": "DEN +7.0",
-      "confidence": 67.6,
-      "pick_score": 50.0,
+      "type": "prop",
+      "player": "Alperen Sengun",
+      "team": "HOU",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 23.5,
+      "projection": 18.6,
+      "diff": -4.9,
+      "ev": 5.7,
+      "confidence": 56.1,
+      "pick_score": 39.2,
       "score_factors": [
-        "67.6% spread conf",
-        "High confidence"
+        "+5.7% EV",
+        "+4.9 edge",
+        "3-game streak"
       ],
-      "commence_time": "2026-02-02T02:40:00Z",
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 23.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -118
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 23.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -111
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 23.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Averaging 18.6 points over last 10 games (-4.9 below line).",
       "top_pick_rank": 5
     }
   ]
