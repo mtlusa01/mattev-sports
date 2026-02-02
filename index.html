@@ -763,32 +763,66 @@
       .search-wrap { max-width: 100%; }
     }
 
-    /* ── Sportsbook Odds Grid ── */
-    .detail-card-wide { grid-column: 1 / -1; }
-    .book-odds-grid {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    /* ── Sportsbook Odds Table ── */
+    .sportsbook-odds-table {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden; margin-top: 12px;
     }
-    .book-odds-item {
-      flex: 1 1 calc(25% - 6px); min-width: 70px;
-      background: var(--bg-tertiary); border: 1px solid var(--border);
-      border-radius: 8px; padding: 8px 10px; text-align: center;
-      position: relative; transition: border-color 0.2s;
+    .odds-table-header {
+      display: flex; background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
     }
-    .book-odds-item.book-best {
-      border-color: var(--accent); background: var(--accent-glow);
+    .odds-table-row {
+      display: flex; border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
     }
-    .book-name {
-      font-size: 11px; font-weight: 700; color: var(--text-secondary);
-      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;
+    .odds-table-row:last-child { border-bottom: none; }
+    .odds-table-row:hover { background: var(--bg-tertiary); }
+    .odds-table-row.recommended {
+      background: rgba(16,185,129,0.06);
+      border-left: 3px solid var(--accent);
     }
-    .book-line { font-size: 14px; font-weight: 600; color: var(--text-primary); }
-    .book-price { font-size: 13px; color: var(--text-secondary); margin-top: 1px; }
-    .book-best .book-price { color: var(--accent-light); font-weight: 600; }
-    .best-badge {
-      display: inline-block; font-size: 9px; font-weight: 700;
-      color: var(--accent); background: rgba(16,185,129,0.15);
-      padding: 1px 6px; border-radius: 4px; margin-top: 4px;
-      letter-spacing: 0.5px;
+    .odds-col {
+      padding: 8px 6px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+    }
+    .odds-col.side-col {
+      width: 80px; flex-direction: row; gap: 6px;
+      justify-content: flex-start; padding-left: 12px;
+    }
+    .side-label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .side-line { font-size: 12px; color: var(--text-primary); font-weight: 600; }
+    .odds-col.best-col {
+      width: 80px; background: rgba(16,185,129,0.04);
+      border-right: 1px solid var(--border);
+    }
+    .odds-col.avg-col {
+      width: 60px; border-right: 1px solid var(--border);
+    }
+    .odds-col.book-col { flex: 1; min-width: 50px; }
+    .col-label {
+      font-size: 10px; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.5px; font-weight: 600;
+    }
+    .book-abbr { font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+    .best-book-mini { font-size: 9px; font-weight: 700; margin-bottom: 1px; }
+    .best-odds { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+    .best-odds.positive { color: var(--accent-light); }
+    .avg-odds { font-size: 13px; color: var(--text-muted); }
+    .book-odds-val { font-size: 13px; color: var(--text-secondary); }
+    .book-odds-val.plus { color: var(--accent); }
+    .odds-col.book-col.is-best { background: rgba(16,185,129,0.1); }
+    .odds-col.book-col.is-best .book-odds-val {
+      color: var(--accent-light); font-weight: 700;
+    }
+    @media (max-width: 600px) {
+      .odds-col.book-col { min-width: 42px; }
+      .odds-col.side-col { width: 65px; padding-left: 8px; }
+      .odds-col.best-col { width: 65px; }
+      .odds-col.avg-col { width: 50px; }
+      .book-abbr { font-size: 9px; }
+      .book-odds-val, .avg-odds { font-size: 11px; }
+      .best-odds { font-size: 12px; }
     }
   </style>
 </head>
@@ -1418,24 +1452,51 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
-                ${p.book_odds && Object.keys(p.book_odds).length > 0 ? `
-                <div class="details-grid" style="margin-top:8px">
-                  <div class="detail-card detail-card-wide">
-                    <div class="dc-label">Sportsbook Odds</div>
-                    <div class="book-odds-grid">
-                      ${Object.entries(p.book_odds).map(([book, data]) => {
-                        const isBest = book === p.best_book;
-                        const label = {draftkings:'DK',fanduel:'FD',betmgm:'MGM',caesars:'CZR'}[book] || book;
-                        return `<div class="book-odds-item ${isBest ? 'book-best' : ''}">
-                          <div class="book-name">${label}</div>
-                          <div class="book-line">${data.line}</div>
-                          <div class="book-price">${data.odds > 0 ? '+' : ''}${data.odds}</div>
-                          ${isBest ? '<div class="best-badge">BEST</div>' : ''}
+                ${p.book_odds && Object.keys(p.book_odds).length > 0 ? (() => {
+                  const bks = ['fanduel','draftkings','betmgm','caesars'];
+                  const bkLabel = {fanduel:'FD',draftkings:'DK',betmgm:'MGM',caesars:'CZR'};
+                  const bkColor = {fanduel:'#1493ff',draftkings:'#53d337',betmgm:'#c4a44a',caesars:'#00694b'};
+                  const fmtO = v => v == null ? '-' : (v > 0 ? '+'+v : ''+v);
+                  const pickSide = p.direction.toLowerCase();
+                  const renderRow = (side) => {
+                    const vals = bks.map(b => p.book_odds[b] && p.book_odds[b][side] ? p.book_odds[b][side].odds : null).filter(v => v !== null);
+                    const best = vals.length ? Math.max(...vals) : null;
+                    const avg = vals.length ? Math.round(vals.reduce((a,b)=>a+b,0)/vals.length) : null;
+                    const bestBk = best !== null ? bks.find(b => p.book_odds[b] && p.book_odds[b][side] && p.book_odds[b][side].odds === best) : null;
+                    const lineVal = (() => { for (const b of bks) { if (p.book_odds[b] && p.book_odds[b][side]) return p.book_odds[b][side].line; } return p.line; })();
+                    const isRec = side === pickSide;
+                    return `<div class="odds-table-row${isRec ? ' recommended' : ''}">
+                      <div class="odds-col side-col">
+                        <span class="side-label">${side === 'over' ? 'Over' : 'Under'}</span>
+                        <span class="side-line">${lineVal}</span>
+                      </div>
+                      <div class="odds-col best-col">
+                        ${bestBk ? `<span class="best-book-mini" style="color:${bkColor[bestBk]}">${bkLabel[bestBk]}</span>` : ''}
+                        <span class="best-odds${best > 0 ? ' positive' : ''}">${fmtO(best)}</span>
+                      </div>
+                      <div class="odds-col avg-col">
+                        <span class="avg-odds">${fmtO(avg)}</span>
+                      </div>
+                      ${bks.map(b => {
+                        const o = p.book_odds[b] && p.book_odds[b][side] ? p.book_odds[b][side].odds : null;
+                        const isBest = o !== null && o === best;
+                        return `<div class="odds-col book-col${isBest ? ' is-best' : ''}">
+                          <span class="book-odds-val${o > 0 ? ' plus' : ''}">${fmtO(o)}</span>
                         </div>`;
                       }).join('')}
+                    </div>`;
+                  };
+                  return `<div class="sportsbook-odds-table">
+                    <div class="odds-table-header">
+                      <div class="odds-col side-col"></div>
+                      <div class="odds-col best-col"><span class="col-label">BEST</span></div>
+                      <div class="odds-col avg-col"><span class="col-label">AVG</span></div>
+                      ${bks.map(b => `<div class="odds-col book-col"><span class="book-abbr" style="color:${bkColor[b]}">${bkLabel[b]}</span></div>`).join('')}
                     </div>
-                  </div>
-                </div>` : ''}
+                    ${renderRow('over')}
+                    ${renderRow('under')}
+                  </div>`;
+                })() : ''}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
                 <div class="injury-section">
                   <div class="injury-alert">
