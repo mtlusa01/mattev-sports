@@ -1585,82 +1585,80 @@
     // ── Recommendations ──
     let recommendations = null;
 
-    function renderRecommendations() {
+    function renderGameRecommendations() {
       const recs = recommendations;
-      if (!recs || !recs.has_recommendations) {
-        if (recs && recs.message) {
-          return `<div class="no-recs-overall">
-            <div class="no-recs-icon">&#128270;</div>
-            <h3>No Recommended Bets Today</h3>
-            <p>${recs.message}</p>
-            <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Browse all projections below.</p>
-          </div>`;
-        }
-        return '';
-      }
-
-      let html = '<div class="rec-section">';
-
-      // Game bet recommendations
-      const gameRecs = recs.game_bets || [];
-      if (gameRecs.length > 0) {
-        const gameCards = gameRecs.map((r, i) => {
-          const confLvl = getConfLevel(r.confidence || 0);
-          const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-          return `<div class="rec-card game-rec">
-            <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
-            <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
-            <div class="rec-matchup">${r.game || ''}</div>
-            <div class="rec-pick">${r.pick}</div>
-            <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
-            ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
-          </div>`;
-        }).join('');
-        html += `<div class="rec-category">
+      const gameRecs = (recs && recs.game_bets) || [];
+      if (gameRecs.length === 0) {
+        return `<div class="rec-category" style="margin-bottom:20px">
           <div class="rec-header">
             <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
-            <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''}</span>
+            <span class="rec-count">0 picks</span>
           </div>
-          <div class="rec-cards">${gameCards}</div>
+          <div class="no-recs">No game bets meet our quality criteria today.</div>
         </div>`;
       }
+      const gameCards = gameRecs.map((r, i) => {
+        const confLvl = getConfLevel(r.confidence || 0);
+        const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
+        return `<div class="rec-card game-rec">
+          <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
+          <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
+          <div class="rec-matchup">${r.game || ''}</div>
+          <div class="rec-pick">${r.pick}</div>
+          <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
+          ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
+        </div>`;
+      }).join('');
+      return `<div class="rec-category" style="margin-bottom:20px">
+        <div class="rec-header">
+          <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
+          <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="rec-cards">${gameCards}</div>
+      </div>`;
+    }
 
-      // Prop recommendations
-      const propRecs = recs.props || [];
-      if (propRecs.length > 0) {
-        const propCards = propRecs.map((r, i) => {
-          const confLvl = getConfLevel(r.confidence || 0);
-          const dirClass = (r.direction || '').toLowerCase();
-          const diff = r.diff != null ? r.diff : ((r.projection || 0) - (r.line || 0));
-          const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
-          const diffCls = diff >= 0 ? 'pos' : 'neg';
-          const g = getGameForTeam(r.team);
-          const matchupStr = g ? (g.away_team === r.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
-          const reasons = (r.reasons || r.score_factors || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-          return `<div class="rec-card prop-rec">
-            <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
-            <div class="rec-badge prop">PROP</div>
-            <div class="rec-player">${r.player}</div>
-            <div class="rec-team"><span class="team-dot" style="background:${TEAM_COLORS[r.team] || 'var(--text-muted)'}"></span>${r.team} ${matchupStr}</div>
-            <div class="rec-prop-type">${r.prop}</div>
-            <div class="rec-pick ${dirClass}">${r.direction} ${r.line}</div>
-            <div class="rec-proj">Proj: ${r.projection} <span class="${diffCls}">(${diffStr})</span></div>
-            ${r.ev ? `<div class="rec-ev">+${r.ev.toFixed(1)}% EV</div>` : ''}
-            <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
-            ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
-          </div>`;
-        }).join('');
-        html += `<div class="rec-category">
+    function renderPropRecommendations() {
+      const recs = recommendations;
+      const propRecs = (recs && recs.props) || [];
+      if (propRecs.length === 0) {
+        return `<div class="rec-category">
           <div class="rec-header">
             <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
-            <span class="rec-count">${propRecs.length} pick${propRecs.length !== 1 ? 's' : ''}</span>
+            <span class="rec-count">0 picks</span>
           </div>
-          <div class="rec-cards">${propCards}</div>
+          <div class="no-recs">No player props meet our quality criteria today.</div>
         </div>`;
       }
-
-      html += '</div>';
-      return html;
+      const propCards = propRecs.map((r, i) => {
+        const confLvl = getConfLevel(r.confidence || 0);
+        const dirClass = (r.direction || '').toLowerCase();
+        const diff = r.diff != null ? r.diff : ((r.projection || 0) - (r.line || 0));
+        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
+        const diffCls = diff >= 0 ? 'pos' : 'neg';
+        const g = getGameForTeam(r.team);
+        const matchupStr = g ? (g.away_team === r.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
+        const reasons = (r.reasons || r.score_factors || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
+        return `<div class="rec-card prop-rec">
+          <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
+          <div class="rec-badge prop">PROP</div>
+          <div class="rec-player">${r.player}</div>
+          <div class="rec-team"><span class="team-dot" style="background:${TEAM_COLORS[r.team] || 'var(--text-muted)'}"></span>${r.team} ${matchupStr}</div>
+          <div class="rec-prop-type">${r.prop}</div>
+          <div class="rec-pick ${dirClass}">${r.direction} ${r.line}</div>
+          <div class="rec-proj">Proj: ${r.projection} <span class="${diffCls}">(${diffStr})</span></div>
+          ${r.ev ? `<div class="rec-ev">+${r.ev.toFixed(1)}% EV</div>` : ''}
+          <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
+          ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
+        </div>`;
+      }).join('');
+      return `<div class="rec-category">
+        <div class="rec-header">
+          <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
+          <span class="rec-count">${propRecs.length} pick${propRecs.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="rec-cards">${propCards}</div>
+      </div>`;
     }
 
     // ── Category Tabs ──
@@ -2113,8 +2111,8 @@
         return;
       }
 
-      // Recommendations
-      let html = renderRecommendations();
+      // Prop recommendations (game recs show in game projections tab)
+      let html = renderPropRecommendations();
 
       // Category tabs
       html += renderPropCategoryTabs(filtered);
@@ -2562,7 +2560,8 @@
         return timeA - timeB;
       });
 
-      // View toggle buttons
+      // Game recommendations + view toggle
+      const gameRecsHtml = renderGameRecommendations();
       const toggleHtml = `
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
           <span style="font-size:13px;color:var(--text-muted)">${filtered.length} game${filtered.length !== 1 ? 's' : ''}</span>
@@ -2574,7 +2573,7 @@
 
       if (gameViewMode === 'list') {
         const betRows = generateBetRows(filtered);
-        container.innerHTML = toggleHtml + renderBetsList(betRows);
+        container.innerHTML = gameRecsHtml + toggleHtml + renderBetsList(betRows);
         // Attach sort handlers
         container.querySelectorAll('[data-bets-sort]').forEach(th => {
           th.addEventListener('click', () => {
@@ -2590,7 +2589,7 @@
         });
       } else {
         // Grid view — flat list sorted by time
-        container.innerHTML = toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
+        container.innerHTML = gameRecsHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
       }
 
       // Attach view toggle handlers
