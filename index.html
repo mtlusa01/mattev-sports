@@ -83,16 +83,13 @@
       color: white;
       flex-shrink: 0;
     }
-    .logo-icon {
-      background: linear-gradient(135deg, var(--brand) 0%, #991b1b 100%);
-      color: white;
-      padding: 0.25rem 0.5rem;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+    .brand-logo-img {
+      height: 45px;
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.2s;
     }
-    .logo .brand-elite { color: var(--brand-light); font-weight: 800; }
+    .brand-logo-img:hover { transform: scale(1.02); }
     .sports-tabs {
       display: flex;
       align-items: center;
@@ -1094,6 +1091,7 @@
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
+      .brand-logo-img { height: 36px; }
       .nav-right { display: none; }
       .sports-tabs { display: none; }
       .mobile-menu-btn { display: block; }
@@ -1202,8 +1200,7 @@
   <header class="top-nav">
     <div class="top-nav-inner">
       <a href="index.html" class="logo">
-        <span class="logo-icon">EF</span>
-        <span>Edge Factor <span class="brand-elite">Elite</span></span>
+        <img src="logo.png" alt="Edge Factor Elite" class="brand-logo-img">
       </a>
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
