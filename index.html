@@ -825,9 +825,14 @@
     .game-conf-section.high .game-conf-section-header { border-bottom-color: rgba(16, 185, 129, 0.3); }
     .game-conf-section.high .game-conf-section-count { background: var(--accent-glow); color: var(--accent-light); }
     .game-conf-section.high .game-card { border-color: rgba(16, 185, 129, 0.15); }
-    .game-conf-section.medium .game-conf-section-title { color: var(--text-primary); }
-    .game-conf-section.low .game-conf-section-title { color: var(--text-muted); }
-    .game-conf-section.low .game-card { opacity: 0.8; }
+    .game-conf-section.medium .game-conf-section-title { color: var(--yellow); }
+    .game-conf-section.medium .game-conf-section-header { border-bottom-color: rgba(245, 158, 11, 0.3); }
+    .game-conf-section.medium .game-conf-section-count { background: rgba(245, 158, 11, 0.15); color: var(--yellow); }
+    .game-conf-section.medium .game-card { border-color: rgba(245, 158, 11, 0.15); }
+    .game-conf-section.low .game-conf-section-title { color: var(--red-light); }
+    .game-conf-section.low .game-conf-section-header { border-bottom-color: rgba(239, 68, 68, 0.2); }
+    .game-conf-section.low .game-conf-section-count { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
+    .game-conf-section.low .game-card { border-color: rgba(239, 68, 68, 0.1); opacity: 0.9; }
     .game-conf-section .game-cards-grid { margin-bottom: 0; }
 
     /* Confidence filter row in game projections */
@@ -871,8 +876,8 @@
       font-size: 11px; font-weight: 700; min-width: 42px; text-align: center;
     }
     .conf-badge.high { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .conf-badge.medium { background: rgba(59, 130, 246, 0.12); color: var(--blue); }
-    .conf-badge.low { background: var(--bg-tertiary); color: var(--text-muted); }
+    .conf-badge.medium { background: rgba(245, 158, 11, 0.15); color: var(--yellow); }
+    .conf-badge.low { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
 
     .type-badge {
       display: inline-block; padding: 2px 8px; border-radius: 4px;
@@ -1240,7 +1245,7 @@
 
     // ── Helpers ──
     function getConfLevel(conf) {
-      if (conf >= 51) return 'high';
+      if (conf >= 60) return 'high';
       if (conf >= 50) return 'medium';
       return 'low';
     }
@@ -1284,7 +1289,7 @@
       const confs = [g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0];
       const maxConf = Math.max(...confs);
       if (maxConf >= 60) return 'high';
-      if (maxConf >= 52) return 'medium';
+      if (maxConf >= 50) return 'medium';
       return 'low';
     }
 
@@ -1437,7 +1442,7 @@
       const g = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
       if (!g) { el.classList.remove('visible'); return; }
 
-      const confColor = c => c >= 65 ? 'var(--accent-light)' : c >= 55 ? 'var(--accent)' : 'var(--text-muted)';
+      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
       const pickCls = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
 
       const spreadStr = g.spread_pick || 'N/A';
@@ -2136,11 +2141,11 @@
 
     function renderGameCard(g) {
       // 3-tier confidence colors: green (>60), white (52-60), gray (<52)
-      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 52 ? 'var(--text-primary)' : 'var(--text-muted)';
+      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
       const pickClass = (pick, conf) => {
         if (!pick || pick === 'N/A') return 'low-conf';
         if (conf >= 60) return 'best-bet';
-        if (conf < 52) return 'low-conf';
+        if (conf < 50) return 'low-conf';
         return '';
       };
       const bestBetBadge = conf => conf >= 60 ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
@@ -2381,7 +2386,7 @@
       };
       const sortedCls = (col) => betsSortBy === col ? ' sorted' : '';
 
-      const confTier = (c) => c >= 60 ? 'high' : c >= 52 ? 'medium' : 'low';
+      const confTier = (c) => c >= 60 ? 'high' : c >= 50 ? 'medium' : 'low';
 
       const resultBadge = (r) => {
         if (r === 'win') return '<span class="result-badge win">W</span>';
