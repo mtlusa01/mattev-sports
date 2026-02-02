@@ -3,27 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MattEV | AI Sports Projections</title>
-  <meta name="description" content="Daily AI-powered sports projections. Data-driven player props and game predictions updated every morning.">
+  <title>Edge Factor Elite | AI Sports Projections</title>
+  <meta name="description" content="Edge Factor Elite — Daily AI-powered sports projections. Data-driven player props and game predictions updated every morning.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #09090b;
-      --bg-secondary: #18181b;
-      --bg-tertiary: #27272a;
-      --bg-elevated: rgba(39, 39, 42, 0.5);
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-tertiary: #1a1a24;
+      --bg-elevated: rgba(37, 37, 50, 0.5);
       --border: rgba(255, 255, 255, 0.08);
       --border-light: rgba(255, 255, 255, 0.12);
-      --text-primary: #fafafa;
-      --text-secondary: #a1a1aa;
-      --text-muted: #71717a;
+      --text-primary: #f0f0f0;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      /* Brand — Ferrari Red */
+      --brand: #dc2626;
+      --brand-light: #ef4444;
+      --brand-glow: rgba(220, 38, 38, 0.15);
+      --brand-border: rgba(220, 38, 38, 0.3);
+      /* Winning/Positive — Green */
       --accent: #10b981;
       --accent-light: #34d399;
       --accent-glow: rgba(16, 185, 129, 0.15);
+      /* Status colors */
       --red: #ef4444;
       --red-light: #f87171;
-      --yellow: #eab308;
+      --yellow: #f59e0b;
       --blue: #3b82f6;
       --purple: #8b5cf6;
     }
@@ -40,7 +47,7 @@
 
     .page-gradient {
       position: fixed; top: 0; left: 0; right: 0; height: 60vh;
-      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.08), transparent);
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(220, 38, 38, 0.08), transparent);
       pointer-events: none; z-index: 0;
     }
 
@@ -77,12 +84,15 @@
       flex-shrink: 0;
     }
     .logo-icon {
-      background: #10b981;
-      color: black;
+      background: linear-gradient(135deg, var(--brand) 0%, #991b1b 100%);
+      color: white;
       padding: 0.25rem 0.5rem;
       border-radius: 6px;
-      font-weight: bold;
+      font-weight: 800;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
     }
+    .logo .brand-elite { color: var(--brand-light); font-weight: 800; }
     .sports-tabs {
       display: flex;
       align-items: center;
@@ -109,8 +119,9 @@
     }
     .sport-tab:hover { color: var(--text-secondary); }
     .sport-tab.active {
-      background: var(--accent);
-      color: #000;
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
     }
     .soon-badge {
       font-size: 9px;
@@ -186,7 +197,7 @@
       font-family: inherit;
     }
     .view-tab:hover { color: var(--text-secondary); }
-    .view-tab.active { color: var(--accent-light); border-bottom-color: var(--accent); }
+    .view-tab.active { color: var(--brand-light); border-bottom-color: var(--brand); }
     .sub-nav-meta {
       font-size: 12px;
       color: var(--text-muted);
@@ -198,7 +209,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--brand);
       animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -267,8 +278,8 @@
     }
     .coming-soon-overlay .cs-back {
       padding: 10px 24px;
-      background: var(--accent);
-      color: #000;
+      background: linear-gradient(135deg, var(--brand) 0%, #991b1b 100%);
+      color: #fff;
       border: none;
       border-radius: 8px;
       font-size: 14px;
@@ -283,7 +294,7 @@
     main { max-width: 1200px; margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 1; }
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
     .section-title { font-size: 14px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
-    .section-title::before { content: ''; width: 3px; height: 16px; background: var(--accent); border-radius: 2px; }
+    .section-title::before { content: ''; width: 3px; height: 16px; background: var(--brand); border-radius: 2px; }
     .section-meta { font-size: 13px; color: var(--text-muted); }
 
     /* ── Game Filter Bar ── */
@@ -312,9 +323,9 @@
       white-space: nowrap;
     }
     .game-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .game-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .game-pill.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
     .game-pill .pill-time { font-weight: 400; color: var(--text-muted); margin-left: 4px; font-size: 11px; }
-    .game-pill.active .pill-time { color: rgba(52, 211, 153, 0.7); }
+    .game-pill.active .pill-time { color: rgba(239, 68, 68, 0.7); }
     .game-pill .pill-live { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; color: var(--red-light); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; }
     .game-pill .pill-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
     .game-pill .pill-soon { color: var(--yellow); margin-left: 4px; font-size: 10px; font-weight: 600; }
@@ -347,7 +358,7 @@
       transition: border-color 0.15s;
     }
     .search-input::placeholder { color: var(--text-muted); }
-    .search-input:focus { border-color: var(--accent); }
+    .search-input:focus { border-color: var(--brand); }
 
     /* Filter row */
     .filter-row { display: flex; align-items: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -355,13 +366,13 @@
     .filter-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
     .filter-pill { padding: 5px 14px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 100px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
     .filter-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .filter-pill.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .filter-pill.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
 
     /* ── Selected Game Card (inline) ── */
     .selected-game-card {
       display: none;
       background: var(--bg-secondary);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--brand-border);
       border-radius: 12px;
       padding: 16px 20px;
       margin-bottom: 20px;
@@ -374,7 +385,7 @@
     .sgc-pick { display: flex; flex-direction: column; gap: 2px; }
     .sgc-pick-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
     .sgc-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .sgc-pick-value.best-bet { color: var(--accent-light); }
+    .sgc-pick-value.best-bet { color: var(--accent-light); }  /* Keep green — winning indicator */
     .sgc-pick-value.no-play { color: var(--text-muted); font-weight: 400; }
     .sgc-pick-conf { font-size: 11px; color: var(--text-secondary); }
 
@@ -533,12 +544,12 @@
     /* ── Top Picks Section ── */
     .top-picks-section {
       margin-bottom: 24px; padding: 20px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px;
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
+      border: 1px solid var(--brand-border); border-radius: 12px;
     }
     .top-picks-header {
       display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
-      font-size: 14px; font-weight: 700; color: var(--accent-light);
+      font-size: 14px; font-weight: 700; color: var(--brand-light);
     }
     .top-picks-cards {
       display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
@@ -548,7 +559,7 @@
       border-radius: 10px; padding: 14px; text-align: center;
       transition: border-color 0.15s; position: relative; overflow: hidden;
     }
-    .top-pick-card:hover { border-color: rgba(16, 185, 129, 0.3); }
+    .top-pick-card:hover { border-color: var(--brand-border); }
     .top-pick-card.graded { opacity: 0.92; }
     .top-pick-card.graded.tp-win {
       border-color: var(--accent);
@@ -572,7 +583,7 @@
     .tp-result-badge.tp-push { background: var(--yellow); color: #000; }
     .tp-actual { background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 3px; font-size: 10px; }
     .top-pick-rank {
-      font-size: 11px; font-weight: 700; color: var(--accent);
+      font-size: 11px; font-weight: 700; color: var(--brand);
       margin-bottom: 6px; letter-spacing: 0.05em;
     }
     .top-pick-player { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
@@ -636,13 +647,13 @@
       cursor: pointer; transition: all 0.15s; font-family: inherit;
     }
     .category-tab:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .category-tab.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .category-tab.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
     .category-tab .tab-count {
       display: inline-block; padding: 1px 6px; border-radius: 100px;
       background: var(--bg-tertiary); font-size: 10px; font-weight: 600;
       color: var(--text-muted); margin-left: 6px;
     }
-    .category-tab.active .tab-count { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
+    .category-tab.active .tab-count { background: rgba(220, 38, 38, 0.2); color: var(--brand-light); }
 
     /* ── Sort Options ── */
     .sort-options {
@@ -658,7 +669,7 @@
       cursor: pointer; transition: all 0.15s; font-family: inherit;
     }
     .sort-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .sort-btn.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .sort-btn.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
 
     /* ── Advanced Filters ── */
     .advanced-filters {
@@ -672,9 +683,9 @@
       font-size: 11px; font-weight: 600; font-family: inherit;
     }
     .filter-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .filter-btn.active { border-color: rgba(16, 185, 129, 0.3); background: var(--accent-glow); color: var(--accent-light); }
+    .filter-btn.active { border-color: var(--brand-border); background: var(--brand-glow); color: var(--brand-light); }
     .filter-icon { font-size: 12px; }
-    .filter-value { color: var(--accent-light); }
+    .filter-value { color: var(--brand-light); }
     .dropdown-arrow { font-size: 8px; margin-left: 2px; transition: transform 0.2s; }
     .filter-dropdown.open .dropdown-arrow { transform: rotate(180deg); }
     .filter-menu {
@@ -688,7 +699,7 @@
       font-size: 12px; color: var(--text-secondary);
     }
     .filter-option:hover { background: var(--bg-tertiary); }
-    .filter-option.active { background: var(--accent-glow); color: var(--accent-light); }
+    .filter-option.active { background: var(--brand-glow); color: var(--brand-light); }
     .filter-option.opt-favorable { color: #10b981; }
     .filter-option.opt-neutral { color: #f59e0b; }
     .filter-option.opt-unfavorable { color: #ef4444; }
@@ -856,7 +867,7 @@
       border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
       min-width: 200px; flex: 1 1 200px; max-width: 300px;
     }
-    .search-filter-bar .search-wrap:focus-within { border-color: var(--accent); }
+    .search-filter-bar .search-wrap:focus-within { border-color: var(--brand); }
     .search-filter-bar .search-wrap svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
     .search-filter-bar .search-wrap input {
       background: transparent; border: none; color: var(--text-primary);
@@ -881,7 +892,7 @@
       cursor: pointer; transition: all 0.15s; font-family: inherit;
     }
     .view-toggle-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .view-toggle-btn.active { background: var(--accent-glow); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-light); }
+    .view-toggle-btn.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
 
     .bets-table { width: 100%; border-collapse: collapse; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .bets-table thead th {
@@ -946,10 +957,10 @@
     .rec-header-title {
       font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;
     }
-    .rec-header-title.game-recs { color: var(--blue); }
+    .rec-header-title.game-recs { color: var(--brand-light); }
     .rec-header-title.prop-recs { color: var(--accent-light); }
     .rec-count {
-      background: var(--accent-glow); color: var(--accent-light);
+      background: var(--brand-glow); color: var(--brand-light);
       padding: 2px 10px; border-radius: 100px;
       font-size: 11px; font-weight: 600;
     }
@@ -961,9 +972,9 @@
       border-radius: 10px; padding: 14px; position: relative;
       transition: border-color 0.15s;
     }
-    .rec-card:hover { border-color: rgba(16, 185, 129, 0.3); }
-    .rec-card.game-rec { border-left: 3px solid var(--blue); }
-    .rec-card.prop-rec { border-left: 3px solid var(--accent); }
+    .rec-card:hover { border-color: var(--brand-border); }
+    .rec-card.game-rec { border-left: 3px solid var(--brand); }
+    .rec-card.prop-rec { border-left: 3px solid var(--accent); }  /* Green — winning */
     .rec-rank {
       position: absolute; top: 8px; right: 10px;
       font-size: 11px; color: var(--text-muted); font-weight: 700;
@@ -1191,8 +1202,8 @@
   <header class="top-nav">
     <div class="top-nav-inner">
       <a href="index.html" class="logo">
-        <span class="logo-icon">M</span>
-        <span>MattEV</span>
+        <span class="logo-icon">EF</span>
+        <span>Edge Factor <span class="brand-elite">Elite</span></span>
       </a>
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
@@ -1317,7 +1328,7 @@
 
   <footer>
     <div class="footer-inner">
-      <p class="footer-brand">MattEV Sports Projections</p>
+      <p class="footer-brand">Edge Factor Elite</p>
       <p class="footer-disclaimer">For entertainment purposes only. Past performance does not guarantee future results. Please gamble responsibly.</p>
     </div>
   </footer>
