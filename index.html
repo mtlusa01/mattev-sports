@@ -845,6 +845,32 @@
       text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
     }
 
+    /* ── Search & Filter Bar (shared by both views) ── */
+    .search-filter-bar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      padding: 12px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 16px;
+    }
+    .search-filter-bar .search-wrap {
+      display: flex; align-items: center; gap: 8px; background: var(--bg-primary);
+      border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
+      min-width: 200px; flex: 1 1 200px; max-width: 300px;
+    }
+    .search-filter-bar .search-wrap:focus-within { border-color: var(--accent); }
+    .search-filter-bar .search-wrap svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+    .search-filter-bar .search-wrap input {
+      background: transparent; border: none; color: var(--text-primary);
+      font-size: 13px; width: 100%; outline: none; font-family: inherit;
+    }
+    .search-filter-bar .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-filter-bar .filter-group {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    @media (max-width: 700px) {
+      .search-filter-bar { flex-direction: column; align-items: stretch; }
+      .search-filter-bar .search-wrap { max-width: 100%; }
+    }
+
     /* ── Game Bets List View ── */
     .view-toggle {
       display: flex; gap: 4px; margin-left: auto;
@@ -2151,6 +2177,106 @@
         </div>`;
     }
 
+    // ── Props inline filter bar ──
+    function renderPropsFilterBar() {
+      const searchIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+      const confTabs = [
+        { key: 'all', label: 'All' }, { key: 'high', label: 'High' },
+        { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
+      ];
+      const dirTabs = [
+        { key: 'all', label: 'All' }, { key: 'over', label: 'Overs' }, { key: 'under', label: 'Unders' },
+      ];
+
+      let html = '<div class="search-filter-bar">';
+      // Search
+      html += `<div class="search-wrap">${searchIcon}<input type="text" id="inline-search-input" placeholder="Search players..." value="${currentSearch || ''}"></div>`;
+      // Confidence
+      html += '<div class="filter-group"><span class="filter-label">Confidence</span>';
+      for (const tab of confTabs) {
+        const active = currentConfFilter === tab.key ? ' active' : '';
+        html += `<button class="filter-pill${active}" data-inline-conf="${tab.key}">${tab.label}</button>`;
+      }
+      html += '</div>';
+      // Direction
+      html += '<div class="filter-group"><span class="filter-label">Direction</span>';
+      for (const tab of dirTabs) {
+        const active = currentDirFilter === tab.key ? ' active' : '';
+        html += `<button class="filter-pill${active}" data-inline-dir="${tab.key}">${tab.label}</button>`;
+      }
+      html += '</div></div>';
+
+      // Game pills
+      if (gameProjections.length > 0) {
+        const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
+        const sorted = [...gameProjections].sort((a, b) => {
+          const sa = getGameStatus(a), sb = getGameStatus(b);
+          if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
+          return (a.commence_time || '').localeCompare(b.commence_time || '');
+        });
+        html += '<div class="game-filter-bar" style="display:flex">';
+        html += '<span class="filter-label">Game</span>';
+        html += `<button class="game-pill${currentGameFilter === null ? ' active' : ''}" data-inline-game="all">All Games</button>`;
+        for (const g of sorted) {
+          const key = gameKey(g);
+          const active = currentGameFilter === key ? ' active' : '';
+          const status = getGameStatus(g);
+          const time = formatGameTime(g.commence_time);
+          let extra = '';
+          let statusCls = '';
+          if (status === 'live') { extra = '<span class="pill-live"><span class="pill-live-dot"></span>LIVE</span>'; statusCls = ' live-pill'; }
+          else if (status === 'soon') { extra = time ? `<span class="pill-soon">${time}</span>` : ''; statusCls = ' soon-pill'; }
+          else if (status === 'final') { extra = '<span class="pill-final">FINAL</span>'; statusCls = ' final-pill'; }
+          else if (time && status === 'scheduled') { extra = `<span class="pill-time">${time}</span>`; }
+          html += `<button class="game-pill${active}${statusCls}" data-inline-game="${key}">${g.away_team} @ ${g.home_team}${extra}</button>`;
+        }
+        html += '</div>';
+      }
+
+      return html;
+    }
+
+    function attachPropsFilterHandlers(propsView) {
+      // Inline search
+      const searchInput = propsView.querySelector('#inline-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentSearch = e.target.value.trim();
+          expandedRowId = null;
+          render();
+        });
+        // Re-focus after re-render if it had focus
+        if (document.activeElement === null || currentSearch) {
+          setTimeout(() => { searchInput.focus(); searchInput.selectionStart = searchInput.selectionEnd = searchInput.value.length; }, 0);
+        }
+      }
+      // Confidence pills
+      propsView.querySelectorAll('[data-inline-conf]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentConfFilter = pill.dataset.inlineConf;
+          expandedRowId = null;
+          render();
+        });
+      });
+      // Direction pills
+      propsView.querySelectorAll('[data-inline-dir]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentDirFilter = pill.dataset.inlineDir;
+          expandedRowId = null;
+          render();
+        });
+      });
+      // Game pills
+      propsView.querySelectorAll('[data-inline-game]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const game = pill.dataset.inlineGame;
+          currentGameFilter = game === 'all' ? null : game;
+          expandedRowId = null;
+          render();
+        });
+      });
+    }
+
     // ── Main Render ──
     function render() {
       const propsView = document.getElementById('player-props-view');
@@ -2160,12 +2286,14 @@
       const searchWrap = document.getElementById('search-wrap');
       const selectedCard = document.getElementById('selected-game-card');
 
+      // Always hide static filters — they're now rendered inline
+      filterRow.style.display = 'none';
+      gameFilterBar.style.display = 'none';
+      searchWrap.style.display = 'none';
+
       if (currentView === 'game-projections') {
         propsView.style.display = 'none';
         gameView.style.display = 'block';
-        filterRow.style.display = 'none';
-        gameFilterBar.style.display = 'none';
-        searchWrap.style.display = 'none';
         selectedCard.classList.remove('visible');
         renderGameProjections();
         return;
@@ -2173,48 +2301,50 @@
 
       propsView.style.display = 'block';
       gameView.style.display = 'none';
-      filterRow.style.display = 'flex';
-      if (gameProjections.length > 0) gameFilterBar.style.display = 'flex';
-      searchWrap.style.display = 'block';
 
       renderSelectedGameCard();
 
       const filtered = applyFilters(projections);
 
+      // Recommendations (shown first, above filters)
+      let recsHtml = currentGameFilter
+        ? renderGameSpecificProps(filtered)
+        : renderPropRecommendations();
+
+      // Inline search + filters (below recs)
+      const filtersHtml = renderPropsFilterBar();
+
       if (filtered.length === 0) {
-        // If a game is selected, show graded props for final games or a helpful message
         if (currentGameFilter) {
           const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
           if (selGame && getGameStatus(selGame) === 'final' && selGame.graded_props) {
             renderGradedProps(selGame, propsView);
             return;
           }
-          // Game selected but no props — explain why
           const status = selGame ? getGameStatus(selGame) : 'unknown';
           const reason = status === 'live' || status === 'final'
             ? 'Player props are generated before tip-off. This game was already in progress when projections were last updated.'
             : 'No player prop lines were available for this game at the time projections were generated.';
-          propsView.innerHTML = `
+          propsView.innerHTML = recsHtml + filtersHtml + `
             <div class="empty-state">
               <div class="empty-state-icon">&#127936;</div>
               <div class="empty-state-title">No player props for this game</div>
               <div class="empty-state-text">${reason}</div>
             </div>`;
+          attachPropsFilterHandlers(propsView);
           return;
         }
-        propsView.innerHTML = `
+        propsView.innerHTML = recsHtml + filtersHtml + `
           <div class="empty-state">
             <div class="empty-state-icon">&#128202;</div>
             <div class="empty-state-title">No projections match</div>
             <div class="empty-state-text">Try adjusting your filters or search to see more projections.</div>
           </div>`;
+        attachPropsFilterHandlers(propsView);
         return;
       }
 
-      // Show game-specific top props when a game is selected, otherwise show overall prop recommendations
-      let html = currentGameFilter
-        ? renderGameSpecificProps(filtered)
-        : renderPropRecommendations();
+      let html = recsHtml + filtersHtml;
 
       // Category tabs
       html += renderPropCategoryTabs(filtered);
@@ -2234,6 +2364,9 @@
       html += renderPropsTable(sorted);
 
       propsView.innerHTML = html;
+
+      // Attach inline filter handlers
+      attachPropsFilterHandlers(propsView);
 
       // Attach category tab handlers
       propsView.querySelectorAll('[data-prop-cat]').forEach(tab => {
@@ -2297,34 +2430,7 @@
       });
     });
 
-    // Confidence pills
-    document.querySelectorAll('[data-conf]').forEach(pill => {
-      pill.addEventListener('click', () => {
-        document.querySelectorAll('[data-conf]').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        currentConfFilter = pill.dataset.conf;
-        expandedRowId = null;
-        render();
-      });
-    });
-
-    // Direction pills
-    document.querySelectorAll('[data-dir]').forEach(pill => {
-      pill.addEventListener('click', () => {
-        document.querySelectorAll('[data-dir]').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        currentDirFilter = pill.dataset.dir;
-        expandedRowId = null;
-        render();
-      });
-    });
-
-    // Search input
-    document.getElementById('search-input').addEventListener('input', (e) => {
-      currentSearch = e.target.value.trim();
-      expandedRowId = null;
-      render();
-    });
+    // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
 
     // ── Game Projections View ──
     function renderResultBadge(result) {
@@ -2451,70 +2557,7 @@
         </div>`;
     }
 
-    function renderGameFilters() {
-      const filterEl = document.getElementById('game-status-filter');
-      if (gameProjections.length === 0) { filterEl.innerHTML = ''; return; }
-
-      // Count games by status category
-      const statusCounts = { all: gameProjections.length, upcoming: 0, live: 0, final: 0 };
-      for (const g of gameProjections) {
-        const s = getGameStatus(g);
-        if (s === 'scheduled' || s === 'soon') statusCounts.upcoming++;
-        else if (s === 'live') statusCounts.live++;
-        else if (s === 'final') statusCounts.final++;
-      }
-
-      const statusTabs = [
-        { key: 'all', label: 'All' },
-        { key: 'upcoming', label: 'Upcoming' },
-        { key: 'live', label: 'Live' },
-        { key: 'final', label: 'Final' },
-      ];
-
-      let html = '<div class="game-status-filter" style="margin-bottom:12px">';
-      html += '<span class="filter-label">Status</span>';
-      for (const tab of statusTabs) {
-        const active = currentStatusFilter === tab.key ? ' active' : '';
-        html += `<button class="filter-pill${active}" data-status-filter="${tab.key}">${tab.label} (${statusCounts[tab.key]})</button>`;
-      }
-      html += '</div>';
-
-      // Confidence filter
-      const confTabs = [
-        { key: 'all', label: 'All' },
-        { key: 'high', label: 'High' },
-        { key: 'medium', label: 'Medium' },
-        { key: 'low', label: 'Low' },
-      ];
-
-      html += '<div class="game-conf-filter">';
-      html += '<span class="filter-label">Confidence</span>';
-      for (const tab of confTabs) {
-        const active = currentGameConfFilter === tab.key ? ' active' : '';
-        html += `<button class="filter-pill${active}" data-conf-filter="${tab.key}">${tab.label}</button>`;
-      }
-      html += '</div>';
-
-      filterEl.innerHTML = html;
-
-      filterEl.querySelectorAll('[data-status-filter]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          currentStatusFilter = pill.dataset.statusFilter;
-          filterEl.querySelectorAll('[data-status-filter]').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          renderGameProjections();
-        });
-      });
-
-      filterEl.querySelectorAll('[data-conf-filter]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          currentGameConfFilter = pill.dataset.confFilter;
-          filterEl.querySelectorAll('[data-conf-filter]').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          renderGameProjections();
-        });
-      });
-    }
+    // renderGameFilters() removed — filters now rendered inline in renderGameProjections()
 
     // ── Game Bets List View ──
     function generateBetRows(games) {
@@ -2624,11 +2667,31 @@
         </table>`;
     }
 
+    function attachGameFilterHandlers(container) {
+      container.querySelectorAll('[data-status-filter]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentStatusFilter = pill.dataset.statusFilter;
+          container.querySelectorAll('[data-status-filter]').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          renderGameProjections();
+        });
+      });
+      container.querySelectorAll('[data-conf-filter]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentGameConfFilter = pill.dataset.confFilter;
+          container.querySelectorAll('[data-conf-filter]').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          renderGameProjections();
+        });
+      });
+    }
+
     function renderGameProjections() {
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
 
-      renderGameFilters();
+      // Hide the static filter element — we render filters inline now
+      document.getElementById('game-status-filter').innerHTML = '';
 
       if (gameProjections.length === 0) {
         container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No game projections available</div><div class="empty-state-text">Game projections will appear here when today's games are loaded.</div></div>`;
@@ -2651,8 +2714,43 @@
         filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter));
       }
 
+      // Game recommendations (rendered first, above filters)
+      const gameRecsHtml = renderGameRecommendations();
+
+      // Build inline filters HTML (below recs, above cards)
+      const statusCounts = { all: gameProjections.length, upcoming: 0, live: 0, final: 0 };
+      for (const g of gameProjections) {
+        const s = getGameStatus(g);
+        if (s === 'scheduled' || s === 'soon') statusCounts.upcoming++;
+        else if (s === 'live') statusCounts.live++;
+        else if (s === 'final') statusCounts.final++;
+      }
+      const statusTabs = [
+        { key: 'all', label: 'All' }, { key: 'upcoming', label: 'Upcoming' },
+        { key: 'live', label: 'Live' }, { key: 'final', label: 'Final' },
+      ];
+      const confTabs = [
+        { key: 'all', label: 'All' }, { key: 'high', label: 'High' },
+        { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
+      ];
+
+      let filtersHtml = '<div class="search-filter-bar">';
+      filtersHtml += '<div class="filter-group"><span class="filter-label">Status</span>';
+      for (const tab of statusTabs) {
+        const active = currentStatusFilter === tab.key ? ' active' : '';
+        filtersHtml += `<button class="filter-pill${active}" data-status-filter="${tab.key}">${tab.label} (${statusCounts[tab.key]})</button>`;
+      }
+      filtersHtml += '</div>';
+      filtersHtml += '<div class="filter-group"><span class="filter-label">Confidence</span>';
+      for (const tab of confTabs) {
+        const active = currentGameConfFilter === tab.key ? ' active' : '';
+        filtersHtml += `<button class="filter-pill${active}" data-conf-filter="${tab.key}">${tab.label}</button>`;
+      }
+      filtersHtml += '</div></div>';
+
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
+        container.innerHTML = gameRecsHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
+        attachGameFilterHandlers(container);
         return;
       }
 
@@ -2663,8 +2761,6 @@
         return timeA - timeB;
       });
 
-      // Game recommendations + view toggle
-      const gameRecsHtml = renderGameRecommendations();
       const makeToggleHtml = (countText) => `
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
           <span style="font-size:13px;color:var(--text-muted)">${countText}</span>
@@ -2680,7 +2776,7 @@
           betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
         }
         const toggleHtml = makeToggleHtml(`${betRows.length} bet${betRows.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + toggleHtml + renderBetsList(betRows);
+        container.innerHTML = gameRecsHtml + filtersHtml + toggleHtml + renderBetsList(betRows);
         // Attach sort handlers
         container.querySelectorAll('[data-bets-sort]').forEach(th => {
           th.addEventListener('click', () => {
@@ -2697,10 +2793,11 @@
       } else {
         // Grid view — flat list sorted by time
         const toggleHtml = makeToggleHtml(`${filtered.length} game${filtered.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
+        container.innerHTML = gameRecsHtml + filtersHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
       }
 
-      // Attach view toggle handlers
+      // Attach filter + view toggle handlers
+      attachGameFilterHandlers(container);
       container.querySelectorAll('[data-view-mode]').forEach(btn => {
         btn.addEventListener('click', () => {
           gameViewMode = btn.dataset.viewMode;
@@ -2731,9 +2828,8 @@
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
 
-        renderGameFilterBar();
         if (currentView === 'game-projections') renderGameProjections();
-        else render(); // re-render props with matchup info
+        else render(); // re-render props with game pills + matchup info
       } catch (err) {
         console.error('Failed to load game projections:', err);
       }
