@@ -757,6 +757,11 @@
     .game-card-time .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
     .game-card-time .soon-badge { color: var(--yellow); font-weight: 600; }
     .game-card.live-card { border-color: rgba(239, 68, 68, 0.25); }
+    .game-live-scores { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
+    .game-live-score-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
+    .game-live-score-row .team-name { color: var(--text-primary); min-width: 40px; }
+    .game-live-score-row .live-score { color: var(--red-light); font-size: 18px; font-weight: 700; min-width: 40px; animation: pulse-live 2s ease-in-out infinite; }
+    .game-live-score-row .leading { color: var(--accent-light); }
     .game-card-score { font-size: 13px; color: var(--text-muted); }
     .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
     .game-pick-row { display: flex; justify-content: space-between; align-items: center; }
@@ -802,6 +807,23 @@
     }
     .pick-result-badge.win { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
     .pick-result-badge.loss { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
+    .pick-result-badge.push { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
+    .prop-result { font-weight: 700; font-size: 12px; }
+    .prop-result.win { color: var(--accent-light); }
+    .prop-result.loss { color: var(--red-light); }
+    .prop-result.push { color: var(--yellow); }
+    .results-summary-bar {
+      display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .results-summary-bar .summary-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .results-summary-bar .summary-record { font-size: 16px; font-weight: 700; }
+    .results-summary-bar .summary-record.winning { color: var(--accent-light); }
+    .results-summary-bar .summary-record.losing { color: var(--red-light); }
+    .results-summary-bar .summary-record.even { color: var(--text-muted); }
+    .results-summary-bar .summary-section { display: flex; align-items: center; gap: 6px; }
+    .results-summary-bar .summary-divider { width: 1px; height: 20px; background: var(--border); }
 
     /* ── Graded Props Table ── */
     .graded-props-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -1926,6 +1948,8 @@
     function renderPropsTable(props) {
       if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div></div>';
 
+      const hasAnyGraded = props.some(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
+
       const rows = props.map((p, idx) => {
         const dirClass = p.direction === 'OVER' ? 'over' : 'under';
         const diff = p.diff != null ? p.diff : (p.projection - p.line);
@@ -1956,6 +1980,12 @@
         const injBadge = injuryBadge(p);
         const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
 
+        // Result columns for graded props
+        const hasResult = p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH';
+        const actualHtml = p.actual != null ? `<td><span class="prop-result ${hasResult ? (p.result === 'WIN' ? 'win' : p.result === 'LOSS' ? 'loss' : 'push') : ''}">${p.actual}</span></td>` : (hasAnyGraded ? '<td>--</td>' : '');
+        const resultHtml = hasResult ? `<td><span class="pick-result-badge ${p.result === 'WIN' ? 'win' : p.result === 'LOSS' ? 'loss' : 'push'}">${p.result === 'WIN' ? '&#10003; W' : p.result === 'LOSS' ? '&#10007; L' : 'PUSH'}</span></td>` : (hasAnyGraded ? '<td>--</td>' : '');
+        const colSpan = hasAnyGraded ? 11 : 9;
+
         return `
           <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')">
             <td><span class="pt-player">${p.player}</span>${injBadge} ${edgeBadge}<br><span class="pt-matchup">${matchupStr}</span></td>
@@ -1967,9 +1997,10 @@
             <td class="col-hide-mobile"><span class="pt-edge ${diffCls}">${diffStr}</span></td>
             <td>${confStr}</td>
             <td><span class="pt-ev ${evCls}">${evStr}</span></td>
+            ${actualHtml}${resultHtml}
           </tr>
           <tr class="pick-row-detail${isExpanded ? ' open' : ''}" id="detail-${rowId}" style="${isExpanded ? '' : 'display:none'}">
-            <td colspan="9" style="padding:0">
+            <td colspan="${colSpan}" style="padding:0">
               <div class="prop-details-expanded">
                 <div class="details-grid">
                   <div class="detail-card">
@@ -2128,6 +2159,7 @@
               <th class="col-hide-mobile">Edge</th>
               <th>Conf</th>
               <th>EV%</th>
+              ${hasAnyGraded ? '<th>Actual</th><th>Result</th>' : ''}
             </tr></thead>
             <tbody>${rows}</tbody>
           </table>
@@ -2454,6 +2486,43 @@
     // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
 
     // ── Game Projections View ──
+    function renderResultsSummary() {
+      const finals = gameProjections.filter(g => getGameStatus(g) === 'final' && g.away_score != null);
+      if (finals.length === 0) return '';
+
+      let gameWins = 0, gameLosses = 0;
+      for (const g of finals) {
+        for (const t of ['spread', 'total', 'ml']) {
+          const r = g[t + '_result'];
+          if (r === 'win') gameWins++;
+          else if (r === 'loss') gameLosses++;
+        }
+      }
+
+      let propWins = 0, propLosses = 0;
+      for (const p of projections) {
+        if (p.result === 'WIN') propWins++;
+        else if (p.result === 'LOSS') propLosses++;
+      }
+
+      const totalW = gameWins + propWins;
+      const totalL = gameLosses + propLosses;
+      const total = totalW + totalL;
+      if (total === 0) return '';
+      const cls = totalW > totalL ? 'winning' : totalW < totalL ? 'losing' : 'even';
+
+      let html = '<div class="results-summary-bar">';
+      html += `<div class="summary-section"><span class="summary-label">Today</span><span class="summary-record ${cls}">${totalW}-${totalL}</span></div>`;
+      if (gameWins + gameLosses > 0) {
+        html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Games</span><span class="summary-record">${gameWins}-${gameLosses}</span></div>`;
+      }
+      if (propWins + propLosses > 0) {
+        html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Props</span><span class="summary-record">${propWins}-${propLosses}</span></div>`;
+      }
+      html += '</div>';
+      return html;
+    }
+
     function renderResultBadge(result) {
       if (result === 'win') return '<span class="pick-result-badge win">&#10003; W</span>';
       if (result === 'loss') return '<span class="pick-result-badge loss">&#10007; L</span>';
@@ -2549,6 +2618,20 @@
         timeHtml = `<div class="game-card-time">${time}</div>`;
       }
 
+      // Live scores section
+      const hasLiveScores = status === 'live' && g.away_score != null && g.home_score != null;
+      const liveScoresHtml = hasLiveScores ? `
+        <div class="game-live-scores">
+          <div class="game-live-score-row">
+            <span class="team-name">${g.away_team}</span>
+            <span class="live-score${g.away_score > g.home_score ? ' leading' : ''}">${g.away_score}</span>
+          </div>
+          <div class="game-live-score-row">
+            <span class="team-name">${g.home_team}</span>
+            <span class="live-score${g.home_score > g.away_score ? ' leading' : ''}">${g.home_score}</span>
+          </div>
+        </div>` : '';
+
       return `
         <div class="game-card${cardCls}">
           <div class="game-card-header">
@@ -2558,6 +2641,7 @@
             </div>
             <div class="game-card-score">Proj: ${g.proj_score}</div>
           </div>
+          ${liveScoresHtml}
           <div class="game-card-picks">
             <div class="game-pick-row${dimClass(g.spread_conf)}">
               <span class="game-pick-label">Spread</span>
@@ -2738,6 +2822,9 @@
       // Game recommendations (rendered first, above filters)
       const gameRecsHtml = renderGameRecommendations();
 
+      // Results summary banner
+      const summaryHtml = renderResultsSummary();
+
       // Build inline filters HTML (below recs, above cards)
       const statusCounts = { all: gameProjections.length, upcoming: 0, live: 0, final: 0 };
       for (const g of gameProjections) {
@@ -2770,7 +2857,7 @@
       filtersHtml += '</div></div>';
 
       if (filtered.length === 0) {
-        container.innerHTML = gameRecsHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
+        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
         attachGameFilterHandlers(container);
         return;
       }
@@ -2797,7 +2884,7 @@
           betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
         }
         const toggleHtml = makeToggleHtml(`${betRows.length} bet${betRows.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + filtersHtml + toggleHtml + renderBetsList(betRows);
+        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + renderBetsList(betRows);
         // Attach sort handlers
         container.querySelectorAll('[data-bets-sort]').forEach(th => {
           th.addEventListener('click', () => {
@@ -2814,7 +2901,7 @@
       } else {
         // Grid view — flat list sorted by time
         const toggleHtml = makeToggleHtml(`${filtered.length} game${filtered.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + filtersHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
+        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
       }
 
       // Attach filter + view toggle handlers
