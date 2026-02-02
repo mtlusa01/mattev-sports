@@ -762,6 +762,34 @@
       .sgc-picks { gap: 16px; }
       .search-wrap { max-width: 100%; }
     }
+
+    /* ── Sportsbook Odds Grid ── */
+    .detail-card-wide { grid-column: 1 / -1; }
+    .book-odds-grid {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .book-odds-item {
+      flex: 1 1 calc(25% - 6px); min-width: 70px;
+      background: var(--bg-tertiary); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 10px; text-align: center;
+      position: relative; transition: border-color 0.2s;
+    }
+    .book-odds-item.book-best {
+      border-color: var(--accent); background: var(--accent-glow);
+    }
+    .book-name {
+      font-size: 11px; font-weight: 700; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;
+    }
+    .book-line { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .book-price { font-size: 13px; color: var(--text-secondary); margin-top: 1px; }
+    .book-best .book-price { color: var(--accent-light); font-weight: 600; }
+    .best-badge {
+      display: inline-block; font-size: 9px; font-weight: 700;
+      color: var(--accent); background: rgba(16,185,129,0.15);
+      padding: 1px 6px; border-radius: 4px; margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
   </style>
 </head>
 <body>
@@ -913,7 +941,7 @@
     const TOP_PICKS_COUNT = 5;
     let currentPropCategory = 'all';
     let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
-    const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all', injury: 'all' };
+    const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all', injury: 'all', sportsbook: 'all' };
 
     // NBA team colors
     const TEAM_COLORS = {
@@ -1057,6 +1085,12 @@
           if (advancedFilters.injury === 'none') return !hasInjuryImpact;
           return true;
         });
+      }
+
+      // Advanced: Sportsbook filter
+      if (advancedFilters.sportsbook !== 'all') {
+        const book = advancedFilters.sportsbook;
+        filtered = filtered.filter(p => p.best_book === book || (p.book_odds && p.book_odds[book]));
       }
 
       return filtered;
@@ -1266,6 +1300,13 @@
           { value: 'all', text: 'All' },
           { value: 'boosted', text: 'Injury Boosted' },
           { value: 'none', text: 'No Impact' }
+        ]},
+        { key: 'sportsbook', icon: '&#128218;', label: 'Best Book', options: [
+          { value: 'all', text: 'All' },
+          { value: 'draftkings', text: 'DraftKings' },
+          { value: 'fanduel', text: 'FanDuel' },
+          { value: 'betmgm', text: 'BetMGM' },
+          { value: 'caesars', text: 'Caesars' }
         ]}
       ];
       const hasActive = Object.values(advancedFilters).some(v => v !== 'all');
@@ -1377,6 +1418,24 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
+                ${p.book_odds && Object.keys(p.book_odds).length > 0 ? `
+                <div class="details-grid" style="margin-top:8px">
+                  <div class="detail-card detail-card-wide">
+                    <div class="dc-label">Sportsbook Odds</div>
+                    <div class="book-odds-grid">
+                      ${Object.entries(p.book_odds).map(([book, data]) => {
+                        const isBest = book === p.best_book;
+                        const label = {draftkings:'DK',fanduel:'FD',betmgm:'MGM',caesars:'CZR'}[book] || book;
+                        return `<div class="book-odds-item ${isBest ? 'book-best' : ''}">
+                          <div class="book-name">${label}</div>
+                          <div class="book-line">${data.line}</div>
+                          <div class="book-price">${data.odds > 0 ? '+' : ''}${data.odds}</div>
+                          ${isBest ? '<div class="best-badge">BEST</div>' : ''}
+                        </div>`;
+                      }).join('')}
+                    </div>
+                  </div>
+                </div>` : ''}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
                 <div class="injury-section">
                   <div class="injury-alert">
