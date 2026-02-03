@@ -67,10 +67,12 @@
       align-items: center;
     }
     .top-nav-inner {
-      max-width: 1200px;
+      position: relative;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
       width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -104,6 +106,9 @@
       background: var(--bg-tertiary);
       border-radius: 10px;
       padding: 4px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .sport-tab {
       position: relative;
@@ -142,6 +147,7 @@
       display: flex;
       align-items: center;
       gap: 1.5rem;
+      flex: 0 0 auto;
     }
     .nav-link {
       color: #a0a0a0;
