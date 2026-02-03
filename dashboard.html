@@ -2520,14 +2520,40 @@
     }
 
     // ── View Tabs (in sub-nav) ──
-    document.querySelectorAll('#view-tabs .view-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('#view-tabs .view-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentView = tab.dataset.view;
-        expandedRowId = null;
-        render();
+    function switchView(view, updateHash) {
+      currentView = view;
+      expandedRowId = null;
+      document.querySelectorAll('#view-tabs .view-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.view === view);
       });
+      if (updateHash !== false) {
+        const hash = view === 'player-props' ? '#props' : '#projections';
+        history.replaceState(null, '', hash);
+      }
+      render();
+    }
+    document.querySelectorAll('#view-tabs .view-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchView(tab.dataset.view));
+    });
+
+    // Restore tab and filters from URL hash on load
+    (function restoreFromHash() {
+      const hash = window.location.hash;
+      const base = hash.split('?')[0];
+      const params = new URLSearchParams(hash.split('?')[1] || '');
+      if (base === '#props') {
+        switchView('player-props', false);
+      }
+      const status = params.get('status');
+      if (status && ['upcoming', 'live', 'final'].includes(status)) {
+        currentStatusFilter = status;
+      }
+    })();
+    // Handle back/forward navigation
+    window.addEventListener('hashchange', () => {
+      const base = window.location.hash.split('?')[0];
+      const target = base === '#props' ? 'player-props' : 'game-projections';
+      if (currentView !== target) switchView(target, false);
     });
 
     // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
@@ -2825,6 +2851,13 @@
           currentStatusFilter = pill.dataset.statusFilter;
           container.querySelectorAll('[data-status-filter]').forEach(p => p.classList.remove('active'));
           pill.classList.add('active');
+          // Update hash with status filter
+          const params = new URLSearchParams(window.location.hash.slice(1).split('?')[1] || '');
+          if (currentStatusFilter !== 'all') params.set('status', currentStatusFilter);
+          else params.delete('status');
+          const base = window.location.hash.split('?')[0] || '#projections';
+          const qs = params.toString();
+          history.replaceState(null, '', base + (qs ? '?' + qs : ''));
           renderGameProjections();
         });
       });
