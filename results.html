@@ -62,10 +62,11 @@
       align-items: center;
       justify-content: space-between;
     }
+    .nav-brand { position: relative; z-index: 2; }
     .sports-tabs {
       display: flex; align-items: center; gap: 4px;
       background: var(--bg-tertiary); border-radius: 10px; padding: 4px;
-      position: absolute; left: 50%; transform: translateX(-50%);
+      position: absolute; left: 50%; transform: translateX(-50%); z-index: 1;
     }
     .sport-tab {
       position: relative; padding: 6px 18px; border-radius: 8px; border: none;
@@ -84,10 +85,28 @@
       background: rgba(255,255,255,0.1); color: var(--text-muted);
     }
     .sport-tab.active .soon-badge { display: none; }
-    .nav-right { display: flex; align-items: center; gap: 1.5rem; flex: 0 0 auto; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; flex: 0 0 auto; position: relative; z-index: 2; }
     .nav-link { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; font-weight: 500; }
     .nav-link:hover, .nav-link.active { color: #ffffff; }
     .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+    /* ── Coming Soon Overlay ── */
+    .coming-soon-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 10, 15, 0.95); z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .coming-soon-content { text-align: center; padding: 3rem; }
+    .coming-soon-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+    .coming-soon-content h2 { font-size: 2rem; font-weight: 700; color: #f0f0f0; margin-bottom: 0.75rem; }
+    .coming-soon-content p { color: #9ca3af; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .coming-soon-content .coming-soon-sub { color: #6b7280; font-size: 0.9rem; margin-bottom: 2rem; }
+    .btn-primary {
+      background: linear-gradient(135deg, #dc2626, #991b1b); color: white; border: none;
+      padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #ef4444, #dc2626); transform: translateY(-1px); }
 
     /* ── Main ── */
     main { max-width: 1200px; margin: 0 auto; padding: 100px 24px 100px; position: relative; z-index: 1; }
@@ -302,11 +321,21 @@
   </style>
 </head>
 <body>
+  <div class="coming-soon-overlay" id="coming-soon-overlay" style="display:none;">
+    <div class="coming-soon-content">
+      <div class="coming-soon-icon">&#127942;</div>
+      <h2><span id="coming-soon-sport">NHL</span> Coming Soon</h2>
+      <p>Edge Factor Elite is building ML models for more sports.</p>
+      <p class="coming-soon-sub">Check back soon!</p>
+      <button class="btn-primary" onclick="closeComingSoon()">View NBA Results</button>
+    </div>
+  </div>
+
   <div class="page-gradient"></div>
 
   <header class="top-nav">
     <div class="top-nav-inner">
-      <div style="display:flex;align-items:center;">
+      <div class="nav-brand">
         <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
           <span style="font-size:1.4rem;font-weight:800;color:#f0f0f0;letter-spacing:-0.02em;white-space:nowrap;">Edge Factor <span style="color:#dc2626;">Elite</span></span>
         </a>
@@ -780,6 +809,28 @@
       const d = document.getElementById('mobile-nav-drawer');
       d.style.display = d.style.display === 'none' ? 'block' : 'none';
     }
+
+    // Sport tab handlers
+    document.querySelectorAll('.sport-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const sport = tab.dataset.sport;
+        if (sport === 'nba') {
+          window.location.href = 'index.html';
+        } else {
+          document.getElementById('coming-soon-sport').textContent = sport.toUpperCase();
+          document.getElementById('coming-soon-overlay').style.display = 'flex';
+        }
+      });
+    });
+
+    function closeComingSoon() {
+      document.getElementById('coming-soon-overlay').style.display = 'none';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeComingSoon(); });
+    document.getElementById('coming-soon-overlay').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeComingSoon();
+    });
   </script>
 </body>
 </html>
