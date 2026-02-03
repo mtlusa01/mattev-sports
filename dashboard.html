@@ -1276,7 +1276,7 @@
       </div>
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
-        <button class="sport-tab" data-sport="nhl">NHL <span class="soon-badge">Soon</span></button>
+        <button class="sport-tab" data-sport="nhl">NHL</button>
         <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
         <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
       </div>
@@ -1306,7 +1306,7 @@
   <div id="mobile-nav-drawer" style="display:none; position:fixed; top:60px; left:0; right:0; background:#0f0f0f; border-bottom:1px solid #2a2a2a; padding:1rem 1.5rem; z-index:98;">
     <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;">
       <button class="sport-tab active" data-sport="nba" onclick="switchSport('nba')">NBA</button>
-      <button class="sport-tab" data-sport="nhl" onclick="switchSport('nhl')">NHL <span class="soon-badge">Soon</span></button>
+      <button class="sport-tab" data-sport="nhl" onclick="switchSport('nhl')">NHL</button>
       <button class="sport-tab" data-sport="nfl" onclick="switchSport('nfl')">NFL <span class="soon-badge">Soon</span></button>
       <button class="sport-tab" data-sport="mlb" onclick="switchSport('mlb')">MLB <span class="soon-badge">Soon</span></button>
     </div>
@@ -1416,26 +1416,95 @@
       const mainEl = document.querySelector('main');
       const statsBar = document.getElementById('stats-bar');
       const pageGradient = document.querySelector('.page-gradient');
+      const viewTabs = document.getElementById('view-tabs');
 
       // Update all sport tabs (top nav + mobile drawer)
       document.querySelectorAll('.sport-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.sport === sport);
       });
 
-      if (sport !== 'nba') {
+      const supportedSports = ['nba', 'nhl'];
+
+      if (!supportedSports.includes(sport)) {
+        // Coming Soon for NFL, MLB
         sportName.textContent = sport.toUpperCase();
         overlay.classList.add('visible');
         mainEl.style.display = 'none';
         statsBar.style.display = 'none';
         if (pageGradient) pageGradient.style.display = 'none';
       } else {
+        currentSport = sport;
         overlay.classList.remove('visible');
         mainEl.style.display = '';
-        if (projections.length > 0) statsBar.style.display = '';
         if (pageGradient) pageGradient.style.display = '';
+        currentGameSearch = ''; // Reset search when switching sports
+
+        // Update view tabs based on sport
+        const propsTab = viewTabs.querySelector('[data-view="player-props"]');
+        if (sport === 'nhl') {
+          // NHL: only game projections, hide player props tab
+          propsTab.style.display = 'none';
+          if (currentView === 'player-props') {
+            switchView('game-projections', false);
+          }
+          // Hide NBA stats bar for NHL
+          statsBar.style.display = 'none';
+        } else {
+          // NBA: show both tabs + stats bar
+          propsTab.style.display = '';
+          if (projections.length > 0) statsBar.style.display = '';
+        }
+
+        // Update the active game data and re-render
+        updateActiveGameData();
+        updateTimestamp();
+        render();
       }
       // Close mobile drawer
       document.getElementById('mobile-nav-drawer').style.display = 'none';
+    }
+
+    function getActiveGameProjections() {
+      return currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+    }
+
+    function updateActiveGameData() {
+      // Rebuild teamToGame for the active sport
+      const games = getActiveGameProjections();
+      teamToGame = {};
+      for (const g of games) {
+        teamToGame[g.away_team] = g;
+        teamToGame[g.home_team] = g;
+      }
+    }
+
+    function updateTimestamp() {
+      const updatedEl = document.getElementById('game-proj-updated');
+      const navUpdated = document.getElementById('nav-updated-time');
+      if (currentSport === 'nhl') {
+        if (nhlGameProjections.length > 0 && nhlGameProjections._updated) {
+          const ts = new Date(nhlGameProjections._updated).toLocaleString('en-US', {
+            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+          });
+          updatedEl.textContent = 'Updated ' + ts + ' \u00B7 ' + nhlGameProjections.length + ' games';
+          navUpdated.textContent = 'Updated ' + new Date(nhlGameProjections._updated).toLocaleTimeString('en-US', {
+            hour: 'numeric', minute: '2-digit'
+          });
+        }
+      } else {
+        // Restore NBA timestamp
+        const nbaUpdated = projections._updated || gameProjections._updated;
+        if (nbaUpdated) {
+          navUpdated.textContent = 'Updated ' + new Date(nbaUpdated).toLocaleTimeString('en-US', {
+            hour: 'numeric', minute: '2-digit'
+          });
+        }
+        if (gameProjections._updated) {
+          updatedEl.textContent = 'Updated ' + new Date(gameProjections._updated).toLocaleString('en-US', {
+            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+          }) + ' \u00B7 ' + gameProjections.length + ' games';
+        }
+      }
     }
 
     // Attach sport tab click handlers (top nav)
@@ -1445,12 +1514,14 @@
 
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
-
+    const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
 
     let projections = [];
     let gameProjections = [];
+    let nhlGameProjections = [];
     let topPicks = [];
     let currentView = 'game-projections';
+    let currentSport = 'nba';
     let currentConfFilter = 'all';
     let currentDirFilter = 'all';
     let currentGameFilter = null; // null = all, or "AWAY@HOME" key
@@ -1462,6 +1533,7 @@
     let gameViewMode = 'grid'; // 'grid' or 'list'
     let betsSortBy = 'conf';   // 'conf', 'time', 'type'
     let betsSortDir = 'desc';  // 'asc' or 'desc'
+    let currentGameSearch = '';
 
     const PROP_CATEGORIES = [
       { key: 'all', label: 'ALL' },
@@ -1483,6 +1555,21 @@
       OKC:'#007AC1', ORL:'#0077C0', PHI:'#006BB6', PHX:'#1D1160', POR:'#E03A3E',
       SAC:'#5A2D81', SAS:'#C4CED4', TOR:'#CE1141', UTA:'#002B5C', WAS:'#002B5C'
     };
+
+    // NHL team colors
+    const NHL_TEAM_COLORS = {
+      ANA:'#F47A38', ARI:'#8C2633', BOS:'#FFB81C', BUF:'#002654', CGY:'#D2001C',
+      CAR:'#CC0000', CHI:'#CF0A2C', COL:'#6F263D', CBJ:'#002654', DAL:'#006847',
+      DET:'#CE1126', EDM:'#041E42', FLA:'#041E42', LAK:'#111111', MIN:'#154734',
+      MTL:'#AF1E2D', NSH:'#FFB81C', NJD:'#CE1126', NYI:'#00539B', NYR:'#0038A8',
+      OTT:'#C52032', PHI:'#F74902', PIT:'#FCB514', SJS:'#006D75', SEA:'#99D9D9',
+      STL:'#002F87', TBL:'#002868', TOR:'#00205B', UTA:'#69B3E7', VAN:'#00205B',
+      VGK:'#B4975A', WPG:'#041E42', WSH:'#C8102E'
+    };
+
+    function getTeamColor(team) {
+      return (currentSport === 'nhl' ? NHL_TEAM_COLORS[team] : TEAM_COLORS[team]) || '#666';
+    }
 
     // Set current date
     document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
@@ -1748,23 +1835,42 @@
     // ── Recommendations ──
     let recommendations = null;
 
+    function buildNhlBestBets() {
+      // Generate best bets from NHL game data — picks with conf >= 60
+      const bets = [];
+      for (const g of nhlGameProjections) {
+        const matchup = g.away_team + ' @ ' + g.home_team;
+        if (g.ml_conf >= 60) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, confidence: g.ml_conf, reasons: ['High ML confidence'] });
+        if (g.spread_conf >= 60) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, confidence: g.spread_conf, reasons: ['High spread confidence'] });
+        if (g.total_conf >= 60) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, confidence: g.total_conf, reasons: ['High total confidence'] });
+      }
+      bets.sort((a, b) => b.confidence - a.confidence);
+      return bets;
+    }
+
     function renderGameRecommendations() {
-      const recs = recommendations;
-      const gameRecs = (recs && recs.game_bets) || [];
+      let gameRecs;
+      if (currentSport === 'nhl') {
+        gameRecs = buildNhlBestBets();
+      } else {
+        const recs = recommendations;
+        gameRecs = (recs && recs.game_bets) || [];
+      }
+      const sportLabel = currentSport.toUpperCase();
       if (gameRecs.length === 0) {
         return `<div class="rec-category" style="margin-bottom:20px">
           <div class="rec-header">
-            <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
+            <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel} Bets</span>
             <span class="rec-count">0 picks</span>
           </div>
-          <div class="no-recs">No game bets meet our quality criteria today.</div>
+          <div class="no-recs">No ${sportLabel} bets meet our quality criteria today.</div>
         </div>`;
       }
       const gameCards = gameRecs.map((r, i) => {
         const confLvl = getConfLevel(r.confidence || 0);
         const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
         return `<div class="rec-card game-rec">
-          <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
+          <div class="rec-rank">#${i + 1}</div>
           <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
           <div class="rec-matchup">${r.game || ''}</div>
           <div class="rec-pick">${r.pick}</div>
@@ -1774,7 +1880,7 @@
       }).join('');
       return `<div class="rec-category" style="margin-bottom:20px">
         <div class="rec-header">
-          <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
+          <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel} Bets</span>
           <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''}</span>
         </div>
         <div class="rec-cards">${gameCards}</div>
@@ -2560,7 +2666,7 @@
 
     // ── Game Projections View ──
     function renderResultsSummary() {
-      const finals = gameProjections.filter(g => getGameStatus(g) === 'final' && g.away_score != null);
+      const finals = getActiveGameProjections().filter(g => getGameStatus(g) === 'final' && g.away_score != null);
       if (finals.length === 0) return '';
 
       let gameWins = 0, gameLosses = 0;
@@ -2846,6 +2952,17 @@
     }
 
     function attachGameFilterHandlers(container) {
+      // Search handler
+      const gameSearchInput = container.querySelector('#game-search-input');
+      if (gameSearchInput) {
+        gameSearchInput.addEventListener('input', (e) => {
+          currentGameSearch = e.target.value.trim();
+          renderGameProjections();
+          // Re-focus input after re-render
+          const newInput = document.getElementById('game-search-input');
+          if (newInput) { newInput.focus(); newInput.selectionStart = newInput.selectionEnd = newInput.value.length; }
+        });
+      }
       container.querySelectorAll('[data-status-filter]').forEach(pill => {
         pill.addEventListener('click', () => {
           currentStatusFilter = pill.dataset.statusFilter;
@@ -2874,18 +2991,20 @@
     function renderGameProjections() {
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
+      const activeGames = getActiveGameProjections();
 
       // Hide the static filter element — we render filters inline now
       document.getElementById('game-status-filter').innerHTML = '';
 
-      if (gameProjections.length === 0) {
-        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No game projections available</div><div class="empty-state-text">Game projections will appear here when today's games are loaded.</div></div>`;
+      if (activeGames.length === 0) {
+        const sportLabel = currentSport.toUpperCase();
+        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No ${sportLabel} game projections available</div><div class="empty-state-text">${sportLabel} game projections will appear here when today's games are loaded.</div></div>`;
         updatedEl.textContent = '';
         return;
       }
 
       // Apply status filter
-      let filtered = [...gameProjections];
+      let filtered = [...activeGames];
       if (currentStatusFilter !== 'all') {
         filtered = filtered.filter(g => {
           const s = getGameStatus(g);
@@ -2899,6 +3018,15 @@
         filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter));
       }
 
+      // Apply search filter
+      if (currentGameSearch) {
+        const q = currentGameSearch.toLowerCase();
+        filtered = filtered.filter(g =>
+          g.away_team.toLowerCase().includes(q) ||
+          g.home_team.toLowerCase().includes(q)
+        );
+      }
+
       // Game recommendations (rendered first, above filters)
       const gameRecsHtml = renderGameRecommendations();
 
@@ -2906,8 +3034,8 @@
       const summaryHtml = renderResultsSummary();
 
       // Build inline filters HTML (below recs, above cards)
-      const statusCounts = { all: gameProjections.length, upcoming: 0, live: 0, final: 0 };
-      for (const g of gameProjections) {
+      const statusCounts = { all: activeGames.length, upcoming: 0, live: 0, final: 0 };
+      for (const g of activeGames) {
         const s = getGameStatus(g);
         if (s === 'scheduled' || s === 'soon') statusCounts.upcoming++;
         else if (s === 'live') statusCounts.live++;
@@ -2922,7 +3050,9 @@
         { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
       ];
 
+      const gameSearchIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
       let filtersHtml = '<div class="search-filter-bar">';
+      filtersHtml += `<div class="search-wrap">${gameSearchIcon}<input type="text" id="game-search-input" placeholder="Search teams..." value="${currentGameSearch || ''}"></div>`;
       filtersHtml += '<div class="filter-group"><span class="filter-label">Status</span>';
       for (const tab of statusTabs) {
         const active = currentStatusFilter === tab.key ? ' active' : '';
@@ -3001,25 +3131,46 @@
         if (!resp.ok) throw new Error('Failed to fetch game projections');
         const data = await resp.json();
         gameProjections = data.games || [];
+        gameProjections._updated = data.updated;
 
-        // Build team lookup
-        teamToGame = {};
-        for (const g of gameProjections) {
-          teamToGame[g.away_team] = g;
-          teamToGame[g.home_team] = g;
+        // Build team lookup for NBA
+        if (currentSport === 'nba') {
+          teamToGame = {};
+          for (const g of gameProjections) {
+            teamToGame[g.away_team] = g;
+            teamToGame[g.home_team] = g;
+          }
         }
 
         const updatedEl = document.getElementById('game-proj-updated');
-        if (data.updated) {
+        if (data.updated && currentSport === 'nba') {
           updatedEl.textContent = 'Updated ' + new Date(data.updated).toLocaleString('en-US', {
             month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
 
-        if (currentView === 'game-projections') renderGameProjections();
-        else render(); // re-render props with game pills + matchup info
+        if (currentView === 'game-projections' && currentSport === 'nba') renderGameProjections();
+        else if (currentSport === 'nba') render(); // re-render props with game pills + matchup info
       } catch (err) {
         console.error('Failed to load game projections:', err);
+      }
+    }
+
+    async function loadNhlGameProjections() {
+      try {
+        const resp = await fetch(NHL_GAME_DATA_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch NHL game projections');
+        const data = await resp.json();
+        nhlGameProjections = data.games || [];
+        nhlGameProjections._updated = data.updated;
+
+        if (currentSport === 'nhl') {
+          updateActiveGameData();
+          updateTimestamp();
+          if (currentView === 'game-projections') renderGameProjections();
+        }
+      } catch (err) {
+        console.error('Failed to load NHL game projections:', err);
       }
     }
 
@@ -3039,10 +3190,13 @@
           }) + ' \u00B7 ' + projections.length + ' projections';
         }
         if (data.updated) {
-          const updatedTime = new Date(data.updated).toLocaleTimeString('en-US', {
-            hour: 'numeric', minute: '2-digit'
-          });
-          document.getElementById('nav-updated-time').textContent = 'Updated ' + updatedTime;
+          projections._updated = data.updated;
+          if (currentSport === 'nba') {
+            const updatedTime = new Date(data.updated).toLocaleTimeString('en-US', {
+              hour: 'numeric', minute: '2-digit'
+            });
+            document.getElementById('nav-updated-time').textContent = 'Updated ' + updatedTime;
+          }
         }
 
         const posEV = projections.filter(p => p.ev > 0).length;
@@ -3067,6 +3221,7 @@
     // ── Init ──
     loadProjections();
     loadGameProjections();
+    loadNhlGameProjections();
   </script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
