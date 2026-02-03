@@ -1410,7 +1410,7 @@
     }
 
     // ── Sport Tab Switching ──
-    function switchSport(sport) {
+    function switchSport(sport, updateHash) {
       const overlay = document.getElementById('coming-soon-overlay');
       const sportName = document.getElementById('cs-sport-name');
       const mainEl = document.querySelector('main');
@@ -1445,7 +1445,10 @@
           // NHL: only game projections, hide player props tab
           propsTab.style.display = 'none';
           if (currentView === 'player-props') {
-            switchView('game-projections', false);
+            currentView = 'game-projections';
+            document.querySelectorAll('#view-tabs .view-tab').forEach(t => {
+              t.classList.toggle('active', t.dataset.view === 'game-projections');
+            });
           }
           // Hide NBA stats bar for NHL
           statsBar.style.display = 'none';
@@ -1458,6 +1461,7 @@
         // Update the active game data and re-render
         updateActiveGameData();
         updateTimestamp();
+        if (updateHash !== false) updateLocationHash();
         render();
       }
       // Close mobile drawer
@@ -2625,16 +2629,49 @@
       }
     }
 
+    // ── Hash Encoding ──
+    // Format: #sport/subtab?params  e.g. #nba/projections, #nhl/projections, #nba/props?status=live
+    function updateLocationHash() {
+      const subtab = currentView === 'player-props' ? 'props' : 'projections';
+      let hash = `#${currentSport}/${subtab}`;
+      // Preserve status filter param
+      if (currentStatusFilter !== 'all') {
+        hash += '?status=' + currentStatusFilter;
+      }
+      history.replaceState(null, '', hash);
+    }
+
+    function parseHash(hash) {
+      hash = hash || window.location.hash;
+      const qIdx = hash.indexOf('?');
+      const base = qIdx >= 0 ? hash.slice(0, qIdx) : hash;
+      const params = new URLSearchParams(qIdx >= 0 ? hash.slice(qIdx + 1) : '');
+      const parts = base.replace('#', '').split('/');
+      let sport, subtab;
+      if (['nba', 'nhl'].includes(parts[0])) {
+        sport = parts[0];
+        subtab = parts[1] || 'projections';
+      } else {
+        // Legacy format: #props or #projections (no sport prefix)
+        sport = 'nba';
+        subtab = parts[0] || 'projections';
+      }
+      if (subtab === 'props') subtab = 'player-props';
+      else subtab = 'game-projections';
+      // NHL has no props
+      if (sport === 'nhl' && subtab === 'player-props') subtab = 'game-projections';
+      return { sport, subtab, params };
+    }
+
     // ── View Tabs (in sub-nav) ──
-    function switchView(view, updateHash) {
+    function switchView(view, doUpdateHash) {
       currentView = view;
       expandedRowId = null;
       document.querySelectorAll('#view-tabs .view-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.view === view);
       });
-      if (updateHash !== false) {
-        const hash = view === 'player-props' ? '#props' : '#projections';
-        history.replaceState(null, '', hash);
+      if (doUpdateHash !== false) {
+        updateLocationHash();
       }
       render();
     }
@@ -2642,24 +2679,28 @@
       tab.addEventListener('click', () => switchView(tab.dataset.view));
     });
 
-    // Restore tab and filters from URL hash on load
+    // Restore sport + tab from URL hash on load
     (function restoreFromHash() {
-      const hash = window.location.hash;
-      const base = hash.split('?')[0];
-      const params = new URLSearchParams(hash.split('?')[1] || '');
-      if (base === '#props') {
-        switchView('player-props', false);
-      }
+      const { sport, subtab, params } = parseHash();
+      // Restore status filter
       const status = params.get('status');
       if (status && ['upcoming', 'live', 'final'].includes(status)) {
         currentStatusFilter = status;
       }
+      // Restore sport (will also set view)
+      if (sport !== 'nba') {
+        switchSport(sport, false);
+      }
+      // Restore subtab
+      if (subtab !== currentView) {
+        switchView(subtab, false);
+      }
     })();
     // Handle back/forward navigation
     window.addEventListener('hashchange', () => {
-      const base = window.location.hash.split('?')[0];
-      const target = base === '#props' ? 'player-props' : 'game-projections';
-      if (currentView !== target) switchView(target, false);
+      const { sport, subtab } = parseHash();
+      if (sport !== currentSport) switchSport(sport, false);
+      if (subtab !== currentView) switchView(subtab, false);
     });
 
     // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
@@ -2968,13 +3009,7 @@
           currentStatusFilter = pill.dataset.statusFilter;
           container.querySelectorAll('[data-status-filter]').forEach(p => p.classList.remove('active'));
           pill.classList.add('active');
-          // Update hash with status filter
-          const params = new URLSearchParams(window.location.hash.slice(1).split('?')[1] || '');
-          if (currentStatusFilter !== 'all') params.set('status', currentStatusFilter);
-          else params.delete('status');
-          const base = window.location.hash.split('?')[0] || '#projections';
-          const qs = params.toString();
-          history.replaceState(null, '', base + (qs ? '?' + qs : ''));
+          updateLocationHash();
           renderGameProjections();
         });
       });
