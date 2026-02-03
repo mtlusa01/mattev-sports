@@ -357,7 +357,7 @@
       </div>
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
-        <button class="sport-tab" data-sport="nhl">NHL <span class="soon-badge">Soon</span></button>
+        <button class="sport-tab" data-sport="nhl">NHL</button>
         <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
         <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
       </div>
@@ -448,8 +448,12 @@
   </footer>
 
   <script>
-    const RESULTS_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
+    const NBA_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
+    const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
 
+    let currentSport = 'nba';
+    let nbaResultsData = null;
+    let nhlResultsData = null;
     let resultsData = null;
     let selectedDate = null;
     let calViewYear = null;
@@ -623,7 +627,10 @@
     // ── Banner ──
     function renderResultsBanner(data) {
       const at = data.allTime;
-      if (!at) return;
+      if (!at) {
+        document.getElementById('results-banner').innerHTML = '<div class="results-banner-stat"><div class="rbs-value">--</div><div class="rbs-label">No results yet</div></div>';
+        return;
+      }
 
       const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
       const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
@@ -632,18 +639,17 @@
       const totalProfit = totalW * 90.91 - totalL * 100;
       const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
 
-      const cats = [
-        { name: 'Props', ...at.props },
-        { name: 'Spreads', ...at.spreads },
-        { name: 'MLs', ...at.moneylines },
-      ];
+      const cats = [];
+      if (at.props && (at.props.wins + at.props.losses) > 0) cats.push({ name: 'Props', ...at.props });
+      if (at.spreads) cats.push({ name: 'Spreads', ...at.spreads });
+      if (at.moneylines) cats.push({ name: 'MLs', ...at.moneylines });
       const bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
       const roiCls = parseFloat(totalRoi) > 0 ? 'green' : parseFloat(totalRoi) < 0 ? 'red' : '';
 
       document.getElementById('results-banner').innerHTML = `
         <div class="results-banner-stat">
           <div class="rbs-value">${totalW}-${totalL}</div>
-          <div class="rbs-label">All-Time Record</div>
+          <div class="rbs-label">${currentSport.toUpperCase()} All-Time Record</div>
         </div>
         <div class="results-banner-stat">
           <div class="rbs-value ${pctClass(parseFloat(totalPct))}">${totalPct}%</div>
@@ -694,9 +700,12 @@
           <div class="rsc-label">${label}</div>
         </div>`;
       }
-      document.getElementById('results-summary').innerHTML =
-        card('Props', day.props) + card('Spreads', day.spreads) +
-        card('Totals', day.totals) + card('Moneylines', day.moneylines);
+      let summaryHtml = '';
+      if (day.props && (day.props.wins + day.props.losses) > 0) summaryHtml += card('Props', day.props);
+      summaryHtml += card('Spreads', day.spreads || {wins:0,losses:0});
+      summaryHtml += card('Totals', day.totals || {wins:0,losses:0});
+      summaryHtml += card('Moneylines', day.moneylines || {wins:0,losses:0});
+      document.getElementById('results-summary').innerHTML = summaryHtml;
     }
 
     function renderResultsTable(day) {
@@ -742,11 +751,15 @@
     }
 
     // ── Init ──
-    async function loadResults() {
+    async function loadResults(sport) {
+      sport = sport || currentSport;
+      const url = sport === 'nhl' ? NHL_RESULTS_URL : NBA_RESULTS_URL;
       try {
-        const resp = await fetch(RESULTS_DATA_URL + '?t=' + Date.now());
+        const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
         resultsData = await resp.json();
+        if (sport === 'nba') nbaResultsData = resultsData;
+        else nhlResultsData = resultsData;
 
         // Build date lookup
         daysByDate = {};
@@ -826,16 +839,50 @@
     }
 
     // Sport tab handlers
-    document.querySelectorAll('.sport-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const sport = tab.dataset.sport;
-        if (sport === 'nba') {
-          window.location.href = 'dashboard.html';
-        } else {
-          document.getElementById('coming-soon-sport').textContent = sport.toUpperCase();
-          document.getElementById('coming-soon-overlay').style.display = 'flex';
-        }
+    function switchResultsSport(sport) {
+      if (sport !== 'nba' && sport !== 'nhl') {
+        document.getElementById('coming-soon-sport').textContent = sport.toUpperCase();
+        document.getElementById('coming-soon-overlay').style.display = 'flex';
+        return;
+      }
+      document.getElementById('coming-soon-overlay').style.display = 'none';
+      currentSport = sport;
+      document.querySelectorAll('.sport-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.sport === sport);
       });
+      // Close mobile drawer
+      document.getElementById('mobile-nav-drawer').style.display = 'none';
+
+      // Update page title
+      document.querySelector('.page-subtitle').textContent =
+        `Track our ${sport.toUpperCase()} model's accuracy across ${sport === 'nhl' ? 'spreads, totals, and moneylines' : 'player props, spreads, and moneylines'}.`;
+
+      // Load the appropriate results
+      const cached = sport === 'nhl' ? nhlResultsData : nbaResultsData;
+      if (cached) {
+        resultsData = cached;
+        rebuildFromData();
+      } else {
+        loadResults(sport);
+      }
+    }
+
+    function rebuildFromData() {
+      daysByDate = {};
+      (resultsData.days || []).forEach(day => { daysByDate[day.date] = day; });
+      sortedDates = Object.keys(daysByDate).sort();
+      selectedDate = sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : todayKey();
+      const sd = new Date(selectedDate + 'T12:00:00');
+      calViewYear = sd.getFullYear();
+      calViewMonth = sd.getMonth();
+      updateTriggerLabel();
+      updateArrowStates();
+      renderResultsBanner(resultsData);
+      renderSelectedDay();
+    }
+
+    document.querySelectorAll('.sport-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchResultsSport(tab.dataset.sport));
     });
 
     function closeComingSoon() {
