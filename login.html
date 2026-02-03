@@ -31,6 +31,34 @@
     .nav-link:hover { color: #fff; }
     .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
+    /* ── Mobile Drawer ── */
+    .mobile-nav-drawer {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: #1a1a24; border-bottom: 1px solid #2a2a3a; z-index: 98;
+      overflow: hidden; max-height: 0; transition: max-height 0.3s ease;
+    }
+    .mobile-nav-drawer.open { display: block; max-height: 400px; }
+    .mobile-drawer-links { padding: 8px 0; }
+    .mobile-drawer-links a {
+      display: flex; align-items: center; gap: 10px; padding: 12px 20px;
+      color: #e0e0e0; text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: all 0.15s; border-left: 3px solid transparent;
+    }
+    .mobile-drawer-links a:hover, .mobile-drawer-links a.active {
+      color: #dc2626; border-left-color: #dc2626; background: rgba(220,38,38,0.05);
+    }
+    .mobile-drawer-links a svg { width: 18px; height: 18px; opacity: 0.7; }
+    .mobile-drawer-divider { height: 1px; background: #2a2a3a; margin: 4px 20px; }
+    .mobile-drawer-auth { padding: 8px 20px 12px; }
+    .mobile-drawer-login-btn {
+      display: block; width: 100%; padding: 10px; background: #dc2626; color: white;
+      border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+      text-align: center; text-decoration: none; transition: background 0.15s;
+    }
+    .mobile-drawer-login-btn:hover { background: #b91c1c; }
+    .mobile-nav-backdrop { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 97; }
+    .mobile-nav-backdrop.open { display: block; }
+
     /* Auth Card */
     .auth-wrapper { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 80px 24px 40px; }
     .auth-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 420px; overflow: hidden; }
@@ -123,10 +151,22 @@
     </div>
   </header>
 
-  <div id="mobile-nav-drawer" style="display:none; position:fixed; top:60px; left:0; right:0; background:#0f0f0f; border-bottom:1px solid #2a2a2a; padding:1rem 1.5rem; z-index:98;">
-    <a href="dashboard.html" class="nav-link" style="display:block;padding:0.5rem 0;">Projections</a>
-    <a href="results.html" class="nav-link" style="display:block;padding:0.5rem 0;">Results</a>
-    <a href="about.html" class="nav-link" style="display:block;padding:0.5rem 0;">About</a>
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-drawer-links">
+      <a href="dashboard.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+        Projections
+      </a>
+      <a href="results.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6m6 0h6m-6 0V9a2 2 0 012-2h2a2 2 0 012 2v10m6 0v-4a2 2 0 00-2-2h-2a2 2 0 00-2 2v4"/></svg>
+        Results
+      </a>
+      <a href="about.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+        About
+      </a>
+    </div>
   </div>
 
   <div class="auth-wrapper">
@@ -332,8 +372,26 @@
     }
 
     function toggleMobileNav() {
-      const d = document.getElementById('mobile-nav-drawer');
-      d.style.display = d.style.display === 'none' ? 'block' : 'none';
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const backdrop = document.getElementById('mobile-nav-backdrop');
+      const isOpen = drawer.classList.contains('open');
+      if (isOpen) {
+        closeMobileNav();
+      } else {
+        drawer.style.display = 'block';
+        if (backdrop) backdrop.style.display = 'block';
+        requestAnimationFrame(() => {
+          drawer.classList.add('open');
+          if (backdrop) backdrop.classList.add('open');
+        });
+      }
+    }
+    function closeMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const backdrop = document.getElementById('mobile-nav-backdrop');
+      drawer.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+      setTimeout(() => { drawer.style.display = 'none'; if (backdrop) backdrop.style.display = 'none'; }, 300);
     }
   </script>
 </body>
