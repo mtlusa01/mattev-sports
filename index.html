@@ -150,7 +150,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .nav-links .nav-text-link { display: none; }
+      .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .hero { padding: 120px 1.5rem 60px; }
       .hero-stats { gap: 1rem; }
@@ -172,8 +172,10 @@
     /* ── Mobile drawer ── */
     .mobile-drawer { position: fixed; top: 0; right: -280px; width: 280px; height: 100vh; background: #12121a; z-index: 200; transition: right 0.3s; padding: 80px 2rem 2rem; border-left: 1px solid rgba(255,255,255,0.06); }
     .mobile-drawer.open { right: 0; }
-    .mobile-drawer a { display: block; padding: 12px 0; font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .mobile-drawer a { display: block; padding: 14px 0; font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
     .mobile-drawer a:hover { color: #fff; }
+    .mobile-drawer .mobile-cta { display: block; margin-top: 16px; padding: 14px; background: #dc2626; color: #fff; font-weight: 700; font-size: 16px; border-radius: 10px; text-align: center; border-bottom: none; }
+    .mobile-drawer .mobile-cta:hover { background: #ef4444; }
     .mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 199; display: none; }
     .mobile-overlay.open { display: block; }
     .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
@@ -206,8 +208,8 @@
     <a href="results.html">Results</a>
     <a href="about.html">About</a>
     <a href="login.html" class="logged-out-only">Log In</a>
-    <a href="login.html?signup=true" class="logged-out-only">Sign Up Free</a>
-    <a href="dashboard.html" class="logged-in-only">Go to Dashboard</a>
+    <a href="login.html?signup=true" class="logged-out-only mobile-cta">Sign Up Free</a>
+    <a href="dashboard.html" class="logged-in-only mobile-cta" style="background:#10b981;">Go to Dashboard</a>
   </div>
 
   <!-- ── Hero ── -->

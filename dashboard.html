@@ -171,70 +171,66 @@
     }
 
     /* ── Mobile Drawer ── */
-    .mobile-nav-drawer {
+    .mobile-nav-backdrop {
       display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+    }
+    .mobile-nav-backdrop.open { display: block; }
+    .mobile-nav-drawer {
       position: fixed;
       top: 90px;
       left: 0;
       right: 0;
       background: #1a1a24;
-      border-bottom: 1px solid #2a2a3a;
-      z-index: 98;
+      border-bottom: 2px solid #2a2a3a;
+      z-index: 9999;
       overflow: hidden;
       max-height: 0;
       transition: max-height 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
-    .mobile-nav-drawer.open {
-      display: block;
-      max-height: 400px;
-    }
-    .mobile-drawer-links {
-      padding: 8px 0;
-    }
+    .mobile-nav-drawer.open { max-height: 500px; }
     .mobile-drawer-links a {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      color: #e0e0e0;
+      gap: 12px;
+      padding: 14px 24px;
+      color: #ffffff;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
+      border-bottom: 1px solid #2a2a3a;
       transition: all 0.15s;
-      border-left: 3px solid transparent;
     }
     .mobile-drawer-links a:hover,
     .mobile-drawer-links a.active {
       color: #dc2626;
-      border-left-color: #dc2626;
-      background: rgba(220, 38, 38, 0.05);
+      background: rgba(220, 38, 38, 0.08);
     }
-    .mobile-drawer-links a svg {
-      width: 18px;
-      height: 18px;
-      opacity: 0.7;
-    }
-    .mobile-drawer-divider {
-      height: 1px;
-      background: #2a2a3a;
-      margin: 4px 20px;
+    .mobile-drawer-links a .menu-icon {
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
     }
     .mobile-drawer-auth {
-      padding: 8px 20px 12px;
+      padding: 12px 24px 16px;
     }
     .mobile-drawer-profile {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 8px 0 12px;
+      padding: 10px 0 14px;
     }
     .mobile-drawer-avatar {
-      width: 36px;
-      height: 36px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       background: #dc2626;
       color: white;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -248,12 +244,12 @@
       min-width: 0;
     }
     .mobile-drawer-name {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       color: #f0f0f0;
     }
     .mobile-drawer-email {
-      font-size: 11px;
+      font-size: 12px;
       color: #6b7280;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -262,33 +258,19 @@
     .mobile-drawer-login-btn {
       display: block;
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background: #dc2626;
       color: white;
       border: none;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
       transition: background 0.15s;
     }
-    .mobile-drawer-login-btn:hover {
-      background: #b91c1c;
-    }
-    .mobile-nav-backdrop {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 97;
-    }
-    .mobile-nav-backdrop.open {
-      display: block;
-    }
+    .mobile-drawer-login-btn:hover { background: #b91c1c; }
 
     /* ── Sub Nav ── */
     .sub-nav {
@@ -1477,22 +1459,10 @@
     .dropdown-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
     .login-btn-pill { padding: 8px 20px; background: linear-gradient(135deg, #00c853, #00e676); color: #0a0e1a; border-radius: 20px; font-weight: 600; font-size: 14px; transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
     .login-btn-pill:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(0,200,83,0.3); }
-    /* Guest banner */
-    .guest-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-bottom: 1px solid rgba(220,38,38,0.2); padding: 10px 2rem; display: flex; align-items: center; justify-content: center; gap: 1rem; font-size: 14px; color: #d1d5db; position: relative; z-index: 90; }
-    .guest-banner a { color: #dc2626; font-weight: 600; text-decoration: underline; }
-    .guest-banner a:hover { color: #ef4444; }
-    .banner-dismiss { background: none; border: none; color: #6b7280; font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1; position: absolute; right: 1rem; }
-    .banner-dismiss:hover { color: #fff; }
   </style>
 </head>
 <body>
   <div class="page-gradient"></div>
-
-  <!-- Guest Banner -->
-  <div class="guest-banner" id="guest-banner" style="display:none;">
-    <span>&#128202; You're viewing as a guest. <a href="login.html?signup=true">Sign up free</a> to save preferences and track your bets.</span>
-    <button onclick="dismissGuestBanner()" class="banner-dismiss">&times;</button>
-  </div>
 
   <!-- Top Navigation v2 -->
   <header class="top-nav">
@@ -1534,22 +1504,12 @@
   <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
   <div class="mobile-nav-drawer" id="mobile-nav-drawer">
     <div class="mobile-drawer-links">
-      <a href="dashboard.html" class="active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
-        Projections
-      </a>
-      <a href="results.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6m6 0h6m-6 0V9a2 2 0 012-2h2a2 2 0 012 2v10m6 0v-4a2 2 0 00-2-2h-2a2 2 0 00-2 2v4"/></svg>
-        Results
-      </a>
-      <a href="about.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
-        About
-      </a>
+      <a href="dashboard.html" class="active"><span class="menu-icon">&#128200;</span> Projections</a>
+      <a href="results.html"><span class="menu-icon">&#128202;</span> Results</a>
+      <a href="about.html"><span class="menu-icon">&#8505;&#65039;</span> About</a>
     </div>
-    <div class="mobile-drawer-divider"></div>
     <div class="mobile-drawer-auth" id="mobile-drawer-auth">
-      <a href="login.html" class="mobile-drawer-login-btn">Log In / Sign Up</a>
+      <a href="login.html" class="mobile-drawer-login-btn">&#128100; Log In / Sign Up</a>
     </div>
   </div>
 
@@ -1646,24 +1606,12 @@
     function toggleMobileNav() {
       const drawer = document.getElementById('mobile-nav-drawer');
       const backdrop = document.getElementById('mobile-nav-backdrop');
-      const isOpen = drawer.classList.contains('open');
-      if (isOpen) {
-        closeMobileNav();
-      } else {
-        drawer.style.display = 'block';
-        backdrop.style.display = 'block';
-        requestAnimationFrame(() => {
-          drawer.classList.add('open');
-          backdrop.classList.add('open');
-        });
-      }
+      drawer.classList.toggle('open');
+      backdrop.classList.toggle('open');
     }
     function closeMobileNav() {
-      const drawer = document.getElementById('mobile-nav-drawer');
-      const backdrop = document.getElementById('mobile-nav-backdrop');
-      drawer.classList.remove('open');
-      backdrop.classList.remove('open');
-      setTimeout(() => { drawer.style.display = 'none'; backdrop.style.display = 'none'; }, 300);
+      document.getElementById('mobile-nav-drawer').classList.remove('open');
+      document.getElementById('mobile-nav-backdrop').classList.remove('open');
     }
 
     // ── Sport Tab Switching ──
@@ -3520,14 +3468,11 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
   <script>
-    // Guest banner logic
-    function dismissGuestBanner() {
-      document.getElementById('guest-banner').style.display = 'none';
-      sessionStorage.setItem('guestBannerDismissed', 'true');
-    }
+    // Auth guard — redirect to landing page if not logged in
     firebase.auth().onAuthStateChanged((user) => {
-      if (!user && !sessionStorage.getItem('guestBannerDismissed')) {
-        document.getElementById('guest-banner').style.display = 'flex';
+      if (!user) {
+        window.location.replace('index.html');
+        return;
       }
     });
   </script>

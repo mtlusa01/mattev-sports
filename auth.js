@@ -225,14 +225,12 @@ function updateNavForLoggedIn(user, profile) {
                     <span class="mobile-drawer-email">${user.email}</span>
                 </div>
             </div>
-            <div class="mobile-drawer-links" style="padding:0;">
-                <a href="profile.html" style="padding:10px 0;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197"/></svg>
-                    Profile & Settings
+            <div class="mobile-drawer-links">
+                <a href="profile.html">
+                    <span class="menu-icon">&#9881;&#65039;</span> Settings
                 </a>
-                <a href="#" onclick="handleSignOut(); return false;" style="padding:10px 0; color:#ef4444;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                    Sign Out
+                <a href="#" onclick="handleSignOut(); return false;" style="color:#ef4444;">
+                    <span class="menu-icon">&#128682;</span> Sign Out
                 </a>
             </div>
         `;
@@ -257,7 +255,7 @@ function updateNavForLoggedOut() {
     // Update mobile drawer auth
     const mobileAuth = document.getElementById('mobile-drawer-auth');
     if (mobileAuth) {
-        mobileAuth.innerHTML = '<a href="login.html" class="mobile-drawer-login-btn">Log In / Sign Up</a>';
+        mobileAuth.innerHTML = '<a href="login.html" class="mobile-drawer-login-btn">&#128100; Log In / Sign Up</a>';
     }
 }
 
