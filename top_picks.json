@@ -1,55 +1,34 @@
 {
-  "date": "2026-02-02",
-  "generated_at": "2026-02-02T22:35:19",
+  "date": "2026-02-03",
+  "generated_at": "2026-02-03T10:07:39",
   "picks": [
     {
-      "type": "ml",
-      "game": "NOP @ CHA",
-      "away_team": "NOP",
-      "home_team": "CHA",
-      "pick": "CHA",
-      "confidence": 65.7,
-      "pick_score": 50.0,
+      "type": "total",
+      "game": "HOU @ IND",
+      "away_team": "HOU",
+      "home_team": "IND",
+      "pick": "OVER 218.5",
+      "confidence": 67.4,
+      "pick_score": 40.0,
       "score_factors": [
-        "65.7% ML conf"
+        "67.4% total conf"
       ],
-      "commence_time": "2026-02-02T20:10:00Z",
-      "top_pick_rank": 1,
-      "result": "WIN",
-      "actual": "95-102"
+      "commence_time": "2026-02-03T00:10:00Z",
+      "top_pick_rank": 1
     },
     {
       "type": "spread",
       "game": "MIN @ MEM",
       "away_team": "MIN",
       "home_team": "MEM",
-      "pick": "MEM +7.5",
-      "confidence": 66.9,
-      "pick_score": 50.0,
-      "score_factors": [
-        "66.9% spread conf",
-        "High confidence"
-      ],
-      "commence_time": "2026-02-03T02:40:00Z",
-      "top_pick_rank": 2,
-      "result": "WIN",
-      "actual": "92-112"
-    },
-    {
-      "type": "total",
-      "game": "HOU @ IND",
-      "away_team": "HOU",
-      "home_team": "IND",
-      "pick": "OVER 219.5",
-      "confidence": 65.9,
+      "pick": "MEM +6.5",
+      "confidence": 61.8,
       "pick_score": 40.0,
       "score_factors": [
-        "65.9% total conf"
+        "61.8% spread conf"
       ],
-      "commence_time": "2026-02-03T00:10:00Z",
-      "top_pick_rank": 3,
-      "result": "WIN",
-      "actual": "118-114"
+      "commence_time": "2026-02-03T00:40:00Z",
+      "top_pick_rank": 2
     },
     {
       "type": "total",
@@ -57,12 +36,26 @@
       "away_team": "PHI",
       "home_team": "LAC",
       "pick": "OVER 220.5",
-      "confidence": 67.4,
+      "confidence": 67.9,
       "pick_score": 40.0,
       "score_factors": [
-        "67.4% total conf"
+        "67.9% total conf"
       ],
-      "commence_time": "2026-02-03T03:40:00Z",
+      "commence_time": "2026-02-03T03:10:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "total",
+      "game": "MIN @ MEM",
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "pick": "OVER 229.5",
+      "confidence": 60.1,
+      "pick_score": 37.8,
+      "score_factors": [
+        "60.1% total conf"
+      ],
+      "commence_time": "2026-02-03T00:40:00Z",
       "top_pick_rank": 4
     },
     {
@@ -74,11 +67,10 @@
       "line": 23.5,
       "projection": 18.6,
       "diff": -4.9,
-      "ev": 5.7,
+      "ev": 4.0,
       "confidence": 56.1,
-      "pick_score": 39.2,
+      "pick_score": 36.7,
       "score_factors": [
-        "+5.7% EV",
         "+4.9 edge",
         "3-game streak"
       ],
@@ -86,21 +78,21 @@
         "fanduel": {
           "over": {
             "line": 23.5,
-            "odds": -110
+            "odds": -111
           },
           "under": {
             "line": 23.5,
-            "odds": -118
+            "odds": -115
           }
         },
         "draftkings": {
           "over": {
             "line": 23.5,
-            "odds": -114
+            "odds": -107
           },
           "under": {
             "line": 23.5,
-            "odds": -111
+            "odds": -120
           }
         },
         "betmgm": {
@@ -110,15 +102,13 @@
           },
           "under": {
             "line": 23.5,
-            "odds": -110
+            "odds": -115
           }
         }
       },
-      "best_book": "betmgm",
+      "best_book": "fanduel",
       "insight": "Averaging 18.6 points over last 10 games (-4.9 below line).",
-      "top_pick_rank": 5,
-      "result": "LOSS",
-      "actual": 39
+      "top_pick_rank": 5
     }
   ]
 }

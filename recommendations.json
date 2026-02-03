@@ -1,12 +1,12 @@
 {
-  "date": "2026-02-02",
-  "generated_at": "2026-02-02T12:02:50",
+  "date": "2026-02-03",
+  "generated_at": "2026-02-03T05:13:46",
   "game_bets": [
     {
       "qualified": true,
-      "score": 153.0,
+      "score": 150.8,
       "reasons": [
-        "69.0% confidence"
+        "67.9% confidence"
       ],
       "type": "total",
       "bet_type": "TOTAL",
@@ -14,60 +14,120 @@
       "away_team": "PHI",
       "home_team": "LAC",
       "pick": "OVER 220.5",
-      "confidence": 69.0,
-      "commence_time": "2026-02-03T03:40:00Z",
+      "confidence": 67.9,
+      "commence_time": "2026-02-03T03:10:00Z",
       "rec_rank": 1
     },
     {
       "qualified": true,
-      "score": 148.8,
+      "score": 149.8,
       "reasons": [
-        "66.9% confidence"
-      ],
-      "type": "ml",
-      "bet_type": "ML",
-      "game": "NOP @ CHA",
-      "away_team": "NOP",
-      "home_team": "CHA",
-      "pick": "CHA",
-      "confidence": 66.9,
-      "commence_time": "2026-02-02T20:10:00Z",
-      "rec_rank": 2
-    },
-    {
-      "qualified": true,
-      "score": 148.4,
-      "reasons": [
-        "66.7% confidence"
-      ],
-      "type": "spread",
-      "bet_type": "SPREAD",
-      "game": "MIN @ MEM",
-      "away_team": "MIN",
-      "home_team": "MEM",
-      "pick": "MEM +7.5",
-      "confidence": 66.7,
-      "commence_time": "2026-02-03T02:40:00Z",
-      "rec_rank": 3
-    },
-    {
-      "qualified": true,
-      "score": 127.4,
-      "reasons": [
-        "63.7% confidence"
+        "67.4% confidence"
       ],
       "type": "total",
       "bet_type": "TOTAL",
       "game": "HOU @ IND",
       "away_team": "HOU",
       "home_team": "IND",
-      "pick": "OVER 219.5",
-      "confidence": 63.7,
+      "pick": "OVER 218.5",
+      "confidence": 67.4,
       "commence_time": "2026-02-03T00:10:00Z",
+      "rec_rank": 2
+    },
+    {
+      "qualified": true,
+      "score": 123.6,
+      "reasons": [
+        "61.8% confidence"
+      ],
+      "type": "spread",
+      "bet_type": "SPREAD",
+      "game": "MIN @ MEM",
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "pick": "MEM +6.5",
+      "confidence": 61.8,
+      "commence_time": "2026-02-03T00:40:00Z",
+      "rec_rank": 3
+    },
+    {
+      "qualified": true,
+      "score": 120.2,
+      "reasons": [
+        "60.1% confidence"
+      ],
+      "type": "total",
+      "bet_type": "TOTAL",
+      "game": "MIN @ MEM",
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "pick": "OVER 229.5",
+      "confidence": 60.1,
+      "commence_time": "2026-02-03T00:40:00Z",
       "rec_rank": 4
     }
   ],
   "props": [
+    {
+      "qualified": true,
+      "score": 46.019999999999996,
+      "reasons": [
+        "+15.0% EV"
+      ],
+      "type": "prop",
+      "player": "Cedric Coward",
+      "team": "MEM",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 6.5,
+      "projection": 6.8,
+      "diff": 0.3,
+      "confidence": 54.8,
+      "ev": 15.0,
+      "edge": 0.2999999999999998,
+      "pick_score": 26.1,
+      "score_factors": [
+        "+15.0% EV",
+        "Injury boosted"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 6.5,
+            "odds": 118
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -150
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 6.5,
+            "odds": 106
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -140
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 6.5,
+            "odds": 105
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -140
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "MIN ranks #10 in rebounds defense \u2014 tough for overs.",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 40,
+      "rec_rank": 1
+    },
     {
       "qualified": true,
       "score": 39.13,
@@ -127,15 +187,74 @@
       "insight": "NOP ranks #29 in assists defense \u2014 favorable for overs.",
       "matchup_favorability": "favorable",
       "l10_hit_rate": 40,
-      "rec_rank": 1
+      "rec_rank": 2
     },
     {
       "qualified": true,
-      "score": 36.095,
+      "score": 35.32,
       "reasons": [
-        "+6.1% EV",
+        "+10.8% EV"
+      ],
+      "type": "prop",
+      "player": "Donte DiVincenzo",
+      "team": "MIN",
+      "prop": "AST",
+      "direction": "UNDER",
+      "line": 4.5,
+      "projection": 4.1,
+      "diff": -0.4,
+      "confidence": 52.8,
+      "ev": 10.8,
+      "edge": 0.40000000000000036,
+      "pick_score": 21.2,
+      "score_factors": [
+        "+10.8% EV"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -136
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 106
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -151
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 115
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": -150
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 110
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": null,
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 50,
+      "rec_rank": 3
+    },
+    {
+      "qualified": true,
+      "score": 30.814999999999998,
+      "reasons": [
         "80% L10 hit rate",
-        "+4.9 edge"
+        "+4.9 edge",
+        "56.1% confidence"
       ],
       "type": "prop",
       "player": "Alperen Sengun",
@@ -145,12 +264,11 @@
       "line": 23.5,
       "projection": 18.6,
       "diff": -4.9,
-      "confidence": 56.3,
-      "ev": 6.1,
+      "confidence": 56.1,
+      "ev": 4.0,
       "edge": 4.899999999999999,
-      "pick_score": 39.9,
+      "pick_score": 36.7,
       "score_factors": [
-        "+6.1% EV",
         "+4.9 edge",
         "3-game streak"
       ],
@@ -158,21 +276,21 @@
         "fanduel": {
           "over": {
             "line": 23.5,
-            "odds": -110
+            "odds": -111
           },
           "under": {
             "line": 23.5,
-            "odds": -118
+            "odds": -115
           }
         },
         "draftkings": {
           "over": {
             "line": 23.5,
-            "odds": -114
+            "odds": -107
           },
           "under": {
             "line": 23.5,
-            "odds": -111
+            "odds": -120
           }
         },
         "betmgm": {
@@ -182,79 +300,80 @@
           },
           "under": {
             "line": 23.5,
-            "odds": -110
+            "odds": -115
           }
         }
       },
-      "best_book": "betmgm",
+      "best_book": "fanduel",
       "insight": "Averaging 18.6 points over last 10 games (-4.9 below line).",
       "matchup_favorability": "unfavorable",
       "l10_hit_rate": 80,
-      "rec_rank": 2
+      "rec_rank": 4
     },
     {
       "qualified": true,
-      "score": 31.62,
+      "score": 23.9,
       "reasons": [
-        "+9.3% EV"
+        "+5.5% EV",
+        "Favorable matchup"
       ],
       "type": "prop",
-      "player": "Cedric Coward",
-      "team": "MEM",
+      "player": "Naz Reid",
+      "team": "MIN",
       "prop": "REB",
       "direction": "OVER",
-      "line": 6.5,
-      "projection": 6.8,
-      "diff": 0.3,
-      "confidence": 53.8,
-      "ev": 9.3,
-      "edge": 0.2999999999999998,
-      "pick_score": 17.6,
+      "line": 7.5,
+      "projection": 7.7,
+      "diff": 0.2,
+      "confidence": 53.0,
+      "ev": 5.5,
+      "edge": 0.20000000000000018,
+      "pick_score": 23.2,
       "score_factors": [
-        "+9.3% EV",
-        "Injury boosted"
+        "+5.5% EV",
+        "Favorable matchup (#20 DEF)"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 6.5,
-            "odds": -100
+            "line": 7.5,
+            "odds": 108
           },
           "under": {
-            "line": 6.5,
-            "odds": -132
+            "line": 7.5,
+            "odds": -138
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": 105
+            "line": 7.5,
+            "odds": -101
           },
           "under": {
-            "line": 6.5,
-            "odds": -138
+            "line": 7.5,
+            "odds": -130
           }
         },
         "betmgm": {
           "over": {
-            "line": 6.5,
-            "odds": 105
+            "line": 7.5,
+            "odds": -110
           },
           "under": {
-            "line": 6.5,
-            "odds": -140
+            "line": 7.5,
+            "odds": -120
           }
         }
       },
-      "best_book": "draftkings",
-      "insight": "MIN ranks #10 in rebounds defense \u2014 tough for overs.",
-      "matchup_favorability": "unfavorable",
-      "l10_hit_rate": 40,
-      "rec_rank": 3
+      "best_book": "fanduel",
+      "insight": "MEM ranks #20 in rebounds defense \u2014 favorable for overs.",
+      "matchup_favorability": "favorable",
+      "l10_hit_rate": 50,
+      "rec_rank": 5
     }
   ],
   "game_count": 4,
-  "prop_count": 3,
+  "prop_count": 5,
   "has_recommendations": true,
   "message": null
 }
