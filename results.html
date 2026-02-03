@@ -38,22 +38,53 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .page-gradient {
-      position: fixed; top: 0; left: 0; right: 0; height: 60vh;
-      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.08), transparent);
-      pointer-events: none; z-index: 0;
-    }
+    .page-gradient { display: none; }
 
-    /* ── Navbar ── */
-    .navbar { background: #0f0f0f; border-bottom: 1px solid #2a2a2a; padding: 0.75rem 0; position: sticky; top: 0; z-index: 100; }
-    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-    .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: bold; font-size: 1.25rem; color: white; }
-    .logo-icon { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: bold; }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-link { color: #a0a0a0; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+    /* ── Top Nav (matches index.html) ── */
+    .top-nav {
+      background: #0f0f0f;
+      border-bottom: 1px solid #2a2a2a;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+    }
+    .top-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sports-tabs {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--bg-tertiary); border-radius: 10px; padding: 4px;
+    }
+    .sport-tab {
+      position: relative; padding: 6px 18px; border-radius: 8px; border: none;
+      background: transparent; color: var(--text-muted); font-size: 13px;
+      font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sport-tab:hover { color: var(--text-secondary); }
+    .sport-tab.active {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+    }
+    .soon-badge {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; padding: 1px 5px; border-radius: 4px;
+      background: rgba(255,255,255,0.1); color: var(--text-muted);
+    }
+    .sport-tab.active .soon-badge { display: none; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-link { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; font-weight: 500; }
     .nav-link:hover, .nav-link.active { color: #ffffff; }
-    .admin-btn { color: #a0a0a0; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid #333; border-radius: 6px; font-size: 0.9rem; transition: all 0.2s; }
-    .admin-btn:hover { border-color: #dc2626; color: #dc2626; }
+    .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
     /* ── Main ── */
     main { max-width: 1200px; margin: 0 auto; padding: 100px 24px 100px; position: relative; z-index: 1; }
@@ -250,8 +281,10 @@
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .mobile-menu { display: block; }
+      .nav-right { display: none; }
+      .sports-tabs { display: none; }
+      .mobile-menu-btn { display: block; }
+      .top-nav-inner { padding: 0 1rem; }
       .results-banner { grid-template-columns: repeat(2, 1fr); }
       .results-banner-stat .rbs-value { font-size: 22px; }
       .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
@@ -268,20 +301,39 @@
 <body>
   <div class="page-gradient"></div>
 
-  <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">M</span>
-        <span class="logo-text">Edge Factor <span class="brand-elite">Elite</span></span>
-      </a>
-      <nav class="nav-links">
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <div style="display:flex;align-items:center;">
+        <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+          <span style="font-size:1.4rem;font-weight:800;color:#f0f0f0;letter-spacing:-0.02em;white-space:nowrap;">Edge Factor <span style="color:#dc2626;">Elite</span></span>
+        </a>
+      </div>
+      <div class="sports-tabs" id="sports-tabs">
+        <button class="sport-tab active" data-sport="nba">NBA</button>
+        <button class="sport-tab" data-sport="nhl">NHL <span class="soon-badge">Soon</span></button>
+        <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
+        <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+      </div>
+      <div class="nav-right">
         <a href="index.html" class="nav-link">Projections</a>
         <a href="results.html" class="nav-link active">Results</a>
         <a href="about.html" class="nav-link">About</a>
-      </nav>
-      <a href="admin.html" class="admin-btn">Admin</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Menu">&#9776;</button>
     </div>
   </header>
+
+  <div id="mobile-nav-drawer" style="display:none; position:fixed; top:60px; left:0; right:0; background:#0f0f0f; border-bottom:1px solid #2a2a2a; padding:1rem 1.5rem; z-index:98;">
+    <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;">
+      <button class="sport-tab active" data-sport="nba">NBA</button>
+      <button class="sport-tab" data-sport="nhl">NHL <span class="soon-badge">Soon</span></button>
+      <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
+      <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+    </div>
+    <a href="index.html" class="nav-link" style="display:block;padding:0.5rem 0;">Projections</a>
+    <a href="results.html" class="nav-link" style="display:block;padding:0.5rem 0;color:#fff;">Results</a>
+    <a href="about.html" class="nav-link" style="display:block;padding:0.5rem 0;">About</a>
+  </div>
 
   <main>
     <h1 class="page-title">Prediction <span>Results</span></h1>
@@ -720,6 +772,11 @@
     }
 
     loadResults();
+
+    function toggleMobileNav() {
+      const d = document.getElementById('mobile-nav-drawer');
+      d.style.display = d.style.display === 'none' ? 'block' : 'none';
+    }
   </script>
 </body>
 </html>
