@@ -940,40 +940,7 @@
       .injury-stat-value { font-size: 0.85rem; }
       .injury-stat-label { font-size: 0.6rem; }
 
-      /* Line shopping — scrollable with sticky first col */
-      .sportsbook-odds-table {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        border-radius: 8px;
-      }
-      .sportsbook-odds-table::-webkit-scrollbar { height: 4px; }
-      .sportsbook-odds-table::-webkit-scrollbar-track { background: #1a1a2e; }
-      .sportsbook-odds-table::-webkit-scrollbar-thumb { background: #3a3a4e; border-radius: 2px; }
-      .odds-table-header, .odds-table-row {
-        display: flex !important;
-        min-width: max-content;
-      }
-      .odds-col {
-        min-width: 62px;
-        flex-shrink: 0;
-        padding: 0.6rem 0.4rem;
-      }
-      .odds-col.side-col {
-        position: sticky;
-        left: 0;
-        z-index: 2;
-        background: #12121f;
-        min-width: 90px;
-        padding-left: 0.6rem;
-        box-shadow: 2px 0 6px rgba(0,0,0,0.4);
-      }
-      .odds-table-header .odds-col.side-col { background: #0f0f1a; }
-      .odds-table-row.recommended .odds-col.side-col {
-        background: linear-gradient(90deg, rgba(16,185,129,0.08), #12121f);
-      }
-      .odds-col.best-col { min-width: 68px; }
-      .odds-col.avg-col { min-width: 58px; }
+      /* Line shopping — compact font sizes on mobile */
       .side-label { font-size: 0.7rem; min-width: 30px; }
       .side-line { font-size: 0.75rem; }
       .book-abbr { font-size: 0.65rem; }
@@ -1497,8 +1464,7 @@
 
     /* ── Sportsbook Odds Table ── */
     .sportsbook-odds-table {
-      background: #12121f; border: 1px solid #2a2a3e;
-      border-radius: 8px; overflow: hidden; margin-top: 1rem;
+      background: #12121f;
     }
     .odds-table-header, .odds-table-row {
       display: grid;
@@ -2536,15 +2502,17 @@
                       }).join('')}
                     </div>`;
                   };
-                  return `<div class="sportsbook-odds-table">
-                    <div class="odds-table-header">
-                      <div class="odds-col side-col"></div>
-                      <div class="odds-col best-col"><span class="col-label">BEST</span></div>
-                      <div class="odds-col avg-col"><span class="col-label">AVG</span></div>
-                      ${bks.map(b => `<div class="odds-col book-col"><span class="book-abbr" style="color:${b.c}">${b.l}</span></div>`).join('')}
+                  return `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin-top:1rem;border-radius:8px;border:1px solid #2a2a3e;">
+                    <div class="sportsbook-odds-table" style="min-width:550px;">
+                      <div class="odds-table-header">
+                        <div class="odds-col side-col"></div>
+                        <div class="odds-col best-col"><span class="col-label">BEST</span></div>
+                        <div class="odds-col avg-col"><span class="col-label">AVG</span></div>
+                        ${bks.map(b => `<div class="odds-col book-col"><span class="book-abbr" style="color:${b.c}">${b.l}</span></div>`).join('')}
+                      </div>
+                      ${renderRow('over')}
+                      ${renderRow('under')}
                     </div>
-                    ${renderRow('over')}
-                    ${renderRow('under')}
                   </div>`;
                 })() : ''}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
