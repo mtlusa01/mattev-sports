@@ -362,7 +362,7 @@
         <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
       </div>
       <div class="nav-right">
-        <a href="index.html" class="nav-link">Projections</a>
+        <a href="dashboard.html" class="nav-link">Projections</a>
         <a href="results.html" class="nav-link active">Results</a>
         <a href="about.html" class="nav-link">About</a>
       </div>
@@ -377,7 +377,7 @@
       <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
       <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
     </div>
-    <a href="index.html" class="nav-link" style="display:block;padding:0.5rem 0;">Projections</a>
+    <a href="dashboard.html" class="nav-link" style="display:block;padding:0.5rem 0;">Projections</a>
     <a href="results.html" class="nav-link" style="display:block;padding:0.5rem 0;color:#fff;">Results</a>
     <a href="about.html" class="nav-link" style="display:block;padding:0.5rem 0;">About</a>
   </div>
@@ -830,7 +830,7 @@
       tab.addEventListener('click', () => {
         const sport = tab.dataset.sport;
         if (sport === 'nba') {
-          window.location.href = 'index.html';
+          window.location.href = 'dashboard.html';
         } else {
           document.getElementById('coming-soon-sport').textContent = sport.toUpperCase();
           document.getElementById('coming-soon-overlay').style.display = 'flex';

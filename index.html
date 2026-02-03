@@ -3,3019 +3,439 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edge Factor Elite | AI Sports Projections</title>
-  <meta name="description" content="Edge Factor Elite — Daily AI-powered sports projections. Data-driven player props and game predictions updated every morning.">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta name="version" content="2026-02-02-v2">
+  <title>Edge Factor Elite - AI-Powered Sports Predictions</title>
+  <meta name="description" content="Machine learning models analyzing player props, spreads, totals & moneylines to find edges the books miss.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #111118;
-      --bg-tertiary: #1a1a24;
-      --bg-elevated: rgba(37, 37, 50, 0.5);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-light: rgba(255, 255, 255, 0.12);
-      --text-primary: #f0f0f0;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-      /* Brand — Ferrari Red */
-      --brand: #dc2626;
-      --brand-light: #ef4444;
-      --brand-glow: rgba(220, 38, 38, 0.15);
-      --brand-border: rgba(220, 38, 38, 0.3);
-      /* Winning/Positive — Green */
-      --accent: #10b981;
-      --accent-light: #34d399;
-      --accent-glow: rgba(16, 185, 129, 0.15);
-      /* Status colors */
-      --red: #ef4444;
-      --red-light: #f87171;
-      --yellow: #f59e0b;
-      --blue: #3b82f6;
-      --purple: #8b5cf6;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0f; color: #e0e0e0; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── Nav ── */
+    .landing-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+    .nav-brand span { color: #dc2626; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .btn-login { padding: 7px 18px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-size: 14px; font-weight: 600; color: #fff; transition: all 0.2s; }
+    .btn-login:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
+    .btn-signup-nav { padding: 7px 18px; background: #dc2626; border-radius: 8px; font-size: 14px; font-weight: 600; color: #fff; transition: all 0.2s; }
+    .btn-signup-nav:hover { background: #ef4444; transform: translateY(-1px); }
+    .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .page-gradient {
-      position: fixed; top: 0; left: 0; right: 0; height: 60vh;
-      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(220, 38, 38, 0.08), transparent);
-      pointer-events: none; z-index: 0;
-    }
-
-    /* ── Top Nav ── */
-    .top-nav {
-      background: #0f0f0f;
-      border-bottom: 1px solid #2a2a2a;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-    }
-    .top-nav-inner {
-      position: relative;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .brand-logo-circle {
-      width: 44px; height: 44px; border-radius: 50%; overflow: hidden;
-      border: 2px solid var(--brand); box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
-      flex-shrink: 0; transition: all 0.2s;
-    }
-    .brand-logo-img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center;
-    }
-    .brand-name {
-      font-size: 1.15rem; font-weight: 700; color: var(--text-primary);
-      letter-spacing: -0.02em; white-space: nowrap;
-    }
-    .brand-name .brand-elite { color: var(--brand-light); font-weight: 800; }
-    .logo:hover .brand-logo-circle { border-color: var(--brand-light); transform: scale(1.05); }
-    .logo:hover .brand-elite { text-shadow: 0 0 10px rgba(220, 38, 38, 0.5); }
-    .nav-brand { position: relative; z-index: 2; }
-    .sports-tabs {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: var(--bg-tertiary);
-      border-radius: 10px;
-      padding: 4px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-    .sport-tab {
-      position: relative;
-      padding: 6px 18px;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .sport-tab:hover { color: var(--text-secondary); }
-    .sport-tab.active {
-      background: var(--brand);
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
-    }
-    .soon-badge {
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 1px 5px;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.1);
-      color: var(--text-muted);
-    }
-    .sport-tab.active .soon-badge { display: none; }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex: 0 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-    .nav-link {
-      color: #a0a0a0;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-      font-weight: 500;
-    }
-    .nav-link:hover { color: #ffffff; }
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ── Sub Nav ── */
-    .sub-nav {
-      background: #0f0f0f;
-      border-bottom: 1px solid #2a2a2a;
-      position: fixed;
-      top: 60px;
-      left: 0;
-      right: 0;
-      height: 50px;
-      z-index: 99;
-      display: flex;
-      align-items: center;
-    }
-    .sub-nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .view-tabs {
-      display: flex;
-      gap: 0;
-    }
-    .view-tab {
-      padding: 8px 20px;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
-    }
-    .view-tab:hover { color: var(--text-secondary); }
-    .view-tab.active { color: var(--brand-light); border-bottom-color: var(--brand); }
-    .sub-nav-meta {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .sub-nav-meta .live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--brand);
-      animation: pulse 2s ease-in-out infinite;
-    }
+    /* ── Hero ── */
+    .hero { padding: 140px 2rem 80px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at 50% 0%, rgba(220,38,38,0.08) 0%, transparent 60%); pointer-events: none; }
+    .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.2); border-radius: 20px; font-size: 13px; font-weight: 600; color: #ef4444; margin-bottom: 1.5rem; }
+    .hero-badge .pulse { width: 8px; height: 8px; background: #dc2626; border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; letter-spacing: -1px; }
+    .hero h1 span { background: linear-gradient(135deg, #dc2626, #f87171); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: #9ca3af; max-width: 620px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-cta { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #dc2626, #991b1b); color: #fff; font-weight: 700; font-size: 16px; border-radius: 10px; transition: all 0.25s; border: none; cursor: pointer; }
+    .btn-cta:hover { background: linear-gradient(135deg, #ef4444, #dc2626); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.3); }
+    .btn-secondary { display: inline-block; padding: 14px 32px; border: 1px solid rgba(255,255,255,0.15); color: #fff; font-weight: 600; font-size: 16px; border-radius: 10px; transition: all 0.25s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
+    .hero-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+    .hero-stat .hs-val { font-size: 18px; font-weight: 800; color: #fff; }
+    .hero-stat .hs-label { font-size: 12px; color: #6b7280; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
-    /* ── Stats Bar (compact, below fixed nav) ── */
-    .stats-bar {
-      display: none;
-      max-width: 1200px;
-      margin: 0 auto 20px;
-      padding: 0 24px;
-    }
-    .stats-bar.visible { display: block; }
-    .stats-bar-inner {
-      display: flex;
-      gap: 1px;
-      background: var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .stats-bar .stat {
-      flex: 1;
-      padding: 14px 16px;
-      background: var(--bg-secondary);
-      text-align: center;
-    }
-    .stats-bar .stat-value {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-    .stats-bar .stat-value.green { color: var(--accent-light); }
-    .stats-bar .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
+    /* ── Sections ── */
+    .section { padding: 80px 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; color: #fff; text-align: center; margin-bottom: 0.75rem; letter-spacing: -0.5px; }
+    .section-subtitle { font-size: 1rem; color: #6b7280; text-align: center; max-width: 600px; margin: 0 auto 3rem; }
 
-    /* ── Coming Soon Overlay ── */
-    .coming-soon-overlay {
-      display: none;
-      position: fixed;
-      top: 110px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(9, 9, 11, 0.95);
-      z-index: 90;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .coming-soon-overlay.visible { display: flex; }
-    .coming-soon-overlay .cs-sport {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-    }
-    .coming-soon-overlay .cs-text {
-      font-size: 18px;
-      color: var(--text-secondary);
-    }
-    .coming-soon-overlay .cs-back {
-      padding: 10px 24px;
-      background: linear-gradient(135deg, var(--brand) 0%, #991b1b 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      transition: opacity 0.15s;
-    }
-    .coming-soon-overlay .cs-back:hover { opacity: 0.85; }
+    /* ── Preview (blurred) ── */
+    .preview-wrapper { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); }
+    .preview-blur { filter: blur(8px); -webkit-filter: blur(8px); pointer-events: none; user-select: none; padding: 2rem; background: #12121a; }
+    .preview-stats-bar { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preview-stat { text-align: center; background: #1a1a24; padding: 16px 24px; border-radius: 10px; border: 1px solid #2a2a3a; min-width: 140px; }
+    .preview-stat .stat-num { font-size: 24px; font-weight: 800; color: #fff; display: block; }
+    .preview-stat .stat-num.green { color: #10b981; }
+    .preview-stat .stat-label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
+    .preview-picks-header { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 1rem; padding: 0 0.5rem; }
+    .preview-picks-header .picks-count { font-size: 13px; font-weight: 500; color: #6b7280; margin-left: 8px; }
+    .preview-game-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .preview-card { background: #1a1a24; border: 1px solid #2a2a3a; border-radius: 10px; padding: 16px; }
+    .card-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; background: rgba(220,38,38,0.15); color: #ef4444; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card-badge.total { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .card-badge.ml { background: rgba(168,85,247,0.15); color: #c084fc; }
+    .card-matchup { font-size: 13px; color: #9ca3af; margin-bottom: 4px; }
+    .card-pick { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .card-conf { font-size: 13px; color: #6b7280; }
+    .card-conf.green { color: #10b981; }
+    .preview-props-header { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 1rem; padding: 0 0.5rem; }
+    .preview-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.75rem; }
+    .preview-prop { background: #1a1a24; border: 1px solid #2a2a3a; border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .prop-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .prop-detail { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .prop-ev { font-size: 14px; font-weight: 700; color: #10b981; }
+    .preview-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,10,15,0.55); display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .overlay-content { text-align: center; padding: 2rem; }
+    .lock-icon { font-size: 3rem; margin-bottom: 1rem; line-height: 1; }
+    .overlay-content h3 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .overlay-content p { color: #9ca3af; margin-bottom: 1.5rem; font-size: 15px; }
+    .overlay-login { display: block; margin-top: 1rem; font-size: 14px; color: #6b7280; }
+    .overlay-login a { color: #dc2626; font-weight: 600; }
+    .overlay-login a:hover { text-decoration: underline; }
 
-    /* ── Main ── */
-    main { max-width: 1200px; margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 1; }
-    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-    .section-title { font-size: 14px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
-    .section-title::before { content: ''; width: 3px; height: 16px; background: var(--brand); border-radius: 2px; }
-    .section-meta { font-size: 13px; color: var(--text-muted); }
+    /* ── Features ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .feature-card { background: #12121a; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 2rem; transition: transform 0.25s, border-color 0.25s; }
+    .feature-card:hover { transform: translateY(-4px); border-color: rgba(220,38,38,0.2); }
+    .feature-icon { font-size: 2rem; margin-bottom: 1rem; line-height: 1; }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 14px; color: #9ca3af; line-height: 1.7; }
 
-    /* ── Game Filter Bar ── */
-    .game-filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    .game-filter-bar .filter-label {
-      font-size: 12px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
-    }
-    .game-pill {
-      padding: 6px 14px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
-      white-space: nowrap;
-    }
-    .game-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .game-pill.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
-    .game-pill .pill-time { font-weight: 400; color: var(--text-muted); margin-left: 4px; font-size: 11px; }
-    .game-pill.active .pill-time { color: rgba(239, 68, 68, 0.7); }
-    .game-pill .pill-live { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; color: var(--red-light); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; }
-    .game-pill .pill-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
-    .game-pill .pill-soon { color: var(--yellow); margin-left: 4px; font-size: 10px; font-weight: 600; }
-    .game-pill .pill-final { color: var(--text-muted); margin-left: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; }
-    .game-pill.final-pill { border-color: rgba(113, 113, 122, 0.3); opacity: 0.85; }
-    @keyframes pulse-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .game-pill.live-pill { border-color: rgba(239, 68, 68, 0.3); }
-    .game-pill.soon-pill { border-color: rgba(234, 179, 8, 0.2); }
+    /* ── How It Works ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+    .step { text-align: center; position: relative; }
+    .step-number { width: 56px; height: 56px; border-radius: 50%; background: rgba(220,38,38,0.1); border: 2px solid rgba(220,38,38,0.3); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; color: #dc2626; margin: 0 auto 1.25rem; }
+    .step h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .step p { font-size: 14px; color: #9ca3af; }
 
-    /* ── Search Bar ── */
-    .search-wrap {
-      position: relative;
-      margin-bottom: 16px;
-      max-width: 360px;
-    }
-    .search-wrap svg {
-      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-      width: 16px; height: 16px; color: var(--text-muted); pointer-events: none;
-    }
-    .search-input {
-      width: 100%;
-      padding: 9px 12px 9px 36px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-size: 13px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .search-input::placeholder { color: var(--text-muted); }
-    .search-input:focus { border-color: var(--brand); }
+    /* ── Performance Teaser ── */
+    .perf-section { text-align: center; }
+    .perf-preview { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); max-width: 700px; margin: 0 auto 2rem; }
+    .perf-blur { filter: blur(5px); -webkit-filter: blur(5px); pointer-events: none; user-select: none; padding: 2rem; background: #12121a; }
+    .perf-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .perf-stat { text-align: center; }
+    .perf-stat .pv { font-size: 28px; font-weight: 800; color: #10b981; }
+    .perf-stat .pl { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .perf-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,10,15,0.5); display: flex; align-items: center; justify-content: center; }
+    .perf-overlay-inner { text-align: center; }
+    .perf-overlay-inner p { color: #9ca3af; font-size: 15px; margin-bottom: 1rem; }
+    .perf-text { max-width: 500px; margin: 0 auto 2rem; color: #9ca3af; font-size: 15px; line-height: 1.7; }
 
-    /* Filter row */
-    .filter-row { display: flex; align-items: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
-    .filter-group { display: flex; align-items: center; gap: 8px; }
-    .filter-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .filter-pill { padding: 5px 14px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 100px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
-    .filter-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .filter-pill.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
+    /* ── Pricing ── */
+    .pricing-card { max-width: 420px; margin: 0 auto; background: #12121a; border: 2px solid rgba(220,38,38,0.2); border-radius: 18px; padding: 2.5rem; text-align: center; }
+    .pricing-badge { display: inline-block; padding: 4px 14px; background: rgba(220,38,38,0.1); border-radius: 20px; font-size: 13px; font-weight: 700; color: #ef4444; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .pricing-price { font-size: 3.5rem; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 0.25rem; }
+    .pricing-period { font-size: 14px; color: #6b7280; margin-bottom: 2rem; }
+    .pricing-features { list-style: none; text-align: left; margin-bottom: 2rem; }
+    .pricing-features li { padding: 8px 0; font-size: 15px; color: #d1d5db; display: flex; align-items: center; gap: 10px; }
+    .pricing-features li .check { color: #10b981; font-weight: 700; flex-shrink: 0; }
+    .pricing-features li .soon { color: #6b7280; flex-shrink: 0; }
+    .pricing-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 1rem 0; }
 
-    /* ── Selected Game Card (inline) ── */
-    .selected-game-card {
-      display: none;
-      background: var(--bg-secondary);
-      border: 1px solid var(--brand-border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-    }
-    .selected-game-card.visible { display: block; }
-    .sgc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .sgc-matchup { font-size: 16px; font-weight: 700; }
-    .sgc-score { font-size: 13px; color: var(--text-muted); }
-    .sgc-picks { display: flex; gap: 24px; flex-wrap: wrap; }
-    .sgc-pick { display: flex; flex-direction: column; gap: 2px; }
-    .sgc-pick-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .sgc-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .sgc-pick-value.best-bet { color: var(--accent-light); }  /* Keep green — winning indicator */
-    .sgc-pick-value.no-play { color: var(--text-muted); font-weight: 400; }
-    .sgc-pick-conf { font-size: 11px; color: var(--text-secondary); }
+    /* ── Footer ── */
+    .landing-footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 2rem; margin-top: 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+    .footer-brand { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .footer-brand span { color: #dc2626; }
+    .footer-disclaimer { font-size: 12px; color: #4b5563; max-width: 400px; line-height: 1.6; margin-top: 0.5rem; }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 14px; color: #6b7280; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 12px; color: #4b5563; text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.04); max-width: 1200px; margin-left: auto; margin-right: auto; }
 
-    /* ── Prop Table ── */
-    .picks-table { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 48px; }
-    .table-header {
-      display: grid;
-      grid-template-columns: 2fr 0.8fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
-      padding: 12px 20px;
-      background: var(--bg-tertiary);
-      border-bottom: 1px solid var(--border);
-      font-size: 11px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .pick-row {
-      display: grid;
-      grid-template-columns: 2fr 0.8fr 0.7fr 0.8fr 0.7fr 0.8fr 0.7fr 0.7fr;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border);
-      align-items: center;
-      transition: background 0.15s;
-      cursor: pointer;
-    }
-    .pick-row:last-child { border-bottom: none; }
-    .pick-row:hover { background: var(--bg-elevated); }
-    .pick-row.positive-ev { background: rgba(16, 185, 129, 0.04); }
-    .pick-row.positive-ev:hover { background: rgba(16, 185, 129, 0.08); }
+    /* ── Scroll animations ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* Team color dot */
-    .team-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; flex-shrink: 0; }
-    .team-label { display: inline-flex; align-items: center; color: var(--text-secondary); font-size: 13px; }
+    /* ── Logged-in state ── */
+    .logged-in-only { display: none; }
+    body.is-logged-in .logged-out-only { display: none; }
+    body.is-logged-in .logged-in-only { display: inline-flex; }
 
-    /* Player cell */
-    .player-cell { display: flex; flex-direction: column; gap: 1px; }
-    .player-name { font-weight: 600; font-size: 14px; }
-    .player-matchup { font-size: 11px; color: var(--text-muted); }
-
-    /* Expandable detail row */
-    .pick-row-detail { animation: slideDown 0.15s ease; }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-
-    .prop-details-expanded { background: var(--bg-primary); padding: 16px 20px; }
-    .details-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 800px;
-    }
-    .detail-card {
-      background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 8px; padding: 14px; text-align: center;
-    }
-    .detail-card .dc-label {
-      font-size: 10px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
-    }
-    /* Projection card */
-    .proj-compare {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      font-size: 20px; margin-bottom: 6px;
-    }
-    .proj-compare .proj-val { color: var(--accent-light); font-weight: 700; }
-    .proj-compare .proj-vs { color: var(--text-muted); font-size: 13px; }
-    .proj-compare .proj-line { color: var(--text-secondary); font-weight: 600; }
-    .dc-edge { font-size: 13px; font-weight: 600; }
-    .dc-edge.pos { color: var(--accent-light); }
-    .dc-edge.neg { color: var(--red-light); }
-    /* Odds card */
-    .odds-compare {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      margin-bottom: 6px;
-    }
-    .odds-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-    .odds-item .oi-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
-    .odds-item .oi-value { font-size: 17px; font-weight: 700; color: var(--text-secondary); }
-    .odds-item .oi-value.fair { color: var(--accent-light); }
-    .odds-arrow { color: var(--accent); font-size: 18px; }
-    /* EV card */
-    .ev-display { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
-    .ev-display.pos { color: var(--accent-light); }
-    .ev-display.neg { color: var(--red-light); }
-    .ev-display.neutral { color: var(--text-muted); }
-    .rating-badge {
-      display: inline-block; padding: 3px 10px; border-radius: 4px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
-    }
-    .rating-badge.strong { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
-    .rating-badge.good { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
-    .rating-badge.lean { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
-
-    /* ── Insight Section ── */
-    .insight-section { margin-top: 12px; }
-    .insight-card {
-      display: flex; gap: 12px; align-items: flex-start;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 12px 16px;
-    }
-    .insight-icon { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
-    .insight-content { flex: 1; }
-    .insight-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; margin-bottom: 8px; }
-    .insight-stats { display: flex; gap: 8px; flex-wrap: wrap; }
-    .stat-badge {
-      padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;
-      background: var(--bg-tertiary); color: var(--text-muted);
-    }
-    .stat-badge.hit-rate { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
-    .stat-badge.streak { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
-    .stat-badge.home-away { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
-    .stat-badge.matchup { display: inline-flex; align-items: center; gap: 3px; }
-    .stat-badge.matchup.favorable { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .stat-badge.matchup.neutral { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); }
-    .stat-badge.matchup.unfavorable { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); }
-
-    /* Injury alert styles */
-    .injury-section { margin-top: 12px; }
-    .injury-alert { background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; border-radius: 8px; padding: 12px 14px; }
-    .injury-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); }
-    .injury-icon { font-size: 1rem; }
-    .injury-title { flex: 1; }
-    .boost-badge { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; }
-    .injury-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-    .teammate-injury { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; }
-    .injury-status { padding: 1px 7px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
-    .injury-status.out { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
-    .injury-status.doubtful { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .injury-status.questionable { background: rgba(234, 179, 8, 0.15); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.25); }
-    .injury-status.day-to-day { background: rgba(234, 179, 8, 0.12); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.2); }
-    .injury-player { color: var(--text-secondary); }
-    .injury-note { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; font-style: italic; }
-    .injury-stats-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-    .injury-stat-box { text-align: center; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 6px 12px; min-width: 60px; }
-    .injury-stat-box.without { border: 1px solid rgba(16, 185, 129, 0.3); }
-    .injury-stat-box.with { border: 1px solid rgba(255,255,255,0.1); }
-    .injury-stat-box.boost-box { border: 1px solid rgba(99, 102, 241, 0.3); }
-    .injury-stat-label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.5px; }
-    .injury-stat-value { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
-    .injury-stat-value.pos { color: #10b981; }
-    .injury-stat-value.neg { color: #ef4444; }
-    .injury-stat-sub { font-size: 0.65rem; color: var(--text-secondary); }
-    .injury-stat-arrow { color: var(--text-secondary); font-size: 1.1rem; }
-    .injury-insight-text { font-size: 0.78rem; color: var(--text-secondary); margin-top: 6px; line-height: 1.4; }
-    .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
-    .insight-type-badge.historical { background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
-
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      .details-grid { grid-template-columns: 1fr; }
-    }
-
-    .pick-value { font-weight: 600; font-size: 14px; }
-    .pick-value.over { color: var(--accent-light); }
-    .pick-value.under { color: var(--red-light); }
-
-    /* Edge badges */
-    .edge-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; vertical-align: middle; margin-left: 6px; }
-    .edge-badge.strong { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .edge-badge.good { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
-    .edge-badge.lean { background: rgba(234, 179, 8, 0.1); color: var(--yellow); }
-
-    /* ── Top Picks Section ── */
-    .top-picks-section {
-      margin-bottom: 24px; padding: 20px;
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
-      border: 1px solid var(--brand-border); border-radius: 12px;
-    }
-    .top-picks-header {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
-      font-size: 14px; font-weight: 700; color: var(--brand-light);
-    }
-    .top-picks-cards {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
-    }
-    .top-pick-card {
-      background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px; text-align: center;
-      transition: border-color 0.15s; position: relative; overflow: hidden;
-    }
-    .top-pick-card:hover { border-color: var(--brand-border); }
-    .top-pick-card.graded { opacity: 0.92; }
-    .top-pick-card.graded.tp-win {
-      border-color: var(--accent);
-      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg-secondary) 100%);
-    }
-    .top-pick-card.graded.tp-loss {
-      border-color: var(--red);
-      background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, var(--bg-secondary) 100%);
-    }
-    .top-pick-card.graded.tp-push {
-      border-color: var(--yellow);
-      background: linear-gradient(135deg, rgba(234,179,8,0.1) 0%, var(--bg-secondary) 100%);
-    }
-    .tp-result-badge {
-      position: absolute; top: 0; right: 0; padding: 3px 8px;
-      border-radius: 0 10px 0 8px; display: flex; align-items: center;
-      gap: 4px; font-weight: 700; font-size: 11px;
-    }
-    .tp-result-badge.tp-win { background: var(--accent); color: #fff; }
-    .tp-result-badge.tp-loss { background: var(--red); color: #fff; }
-    .tp-result-badge.tp-push { background: var(--yellow); color: #000; }
-    .tp-actual { background: rgba(0,0,0,0.2); padding: 1px 4px; border-radius: 3px; font-size: 10px; }
-    .top-pick-rank {
-      font-size: 11px; font-weight: 700; color: var(--brand);
-      margin-bottom: 6px; letter-spacing: 0.05em;
-    }
-    .top-pick-player { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-    .top-pick-team { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
-    .top-pick-prop {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      font-size: 10px; font-weight: 700; background: var(--bg-tertiary);
-      color: var(--text-secondary); margin-bottom: 6px;
-    }
-    .top-pick-direction { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .top-pick-direction.over { color: var(--accent-light); }
-    .top-pick-direction.under { color: var(--red-light); }
-    .top-pick-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
-    .top-pick-proj .edge { font-weight: 600; }
-    .top-pick-proj .edge.pos { color: var(--accent-light); }
-    .top-pick-proj .edge.neg { color: var(--red-light); }
-    .top-pick-ev {
-      font-size: 15px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px;
-    }
-    .top-pick-conf { font-size: 11px; color: var(--text-muted); }
-    .top-pick-factors {
-      display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; justify-content: center;
-    }
-    .tp-factor {
-      background: var(--bg-tertiary); color: var(--accent); font-size: 9px;
-      padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2);
-      font-weight: 600; letter-spacing: 0.02em;
-    }
-    .tp-type-badge {
-      display: inline-block; padding: 2px 6px; border-radius: 3px;
-      font-size: 9px; font-weight: 700; color: #000;
-      margin-bottom: 6px; letter-spacing: 0.05em;
-    }
-    .injury-badge {
-      display: inline-flex; align-items: center; gap: 3px;
-      padding: 2px 6px; border-radius: 4px;
-      font-size: 10px; font-weight: 600; margin-left: 6px;
-      vertical-align: middle; cursor: help;
-    }
-    .injury-badge.inj-out { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
-    .injury-badge.inj-doubtful { background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
-    .injury-badge.inj-questionable { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
-    .injury-badge.inj-probable { background: rgba(132,204,22,0.15); color: #84cc16; border: 1px solid rgba(132,204,22,0.3); }
-    .injury-type { color: var(--text-muted); font-weight: 400; }
-    tr.player-out td { opacity: 0.45; }
-    tr.player-out td:first-child { text-decoration: line-through; text-decoration-color: var(--red); }
-    tr.player-questionable { background: rgba(245,158,11,0.04); }
-
-    @media (max-width: 768px) {
-      .top-picks-cards { grid-template-columns: repeat(2, 1fr); }
-      .top-picks-cards .top-pick-card:nth-child(5) { display: none; }
-    }
-
-    /* ── Category Tabs ── */
-    .prop-category-tabs {
-      display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap;
-    }
-    .category-tab {
-      padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text-muted); font-size: 12px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s; font-family: inherit;
-    }
-    .category-tab:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .category-tab.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
-    .category-tab .tab-count {
-      display: inline-block; padding: 1px 6px; border-radius: 100px;
-      background: var(--bg-tertiary); font-size: 10px; font-weight: 600;
-      color: var(--text-muted); margin-left: 6px;
-    }
-    .category-tab.active .tab-count { background: rgba(220, 38, 38, 0.2); color: var(--brand-light); }
-
-    /* ── Sort Options ── */
-    .sort-options {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
-    }
-    .sort-options .sort-label {
-      font-size: 12px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .sort-btn {
-      padding: 5px 12px; background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text-muted); font-size: 11px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s; font-family: inherit;
-    }
-    .sort-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .sort-btn.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
-
-    /* ── Advanced Filters ── */
-    .advanced-filters {
-      display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
-    }
-    .filter-dropdown { position: relative; }
-    .filter-btn {
-      display: flex; align-items: center; gap: 6px; padding: 5px 12px;
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px;
-      color: var(--text-muted); cursor: pointer; transition: all 0.15s;
-      font-size: 11px; font-weight: 600; font-family: inherit;
-    }
-    .filter-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .filter-btn.active { border-color: var(--brand-border); background: var(--brand-glow); color: var(--brand-light); }
-    .filter-icon { font-size: 12px; }
-    .filter-value { color: var(--brand-light); }
-    .dropdown-arrow { font-size: 8px; margin-left: 2px; transition: transform 0.2s; }
-    .filter-dropdown.open .dropdown-arrow { transform: rotate(180deg); }
-    .filter-menu {
-      position: absolute; top: calc(100% + 4px); left: 0; min-width: 170px;
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px;
-      padding: 4px 0; z-index: 100; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-    .filter-dropdown.open .filter-menu { display: block; }
-    .filter-option {
-      padding: 7px 12px; cursor: pointer; transition: background 0.15s;
-      font-size: 12px; color: var(--text-secondary);
-    }
-    .filter-option:hover { background: var(--bg-tertiary); }
-    .filter-option.active { background: var(--brand-glow); color: var(--brand-light); }
-    .filter-option.opt-favorable { color: #10b981; }
-    .filter-option.opt-neutral { color: #f59e0b; }
-    .filter-option.opt-unfavorable { color: #ef4444; }
-    .clear-filters-btn {
-      padding: 5px 12px; background: transparent; border: 1px solid rgba(239,68,68,0.4);
-      border-radius: 6px; color: #ef4444; cursor: pointer; font-size: 11px;
-      font-weight: 600; font-family: inherit; transition: all 0.15s;
-    }
-    .clear-filters-btn:hover { background: rgba(239,68,68,0.1); }
-    .results-info {
-      font-size: 12px; color: var(--text-muted); margin-bottom: 8px;
-    }
-    .results-info strong { color: var(--accent-light); }
-
-    /* ── Props Table (redesigned) ── */
-    .props-table-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .props-table { width: 100%; border-collapse: collapse; }
-    .props-table thead th {
-      padding: 10px 14px; font-size: 11px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em; text-align: left;
-      border-bottom: 1px solid var(--border); background: var(--bg-tertiary);
-    }
-    .props-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: pointer; }
-    .props-table tbody tr:last-child { border-bottom: none; }
-    .props-table tbody tr:hover { background: var(--bg-elevated); }
-    .props-table td { padding: 10px 14px; font-size: 13px; }
-    .props-table .pt-player { font-weight: 600; color: var(--text-primary); }
-    .props-table .pt-matchup { font-size: 11px; color: var(--text-muted); }
-    .props-table .pt-prop-badge {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      font-size: 10px; font-weight: 700; background: var(--bg-tertiary); color: var(--text-secondary);
-    }
-    .props-table .pt-edge.positive { color: var(--accent-light); font-weight: 600; }
-    .props-table .pt-edge.negative { color: var(--red-light); }
-    .props-table .pt-ev.positive { color: var(--accent-light); font-weight: 700; }
-    .props-table .pt-ev.negative { color: var(--text-muted); }
-
-    @media (max-width: 768px) {
-      .props-table .col-hide-mobile { display: none; }
-      .props-table td, .props-table thead th { padding: 8px 8px; font-size: 11px; }
-    }
-
-    /* ── Game Cards ── */
-    .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
-    .game-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.15s; }
-    .game-card:hover { border-color: var(--border-light); }
-    .game-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .game-card-matchup { font-size: 18px; font-weight: 700; color: var(--text-primary); }
-    .game-card-time { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .game-card-time .live-badge { display: inline-flex; align-items: center; gap: 4px; color: var(--red-light); font-weight: 700; font-size: 11px; }
-    .game-card-time .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
-    .game-card-time .soon-badge { color: var(--yellow); font-weight: 600; }
-    .game-card.live-card { border-color: rgba(239, 68, 68, 0.25); }
-    .game-live-scores { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
-    .game-live-score-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
-    .game-live-score-row .team-name { color: var(--text-primary); min-width: 40px; }
-    .game-live-score-row .live-score { color: var(--red-light); font-size: 18px; font-weight: 700; min-width: 40px; animation: pulse-live 2s ease-in-out infinite; }
-    .game-live-score-row .leading { color: var(--accent-light); }
-    .game-card-score { font-size: 13px; color: var(--text-muted); }
-    .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
-    .game-pick-row { display: flex; justify-content: space-between; align-items: center; }
-    .game-pick-row.dimmed { opacity: 0.35; }
-    .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 70px; }
-    .game-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
-    .game-pick-value.low-conf { color: var(--text-muted); font-weight: 400; }
-    .game-pick-value.best-bet { color: var(--accent-light); }
-    .game-pick-best-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.03em; background: rgba(16, 185, 129, 0.15); color: var(--accent-light); margin-left: 6px; vertical-align: middle; }
-    .game-proj-updated { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 16px; }
-
-    /* ── Game Status Filter ── */
-    .game-status-filter {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
-    }
-    .game-status-filter .filter-label {
-      font-size: 12px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
-    }
-
-    /* ── Final Game Card ── */
-    .game-card.final-card { border-color: rgba(113, 113, 122, 0.25); opacity: 0.92; }
-    .game-card.final-card:hover { border-color: rgba(113, 113, 122, 0.4); }
-    .final-badge {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      background: var(--bg-tertiary); color: var(--text-muted);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
-    }
-    .game-final-scores { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
-    .game-final-score-row {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 14px; font-weight: 600;
-    }
-    .game-final-score-row .team-name { color: var(--text-primary); min-width: 40px; }
-    .game-final-score-row .actual-score { color: var(--text-primary); font-size: 18px; font-weight: 700; min-width: 40px; }
-    .game-final-score-row .proj-score-label { color: var(--text-muted); font-size: 12px; font-weight: 400; }
-    .game-final-score-row .winner-team { color: var(--accent-light); }
-    .pick-result-badge {
-      display: inline-flex; align-items: center; gap: 3px;
-      padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-    .pick-result-badge.win { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .pick-result-badge.loss { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
-    .pick-result-badge.push { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
-    .prop-result { font-weight: 700; font-size: 12px; }
-    .prop-result.win { color: var(--accent-light); }
-    .prop-result.loss { color: var(--red-light); }
-    .prop-result.push { color: var(--yellow); }
-    .results-summary-bar {
-      display: flex; align-items: center; gap: 16px; padding: 12px 20px;
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px;
-      margin-bottom: 16px; flex-wrap: wrap;
-    }
-    .results-summary-bar .summary-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .results-summary-bar .summary-record { font-size: 16px; font-weight: 700; }
-    .results-summary-bar .summary-record.winning { color: var(--accent-light); }
-    .results-summary-bar .summary-record.losing { color: var(--red-light); }
-    .results-summary-bar .summary-record.even { color: var(--text-muted); }
-    .results-summary-bar .summary-section { display: flex; align-items: center; gap: 6px; }
-    .results-summary-bar .summary-divider { width: 1px; height: 20px; background: var(--border); }
-
-    /* ── Graded Props Table ── */
-    .graded-props-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .graded-props-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; background: var(--bg-tertiary); border-bottom: 1px solid var(--border); }
-    .graded-props-title { font-size: 14px; font-weight: 700; color: var(--text-primary); }
-    .graded-props-record { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 100px; }
-    .graded-props-record.winning { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .graded-props-record.losing { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
-    .graded-props-record.even { background: var(--bg-tertiary); color: var(--text-muted); }
-    .graded-props-table { width: 100%; border-collapse: collapse; }
-    .graded-props-table thead th { padding: 10px 16px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; text-align: left; border-bottom: 1px solid var(--border); background: var(--bg-tertiary); }
-    .graded-props-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-    .graded-props-table tbody tr:last-child { border-bottom: none; }
-    .graded-props-table tbody tr:hover { background: var(--bg-elevated); }
-    .graded-props-table td { padding: 10px 16px; font-size: 13px; }
-    .graded-props-table .gp-player { font-weight: 600; color: var(--text-primary); }
-    .graded-props-table .gp-team { font-size: 11px; color: var(--text-muted); margin-left: 6px; }
-    .graded-props-table .gp-actual { font-weight: 700; font-size: 14px; }
-    .graded-props-table .gp-actual.hit { color: var(--accent-light); }
-    .graded-props-table .gp-actual.miss { color: var(--red-light); }
-
-    /* ── Game Confidence Sections ── */
-    .game-conf-section { margin-bottom: 24px; }
-    .game-conf-section-header {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-      padding-bottom: 8px; border-bottom: 1px solid var(--border);
-    }
-    .game-conf-section-title {
-      font-size: 13px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .game-conf-section-count {
-      font-size: 11px; font-weight: 600; padding: 2px 8px;
-      border-radius: 100px; background: var(--bg-tertiary); color: var(--text-muted);
-    }
-    .game-conf-section.high .game-conf-section-title { color: var(--accent-light); }
-    .game-conf-section.high .game-conf-section-header { border-bottom-color: rgba(16, 185, 129, 0.3); }
-    .game-conf-section.high .game-conf-section-count { background: var(--accent-glow); color: var(--accent-light); }
-    .game-conf-section.high .game-card { border-color: rgba(16, 185, 129, 0.15); }
-    .game-conf-section.medium .game-conf-section-title { color: var(--yellow); }
-    .game-conf-section.medium .game-conf-section-header { border-bottom-color: rgba(245, 158, 11, 0.3); }
-    .game-conf-section.medium .game-conf-section-count { background: rgba(245, 158, 11, 0.15); color: var(--yellow); }
-    .game-conf-section.medium .game-card { border-color: rgba(245, 158, 11, 0.15); }
-    .game-conf-section.low .game-conf-section-title { color: var(--red-light); }
-    .game-conf-section.low .game-conf-section-header { border-bottom-color: rgba(239, 68, 68, 0.2); }
-    .game-conf-section.low .game-conf-section-count { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
-    .game-conf-section.low .game-card { border-color: rgba(239, 68, 68, 0.1); opacity: 0.9; }
-    .game-conf-section .game-cards-grid { margin-bottom: 0; }
-
-    /* Confidence filter row in game projections */
-    .game-conf-filter {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
-    }
-    .game-conf-filter .filter-label {
-      font-size: 12px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
-    }
-
-    /* ── Search & Filter Bar (shared by both views) ── */
-    .search-filter-bar {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
-      padding: 12px 16px; background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 12px; margin-bottom: 16px;
-    }
-    .search-filter-bar .search-wrap {
-      display: flex; align-items: center; gap: 8px; background: var(--bg-primary);
-      border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
-      min-width: 200px; flex: 1 1 200px; max-width: 300px;
-    }
-    .search-filter-bar .search-wrap:focus-within { border-color: var(--brand); }
-    .search-filter-bar .search-wrap svg { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
-    .search-filter-bar .search-wrap input {
-      background: transparent; border: none; color: var(--text-primary);
-      font-size: 13px; width: 100%; outline: none; font-family: inherit;
-    }
-    .search-filter-bar .search-wrap input::placeholder { color: var(--text-muted); }
-    .search-filter-bar .filter-group {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    }
-    @media (max-width: 700px) {
-      .search-filter-bar { flex-direction: column; align-items: stretch; }
-      .search-filter-bar .search-wrap { max-width: 100%; }
-    }
-
-    /* ── Game Bets List View ── */
-    .view-toggle {
-      display: flex; gap: 4px; margin-left: auto;
-    }
-    .view-toggle-btn {
-      padding: 6px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text-muted); font-size: 12px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s; font-family: inherit;
-    }
-    .view-toggle-btn:hover { border-color: var(--border-light); color: var(--text-secondary); }
-    .view-toggle-btn.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
-
-    .bets-table { width: 100%; border-collapse: collapse; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .bets-table thead th {
-      padding: 10px 14px; font-size: 11px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.05em; text-align: left;
-      border-bottom: 1px solid var(--border); background: var(--bg-tertiary);
-      cursor: pointer; user-select: none; transition: color 0.15s; white-space: nowrap;
-    }
-    .bets-table thead th:hover { color: var(--text-secondary); }
-    .bets-table thead th.sorted { color: var(--accent-light); }
-    .bets-table thead th .sort-arrow { margin-left: 4px; font-size: 10px; }
-    .bets-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-    .bets-table tbody tr:last-child { border-bottom: none; }
-    .bets-table tbody tr:hover { background: var(--bg-elevated); }
-    .bets-table td { padding: 10px 14px; font-size: 13px; white-space: nowrap; }
-
-    .conf-badge {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      font-size: 11px; font-weight: 700; min-width: 42px; text-align: center;
-    }
-    .conf-badge.high { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .conf-badge.medium { background: rgba(245, 158, 11, 0.15); color: var(--yellow); }
-    .conf-badge.low { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
-
-    .type-badge {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-    }
-    .type-badge.spread { background: rgba(139, 92, 246, 0.12); color: var(--purple); }
-    .type-badge.total { background: rgba(59, 130, 246, 0.12); color: var(--blue); }
-    .type-badge.ml { background: rgba(234, 179, 8, 0.12); color: var(--yellow); }
-
-    .result-badge {
-      display: inline-flex; align-items: center; gap: 3px;
-      padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
-    }
-    .result-badge.win { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .result-badge.loss { background: rgba(239, 68, 68, 0.15); color: var(--red-light); }
-    .result-badge.pending { color: var(--text-muted); }
-
-    @media (max-width: 768px) {
-      .bets-table td, .bets-table thead th { padding: 8px 8px; font-size: 11px; }
-      .bets-table .col-vegas, .bets-table .col-model { display: none; }
-    }
-
-    /* (Results section moved to results.html) */
-
-    /* ── Recommendations Section ── */
-    .rec-section { margin-bottom: 24px; }
-    .rec-category {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
-    }
-    .rec-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 14px; padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-    .rec-header-title {
-      font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;
-    }
-    .rec-header-title.game-recs { color: var(--brand-light); }
-    .rec-header-title.prop-recs { color: var(--accent-light); }
-    .rec-count {
-      background: var(--brand-glow); color: var(--brand-light);
-      padding: 2px 10px; border-radius: 100px;
-      font-size: 11px; font-weight: 600;
-    }
-    .rec-cards {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
-    }
-    .rec-card {
-      background: var(--bg-primary); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px; position: relative;
-      transition: border-color 0.15s;
-    }
-    .rec-card:hover { border-color: var(--brand-border); }
-    .rec-card.game-rec { border-left: 3px solid var(--brand); }
-    .rec-card.prop-rec { border-left: 3px solid var(--accent); }  /* Green — winning */
-    .rec-rank {
-      position: absolute; top: 8px; right: 10px;
-      font-size: 11px; color: var(--text-muted); font-weight: 700;
-    }
-    .rec-badge {
-      display: inline-block; padding: 2px 6px; border-radius: 4px;
-      font-size: 9px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 6px;
-    }
-    .rec-badge.spread { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
-    .rec-badge.total { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
-    .rec-badge.ml { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
-    .rec-badge.prop { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
-    .rec-matchup { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
-    .rec-player { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-    .rec-team { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
-    .rec-prop-type {
-      display: inline-block; background: var(--bg-tertiary); padding: 2px 6px;
-      border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;
-    }
-    .rec-pick { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .rec-pick.over { color: var(--accent-light); }
-    .rec-pick.under { color: var(--red-light); }
-    .rec-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
-    .rec-proj .pos { color: var(--accent-light); }
-    .rec-proj .neg { color: var(--red-light); }
-    .rec-ev { font-size: 15px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px; }
-    .rec-conf { font-size: 11px; margin-bottom: 6px; }
-    .rec-conf.high { color: var(--accent-light); }
-    .rec-conf.medium { color: var(--yellow); }
-    .rec-conf.low { color: var(--red-light); }
-    .rec-reasons { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
-    .rec-reason {
-      background: var(--bg-tertiary); color: var(--accent);
-      font-size: 9px; padding: 2px 6px; border-radius: 4px;
-      border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600;
-    }
-    .no-recs {
-      text-align: center; padding: 20px; color: var(--text-secondary); font-size: 13px;
-    }
-    .no-recs-overall {
-      text-align: center; padding: 40px 20px;
-      background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 12px; margin-bottom: 24px;
-    }
-    .no-recs-icon { font-size: 32px; margin-bottom: 12px; }
-    .no-recs-overall h3 { font-size: 16px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600; }
-    .no-recs-overall p { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
-    @media (max-width: 768px) {
-      .rec-cards { grid-template-columns: repeat(2, 1fr); }
-      .game-specific-cards { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* ── Game-Specific Props ── */
-    .game-specific-section {
-      background: var(--bg-secondary);
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-    }
-    .game-specific-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 14px; padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-    .game-specific-title {
-      font-size: 14px; font-weight: 700; color: var(--blue);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .game-specific-count {
-      background: rgba(59, 130, 246, 0.15); color: var(--blue);
-      padding: 2px 10px; border-radius: 100px;
-      font-size: 11px; font-weight: 600;
-    }
-    .game-specific-cards {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;
-    }
-    .game-prop-card {
-      background: var(--bg-primary); border: 1px solid var(--border);
-      border-radius: 10px; padding: 12px; position: relative;
-      transition: border-color 0.15s;
-    }
-    .game-prop-card:hover { border-color: rgba(59, 130, 246, 0.3); }
-    .game-prop-card .gpc-rank {
-      position: absolute; top: 8px; right: 10px;
-      font-size: 11px; color: var(--text-muted); font-weight: 700;
-    }
-    .game-prop-card .gpc-player { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; padding-right: 1.5rem; }
-    .game-prop-card .gpc-team { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
-    .game-prop-card .gpc-prop-type {
-      display: inline-block; background: var(--bg-tertiary); padding: 2px 6px;
-      border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;
-    }
-    .game-prop-card .gpc-pick { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-    .game-prop-card .gpc-pick.over { color: var(--accent-light); }
-    .game-prop-card .gpc-pick.under { color: var(--red-light); }
-    .game-prop-card .gpc-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
-    .game-prop-card .gpc-proj .pos { color: var(--accent-light); }
-    .game-prop-card .gpc-proj .neg { color: var(--red-light); }
-    .game-prop-card .gpc-ev { font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 2px; }
-    .game-prop-card .gpc-conf { font-size: 11px; }
-    .game-prop-card .gpc-conf.high { color: var(--accent-light); }
-    .game-prop-card .gpc-conf.medium { color: var(--yellow); }
-    .game-prop-card .gpc-conf.low { color: var(--red-light); }
-
-    /* Empty State */
-    .empty-state { text-align: center; padding: 80px 20px; }
-    .empty-state-icon { width: 64px; height: 64px; margin: 0 auto 20px; background: var(--bg-tertiary); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
-    .empty-state-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
-    .empty-state-text { font-size: 14px; color: var(--text-muted); max-width: 400px; margin: 0 auto; }
-
-    /* Footer */
-    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; }
-    .footer-brand { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
-    .footer-disclaimer { font-size: 12px; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
-
-    /* ── Mobile ── */
-    @media (max-width: 768px) {
-      .brand-logo-circle { width: 36px; height: 36px; }
-      .brand-name { font-size: 0.95rem; }
-      .nav-right { display: none; }
-      .sports-tabs { display: none; }
+      .nav-links .nav-text-link { display: none; }
       .mobile-menu-btn { display: block; }
-      .top-nav-inner { padding: 0 1rem; }
-      .sub-nav-inner { padding: 0 1rem; }
-      .view-tab { padding: 8px 14px; font-size: 11px; }
-      .sub-nav-meta { display: none; }
-      .stats-bar { padding: 0 16px; }
-      .stats-bar .stat { padding: 10px 8px; }
-      .stats-bar .stat-value { font-size: 18px; }
-      .stats-bar .stat-label { font-size: 9px; }
-      .table-header, .pick-row {
-        grid-template-columns: 1.5fr 0.6fr 0.7fr 0.8fr 0.7fr;
-        gap: 4px; font-size: 12px;
-      }
-      .table-header > *:nth-child(6),
-      .table-header > *:nth-child(7),
-      .table-header > *:nth-child(8),
-      .pick-row > *:nth-child(6),
-      .pick-row > *:nth-child(7),
-      .pick-row > *:nth-child(8) { display: none; }
-      .filter-row { gap: 12px; }
-      .filter-pill { padding: 4px 10px; font-size: 11px; }
-      .game-cards-grid { grid-template-columns: 1fr; }
-      .sgc-picks { gap: 16px; }
-      .search-wrap { max-width: 100%; }
+      .hero { padding: 120px 1.5rem 60px; }
+      .hero-stats { gap: 1rem; }
+      .hero-stat .hs-val { font-size: 16px; }
+      .section { padding: 60px 1.5rem; }
+      .preview-game-cards { grid-template-columns: 1fr 1fr; }
+      .perf-stats { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer-disclaimer { max-width: 100%; }
+      .footer-links { justify-content: center; }
     }
     @media (max-width: 480px) {
-      .brand-name { display: none; }
+      .preview-game-cards { grid-template-columns: 1fr; }
+      .preview-stats-bar { gap: 0.75rem; }
+      .preview-stat { min-width: 0; flex: 1; padding: 12px; }
+      .hero-buttons { flex-direction: column; align-items: center; }
     }
 
-    /* ── Sportsbook Odds Table ── */
-    .sportsbook-odds-table {
-      background: #12121f; border: 1px solid #2a2a3e;
-      border-radius: 8px; overflow: hidden; margin-top: 1rem;
-    }
-    .odds-table-header, .odds-table-row {
-      display: grid;
-      grid-template-columns: 100px 70px 60px repeat(4, 1fr);
-    }
-    .odds-table-header {
-      background: #0f0f1a; border-bottom: 1px solid #2a2a3e; padding: 0.5rem 0;
-    }
-    .odds-table-row {
-      border-bottom: 1px solid #1e1e2e; transition: background 0.15s;
-    }
-    .odds-table-row:last-child { border-bottom: none; }
-    .odds-table-row:hover { background: #1a1a2e; }
-    .odds-table-row.recommended {
-      background: linear-gradient(90deg, rgba(16,185,129,0.08) 0%, transparent 50%);
-      position: relative;
-    }
-    .odds-table-row.recommended::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px; background: var(--accent); border-radius: 3px 0 0 3px;
-    }
-    .odds-col {
-      padding: 0.75rem 0.5rem; display: flex; align-items: center;
-      justify-content: center; text-align: center;
-    }
-    .odds-col.side-col {
-      justify-content: flex-start; padding-left: 1rem; gap: 0.5rem;
-    }
-    .side-label { font-size: 0.8rem; color: #888; font-weight: 500; min-width: 40px; }
-    .side-line { font-size: 0.85rem; color: #e0e0e0; font-weight: 600; }
-    .odds-col.best-col {
-      flex-direction: column; gap: 1px; background: rgba(16,185,129,0.05);
-    }
-    .odds-col.avg-col {
-      border-left: 1px solid #2a2a3e; border-right: 1px solid #2a2a3e;
-    }
-    .col-label {
-      font-size: 0.65rem; color: #555; text-transform: uppercase;
-      letter-spacing: 0.08em; font-weight: 600;
-    }
-    .book-abbr { font-size: 0.75rem; font-weight: 700; }
-    .best-book-mini {
-      font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-    .best-odds { font-size: 1rem; font-weight: 700; color: #e0e0e0; }
-    .best-odds.positive { color: var(--accent); }
-    .avg-odds { font-size: 0.8rem; color: #666; }
-    .book-odds-val { font-size: 0.9rem; color: #888; font-weight: 500; }
-    .book-odds-val.plus { color: var(--accent); }
-    .book-odds-val.no-odds { color: #444; }
-    .odds-col.book-col.is-best { background: rgba(16,185,129,0.12); }
-    .odds-col.book-col.is-best .book-odds-val {
-      color: var(--accent-light); font-weight: 700;
-    }
-    @media (max-width: 600px) {
-      .odds-table-header, .odds-table-row {
-        grid-template-columns: 80px 60px 50px repeat(4, 1fr);
-      }
-      .odds-col.side-col { padding-left: 0.5rem; gap: 0.3rem; }
-      .side-label { font-size: 0.7rem; min-width: 32px; }
-      .side-line { font-size: 0.75rem; }
-      .book-abbr { font-size: 0.6rem; }
-      .book-odds-val { font-size: 0.75rem; }
-      .best-odds { font-size: 0.85rem; }
-      .avg-odds { font-size: 0.7rem; }
-    }
-    /* Auth styles */
-    .user-menu { position: relative; }
-    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #00c853, #00e676); color: #0a0e1a; font-weight: 700; font-size: 16px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-    .user-avatar:hover { transform: scale(1.1); }
-    .user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: #1a1f2e; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; min-width: 200px; padding: 8px 0; display: none; z-index: 1000; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-    .user-dropdown.active { display: block; }
-    .dropdown-header { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .dropdown-header .user-name { display: block; font-weight: 600; color: #fff; font-size: 14px; }
-    .dropdown-header .user-email { display: block; color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 2px; }
-    .dropdown-header .user-role { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: rgba(0,200,83,0.15); color: #00c853; }
-    .dropdown-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 4px 0; }
-    .dropdown-item { display: block; padding: 10px 16px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; transition: background 0.2s; }
-    .dropdown-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
-    .login-btn-pill { padding: 8px 20px; background: linear-gradient(135deg, #00c853, #00e676); color: #0a0e1a; border-radius: 20px; font-weight: 600; font-size: 14px; transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
-    .login-btn-pill:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(0,200,83,0.3); }
+    /* ── Mobile drawer ── */
+    .mobile-drawer { position: fixed; top: 0; right: -280px; width: 280px; height: 100vh; background: #12121a; z-index: 200; transition: right 0.3s; padding: 80px 2rem 2rem; border-left: 1px solid rgba(255,255,255,0.06); }
+    .mobile-drawer.open { right: 0; }
+    .mobile-drawer a { display: block; padding: 12px 0; font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .mobile-drawer a:hover { color: #fff; }
+    .mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 199; display: none; }
+    .mobile-overlay.open { display: block; }
+    .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
   </style>
 </head>
 <body>
-  <div class="page-gradient"></div>
 
-  <!-- Top Navigation v2 -->
-  <header class="top-nav">
-    <div class="top-nav-inner">
-      <div class="nav-brand">
-        <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
-          <span style="font-size:1.4rem;font-weight:800;color:#f0f0f0;letter-spacing:-0.02em;white-space:nowrap;">Edge Factor <span style="color:#dc2626;">Elite</span></span>
-        </a>
+  <!-- ── Navigation ── -->
+  <nav class="landing-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">Edge Factor <span>Elite</span></div>
+      <div class="nav-links">
+        <a href="#features" class="nav-text-link">Features</a>
+        <a href="results.html" class="nav-text-link">Results</a>
+        <a href="about.html" class="nav-text-link">About</a>
+        <a href="login.html" class="btn-login logged-out-only">Log In</a>
+        <a href="login.html?signup=true" class="btn-signup-nav logged-out-only">Sign Up Free</a>
+        <a href="dashboard.html" class="btn-signup-nav logged-in-only" style="background:#10b981;">Go to Dashboard</a>
       </div>
-      <div class="sports-tabs" id="sports-tabs">
-        <button class="sport-tab active" data-sport="nba">NBA</button>
-        <button class="sport-tab" data-sport="nhl">NHL <span class="soon-badge">Soon</span></button>
-        <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
-        <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
-      </div>
-      <div class="nav-right">
-        <a href="results.html" class="nav-link">Results</a>
-        <a href="about.html" class="nav-link">About</a>
-      </div>
-      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Menu">&#9776;</button>
-    </div>
-  </header>
-
-  <!-- Sub Navigation -->
-  <nav class="sub-nav">
-    <div class="sub-nav-inner">
-      <div class="view-tabs" id="view-tabs">
-        <button class="view-tab active" data-view="game-projections">Game Projections</button>
-        <button class="view-tab" data-view="player-props">Player Props</button>
-      </div>
-      <div class="sub-nav-meta" id="sub-nav-meta">
-        <span class="live-dot"></span>
-        <span id="nav-updated-time">Loading...</span>
-      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileDrawer()">&#9776;</button>
     </div>
   </nav>
 
-  <!-- Mobile Drawer -->
-  <div id="mobile-nav-drawer" style="display:none; position:fixed; top:60px; left:0; right:0; background:#0f0f0f; border-bottom:1px solid #2a2a2a; padding:1rem 1.5rem; z-index:98;">
-    <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;">
-      <button class="sport-tab active" data-sport="nba" onclick="switchSport('nba')">NBA</button>
-      <button class="sport-tab" data-sport="nhl" onclick="switchSport('nhl')">NHL <span class="soon-badge">Soon</span></button>
-      <button class="sport-tab" data-sport="nfl" onclick="switchSport('nfl')">NFL <span class="soon-badge">Soon</span></button>
-      <button class="sport-tab" data-sport="mlb" onclick="switchSport('mlb')">MLB <span class="soon-badge">Soon</span></button>
-    </div>
-    <a href="results.html" class="nav-link" style="display:block;padding:0.5rem 0;">Results</a>
-    <a href="about.html" class="nav-link" style="display:block;padding:0.5rem 0;">About</a>
+  <!-- Mobile drawer -->
+  <div class="mobile-overlay" id="mobile-overlay" onclick="toggleMobileDrawer()"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <button class="mobile-close" onclick="toggleMobileDrawer()">&times;</button>
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="results.html">Results</a>
+    <a href="about.html">About</a>
+    <a href="login.html" class="logged-out-only">Log In</a>
+    <a href="login.html?signup=true" class="logged-out-only">Sign Up Free</a>
+    <a href="dashboard.html" class="logged-in-only">Go to Dashboard</a>
   </div>
 
-  <!-- Coming Soon Overlay -->
-  <div class="coming-soon-overlay" id="coming-soon-overlay">
-    <div class="cs-sport" id="cs-sport-name">NHL</div>
-    <div class="cs-text">Projections coming soon</div>
-    <button class="cs-back" onclick="switchSport('nba')">Back to NBA</button>
-  </div>
-
-  <!-- Spacer for fixed nav (60px + 50px) -->
-  <div style="height: 110px;"></div>
-
-  <!-- Stats Bar -->
-  <div class="stats-bar" id="stats-bar">
-    <div class="stats-bar-inner">
-      <div class="stat">
-        <div class="stat-value" id="stat-total">--</div>
-        <div class="stat-label">Total Props</div>
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="pulse"></span> Models Updated Daily</div>
+      <h1>AI-Powered Sports <span>Predictions</span></h1>
+      <p class="hero-sub">Machine learning models analyzing player props, spreads, totals & moneylines to find edges the books miss.</p>
+      <div class="hero-buttons">
+        <a href="login.html?signup=true" class="btn-cta logged-out-only">Get Started Free</a>
+        <a href="dashboard.html" class="btn-cta logged-in-only" style="background:linear-gradient(135deg,#10b981,#059669);">Go to Dashboard</a>
+        <a href="#preview" class="btn-secondary">View Demo</a>
       </div>
-      <div class="stat">
-        <div class="stat-value green" id="stat-posev">--</div>
-        <div class="stat-label">Positive EV</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value green" id="stat-bestev">--</div>
-        <div class="stat-label">Best EV%</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="stat-avgconf">--</div>
-        <div class="stat-label">Avg Confidence</div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hs-val">85+</div><div class="hs-label">Daily Props</div></div>
+        <div class="hero-stat"><div class="hs-val">6 Books</div><div class="hs-label">Line Shopping</div></div>
+        <div class="hero-stat"><div class="hs-val">Live</div><div class="hs-label">Grading</div></div>
+        <div class="hero-stat"><div class="hs-val">52%+</div><div class="hs-label">Win Rate</div></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
-    <section class="picks-section">
-      <div class="section-header">
-        <h2 class="section-title">Today's Projections</h2>
-        <span class="section-meta" id="current-date"></span>
-      </div>
-
-      <div id="game-filter-bar" class="game-filter-bar" style="display:none;"></div>
-
-      <div class="search-wrap" id="search-wrap" style="display:none;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" class="search-input" id="search-input" placeholder="Search players...">
-      </div>
-
-      <div class="filter-row" id="filter-row">
-        <div class="filter-group">
-          <span class="filter-label">Confidence</span>
-          <button class="filter-pill active" data-conf="all">All</button>
-          <button class="filter-pill" data-conf="high">High</button>
-          <button class="filter-pill" data-conf="medium">Medium</button>
-          <button class="filter-pill" data-conf="low">Low</button>
+  <!-- ── Live Preview (blurred) ── -->
+  <section class="section" id="preview">
+    <h2 class="section-title fade-in">Today's Picks</h2>
+    <p class="section-subtitle fade-in">A real-time look at what our models are finding</p>
+    <div class="preview-wrapper fade-in">
+      <div class="preview-blur">
+        <div class="preview-stats-bar">
+          <div class="preview-stat"><span class="stat-num">87</span><span class="stat-label">Total Props</span></div>
+          <div class="preview-stat"><span class="stat-num green">19</span><span class="stat-label">Positive EV</span></div>
+          <div class="preview-stat"><span class="stat-num green">+12.4%</span><span class="stat-label">Best EV%</span></div>
+          <div class="preview-stat"><span class="stat-num">54.2%</span><span class="stat-label">Avg Confidence</span></div>
         </div>
-        <div class="filter-group">
-          <span class="filter-label">Direction</span>
-          <button class="filter-pill active" data-dir="all">All</button>
-          <button class="filter-pill" data-dir="over">Overs</button>
-          <button class="filter-pill" data-dir="under">Unders</button>
+        <div class="preview-picks-header">Recommended Game Bets <span class="picks-count">5 picks</span></div>
+        <div class="preview-game-cards">
+          <div class="preview-card">
+            <div class="card-badge">SPREAD</div>
+            <div class="card-matchup">PHI @ LAC</div>
+            <div class="card-pick">LAC -2.5</div>
+            <div class="card-conf green">68.5% conf</div>
+          </div>
+          <div class="preview-card">
+            <div class="card-badge total">TOTAL</div>
+            <div class="card-matchup">HOU @ IND</div>
+            <div class="card-pick">OVER 218.5</div>
+            <div class="card-conf green">71.2% conf</div>
+          </div>
+          <div class="preview-card">
+            <div class="card-badge ml">ML</div>
+            <div class="card-matchup">NOP @ CHA</div>
+            <div class="card-pick">CHA</div>
+            <div class="card-conf green">65.8% conf</div>
+          </div>
+          <div class="preview-card">
+            <div class="card-badge">SPREAD</div>
+            <div class="card-matchup">MIN @ MEM</div>
+            <div class="card-pick">MEM +6.5</div>
+            <div class="card-conf">62.1% conf</div>
+          </div>
+        </div>
+        <div class="preview-props-header">Top Player Props <span class="picks-count">19 positive EV</span></div>
+        <div class="preview-props">
+          <div class="preview-prop"><div><div class="prop-name">LaMelo Ball - Points</div><div class="prop-detail">Over 24.5 | 61.2% conf</div></div><div class="prop-ev">+8.3% EV</div></div>
+          <div class="preview-prop"><div><div class="prop-name">Tyrese Haliburton - Assists</div><div class="prop-detail">Over 9.5 | 58.7% conf</div></div><div class="prop-ev">+6.1% EV</div></div>
+          <div class="preview-prop"><div><div class="prop-name">Anthony Edwards - Points</div><div class="prop-detail">Over 26.5 | 57.4% conf</div></div><div class="prop-ev">+5.8% EV</div></div>
+          <div class="preview-prop"><div><div class="prop-name">James Harden - Rebounds</div><div class="prop-detail">Over 5.5 | 60.1% conf</div></div><div class="prop-ev">+7.2% EV</div></div>
+          <div class="preview-prop"><div><div class="prop-name">Ja Morant - Points</div><div class="prop-detail">Over 22.5 | 56.8% conf</div></div><div class="prop-ev">+4.9% EV</div></div>
+          <div class="preview-prop"><div><div class="prop-name">Joel Embiid - Rebounds</div><div class="prop-detail">Over 10.5 | 59.3% conf</div></div><div class="prop-ev">+6.7% EV</div></div>
         </div>
       </div>
-
-      <div id="selected-game-card" class="selected-game-card"></div>
-
-      <div id="player-props-view">
-        <div class="empty-state">
-          <div class="empty-state-icon">&#128202;</div>
-          <div class="empty-state-title">No projections yet</div>
-          <div class="empty-state-text">Our model is being configured. Check back soon for daily AI-powered sports projections.</div>
+      <div class="preview-overlay">
+        <div class="overlay-content">
+          <div class="lock-icon">&#128274;</div>
+          <h3>Unlock Today's AI Predictions</h3>
+          <p>Create a free account to access all picks, props, and real-time grading</p>
+          <a href="login.html?signup=true" class="btn-cta">Create Free Account</a>
+          <span class="overlay-login">Already have an account? <a href="login.html">Log in</a></span>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div id="game-projections-view" style="display:none;">
-        <div id="game-status-filter"></div>
-        <div id="game-cards-container"></div>
-        <div class="game-proj-updated" id="game-proj-updated"></div>
+  <!-- ── Features ── -->
+  <section class="section" id="features">
+    <h2 class="section-title fade-in">Why Edge Factor Elite?</h2>
+    <p class="section-subtitle fade-in">Purpose-built tools for serious sports bettors</p>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">&#129302;</div>
+        <h3>AI-Powered Models</h3>
+        <p>Ensemble ML models trained on thousands of games. Random Forest + Gradient Boosting analyze matchups, pace, rest days, and injury context.</p>
       </div>
-    </section>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">&#128202;</div>
+        <h3>Multi-Book Line Shopping</h3>
+        <p>Compare odds across DraftKings, FanDuel, BetMGM, Caesars & more. Find the best available line for every pick.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">&#9889;</div>
+        <h3>Real-Time Grading</h3>
+        <p>Picks are graded live as games finish. Track our model's accuracy with full transparency. No cherry-picking.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">&#127919;</div>
+        <h3>Smart Recommendations</h3>
+        <p>Only see picks that meet strict quality filters. Confidence scores, EV calculations, and edge analysis for every bet.</p>
+      </div>
+    </div>
+  </section>
 
-  </main>
+  <!-- ── How It Works ── -->
+  <section class="section" id="how-it-works">
+    <h2 class="section-title fade-in">How It Works</h2>
+    <p class="section-subtitle fade-in">From sign-up to tracking wins in three steps</p>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-number">1</div>
+        <h3>Create Account</h3>
+        <p>Sign up free in 30 seconds. No credit card required.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">2</div>
+        <h3>View Predictions</h3>
+        <p>Browse today's AI-analyzed picks across props, spreads, and totals with full line shopping.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">3</div>
+        <h3>Track Results</h3>
+        <p>Watch picks get graded in real-time with full performance history and accountability.</p>
+      </div>
+    </div>
+  </section>
 
-  <footer>
+  <!-- ── Performance Teaser ── -->
+  <section class="section perf-section">
+    <h2 class="section-title fade-in">Our Models Are Transparent</h2>
+    <p class="perf-text fade-in">Every pick is tracked and graded. No cherry-picking. Full accountability. See our complete track record.</p>
+    <div class="perf-preview fade-in">
+      <div class="perf-blur">
+        <div class="perf-stats">
+          <div class="perf-stat"><div class="pv">54.2%</div><div class="pl">Props Win Rate</div></div>
+          <div class="perf-stat"><div class="pv">+8.7%</div><div class="pl">ROI</div></div>
+          <div class="perf-stat"><div class="pv">312</div><div class="pl">Picks Graded</div></div>
+          <div class="perf-stat"><div class="pv">28</div><div class="pl">Days Tracked</div></div>
+        </div>
+      </div>
+      <div class="perf-overlay">
+        <div class="perf-overlay-inner">
+          <p>Full performance data available</p>
+          <a href="results.html" class="btn-cta" style="padding:10px 24px; font-size:14px;">View Track Record</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ── -->
+  <section class="section" id="pricing">
+    <h2 class="section-title fade-in">Simple Pricing</h2>
+    <p class="section-subtitle fade-in">Everything free while we're in beta</p>
+    <div class="pricing-card fade-in">
+      <div class="pricing-badge">Free Beta</div>
+      <div class="pricing-price">$0</div>
+      <div class="pricing-period">per month</div>
+      <ul class="pricing-features">
+        <li><span class="check">&#10003;</span> All NBA player prop predictions</li>
+        <li><span class="check">&#10003;</span> Game spread, total & ML projections</li>
+        <li><span class="check">&#10003;</span> Multi-book line shopping</li>
+        <li><span class="check">&#10003;</span> Real-time grading & results</li>
+        <li><span class="check">&#10003;</span> Smart recommendations engine</li>
+        <li><span class="check">&#10003;</span> Performance tracking dashboard</li>
+        <div class="pricing-divider"></div>
+        <li><span class="soon">&#128284;</span> NHL, NFL, MLB models</li>
+        <li><span class="soon">&#128284;</span> Email/push notifications</li>
+        <li><span class="soon">&#128284;</span> Bankroll management tools</li>
+      </ul>
+      <a href="login.html?signup=true" class="btn-cta" style="width:100%; text-align:center;">Start Free</a>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="landing-footer">
     <div class="footer-inner">
-      <p class="footer-brand">Edge Factor Elite</p>
-      <p class="footer-disclaimer">For entertainment purposes only. Past performance does not guarantee future results. Please gamble responsibly.</p>
+      <div>
+        <div class="footer-brand">Edge Factor <span>Elite</span></div>
+        <p class="footer-disclaimer">Edge Factor Elite provides statistical analysis for informational purposes. Please gamble responsibly.</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="results.html">Results</a>
+        <a href="login.html">Log In</a>
+        <a href="login.html?signup=true">Sign Up</a>
+      </div>
     </div>
+    <div class="footer-copy">&copy; 2026 Edge Factor Elite. All rights reserved.</div>
   </footer>
 
-  <script>
-    // ── Mobile Nav Toggle ──
-    function toggleMobileNav() {
-      const d = document.getElementById('mobile-nav-drawer');
-      d.style.display = d.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // ── Sport Tab Switching ──
-    function switchSport(sport) {
-      const overlay = document.getElementById('coming-soon-overlay');
-      const sportName = document.getElementById('cs-sport-name');
-      const mainEl = document.querySelector('main');
-      const statsBar = document.getElementById('stats-bar');
-      const pageGradient = document.querySelector('.page-gradient');
-
-      // Update all sport tabs (top nav + mobile drawer)
-      document.querySelectorAll('.sport-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.sport === sport);
-      });
-
-      if (sport !== 'nba') {
-        sportName.textContent = sport.toUpperCase();
-        overlay.classList.add('visible');
-        mainEl.style.display = 'none';
-        statsBar.style.display = 'none';
-        if (pageGradient) pageGradient.style.display = 'none';
-      } else {
-        overlay.classList.remove('visible');
-        mainEl.style.display = '';
-        if (projections.length > 0) statsBar.style.display = '';
-        if (pageGradient) pageGradient.style.display = '';
-      }
-      // Close mobile drawer
-      document.getElementById('mobile-nav-drawer').style.display = 'none';
-    }
-
-    // Attach sport tab click handlers (top nav)
-    document.querySelectorAll('#sports-tabs .sport-tab').forEach(tab => {
-      tab.addEventListener('click', () => switchSport(tab.dataset.sport));
-    });
-
-    const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
-    const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
-
-
-    let projections = [];
-    let gameProjections = [];
-    let topPicks = [];
-    let currentView = 'game-projections';
-    let currentConfFilter = 'all';
-    let currentDirFilter = 'all';
-    let currentGameFilter = null; // null = all, or "AWAY@HOME" key
-    let currentStatusFilter = 'all'; // all, upcoming, live, final
-    let currentGameConfFilter = 'all'; // all, high, medium, low
-    let currentSearch = '';
-    let teamToGame = {};  // team abbr -> game object
-    let expandedRowId = null;  // currently expanded row
-    let gameViewMode = 'grid'; // 'grid' or 'list'
-    let betsSortBy = 'conf';   // 'conf', 'time', 'type'
-    let betsSortDir = 'desc';  // 'asc' or 'desc'
-
-    const PROP_CATEGORIES = [
-      { key: 'all', label: 'ALL' },
-      { key: 'PTS', label: 'POINTS' },
-      { key: 'REB', label: 'REBOUNDS' },
-      { key: 'AST', label: 'ASSISTS' },
-      { key: 'PRA', label: 'PRA' }
-    ];
-    let currentPropCategory = 'all';
-    let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
-    const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all', injury: 'all', sportsbook: 'all' };
-
-    // NBA team colors
-    const TEAM_COLORS = {
-      ATL:'#E03A3E', BOS:'#007A33', BKN:'#FFFFFF', CHA:'#1D1160', CHI:'#CE1141',
-      CLE:'#860038', DAL:'#00538C', DEN:'#0E2240', DET:'#C8102E', GSW:'#1D428A',
-      HOU:'#CE1141', IND:'#002D62', LAC:'#C8102E', LAL:'#552583', MEM:'#5D76A9',
-      MIA:'#98002E', MIL:'#00471B', MIN:'#0C2340', NOP:'#0C2340', NYK:'#F58426',
-      OKC:'#007AC1', ORL:'#0077C0', PHI:'#006BB6', PHX:'#1D1160', POR:'#E03A3E',
-      SAC:'#5A2D81', SAS:'#C4CED4', TOR:'#CE1141', UTA:'#002B5C', WAS:'#002B5C'
-    };
-
-    // Set current date
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
-      weekday: 'long', month: 'short', day: 'numeric'
-    });
-
-    // ── Helpers ──
-    const getConfLevel = getConfTier; // alias for props
-
-    function getGameForTeam(team) { return teamToGame[team] || null; }
-
-    function getOpponent(team) {
-      const g = getGameForTeam(team);
-      if (!g) return null;
-      return g.away_team === team ? g.home_team : g.away_team;
-    }
-
-    function gameKey(g) { return g.away_team + '@' + g.home_team; }
-
-    function formatGameTime(ct) {
-      if (!ct) return null;
-      const d = new Date(ct);
-      if (isNaN(d)) return null;
-      return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-    }
-
-    function getGameStatus(g) {
-      // Use status from JSON if available
-      if (g.status === 'live') return 'live';
-      if (g.status === 'final') return 'final';
-      if (!g.commence_time) return 'scheduled';
-      const ct = new Date(g.commence_time);
-      if (isNaN(ct)) return 'scheduled';
-      const now = new Date();
-      const diff = ct - now;
-      const hoursUntil = diff / 3600000;
-      if (diff < 0) {
-        // Past start time — check if likely still playing
-        return (-hoursUntil) < 3 ? 'live' : 'final';
-      }
-      if (hoursUntil <= 1) return 'soon';
-      return 'scheduled';
-    }
-
-    function getConfTier(conf) {
-      if (conf >= 60) return 'high';
-      if (conf >= 50) return 'medium';
-      return 'low';
-    }
-
-    function gameHasConfTier(g, tier) {
-      const confs = [g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0];
-      return confs.some(c => getConfTier(c) === tier);
-    }
-
-    function getGameMaxConf(g) {
-      return Math.max(g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0);
-    }
-
-    // ── Filters ──
-    function applyFilters(data) {
-      let filtered = data;
-
-      // Game filter
-      if (currentGameFilter) {
-        const parts = currentGameFilter.split('@');
-        const teams = new Set(parts);
-        filtered = filtered.filter(p => teams.has(p.team));
-      }
-
-      // Search filter
-      if (currentSearch) {
-        const q = currentSearch.toLowerCase();
-        filtered = filtered.filter(p => p.player.toLowerCase().includes(q));
-      }
-
-      // Confidence filter
-      if (currentConfFilter !== 'all') {
-        filtered = filtered.filter(p => getConfLevel(p.confidence || 0) === currentConfFilter);
-      }
-
-      // Direction filter
-      if (currentDirFilter !== 'all') {
-        filtered = filtered.filter(p => p.direction === currentDirFilter.toUpperCase());
-      }
-
-      // Advanced: EV% filter
-      if (advancedFilters.ev !== 'all') {
-        const minEV = parseFloat(advancedFilters.ev);
-        filtered = filtered.filter(p => (p.ev || 0) >= minEV);
-      }
-
-      // Advanced: Hit Rate filter
-      if (advancedFilters.hitrate !== 'all') {
-        const minHR = parseFloat(advancedFilters.hitrate);
-        filtered = filtered.filter(p => {
-          if (p.direction === 'OVER') return (p.l10_hit_rate || 0) >= minHR;
-          return (100 - (p.l10_hit_rate || 100)) >= minHR;
-        });
-      }
-
-      // Advanced: Matchup filter
-      if (advancedFilters.matchup !== 'all') {
-        filtered = filtered.filter(p => {
-          const f = p.matchup_favorability || (p.opp_def_rank == null ? 'neutral' :
-            p.direction === 'OVER'
-              ? (p.opp_def_rank >= 20 ? 'favorable' : p.opp_def_rank <= 10 ? 'unfavorable' : 'neutral')
-              : (p.opp_def_rank <= 10 ? 'favorable' : p.opp_def_rank >= 20 ? 'unfavorable' : 'neutral'));
-          return f === advancedFilters.matchup;
-        });
-      }
-
-      // Advanced: Odds filter
-      if (advancedFilters.odds !== 'all') {
-        filtered = filtered.filter(p => {
-          const o = p.market_odds;
-          if (o == null) return false;
-          if (advancedFilters.odds === 'plus') return o >= 100;
-          if (advancedFilters.odds === 'even') return o >= -150 && o < 100;
-          if (advancedFilters.odds === 'minus') return o < -100 && o >= -200;
-          return true;
-        });
-      }
-
-      // Advanced: Injury filter
-      if (advancedFilters.injury !== 'all') {
-        filtered = filtered.filter(p => {
-          const hasInjuryImpact = p.has_boost || (p.teammate_injuries && p.teammate_injuries.length > 0);
-          const status = p.injury_status;
-          if (advancedFilters.injury === 'healthy') return !status || status === 'Probable';
-          if (advancedFilters.injury === 'boosted') return hasInjuryImpact;
-          if (advancedFilters.injury === 'questionable') return status === 'Questionable' || status === 'Doubtful';
-          return true;
-        });
-      }
-
-      // Advanced: Sportsbook filter
-      if (advancedFilters.sportsbook !== 'all') {
-        const book = advancedFilters.sportsbook;
-        filtered = filtered.filter(p => p.best_book === book || (p.book_odds && p.book_odds[book]));
-      }
-
-      return filtered;
-    }
-
-    // ── Game Filter Bar ──
-    function renderGameFilterBar() {
-      const bar = document.getElementById('game-filter-bar');
-      if (gameProjections.length === 0) { bar.style.display = 'none'; return; }
-
-      // Sort: live first, then soon, then by commence_time
-      const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
-      const sorted = [...gameProjections].sort((a, b) => {
-        const sa = getGameStatus(a), sb = getGameStatus(b);
-        if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
-        return (a.commence_time || '').localeCompare(b.commence_time || '');
-      });
-
-      let html = '<span class="filter-label">Game</span>';
-      html += `<button class="game-pill${currentGameFilter === null ? ' active' : ''}" data-game="all">All Games</button>`;
-      for (const g of sorted) {
-        const key = gameKey(g);
-        const active = currentGameFilter === key ? ' active' : '';
-        const status = getGameStatus(g);
-        const time = formatGameTime(g.commence_time);
-        let extra = '';
-        let statusCls = '';
-        if (status === 'live') {
-          extra = '<span class="pill-live"><span class="pill-live-dot"></span>LIVE</span>';
-          statusCls = ' live-pill';
-        } else if (status === 'soon') {
-          extra = time ? `<span class="pill-soon">${time}</span>` : '';
-          statusCls = ' soon-pill';
-        } else if (status === 'final') {
-          extra = '<span class="pill-final">FINAL</span>';
-          statusCls = ' final-pill';
-        } else if (time && status === 'scheduled') {
-          extra = `<span class="pill-time">${time}</span>`;
-        }
-        html += `<button class="game-pill${active}${statusCls}" data-game="${key}">${g.away_team} @ ${g.home_team}${extra}</button>`;
-      }
-      bar.innerHTML = html;
-      bar.style.display = 'flex';
-
-      bar.querySelectorAll('.game-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-          const game = pill.dataset.game;
-          currentGameFilter = game === 'all' ? null : game;
-          bar.querySelectorAll('.game-pill').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          expandedRowId = null;
-          render();
-        });
-      });
-    }
-
-    // ── Selected Game Card ──
-    function renderSelectedGameCard() {
-      const el = document.getElementById('selected-game-card');
-      if (!currentGameFilter) { el.classList.remove('visible'); return; }
-
-      const g = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
-      if (!g) { el.classList.remove('visible'); return; }
-
-      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
-      const pickCls = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
-
-      const spreadStr = g.spread_pick || 'N/A';
-      const totalStr = g.total_pick && g.total_line != null
-        ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line)
-        : 'N/A';
-
-      const status = getGameStatus(g);
-      const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
-      const time = formatGameTime(g.commence_time);
-      let sgcTime = '';
-      if (isFinal) sgcTime = ' <span class="final-badge">FINAL</span>';
-      else if (status === 'live') sgcTime = ' <span style="color:var(--red-light);font-size:12px;font-weight:700"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse-live 1.5s ease-in-out infinite;vertical-align:middle;margin-right:4px"></span>LIVE</span>';
-      else if (time) sgcTime = ` <span style="color:var(--text-muted);font-size:13px;font-weight:400">${time}</span>`;
-
-      const sgcScore = isFinal
-        ? `<span style="font-weight:700">${g.away_team} ${g.away_score} - ${g.home_team} ${g.home_score}</span>`
-        : `Proj: ${g.proj_score}`;
-
-      function sgcResultBadge(result) {
-        if (result === 'win') return ' <span class="pick-result-badge win">&#10003; W</span>';
-        if (result === 'loss') return ' <span class="pick-result-badge loss">&#10007; L</span>';
-        return '';
-      }
-
-      el.innerHTML = `
-        <div class="sgc-header">
-          <div class="sgc-matchup">${g.away_team} @ ${g.home_team}${sgcTime}</div>
-          <div class="sgc-score">${sgcScore}</div>
-        </div>
-        <div class="sgc-picks">
-          <div class="sgc-pick">
-            <span class="sgc-pick-label">Spread</span>
-            <span class="sgc-pick-value ${pickCls(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
-            ${g.spread_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.spread_conf)}">${g.spread_conf}%</span>` : ''}
-            ${isFinal ? sgcResultBadge(g.spread_result) : ''}
-          </div>
-          <div class="sgc-pick">
-            <span class="sgc-pick-label">Total</span>
-            <span class="sgc-pick-value ${pickCls(g.total_pick, g.total_conf)}">${totalStr}</span>
-            ${g.total_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.total_conf)}">${g.total_conf}%</span>` : ''}
-            ${isFinal ? sgcResultBadge(g.total_result) : ''}
-          </div>
-          <div class="sgc-pick">
-            <span class="sgc-pick-label">Moneyline</span>
-            <span class="sgc-pick-value ${pickCls(g.ml_pick, g.ml_conf)}">${g.ml_pick || 'N/A'}</span>
-            ${g.ml_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.ml_conf)}">${g.ml_conf}%</span>` : ''}
-            ${isFinal ? sgcResultBadge(g.ml_result) : ''}
-          </div>
-        </div>`;
-      el.classList.add('visible');
-    }
-
-    // ── Top 5 Picks ──
-    // ── Recommendations ──
-    let recommendations = null;
-
-    function renderGameRecommendations() {
-      const recs = recommendations;
-      const gameRecs = (recs && recs.game_bets) || [];
-      if (gameRecs.length === 0) {
-        return `<div class="rec-category" style="margin-bottom:20px">
-          <div class="rec-header">
-            <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
-            <span class="rec-count">0 picks</span>
-          </div>
-          <div class="no-recs">No game bets meet our quality criteria today.</div>
-        </div>`;
-      }
-      const gameCards = gameRecs.map((r, i) => {
-        const confLvl = getConfLevel(r.confidence || 0);
-        const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-        return `<div class="rec-card game-rec">
-          <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
-          <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
-          <div class="rec-matchup">${r.game || ''}</div>
-          <div class="rec-pick">${r.pick}</div>
-          <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
-          ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
-        </div>`;
-      }).join('');
-      return `<div class="rec-category" style="margin-bottom:20px">
-        <div class="rec-header">
-          <span class="rec-header-title game-recs">&#127919; Recommended Game Bets</span>
-          <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''}</span>
-        </div>
-        <div class="rec-cards">${gameCards}</div>
-      </div>`;
-    }
-
-    function renderPropRecommendations() {
-      const recs = recommendations;
-      const propRecs = (recs && recs.props) || [];
-      if (propRecs.length === 0) {
-        return `<div class="rec-category">
-          <div class="rec-header">
-            <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
-            <span class="rec-count">0 picks</span>
-          </div>
-          <div class="no-recs">No player props meet our quality criteria today.</div>
-        </div>`;
-      }
-      const propCards = propRecs.map((r, i) => {
-        const confLvl = getConfLevel(r.confidence || 0);
-        const dirClass = (r.direction || '').toLowerCase();
-        const diff = r.diff != null ? r.diff : ((r.projection || 0) - (r.line || 0));
-        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
-        const diffCls = diff >= 0 ? 'pos' : 'neg';
-        const g = getGameForTeam(r.team);
-        const matchupStr = g ? (g.away_team === r.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
-        const reasons = (r.reasons || r.score_factors || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-        return `<div class="rec-card prop-rec">
-          <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
-          <div class="rec-badge prop">PROP</div>
-          <div class="rec-player">${r.player}</div>
-          <div class="rec-team"><span class="team-dot" style="background:${TEAM_COLORS[r.team] || 'var(--text-muted)'}"></span>${r.team} ${matchupStr}</div>
-          <div class="rec-prop-type">${r.prop}</div>
-          <div class="rec-pick ${dirClass}">${r.direction} ${r.line}</div>
-          <div class="rec-proj">Proj: ${r.projection} <span class="${diffCls}">(${diffStr})</span></div>
-          ${r.ev ? `<div class="rec-ev">+${r.ev.toFixed(1)}% EV</div>` : ''}
-          <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
-          ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
-        </div>`;
-      }).join('');
-      return `<div class="rec-category">
-        <div class="rec-header">
-          <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
-          <span class="rec-count">${propRecs.length} pick${propRecs.length !== 1 ? 's' : ''}</span>
-        </div>
-        <div class="rec-cards">${propCards}</div>
-      </div>`;
-    }
-
-    function renderGameSpecificProps(filtered) {
-      // Show top props for the selected game, sorted by EV
-      const sorted = [...filtered].filter(p => (p.ev || 0) > 0)
-        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
-        .slice(0, 8);
-
-      const parts = currentGameFilter.split('@');
-      const label = parts.join(' @ ');
-
-      if (sorted.length === 0) {
-        return `<div class="game-specific-section">
-          <div class="game-specific-header">
-            <span class="game-specific-title">&#128202; Top Props for ${label}</span>
-          </div>
-          <div class="no-recs">No positive-EV props available for this game.</div>
-        </div>`;
-      }
-
-      const cards = sorted.map((p, i) => {
-        const confLvl = getConfLevel(p.confidence || 0);
-        const dirClass = (p.direction || '').toLowerCase();
-        const diff = p.diff != null ? p.diff : ((p.projection || 0) - (p.line || 0));
-        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
-        const diffCls = diff >= 0 ? 'pos' : 'neg';
-        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
-        return `<div class="game-prop-card">
-          <div class="gpc-rank">#${i + 1}</div>
-          <div class="gpc-player">${p.player}</div>
-          <div class="gpc-team"><span class="team-dot" style="background:${teamColor}"></span>${p.team}</div>
-          <div class="gpc-prop-type">${p.prop}</div>
-          <div class="gpc-pick ${dirClass}">${p.direction} ${p.line}</div>
-          <div class="gpc-proj">Proj: ${p.projection} <span class="${diffCls}">(${diffStr})</span></div>
-          ${p.ev ? `<div class="gpc-ev">+${p.ev.toFixed(1)}% EV</div>` : ''}
-          <div class="gpc-conf ${confLvl}">${(p.confidence || 0).toFixed(1)}% conf</div>
-        </div>`;
-      }).join('');
-
-      return `<div class="game-specific-section">
-        <div class="game-specific-header">
-          <span class="game-specific-title">&#128202; Top Props for ${label}</span>
-          <span class="game-specific-count">${sorted.length} prop${sorted.length !== 1 ? 's' : ''}</span>
-        </div>
-        <div class="game-specific-cards">${cards}</div>
-      </div>`;
-    }
-
-    // ── Category Tabs ──
-    function renderPropCategoryTabs(filtered) {
-      const counts = { all: filtered.length };
-      for (const cat of PROP_CATEGORIES) {
-        if (cat.key !== 'all') counts[cat.key] = filtered.filter(p => p.prop === cat.key).length;
-      }
-      return `
-        <div class="prop-category-tabs">
-          ${PROP_CATEGORIES.map(cat => {
-            const active = currentPropCategory === cat.key ? ' active' : '';
-            return `<button class="category-tab${active}" data-prop-cat="${cat.key}">${cat.label}<span class="tab-count">${counts[cat.key] || 0}</span></button>`;
-          }).join('')}
-        </div>`;
-    }
-
-    // ── Sort Options ──
-    function renderSortOptions() {
-      const sorts = [
-        { key: 'ev', label: 'EV%' },
-        { key: 'confidence', label: 'Confidence' },
-        { key: 'edge', label: 'Edge' },
-      ];
-      return `
-        <div class="sort-options">
-          <span class="sort-label">Sort by</span>
-          ${sorts.map(s => {
-            const active = currentPropSort === s.key ? ' active' : '';
-            return `<button class="sort-btn${active}" data-prop-sort="${s.key}">${s.label}</button>`;
-          }).join('')}
-        </div>`;
-    }
-
-    // ── Advanced Filters ──
-    function renderAdvancedFilters(totalCount, filteredCount) {
-      const FILTERS = [
-        { key: 'ev', icon: '&#128200;', label: 'EV%', options: [
-          { value: 'all', text: 'All' }, { value: '5', text: '5%+ EV' },
-          { value: '10', text: '10%+ EV' }, { value: '15', text: '15%+ EV' }, { value: '20', text: '20%+ EV' }
-        ]},
-        { key: 'hitrate', icon: '&#127919;', label: 'Hit Rate', options: [
-          { value: 'all', text: 'All' }, { value: '50', text: '50%+' },
-          { value: '60', text: '60%+' }, { value: '70', text: '70%+' }, { value: '80', text: '80%+' }
-        ]},
-        { key: 'matchup', icon: '&#127936;', label: 'Matchup', options: [
-          { value: 'all', text: 'All' },
-          { value: 'favorable', text: '\u2713 Favorable', cls: 'opt-favorable' },
-          { value: 'neutral', text: '\u2013 Neutral', cls: 'opt-neutral' },
-          { value: 'unfavorable', text: '\u2717 Unfavorable', cls: 'opt-unfavorable' }
-        ]},
-        { key: 'odds', icon: '&#128176;', label: 'Odds', options: [
-          { value: 'all', text: 'All' }, { value: 'plus', text: 'Plus Money (+100+)' },
-          { value: 'even', text: 'Even to -150' }, { value: 'minus', text: '-101 to -200' }
-        ]},
-        { key: 'injury', icon: '&#127973;', label: 'Injuries', options: [
-          { value: 'all', text: 'All' },
-          { value: 'healthy', text: 'Healthy Only' },
-          { value: 'boosted', text: 'Injury Boosted' },
-          { value: 'questionable', text: 'Questionable' }
-        ]},
-        { key: 'sportsbook', icon: '&#128218;', label: 'Best Book', options: [
-          { value: 'all', text: 'All' },
-          { value: 'draftkings', text: 'DraftKings' },
-          { value: 'fanduel', text: 'FanDuel' },
-          { value: 'betmgm', text: 'BetMGM' },
-          { value: 'caesars', text: 'Caesars' }
-        ]}
-      ];
-      const hasActive = Object.values(advancedFilters).some(v => v !== 'all');
-      const dropdowns = FILTERS.map(f => {
-        const cur = advancedFilters[f.key];
-        const curOpt = f.options.find(o => o.value === cur) || f.options[0];
-        const isActive = cur !== 'all';
-        return `<div class="filter-dropdown" data-filter-key="${f.key}">
-          <button class="filter-btn${isActive ? ' active' : ''}">
-            <span class="filter-icon">${f.icon}</span>
-            <span>${f.label}</span>
-            <span class="filter-value">${curOpt.text}</span>
-            <span class="dropdown-arrow">&#9660;</span>
-          </button>
-          <div class="filter-menu">
-            ${f.options.map(o => `<div class="filter-option${cur === o.value ? ' active' : ''}${o.cls ? ' ' + o.cls : ''}" data-value="${o.value}">${o.text}</div>`).join('')}
-          </div>
-        </div>`;
-      }).join('');
-      const clearBtn = hasActive ? `<button class="clear-filters-btn" data-clear-filters>&#10005; Clear</button>` : '';
-      const info = hasActive ? `<div class="results-info">Showing <strong>${filteredCount}</strong> of ${totalCount} props</div>` : '';
-      return `<div class="advanced-filters">${dropdowns}${clearBtn}</div>${info}`;
-    }
-
-    // ── Sort props ──
-    function sortPropsBy(props, sortBy) {
-      return [...props].sort((a, b) => {
-        if (sortBy === 'ev') return (b.ev || 0) - (a.ev || 0);
-        if (sortBy === 'confidence') return (b.confidence || 0) - (a.confidence || 0);
-        if (sortBy === 'edge') return Math.abs(b.diff || 0) - Math.abs(a.diff || 0);
-        return 0;
-      });
-    }
-
-    // ── Filter by category ──
-    function filterByPropCategory(props, cat) {
-      if (cat === 'all') return props;
-      return props.filter(p => p.prop === cat);
-    }
-
-    function injuryBadge(p) {
-      const s = p.injury_status;
-      if (!s) return '';
-      const cfg = { Out: 'inj-out', Doubtful: 'inj-doubtful', Questionable: 'inj-questionable', Probable: 'inj-probable' };
-      const cls = cfg[s] || '';
-      const tip = p.injury_type ? `${s} — ${p.injury_type}` : s;
-      return `<span class="injury-badge ${cls}" title="${p.injury_headline || tip}">${s.toUpperCase()}${p.injury_type ? ` <span class="injury-type">${p.injury_type}</span>` : ''}</span>`;
-    }
-
-    // ── Props Table ──
-    function renderPropsTable(props) {
-      if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div></div>';
-
-      const hasAnyGraded = props.some(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
-
-      const rows = props.map((p, idx) => {
-        const dirClass = p.direction === 'OVER' ? 'over' : 'under';
-        const diff = p.diff != null ? p.diff : (p.projection - p.line);
-        const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
-        const diffCls = diff >= 0 ? 'positive' : 'negative';
-        const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
-        const evCls = p.ev > 0 ? 'positive' : 'negative';
-        const confStr = p.confidence != null ? p.confidence.toFixed(1) + '%' : '--';
-        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
-        const g = getGameForTeam(p.team);
-        const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
-        const edgeBadge = p.edge === 'STRONG' ? '<span class="edge-badge strong">STRONG</span>'
-          : p.edge === 'GOOD' ? '<span class="edge-badge good">GOOD</span>'
-          : p.edge === 'LEAN' ? '<span class="edge-badge lean">LEAN</span>' : '';
-
-        const rowId = 'row-' + idx;
-        const isExpanded = expandedRowId === rowId;
-
-        // Detail data
-        const isVal = (v) => v != null && !Number.isNaN(v);
-        const fmtOdds = (v) => !isVal(v) ? '--' : (v > 0 ? '+' + v : '' + v);
-        const mktOddsStr = fmtOdds(p.market_odds);
-        const fairOddsStr = fmtOdds(p.fair_odds);
-        const pe = p.prob_edge;
-        const probEdgeStr = isVal(pe) ? (pe >= 0 ? '+' : '') + pe.toFixed(1) + '%' : '--';
-        const edgeColor = !isVal(pe) ? 'var(--text-muted)' : pe > 3 ? 'var(--accent-light)' : pe > 0 ? 'var(--accent)' : 'var(--red-light)';
-
-        const injBadge = injuryBadge(p);
-        const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
-
-        // Result columns for graded props
-        const hasResult = p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH';
-        const actualHtml = p.actual != null ? `<td><span class="prop-result ${hasResult ? (p.result === 'WIN' ? 'win' : p.result === 'LOSS' ? 'loss' : 'push') : ''}">${p.actual}</span></td>` : (hasAnyGraded ? '<td>--</td>' : '');
-        const resultHtml = hasResult ? `<td><span class="pick-result-badge ${p.result === 'WIN' ? 'win' : p.result === 'LOSS' ? 'loss' : 'push'}">${p.result === 'WIN' ? '&#10003; W' : p.result === 'LOSS' ? '&#10007; L' : 'PUSH'}</span></td>` : (hasAnyGraded ? '<td>--</td>' : '');
-        const colSpan = hasAnyGraded ? 11 : 9;
-
-        return `
-          <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')">
-            <td><span class="pt-player">${p.player}</span>${injBadge} ${edgeBadge}<br><span class="pt-matchup">${matchupStr}</span></td>
-            <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
-            <td><span class="pt-prop-badge">${p.prop}</span></td>
-            <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
-            <td>${p.line}</td>
-            <td style="font-weight:600">${p.projection}</td>
-            <td class="col-hide-mobile"><span class="pt-edge ${diffCls}">${diffStr}</span></td>
-            <td>${confStr}</td>
-            <td><span class="pt-ev ${evCls}">${evStr}</span></td>
-            ${actualHtml}${resultHtml}
-          </tr>
-          <tr class="pick-row-detail${isExpanded ? ' open' : ''}" id="detail-${rowId}" style="${isExpanded ? '' : 'display:none'}">
-            <td colspan="${colSpan}" style="padding:0">
-              <div class="prop-details-expanded">
-                <div class="details-grid">
-                  <div class="detail-card">
-                    <div class="dc-label">Projection vs Line</div>
-                    <div class="proj-compare">
-                      <span class="proj-val">${p.projection}</span>
-                      <span class="proj-vs">vs</span>
-                      <span class="proj-line">${p.line}</span>
-                    </div>
-                    <div class="dc-edge ${diff >= 0 ? 'pos' : 'neg'}">${diffStr} edge</div>
-                  </div>
-                  <div class="detail-card">
-                    <div class="dc-label">Odds Value</div>
-                    <div class="odds-compare">
-                      <div class="odds-item"><span class="oi-label">Market</span><span class="oi-value">${mktOddsStr}</span></div>
-                      <span class="odds-arrow">&rarr;</span>
-                      <div class="odds-item"><span class="oi-label">Fair</span><span class="oi-value fair">${fairOddsStr}</span></div>
-                    </div>
-                    <div class="dc-edge ${isVal(pe) && pe >= 0 ? 'pos' : 'neg'}">${probEdgeStr} prob edge</div>
-                  </div>
-                  <div class="detail-card">
-                    <div class="dc-label">Expected Value</div>
-                    <div class="ev-display ${p.ev > 0 ? 'pos' : p.ev < 0 ? 'neg' : 'neutral'}">${evStr}</div>
-                    ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
-                  </div>
-                </div>
-                ${p.book_odds && Object.keys(p.book_odds).length > 0 ? (() => {
-                  const bks = [
-                    {k:'fanduel',l:'FD',c:'#1493ff'},{k:'draftkings',l:'DK',c:'#53d337'},
-                    {k:'betmgm',l:'MGM',c:'#c4a44a'},{k:'caesars',l:'CZR',c:'#00694b'}
-                  ];
-                  const fmtO = v => v == null ? '-' : (v > 0 ? '+'+v : ''+v);
-                  const pickSide = p.direction.toLowerCase();
-                  const getOdds = (bk, side) => p.book_odds[bk] && p.book_odds[bk][side] ? p.book_odds[bk][side].odds : null;
-                  const getLine = (bk, side) => p.book_odds[bk] && p.book_odds[bk][side] ? p.book_odds[bk][side].line : null;
-                  const renderRow = (side) => {
-                    const vals = bks.map(b => getOdds(b.k, side)).filter(v => v !== null);
-                    const best = vals.length ? Math.max(...vals) : null;
-                    const avg = vals.length ? Math.round(vals.reduce((a,v)=>a+v,0)/vals.length) : null;
-                    const bestBk = best !== null ? bks.find(b => getOdds(b.k, side) === best) : null;
-                    const lineVal = bks.reduce((r, b) => r !== null ? r : getLine(b.k, side), null) || p.line;
-                    return `<div class="odds-table-row${side === pickSide ? ' recommended' : ''}">
-                      <div class="odds-col side-col">
-                        <span class="side-label">${side === 'over' ? 'Over' : 'Under'}</span>
-                        <span class="side-line">${lineVal}</span>
-                      </div>
-                      <div class="odds-col best-col">
-                        ${bestBk ? `<span class="best-book-mini" style="color:${bestBk.c}">${bestBk.l}</span>` : ''}
-                        <span class="best-odds${best !== null && best > 0 ? ' positive' : ''}">${fmtO(best)}</span>
-                      </div>
-                      <div class="odds-col avg-col">
-                        <span class="avg-odds">${fmtO(avg)}</span>
-                      </div>
-                      ${bks.map(b => {
-                        const o = getOdds(b.k, side);
-                        const has = o !== null;
-                        return `<div class="odds-col book-col${has && o === best ? ' is-best' : ''}">
-                          <span class="book-odds-val${has && o > 0 ? ' plus' : ''}${!has ? ' no-odds' : ''}">${fmtO(o)}</span>
-                        </div>`;
-                      }).join('')}
-                    </div>`;
-                  };
-                  return `<div class="sportsbook-odds-table">
-                    <div class="odds-table-header">
-                      <div class="odds-col side-col"></div>
-                      <div class="odds-col best-col"><span class="col-label">BEST</span></div>
-                      <div class="odds-col avg-col"><span class="col-label">AVG</span></div>
-                      ${bks.map(b => `<div class="odds-col book-col"><span class="book-abbr" style="color:${b.c}">${b.l}</span></div>`).join('')}
-                    </div>
-                    ${renderRow('over')}
-                    ${renderRow('under')}
-                  </div>`;
-                })() : ''}
-                ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
-                <div class="injury-section">
-                  <div class="injury-alert">
-                    <div class="injury-header">
-                      <span class="injury-icon">&#9888;</span>
-                      <span class="injury-title">Team Injuries</span>
-                      ${p.injury_boost ? `<span class="boost-badge">+${p.injury_boost.toFixed(1)} boost</span>` : ''}
-                    </div>
-                    <div class="injury-list">
-                      ${p.teammate_injuries.map(inj => `
-                        <div class="teammate-injury">
-                          <span class="injury-status ${inj.status.toLowerCase().replace(/\s/g,'-')}">${inj.status}</span>
-                          <span class="injury-player">${inj.player}</span>
-                        </div>`).join('')}
-                    </div>
-                    ${p.injury_insight ? `
-                    <div class="injury-insight-text">
-                      <span class="insight-type-badge historical">Historical</span>
-                      ${p.injury_insight}
-                    </div>
-                    ${p.injury_details ? `
-                    <div class="injury-stats-row">
-                      <div class="injury-stat-box without">
-                        <div class="injury-stat-label">Without</div>
-                        <div class="injury-stat-value">${p.injury_details.avg_without}</div>
-                        <div class="injury-stat-sub">${p.injury_details.games_without} games</div>
-                      </div>
-                      <div class="injury-stat-arrow">&#x2192;</div>
-                      <div class="injury-stat-box with">
-                        <div class="injury-stat-label">With</div>
-                        <div class="injury-stat-value">${p.injury_details.avg_with}</div>
-                      </div>
-                      <div class="injury-stat-box boost-box">
-                        <div class="injury-stat-label">Boost</div>
-                        <div class="injury-stat-value ${p.injury_boost > 0 ? 'pos' : 'neg'}">${p.injury_boost > 0 ? '+' : ''}${p.injury_boost.toFixed(1)}</div>
-                      </div>
-                    </div>` : ''}
-                    ` : p.boosted_by ? `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>` : ''}
-                  </div>
-                </div>` : ''}
-                ${p.insight ? `
-                <div class="insight-section">
-                  <div class="insight-card">
-                    <div class="insight-icon">&#128161;</div>
-                    <div class="insight-content">
-                      <div class="insight-text">${p.insight}</div>
-                      <div class="insight-stats">
-                        ${p.l5_avg != null ? `<span class="stat-badge">L5: ${p.l5_avg}</span>` : ''}
-                        ${p.l10_avg != null ? `<span class="stat-badge">L10: ${p.l10_avg}</span>` : ''}
-                        ${p.l10_hit_rate != null ? `<span class="stat-badge hit-rate">${p.l10_hit_rate}% hit rate</span>` : ''}
-                        ${p.streak >= 3 ? `<span class="stat-badge streak">${p.streak} game streak</span>` : ''}
-                        ${p.opp_def_rank != null ? (() => { const f = p.matchup_favorability || (p.direction === 'OVER' ? (p.opp_def_rank >= 20 ? 'favorable' : p.opp_def_rank <= 10 ? 'unfavorable' : 'neutral') : (p.opp_def_rank <= 10 ? 'favorable' : p.opp_def_rank >= 20 ? 'unfavorable' : 'neutral')); const icon = f === 'favorable' ? '&#9650;' : f === 'unfavorable' ? '&#9660;' : '&#8211;'; return `<span class="stat-badge matchup ${f}" title="${f.charAt(0).toUpperCase()+f.slice(1)} matchup">${icon} DEF #${p.opp_def_rank}</span>`; })() : ''}
-                        ${p.home_avg != null && p.away_avg != null ? `<span class="stat-badge home-away">H: ${p.home_avg} / A: ${p.away_avg}</span>` : ''}
-                      </div>
-                    </div>
-                  </div>
-                </div>` : (p.l5_avg != null ? `
-                <div class="insight-section">
-                  <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px;">
-                    ${p.l5_avg != null ? `<span class="stat-badge">L5: ${p.l5_avg}</span>` : ''}
-                    ${p.l10_avg != null ? `<span class="stat-badge">L10: ${p.l10_avg}</span>` : ''}
-                    ${p.l10_hit_rate != null ? `<span class="stat-badge hit-rate">${p.l10_hit_rate}% hit rate</span>` : ''}
-                    ${p.streak >= 3 ? `<span class="stat-badge streak">${p.streak} game streak</span>` : ''}
-                    ${p.opp_def_rank != null ? (() => { const f = p.matchup_favorability || (p.direction === 'OVER' ? (p.opp_def_rank >= 20 ? 'favorable' : p.opp_def_rank <= 10 ? 'unfavorable' : 'neutral') : (p.opp_def_rank <= 10 ? 'favorable' : p.opp_def_rank >= 20 ? 'unfavorable' : 'neutral')); const icon = f === 'favorable' ? '&#9650;' : f === 'unfavorable' ? '&#9660;' : '&#8211;'; return `<span class="stat-badge matchup ${f}" title="${f.charAt(0).toUpperCase()+f.slice(1)} matchup">${icon} DEF #${p.opp_def_rank}</span>`; })() : ''}
-                    ${p.home_avg != null && p.away_avg != null ? `<span class="stat-badge home-away">H: ${p.home_avg} / A: ${p.away_avg}</span>` : ''}
-                  </div>
-                </div>` : '')}
-              </div>
-            </td>
-          </tr>`;
-      }).join('');
-
-      return `
-        <div class="props-table-wrap">
-          <table class="props-table">
-            <thead><tr>
-              <th>Player</th>
-              <th>Team</th>
-              <th>Prop</th>
-              <th>Pick</th>
-              <th>Line</th>
-              <th>Proj</th>
-              <th class="col-hide-mobile">Edge</th>
-              <th>Conf</th>
-              <th>EV%</th>
-              ${hasAnyGraded ? '<th>Actual</th><th>Result</th>' : ''}
-            </tr></thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>`;
-    }
-
-    function toggleRow(rowId) {
-      const detail = document.getElementById('detail-' + rowId);
-      if (!detail) return;
-      if (expandedRowId === rowId) {
-        detail.style.display = 'none';
-        detail.classList.remove('open');
-        expandedRowId = null;
-      } else {
-        if (expandedRowId) {
-          const prev = document.getElementById('detail-' + expandedRowId);
-          if (prev) { prev.style.display = 'none'; prev.classList.remove('open'); }
-        }
-        detail.style.display = '';
-        detail.classList.add('open');
-        expandedRowId = rowId;
-      }
-    }
-
-    // ── Graded Props for Finished Games ──
-    function renderGradedProps(game, container) {
-      const props = game.graded_props || [];
-      if (props.length === 0) {
-        container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No graded props available</div><div class="empty-state-text">Props results for this game haven't been loaded yet.</div></div>`;
-        return;
-      }
-
-      const PROP_LABELS = { points: 'PTS', rebounds: 'REB', assists: 'AST', pts_rebs_asts: 'PRA' };
-      const wins = props.filter(p => p.hit).length;
-      const losses = props.length - wins;
-      const pct = props.length > 0 ? (wins / props.length * 100).toFixed(0) : 0;
-      const recordCls = wins > losses ? 'winning' : wins < losses ? 'losing' : 'even';
-
-      const rows = props.map(p => {
-        const propLabel = PROP_LABELS[p.prop] || p.prop;
-        const hitIcon = p.hit
-          ? '<span class="pick-result-badge win">&#10003;</span>'
-          : '<span class="pick-result-badge loss">&#10007;</span>';
-        const dirClass = p.direction === 'OVER' ? 'over' : 'under';
-        const actualCls = p.hit ? 'hit' : 'miss';
-        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
-        return `<tr>
-          <td><span class="gp-player">${p.player}</span><span class="gp-team"><span class="team-dot" style="background:${teamColor}"></span>${p.team}</span></td>
-          <td style="font-weight:500">${propLabel}</td>
-          <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
-          <td style="color:var(--text-secondary)">${p.line}</td>
-          <td style="color:var(--text-secondary)">${p.projection}</td>
-          <td><span class="gp-actual ${actualCls}">${p.actual}</span></td>
-          <td>${hitIcon}</td>
-        </tr>`;
-      }).join('');
-
-      container.innerHTML = `
-        <div class="graded-props-wrap">
-          <div class="graded-props-header">
-            <span class="graded-props-title">Graded Props &mdash; ${game.away_team} @ ${game.home_team}</span>
-            <span class="graded-props-record ${recordCls}">${wins}-${losses} (${pct}%)</span>
-          </div>
-          <table class="graded-props-table">
-            <thead><tr><th>Player</th><th>Prop</th><th>Dir</th><th>Line</th><th>Proj</th><th>Actual</th><th></th></tr></thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>`;
-    }
-
-    // ── Props inline filter bar ──
-    function renderPropsFilterBar() {
-      const searchIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
-      const confTabs = [
-        { key: 'all', label: 'All' }, { key: 'high', label: 'High' },
-        { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
-      ];
-      const dirTabs = [
-        { key: 'all', label: 'All' }, { key: 'over', label: 'Overs' }, { key: 'under', label: 'Unders' },
-      ];
-
-      let html = '<div class="search-filter-bar">';
-      // Search
-      html += `<div class="search-wrap">${searchIcon}<input type="text" id="inline-search-input" placeholder="Search players..." value="${currentSearch || ''}"></div>`;
-      // Confidence
-      html += '<div class="filter-group"><span class="filter-label">Confidence</span>';
-      for (const tab of confTabs) {
-        const active = currentConfFilter === tab.key ? ' active' : '';
-        html += `<button class="filter-pill${active}" data-inline-conf="${tab.key}">${tab.label}</button>`;
-      }
-      html += '</div>';
-      // Direction
-      html += '<div class="filter-group"><span class="filter-label">Direction</span>';
-      for (const tab of dirTabs) {
-        const active = currentDirFilter === tab.key ? ' active' : '';
-        html += `<button class="filter-pill${active}" data-inline-dir="${tab.key}">${tab.label}</button>`;
-      }
-      html += '</div></div>';
-
-      // Game pills
-      if (gameProjections.length > 0) {
-        const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
-        const sorted = [...gameProjections].sort((a, b) => {
-          const sa = getGameStatus(a), sb = getGameStatus(b);
-          if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
-          return (a.commence_time || '').localeCompare(b.commence_time || '');
-        });
-        html += '<div class="game-filter-bar" style="display:flex">';
-        html += '<span class="filter-label">Game</span>';
-        html += `<button class="game-pill${currentGameFilter === null ? ' active' : ''}" data-inline-game="all">All Games</button>`;
-        for (const g of sorted) {
-          const key = gameKey(g);
-          const active = currentGameFilter === key ? ' active' : '';
-          const status = getGameStatus(g);
-          const time = formatGameTime(g.commence_time);
-          let extra = '';
-          let statusCls = '';
-          if (status === 'live') { extra = '<span class="pill-live"><span class="pill-live-dot"></span>LIVE</span>'; statusCls = ' live-pill'; }
-          else if (status === 'soon') { extra = time ? `<span class="pill-soon">${time}</span>` : ''; statusCls = ' soon-pill'; }
-          else if (status === 'final') { extra = '<span class="pill-final">FINAL</span>'; statusCls = ' final-pill'; }
-          else if (time && status === 'scheduled') { extra = `<span class="pill-time">${time}</span>`; }
-          html += `<button class="game-pill${active}${statusCls}" data-inline-game="${key}">${g.away_team} @ ${g.home_team}${extra}</button>`;
-        }
-        html += '</div>';
-      }
-
-      return html;
-    }
-
-    function attachPropsFilterHandlers(propsView) {
-      // Inline search
-      const searchInput = propsView.querySelector('#inline-search-input');
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-          currentSearch = e.target.value.trim();
-          expandedRowId = null;
-          render();
-        });
-        // Re-focus after re-render if it had focus
-        if (document.activeElement === null || currentSearch) {
-          setTimeout(() => { searchInput.focus(); searchInput.selectionStart = searchInput.selectionEnd = searchInput.value.length; }, 0);
-        }
-      }
-      // Confidence pills
-      propsView.querySelectorAll('[data-inline-conf]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          currentConfFilter = pill.dataset.inlineConf;
-          expandedRowId = null;
-          render();
-        });
-      });
-      // Direction pills
-      propsView.querySelectorAll('[data-inline-dir]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          currentDirFilter = pill.dataset.inlineDir;
-          expandedRowId = null;
-          render();
-        });
-      });
-      // Game pills
-      propsView.querySelectorAll('[data-inline-game]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          const game = pill.dataset.inlineGame;
-          currentGameFilter = game === 'all' ? null : game;
-          expandedRowId = null;
-          render();
-        });
-      });
-    }
-
-    // ── Main Render ──
-    function render() {
-      const propsView = document.getElementById('player-props-view');
-      const gameView = document.getElementById('game-projections-view');
-      const filterRow = document.getElementById('filter-row');
-      const gameFilterBar = document.getElementById('game-filter-bar');
-      const searchWrap = document.getElementById('search-wrap');
-      const selectedCard = document.getElementById('selected-game-card');
-
-      // Always hide static filters — they're now rendered inline
-      filterRow.style.display = 'none';
-      gameFilterBar.style.display = 'none';
-      searchWrap.style.display = 'none';
-
-      if (currentView === 'game-projections') {
-        propsView.style.display = 'none';
-        gameView.style.display = 'block';
-        selectedCard.classList.remove('visible');
-        renderGameProjections();
-        return;
-      }
-
-      propsView.style.display = 'block';
-      gameView.style.display = 'none';
-
-      renderSelectedGameCard();
-
-      const filtered = applyFilters(projections);
-
-      // Recommendations (shown first, above filters)
-      let recsHtml = currentGameFilter
-        ? renderGameSpecificProps(filtered)
-        : renderPropRecommendations();
-
-      // Inline search + filters (below recs)
-      const filtersHtml = renderPropsFilterBar();
-
-      if (filtered.length === 0) {
-        if (currentGameFilter) {
-          const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
-          if (selGame && getGameStatus(selGame) === 'final' && selGame.graded_props) {
-            renderGradedProps(selGame, propsView);
-            return;
-          }
-          const status = selGame ? getGameStatus(selGame) : 'unknown';
-          const reason = status === 'live' || status === 'final'
-            ? 'Player props are generated before tip-off. This game was already in progress when projections were last updated.'
-            : 'No player prop lines were available for this game at the time projections were generated.';
-          propsView.innerHTML = recsHtml + filtersHtml + `
-            <div class="empty-state">
-              <div class="empty-state-icon">&#127936;</div>
-              <div class="empty-state-title">No player props for this game</div>
-              <div class="empty-state-text">${reason}</div>
-            </div>`;
-          attachPropsFilterHandlers(propsView);
-          return;
-        }
-        propsView.innerHTML = recsHtml + filtersHtml + `
-          <div class="empty-state">
-            <div class="empty-state-icon">&#128202;</div>
-            <div class="empty-state-title">No projections match</div>
-            <div class="empty-state-text">Try adjusting your filters or search to see more projections.</div>
-          </div>`;
-        attachPropsFilterHandlers(propsView);
-        return;
-      }
-
-      let html = recsHtml + filtersHtml;
-
-      // Category tabs
-      html += renderPropCategoryTabs(filtered);
-
-      // Sort options + advanced filters
-      html += renderSortOptions();
-
-      // Filter by category, then sort
-      const catFiltered = filterByPropCategory(filtered, currentPropCategory);
-      const sorted = sortPropsBy(catFiltered, currentPropSort);
-
-      // Advanced filters (show counts based on category-filtered set)
-      html += renderAdvancedFilters(projections.length, filtered.length);
-
-      // Props table
-      expandedRowId = null;
-      html += renderPropsTable(sorted);
-
-      propsView.innerHTML = html;
-
-      // Attach inline filter handlers
-      attachPropsFilterHandlers(propsView);
-
-      // Attach category tab handlers
-      propsView.querySelectorAll('[data-prop-cat]').forEach(tab => {
-        tab.addEventListener('click', () => {
-          currentPropCategory = tab.dataset.propCat;
-          expandedRowId = null;
-          render();
-        });
-      });
-
-      // Attach sort handlers
-      propsView.querySelectorAll('[data-prop-sort]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          currentPropSort = btn.dataset.propSort;
-          expandedRowId = null;
-          render();
-        });
-      });
-
-      // Attach advanced filter handlers
-      propsView.querySelectorAll('.filter-dropdown').forEach(dd => {
-        const key = dd.dataset.filterKey;
-        dd.querySelector('.filter-btn').addEventListener('click', (e) => {
-          e.stopPropagation();
-          const wasOpen = dd.classList.contains('open');
-          propsView.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
-          if (!wasOpen) dd.classList.add('open');
-        });
-        dd.querySelectorAll('.filter-option').forEach(opt => {
-          opt.addEventListener('click', (e) => {
-            e.stopPropagation();
-            advancedFilters[key] = opt.dataset.value;
-            expandedRowId = null;
-            render();
-          });
-        });
-      });
-      // Close dropdowns on outside click
-      document.addEventListener('click', () => {
-        propsView.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
-      }, { once: true });
-      // Clear filters button
-      const clearBtn = propsView.querySelector('[data-clear-filters]');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-          Object.keys(advancedFilters).forEach(k => advancedFilters[k] = 'all');
-          expandedRowId = null;
-          render();
-        });
-      }
-    }
-
-    // ── View Tabs (in sub-nav) ──
-    document.querySelectorAll('#view-tabs .view-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('#view-tabs .view-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentView = tab.dataset.view;
-        expandedRowId = null;
-        render();
-      });
-    });
-
-    // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
-
-    // ── Game Projections View ──
-    function renderResultsSummary() {
-      const finals = gameProjections.filter(g => getGameStatus(g) === 'final' && g.away_score != null);
-      if (finals.length === 0) return '';
-
-      let gameWins = 0, gameLosses = 0;
-      for (const g of finals) {
-        for (const t of ['spread', 'total', 'ml']) {
-          const r = g[t + '_result'];
-          if (r === 'win') gameWins++;
-          else if (r === 'loss') gameLosses++;
-        }
-      }
-
-      let propWins = 0, propLosses = 0;
-      for (const p of projections) {
-        if (p.result === 'WIN') propWins++;
-        else if (p.result === 'LOSS') propLosses++;
-      }
-
-      const totalW = gameWins + propWins;
-      const totalL = gameLosses + propLosses;
-      const total = totalW + totalL;
-      if (total === 0) return '';
-      const cls = totalW > totalL ? 'winning' : totalW < totalL ? 'losing' : 'even';
-
-      let html = '<div class="results-summary-bar">';
-      html += `<div class="summary-section"><span class="summary-label">Today</span><span class="summary-record ${cls}">${totalW}-${totalL}</span></div>`;
-      if (gameWins + gameLosses > 0) {
-        html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Games</span><span class="summary-record">${gameWins}-${gameLosses}</span></div>`;
-      }
-      if (propWins + propLosses > 0) {
-        html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Props</span><span class="summary-record">${propWins}-${propLosses}</span></div>`;
-      }
-      html += '</div>';
-      return html;
-    }
-
-    function renderResultBadge(result) {
-      if (result === 'win') return '<span class="pick-result-badge win">&#10003; W</span>';
-      if (result === 'loss') return '<span class="pick-result-badge loss">&#10007; L</span>';
-      return '';
-    }
-
-    function renderGameCard(g) {
-      // 3-tier confidence colors: green (>60), yellow (50-59), red (<50)
-      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
-      const pickClass = (pick, conf) => {
-        if (!pick || pick === 'N/A') return 'low-conf';
-        if (conf >= 60) return 'best-bet';
-        if (conf < 50) return 'low-conf';
-        return '';
-      };
-      const bestBetBadge = conf => conf >= 60 ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
-      const dimClass = conf => currentGameConfFilter !== 'all' && getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
-
-      const status = getGameStatus(g);
-      const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
-
-      const spreadStr = g.spread_pick || 'N/A';
-      const spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
-      const totalStr = g.total_pick && g.total_line != null
-        ? (g.total_pick + ' ' + g.total_line) : 'N/A';
-      const totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
-      const mlStr = g.ml_pick || 'N/A';
-      const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
-
-      // Final card layout
-      if (isFinal) {
-        const projParts = (g.proj_score || '').split('-');
-        const projAway = projParts[0] || '?';
-        const projHome = projParts[1] || '?';
-        const awayWon = g.away_score > g.home_score;
-        const awayClass = awayWon ? ' winner-team' : '';
-        const homeClass = !awayWon ? ' winner-team' : '';
-
-        return `
-          <div class="game-card final-card">
-            <div class="game-card-header">
-              <div>
-                <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
-                <div class="game-card-time"><span class="final-badge">FINAL</span></div>
-              </div>
-              <div class="game-card-score">Proj: ${g.proj_score}</div>
-            </div>
-            <div class="game-final-scores">
-              <div class="game-final-score-row">
-                <span class="team-name${awayClass}">${g.away_team}</span>
-                <span class="actual-score${awayClass}">${g.away_score}</span>
-                <span class="proj-score-label">Proj: ${projAway}</span>
-              </div>
-              <div class="game-final-score-row">
-                <span class="team-name${homeClass}">${g.home_team}</span>
-                <span class="actual-score${homeClass}">${g.home_score}</span>
-                <span class="proj-score-label">Proj: ${projHome}</span>
-              </div>
-            </div>
-            <div class="game-card-picks">
-              <div class="game-pick-row${dimClass(g.spread_conf)}">
-                <span class="game-pick-label">Spread</span>
-                <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
-                <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
-                ${renderResultBadge(g.spread_result)}
-              </div>
-              <div class="game-pick-row${dimClass(g.total_conf)}">
-                <span class="game-pick-label">Total</span>
-                <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
-                <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
-                ${renderResultBadge(g.total_result)}
-              </div>
-              <div class="game-pick-row${dimClass(g.ml_conf)}">
-                <span class="game-pick-label">ML</span>
-                <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
-                <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
-                ${renderResultBadge(g.ml_result)}
-              </div>
-            </div>
-          </div>`;
-      }
-
-      // Non-final card layout (scheduled/live/soon)
-      const time = formatGameTime(g.commence_time);
-      let timeHtml = '';
-      let cardCls = '';
-      if (status === 'live') {
-        timeHtml = '<div class="game-card-time"><span class="live-badge"><span class="live-dot"></span> LIVE</span></div>';
-        cardCls = ' live-card';
-      } else if (status === 'soon') {
-        timeHtml = time ? `<div class="game-card-time"><span class="soon-badge">${time} - Starting Soon</span></div>` : '';
-      } else if (time) {
-        timeHtml = `<div class="game-card-time">${time}</div>`;
-      }
-
-      // Live scores section
-      const hasLiveScores = status === 'live' && g.away_score != null && g.home_score != null;
-      const liveScoresHtml = hasLiveScores ? `
-        <div class="game-live-scores">
-          <div class="game-live-score-row">
-            <span class="team-name">${g.away_team}</span>
-            <span class="live-score${g.away_score > g.home_score ? ' leading' : ''}">${g.away_score}</span>
-          </div>
-          <div class="game-live-score-row">
-            <span class="team-name">${g.home_team}</span>
-            <span class="live-score${g.home_score > g.away_score ? ' leading' : ''}">${g.home_score}</span>
-          </div>
-        </div>` : '';
-
-      return `
-        <div class="game-card${cardCls}">
-          <div class="game-card-header">
-            <div>
-              <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
-              ${timeHtml}
-            </div>
-            <div class="game-card-score">Proj: ${g.proj_score}</div>
-          </div>
-          ${liveScoresHtml}
-          <div class="game-card-picks">
-            <div class="game-pick-row${dimClass(g.spread_conf)}">
-              <span class="game-pick-label">Spread</span>
-              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge(g.spread_conf || 0)}</span>
-              <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
-            </div>
-            <div class="game-pick-row${dimClass(g.total_conf)}">
-              <span class="game-pick-label">Total</span>
-              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge(g.total_conf || 0)}</span>
-              <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
-            </div>
-            <div class="game-pick-row${dimClass(g.ml_conf)}">
-              <span class="game-pick-label">ML</span>
-              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge(g.ml_conf || 0)}</span>
-              <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
-            </div>
-          </div>
-        </div>`;
-    }
-
-    // renderGameFilters() removed — filters now rendered inline in renderGameProjections()
-
-    // ── Game Bets List View ──
-    function generateBetRows(games) {
-      const rows = [];
-      for (const g of games) {
-        const matchup = g.away_team + ' @ ' + g.home_team;
-        const status = getGameStatus(g);
-        const time = g.commence_time;
-
-        // Spread row
-        if (g.spread_pick && g.spread_pick !== 'N/A') {
-          rows.push({
-            type: 'spread', matchup, time, status,
-            conf: g.spread_conf || 0,
-            pick: g.spread_pick,
-            vegas: g.spread_pick ? g.spread_pick.split(' ').pop() : '--',
-            model: g.proj_score || '--',
-            result: g.spread_result || null
-          });
-        }
-        // Total row
-        if (g.total_pick && g.total_pick !== 'N/A') {
-          rows.push({
-            type: 'total', matchup, time, status,
-            conf: g.total_conf || 0,
-            pick: g.total_pick + ' ' + (g.total_line || ''),
-            vegas: g.total_line != null ? '' + g.total_line : '--',
-            model: g.proj_score ? (() => {
-              const parts = g.proj_score.split('-');
-              const total = (parseFloat(parts[0]) || 0) + (parseFloat(parts[1]) || 0);
-              return total.toFixed(1);
-            })() : '--',
-            result: g.total_result || null
-          });
-        }
-        // ML row
-        if (g.ml_pick && g.ml_pick !== 'N/A') {
-          rows.push({
-            type: 'ml', matchup, time, status,
-            conf: g.ml_conf || 0,
-            pick: g.ml_pick,
-            vegas: '--',
-            model: g.proj_score || '--',
-            result: g.ml_result || null
-          });
-        }
-      }
-      return rows;
-    }
-
-    function renderBetsList(rows) {
-      // Sort
-      const sorted = [...rows].sort((a, b) => {
-        let cmp = 0;
-        if (betsSortBy === 'conf') cmp = a.conf - b.conf;
-        else if (betsSortBy === 'time') cmp = (a.time || '9999').localeCompare(b.time || '9999');
-        else if (betsSortBy === 'type') cmp = a.type.localeCompare(b.type);
-        return betsSortDir === 'desc' ? -cmp : cmp;
-      });
-
-      const arrow = (col) => {
-        if (betsSortBy !== col) return '';
-        return `<span class="sort-arrow">${betsSortDir === 'desc' ? '\u25BC' : '\u25B2'}</span>`;
-      };
-      const sortedCls = (col) => betsSortBy === col ? ' sorted' : '';
-
-      const confTier = (c) => c >= 60 ? 'high' : c >= 50 ? 'medium' : 'low';
-
-      const resultBadge = (r) => {
-        if (r === 'win') return '<span class="result-badge win">W</span>';
-        if (r === 'loss') return '<span class="result-badge loss">L</span>';
-        return '<span class="result-badge pending">--</span>';
-      };
-
-      const timeStr = (t) => {
-        if (!t) return '--';
-        const d = new Date(t);
-        if (isNaN(d)) return '--';
-        return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      };
-
-      const bodyRows = sorted.map(r => `
-        <tr>
-          <td><span class="conf-badge ${confTier(r.conf)}">${r.conf.toFixed(1)}%</span></td>
-          <td><span class="type-badge ${r.type}">${r.type === 'ml' ? 'ML' : r.type}</span></td>
-          <td style="font-weight:600">${r.matchup}</td>
-          <td style="font-weight:600;color:var(--text-primary)">${r.pick}</td>
-          <td class="col-vegas" style="color:var(--text-secondary)">${r.vegas}</td>
-          <td class="col-model" style="color:var(--text-secondary)">${r.model}</td>
-          <td style="color:var(--text-muted)">${timeStr(r.time)}</td>
-          <td>${resultBadge(r.result)}</td>
-        </tr>`).join('');
-
-      return `
-        <table class="bets-table">
-          <thead><tr>
-            <th class="${sortedCls('conf')}" data-bets-sort="conf">Conf${arrow('conf')}</th>
-            <th class="${sortedCls('type')}" data-bets-sort="type">Type${arrow('type')}</th>
-            <th>Matchup</th>
-            <th>Pick</th>
-            <th class="col-vegas">Vegas</th>
-            <th class="col-model">Model</th>
-            <th class="${sortedCls('time')}" data-bets-sort="time">Time${arrow('time')}</th>
-            <th>Result</th>
-          </tr></thead>
-          <tbody>${bodyRows}</tbody>
-        </table>`;
-    }
-
-    function attachGameFilterHandlers(container) {
-      container.querySelectorAll('[data-status-filter]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          currentStatusFilter = pill.dataset.statusFilter;
-          container.querySelectorAll('[data-status-filter]').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          renderGameProjections();
-        });
-      });
-      container.querySelectorAll('[data-conf-filter]').forEach(pill => {
-        pill.addEventListener('click', () => {
-          currentGameConfFilter = pill.dataset.confFilter;
-          container.querySelectorAll('[data-conf-filter]').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          renderGameProjections();
-        });
-      });
-    }
-
-    function renderGameProjections() {
-      const container = document.getElementById('game-cards-container');
-      const updatedEl = document.getElementById('game-proj-updated');
-
-      // Hide the static filter element — we render filters inline now
-      document.getElementById('game-status-filter').innerHTML = '';
-
-      if (gameProjections.length === 0) {
-        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No game projections available</div><div class="empty-state-text">Game projections will appear here when today's games are loaded.</div></div>`;
-        updatedEl.textContent = '';
-        return;
-      }
-
-      // Apply status filter
-      let filtered = [...gameProjections];
-      if (currentStatusFilter !== 'all') {
-        filtered = filtered.filter(g => {
-          const s = getGameStatus(g);
-          if (currentStatusFilter === 'upcoming') return s === 'scheduled' || s === 'soon';
-          return s === currentStatusFilter;
-        });
-      }
-
-      // Apply confidence filter
-      if (currentGameConfFilter !== 'all') {
-        filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter));
-      }
-
-      // Game recommendations (rendered first, above filters)
-      const gameRecsHtml = renderGameRecommendations();
-
-      // Results summary banner
-      const summaryHtml = renderResultsSummary();
-
-      // Build inline filters HTML (below recs, above cards)
-      const statusCounts = { all: gameProjections.length, upcoming: 0, live: 0, final: 0 };
-      for (const g of gameProjections) {
-        const s = getGameStatus(g);
-        if (s === 'scheduled' || s === 'soon') statusCounts.upcoming++;
-        else if (s === 'live') statusCounts.live++;
-        else if (s === 'final') statusCounts.final++;
-      }
-      const statusTabs = [
-        { key: 'all', label: 'All' }, { key: 'upcoming', label: 'Upcoming' },
-        { key: 'live', label: 'Live' }, { key: 'final', label: 'Final' },
-      ];
-      const confTabs = [
-        { key: 'all', label: 'All' }, { key: 'high', label: 'High' },
-        { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
-      ];
-
-      let filtersHtml = '<div class="search-filter-bar">';
-      filtersHtml += '<div class="filter-group"><span class="filter-label">Status</span>';
-      for (const tab of statusTabs) {
-        const active = currentStatusFilter === tab.key ? ' active' : '';
-        filtersHtml += `<button class="filter-pill${active}" data-status-filter="${tab.key}">${tab.label} (${statusCounts[tab.key]})</button>`;
-      }
-      filtersHtml += '</div>';
-      filtersHtml += '<div class="filter-group"><span class="filter-label">Confidence</span>';
-      for (const tab of confTabs) {
-        const active = currentGameConfFilter === tab.key ? ' active' : '';
-        filtersHtml += `<button class="filter-pill${active}" data-conf-filter="${tab.key}">${tab.label}</button>`;
-      }
-      filtersHtml += '</div></div>';
-
-      if (filtered.length === 0) {
-        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
-        attachGameFilterHandlers(container);
-        return;
-      }
-
-      // Sort all filtered games by game time (earliest first)
-      filtered.sort((a, b) => {
-        const timeA = new Date(a.commence_time || '9999');
-        const timeB = new Date(b.commence_time || '9999');
-        return timeA - timeB;
-      });
-
-      const makeToggleHtml = (countText) => `
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <span style="font-size:13px;color:var(--text-muted)">${countText}</span>
-          <div class="view-toggle">
-            <button class="view-toggle-btn${gameViewMode === 'grid' ? ' active' : ''}" data-view-mode="grid">Grid</button>
-            <button class="view-toggle-btn${gameViewMode === 'list' ? ' active' : ''}" data-view-mode="list">List</button>
-          </div>
-        </div>`;
-
-      if (gameViewMode === 'list') {
-        let betRows = generateBetRows(filtered);
-        if (currentGameConfFilter !== 'all') {
-          betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
-        }
-        const toggleHtml = makeToggleHtml(`${betRows.length} bet${betRows.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + renderBetsList(betRows);
-        // Attach sort handlers
-        container.querySelectorAll('[data-bets-sort]').forEach(th => {
-          th.addEventListener('click', () => {
-            const col = th.dataset.betsSort;
-            if (betsSortBy === col) {
-              betsSortDir = betsSortDir === 'desc' ? 'asc' : 'desc';
-            } else {
-              betsSortBy = col;
-              betsSortDir = 'desc';
-            }
-            renderGameProjections();
-          });
-        });
-      } else {
-        // Grid view — flat list sorted by time
-        const toggleHtml = makeToggleHtml(`${filtered.length} game${filtered.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
-      }
-
-      // Attach filter + view toggle handlers
-      attachGameFilterHandlers(container);
-      container.querySelectorAll('[data-view-mode]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          gameViewMode = btn.dataset.viewMode;
-          renderGameProjections();
-        });
-      });
-    }
-
-    // ── Data Loading ──
-    async function loadGameProjections() {
-      try {
-        const resp = await fetch(GAME_DATA_URL + '?t=' + Date.now());
-        if (!resp.ok) throw new Error('Failed to fetch game projections');
-        const data = await resp.json();
-        gameProjections = data.games || [];
-
-        // Build team lookup
-        teamToGame = {};
-        for (const g of gameProjections) {
-          teamToGame[g.away_team] = g;
-          teamToGame[g.home_team] = g;
-        }
-
-        const updatedEl = document.getElementById('game-proj-updated');
-        if (data.updated) {
-          updatedEl.textContent = 'Updated ' + new Date(data.updated).toLocaleString('en-US', {
-            month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
-          }) + ' \u00B7 ' + gameProjections.length + ' games';
-        }
-
-        if (currentView === 'game-projections') renderGameProjections();
-        else render(); // re-render props with game pills + matchup info
-      } catch (err) {
-        console.error('Failed to load game projections:', err);
-      }
-    }
-
-    async function loadProjections() {
-      try {
-        const resp = await fetch(DATA_URL + '?t=' + Date.now());
-        if (!resp.ok) throw new Error('Failed to fetch');
-        const data = await resp.json();
-        projections = data.projections || [];
-        topPicks = data.top_picks || [];
-        recommendations = data.recommendations || null;
-
-        if (data.date) {
-          const d = new Date(data.date + 'T12:00:00');
-          document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', {
-            weekday: 'long', month: 'short', day: 'numeric'
-          }) + ' \u00B7 ' + projections.length + ' projections';
-        }
-        if (data.updated) {
-          const updatedTime = new Date(data.updated).toLocaleTimeString('en-US', {
-            hour: 'numeric', minute: '2-digit'
-          });
-          document.getElementById('nav-updated-time').textContent = 'Updated ' + updatedTime;
-        }
-
-        const posEV = projections.filter(p => p.ev > 0).length;
-        const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
-        const avgConf = projections.length > 0
-          ? projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length : 0;
-
-        const statsBar = document.getElementById('stats-bar');
-        statsBar.classList.add('visible');
-        document.getElementById('stat-total').textContent = projections.length;
-        document.getElementById('stat-posev').textContent = posEV;
-        document.getElementById('stat-bestev').textContent = bestEV > -Infinity ? (bestEV >= 0 ? '+' : '') + bestEV.toFixed(1) + '%' : '--';
-        document.getElementById('stat-avgconf').textContent = avgConf.toFixed(1) + '%';
-
-        render();
-      } catch (err) {
-        console.error('Failed to load projections:', err);
-        render();
-      }
-    }
-
-    // ── Init ──
-    loadProjections();
-    loadGameProjections();
-  </script>
+  <!-- ── Scripts ── -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="auth.js"></script>
+  <script>
+    // Firebase init (just for auth state detection on landing page)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZtHCHKutZzbQXgwUPfOfJvCtbQh3e-r4",
+      authDomain: "edge-factor-elite.firebaseapp.com",
+      projectId: "edge-factor-elite",
+      storageBucket: "edge-factor-elite.firebasestorage.app",
+      messagingSenderId: "469124201044",
+      appId: "1:469124201044:web:d1466e2b198db6d7df4bc1"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        document.body.classList.add('is-logged-in');
+      }
+    });
+
+    // Mobile drawer
+    function toggleMobileDrawer() {
+      document.getElementById('mobile-drawer').classList.toggle('open');
+      document.getElementById('mobile-overlay').classList.toggle('open');
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
