@@ -757,7 +757,7 @@
     }
 
     /* ── Game Cards ── */
-    .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+    .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
     .game-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.15s; }
     .game-card:hover { border-color: var(--border-light); }
     .game-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
@@ -1059,8 +1059,8 @@
     .no-recs-overall h3 { font-size: 16px; color: var(--text-primary); margin-bottom: 8px; font-weight: 600; }
     .no-recs-overall p { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
     @media (max-width: 768px) {
-      .rec-cards { grid-template-columns: repeat(2, 1fr); }
-      .game-specific-cards { grid-template-columns: repeat(2, 1fr); }
+      .rec-cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .game-specific-cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
 
     /* ── Game-Specific Props ── */
@@ -1128,21 +1128,45 @@
     .footer-brand { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
     .footer-disclaimer { font-size: 12px; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
 
-    /* ── Mobile ── */
+    /* ── Mobile (tablet) ── */
     @media (max-width: 768px) {
       .brand-logo-circle { width: 36px; height: 36px; }
       .brand-name { font-size: 0.95rem; }
       .nav-right { display: none; }
-      .sports-tabs { display: none; }
       .mobile-menu-btn { display: block; }
       .top-nav-inner { padding: 0 1rem; }
+
+      /* Sport tabs: show inline, compact */
+      .sports-tabs {
+        position: static;
+        transform: none;
+        gap: 2px;
+        padding: 3px;
+        margin-left: auto;
+        margin-right: 8px;
+      }
+      .sport-tab {
+        padding: 4px 10px;
+        font-size: 11px;
+        gap: 3px;
+      }
+      .soon-badge { font-size: 7px; padding: 1px 3px; }
+
+      /* Sub-nav */
       .sub-nav-inner { padding: 0 1rem; }
       .view-tab { padding: 8px 14px; font-size: 11px; }
       .sub-nav-meta { display: none; }
+
+      /* Stats bar */
       .stats-bar { padding: 0 16px; }
       .stats-bar .stat { padding: 10px 8px; }
       .stats-bar .stat-value { font-size: 18px; }
       .stats-bar .stat-label { font-size: 9px; }
+
+      /* Main content */
+      main { padding: 0 12px 60px; }
+
+      /* Props table */
       .table-header, .pick-row {
         grid-template-columns: 1.5fr 0.6fr 0.7fr 0.8fr 0.7fr;
         gap: 4px; font-size: 12px;
@@ -1153,14 +1177,87 @@
       .pick-row > *:nth-child(6),
       .pick-row > *:nth-child(7),
       .pick-row > *:nth-child(8) { display: none; }
+
+      /* Filters */
       .filter-row { gap: 12px; }
       .filter-pill { padding: 4px 10px; font-size: 11px; }
+
+      /* Game cards */
       .game-cards-grid { grid-template-columns: 1fr; }
+      .game-card { padding: 16px; }
+      .game-card-matchup { font-size: 16px; }
       .sgc-picks { gap: 16px; }
+
+      /* Rec cards */
+      .rec-cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .rec-card { padding: 10px; }
+      .rec-category { padding: 12px 14px; }
+
+      /* Search */
       .search-wrap { max-width: 100%; }
+      .search-filter-bar { gap: 10px; padding: 10px 12px; }
+      .search-filter-bar .search-wrap {
+        min-width: 0; flex: 1 1 100%; max-width: 100%;
+        padding: 6px 10px;
+      }
+      .search-filter-bar .search-wrap input { font-size: 14px; }
+      .search-filter-bar .filter-group { gap: 6px; flex-wrap: wrap; }
+      .search-filter-bar .filter-pill { padding: 4px 8px; font-size: 10px; }
+
+      /* Line shopping odds table — horizontal scroll */
+      .sportsbook-odds-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .odds-table-header, .odds-table-row { min-width: 500px; }
+
+      /* View toggle */
+      .view-toggle { gap: 0; }
+      .view-toggle-btn { padding: 4px 10px; font-size: 11px; }
     }
+
+    /* ── Mobile (phone) ── */
     @media (max-width: 480px) {
       .brand-name { display: none; }
+
+      /* Sport tabs even more compact */
+      .sports-tabs { gap: 1px; padding: 2px; }
+      .sport-tab { padding: 4px 8px; font-size: 10px; }
+      .soon-badge { font-size: 6px; padding: 0px 2px; }
+
+      /* Sub-nav full width tabs */
+      .view-tabs { width: 100%; }
+      .view-tab { flex: 1; text-align: center; padding: 8px 8px; font-size: 11px; }
+
+      /* Rec cards single column */
+      .rec-cards { grid-template-columns: 1fr; }
+      .game-specific-cards { grid-template-columns: 1fr; }
+
+      /* Game card tighter */
+      .game-card { padding: 14px; }
+      .game-card-matchup { font-size: 15px; }
+      .game-pick-label { font-size: 10px; min-width: 55px; }
+      .game-pick-value { font-size: 12px; }
+      .game-pick-conf { font-size: 11px; }
+
+      /* Filter bar stack */
+      .search-filter-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+      .search-filter-bar .filter-group { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+      .search-filter-bar .filter-label { white-space: nowrap; }
+      .search-filter-bar .filter-pill { white-space: nowrap; flex-shrink: 0; }
+
+      /* Props table even tighter */
+      .table-header, .pick-row {
+        grid-template-columns: 1.3fr 0.5fr 0.6fr 0.7fr 0.6fr;
+        gap: 2px; font-size: 11px;
+      }
+
+      /* Top picks 2-col tight */
+      .top-picks-section { padding: 12px; }
+      .top-picks-cards { gap: 8px; }
+      .top-pick-card { padding: 10px; }
+      .top-pick-player { font-size: 12px; }
+      .top-pick-ev { font-size: 13px; }
+
+      /* Empty state */
+      .empty-state { padding: 40px 16px; }
     }
 
     /* ── Sportsbook Odds Table ── */

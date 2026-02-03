@@ -304,19 +304,39 @@
     /* ── Mobile ── */
     @media (max-width: 768px) {
       .nav-right { display: none; }
-      .sports-tabs { display: none; }
       .mobile-menu-btn { display: block; }
       .top-nav-inner { padding: 0 1rem; }
+      /* Sport tabs: compact inline */
+      .sports-tabs {
+        position: static;
+        transform: none;
+        gap: 2px;
+        padding: 3px;
+        margin-left: auto;
+        margin-right: 8px;
+      }
+      .sport-tab { padding: 4px 10px; font-size: 11px; gap: 3px; }
+      .soon-badge { font-size: 7px; padding: 1px 3px; }
+      /* Results */
       .results-banner { grid-template-columns: repeat(2, 1fr); }
       .results-banner-stat .rbs-value { font-size: 22px; }
       .results-summary-grid { grid-template-columns: repeat(2, 1fr); }
-      .results-table-wrap { overflow-x: auto; }
+      .results-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .results-table { min-width: 520px; }
       .results-filter-row { gap: 12px; }
       .calendar-bar { width: 100%; }
       .calendar-trigger { flex: 1; min-width: 0; }
       .calendar-trigger .ct-date { font-size: 13px; }
       .calendar-dropdown { width: calc(100vw - 48px); max-width: 310px; }
+      main { padding-left: 12px; padding-right: 12px; }
+    }
+    @media (max-width: 480px) {
+      .sports-tabs { gap: 1px; padding: 2px; }
+      .sport-tab { padding: 4px 8px; font-size: 10px; }
+      .soon-badge { font-size: 6px; padding: 0px 2px; }
+      .results-banner-stat { padding: 12px 8px; }
+      .results-banner-stat .rbs-value { font-size: 18px; }
+      .results-banner-stat .rbs-label { font-size: 10px; }
     }
     /* Auth styles */
     .user-menu { position: relative; }
