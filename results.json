@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-02T22:35:52",
+  "updated": "2026-02-02T22:40:59",
   "allTime": {
     "props": {
       "wins": 18,
@@ -8,22 +8,22 @@
       "roi": -23.6
     },
     "spreads": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
       "pct": 100.0,
       "roi": 90.9
     },
     "totals": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "pct": 50.0,
-      "roi": -4.5
+      "pct": 66.7,
+      "roi": 27.3
     },
     "moneylines": {
       "wins": 2,
-      "losses": 0,
-      "pct": 100.0,
-      "roi": 90.9
+      "losses": 1,
+      "pct": 66.7,
+      "roi": 27.3
     },
     "best_prop_type": "",
     "best_prop_pct": 0
@@ -38,22 +38,22 @@
         "pct": 40.0
       },
       "spreads": {
-        "wins": 2,
+        "wins": 3,
         "losses": 0,
-        "record": "2-0",
+        "record": "3-0",
         "pct": 100.0
       },
       "totals": {
-        "wins": 1,
+        "wins": 2,
         "losses": 1,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "2-1",
+        "pct": 66.7
       },
       "moneylines": {
         "wins": 2,
-        "losses": 0,
-        "record": "2-0",
-        "pct": 100.0
+        "losses": 1,
+        "record": "2-1",
+        "pct": 66.7
       },
       "picks": [
         {
@@ -109,6 +109,33 @@
           "result": "118-114",
           "hit": true,
           "confidence": 57.1
+        },
+        {
+          "date": "2026-02-02",
+          "type": "spread",
+          "game": "MIN @ MEM",
+          "pick": "MEM +6.5",
+          "result": "128-137",
+          "hit": true,
+          "confidence": 61.8
+        },
+        {
+          "date": "2026-02-02",
+          "type": "total",
+          "game": "MIN @ MEM",
+          "pick": "OVER 229.5",
+          "result": "128-137",
+          "hit": true,
+          "confidence": 60.1
+        },
+        {
+          "date": "2026-02-02",
+          "type": "ml",
+          "game": "MIN @ MEM",
+          "pick": "MIN",
+          "result": "128-137",
+          "hit": false,
+          "confidence": 53.4
         },
         {
           "date": "2026-02-02",
