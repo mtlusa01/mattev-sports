@@ -305,18 +305,26 @@
     @media (max-width: 768px) {
       .nav-right { display: none; }
       .mobile-menu-btn { display: block; }
-      .top-nav-inner { padding: 0 1rem; }
-      /* Sport tabs: compact inline */
+      /* Two-row nav: logo row + sport tabs row */
+      .top-nav { height: 90px; }
+      .top-nav-inner {
+        padding: 0 1rem;
+        flex-wrap: wrap;
+        align-content: center;
+      }
       .sports-tabs {
         position: static;
         transform: none;
+        width: 100%;
+        justify-content: center;
         gap: 2px;
         padding: 3px;
-        margin-left: auto;
-        margin-right: 8px;
+        margin: 0;
+        order: 3;
       }
       .sport-tab { padding: 4px 10px; font-size: 11px; gap: 3px; }
       .soon-badge { font-size: 7px; padding: 1px 3px; }
+      main { padding-top: 130px; }
       /* Results */
       .results-banner { grid-template-columns: repeat(2, 1fr); }
       .results-banner-stat .rbs-value { font-size: 22px; }
