@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T22:20:18",
+  "updated": "2026-02-03T22:22:17",
   "games": [
     {
       "away_team": "DEN",
@@ -196,7 +196,21 @@
       "home_score": 115,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Nickeil Alexander-Walker",
+          "team": "ATL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 3.9,
+          "actual": 0,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 4.7
+        }
+      ]
     },
     {
       "away_team": "BOS",
@@ -253,7 +267,7 @@
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
       "away_score": 85,
-      "home_score": 121
+      "home_score": 125
     },
     {
       "away_team": "PHI",
@@ -268,8 +282,10 @@
       "ml_pick": "GSW",
       "ml_conf": 58.7,
       "commence_time": "2026-02-04T03:10:00Z",
-      "status": "scheduled",
-      "locked_at": "2026-02-03T15:07:38Z"
+      "status": "live",
+      "locked_at": "2026-02-03T15:07:38Z",
+      "away_score": 16,
+      "home_score": 9
     },
     {
       "away_team": "PHX",
