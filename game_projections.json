@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T22:05:51",
+  "updated": "2026-02-03T22:07:39",
   "games": [
     {
       "away_team": "DEN",
@@ -123,7 +123,45 @@
       "home_score": 109,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 21.8,
+          "actual": 15,
+          "hit": false,
+          "confidence": 59.0,
+          "ev": 12.5
+        },
+        {
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 28.9,
+          "actual": 20,
+          "hit": false,
+          "confidence": 57.9,
+          "ev": 8.6
+        },
+        {
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 5.0,
+          "actual": 1,
+          "hit": false,
+          "confidence": 56.1,
+          "ev": 8.1
+        }
+      ]
     },
     {
       "away_team": "ATL",
@@ -140,8 +178,8 @@
       "commence_time": "2026-02-04T00:40:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 122,
-      "home_score": 105
+      "away_score": 124,
+      "home_score": 109
     },
     {
       "away_team": "BOS",
@@ -158,8 +196,8 @@
       "commence_time": "2026-02-04T01:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 94,
-      "home_score": 76
+      "away_score": 97,
+      "home_score": 79
     },
     {
       "away_team": "CHI",
@@ -177,7 +215,7 @@
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
       "away_score": 106,
-      "home_score": 128
+      "home_score": 131
     },
     {
       "away_team": "ORL",
