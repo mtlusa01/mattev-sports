@@ -330,6 +330,27 @@
     }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+    /* ── Nuclear: kill ALL lines in header/tab area ── */
+    .top-nav,
+    .top-nav *,
+    .sub-nav,
+    .sub-nav *,
+    .sub-nav-inner,
+    .sub-nav-inner *,
+    .view-tabs,
+    .view-tabs *,
+    .nav-spacer {
+      border: none !important;
+      border-top: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+    /* Add back ONLY the active tab red underline */
+    .view-tab.active {
+      border-bottom: 3px solid #dc2626 !important;
+    }
+
     /* ── Stats Bar (compact, below fixed nav) ── */
     .stats-bar {
       display: none;
