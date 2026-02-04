@@ -37,7 +37,7 @@
       --purple: #8b5cf6;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; border: 0 none transparent !important; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -330,27 +330,27 @@
     }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* ── Nuclear: kill ALL lines in header/tab area ── */
-    .top-nav,
-    .top-nav *,
-    .sub-nav,
-    .sub-nav *,
-    .sub-nav-inner,
-    .sub-nav-inner *,
-    .view-tabs,
-    .view-tabs *,
+    /* ── Kill the gray line below sub-tabs ── */
+    html, body,
+    header, nav, main, section, footer,
+    .top-nav, .top-nav *,
+    .sub-nav, .sub-nav *,
     .nav-spacer,
-    .stats-bar,
-    .stats-bar-inner,
-    .stats-bar .stat,
-    .mobile-nav-backdrop,
-    .mobile-nav-drawer,
-    .mobile-nav-drawer * {
-      border: none !important;
+    .page-gradient,
+    .stats-bar, .stats-bar-inner, .stats-bar .stat,
+    .mobile-nav-backdrop, .mobile-nav-drawer, .mobile-nav-drawer *,
+    .coming-soon-overlay,
+    .picks-section,
+    .section-header,
+    .section-title,
+    .rec-section,
+    #game-projections-view,
+    #player-props-view,
+    #game-status-filter,
+    #game-cards-container {
       border-top: none !important;
       border-bottom: none !important;
       box-shadow: none !important;
-      outline: none !important;
     }
     /* Add back ONLY the active tab red underline */
     .view-tab.active {
