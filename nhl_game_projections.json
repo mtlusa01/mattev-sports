@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NHL",
-  "updated": "2026-02-04T00:50:01",
+  "updated": "2026-02-04T00:52:16",
   "games": [
     {
       "away_team": "CBJ",
@@ -409,7 +409,7 @@
       "ml_pick": "SEA",
       "ml_conf": 52.4,
       "commence_time": "2026-02-04T03:00:00Z",
-      "status": "live",
+      "status": "final",
       "away_score": 2,
       "home_score": 4,
       "odds": {
@@ -446,22 +446,25 @@
         "MGM": {
           "spread": {
             "home_line": -2.5,
-            "home_odds": -135,
+            "home_odds": 500,
             "away_line": 2.5,
-            "away_odds": 100
+            "away_odds": -900
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": -300,
+            "over_odds": 400,
             "under_line": 6.5,
-            "under_odds": 220
+            "under_odds": -650
           },
           "ml": {
             "ANA": -10000,
             "SEA": 3300
           }
         }
-      }
+      },
+      "spread_result": "L",
+      "total_result": "W",
+      "ml_result": "L"
     }
   ],
   "locked_at": "2026-02-03T14:04:29"

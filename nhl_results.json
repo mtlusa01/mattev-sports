@@ -1,20 +1,20 @@
 {
-  "updated": "2026-02-03T23:15:54",
+  "updated": "2026-02-04T00:52:16",
   "allTime": {
     "spreads": {
+      "wins": 5,
+      "losses": 2,
+      "pct": 71.4
+    },
+    "totals": {
       "wins": 5,
       "losses": 1,
       "pct": 83.3
     },
-    "totals": {
-      "wins": 4,
-      "losses": 1,
-      "pct": 80.0
-    },
     "moneylines": {
       "wins": 4,
-      "losses": 2,
-      "pct": 66.7
+      "losses": 3,
+      "pct": 57.1
     }
   },
   "days": [
@@ -22,21 +22,21 @@
       "date": "2026-02-03",
       "spreads": {
         "wins": 5,
+        "losses": 2,
+        "record": "5-2",
+        "pct": 71.4
+      },
+      "totals": {
+        "wins": 5,
         "losses": 1,
         "record": "5-1",
         "pct": 83.3
       },
-      "totals": {
-        "wins": 4,
-        "losses": 1,
-        "record": "4-1",
-        "pct": 80.0
-      },
       "moneylines": {
         "wins": 4,
-        "losses": 2,
-        "record": "4-2",
-        "pct": 66.7
+        "losses": 3,
+        "record": "4-3",
+        "pct": 57.1
       },
       "picks": [
         {
@@ -191,6 +191,33 @@
           "result": "5-2",
           "hit": false,
           "confidence": 64.6
+        },
+        {
+          "date": "2026-02-03",
+          "type": "spread",
+          "game": "SEA @ ANA",
+          "pick": "SEA +1.5",
+          "result": "2-4",
+          "hit": false,
+          "confidence": 50.2
+        },
+        {
+          "date": "2026-02-03",
+          "type": "total",
+          "game": "SEA @ ANA",
+          "pick": "UNDER 6.5",
+          "result": "2-4",
+          "hit": true,
+          "confidence": 54.7
+        },
+        {
+          "date": "2026-02-03",
+          "type": "ml",
+          "game": "SEA @ ANA",
+          "pick": "SEA",
+          "result": "2-4",
+          "hit": false,
+          "confidence": 52.4
         }
       ]
     }
