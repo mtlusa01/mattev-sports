@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T23:01:56",
+  "updated": "2026-02-03T23:02:11",
   "games": [
     {
       "away_team": "DEN",
@@ -232,7 +232,44 @@
       "spread_result": "loss",
       "total_result": "loss",
       "ml_result": "win",
-      "graded_props": []
+      "graded_props": [
+        {
+          "player": "Payton Pritchard",
+          "team": "BOS",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.0,
+          "actual": 7,
+          "hit": true,
+          "confidence": 52.3,
+          "ev": 15.2
+        },
+        {
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 8.2,
+          "actual": 11,
+          "hit": true,
+          "confidence": 54.0,
+          "ev": 10.6
+        },
+        {
+          "player": "Derrick White",
+          "team": "BOS",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.6,
+          "actual": 8,
+          "hit": true,
+          "confidence": 53.0,
+          "ev": 2.0
+        }
+      ]
     },
     {
       "away_team": "CHI",
