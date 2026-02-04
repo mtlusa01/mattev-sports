@@ -2234,8 +2234,10 @@
     // ── Recommendations ──
     let recommendations = null;
 
+    const MAX_RECOMMENDED = 5;
+
     function buildNhlBestBets() {
-      // Generate best bets from NHL game data — picks with conf >= 60
+      // Generate best bets from NHL game data — picks with conf >= 60, max 5
       const bets = [];
       for (const g of nhlGameProjections) {
         const matchup = g.away_team + ' @ ' + g.home_team;
@@ -2244,7 +2246,7 @@
         if (g.total_conf >= 60) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, confidence: g.total_conf, reasons: ['High total confidence'] });
       }
       bets.sort((a, b) => b.confidence - a.confidence);
-      return bets;
+      return bets.slice(0, MAX_RECOMMENDED);
     }
 
     function renderGameRecommendations() {
@@ -2253,7 +2255,10 @@
         gameRecs = buildNhlBestBets();
       } else {
         const recs = recommendations;
-        gameRecs = (recs && recs.game_bets) || [];
+        gameRecs = ((recs && recs.game_bets) || [])
+          .filter(r => (r.confidence || 0) >= 60)
+          .sort((a, b) => (b.confidence || 0) - (a.confidence || 0))
+          .slice(0, MAX_RECOMMENDED);
       }
       const sportLabel = currentSport.toUpperCase();
       if (gameRecs.length === 0) {
@@ -2288,7 +2293,10 @@
 
     function renderPropRecommendations() {
       const recs = recommendations;
-      const propRecs = (recs && recs.props) || [];
+      const propRecs = ((recs && recs.props) || [])
+        .filter(r => r.edge === 'STRONG' || r.edge === 'GOOD')
+        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
+        .slice(0, MAX_RECOMMENDED);
       if (propRecs.length === 0) {
         return `<div class="rec-category">
           <div class="rec-header">
