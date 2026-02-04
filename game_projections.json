@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T22:30:34",
+  "updated": "2026-02-03T22:30:54",
   "games": [
     {
       "away_team": "DEN",
@@ -74,11 +74,8 @@
       "commence_time": "2026-02-04T00:10:00Z",
       "status": "final",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 132,
+      "away_score": 0,
       "home_score": 101,
-      "spread_result": "loss",
-      "total_result": "win",
-      "ml_result": "win",
       "graded_props": [
         {
           "player": "Karl-Anthony Towns",
@@ -116,7 +113,10 @@
           "confidence": 53.4,
           "ev": 2.0
         }
-      ]
+      ],
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "loss"
     },
     {
       "away_team": "LAL",
