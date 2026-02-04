@@ -570,6 +570,33 @@
     .pick-row-detail { animation: slideDown 0.15s ease; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* Row chevron indicator */
+    .row-chevron {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-left: 8px;
+      transition: transform 0.2s;
+    }
+    .row-chevron.open { transform: rotate(180deg); }
+
+    /* Collapse button at bottom of expanded detail */
+    .collapse-btn {
+      display: none;
+      text-align: center;
+      padding: 10px;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border-top: 1px solid var(--border);
+    }
+    .collapse-btn:active { color: var(--text-primary); }
+    @media (max-width: 768px) {
+      .collapse-btn { display: block; }
+    }
+
     .prop-details-expanded { background: var(--bg-primary); padding: 16px 20px; }
     .details-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 800px;
@@ -901,8 +928,10 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        padding: 10px 12px;
+        padding: 12px 12px;
         gap: 0;
+        min-height: 44px;
+        cursor: pointer;
       }
       .props-table td { padding: 0; display: inline; font-size: 13px; }
       /* Row 1: Player name + badge — full width */
@@ -2445,8 +2474,8 @@
         const colSpan = hasAnyGraded ? 11 : 9;
 
         return `
-          <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')">
-            <td><span class="pt-player">${p.player}</span>${injBadge} ${edgeBadge}<br><span class="pt-matchup">${matchupStr}</span></td>
+          <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')" style="cursor:pointer">
+            <td><span class="pt-player">${p.player}</span>${injBadge} ${edgeBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
             <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
             <td><span class="pt-prop-badge">${p.prop}</span></td>
             <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
@@ -2608,6 +2637,7 @@
                     ${p.home_avg != null && p.away_avg != null ? `<span class="stat-badge home-away">H: ${p.home_avg} / A: ${p.away_avg}</span>` : ''}
                   </div>
                 </div>` : '')}
+                <div class="collapse-btn" onclick="event.stopPropagation(); toggleRow('${rowId}')">&#9650; Collapse</div>
               </div>
             </td>
           </tr>`;
@@ -2636,17 +2666,24 @@
     function toggleRow(rowId) {
       const detail = document.getElementById('detail-' + rowId);
       if (!detail) return;
+      const row = document.querySelector(`tr[data-row-id="${rowId}"]`);
+      const chevron = row ? row.querySelector('.row-chevron') : null;
       if (expandedRowId === rowId) {
         detail.style.display = 'none';
         detail.classList.remove('open');
+        if (chevron) chevron.classList.remove('open');
         expandedRowId = null;
       } else {
         if (expandedRowId) {
           const prev = document.getElementById('detail-' + expandedRowId);
           if (prev) { prev.style.display = 'none'; prev.classList.remove('open'); }
+          const prevRow = document.querySelector(`tr[data-row-id="${expandedRowId}"]`);
+          const prevChev = prevRow ? prevRow.querySelector('.row-chevron') : null;
+          if (prevChev) prevChev.classList.remove('open');
         }
         detail.style.display = '';
         detail.classList.add('open');
+        if (chevron) chevron.classList.add('open');
         expandedRowId = rowId;
       }
     }
