@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NHL",
-  "updated": "2026-02-03T21:50:58",
+  "updated": "2026-02-03T22:16:01",
   "games": [
     {
       "away_team": "CBJ",
@@ -244,65 +244,38 @@
       "ml_pick": "TBL",
       "ml_conf": 73.2,
       "commence_time": "2026-02-04T00:30:00Z",
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null,
+      "status": "final",
+      "away_score": 3,
+      "home_score": 4,
       "odds": {
         "FD": {
-          "spread": {
-            "away_line": 1.5,
-            "away_odds": -260,
-            "home_line": -1.5,
-            "home_odds": 192
-          },
-          "total": {
-            "over_line": 4.5,
-            "over_odds": -260,
-            "under_line": 4.5,
-            "under_odds": 192
-          },
+          "spread": {},
+          "total": {},
           "ml": {
-            "BUF": 142,
-            "TBL": -184
+            "BUF": -128,
+            "TBL": 100
           }
         },
         "DK": {
-          "spread": {
-            "away_line": 1.5,
-            "away_odds": -280,
-            "home_line": -1.5,
-            "home_odds": 210
-          },
-          "total": {
-            "over_line": 4.5,
-            "over_odds": -210,
-            "under_line": 4.5,
-            "under_odds": 160
-          },
+          "spread": {},
+          "total": {},
           "ml": {
-            "BUF": 145,
-            "TBL": -188
+            "BUF": -110,
+            "TBL": -120
           }
         },
         "MGM": {
-          "spread": {
-            "away_line": 1.5,
-            "away_odds": -325,
-            "home_line": -1.5,
-            "home_odds": 230
-          },
-          "total": {
-            "over_line": 4.5,
-            "over_odds": -200,
-            "under_line": 4.5,
-            "under_odds": 150
-          },
+          "spread": {},
+          "total": {},
           "ml": {
-            "BUF": 135,
-            "TBL": -170
+            "BUF": -102,
+            "TBL": -120
           }
         }
-      }
+      },
+      "spread_result": "W",
+      "total_result": "W",
+      "ml_result": "W"
     },
     {
       "away_team": "PIT",
@@ -322,57 +295,27 @@
       "home_score": null,
       "odds": {
         "FD": {
-          "spread": {
-            "home_line": 1.5,
-            "home_odds": -132,
-            "away_line": -1.5,
-            "away_odds": 102
-          },
-          "total": {
-            "over_line": 7.5,
-            "over_odds": -118,
-            "under_line": 7.5,
-            "under_odds": -110
-          },
+          "spread": {},
+          "total": {},
           "ml": {
-            "NYI": 260,
-            "PIT": -360
+            "NYI": -128,
+            "PIT": 100
           }
         },
         "DK": {
-          "spread": {
-            "home_line": 1.5,
-            "home_odds": -154,
-            "away_line": -1.5,
-            "away_odds": 120
-          },
-          "total": {
-            "over_line": 7.5,
-            "over_odds": 100,
-            "under_line": 7.5,
-            "under_odds": -130
-          },
+          "spread": {},
+          "total": {},
           "ml": {
-            "NYI": 250,
-            "PIT": -345
+            "NYI": -115,
+            "PIT": -115
           }
         },
         "MGM": {
-          "spread": {
-            "home_line": 1.5,
-            "home_odds": -165,
-            "away_line": -1.5,
-            "away_odds": 125
-          },
-          "total": {
-            "over_line": 7.5,
-            "over_odds": 110,
-            "under_line": 7.5,
-            "under_odds": -150
-          },
+          "spread": {},
+          "total": {},
           "ml": {
-            "NYI": 250,
-            "PIT": -325
+            "NYI": -115,
+            "PIT": -110
           }
         }
       }
@@ -396,56 +339,56 @@
       "odds": {
         "FD": {
           "spread": {
-            "home_line": -1.5,
-            "home_odds": 112,
-            "away_line": 1.5,
-            "away_odds": -146
+            "home_line": 1.5,
+            "home_odds": -196,
+            "away_line": -1.5,
+            "away_odds": 148
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -138,
+            "over_odds": -140,
             "under_line": 5.5,
-            "under_odds": 106
+            "under_odds": 108
           },
           "ml": {
-            "EDM": -215,
-            "TOR": 164
+            "EDM": 164,
+            "TOR": -215
           }
         },
         "DK": {
           "spread": {
-            "home_line": -1.5,
-            "home_odds": 130,
-            "away_line": 1.5,
-            "away_odds": -166
+            "home_line": 1.5,
+            "home_odds": -230,
+            "away_line": -1.5,
+            "away_odds": 175
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -125,
+            "over_odds": -105,
             "under_line": 5.5,
-            "under_odds": -105
+            "under_odds": -125
           },
           "ml": {
-            "EDM": -200,
-            "TOR": 154
+            "EDM": 165,
+            "TOR": -215
           }
         },
         "MGM": {
           "spread": {
-            "home_line": -1.5,
-            "home_odds": 115,
-            "away_line": 1.5,
-            "away_odds": -155
+            "home_line": 1.5,
+            "home_odds": -210,
+            "away_line": -1.5,
+            "away_odds": 154
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -125,
+            "over_odds": -120,
             "under_line": 5.5,
-            "under_odds": -105
+            "under_odds": -110
           },
           "ml": {
-            "EDM": -210,
-            "TOR": 165
+            "EDM": 180,
+            "TOR": -225
           }
         }
       }
@@ -470,9 +413,9 @@
         "FD": {
           "spread": {
             "home_line": -1.5,
-            "home_odds": 180,
+            "home_odds": 176,
             "away_line": 1.5,
-            "away_odds": -225
+            "away_odds": -220
           },
           "total": {
             "over_line": 6.5,
@@ -481,7 +424,7 @@
             "under_odds": -128
           },
           "ml": {
-            "ANA": -137,
+            "ANA": -134,
             "SEA": 114
           }
         },
@@ -499,8 +442,8 @@
             "under_odds": -115
           },
           "ml": {
-            "ANA": -135,
-            "SEA": 114
+            "ANA": -142,
+            "SEA": 120
           }
         },
         "MGM": {
