@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NHL",
-  "updated": "2026-02-03T23:38:30",
+  "updated": "2026-02-04T00:39:35",
   "games": [
     {
       "away_team": "CBJ",
@@ -409,62 +409,56 @@
       "ml_pick": "SEA",
       "ml_conf": 52.4,
       "commence_time": "2026-02-04T03:00:00Z",
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null,
+      "status": "live",
+      "away_score": 1,
+      "home_score": 4,
       "odds": {
         "FD": {
           "spread": {
-            "home_line": -1.5,
-            "home_odds": -114,
-            "away_line": 1.5,
-            "away_odds": -114
+            "home_line": -4.5,
+            "home_odds": 360,
+            "away_line": 4.5,
+            "away_odds": -560
           },
           "total": {
-            "over_line": 3.5,
-            "over_odds": -146,
-            "under_line": 3.5,
-            "under_odds": 112
+            "over_line": 4.5,
+            "over_odds": 142,
+            "under_line": 4.5,
+            "under_odds": -188
           },
-          "ml": {
-            "ANA": -390,
-            "SEA": 280
-          }
+          "ml": {}
         },
         "DK": {
           "spread": {
-            "home_line": -1.5,
-            "home_odds": -105,
-            "away_line": 1.5,
-            "away_odds": -125
+            "home_line": -3.5,
+            "home_odds": 200,
+            "away_line": 3.5,
+            "away_odds": -270
           },
           "total": {
-            "over_line": 3.5,
-            "over_odds": -125,
-            "under_line": 3.5,
-            "under_odds": -105
+            "over_line": 5.5,
+            "over_odds": -105,
+            "under_line": 5.5,
+            "under_odds": -125
           },
-          "ml": {
-            "ANA": -395,
-            "SEA": 280
-          }
+          "ml": {}
         },
         "MGM": {
           "spread": {
-            "home_line": -1.5,
-            "home_odds": 100,
-            "away_line": 1.5,
-            "away_odds": -135
+            "home_line": -3.5,
+            "home_odds": 250,
+            "away_line": 3.5,
+            "away_odds": -350
           },
           "total": {
-            "over_line": 3.5,
-            "over_odds": -135,
-            "under_line": 3.5,
-            "under_odds": 100
+            "over_line": 5.5,
+            "over_odds": 105,
+            "under_line": 5.5,
+            "under_odds": -140
           },
           "ml": {
-            "ANA": -375,
-            "SEA": 280
+            "ANA": -10000,
+            "SEA": 3300
           }
         }
       }
