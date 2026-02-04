@@ -37,7 +37,7 @@
       --purple: #8b5cf6;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; border-color: red !important; }
+    * { margin: 0; padding: 0; box-sizing: border-box; border: 0 none transparent !important; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -339,7 +339,13 @@
     .sub-nav-inner *,
     .view-tabs,
     .view-tabs *,
-    .nav-spacer {
+    .nav-spacer,
+    .stats-bar,
+    .stats-bar-inner,
+    .stats-bar .stat,
+    .mobile-nav-backdrop,
+    .mobile-nav-drawer,
+    .mobile-nav-drawer * {
       border: none !important;
       border-top: none !important;
       border-bottom: none !important;
