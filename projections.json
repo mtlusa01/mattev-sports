@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T17:55:23",
+  "updated": "2026-02-04T18:09:57",
   "projections": [
     {
       "player": "Payton Pritchard",
@@ -2231,6 +2231,150 @@
       "score_factors": [],
       "added_live": true,
       "discovered_at": "2026-02-04T17:34:46"
+    },
+    {
+      "player": "Jamal Murray",
+      "team": "DEN",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 32.5,
+      "projection": 34.7,
+      "confidence": 52.9,
+      "ev": 1.9,
+      "diff": 2.2,
+      "market_odds": -108,
+      "fair_odds": -112,
+      "prob_edge": 1.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 32.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 32.5,
+            "odds": -125
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 32.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 32.5,
+            "odds": -118
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 32.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 32.5,
+            "odds": -118
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T18:09:57",
+      "edge": "LEAN",
+      "l5_avg": 35.8,
+      "l10_avg": 36.3,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 80,
+      "streak": 1,
+      "home_avg": 36.4,
+      "away_avg": 41.7,
+      "opp_def_rank": 6,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 37.2,
+      "vs_bot10_avg": 40.4,
+      "insight": "Has gone OVER 32.5 PRA in 8 of last 10 games (36.3 avg).",
+      "insight_strength": "strong",
+      "pick_score": 21.4,
+      "score_factors": [
+        "80% L10 hit rate",
+        "+2.2 edge"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T18:09:57"
+    },
+    {
+      "player": "Amen Thompson",
+      "team": "HOU",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 7.5,
+      "projection": 8.4,
+      "confidence": 52.3,
+      "ev": 8.3,
+      "diff": 0.9,
+      "market_odds": 107,
+      "fair_odds": -110,
+      "prob_edge": 4.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 7.5,
+            "odds": 120
+          },
+          "under": {
+            "line": 7.5,
+            "odds": -154
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 7.5,
+            "odds": 107
+          },
+          "under": {
+            "line": 7.5,
+            "odds": -141
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 7.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 7.5,
+            "odds": -125
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T18:09:57",
+      "edge": "STRONG",
+      "l5_avg": 8.2,
+      "l10_avg": 8.1,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 60,
+      "streak": 2,
+      "home_avg": 7.9,
+      "away_avg": 8.7,
+      "opp_def_rank": 7,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 7.7,
+      "vs_bot10_avg": 9.1,
+      "insight": "BOS ranks #7 in rebounds defense \u2014 tough for overs.",
+      "insight_strength": "lean",
+      "teammate_injuries": [
+        {
+          "player": "Aaron Holiday",
+          "status": "DAY-TO-DAY"
+        }
+      ],
+      "pick_score": 16.5,
+      "score_factors": [
+        "+8.3% EV",
+        "60% L10 hit rate"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T18:09:57"
     }
   ],
   "locked_at": "2026-02-04T15:30:54"
