@@ -2236,14 +2236,16 @@
 
     const MAX_RECOMMENDED = 5;
 
-    function buildNhlBestBets() {
-      // Generate best bets from NHL game data — picks with conf >= 60, max 5
+    function buildGameBestBets(games, thresholds) {
+      // Build best bets dynamically from game projections
+      const { spread: spT, total: totT, ml: mlT } = thresholds;
       const bets = [];
-      for (const g of nhlGameProjections) {
+      for (const g of games) {
+        if (g.status === 'final') continue;
         const matchup = g.away_team + ' @ ' + g.home_team;
-        if (g.ml_conf >= 60) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, confidence: g.ml_conf, reasons: ['High ML confidence'] });
-        if (g.spread_conf >= 60) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, confidence: g.spread_conf, reasons: ['High spread confidence'] });
-        if (g.total_conf >= 60) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, confidence: g.total_conf, reasons: ['High total confidence'] });
+        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, confidence: g.spread_conf, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`] });
+        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
+        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
       }
       bets.sort((a, b) => b.confidence - a.confidence);
       return bets.slice(0, MAX_RECOMMENDED);
@@ -2252,13 +2254,9 @@
     function renderGameRecommendations() {
       let gameRecs;
       if (currentSport === 'nhl') {
-        gameRecs = buildNhlBestBets();
+        gameRecs = buildGameBestBets(nhlGameProjections, { spread: 60, total: 60, ml: 60 });
       } else {
-        const recs = recommendations;
-        gameRecs = ((recs && recs.game_bets) || [])
-          .filter(r => (r.confidence || 0) >= 60)
-          .sort((a, b) => (b.confidence || 0) - (a.confidence || 0))
-          .slice(0, MAX_RECOMMENDED);
+        gameRecs = buildGameBestBets(gameProjections, { spread: 60, total: 65, ml: 58 });
       }
       const sportLabel = currentSport.toUpperCase();
       if (gameRecs.length === 0) {
