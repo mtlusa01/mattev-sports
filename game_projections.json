@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T22:16:12",
+  "updated": "2026-02-03T22:18:07",
   "games": [
     {
       "away_team": "DEN",
@@ -22,7 +22,21 @@
       "home_score": 124,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Peyton Watson",
+          "team": "DEN",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 26.0,
+          "actual": 17,
+          "hit": true,
+          "confidence": 55.7,
+          "ev": 6.4
+        }
+      ]
     },
     {
       "away_team": "UTA",
@@ -199,8 +213,8 @@
       "commence_time": "2026-02-04T01:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 102,
-      "home_score": 89
+      "away_score": 104,
+      "home_score": 90
     },
     {
       "away_team": "CHI",
@@ -215,10 +229,13 @@
       "ml_pick": "MIL",
       "ml_conf": 56.2,
       "commence_time": "2026-02-04T01:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 112,
-      "home_score": 131
+      "away_score": 115,
+      "home_score": 131,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win"
     },
     {
       "away_team": "ORL",
@@ -235,8 +252,8 @@
       "commence_time": "2026-02-04T01:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 80,
-      "home_score": 117
+      "away_score": 83,
+      "home_score": 119
     },
     {
       "away_team": "PHI",
