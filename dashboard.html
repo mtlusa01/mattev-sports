@@ -599,7 +599,7 @@
 
     .prop-details-expanded { background: var(--bg-primary); padding: 16px 20px; }
     .details-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 1000px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 1000px;
     }
     .detail-card {
       background: var(--bg-secondary); border: 1px solid var(--border);
@@ -697,27 +697,31 @@
     .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
     .insight-type-badge.historical { background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
 
-    /* Hit Rates compact card */
-    .hr-compact { display: flex; justify-content: center; gap: 16px; margin-bottom: 6px; }
-    .hr-item { text-align: center; }
-    .hr-val { font-size: 20px; font-weight: 700; }
-    .hr-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+    /* Hit Rates — full-width section below the 3 stat cards */
+    .hr-section {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px 16px; margin-top: 12px; max-width: 1000px;
+    }
+    .hr-section .dc-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .hr-body { display: flex; gap: 24px; align-items: flex-start; }
+    .hr-table-wrap { flex: 1; min-width: 0; }
+    .hr-spark-wrap { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .hr-spark-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .hr-val { font-weight: 700; }
     .hr-val.hr-hot { color: var(--accent-light); }
     .hr-val.hr-warm { color: var(--yellow); }
     .hr-val.hr-cold { color: var(--red-light); }
-
-    /* Hit Rates expanded panel */
-    .hr-expand-btn { cursor: pointer; font-size: 11px; color: var(--accent); }
-    .hr-panel { margin-top: 12px; padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; }
     .hr-table { width: 100%; font-size: 12px; border-collapse: collapse; }
-    .hr-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 4px 8px; font-size: 10px; text-transform: uppercase; }
-    .hr-table td { padding: 4px 8px; }
+    .hr-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 4px 8px; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    .hr-table td { padding: 5px 8px; }
+    .hr-streak { font-size: 12px; margin-top: 6px; color: var(--text-secondary); }
 
     /* Sparkline */
-    .sparkline-row { display: flex; gap: 2px; align-items: flex-end; height: 32px; margin: 8px 0; }
-    .spark-bar { flex: 1; min-width: 4px; max-width: 12px; border-radius: 2px 2px 0 0; }
+    .sparkline-row { display: flex; gap: 3px; align-items: flex-end; height: 40px; }
+    .spark-bar { flex: 1; min-width: 6px; max-width: 14px; border-radius: 2px 2px 0 0; position: relative; }
     .spark-bar.hit { background: var(--accent); }
     .spark-bar.miss { background: var(--red); opacity: 0.5; }
+    .spark-line-marker { position: absolute; left: 0; right: 0; border-top: 1.5px dashed var(--text-muted); opacity: 0.35; pointer-events: none; }
 
     /* Head-to-Head section */
     .h2h-section { margin-top: 12px; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
@@ -753,7 +757,7 @@
     }
 
     @media (max-width: 768px) {
-      .details-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .details-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
       .detail-card { padding: 8px 6px; }
       .detail-card .dc-label { font-size: 8px; margin-bottom: 4px; letter-spacing: 0.05em; }
       .proj-compare { font-size: 16px; gap: 4px; margin-bottom: 3px; }
@@ -765,6 +769,10 @@
       .odds-arrow { font-size: 14px; }
       .ev-display { font-size: 20px; margin-bottom: 4px; }
       .rating-badge { font-size: 10px; padding: 2px 8px; }
+      .hr-section { padding: 10px 12px; }
+      .hr-body { flex-direction: column; gap: 12px; }
+      .hr-spark-wrap { width: 100%; }
+      .sparkline-row { height: 32px; }
     }
 
     .pick-value { font-weight: 600; font-size: 14px; }
@@ -1556,11 +1564,14 @@
       .edge-badge { font-size: 9px; padding: 1px 4px; margin-left: 4px; }
 
       /* Detail cards even tighter on phone */
-      .details-grid { gap: 6px; }
+      .details-grid { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
       .detail-card { padding: 6px 4px; }
       .proj-compare { font-size: 14px; }
       .odds-item .oi-value { font-size: 12px; }
       .ev-display { font-size: 18px; }
+      .hr-section { padding: 8px 10px; margin-top: 8px; }
+      .hr-table { font-size: 11px; }
+      .hr-table th, .hr-table td { padding: 3px 6px; }
 
       /* Top picks 2-col tight */
       .top-picks-section { padding: 12px; }
@@ -2546,47 +2557,49 @@
       </div>`;
     }
 
-    // ── Hit Rates Card ──
-    function buildHitRatesCard(p) {
+    // ── Hit Rates Section (full-width, always visible) ──
+    function buildHitRatesSection(p) {
       const l5 = p.l5_hit_rate, l10 = p.l10_hit_rate;
       const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
       const l5Str = l5 != null ? l5 + '%' : '-';
       const l10Str = l10 != null ? l10 + '%' : '-';
-      const cardId = `hr-${p.player}-${p.prop}`.replace(/[^a-zA-Z0-9]/g, '_');
 
+      // Sparkline with line marker
       let sparkHtml = '';
       if (p.last_10_values && p.last_10_values.length > 0) {
         const vals = p.last_10_values;
-        const max = Math.max(...vals, p.line || 0);
-        sparkHtml = '<div class="sparkline-row">' + vals.map(v => {
-          const h = Math.max(4, (v / max) * 32);
-          const hit = p.direction === 'OVER' ? v > p.line : v < p.line;
-          return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${h}px" title="${v}"></div>`;
-        }).join('') + '</div>';
+        const line = p.line || 0;
+        const max = Math.max(...vals, line) || 1;
+        const linePos = Math.min(100, (line / max) * 100);
+        sparkHtml = '<div class="sparkline-row" style="position:relative">' +
+          vals.map(v => {
+            const h = Math.max(4, (v / max) * 40);
+            const hit = p.direction === 'OVER' ? v > line : v < line;
+            return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${h}px" title="${v}"></div>`;
+          }).join('') +
+          `<div class="spark-line-marker" style="bottom:${linePos}%"></div>` +
+          '</div>';
       }
 
-      let panelHtml = `<div id="${cardId}" style="display:none" class="hr-panel">`;
-      panelHtml += '<table class="hr-table"><tr><th>Window</th><th>Hit</th><th>Rate</th><th>Avg</th></tr>';
-      panelHtml += `<tr><td>Last 5</td><td>${p.l5_hit_count ?? '-'}/${Math.min(5, (p.last_10_values||[]).length)}</td><td class="${colorCls(l5)}">${l5Str}</td><td>${p.l5_avg ?? '-'}</td></tr>`;
-      panelHtml += `<tr><td>Last 10</td><td>${p.l10_hit_count ?? '-'}/${(p.last_10_values||[]).length}</td><td class="${colorCls(l10)}">${l10Str}</td><td>${p.l10_avg ?? '-'}</td></tr>`;
+      // Table
+      let table = '<table class="hr-table"><tr><th>Window</th><th>Hit</th><th>Rate</th><th>Avg</th></tr>';
+      const l10Count = (p.last_10_values || []).length;
+      table += `<tr><td>Last 5</td><td>${p.l5_hit_count ?? '-'}/${Math.min(5, l10Count)}</td><td><span class="hr-val ${colorCls(l5)}">${l5Str}</span></td><td>${p.l5_avg ?? '-'}</td></tr>`;
+      table += `<tr><td>Last 10</td><td>${p.l10_hit_count ?? '-'}/${l10Count}</td><td><span class="hr-val ${colorCls(l10)}">${l10Str}</span></td><td>${p.l10_avg ?? '-'}</td></tr>`;
       if (p.season_total) {
         const sPct = Math.round(p.season_hit_count / p.season_total * 100);
-        panelHtml += `<tr><td>Season</td><td>${p.season_hit_count}/${p.season_total}</td><td class="${colorCls(sPct)}">${sPct}%</td><td>${p.season_avg ?? '-'}</td></tr>`;
+        table += `<tr><td>Season</td><td>${p.season_hit_count}/${p.season_total}</td><td><span class="hr-val ${colorCls(sPct)}">${sPct}%</span></td><td>${p.season_avg ?? '-'}</td></tr>`;
       }
-      panelHtml += '</table>';
-      panelHtml += sparkHtml;
-      panelHtml += '</div>';
+      table += '</table>';
 
-      return `<div class="detail-card">
-        <div class="dc-label">Hit Rates</div>
-        <div class="hr-compact">
-          <div class="hr-item"><div class="hr-val ${colorCls(l5)}">${l5Str}</div><div class="hr-label">L5</div></div>
-          <div class="hr-item"><div class="hr-val ${colorCls(l10)}">${l10Str}</div><div class="hr-label">L10</div></div>
+      const streakHtml = p.streak ? `<div class="hr-streak">&#128293; ${p.streak} game streak</div>` : '';
+
+      return `<div class="hr-section">
+        <div class="dc-label">Hit Rates &mdash; Last 10 Games</div>
+        <div class="hr-body">
+          <div class="hr-table-wrap">${table}${streakHtml}</div>
+          ${sparkHtml ? `<div class="hr-spark-wrap"><div class="hr-spark-label">Last 10 (line: ${p.line})</div>${sparkHtml}</div>` : ''}
         </div>
-        <div class="hr-expand-btn" onclick="let el=document.getElementById('${cardId}');el.style.display=el.style.display==='none'?'block':'none'">
-          ${p.streak ? '🔥 ' + p.streak + ' streak · ' : ''}Details ▾
-        </div>
-        ${panelHtml}
       </div>`;
     }
 
@@ -2673,8 +2686,8 @@
                     <div class="ev-display ${p.ev > 0 ? 'pos' : p.ev < 0 ? 'neg' : 'neutral'}">${evStr}</div>
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
-                  ${buildHitRatesCard(p)}
                 </div>
+                ${buildHitRatesSection(p)}
                 ${p.book_odds && Object.keys(p.book_odds).length > 0 ? (() => {
                   const bks = [
                     {k:'fanduel',l:'FD',c:'#1493ff'},{k:'draftkings',l:'DK',c:'#53d337'},
