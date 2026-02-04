@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T11:44:08",
+  "updated": "2026-02-04T11:50:26",
   "projections": [
     {
       "player": "Peyton Watson",
@@ -967,6 +967,143 @@
       "score_factors": [
         "Favorable matchup (#1 DEF)"
       ]
+    },
+    {
+      "player": "Immanuel Quickley",
+      "team": "TOR",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 5.8,
+      "confidence": 53.1,
+      "ev": 1.4,
+      "diff": 0.3,
+      "market_odds": -110,
+      "fair_odds": -113,
+      "prob_edge": 0.7,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -114
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -119
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -125
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-04T11:50:26",
+      "edge": "LEAN",
+      "l5_avg": 4.4,
+      "l10_avg": 5.4,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 60,
+      "streak": 0,
+      "home_avg": 4.9,
+      "away_avg": 7.3,
+      "opp_def_rank": 10,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 6.2,
+      "vs_bot10_avg": 5.4,
+      "insight": "MIN ranks #10 in assists defense \u2014 tough for overs.",
+      "insight_strength": "lean",
+      "pick_score": 6.1,
+      "score_factors": [
+        "60% L10 hit rate"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T11:50:26"
+    },
+    {
+      "player": "Ryan Rollins",
+      "team": "MIL",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 5.0,
+      "confidence": 54.3,
+      "ev": 1.6,
+      "diff": 0.5,
+      "market_odds": -115,
+      "fair_odds": -119,
+      "prob_edge": 0.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": 118
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -158
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -146
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 110
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T11:50:26",
+      "edge": "LEAN",
+      "l5_avg": 5.6,
+      "l10_avg": 5.4,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 60,
+      "streak": 2,
+      "home_avg": 4.5,
+      "away_avg": 5.3,
+      "opp_def_rank": 25,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 4.4,
+      "vs_bot10_avg": 4.9,
+      "insight": "NOP ranks #25 in rebounds defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "pick_score": 21.4,
+      "score_factors": [
+        "60% L10 hit rate",
+        "Favorable matchup (#25 DEF)"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T11:50:26"
     }
   ],
   "locked_at": "2026-02-04T10:18:05"
