@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T16:56:49",
+  "updated": "2026-02-04T17:00:09",
   "projections": [
     {
       "player": "Payton Pritchard",
@@ -197,8 +197,7 @@
       "score_factors": [
         "Favorable matchup (#4 DEF)",
         "+4.5 edge"
-      ],
-      "top_pick_rank": 5
+      ]
     },
     {
       "player": "Derrick White",
@@ -297,8 +296,7 @@
         "Favorable matchup (#4 DEF)",
         "+6.2 edge",
         "10-game streak"
-      ],
-      "top_pick_rank": 3
+      ]
     },
     {
       "player": "Jarrett Allen",
@@ -475,7 +473,7 @@
         "+5.5 edge",
         "4-game streak"
       ],
-      "top_pick_rank": 4
+      "top_pick_rank": 2
     },
     {
       "player": "Kris Dunn",
@@ -752,8 +750,7 @@
         "+14.0% EV",
         "80% L10 hit rate",
         "Favorable matchup (#28 DEF)"
-      ],
-      "top_pick_rank": 1
+      ]
     },
     {
       "player": "Naz Reid",
@@ -831,8 +828,7 @@
       "score_factors": [
         "+15.7% EV",
         "70% L10 hit rate"
-      ],
-      "top_pick_rank": 2
+      ]
     },
     {
       "player": "Derik Queen",
@@ -1959,5 +1955,166 @@
       "discovered_at": "2026-02-04T16:41:10"
     }
   ],
-  "locked_at": "2026-02-04T15:30:54"
+  "locked_at": "2026-02-04T15:30:54",
+  "top_picks": [
+    {
+      "type": "prop",
+      "player": "Austin Reaves",
+      "team": "LAL",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 15.5,
+      "projection": 21.8,
+      "diff": 6.3,
+      "ev": 14.6,
+      "confidence": 58.7,
+      "pick_score": 56.9,
+      "score_factors": [
+        "+12.6% EV",
+        "70% L10 hit rate",
+        "+6.3 edge"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 14.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -120
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 13.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 13.5,
+            "odds": -110
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 14.5,
+            "odds": 110
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -145
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Has gone OVER 15.5 points in 7 of last 10 games (25.3 avg).",
+      "top_pick_rank": 1,
+      "result": "LOSS",
+      "actual": 15
+    },
+    {
+      "type": "prop",
+      "player": "Peyton Watson",
+      "team": "DEN",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 16.5,
+      "projection": 26.0,
+      "diff": 9.5,
+      "ev": 10.6,
+      "confidence": 55.6,
+      "pick_score": 52.9,
+      "score_factors": [
+        "+6.6% EV",
+        "80% L10 hit rate",
+        "+9.5 edge"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 16.5,
+            "odds": 106
+          },
+          "under": {
+            "line": 16.5,
+            "odds": -136
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 15.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 15.5,
+            "odds": -116
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 16.5,
+            "odds": 100
+          },
+          "under": {
+            "line": 16.5,
+            "odds": -130
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 16.5 points in 8 of last 10 games (21.6 avg).",
+      "top_pick_rank": 2,
+      "result": "WIN",
+      "actual": 17
+    },
+    {
+      "type": "spread",
+      "game": "NYK @ WAS",
+      "away_team": "NYK",
+      "home_team": "WAS",
+      "pick": "WAS +13.0",
+      "confidence": 76.3,
+      "pick_score": 50.0,
+      "score_factors": [
+        "76.3% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-02-04T00:10:00Z",
+      "top_pick_rank": 3,
+      "result": "LOSS",
+      "actual": "132-101"
+    },
+    {
+      "type": "ml",
+      "game": "NYK @ WAS",
+      "away_team": "NYK",
+      "home_team": "WAS",
+      "pick": "NYK",
+      "confidence": 67.7,
+      "pick_score": 50.0,
+      "score_factors": [
+        "67.7% ML conf"
+      ],
+      "commence_time": "2026-02-04T00:10:00Z",
+      "top_pick_rank": 4,
+      "result": "WIN",
+      "actual": "132-101"
+    },
+    {
+      "type": "ml",
+      "game": "ORL @ OKC",
+      "away_team": "ORL",
+      "home_team": "OKC",
+      "pick": "OKC",
+      "confidence": 69.7,
+      "pick_score": 50.0,
+      "score_factors": [
+        "69.7% ML conf"
+      ],
+      "commence_time": "2026-02-04T01:10:00Z",
+      "top_pick_rank": 5,
+      "result": "WIN",
+      "actual": "92-128"
+    }
+  ]
 }
