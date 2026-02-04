@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T21:02:40",
+  "updated": "2026-02-03T21:50:57",
   "games": [
     {
       "away_team": "DEN",
@@ -16,10 +16,13 @@
       "ml_pick": "DET",
       "ml_conf": 60.5,
       "commence_time": "2026-02-04T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 80,
-      "home_score": 91
+      "away_score": 121,
+      "home_score": 124,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "win"
     },
     {
       "away_team": "UTA",
@@ -34,10 +37,13 @@
       "ml_pick": "IND",
       "ml_conf": 57.0,
       "commence_time": "2026-02-04T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 113,
-      "home_score": 111
+      "away_score": 131,
+      "home_score": 122,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "loss"
     },
     {
       "away_team": "NYK",
@@ -52,10 +58,51 @@
       "ml_pick": "NYK",
       "ml_conf": 66.0,
       "commence_time": "2026-02-04T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 105,
-      "home_score": 71
+      "away_score": 132,
+      "home_score": 101,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 20.5,
+          "projection": 12.7,
+          "actual": 19,
+          "hit": true,
+          "confidence": 56.3,
+          "ev": 9.4
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 36.5,
+          "projection": 28.2,
+          "actual": 36,
+          "hit": true,
+          "confidence": 54.7,
+          "ev": 3.9
+        },
+        {
+          "player": "OG Anunoby",
+          "team": "NYK",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 19.9,
+          "actual": 19,
+          "hit": true,
+          "confidence": 53.4,
+          "ev": 2.0
+        }
+      ]
     },
     {
       "away_team": "LAL",
@@ -72,8 +119,8 @@
       "commence_time": "2026-02-04T00:40:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 71,
-      "home_score": 40
+      "away_score": 123,
+      "home_score": 107
     },
     {
       "away_team": "ATL",
@@ -90,8 +137,8 @@
       "commence_time": "2026-02-04T00:40:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 67,
-      "home_score": 50
+      "away_score": 102,
+      "home_score": 91
     },
     {
       "away_team": "BOS",
@@ -108,8 +155,8 @@
       "commence_time": "2026-02-04T01:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 50,
-      "home_score": 40
+      "away_score": 78,
+      "home_score": 67
     },
     {
       "away_team": "CHI",
@@ -126,8 +173,8 @@
       "commence_time": "2026-02-04T01:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 46,
-      "home_score": 72
+      "away_score": 94,
+      "home_score": 110
     },
     {
       "away_team": "ORL",
@@ -144,8 +191,8 @@
       "commence_time": "2026-02-04T01:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 30,
-      "home_score": 61
+      "away_score": 62,
+      "home_score": 93
     },
     {
       "away_team": "PHI",
