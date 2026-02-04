@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T17:29:42",
+  "updated": "2026-02-04T17:34:46",
   "projections": [
     {
       "player": "Payton Pritchard",
@@ -2089,6 +2089,148 @@
       ],
       "added_live": true,
       "discovered_at": "2026-02-04T17:04:00"
+    },
+    {
+      "player": "Alperen Sengun",
+      "team": "HOU",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 9.5,
+      "projection": 10.6,
+      "confidence": 52.8,
+      "ev": 5.0,
+      "diff": 1.1,
+      "market_odds": -101,
+      "fair_odds": -112,
+      "prob_edge": 2.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 9.5,
+            "odds": 112
+          },
+          "under": {
+            "line": 9.5,
+            "odds": -142
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 9.5,
+            "odds": 102
+          },
+          "under": {
+            "line": 9.5,
+            "odds": -134
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 9.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 9.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T17:34:46",
+      "edge": "STRONG",
+      "l5_avg": 12.4,
+      "l10_avg": 10.6,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
+      "streak": 4,
+      "home_avg": 10.9,
+      "away_avg": 8.1,
+      "opp_def_rank": 7,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 9.0,
+      "vs_bot10_avg": 10.1,
+      "insight": "On a 4-game OVER streak for rebounds.",
+      "insight_strength": "strong",
+      "teammate_injuries": [
+        {
+          "player": "Aaron Holiday",
+          "status": "DAY-TO-DAY"
+        }
+      ],
+      "pick_score": 22.8,
+      "score_factors": [
+        "+5.0% EV",
+        "60% L10 hit rate",
+        "4-game streak"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T17:34:46"
+    },
+    {
+      "player": "Ryan Rollins",
+      "team": "MIL",
+      "prop": "AST",
+      "direction": "UNDER",
+      "line": 6.5,
+      "projection": 6.3,
+      "confidence": 52.0,
+      "ev": 4.5,
+      "diff": -0.2,
+      "market_odds": 101,
+      "fair_odds": -108,
+      "prob_edge": 2.2,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 6.5,
+            "odds": -138
+          },
+          "under": {
+            "line": 6.5,
+            "odds": 108
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 6.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -101
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 6.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T17:34:46",
+      "edge": "GOOD",
+      "l5_avg": 6.0,
+      "l10_avg": 5.4,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 50,
+      "streak": 0,
+      "home_avg": 6.5,
+      "away_avg": 4.7,
+      "opp_def_rank": 28,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 5.8,
+      "vs_bot10_avg": 5.6,
+      "insight": "NOP ranks #28 in assists defense \u2014 tough for unders.",
+      "insight_strength": "lean",
+      "pick_score": 6.8,
+      "score_factors": [],
+      "added_live": true,
+      "discovered_at": "2026-02-04T17:34:46"
     }
   ],
   "locked_at": "2026-02-04T15:30:54"
