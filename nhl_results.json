@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-03T22:18:10",
+  "updated": "2026-02-03T23:15:54",
   "allTime": {
     "spreads": {
-      "wins": 4,
+      "wins": 5,
       "losses": 1,
-      "pct": 80.0
+      "pct": 83.3
     },
     "totals": {
       "wins": 4,
@@ -13,18 +13,18 @@
     },
     "moneylines": {
       "wins": 4,
-      "losses": 1,
-      "pct": 80.0
+      "losses": 2,
+      "pct": 66.7
     }
   },
   "days": [
     {
       "date": "2026-02-03",
       "spreads": {
-        "wins": 4,
+        "wins": 5,
         "losses": 1,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "5-1",
+        "pct": 83.3
       },
       "totals": {
         "wins": 4,
@@ -34,9 +34,9 @@
       },
       "moneylines": {
         "wins": 4,
-        "losses": 1,
-        "record": "4-1",
-        "pct": 80.0
+        "losses": 2,
+        "record": "4-2",
+        "pct": 66.7
       },
       "picks": [
         {
@@ -173,6 +173,24 @@
           "result": "4-5",
           "hit": true,
           "confidence": 58.2
+        },
+        {
+          "date": "2026-02-03",
+          "type": "spread",
+          "game": "TOR @ EDM",
+          "pick": "TOR +1.5",
+          "result": "5-2",
+          "hit": true,
+          "confidence": 56.3
+        },
+        {
+          "date": "2026-02-03",
+          "type": "ml",
+          "game": "TOR @ EDM",
+          "pick": "EDM",
+          "result": "5-2",
+          "hit": false,
+          "confidence": 64.6
         }
       ]
     }
