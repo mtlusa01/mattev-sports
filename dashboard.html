@@ -721,6 +721,7 @@
     .edge-badge.strong { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
     .edge-badge.good { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
     .edge-badge.lean { background: rgba(234, 179, 8, 0.1); color: var(--yellow); }
+    .new-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase; background: rgba(59, 130, 246, 0.2); color: #3b82f6; margin-left: 6px; letter-spacing: 0.05em; vertical-align: middle; }
 
     /* ── Top Picks Section ── */
     .top-picks-section {
@@ -1865,6 +1866,7 @@
     let currentSport = 'nba';
     let currentConfFilter = 'all';
     let currentDirFilter = 'all';
+    let currentSourceFilter = 'all'; // all, original, new
     let currentGameFilter = null; // null = all, or "AWAY@HOME" key
     let currentStatusFilter = 'all'; // all, upcoming, live, final
     let currentGameConfFilter = 'all'; // all, high, medium, low
@@ -1998,6 +2000,13 @@
       // Direction filter
       if (currentDirFilter !== 'all') {
         filtered = filtered.filter(p => p.direction === currentDirFilter.toUpperCase());
+      }
+
+      // Source filter
+      if (currentSourceFilter === 'original') {
+        filtered = filtered.filter(p => !p.added_live);
+      } else if (currentSourceFilter === 'new') {
+        filtered = filtered.filter(p => p.added_live === true);
       }
 
       // Advanced: EV% filter
@@ -2139,8 +2148,10 @@
         : `Proj: ${g.proj_score}`;
 
       function sgcResultBadge(result) {
-        if (result === 'win') return ' <span class="pick-result-badge win">&#10003; W</span>';
-        if (result === 'loss') return ' <span class="pick-result-badge loss">&#10007; L</span>';
+        const r = (result || '').toLowerCase();
+        if (r === 'win' || r === 'w') return ' <span class="pick-result-badge win">&#10003; W</span>';
+        if (r === 'loss' || r === 'l') return ' <span class="pick-result-badge loss">&#10007; L</span>';
+        if (r === 'push' || r === 'p') return ' <span class="pick-result-badge push">P</span>';
         return '';
       }
 
@@ -2409,6 +2420,10 @@
     // ── Sort props ──
     function sortPropsBy(props, sortBy) {
       return [...props].sort((a, b) => {
+        // Original picks first, new (live-discovered) picks after
+        const aNew = a.added_live ? 1 : 0;
+        const bNew = b.added_live ? 1 : 0;
+        if (aNew !== bNew) return aNew - bNew;
         if (sortBy === 'ev') return (b.ev || 0) - (a.ev || 0);
         if (sortBy === 'confidence') return (b.confidence || 0) - (a.confidence || 0);
         if (sortBy === 'edge') return Math.abs(b.diff || 0) - Math.abs(a.diff || 0);
@@ -2465,6 +2480,7 @@
         const edgeColor = !isVal(pe) ? 'var(--text-muted)' : pe > 3 ? 'var(--accent-light)' : pe > 0 ? 'var(--accent)' : 'var(--red-light)';
 
         const injBadge = injuryBadge(p);
+        const newBadge = p.added_live ? '<span class="new-badge">NEW</span>' : '';
         const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
 
         // Result columns for graded props
@@ -2475,7 +2491,7 @@
 
         return `
           <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')" style="cursor:pointer">
-            <td><span class="pt-player">${p.player}</span>${injBadge} ${edgeBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
+            <td><span class="pt-player">${p.player}</span>${newBadge}${injBadge} ${edgeBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
             <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
             <td><span class="pt-prop-badge">${p.prop}</span></td>
             <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
@@ -2765,7 +2781,21 @@
         const active = currentDirFilter === tab.key ? ' active' : '';
         html += `<button class="filter-pill${active}" data-inline-dir="${tab.key}">${tab.label}</button>`;
       }
-      html += '</div></div>';
+      html += '</div>';
+      // Source (only show if there are any live-discovered props)
+      const hasNewProps = projections.some(p => p.added_live === true);
+      if (hasNewProps) {
+        const srcTabs = [
+          { key: 'all', label: 'All' }, { key: 'original', label: 'Original' }, { key: 'new', label: 'New' },
+        ];
+        html += '<div class="filter-group"><span class="filter-label">Source</span>';
+        for (const tab of srcTabs) {
+          const active = currentSourceFilter === tab.key ? ' active' : '';
+          html += `<button class="filter-pill${active}" data-inline-src="${tab.key}">${tab.label}</button>`;
+        }
+        html += '</div>';
+      }
+      html += '</div>';
 
       // Game pills
       if (gameProjections.length > 0) {
@@ -2823,6 +2853,14 @@
       propsView.querySelectorAll('[data-inline-dir]').forEach(pill => {
         pill.addEventListener('click', () => {
           currentDirFilter = pill.dataset.inlineDir;
+          expandedRowId = null;
+          render();
+        });
+      });
+      // Source pills
+      propsView.querySelectorAll('[data-inline-src]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentSourceFilter = pill.dataset.inlineSrc;
           expandedRowId = null;
           render();
         });
@@ -3064,9 +3102,9 @@
       let gameWins = 0, gameLosses = 0;
       for (const g of finals) {
         for (const t of ['spread', 'total', 'ml']) {
-          const r = g[t + '_result'];
-          if (r === 'win') gameWins++;
-          else if (r === 'loss') gameLosses++;
+          const r = (g[t + '_result'] || '').toLowerCase();
+          if (r === 'win' || r === 'w') gameWins++;
+          else if (r === 'loss' || r === 'l') gameLosses++;
         }
       }
 
@@ -3095,8 +3133,10 @@
     }
 
     function renderResultBadge(result) {
-      if (result === 'win') return '<span class="pick-result-badge win">&#10003; W</span>';
-      if (result === 'loss') return '<span class="pick-result-badge loss">&#10007; L</span>';
+      const r = (result || '').toLowerCase();
+      if (r === 'win' || r === 'w') return '<span class="pick-result-badge win">&#10003; W</span>';
+      if (r === 'loss' || r === 'l') return '<span class="pick-result-badge loss">&#10007; L</span>';
+      if (r === 'push' || r === 'p') return '<span class="pick-result-badge push">P</span>';
       return '';
     }
 
@@ -3303,8 +3343,10 @@
       const confTier = (c) => c >= 60 ? 'high' : c >= 50 ? 'medium' : 'low';
 
       const resultBadge = (r) => {
-        if (r === 'win') return '<span class="result-badge win">W</span>';
-        if (r === 'loss') return '<span class="result-badge loss">L</span>';
+        const v = (r || '').toLowerCase();
+        if (v === 'win' || v === 'w') return '<span class="result-badge win">W</span>';
+        if (v === 'loss' || v === 'l') return '<span class="result-badge loss">L</span>';
+        if (v === 'push' || v === 'p') return '<span class="result-badge push">P</span>';
         return '<span class="result-badge pending">--</span>';
       };
 
