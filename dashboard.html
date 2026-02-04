@@ -2440,7 +2440,7 @@
 
     // ── Props Table ──
     function renderPropsTable(props) {
-      if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div></div>';
+      if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div><div class="empty-state-text">Try selecting a different category or adjusting filters.</div></div>';
 
       const hasAnyGraded = props.some(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
 
@@ -2857,11 +2857,12 @@
           render();
         });
       });
-      // Game pills
+      // Game pills — reset category to 'all' when switching games
       propsView.querySelectorAll('[data-inline-game]').forEach(pill => {
         pill.addEventListener('click', () => {
           const game = pill.dataset.inlineGame;
           currentGameFilter = game === 'all' ? null : game;
+          currentPropCategory = 'all';
           expandedRowId = null;
           render();
         });
@@ -2902,42 +2903,21 @@
         ? renderGameSpecificProps(filtered)
         : renderPropRecommendations();
 
-      // Inline search + filters (below recs)
+      // Inline search + filters (always visible)
       const filtersHtml = renderPropsFilterBar();
 
-      if (filtered.length === 0) {
-        if (currentGameFilter) {
-          const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
-          if (selGame && getGameStatus(selGame) === 'final' && selGame.graded_props) {
-            renderGradedProps(selGame, propsView);
-            return;
-          }
-          const status = selGame ? getGameStatus(selGame) : 'unknown';
-          const reason = status === 'live' || status === 'final'
-            ? 'Player props are generated before tip-off. This game was already in progress when projections were last updated.'
-            : 'No player prop lines were available for this game at the time projections were generated.';
-          propsView.innerHTML = recsHtml + filtersHtml + `
-            <div class="empty-state">
-              <div class="empty-state-icon">&#127936;</div>
-              <div class="empty-state-title">No player props for this game</div>
-              <div class="empty-state-text">${reason}</div>
-            </div>`;
-          attachPropsFilterHandlers(propsView);
+      // Check if game filter points to a final game with graded props (special case)
+      if (filtered.length === 0 && currentGameFilter) {
+        const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
+        if (selGame && getGameStatus(selGame) === 'final' && selGame.graded_props) {
+          renderGradedProps(selGame, propsView);
           return;
         }
-        propsView.innerHTML = recsHtml + filtersHtml + `
-          <div class="empty-state">
-            <div class="empty-state-icon">&#128202;</div>
-            <div class="empty-state-title">No projections match</div>
-            <div class="empty-state-text">Try adjusting your filters or search to see more projections.</div>
-          </div>`;
-        attachPropsFilterHandlers(propsView);
-        return;
       }
 
       let html = recsHtml + filtersHtml;
 
-      // Category tabs
+      // Category tabs (always shown so user can adjust filters)
       html += renderPropCategoryTabs(filtered);
 
       // Sort options + advanced filters
@@ -2950,9 +2930,24 @@
       // Advanced filters (show counts based on category-filtered set)
       html += renderAdvancedFilters(projections.length, filtered.length);
 
-      // Props table
+      // Props table (or empty state with filters still visible)
       expandedRowId = null;
-      html += renderPropsTable(sorted);
+      if (sorted.length === 0) {
+        const isGameOnly = currentGameFilter && currentConfFilter === 'all'
+          && currentDirFilter === 'all' && currentPropCategory === 'all' && !currentSearch;
+        if (isGameOnly) {
+          const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
+          const status = selGame ? getGameStatus(selGame) : 'unknown';
+          const reason = status === 'live' || status === 'final'
+            ? 'Player props are generated before tip-off. This game was already in progress when projections were last updated.'
+            : 'No player prop lines were available for this game at the time projections were generated.';
+          html += `<div class="empty-state"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No player props for this game</div><div class="empty-state-text">${reason}</div></div>`;
+        } else {
+          html += `<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props match these filters</div><div class="empty-state-text">Try adjusting your filters, category, or search to see more projections.</div></div>`;
+        }
+      } else {
+        html += renderPropsTable(sorted);
+      }
 
       propsView.innerHTML = html;
 
