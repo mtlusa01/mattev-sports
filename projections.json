@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T15:56:04",
+  "updated": "2026-02-04T16:04:05",
   "projections": [
     {
       "player": "Payton Pritchard",
@@ -1529,6 +1529,141 @@
       "score_factors": [
         "60% L10 hit rate"
       ]
+    },
+    {
+      "player": "Payton Pritchard",
+      "team": "BOS",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 21.5,
+      "projection": 17.0,
+      "confidence": 55.1,
+      "ev": 2.6,
+      "diff": -4.5,
+      "market_odds": -116,
+      "fair_odds": -123,
+      "prob_edge": 1.4,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 21.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 21.5,
+            "odds": -103
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -123
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 21.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-04T16:04:05",
+      "edge": "GOOD",
+      "l5_avg": 19.4,
+      "l10_avg": 16.8,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 60,
+      "streak": 0,
+      "home_avg": 14.9,
+      "away_avg": 18.2,
+      "opp_def_rank": 4,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 17.6,
+      "vs_bot10_avg": 16.4,
+      "insight": "Averaging 16.8 points over last 10 games (-4.7 below line).",
+      "insight_strength": "good",
+      "pick_score": 42.4,
+      "score_factors": [
+        "Favorable matchup (#4 DEF)",
+        "+4.5 edge"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T16:04:05"
+    },
+    {
+      "player": "Myles Turner",
+      "team": "MIL",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 24.5,
+      "projection": 23.3,
+      "confidence": 52.9,
+      "ev": 2.9,
+      "diff": -1.2,
+      "market_odds": -106,
+      "fair_odds": -112,
+      "prob_edge": 1.4,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 24.5,
+            "odds": -128
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -104
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 24.5,
+            "odds": -121
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -109
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 24.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T16:04:05",
+      "edge": "GOOD",
+      "l5_avg": 26.4,
+      "l10_avg": 21.9,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 70,
+      "streak": 2,
+      "home_avg": 18.9,
+      "away_avg": 20.4,
+      "opp_def_rank": 28,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 15.4,
+      "vs_bot10_avg": 21.8,
+      "insight": "Averaging 21.9 PRA over last 10 games (-2.6 below line).",
+      "insight_strength": "good",
+      "pick_score": 7.9,
+      "score_factors": [],
+      "added_live": true,
+      "discovered_at": "2026-02-04T16:04:05"
     }
   ],
   "locked_at": "2026-02-04T15:30:54"
