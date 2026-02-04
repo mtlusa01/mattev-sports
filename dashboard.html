@@ -599,7 +599,7 @@
 
     .prop-details-expanded { background: var(--bg-primary); padding: 16px 20px; }
     .details-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 800px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 1000px;
     }
     .detail-card {
       background: var(--bg-secondary); border: 1px solid var(--border);
@@ -697,8 +697,30 @@
     .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
     .insight-type-badge.historical { background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
 
+    /* Hit Rates compact card */
+    .hr-compact { display: flex; justify-content: center; gap: 16px; margin-bottom: 6px; }
+    .hr-item { text-align: center; }
+    .hr-val { font-size: 20px; font-weight: 700; }
+    .hr-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+    .hr-val.hr-hot { color: var(--accent-light); }
+    .hr-val.hr-warm { color: var(--yellow); }
+    .hr-val.hr-cold { color: var(--red-light); }
+
+    /* Hit Rates expanded panel */
+    .hr-expand-btn { cursor: pointer; font-size: 11px; color: var(--accent); }
+    .hr-panel { margin-top: 12px; padding: 12px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; }
+    .hr-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+    .hr-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 4px 8px; font-size: 10px; text-transform: uppercase; }
+    .hr-table td { padding: 4px 8px; }
+
+    /* Sparkline */
+    .sparkline-row { display: flex; gap: 2px; align-items: flex-end; height: 32px; margin: 8px 0; }
+    .spark-bar { flex: 1; min-width: 4px; max-width: 12px; border-radius: 2px 2px 0 0; }
+    .spark-bar.hit { background: var(--accent); }
+    .spark-bar.miss { background: var(--red); opacity: 0.5; }
+
     @media (max-width: 768px) {
-      .details-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .details-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .detail-card { padding: 8px 6px; }
       .detail-card .dc-label { font-size: 8px; margin-bottom: 4px; letter-spacing: 0.05em; }
       .proj-compare { font-size: 16px; gap: 4px; margin-bottom: 3px; }
@@ -2438,6 +2460,50 @@
       return `<span class="injury-badge ${cls}" title="${p.injury_headline || tip}">${s.toUpperCase()}${p.injury_type ? ` <span class="injury-type">${p.injury_type}</span>` : ''}</span>`;
     }
 
+    // ── Hit Rates Card ──
+    function buildHitRatesCard(p) {
+      const l5 = p.l5_hit_rate, l10 = p.l10_hit_rate;
+      const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
+      const l5Str = l5 != null ? l5 + '%' : '-';
+      const l10Str = l10 != null ? l10 + '%' : '-';
+      const cardId = `hr-${p.player}-${p.prop}`.replace(/[^a-zA-Z0-9]/g, '_');
+
+      let sparkHtml = '';
+      if (p.last_10_values && p.last_10_values.length > 0) {
+        const vals = p.last_10_values;
+        const max = Math.max(...vals, p.line || 0);
+        sparkHtml = '<div class="sparkline-row">' + vals.map(v => {
+          const h = Math.max(4, (v / max) * 32);
+          const hit = p.direction === 'OVER' ? v > p.line : v < p.line;
+          return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${h}px" title="${v}"></div>`;
+        }).join('') + '</div>';
+      }
+
+      let panelHtml = `<div id="${cardId}" style="display:none" class="hr-panel">`;
+      panelHtml += '<table class="hr-table"><tr><th>Window</th><th>Hit</th><th>Rate</th><th>Avg</th></tr>';
+      panelHtml += `<tr><td>Last 5</td><td>${p.l5_hit_count ?? '-'}/${Math.min(5, (p.last_10_values||[]).length)}</td><td class="${colorCls(l5)}">${l5Str}</td><td>${p.l5_avg ?? '-'}</td></tr>`;
+      panelHtml += `<tr><td>Last 10</td><td>${p.l10_hit_count ?? '-'}/${(p.last_10_values||[]).length}</td><td class="${colorCls(l10)}">${l10Str}</td><td>${p.l10_avg ?? '-'}</td></tr>`;
+      if (p.season_total) {
+        const sPct = Math.round(p.season_hit_count / p.season_total * 100);
+        panelHtml += `<tr><td>Season</td><td>${p.season_hit_count}/${p.season_total}</td><td class="${colorCls(sPct)}">${sPct}%</td><td>${p.season_avg ?? '-'}</td></tr>`;
+      }
+      panelHtml += '</table>';
+      panelHtml += sparkHtml;
+      panelHtml += '</div>';
+
+      return `<div class="detail-card">
+        <div class="dc-label">Hit Rates</div>
+        <div class="hr-compact">
+          <div class="hr-item"><div class="hr-val ${colorCls(l5)}">${l5Str}</div><div class="hr-label">L5</div></div>
+          <div class="hr-item"><div class="hr-val ${colorCls(l10)}">${l10Str}</div><div class="hr-label">L10</div></div>
+        </div>
+        <div class="hr-expand-btn" onclick="let el=document.getElementById('${cardId}');el.style.display=el.style.display==='none'?'block':'none'">
+          ${p.streak ? '🔥 ' + p.streak + ' streak · ' : ''}Details ▾
+        </div>
+        ${panelHtml}
+      </div>`;
+    }
+
     // ── Props Table ──
     function renderPropsTable(props) {
       if (props.length === 0) return '<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No props in this category</div><div class="empty-state-text">Try selecting a different category or adjusting filters.</div></div>';
@@ -2521,6 +2587,7 @@
                     <div class="ev-display ${p.ev > 0 ? 'pos' : p.ev < 0 ? 'neg' : 'neutral'}">${evStr}</div>
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
+                  ${buildHitRatesCard(p)}
                 </div>
                 ${p.book_odds && Object.keys(p.book_odds).length > 0 ? (() => {
                   const bks = [
