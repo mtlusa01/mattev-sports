@@ -1975,7 +1975,14 @@
     });
 
     // ── Helpers ──
-    const getConfLevel = getConfTier; // alias for props
+    // Props use different thresholds than games
+    function getPropConfTier(conf) {
+      const v = parseFloat(conf) || 0;
+      if (v >= 55) return 'high';
+      if (v >= 52) return 'medium';
+      return 'low';
+    }
+    const getConfLevel = getPropConfTier;
 
     function getGameForTeam(team) { return teamToGame[team] || null; }
 
@@ -2008,18 +2015,19 @@
     }
 
     function getConfTier(conf) {
-      if (conf >= 60) return 'high';
-      if (conf >= 50) return 'medium';
+      const v = parseFloat(conf) || 0;
+      if (v >= 60) return 'high';
+      if (v >= 50) return 'medium';
       return 'low';
     }
 
     function gameHasConfTier(g, tier) {
-      const confs = [g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0];
+      const confs = [parseFloat(g.spread_conf) || 0, parseFloat(g.total_conf) || 0, parseFloat(g.ml_conf) || 0];
       return confs.some(c => getConfTier(c) === tier);
     }
 
     function getGameMaxConf(g) {
-      return Math.max(g.spread_conf || 0, g.total_conf || 0, g.ml_conf || 0);
+      return Math.max(parseFloat(g.spread_conf) || 0, parseFloat(g.total_conf) || 0, parseFloat(g.ml_conf) || 0);
     }
 
     // ── Filters ──
@@ -2041,7 +2049,7 @@
 
       // Confidence filter
       if (currentConfFilter !== 'all') {
-        filtered = filtered.filter(p => getConfLevel(p.confidence || 0) === currentConfFilter);
+        filtered = filtered.filter(p => getConfLevel(parseFloat(p.confidence) || 0) === currentConfFilter);
       }
 
       // Direction filter
@@ -2059,16 +2067,13 @@
       // Advanced: EV% filter
       if (advancedFilters.ev !== 'all') {
         const minEV = parseFloat(advancedFilters.ev);
-        filtered = filtered.filter(p => (p.ev || 0) >= minEV);
+        filtered = filtered.filter(p => (parseFloat(p.ev) || 0) >= minEV);
       }
 
-      // Advanced: Hit Rate filter
+      // Advanced: Hit Rate filter (l10_hit_rate is already direction-aware)
       if (advancedFilters.hitrate !== 'all') {
         const minHR = parseFloat(advancedFilters.hitrate);
-        filtered = filtered.filter(p => {
-          if (p.direction === 'OVER') return (p.l10_hit_rate || 0) >= minHR;
-          return (100 - (p.l10_hit_rate || 100)) >= minHR;
-        });
+        filtered = filtered.filter(p => (parseFloat(p.l10_hit_rate) || 0) >= minHR);
       }
 
       // Advanced: Matchup filter
@@ -2247,7 +2252,7 @@
         if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
         if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
       }
-      bets.sort((a, b) => b.confidence - a.confidence);
+      bets.sort((a, b) => (parseFloat(b.confidence) || 0) - (parseFloat(a.confidence) || 0));
       return bets.slice(0, MAX_RECOMMENDED);
     }
 
@@ -2293,7 +2298,7 @@
       const recs = recommendations;
       const propRecs = ((recs && recs.props) || [])
         .filter(r => r.edge === 'STRONG' || r.edge === 'GOOD')
-        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
+        .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
         .slice(0, MAX_RECOMMENDED);
       if (propRecs.length === 0) {
         return `<div class="rec-category">
@@ -2337,8 +2342,8 @@
 
     function renderGameSpecificProps(filtered) {
       // Show top props for the selected game, sorted by EV
-      const sorted = [...filtered].filter(p => (p.ev || 0) > 0)
-        .sort((a, b) => (b.ev || 0) - (a.ev || 0))
+      const sorted = [...filtered].filter(p => (parseFloat(p.ev) || 0) > 0)
+        .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
         .slice(0, 8);
 
       const parts = currentGameFilter.split('@');
@@ -2477,9 +2482,9 @@
         const aNew = a.added_live ? 1 : 0;
         const bNew = b.added_live ? 1 : 0;
         if (aNew !== bNew) return aNew - bNew;
-        if (sortBy === 'ev') return (b.ev || 0) - (a.ev || 0);
-        if (sortBy === 'confidence') return (b.confidence || 0) - (a.confidence || 0);
-        if (sortBy === 'edge') return Math.abs(b.diff || 0) - Math.abs(a.diff || 0);
+        if (sortBy === 'ev') return (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0);
+        if (sortBy === 'confidence') return (parseFloat(b.confidence) || 0) - (parseFloat(a.confidence) || 0);
+        if (sortBy === 'edge') return Math.abs(parseFloat(b.diff) || 0) - Math.abs(parseFloat(a.diff) || 0);
         return 0;
       });
     }
@@ -3464,9 +3469,9 @@
       // Sort
       const sorted = [...rows].sort((a, b) => {
         let cmp = 0;
-        if (betsSortBy === 'conf') cmp = a.conf - b.conf;
+        if (betsSortBy === 'conf') cmp = (parseFloat(a.conf) || 0) - (parseFloat(b.conf) || 0);
         else if (betsSortBy === 'time') cmp = (a.time || '9999').localeCompare(b.time || '9999');
-        else if (betsSortBy === 'type') cmp = a.type.localeCompare(b.type);
+        else if (betsSortBy === 'type') cmp = (a.type || '').localeCompare(b.type || '');
         return betsSortDir === 'desc' ? -cmp : cmp;
       });
 
