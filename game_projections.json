@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T23:02:11",
+  "updated": "2026-02-03T23:03:47",
   "games": [
     {
       "away_team": "DEN",
@@ -291,7 +291,20 @@
       "spread_result": "win",
       "total_result": "win",
       "ml_result": "win",
-      "graded_props": []
+      "graded_props": [
+        {
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 33.5,
+          "projection": 27.0,
+          "actual": 38,
+          "hit": false,
+          "confidence": 57.5,
+          "ev": 7.5
+        }
+      ]
     },
     {
       "away_team": "ORL",
@@ -313,7 +326,56 @@
       "spread_result": "win",
       "total_result": "win",
       "ml_result": "win",
-      "graded_props": []
+      "graded_props": [
+        {
+          "player": "Isaiah Hartenstein",
+          "team": "OKC",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 8.5,
+          "projection": 8.7,
+          "actual": 10,
+          "hit": true,
+          "confidence": 55.1,
+          "ev": 14.0
+        },
+        {
+          "player": "Anthony Black",
+          "team": "ORL",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 23.5,
+          "projection": 31.2,
+          "actual": 19,
+          "hit": false,
+          "confidence": 54.3,
+          "ev": 4.6
+        },
+        {
+          "player": "Chet Holmgren",
+          "team": "OKC",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 18.5,
+          "projection": 15.3,
+          "actual": 16,
+          "hit": true,
+          "confidence": 53.6,
+          "ev": 1.5
+        },
+        {
+          "player": "Chet Holmgren",
+          "team": "OKC",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 29.5,
+          "projection": 26.2,
+          "actual": 27,
+          "hit": true,
+          "confidence": 54.3,
+          "ev": 1.1
+        }
+      ]
     },
     {
       "away_team": "PHI",
@@ -330,7 +392,7 @@
       "commence_time": "2026-02-04T03:10:00Z",
       "status": "live",
       "locked_at": "2026-02-03T15:07:38Z",
-      "away_score": 55,
+      "away_score": 57,
       "home_score": 54
     },
     {
