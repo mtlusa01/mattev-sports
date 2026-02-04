@@ -973,10 +973,10 @@
         font-size: 11px;
         margin-left: 6px;
       }
-      /* Expanded detail row */
-      .props-table tr.pick-row-detail { display: block !important; }
-      .props-table tr.pick-row-detail[style*="display:none"] { display: none !important; }
-      .props-table tr.pick-row-detail td {
+      /* Expanded detail row — only show when .open class is present */
+      .props-table tr.pick-row-detail { display: none !important; }
+      .props-table tr.pick-row-detail.open { display: block !important; }
+      .props-table tr.pick-row-detail.open td {
         display: block !important;
         width: 100%;
         padding: 0;
@@ -2685,6 +2685,10 @@
         detail.classList.add('open');
         if (chevron) chevron.classList.add('open');
         expandedRowId = rowId;
+        // On mobile, scroll the row into view
+        if (window.innerWidth <= 768 && row) {
+          row.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     }
 
