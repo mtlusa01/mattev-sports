@@ -719,6 +719,39 @@
     .spark-bar.hit { background: var(--accent); }
     .spark-bar.miss { background: var(--red); opacity: 0.5; }
 
+    /* Head-to-Head section */
+    .h2h-section { margin-top: 12px; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+    .h2h-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-secondary); border-bottom: 1px solid var(--border); }
+    .h2h-title { font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; }
+    .h2h-summary { font-size: 11px; color: var(--text-secondary); }
+    .h2h-summary .h2h-avg-val { font-weight: 700; color: var(--text-primary); }
+    .h2h-summary .h2h-hit-rate { font-weight: 700; margin-left: 8px; }
+    .h2h-summary .h2h-hit-rate.hr-hot { color: var(--accent-light); }
+    .h2h-summary .h2h-hit-rate.hr-warm { color: var(--yellow); }
+    .h2h-summary .h2h-hit-rate.hr-cold { color: var(--red-light); }
+    .h2h-row { display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--border); background: var(--bg-primary); }
+    .h2h-row:last-child { border-bottom: none; }
+    .h2h-date { font-size: 11px; color: var(--text-muted); min-width: 50px; }
+    .h2h-venue { font-size: 10px; color: var(--text-muted); min-width: 45px; }
+    .h2h-stat-val { font-size: 18px; font-weight: 700; min-width: 40px; text-align: center; }
+    .h2h-stat-val.hit { color: var(--accent-light); }
+    .h2h-stat-val.miss { color: var(--red-light); }
+    .h2h-mins { font-size: 11px; color: var(--text-muted); min-width: 45px; }
+    .h2h-result { font-size: 10px; font-weight: 700; min-width: 20px; }
+    .h2h-result.W { color: var(--accent-light); }
+    .h2h-result.L { color: var(--red-light); }
+    .h2h-hit-badge { font-size: 10px; font-weight: 700; }
+    .h2h-hit-badge.hit { color: var(--accent-light); }
+    .h2h-hit-badge.miss { color: var(--red-light); opacity: 0.7; }
+    .h2h-empty { padding: 12px 14px; font-size: 11px; color: var(--text-muted); text-align: center; }
+
+    @media (max-width: 768px) {
+      .h2h-row { flex-wrap: wrap; gap: 6px; padding: 6px 10px; }
+      .h2h-date { min-width: auto; }
+      .h2h-venue { min-width: auto; }
+      .h2h-stat-val { font-size: 16px; }
+    }
+
     @media (max-width: 768px) {
       .details-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .detail-card { padding: 8px 6px; }
@@ -2460,6 +2493,48 @@
       return `<span class="injury-badge ${cls}" title="${p.injury_headline || tip}">${s.toUpperCase()}${p.injury_type ? ` <span class="injury-type">${p.injury_type}</span>` : ''}</span>`;
     }
 
+    // ── Head-to-Head Section ──
+    function buildH2HSection(p) {
+      const PROP_SHORT = { points: 'PTS', rebounds: 'REB', assists: 'AST', pts_rebs_asts: 'PRA' };
+      const statLabel = PROP_SHORT[p.prop] || p.prop;
+      const opp = p.opponent || '??';
+      const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
+
+      if (!p.h2h_games || p.h2h_games.length === 0) {
+        return `<div class="h2h-section">
+          <div class="h2h-header">
+            <span class="h2h-title">Head to Head vs ${opp}</span>
+          </div>
+          <div class="h2h-empty">No previous matchups this season</div>
+        </div>`;
+      }
+
+      const total = p.h2h_total_games || p.h2h_games.length;
+      const hits = p.h2h_record ? parseInt(p.h2h_record) : 0;
+      const hitPct = total > 0 ? Math.round(hits / total * 100) : 0;
+
+      let rows = p.h2h_games.map(g => {
+        const hitCls = g.hit ? 'hit' : 'miss';
+        const hitText = g.hit ? '&#10003; HIT' : '&#10007; MISS';
+        return `<div class="h2h-row">
+          <span class="h2h-date">${g.date}</span>
+          <span class="h2h-venue">${g.venue || '@'} ${opp}</span>
+          <span class="h2h-stat-val ${hitCls}">${g.value}</span>
+          <span class="h2h-mins">${g.minutes != null ? g.minutes + ' min' : '-'}</span>
+          <span class="h2h-result ${g.result || ''}">${g.result || '-'}</span>
+          <span class="h2h-hit-badge ${hitCls}">${hitText}</span>
+        </div>`;
+      }).join('');
+
+      return `<div class="h2h-section">
+        <div class="h2h-header">
+          <span class="h2h-title">Head to Head vs ${opp}</span>
+          <span class="h2h-summary">Avg: <span class="h2h-avg-val">${p.h2h_avg ?? '-'} ${statLabel}</span><span class="h2h-hit-rate ${colorCls(hitPct)}">${p.h2h_record || '-'} hit rate</span></span>
+        </div>
+        ${rows}
+      </div>`;
+    }
+
     // ── Hit Rates Card ──
     function buildHitRatesCard(p) {
       const l5 = p.l5_hit_rate, l10 = p.l10_hit_rate;
@@ -2645,6 +2720,7 @@
                     </div>
                   </div>`;
                 })() : ''}
+                ${buildH2HSection(p)}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
                 <div class="injury-section">
                   <div class="injury-alert">
