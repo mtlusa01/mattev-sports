@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-04T01:23:19",
+  "updated": "2026-02-04T04:26:03",
   "games": [
     {
       "away_team": "DEN",
@@ -25,16 +25,28 @@
       "ml_result": "win",
       "graded_props": [
         {
+          "player": "Jamal Murray",
+          "team": "DEN",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.7,
+          "actual": 8,
+          "hit": true,
+          "confidence": 55.7,
+          "ev": 17.5
+        },
+        {
           "player": "Peyton Watson",
           "team": "DEN",
           "prop": "PTS",
           "direction": "OVER",
-          "line": 15.5,
+          "line": 16.5,
           "projection": 26.0,
           "actual": 17,
           "hit": true,
-          "confidence": 55.7,
-          "ev": 6.4
+          "confidence": 55.6,
+          "ev": 10.6
         }
       ]
     },
@@ -57,7 +69,21 @@
       "home_score": 122,
       "spread_result": "win",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Lauri Markkanen",
+          "team": "UTA",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 9.3,
+          "actual": 3,
+          "hit": false,
+          "confidence": 52.4,
+          "ev": 6.9
+        }
+      ]
     },
     {
       "away_team": "NYK",
@@ -89,20 +115,8 @@
           "projection": 12.7,
           "actual": 19,
           "hit": true,
-          "confidence": 56.3,
-          "ev": 9.4
-        },
-        {
-          "player": "Karl-Anthony Towns",
-          "team": "NYK",
-          "prop": "PRA",
-          "direction": "UNDER",
-          "line": 36.5,
-          "projection": 28.2,
-          "actual": 36,
-          "hit": true,
-          "confidence": 54.7,
-          "ev": 3.9
+          "confidence": 55.3,
+          "ev": 7.5
         },
         {
           "player": "OG Anunoby",
@@ -113,8 +127,8 @@
           "projection": 19.9,
           "actual": 19,
           "hit": true,
-          "confidence": 53.4,
-          "ev": 2.0
+          "confidence": 53.2,
+          "ev": -0.9
         }
       ]
     },
@@ -148,20 +162,8 @@
           "projection": 21.8,
           "actual": 15,
           "hit": false,
-          "confidence": 59.0,
-          "ev": 12.5
-        },
-        {
-          "player": "Austin Reaves",
-          "team": "LAL",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 22.5,
-          "projection": 28.9,
-          "actual": 20,
-          "hit": false,
-          "confidence": 57.9,
-          "ev": 8.6
+          "confidence": 58.7,
+          "ev": 14.6
         },
         {
           "player": "Austin Reaves",
@@ -172,8 +174,8 @@
           "projection": 5.0,
           "actual": 1,
           "hit": false,
-          "confidence": 56.1,
-          "ev": 8.1
+          "confidence": 56.0,
+          "ev": -0.6
         }
       ]
     },
@@ -207,8 +209,8 @@
           "projection": 3.9,
           "actual": 7,
           "hit": true,
-          "confidence": 52.1,
-          "ev": 4.7
+          "confidence": 52.3,
+          "ev": 4.1
         }
       ]
     },
@@ -234,6 +236,30 @@
       "ml_result": "win",
       "graded_props": [
         {
+          "player": "Derrick White",
+          "team": "BOS",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.6,
+          "actual": 8,
+          "hit": true,
+          "confidence": 53.7,
+          "ev": 9.0
+        },
+        {
+          "player": "Cooper Flagg",
+          "team": "DAL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 6.9,
+          "actual": 6,
+          "hit": true,
+          "confidence": 53.3,
+          "ev": 4.1
+        },
+        {
           "player": "Payton Pritchard",
           "team": "BOS",
           "prop": "AST",
@@ -242,8 +268,8 @@
           "projection": 6.0,
           "actual": 7,
           "hit": true,
-          "confidence": 52.3,
-          "ev": 15.2
+          "confidence": 52.9,
+          "ev": 2.8
         },
         {
           "player": "Jaylen Brown",
@@ -254,20 +280,8 @@
           "projection": 8.2,
           "actual": 11,
           "hit": true,
-          "confidence": 54.0,
-          "ev": 10.6
-        },
-        {
-          "player": "Derrick White",
-          "team": "BOS",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 6.6,
-          "actual": 8,
-          "hit": true,
-          "confidence": 53.0,
-          "ev": 2.0
+          "confidence": 53.8,
+          "ev": -9.6
         }
       ]
     },
@@ -293,16 +307,124 @@
       "ml_result": "win",
       "graded_props": [
         {
+          "player": "Myles Turner",
+          "team": "MIL",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 25.5,
+          "projection": 21.8,
+          "actual": 20,
+          "hit": true,
+          "confidence": 56.4,
+          "ev": 9.1
+        },
+        {
           "player": "Ryan Rollins",
           "team": "MIL",
           "prop": "PRA",
           "direction": "UNDER",
-          "line": 33.5,
+          "line": 34.5,
           "projection": 27.0,
           "actual": 38,
           "hit": false,
-          "confidence": 57.5,
-          "ev": 7.5
+          "confidence": 58.1,
+          "ev": 6.5
+        },
+        {
+          "player": "Matas Buzelis",
+          "team": "CHI",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 6.0,
+          "actual": 2,
+          "hit": true,
+          "confidence": 55.5,
+          "ev": 6.0
+        },
+        {
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 21.5,
+          "projection": 16.6,
+          "actual": 21,
+          "hit": true,
+          "confidence": 56.3,
+          "ev": 5.3
+        },
+        {
+          "player": "Kyle Kuzma",
+          "team": "MIL",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 29.5,
+          "projection": 25.0,
+          "actual": 47,
+          "hit": false,
+          "confidence": 55.8,
+          "ev": 4.7
+        },
+        {
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 5.6,
+          "actual": 10,
+          "hit": false,
+          "confidence": 53.6,
+          "ev": 4.2
+        },
+        {
+          "player": "Coby White",
+          "team": "CHI",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 31.5,
+          "projection": 28.9,
+          "actual": 34,
+          "hit": false,
+          "confidence": 55.2,
+          "ev": 4.0
+        },
+        {
+          "player": "Matas Buzelis",
+          "team": "CHI",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 28.5,
+          "projection": 24.9,
+          "actual": 25,
+          "hit": true,
+          "confidence": 55.3,
+          "ev": 2.2
+        },
+        {
+          "player": "Coby White",
+          "team": "CHI",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 21.5,
+          "projection": 18.5,
+          "actual": 21,
+          "hit": true,
+          "confidence": 54.8,
+          "ev": 1.6
+        },
+        {
+          "player": "Matas Buzelis",
+          "team": "CHI",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 18.5,
+          "projection": 15.3,
+          "actual": 22,
+          "hit": false,
+          "confidence": 54.8,
+          "ev": -1.0
         }
       ]
     },
@@ -336,32 +458,8 @@
           "projection": 8.7,
           "actual": 10,
           "hit": true,
-          "confidence": 55.1,
-          "ev": 14.0
-        },
-        {
-          "player": "Anthony Black",
-          "team": "ORL",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 23.5,
-          "projection": 31.2,
-          "actual": 19,
-          "hit": false,
           "confidence": 54.3,
           "ev": 4.6
-        },
-        {
-          "player": "Chet Holmgren",
-          "team": "OKC",
-          "prop": "PTS",
-          "direction": "UNDER",
-          "line": 18.5,
-          "projection": 15.3,
-          "actual": 16,
-          "hit": true,
-          "confidence": 53.6,
-          "ev": 1.5
         },
         {
           "player": "Chet Holmgren",
@@ -372,8 +470,8 @@
           "projection": 26.2,
           "actual": 27,
           "hit": true,
-          "confidence": 54.3,
-          "ev": 1.1
+          "confidence": 54.2,
+          "ev": 4.4
         }
       ]
     },
@@ -396,7 +494,21 @@
       "home_score": 94,
       "spread_result": "win",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Brandin Podziemski",
+          "team": "GSW",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 5.1,
+          "actual": 2,
+          "hit": true,
+          "confidence": 52.7,
+          "ev": -3.4
+        }
+      ]
     },
     {
       "away_team": "PHX",
@@ -411,10 +523,63 @@
       "ml_pick": "POR",
       "ml_conf": 53.3,
       "commence_time": "2026-02-04T04:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-04T04:05:58Z",
-      "away_score": 122,
-      "home_score": 111
+      "away_score": 130,
+      "home_score": 125,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Grayson Allen",
+          "team": "PHX",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.5,
+          "actual": 4,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 8.4
+        },
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.3,
+          "actual": 5,
+          "hit": true,
+          "confidence": 56.6,
+          "ev": 6.2
+        },
+        {
+          "player": "Royce O'Neale",
+          "team": "PHX",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.4,
+          "actual": 7,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 0.3
+        },
+        {
+          "player": "Donovan Clingan",
+          "team": "POR",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 11.5,
+          "projection": 11.5,
+          "actual": 15,
+          "hit": false,
+          "confidence": 53.2,
+          "ev": -1.3
+        }
+      ]
     }
   ]
 }
