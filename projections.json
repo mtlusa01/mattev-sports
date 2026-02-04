@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T16:29:19",
+  "updated": "2026-02-04T16:41:10",
   "projections": [
     {
       "player": "Payton Pritchard",
@@ -379,8 +379,8 @@
         5
       ],
       "opponent": "LAC",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 32.4,
       "score_factors": [
@@ -466,8 +466,8 @@
         18
       ],
       "opponent": "NYK",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 42.4,
       "score_factors": [
@@ -724,8 +724,8 @@
         11
       ],
       "opponent": "NOP",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 52.8,
       "score_factors": [
@@ -804,8 +804,8 @@
         9
       ],
       "opponent": "TOR",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 49.8,
       "score_factors": [
@@ -891,8 +891,8 @@
         4
       ],
       "opponent": "MIL",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 15.2,
       "score_factors": [
@@ -978,8 +978,8 @@
         8
       ],
       "opponent": "DEN",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 13.7,
       "score_factors": [
@@ -1065,8 +1065,8 @@
         39
       ],
       "opponent": "DEN",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 15.1,
       "score_factors": [
@@ -1152,8 +1152,8 @@
         17
       ],
       "opponent": "DEN",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 31.4,
       "score_factors": [
@@ -1349,8 +1349,8 @@
         5
       ],
       "opponent": "MEM",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 10.6,
       "score_factors": []
@@ -1434,8 +1434,8 @@
         5
       ],
       "opponent": "MIN",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 22.0,
       "score_factors": [
@@ -1522,8 +1522,8 @@
         7
       ],
       "opponent": "MIN",
-      "h2h_avg": null,
-      "h2h_record": null,
+      "h2h_avg": NaN,
+      "h2h_record": NaN,
       "h2h_total_games": 0,
       "pick_score": 8.9,
       "score_factors": [
@@ -1664,6 +1664,279 @@
       "score_factors": [],
       "added_live": true,
       "discovered_at": "2026-02-04T16:04:05"
+    },
+    {
+      "player": "OG Anunoby",
+      "team": "NYK",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 4.6,
+      "confidence": 54.0,
+      "ev": 1.0,
+      "diff": 0.1,
+      "market_odds": -115,
+      "fair_odds": -117,
+      "prob_edge": 0.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": 130
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -166
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -149
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 113
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": -135
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -100
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T16:41:10",
+      "edge": "LEAN",
+      "l5_avg": 4.6,
+      "l10_avg": 5.3,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 60,
+      "streak": 0,
+      "home_avg": 4.7,
+      "away_avg": 5.7,
+      "opp_def_rank": 9,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 5.1,
+      "vs_bot10_avg": 5.8,
+      "insight": "DEN ranks #9 in rebounds defense \u2014 tough for overs.",
+      "insight_strength": "lean",
+      "pick_score": 5.5,
+      "score_factors": [
+        "60% L10 hit rate"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T16:41:10"
+    },
+    {
+      "player": "Peyton Watson",
+      "team": "DEN",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 22.5,
+      "projection": 26.8,
+      "confidence": 56.0,
+      "ev": 2.2,
+      "diff": 4.3,
+      "market_odds": -121,
+      "fair_odds": -127,
+      "prob_edge": 1.2,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 22.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -106
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -112
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 21.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-04T16:41:10",
+      "edge": "GOOD",
+      "l5_avg": 26.0,
+      "l10_avg": 27.0,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 0,
+      "home_avg": 24.2,
+      "away_avg": 26.6,
+      "opp_def_rank": 6,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 24.6,
+      "vs_bot10_avg": 29.0,
+      "insight": "Has gone OVER 22.5 PRA in 7 of last 10 games (27.0 avg).",
+      "insight_strength": "strong",
+      "pick_score": 34.2,
+      "score_factors": [
+        "70% L10 hit rate",
+        "+4.3 edge"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T16:41:10"
+    },
+    {
+      "player": "Ryan Rollins",
+      "team": "MIL",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 32.5,
+      "projection": 29.5,
+      "confidence": 54.5,
+      "ev": 2.8,
+      "diff": -3.0,
+      "market_odds": -113,
+      "fair_odds": -120,
+      "prob_edge": 1.4,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 32.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 32.5,
+            "odds": -104
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 32.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 32.5,
+            "odds": -115
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 32.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 32.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T16:41:10",
+      "edge": "GOOD",
+      "l5_avg": 33.2,
+      "l10_avg": 25.9,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 70,
+      "streak": 0,
+      "home_avg": 28.3,
+      "away_avg": 24.9,
+      "opp_def_rank": 28,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 26.6,
+      "vs_bot10_avg": 28.6,
+      "insight": "Averaging 25.9 PRA over last 10 games (-6.6 below line).",
+      "insight_strength": "good",
+      "pick_score": 13.2,
+      "score_factors": [
+        "+3.0 edge"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T16:41:10"
+    },
+    {
+      "player": "Kyle Kuzma",
+      "team": "MIL",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 17.5,
+      "projection": 15.4,
+      "confidence": 52.4,
+      "ev": 1.0,
+      "diff": -2.1,
+      "market_odds": -108,
+      "fair_odds": -110,
+      "prob_edge": 0.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 17.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 17.5,
+            "odds": -119
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -108
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 17.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -115
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T16:41:10",
+      "edge": "LEAN",
+      "l5_avg": 18.8,
+      "l10_avg": 14.4,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 0,
+      "home_avg": 14.1,
+      "away_avg": 12.9,
+      "opp_def_rank": 28,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 15.0,
+      "vs_bot10_avg": 12.1,
+      "insight": "Averaging 14.4 points over last 10 games (-3.1 below line).",
+      "insight_strength": "good",
+      "pick_score": 7.8,
+      "score_factors": [
+        "+2.1 edge"
+      ],
+      "added_live": true,
+      "discovered_at": "2026-02-04T16:41:10"
     }
   ],
   "locked_at": "2026-02-04T15:30:54"
