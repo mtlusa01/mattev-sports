@@ -703,10 +703,6 @@
       border-radius: 8px; padding: 14px 16px; margin-top: 12px; max-width: 1000px;
     }
     .hr-section .dc-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-    .hr-body { display: flex; gap: 24px; align-items: flex-start; }
-    .hr-table-wrap { flex: 1; min-width: 0; }
-    .hr-spark-wrap { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .hr-spark-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
     .hr-val { font-weight: 700; }
     .hr-val.hr-hot { color: var(--accent-light); }
     .hr-val.hr-warm { color: var(--yellow); }
@@ -716,9 +712,16 @@
     .hr-table td { padding: 5px 8px; }
     .hr-streak { font-size: 12px; margin-top: 6px; color: var(--text-secondary); }
 
-    /* Sparkline */
-    .sparkline-row { display: flex; gap: 3px; align-items: flex-end; height: 40px; }
-    .spark-bar { flex: 1; min-width: 6px; max-width: 14px; border-radius: 2px 2px 0 0; position: relative; }
+    /* Sparkline — full width below table */
+    .hr-spark-wrap { margin-top: 10px; }
+    .hr-spark-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .hr-spark-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .hr-spark-legend { display: flex; gap: 10px; font-size: 10px; color: var(--text-muted); }
+    .hr-spark-legend span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+    .hr-spark-legend .leg-hit::before { background: var(--accent); }
+    .hr-spark-legend .leg-miss::before { background: var(--red); opacity: 0.5; }
+    .sparkline-row { display: flex; gap: 3px; align-items: flex-end; height: 48px; position: relative; }
+    .spark-bar { flex: 1; min-width: 0; border-radius: 2px 2px 0 0; }
     .spark-bar.hit { background: var(--accent); }
     .spark-bar.miss { background: var(--red); opacity: 0.5; }
     .spark-line-marker { position: absolute; left: 0; right: 0; border-top: 1.5px dashed var(--text-muted); opacity: 0.35; pointer-events: none; }
@@ -770,9 +773,7 @@
       .ev-display { font-size: 20px; margin-bottom: 4px; }
       .rating-badge { font-size: 10px; padding: 2px 8px; }
       .hr-section { padding: 10px 12px; }
-      .hr-body { flex-direction: column; gap: 12px; }
-      .hr-spark-wrap { width: 100%; }
-      .sparkline-row { height: 32px; }
+      .sparkline-row { height: 36px; }
     }
 
     .pick-value { font-weight: 600; font-size: 14px; }
@@ -2564,23 +2565,6 @@
       const l5Str = l5 != null ? l5 + '%' : '-';
       const l10Str = l10 != null ? l10 + '%' : '-';
 
-      // Sparkline with line marker
-      let sparkHtml = '';
-      if (p.last_10_values && p.last_10_values.length > 0) {
-        const vals = p.last_10_values;
-        const line = p.line || 0;
-        const max = Math.max(...vals, line) || 1;
-        const linePos = Math.min(100, (line / max) * 100);
-        sparkHtml = '<div class="sparkline-row" style="position:relative">' +
-          vals.map(v => {
-            const h = Math.max(4, (v / max) * 40);
-            const hit = p.direction === 'OVER' ? v > line : v < line;
-            return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${h}px" title="${v}"></div>`;
-          }).join('') +
-          `<div class="spark-line-marker" style="bottom:${linePos}%"></div>` +
-          '</div>';
-      }
-
       // Table
       let table = '<table class="hr-table"><tr><th>Window</th><th>Hit</th><th>Rate</th><th>Avg</th></tr>';
       const l10Count = (p.last_10_values || []).length;
@@ -2594,12 +2578,30 @@
 
       const streakHtml = p.streak ? `<div class="hr-streak">&#128293; ${p.streak} game streak</div>` : '';
 
+      // Sparkline — full width below table
+      let sparkHtml = '';
+      if (p.last_10_values && p.last_10_values.length > 0) {
+        const vals = p.last_10_values;
+        const line = p.line || 0;
+        const max = Math.max(...vals, line) || 1;
+        const linePos = Math.min(100, (line / max) * 100);
+        const bars = vals.map(v => {
+          const hPct = Math.max(8, (v / max) * 100);
+          const hit = p.direction === 'OVER' ? v > line : v < line;
+          return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${hPct}%" title="${v}"></div>`;
+        }).join('');
+        sparkHtml = `<div class="hr-spark-wrap">
+          <div class="hr-spark-header">
+            <span class="hr-spark-label">Last ${vals.length} games (line: ${p.line})</span>
+            <div class="hr-spark-legend"><span class="leg-hit">Hit</span><span class="leg-miss">Miss</span></div>
+          </div>
+          <div class="sparkline-row">${bars}<div class="spark-line-marker" style="bottom:${linePos}%"></div></div>
+        </div>`;
+      }
+
       return `<div class="hr-section">
-        <div class="dc-label">Hit Rates &mdash; Last 10 Games</div>
-        <div class="hr-body">
-          <div class="hr-table-wrap">${table}${streakHtml}</div>
-          ${sparkHtml ? `<div class="hr-spark-wrap"><div class="hr-spark-label">Last 10 (line: ${p.line})</div>${sparkHtml}</div>` : ''}
-        </div>
+        <div class="dc-label">Hit Rates</div>
+        ${table}${streakHtml}${sparkHtml}
       </div>`;
     }
 
@@ -2688,62 +2690,6 @@
                   </div>
                 </div>
                 ${buildHitRatesSection(p)}
-                ${p.book_odds && Object.keys(p.book_odds).length > 0 ? (() => {
-                  const bks = [
-                    {k:'fanduel',l:'FD',c:'#1493ff'},{k:'draftkings',l:'DK',c:'#53d337'},
-                    {k:'betmgm',l:'MGM',c:'#c4a44a'},{k:'caesars',l:'CZR',c:'#00694b'}
-                  ];
-                  const fmtO = v => {
-                    if (v == null) return '-';
-                    const n = Math.round(v);
-                    if (n === 0) return '+100';
-                    return n > 0 ? '+' + n : '' + n;
-                  };
-                  const toImplied = v => v < 0 ? Math.abs(v) / (Math.abs(v) + 100) : 100 / (v + 100);
-                  const fromImplied = p => p >= 0.5 ? Math.round(-p / (1 - p) * 100) : Math.round((1 - p) / p * 100);
-                  const pickSide = p.direction.toLowerCase();
-                  const getOdds = (bk, side) => p.book_odds[bk] && p.book_odds[bk][side] ? p.book_odds[bk][side].odds : null;
-                  const getLine = (bk, side) => p.book_odds[bk] && p.book_odds[bk][side] ? p.book_odds[bk][side].line : null;
-                  const renderRow = (side) => {
-                    const vals = bks.map(b => getOdds(b.k, side)).filter(v => v !== null);
-                    const best = vals.length ? Math.max(...vals) : null;
-                    const avg = vals.length ? fromImplied(vals.map(toImplied).reduce((a,v)=>a+v,0)/vals.length) : null;
-                    const bestBk = best !== null ? bks.find(b => getOdds(b.k, side) === best) : null;
-                    const lineVal = bks.reduce((r, b) => r !== null ? r : getLine(b.k, side), null) || p.line;
-                    return `<div class="odds-table-row${side === pickSide ? ' recommended' : ''}">
-                      <div class="odds-col side-col">
-                        <span class="side-label">${side === 'over' ? 'Over' : 'Under'}</span>
-                        <span class="side-line">${lineVal}</span>
-                      </div>
-                      <div class="odds-col best-col">
-                        ${bestBk ? `<span class="best-book-mini" style="color:${bestBk.c}">${bestBk.l}</span>` : ''}
-                        <span class="best-odds${best !== null && best > 0 ? ' positive' : ''}">${fmtO(best)}</span>
-                      </div>
-                      <div class="odds-col avg-col">
-                        <span class="avg-odds">${fmtO(avg)}</span>
-                      </div>
-                      ${bks.map(b => {
-                        const o = getOdds(b.k, side);
-                        const has = o !== null;
-                        return `<div class="odds-col book-col${has && o === best ? ' is-best' : ''}">
-                          <span class="book-odds-val${has && o > 0 ? ' plus' : ''}${!has ? ' no-odds' : ''}">${fmtO(o)}</span>
-                        </div>`;
-                      }).join('')}
-                    </div>`;
-                  };
-                  return `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin-top:1rem;border-radius:8px;border:1px solid #2a2a3e;">
-                    <div class="sportsbook-odds-table" style="min-width:550px;">
-                      <div class="odds-table-header">
-                        <div class="odds-col side-col"></div>
-                        <div class="odds-col best-col"><span class="col-label">BEST</span></div>
-                        <div class="odds-col avg-col"><span class="col-label">AVG</span></div>
-                        ${bks.map(b => `<div class="odds-col book-col"><span class="book-abbr" style="color:${b.c}">${b.l}</span></div>`).join('')}
-                      </div>
-                      ${renderRow('over')}
-                      ${renderRow('under')}
-                    </div>
-                  </div>`;
-                })() : ''}
                 ${buildH2HSection(p)}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
                 <div class="injury-section">
@@ -2812,6 +2758,62 @@
                     ${p.home_avg != null && p.away_avg != null ? `<span class="stat-badge home-away">H: ${p.home_avg} / A: ${p.away_avg}</span>` : ''}
                   </div>
                 </div>` : '')}
+                ${p.book_odds && Object.keys(p.book_odds).length > 0 ? (() => {
+                  const bks = [
+                    {k:'fanduel',l:'FD',c:'#1493ff'},{k:'draftkings',l:'DK',c:'#53d337'},
+                    {k:'betmgm',l:'MGM',c:'#c4a44a'},{k:'caesars',l:'CZR',c:'#00694b'}
+                  ];
+                  const fmtO = v => {
+                    if (v == null) return '-';
+                    const n = Math.round(v);
+                    if (n === 0) return '+100';
+                    return n > 0 ? '+' + n : '' + n;
+                  };
+                  const toImplied = v => v < 0 ? Math.abs(v) / (Math.abs(v) + 100) : 100 / (v + 100);
+                  const fromImplied = p => p >= 0.5 ? Math.round(-p / (1 - p) * 100) : Math.round((1 - p) / p * 100);
+                  const pickSide = p.direction.toLowerCase();
+                  const getOdds = (bk, side) => p.book_odds[bk] && p.book_odds[bk][side] ? p.book_odds[bk][side].odds : null;
+                  const getLine = (bk, side) => p.book_odds[bk] && p.book_odds[bk][side] ? p.book_odds[bk][side].line : null;
+                  const renderRow = (side) => {
+                    const vals = bks.map(b => getOdds(b.k, side)).filter(v => v !== null);
+                    const best = vals.length ? Math.max(...vals) : null;
+                    const avg = vals.length ? fromImplied(vals.map(toImplied).reduce((a,v)=>a+v,0)/vals.length) : null;
+                    const bestBk = best !== null ? bks.find(b => getOdds(b.k, side) === best) : null;
+                    const lineVal = bks.reduce((r, b) => r !== null ? r : getLine(b.k, side), null) || p.line;
+                    return `<div class="odds-table-row${side === pickSide ? ' recommended' : ''}">
+                      <div class="odds-col side-col">
+                        <span class="side-label">${side === 'over' ? 'Over' : 'Under'}</span>
+                        <span class="side-line">${lineVal}</span>
+                      </div>
+                      <div class="odds-col best-col">
+                        ${bestBk ? `<span class="best-book-mini" style="color:${bestBk.c}">${bestBk.l}</span>` : ''}
+                        <span class="best-odds${best !== null && best > 0 ? ' positive' : ''}">${fmtO(best)}</span>
+                      </div>
+                      <div class="odds-col avg-col">
+                        <span class="avg-odds">${fmtO(avg)}</span>
+                      </div>
+                      ${bks.map(b => {
+                        const o = getOdds(b.k, side);
+                        const has = o !== null;
+                        return `<div class="odds-col book-col${has && o === best ? ' is-best' : ''}">
+                          <span class="book-odds-val${has && o > 0 ? ' plus' : ''}${!has ? ' no-odds' : ''}">${fmtO(o)}</span>
+                        </div>`;
+                      }).join('')}
+                    </div>`;
+                  };
+                  return `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin-top:1rem;border-radius:8px;border:1px solid #2a2a3e;">
+                    <div class="sportsbook-odds-table" style="min-width:550px;">
+                      <div class="odds-table-header">
+                        <div class="odds-col side-col"></div>
+                        <div class="odds-col best-col"><span class="col-label">BEST</span></div>
+                        <div class="odds-col avg-col"><span class="col-label">AVG</span></div>
+                        ${bks.map(b => `<div class="odds-col book-col"><span class="book-abbr" style="color:${b.c}">${b.l}</span></div>`).join('')}
+                      </div>
+                      ${renderRow('over')}
+                      ${renderRow('under')}
+                    </div>
+                  </div>`;
+                })() : ''}
                 <div class="collapse-btn" onclick="event.stopPropagation(); toggleRow('${rowId}')">&#9650; Collapse</div>
               </div>
             </td>
