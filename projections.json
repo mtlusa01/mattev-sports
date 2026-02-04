@@ -1,75 +1,8 @@
 {
   "date": "2026-02-03",
   "sport": "NBA",
-  "updated": "2026-02-03T19:57:09",
+  "updated": "2026-02-03T23:18:13",
   "projections": [
-    {
-      "player": "Austin Reaves",
-      "team": "LAL",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 3.5,
-      "projection": 5.0,
-      "confidence": 56.0,
-      "ev": -0.6,
-      "diff": 1.5,
-      "market_odds": -129,
-      "fair_odds": -127,
-      "prob_edge": -0.3,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 2.5,
-            "odds": -166
-          },
-          "under": {
-            "line": 2.5,
-            "odds": 130
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 2.5,
-            "odds": -166
-          },
-          "under": {
-            "line": 2.5,
-            "odds": 130
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 3.5,
-            "odds": 125
-          },
-          "under": {
-            "line": 3.5,
-            "odds": -165
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 4.4,
-      "l10_avg": 4.9,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 50,
-      "streak": 0,
-      "home_avg": 5.6,
-      "away_avg": 6.8,
-      "opp_def_rank": 25,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 6.8,
-      "vs_bot10_avg": 5.7,
-      "insight": "BKN ranks #25 in assists defense \u2014 favorable for overs.",
-      "insight_strength": "good",
-      "pick_score": 52.5,
-      "score_factors": [
-        "+15.3% EV",
-        "Favorable matchup (#25 DEF)"
-      ]
-    },
     {
       "player": "Payton Pritchard",
       "team": "BOS",
@@ -77,12 +10,12 @@
       "direction": "OVER",
       "line": 5.5,
       "projection": 6.0,
-      "confidence": 52.9,
-      "ev": 2.8,
+      "confidence": 52.3,
+      "ev": 15.2,
       "diff": 0.5,
       "market_odds": -106,
-      "fair_odds": -112,
-      "prob_edge": 1.4,
+      "fair_odds": -110,
+      "prob_edge": 6.8,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -116,7 +49,7 @@
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
+      "generated_at": "2026-02-03T11:44:16",
       "edge": "STRONG",
       "l5_avg": 4.6,
       "l10_avg": 5.4,
@@ -129,10 +62,12 @@
       "matchup_favorability": "neutral",
       "vs_top10_avg": 6.1,
       "vs_bot10_avg": 5.4,
-      "pick_score": 28.0,
+      "pick_score": 27.8,
       "score_factors": [
-        "+15.3% EV"
-      ]
+        "+15.2% EV"
+      ],
+      "actual": 7,
+      "result": "WIN"
     },
     {
       "player": "Isaiah Hartenstein",
@@ -141,12 +76,12 @@
       "direction": "OVER",
       "line": 8.5,
       "projection": 8.7,
-      "confidence": 54.3,
-      "ev": 4.6,
+      "confidence": 55.1,
+      "ev": 14.0,
       "diff": 0.2,
-      "market_odds": -108,
-      "fair_odds": -119,
-      "prob_edge": 2.4,
+      "market_odds": -107,
+      "fair_odds": -123,
+      "prob_edge": 6.8,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -161,26 +96,26 @@
         "draftkings": {
           "over": {
             "line": 7.5,
-            "odds": -110
+            "odds": -106
           },
           "under": {
             "line": 7.5,
-            "odds": -120
+            "odds": -124
           }
         },
         "betmgm": {
           "over": {
             "line": 7.5,
-            "odds": 100
+            "odds": -105
           },
           "under": {
             "line": 7.5,
-            "odds": -135
+            "odds": -130
           }
         }
       },
       "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
+      "generated_at": "2026-02-03T11:44:16",
       "edge": "STRONG",
       "l5_avg": 7.4,
       "l10_avg": 8.3,
@@ -195,10 +130,12 @@
       "vs_bot10_avg": 11.6,
       "insight": "Averages 11.6 rebounds vs bottom-10 defenses.",
       "insight_strength": "good",
-      "pick_score": 25.2,
+      "pick_score": 36.0,
       "score_factors": [
-        "+13.5% EV"
-      ]
+        "+14.0% EV"
+      ],
+      "actual": 10,
+      "result": "WIN"
     },
     {
       "player": "Austin Reaves",
@@ -207,46 +144,46 @@
       "direction": "OVER",
       "line": 15.5,
       "projection": 21.8,
-      "confidence": 58.7,
-      "ev": 14.6,
+      "confidence": 59.0,
+      "ev": 12.5,
       "diff": 6.3,
-      "market_odds": -105,
-      "fair_odds": -142,
-      "prob_edge": 7.5,
+      "market_odds": -110,
+      "fair_odds": -144,
+      "prob_edge": 6.6,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 14.5,
-            "odds": -106
+            "line": 15.5,
+            "odds": -108
           },
           "under": {
-            "line": 14.5,
-            "odds": -120
+            "line": 15.5,
+            "odds": -122
           }
         },
         "draftkings": {
           "over": {
-            "line": 13.5,
-            "odds": -120
+            "line": 15.5,
+            "odds": -111
           },
           "under": {
-            "line": 13.5,
-            "odds": -110
+            "line": 15.5,
+            "odds": -115
           }
         },
         "betmgm": {
           "over": {
-            "line": 14.5,
-            "odds": 110
+            "line": 15.5,
+            "odds": -110
           },
           "under": {
-            "line": 14.5,
-            "odds": -145
+            "line": 15.5,
+            "odds": -118
           }
         }
       },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T11:44:16",
       "edge": "STRONG",
       "l5_avg": 18.2,
       "l10_avg": 25.3,
@@ -261,86 +198,774 @@
       "vs_bot10_avg": 31.4,
       "insight": "Has gone OVER 15.5 points in 7 of last 10 games (25.3 avg).",
       "insight_strength": "strong",
-      "pick_score": 56.9,
+      "pick_score": 56.8,
       "score_factors": [
-        "+12.6% EV",
+        "+12.5% EV",
         "70% L10 hit rate",
         "+6.3 edge"
       ],
-      "top_pick_rank": 1
+      "actual": 15,
+      "result": "LOSS"
     },
     {
-      "player": "Cooper Flagg",
-      "team": "DAL",
-      "prop": "AST",
+      "player": "Jaylen Brown",
+      "team": "BOS",
+      "prop": "REB",
       "direction": "OVER",
-      "line": 4.5,
-      "projection": 6.9,
-      "confidence": 53.3,
-      "ev": 4.1,
-      "diff": 2.4,
-      "market_odds": -105,
-      "fair_odds": -114,
-      "prob_edge": 2.1,
+      "line": 7.5,
+      "projection": 8.2,
+      "confidence": 54.0,
+      "ev": 10.6,
+      "diff": 0.7,
+      "market_odds": -145,
+      "fair_odds": -117,
+      "prob_edge": 5.2,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 4.5,
-            "odds": 104
+            "line": 6.5,
+            "odds": -146
           },
           "under": {
-            "line": 4.5,
-            "odds": -132
+            "line": 6.5,
+            "odds": 114
           }
         },
         "draftkings": {
           "over": {
-            "line": 4.5,
-            "odds": -128
+            "line": 6.5,
+            "odds": -147
           },
           "under": {
-            "line": 4.5,
-            "odds": -102
+            "line": 6.5,
+            "odds": 111
           }
         },
         "betmgm": {
           "over": {
-            "line": 4.5,
+            "line": 6.5,
+            "odds": -145
+          },
+          "under": {
+            "line": 6.5,
+            "odds": 110
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "STRONG",
+      "l5_avg": 9.2,
+      "l10_avg": 8.8,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "streak": 1,
+      "home_avg": 8.1,
+      "away_avg": 6.9,
+      "opp_def_rank": 27,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 7.5,
+      "vs_bot10_avg": 8.0,
+      "insight": "Has gone OVER 7.5 rebounds in 7 of last 10 games (8.8 avg).",
+      "insight_strength": "strong",
+      "pick_score": 38.9,
+      "score_factors": [
+        "+10.6% EV",
+        "70% L10 hit rate",
+        "Favorable matchup (#27 DEF)"
+      ],
+      "actual": 11,
+      "result": "WIN"
+    },
+    {
+      "player": "Karl-Anthony Towns",
+      "team": "NYK",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 20.5,
+      "projection": 12.7,
+      "confidence": 56.3,
+      "ev": 9.4,
+      "diff": -7.8,
+      "market_odds": -106,
+      "fair_odds": -129,
+      "prob_edge": 4.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 20.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 20.5,
+            "odds": -108
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 20.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 20.5,
+            "odds": -106
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 20.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 20.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "STRONG",
+      "l5_avg": 12.0,
+      "l10_avg": 14.9,
+      "l5_hit_rate": 100,
+      "l10_hit_rate": 80,
+      "streak": 6,
+      "home_avg": 17.5,
+      "away_avg": 19.2,
+      "opp_def_rank": 29,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 17.4,
+      "vs_bot10_avg": 19.3,
+      "insight": "Has stayed UNDER 20.5 points in 6 straight games.",
+      "insight_strength": "strong",
+      "pick_score": 49.1,
+      "score_factors": [
+        "+9.4% EV",
+        "+7.8 edge",
+        "6-game streak"
+      ],
+      "actual": 19,
+      "result": "WIN"
+    },
+    {
+      "player": "Austin Reaves",
+      "team": "LAL",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 22.5,
+      "projection": 28.9,
+      "confidence": 57.9,
+      "ev": 8.6,
+      "diff": 6.4,
+      "market_odds": -114,
+      "fair_odds": -138,
+      "prob_edge": 4.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 22.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -120
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -109
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -120
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 21.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "STRONG",
+      "l5_avg": 26.2,
+      "l10_avg": 35.1,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 70,
+      "streak": 0,
+      "home_avg": 37.4,
+      "away_avg": 38.8,
+      "opp_def_rank": 13,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 33.1,
+      "vs_bot10_avg": 43.4,
+      "insight": "Has gone OVER 22.5 PRA in 7 of last 10 games (35.1 avg).",
+      "insight_strength": "strong",
+      "pick_score": 50.9,
+      "score_factors": [
+        "+8.6% EV",
+        "70% L10 hit rate",
+        "+6.4 edge"
+      ],
+      "actual": 20,
+      "result": "LOSS"
+    },
+    {
+      "player": "Austin Reaves",
+      "team": "LAL",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 3.5,
+      "projection": 5.0,
+      "confidence": 56.1,
+      "ev": 8.1,
+      "diff": 1.5,
+      "market_odds": -108,
+      "fair_odds": -128,
+      "prob_edge": 4.2,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 3.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -114
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 3.5,
+            "odds": -109
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -120
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 3.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -135
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "STRONG",
+      "l5_avg": 4.4,
+      "l10_avg": 4.9,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 50,
+      "streak": 0,
+      "home_avg": 5.6,
+      "away_avg": 6.8,
+      "opp_def_rank": 25,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 6.8,
+      "vs_bot10_avg": 5.7,
+      "insight": "BKN ranks #25 in assists defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "pick_score": 41.6,
+      "score_factors": [
+        "+8.1% EV",
+        "Favorable matchup (#25 DEF)"
+      ],
+      "actual": 1,
+      "result": "LOSS"
+    },
+    {
+      "player": "Ryan Rollins",
+      "team": "MIL",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 33.5,
+      "projection": 27.0,
+      "confidence": 57.5,
+      "ev": 7.5,
+      "diff": -6.5,
+      "market_odds": -120,
+      "fair_odds": -135,
+      "prob_edge": 4.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 36.5,
+            "odds": -104
+          },
+          "under": {
+            "line": 36.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 36.5,
+            "odds": -116
+          },
+          "under": {
+            "line": 36.5,
+            "odds": -114
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 36.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 36.5,
+            "odds": -125
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "STRONG",
+      "l5_avg": 29.6,
+      "l10_avg": 23.9,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 80,
+      "streak": 0,
+      "home_avg": 27.9,
+      "away_avg": 24.9,
+      "opp_def_rank": 26,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 26.6,
+      "vs_bot10_avg": 27.0,
+      "insight": "Averaging 23.9 PRA over last 10 games (-9.6 below line).",
+      "insight_strength": "good",
+      "pick_score": 36.2,
+      "score_factors": [
+        "+7.5% EV",
+        "+6.5 edge"
+      ],
+      "actual": 38,
+      "result": "LOSS"
+    },
+    {
+      "player": "Peyton Watson",
+      "team": "DEN",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 15.5,
+      "projection": 26.0,
+      "confidence": 55.7,
+      "ev": 6.4,
+      "diff": 10.5,
+      "market_odds": -110,
+      "fair_odds": -126,
+      "prob_edge": 3.3,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 15.5,
+            "odds": -128
+          },
+          "under": {
+            "line": 15.5,
+            "odds": -104
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 15.5,
+            "odds": -121
+          },
+          "under": {
+            "line": 15.5,
+            "odds": -105
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 17.5,
+            "odds": 115
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -155
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "STRONG",
+      "l5_avg": 23.4,
+      "l10_avg": 21.6,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 80,
+      "streak": 3,
+      "home_avg": 17.0,
+      "away_avg": 19.1,
+      "opp_def_rank": 3,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 15.9,
+      "vs_bot10_avg": 21.1,
+      "insight": "Has gone OVER 15.5 points in 8 of last 10 games (21.6 avg).",
+      "insight_strength": "strong",
+      "pick_score": 52.6,
+      "score_factors": [
+        "+6.4% EV",
+        "80% L10 hit rate",
+        "+10.5 edge"
+      ],
+      "actual": 17,
+      "result": "WIN"
+    },
+    {
+      "player": "Nickeil Alexander-Walker",
+      "team": "ATL",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 3.5,
+      "projection": 3.9,
+      "confidence": 52.1,
+      "ev": 4.7,
+      "diff": 0.4,
+      "market_odds": 101,
+      "fair_odds": -109,
+      "prob_edge": 2.3,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 3.5,
+            "odds": 104
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -138
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 3.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -124
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 3.5,
             "odds": 105
           },
           "under": {
-            "line": 4.5,
+            "line": 3.5,
             "odds": -140
           }
         }
       },
       "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 3.8,
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "GOOD",
+      "l5_avg": 3.0,
       "l10_avg": 4.1,
-      "l5_hit_rate": 40,
+      "l5_hit_rate": 20,
       "l10_hit_rate": 50,
       "streak": 1,
-      "home_avg": 4.5,
-      "away_avg": 4.9,
-      "opp_def_rank": 8,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 3.7,
-      "vs_bot10_avg": 5.1,
-      "insight": "BOS ranks #8 in assists defense \u2014 tough for overs.",
-      "insight_strength": "lean",
-      "teammate_injuries": [
-        {
-          "player": "Naji Marshall",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 25.8,
+      "home_avg": 3.3,
+      "away_avg": 3.3,
+      "opp_def_rank": 20,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 3.4,
+      "vs_bot10_avg": 4.0,
+      "insight": "MIA ranks #20 in assists defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "pick_score": 22.1,
       "score_factors": [
-        "+12.4% EV",
-        "+2.4 edge"
+        "Favorable matchup (#20 DEF)"
+      ],
+      "actual": 7,
+      "result": "WIN"
+    },
+    {
+      "player": "Anthony Black",
+      "team": "ORL",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 23.5,
+      "projection": 31.2,
+      "confidence": 54.3,
+      "ev": 4.6,
+      "diff": 7.7,
+      "market_odds": -121,
+      "fair_odds": -119,
+      "prob_edge": 2.4,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 23.5,
+            "odds": -113
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -113
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -127
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -103
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 22.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "GOOD",
+      "l5_avg": 27.2,
+      "l10_avg": 27.1,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 0,
+      "home_avg": 28.6,
+      "away_avg": 26.0,
+      "opp_def_rank": 1,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 24.4,
+      "vs_bot10_avg": 30.9,
+      "insight": "Has gone OVER 23.5 PRA in 7 of last 10 games (27.1 avg).",
+      "insight_strength": "strong",
+      "pick_score": 29.9,
+      "score_factors": [
+        "70% L10 hit rate",
+        "+7.7 edge"
+      ],
+      "actual": 19,
+      "result": "LOSS"
+    },
+    {
+      "player": "Karl-Anthony Towns",
+      "team": "NYK",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 36.5,
+      "projection": 28.2,
+      "confidence": 54.7,
+      "ev": 3.9,
+      "diff": -8.3,
+      "market_odds": -111,
+      "fair_odds": -121,
+      "prob_edge": 2.1,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 36.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 36.5,
+            "odds": -118
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 36.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 36.5,
+            "odds": -105
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 36.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 36.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "GOOD",
+      "l5_avg": 29.2,
+      "l10_avg": 30.8,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "streak": 1,
+      "home_avg": 32.9,
+      "away_avg": 32.3,
+      "opp_def_rank": 29,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 31.7,
+      "vs_bot10_avg": 33.5,
+      "insight": "Averaging 30.8 PRA over last 10 games (-5.7 below line).",
+      "insight_strength": "good",
+      "pick_score": 20.9,
+      "score_factors": [
+        "+8.3 edge"
+      ],
+      "actual": 36,
+      "result": "WIN"
+    },
+    {
+      "player": "Tyrese Maxey",
+      "team": "PHI",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 40.5,
+      "projection": 33.1,
+      "confidence": 55.4,
+      "ev": 3.1,
+      "diff": -7.4,
+      "market_odds": -116,
+      "fair_odds": -124,
+      "prob_edge": 1.7,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 40.5,
+            "odds": -104
+          },
+          "under": {
+            "line": 40.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 40.5,
+            "odds": -111
+          },
+          "under": {
+            "line": 40.5,
+            "odds": -119
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 39.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 39.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "GOOD",
+      "l5_avg": 34.4,
+      "l10_avg": 35.7,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "streak": 2,
+      "home_avg": 36.1,
+      "away_avg": 40.3,
+      "opp_def_rank": 10,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 39.8,
+      "vs_bot10_avg": 43.7,
+      "insight": "Averaging 35.7 PRA over last 10 games (-4.8 below line).",
+      "insight_strength": "good",
+      "pick_score": 44.6,
+      "score_factors": [
+        "Favorable matchup (#10 DEF)",
+        "+7.4 edge"
       ]
+    },
+    {
+      "player": "OG Anunoby",
+      "team": "NYK",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 16.5,
+      "projection": 19.9,
+      "confidence": 53.4,
+      "ev": 2.0,
+      "diff": 3.4,
+      "market_odds": -110,
+      "fair_odds": -115,
+      "prob_edge": 1.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 16.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 16.5,
+            "odds": -118
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 16.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 16.5,
+            "odds": -112
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 16.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 16.5,
+            "odds": -130
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "GOOD",
+      "l5_avg": 22.6,
+      "l10_avg": 18.8,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
+      "streak": 3,
+      "home_avg": 14.6,
+      "away_avg": 17.9,
+      "opp_def_rank": 29,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 16.0,
+      "vs_bot10_avg": 18.0,
+      "insight": "Averaging 18.8 points over last 10 games (+2.3 above line).",
+      "insight_strength": "good",
+      "pick_score": 38.2,
+      "score_factors": [
+        "60% L10 hit rate",
+        "Favorable matchup (#29 DEF)",
+        "+3.4 edge"
+      ],
+      "actual": 19,
+      "result": "WIN"
     },
     {
       "player": "Derrick White",
@@ -349,21 +974,21 @@
       "direction": "OVER",
       "line": 5.5,
       "projection": 6.6,
-      "confidence": 53.7,
-      "ev": 9.0,
+      "confidence": 53.0,
+      "ev": 2.0,
       "diff": 1.1,
-      "market_odds": 103,
-      "fair_odds": -116,
-      "prob_edge": 4.4,
+      "market_odds": -102,
+      "fair_odds": -113,
+      "prob_edge": 1.1,
       "book_odds": {
         "fanduel": {
           "over": {
             "line": 5.5,
-            "odds": 106
+            "odds": -113
           },
           "under": {
             "line": 5.5,
-            "odds": -136
+            "odds": -113
           }
         },
         "draftkings": {
@@ -387,9 +1012,9 @@
           }
         }
       },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "GOOD",
       "l5_avg": 6.2,
       "l10_avg": 6.3,
       "l5_hit_rate": 60,
@@ -401,211 +1026,1162 @@
       "matchup_favorability": "neutral",
       "vs_top10_avg": 4.8,
       "vs_bot10_avg": 7.0,
-      "pick_score": 25.8,
-      "score_factors": [
-        "+11.7% EV"
-      ]
+      "pick_score": 11.3,
+      "score_factors": [],
+      "actual": 8,
+      "result": "WIN"
     },
     {
-      "player": "Nickeil Alexander-Walker",
-      "team": "ATL",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 3.5,
-      "projection": 3.9,
-      "confidence": 52.3,
-      "ev": 4.1,
-      "diff": 0.4,
-      "market_odds": -101,
-      "fair_odds": -110,
-      "prob_edge": 2.1,
+      "player": "Chet Holmgren",
+      "team": "OKC",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 18.5,
+      "projection": 15.3,
+      "confidence": 53.6,
+      "ev": 1.5,
+      "diff": -3.2,
+      "market_odds": -118,
+      "fair_odds": -116,
+      "prob_edge": 0.8,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 3.5,
-            "odds": 108
+            "line": 16.5,
+            "odds": -113
           },
           "under": {
-            "line": 3.5,
-            "odds": -136
+            "line": 16.5,
+            "odds": -113
           }
         },
         "draftkings": {
           "over": {
-            "line": 3.5,
-            "odds": -107
+            "line": 16.5,
+            "odds": -109
           },
           "under": {
-            "line": 3.5,
-            "odds": -123
+            "line": 16.5,
+            "odds": -117
           }
         },
         "betmgm": {
           "over": {
-            "line": 3.5,
+            "line": 17.5,
             "odds": -105
           },
           "under": {
-            "line": 3.5,
-            "odds": -130
+            "line": 17.5,
+            "odds": -125
           }
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 3.0,
-      "l10_avg": 4.1,
-      "l5_hit_rate": 20,
-      "l10_hit_rate": 50,
-      "streak": 1,
-      "home_avg": 3.3,
-      "away_avg": 3.3,
-      "opp_def_rank": 20,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 3.4,
-      "vs_bot10_avg": 4.0,
-      "insight": "MIA ranks #20 in assists defense \u2014 favorable for overs.",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "LEAN",
+      "l5_avg": 17.0,
+      "l10_avg": 16.3,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 2,
+      "home_avg": 18.1,
+      "away_avg": 17.0,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 15.0,
+      "vs_bot10_avg": 18.3,
+      "insight": "Averaging 16.3 points over last 10 games (-2.2 below line).",
       "insight_strength": "good",
-      "pick_score": 32.2,
+      "pick_score": 16.9,
       "score_factors": [
-        "+11.5% EV",
-        "Favorable matchup (#20 DEF)"
-      ]
+        "+3.2 edge"
+      ],
+      "actual": 16,
+      "result": "WIN"
     },
     {
-      "player": "Jaylen Brown",
-      "team": "BOS",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 7.5,
-      "projection": 8.2,
-      "confidence": 53.8,
-      "ev": -9.6,
-      "diff": 0.7,
-      "market_odds": -147,
-      "fair_odds": -116,
-      "prob_edge": -5.7,
+      "player": "Chet Holmgren",
+      "team": "OKC",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 29.5,
+      "projection": 26.2,
+      "confidence": 54.3,
+      "ev": 1.1,
+      "diff": -3.3,
+      "market_odds": -112,
+      "fair_odds": -119,
+      "prob_edge": 0.6,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 6.5,
-            "odds": -148
+            "line": 26.5,
+            "odds": -122
           },
           "under": {
-            "line": 6.5,
-            "odds": 114
+            "line": 26.5,
+            "odds": -104
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -147
+            "line": 26.5,
+            "odds": -114
           },
           "under": {
-            "line": 6.5,
-            "odds": 111
+            "line": 26.5,
+            "odds": -115
           }
         },
         "betmgm": {
           "over": {
-            "line": 6.5,
-            "odds": -145
+            "line": 27.5,
+            "odds": -110
           },
           "under": {
-            "line": 6.5,
-            "odds": 110
+            "line": 27.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T11:44:16",
+      "edge": "LEAN",
+      "l5_avg": 28.0,
+      "l10_avg": 27.0,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 2,
+      "home_avg": 29.3,
+      "away_avg": 26.1,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 25.3,
+      "vs_bot10_avg": 31.0,
+      "insight": "Averaging 27.0 PRA over last 10 games (-2.5 below line).",
+      "insight_strength": "good",
+      "pick_score": 16.5,
+      "score_factors": [
+        "+3.3 edge"
+      ],
+      "actual": 27,
+      "result": "WIN"
+    },
+    {
+      "player": "Jrue Holiday",
+      "team": "POR",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 6.2,
+      "confidence": 56.6,
+      "ev": 7.6,
+      "diff": 1.7,
+      "market_odds": -110,
+      "fair_odds": -130,
+      "prob_edge": 4.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -128
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 100
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -139
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 106
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": 130
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -175
           }
         }
       },
       "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
+      "generated_at": "2026-02-03T23:05:52",
       "edge": "STRONG",
-      "l5_avg": 9.2,
-      "l10_avg": 8.8,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 70,
-      "streak": 1,
-      "home_avg": 8.1,
-      "away_avg": 6.9,
-      "opp_def_rank": 27,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 7.5,
-      "vs_bot10_avg": 8.0,
-      "insight": "Has gone OVER 7.5 rebounds in 7 of last 10 games (8.8 avg).",
-      "insight_strength": "strong",
-      "pick_score": 39.0,
+      "l5_avg": 5.2,
+      "l10_avg": 4.7,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 40,
+      "streak": 0,
+      "home_avg": 6.6,
+      "away_avg": 6.7,
+      "opp_def_rank": 5,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 5.1,
+      "vs_bot10_avg": 7.2,
+      "insight": "PHX ranks #5 in assists defense \u2014 tough for overs.",
+      "insight_strength": "lean",
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 26.5,
       "score_factors": [
-        "+10.7% EV",
-        "70% L10 hit rate",
-        "Favorable matchup (#27 DEF)"
+        "+7.6% EV"
       ]
     },
     {
-      "player": "Matas Buzelis",
-      "team": "CHI",
-      "prop": "REB",
+      "player": "Jerami Grant",
+      "team": "POR",
+      "prop": "PTS",
       "direction": "UNDER",
-      "line": 6.5,
-      "projection": 6.0,
-      "confidence": 55.5,
-      "ev": 6.0,
-      "diff": -0.5,
-      "market_odds": -110,
-      "fair_odds": -125,
-      "prob_edge": 3.1,
+      "line": 16.5,
+      "projection": 16.1,
+      "confidence": 47.8,
+      "ev": -9.6,
+      "diff": -0.4,
+      "market_odds": -112,
+      "fair_odds": 109,
+      "prob_edge": -5.0,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 6.5,
-            "odds": -132
+            "line": 16.5,
+            "odds": -115
           },
           "under": {
-            "line": 6.5,
-            "odds": 104
+            "line": 16.5,
+            "odds": -111
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -133
+            "line": 16.5,
+            "odds": -104
           },
           "under": {
-            "line": 6.5,
-            "odds": 101
+            "line": 16.5,
+            "odds": -122
           }
         },
         "betmgm": {
           "over": {
-            "line": 7.5,
+            "line": 15.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 15.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 12.6,
+      "l10_avg": 16.8,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
+      "streak": 3,
+      "home_avg": 19.8,
+      "away_avg": 17.3,
+      "opp_def_rank": 5,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 18.2,
+      "vs_bot10_avg": 16.2,
+      "insight": "PHX ranks #5 in points defense \u2014 favorable for unders.",
+      "insight_strength": "good",
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 11.0,
+      "score_factors": [
+        "Favorable matchup (#5 DEF)",
+        "3-game streak"
+      ]
+    },
+    {
+      "player": "Shaedon Sharpe",
+      "team": "POR",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 22.5,
+      "projection": 20.9,
+      "confidence": 52.8,
+      "ev": -3.7,
+      "diff": -1.6,
+      "market_odds": -119,
+      "fair_odds": -112,
+      "prob_edge": -2.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 22.5,
+            "odds": -111
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -115
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -125
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 21.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 21.4,
+      "l10_avg": 22.9,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 40,
+      "streak": 1,
+      "home_avg": 23.2,
+      "away_avg": 21.5,
+      "opp_def_rank": 5,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 18.4,
+      "vs_bot10_avg": 24.8,
+      "insight": "PHX ranks #5 in points defense \u2014 favorable for unders.",
+      "insight_strength": "good",
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 23.8,
+      "score_factors": [
+        "60% L10 hit rate",
+        "Favorable matchup (#5 DEF)"
+      ]
+    },
+    {
+      "player": "Shaedon Sharpe",
+      "team": "POR",
+      "prop": "REB",
+      "direction": "UNDER",
+      "line": 4.5,
+      "projection": 4.1,
+      "confidence": 49.0,
+      "ev": 1.0,
+      "diff": -0.4,
+      "market_odds": 106,
+      "fair_odds": 104,
+      "prob_edge": 0.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -138
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 108
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -153
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 116
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T23:05:52",
+      "edge": "LEAN",
+      "l5_avg": 4.2,
+      "l10_avg": 4.9,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 50,
+      "streak": 3,
+      "home_avg": 4.7,
+      "away_avg": 4.2,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 4.2,
+      "vs_bot10_avg": 5.2,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 12.5,
+      "score_factors": [
+        "3-game streak"
+      ]
+    },
+    {
+      "player": "Shaedon Sharpe",
+      "team": "POR",
+      "prop": "AST",
+      "direction": "UNDER",
+      "line": 3.5,
+      "projection": 3.4,
+      "confidence": 51.7,
+      "ev": -9.5,
+      "diff": -0.1,
+      "market_odds": -133,
+      "fair_odds": -107,
+      "prob_edge": -5.4,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 3.5,
+            "odds": 142
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -184
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 3.5,
+            "odds": 135
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -179
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 2.5,
+            "odds": -185
+          },
+          "under": {
+            "line": 2.5,
+            "odds": 135
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 3.0,
+      "l10_avg": 2.9,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "streak": 4,
+      "home_avg": 3.5,
+      "away_avg": 2.7,
+      "opp_def_rank": 5,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 2.7,
+      "vs_bot10_avg": 3.2,
+      "insight": "Has stayed UNDER 3.5 assists in 4 straight games.",
+      "insight_strength": "strong",
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 23.0,
+      "score_factors": [
+        "Favorable matchup (#5 DEF)",
+        "4-game streak"
+      ]
+    },
+    {
+      "player": "Shaedon Sharpe",
+      "team": "POR",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 30.5,
+      "projection": 29.2,
+      "confidence": 52.7,
+      "ev": -1.5,
+      "diff": -1.3,
+      "market_odds": -114,
+      "fair_odds": -111,
+      "prob_edge": -0.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 30.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 30.5,
+            "odds": -111
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 30.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 30.5,
+            "odds": -117
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 29.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 29.5,
+            "odds": -115
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 28.6,
+      "l10_avg": 30.7,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 30,
+      "streak": 1,
+      "home_avg": 31.5,
+      "away_avg": 28.4,
+      "opp_def_rank": 5,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 25.5,
+      "vs_bot10_avg": 32.8,
+      "insight": "Has stayed UNDER 30.5 PRA in 7 of last 10 games (30.7 avg).",
+      "insight_strength": "strong",
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 26.9,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup (#5 DEF)"
+      ]
+    },
+    {
+      "player": "Donovan Clingan",
+      "team": "POR",
+      "prop": "REB",
+      "direction": "UNDER",
+      "line": 11.5,
+      "projection": 11.5,
+      "confidence": 52.1,
+      "ev": -8.1,
+      "diff": -0.0,
+      "market_odds": -130,
+      "fair_odds": -109,
+      "prob_edge": -4.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 11.5,
+            "odds": 100
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -128
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 11.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -129
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 11.5,
+            "odds": 100
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -135
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 13.8,
+      "l10_avg": 12.6,
+      "l5_hit_rate": 20,
+      "l10_hit_rate": 40,
+      "streak": 0,
+      "home_avg": 11.7,
+      "away_avg": 11.8,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 10.6,
+      "vs_bot10_avg": 12.1,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 9.0,
+      "score_factors": [
+        "60% L10 hit rate"
+      ]
+    },
+    {
+      "player": "Donovan Clingan",
+      "team": "POR",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 24.5,
+      "projection": 25.2,
+      "confidence": 51.4,
+      "ev": -2.0,
+      "diff": 0.7,
+      "market_odds": -111,
+      "fair_odds": -106,
+      "prob_edge": -1.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 24.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -108
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 24.5,
+            "odds": -113
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -116
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 24.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -125
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 26.2,
+      "l10_avg": 26.1,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
+      "streak": 1,
+      "home_avg": 26.6,
+      "away_avg": 26.3,
+      "opp_def_rank": 5,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 24.3,
+      "vs_bot10_avg": 29.4,
+      "insight": "Averages 29.4 PRA vs bottom-10 defenses.",
+      "insight_strength": "good",
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 4.0,
+      "score_factors": [
+        "60% L10 hit rate"
+      ]
+    },
+    {
+      "player": "Toumani Camara",
+      "team": "POR",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 5.8,
+      "confidence": 48.1,
+      "ev": -6.9,
+      "diff": 0.3,
+      "market_odds": -107,
+      "fair_odds": 108,
+      "prob_edge": -3.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -162
+          },
+          "under": {
+            "line": 4.5,
+            "odds": 126
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": 118
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -156
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": 110
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -150
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 6.2,
+      "l10_avg": 5.2,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 40,
+      "streak": 0,
+      "home_avg": 4.6,
+      "away_avg": 5.7,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 3.9,
+      "vs_bot10_avg": 5.9,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 5.0,
+      "score_factors": []
+    },
+    {
+      "player": "Royce O'Neale",
+      "team": "PHX",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 4.6,
+      "confidence": 50.2,
+      "ev": -7.0,
+      "diff": 0.1,
+      "market_odds": -116,
+      "fair_odds": -101,
+      "prob_edge": -3.7,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -113
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -113
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -117
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -112
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 3.6,
+      "l10_avg": 3.8,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 40,
+      "streak": 0,
+      "home_avg": 4.7,
+      "away_avg": 4.3,
+      "opp_def_rank": 14,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 4.3,
+      "vs_bot10_avg": 4.4,
+      "pick_score": 5.0,
+      "score_factors": []
+    },
+    {
+      "player": "Royce O'Neale",
+      "team": "PHX",
+      "prop": "AST",
+      "direction": "UNDER",
+      "line": 3.5,
+      "projection": 3.5,
+      "confidence": 53.6,
+      "ev": -3.8,
+      "diff": -0.0,
+      "market_odds": -124,
+      "fair_odds": -116,
+      "prob_edge": -2.2,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 3.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -115
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 3.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -120
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 3.5,
             "odds": 105
           },
           "under": {
-            "line": 7.5,
+            "line": 3.5,
             "odds": -140
           }
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 6.6,
-      "l10_avg": 6.0,
-      "l5_hit_rate": 40,
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 3.2,
+      "l10_avg": 3.5,
+      "l5_hit_rate": 60,
       "l10_hit_rate": 60,
-      "streak": 1,
-      "home_avg": 5.5,
-      "away_avg": 4.8,
-      "opp_def_rank": 23,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 5.2,
-      "vs_bot10_avg": 5.0,
-      "insight": "MIL ranks #23 in rebounds defense \u2014 tough for unders.",
-      "insight_strength": "lean",
-      "pick_score": 23.5,
+      "streak": 3,
+      "home_avg": 2.4,
+      "away_avg": 3.2,
+      "opp_def_rank": 19,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 2.7,
+      "vs_bot10_avg": 3.5,
+      "pick_score": 11.0,
       "score_factors": [
-        "+9.0% EV"
+        "3-game streak"
       ]
+    },
+    {
+      "player": "Dillon Brooks",
+      "team": "PHX",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 22.5,
+      "projection": 21.5,
+      "confidence": 55.0,
+      "ev": -1.6,
+      "diff": -1.0,
+      "market_odds": -128,
+      "fair_odds": -122,
+      "prob_edge": -0.9,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 22.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -118
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -107
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -119
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 23.5,
+            "odds": 110
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -150
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 28.2,
+      "l10_avg": 20.6,
+      "l5_hit_rate": 20,
+      "l10_hit_rate": 50,
+      "streak": 1,
+      "home_avg": 24.8,
+      "away_avg": 17.3,
+      "opp_def_rank": 22,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 20.9,
+      "vs_bot10_avg": 18.8,
+      "insight": "POR ranks #22 in points defense \u2014 tough for unders.",
+      "insight_strength": "lean",
+      "pick_score": 13.0,
+      "score_factors": []
+    },
+    {
+      "player": "Dillon Brooks",
+      "team": "PHX",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 4.6,
+      "confidence": 47.1,
+      "ev": 0.7,
+      "diff": 0.1,
+      "market_odds": 114,
+      "fair_odds": 112,
+      "prob_edge": 0.4,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": 120
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -154
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": 124
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -164
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": 100
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -135
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T23:05:52",
+      "edge": "LEAN",
+      "l5_avg": 4.6,
+      "l10_avg": 4.6,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 1,
+      "home_avg": 3.6,
+      "away_avg": 4.0,
+      "opp_def_rank": 14,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 4.0,
+      "vs_bot10_avg": 3.7,
+      "insight": "Has gone OVER 4.5 rebounds in 7 of last 10 games (4.6 avg).",
+      "insight_strength": "strong",
+      "pick_score": 4.1,
+      "score_factors": [
+        "70% L10 hit rate"
+      ]
+    },
+    {
+      "player": "Dillon Brooks",
+      "team": "PHX",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 28.5,
+      "projection": 28.1,
+      "confidence": 53.1,
+      "ev": -1.9,
+      "diff": -0.4,
+      "market_odds": -116,
+      "fair_odds": -113,
+      "prob_edge": -1.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 28.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 28.5,
+            "odds": -102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 28.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 28.5,
+            "odds": -105
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 30.5,
+            "odds": 110
+          },
+          "under": {
+            "line": 30.5,
+            "odds": -150
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 35.4,
+      "l10_avg": 27.2,
+      "l5_hit_rate": 20,
+      "l10_hit_rate": 50,
+      "streak": 1,
+      "home_avg": 30.3,
+      "away_avg": 22.9,
+      "opp_def_rank": 22,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 28.0,
+      "vs_bot10_avg": 23.7,
+      "insight": "POR ranks #22 in PRA defense \u2014 tough for unders.",
+      "insight_strength": "lean",
+      "pick_score": 0.0,
+      "score_factors": []
+    },
+    {
+      "player": "Grayson Allen",
+      "team": "PHX",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 18.5,
+      "projection": 17.8,
+      "confidence": 51.7,
+      "ev": -3.8,
+      "diff": -0.7,
+      "market_odds": -116,
+      "fair_odds": -107,
+      "prob_edge": -2.0,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 18.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 18.5,
+            "odds": -111
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 18.5,
+            "odds": -113
+          },
+          "under": {
+            "line": 18.5,
+            "odds": -113
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 19.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -125
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 19.2,
+      "l10_avg": 19.1,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "streak": 0,
+      "home_avg": 17.2,
+      "away_avg": 16.4,
+      "opp_def_rank": 22,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 15.7,
+      "vs_bot10_avg": 19.5,
+      "insight": "Averages only 15.7 points vs top-10 defenses.",
+      "insight_strength": "good",
+      "pick_score": 0.0,
+      "score_factors": []
     },
     {
       "player": "Grayson Allen",
@@ -613,13 +2189,208 @@
       "prop": "AST",
       "direction": "OVER",
       "line": 4.5,
-      "projection": 5.5,
-      "confidence": 52.1,
-      "ev": 8.4,
-      "diff": 1.0,
-      "market_odds": 108,
-      "fair_odds": -109,
-      "prob_edge": 4.0,
+      "projection": 5.1,
+      "confidence": 52.0,
+      "ev": 2.6,
+      "diff": 0.6,
+      "market_odds": -102,
+      "fair_odds": -108,
+      "prob_edge": 1.3,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": 104
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -132
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -103
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -128
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 4.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-03T23:05:52",
+      "edge": "GOOD",
+      "l5_avg": 5.4,
+      "l10_avg": 4.7,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
+      "streak": 4,
+      "home_avg": 4.2,
+      "away_avg": 3.5,
+      "opp_def_rank": 19,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 2.8,
+      "vs_bot10_avg": 4.6,
+      "insight": "On a 4-game OVER streak for assists.",
+      "insight_strength": "strong",
+      "pick_score": 20.9,
+      "score_factors": [
+        "60% L10 hit rate",
+        "4-game streak"
+      ]
+    },
+    {
+      "player": "Grayson Allen",
+      "team": "PHX",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 26.5,
+      "projection": 26.1,
+      "confidence": 50.6,
+      "ev": -2.1,
+      "diff": -0.4,
+      "market_odds": -113,
+      "fair_odds": -102,
+      "prob_edge": -1.1,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 27.5,
+            "odds": -104
+          },
+          "under": {
+            "line": 27.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 26.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 26.5,
+            "odds": -108
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 27.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 27.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 28.2,
+      "l10_avg": 27.2,
+      "l5_hit_rate": 20,
+      "l10_hit_rate": 40,
+      "streak": 0,
+      "home_avg": 24.7,
+      "away_avg": 22.5,
+      "opp_def_rank": 22,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 21.2,
+      "vs_bot10_avg": 26.1,
+      "insight": "Averages only 21.2 PRA vs top-10 defenses.",
+      "insight_strength": "good",
+      "pick_score": 4.0,
+      "score_factors": [
+        "60% L10 hit rate"
+      ]
+    },
+    {
+      "player": "Collin Gillespie",
+      "team": "PHX",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 14.5,
+      "projection": 14.1,
+      "confidence": 50.6,
+      "ev": -3.4,
+      "diff": -0.4,
+      "market_odds": -110,
+      "fair_odds": -102,
+      "prob_edge": -1.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 14.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -111
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 14.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -102
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 14.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -118
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 14.2,
+      "l10_avg": 14.7,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 50,
+      "streak": 1,
+      "home_avg": 12.7,
+      "away_avg": 15.0,
+      "opp_def_rank": 22,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 11.6,
+      "vs_bot10_avg": 14.6,
+      "insight": "Averages only 11.6 points vs top-10 defenses.",
+      "insight_strength": "good",
+      "pick_score": 0.0,
+      "score_factors": []
+    },
+    {
+      "player": "Collin Gillespie",
+      "team": "PHX",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 4.6,
+      "confidence": 49.0,
+      "ev": 5.9,
+      "diff": 0.1,
+      "market_odds": 116,
+      "fair_odds": 104,
+      "prob_edge": 2.7,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -634,1885 +2405,278 @@
         "draftkings": {
           "over": {
             "line": 4.5,
-            "odds": 110
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -145
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 4.5,
-            "odds": 100
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -135
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 5.4,
-      "l10_avg": 4.7,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 60,
-      "streak": 4,
-      "home_avg": 4.2,
-      "away_avg": 3.5,
-      "opp_def_rank": 19,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 2.8,
-      "vs_bot10_avg": 5.4,
-      "insight": "On a 4-game OVER streak for assists.",
-      "insight_strength": "strong",
-      "pick_score": 32.6,
-      "score_factors": [
-        "+8.4% EV",
-        "60% L10 hit rate",
-        "4-game streak"
-      ]
-    },
-    {
-      "player": "Jamal Murray",
-      "team": "DEN",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 6.5,
-      "projection": 7.7,
-      "confidence": 55.7,
-      "ev": 17.5,
-      "diff": 1.2,
-      "market_odds": 111,
-      "fair_odds": -126,
-      "prob_edge": 8.3,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 6.5,
-            "odds": 126
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -162
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 6.5,
             "odds": 115
           },
           "under": {
-            "line": 6.5,
+            "line": 4.5,
             "odds": -151
           }
         },
         "betmgm": {
           "over": {
-            "line": 6.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -130
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 8.4,
-      "l10_avg": 7.5,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 50,
-      "streak": 2,
-      "home_avg": 7.4,
-      "away_avg": 8.5,
-      "opp_def_rank": 1,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 7.7,
-      "vs_bot10_avg": 7.4,
-      "insight": "DET ranks #1 in assists defense \u2014 tough for overs.",
-      "insight_strength": "lean",
-      "pick_score": 25.9,
-      "score_factors": [
-        "+8.2% EV"
-      ]
-    },
-    {
-      "player": "Jrue Holiday",
-      "team": "POR",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 4.5,
-      "projection": 5.3,
-      "confidence": 56.6,
-      "ev": 6.2,
-      "diff": 0.8,
-      "market_odds": -114,
-      "fair_odds": -130,
-      "prob_edge": 3.3,
-      "book_odds": {
-        "fanduel": {
-          "over": {
             "line": 4.5,
-            "odds": -130
+            "odds": 120
           },
           "under": {
             "line": 4.5,
-            "odds": 102
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 4.5,
-            "odds": -147
-          },
-          "under": {
-            "line": 4.5,
-            "odds": 111
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 5.5,
-            "odds": 130
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -175
+            "odds": -160
           }
         }
       },
       "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
+      "generated_at": "2026-02-03T23:05:52",
       "edge": "STRONG",
-      "l5_avg": 5.2,
-      "l10_avg": 4.7,
-      "l5_hit_rate": 60,
+      "l5_avg": 4.2,
+      "l10_avg": 4.0,
+      "l5_hit_rate": 40,
       "l10_hit_rate": 40,
       "streak": 0,
-      "home_avg": 6.6,
-      "away_avg": 6.7,
-      "opp_def_rank": 5,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 5.1,
-      "vs_bot10_avg": 6.4,
-      "insight": "PHX ranks #5 in assists defense \u2014 tough for overs.",
-      "insight_strength": "lean",
-      "teammate_injuries": [
-        {
-          "player": "Matisse Thybulle",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 20.6,
+      "home_avg": 3.6,
+      "away_avg": 4.9,
+      "opp_def_rank": 14,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 4.0,
+      "vs_bot10_avg": 4.4,
+      "pick_score": 13.9,
       "score_factors": [
-        "+7.1% EV"
+        "+5.9% EV"
       ]
     },
     {
-      "player": "Peyton Watson",
-      "team": "DEN",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 16.5,
-      "projection": 26.0,
-      "confidence": 55.6,
-      "ev": 10.6,
-      "diff": 9.5,
-      "market_odds": -101,
-      "fair_odds": -125,
-      "prob_edge": 5.4,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 16.5,
-            "odds": 106
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -136
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 15.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 15.5,
-            "odds": -116
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 16.5,
-            "odds": 100
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -130
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 23.4,
-      "l10_avg": 21.6,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 80,
-      "streak": 3,
-      "home_avg": 17.0,
-      "away_avg": 19.1,
-      "opp_def_rank": 3,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 15.9,
-      "vs_bot10_avg": 21.1,
-      "insight": "Has gone OVER 16.5 points in 8 of last 10 games (21.6 avg).",
-      "insight_strength": "strong",
-      "pick_score": 52.9,
-      "score_factors": [
-        "+6.6% EV",
-        "80% L10 hit rate",
-        "+9.5 edge"
-      ],
-      "top_pick_rank": 2
-    },
-    {
-      "player": "Ryan Rollins",
-      "team": "MIL",
-      "prop": "PRA",
+      "player": "Collin Gillespie",
+      "team": "PHX",
+      "prop": "AST",
       "direction": "UNDER",
-      "line": 34.5,
-      "projection": 27.0,
-      "confidence": 58.1,
-      "ev": 6.5,
-      "diff": -7.5,
-      "market_odds": -120,
-      "fair_odds": -139,
-      "prob_edge": 3.6,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 36.5,
-            "odds": -104
-          },
-          "under": {
-            "line": 36.5,
-            "odds": -122
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 36.5,
-            "odds": -116
-          },
-          "under": {
-            "line": 36.5,
-            "odds": -114
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 36.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 36.5,
-            "odds": -125
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 29.6,
-      "l10_avg": 23.9,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 80,
-      "streak": 0,
-      "home_avg": 27.9,
-      "away_avg": 24.9,
-      "opp_def_rank": 26,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 26.6,
-      "vs_bot10_avg": 27.0,
-      "insight": "Averaging 23.9 PRA over last 10 games (-10.6 below line).",
-      "insight_strength": "good",
-      "pick_score": 34.8,
-      "score_factors": [
-        "+6.5% EV",
-        "+7.5 edge"
-      ]
-    },
-    {
-      "player": "Myles Turner",
-      "team": "MIL",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 25.5,
-      "projection": 21.8,
-      "confidence": 56.4,
-      "ev": 9.1,
-      "diff": -3.7,
-      "market_odds": -107,
-      "fair_odds": -129,
-      "prob_edge": 4.7,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 28.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 28.5,
-            "odds": -106
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 28.5,
-            "odds": -119
-          },
-          "under": {
-            "line": 28.5,
-            "odds": -110
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 28.5,
-            "odds": -125
-          },
-          "under": {
-            "line": 28.5,
-            "odds": -105
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 27.0,
-      "l10_avg": 21.9,
-      "l5_hit_rate": 40,
-      "l10_hit_rate": 70,
-      "streak": 1,
-      "home_avg": 19.6,
-      "away_avg": 20.4,
-      "opp_def_rank": 26,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 15.4,
-      "vs_bot10_avg": 22.3,
-      "insight": "Averaging 21.9 PRA over last 10 games (-3.6 below line).",
-      "insight_strength": "good",
-      "pick_score": 29.8,
-      "score_factors": [
-        "+5.8% EV",
-        "+3.7 edge"
-      ]
-    },
-    {
-      "player": "Ryan Rollins",
-      "team": "MIL",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 21.5,
-      "projection": 16.6,
-      "confidence": 56.3,
-      "ev": 5.3,
-      "diff": -4.9,
-      "market_odds": -115,
-      "fair_odds": -129,
-      "prob_edge": 2.8,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 22.5,
-            "odds": -113
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -113
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 22.5,
-            "odds": -116
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -109
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 22.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -125
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "STRONG",
-      "l5_avg": 19.4,
-      "l10_avg": 14.0,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 80,
-      "streak": 0,
-      "home_avg": 17.2,
-      "away_avg": 14.9,
-      "opp_def_rank": 26,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 15.3,
-      "vs_bot10_avg": 16.7,
-      "insight": "Averaging 14.0 points over last 10 games (-7.5 below line).",
-      "insight_strength": "good",
-      "pick_score": 33.2,
-      "score_factors": [
-        "+5.7% EV",
-        "+4.9 edge"
-      ]
-    },
-    {
-      "player": "Brandin Podziemski",
-      "team": "GSW",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 5.5,
-      "projection": 5.1,
-      "confidence": 52.7,
-      "ev": -3.4,
+      "line": 4.5,
+      "projection": 4.1,
+      "confidence": 51.2,
+      "ev": -9.5,
       "diff": -0.4,
-      "market_odds": -120,
-      "fair_odds": -111,
-      "prob_edge": -1.8,
+      "market_odds": -130,
+      "fair_odds": -105,
+      "prob_edge": -5.3,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 5.5,
+            "line": 4.5,
             "odds": 100
           },
           "under": {
-            "line": 5.5,
+            "line": 4.5,
             "odds": -128
           }
         },
         "draftkings": {
           "over": {
-            "line": 5.5,
-            "odds": -106
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -124
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 5.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -110
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 6.4,
-      "l10_avg": 5.6,
-      "l5_hit_rate": 40,
-      "l10_hit_rate": 50,
-      "streak": 0,
-      "home_avg": 4.7,
-      "away_avg": 5.1,
-      "opp_def_rank": 20,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 4.6,
-      "vs_bot10_avg": 5.1,
-      "insight": "PHI ranks #20 in rebounds defense \u2014 tough for unders.",
-      "insight_strength": "lean",
-      "pick_score": 7.2,
-      "score_factors": []
-    },
-    {
-      "player": "Royce O'Neale",
-      "team": "PHX",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 4.5,
-      "projection": 4.4,
-      "confidence": 52.1,
-      "ev": 0.3,
-      "diff": -0.1,
-      "market_odds": -108,
-      "fair_odds": -109,
-      "prob_edge": 0.2,
-      "book_odds": {
-        "fanduel": {
-          "over": {
             "line": 4.5,
-            "odds": -122
+            "odds": -107
           },
           "under": {
             "line": 4.5,
-            "odds": -104
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 4.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -110
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 4.5,
-            "odds": -118
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -110
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 3.6,
-      "l10_avg": 3.8,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 60,
-      "streak": 1,
-      "home_avg": 4.7,
-      "away_avg": 4.3,
-      "opp_def_rank": 14,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 4.3,
-      "vs_bot10_avg": 4.5,
-      "pick_score": 12.2,
-      "score_factors": []
-    },
-    {
-      "player": "Coby White",
-      "team": "CHI",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 31.5,
-      "projection": 28.9,
-      "confidence": 55.2,
-      "ev": 4.0,
-      "diff": -2.6,
-      "market_odds": -113,
-      "fair_odds": -123,
-      "prob_edge": 2.1,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 30.5,
-            "odds": -118
-          },
-          "under": {
-            "line": 30.5,
-            "odds": -108
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 30.5,
-            "odds": -117
-          },
-          "under": {
-            "line": 30.5,
-            "odds": -113
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 31.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 31.5,
-            "odds": -118
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 26.6,
-      "l10_avg": 27.4,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 80,
-      "streak": 3,
-      "home_avg": 25.9,
-      "away_avg": 27.8,
-      "opp_def_rank": 14,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 23.2,
-      "vs_bot10_avg": 27.0,
-      "insight": "Averaging 27.4 PRA over last 10 games (-4.1 below line).",
-      "insight_strength": "good",
-      "pick_score": 35.4,
-      "score_factors": [
-        "+2.6 edge",
-        "3-game streak"
-      ]
-    },
-    {
-      "player": "Ryan Rollins",
-      "team": "MIL",
-      "prop": "AST",
-      "direction": "UNDER",
-      "line": 6.5,
-      "projection": 5.6,
-      "confidence": 53.6,
-      "ev": 4.2,
-      "diff": -0.9,
-      "market_odds": -106,
-      "fair_odds": -116,
-      "prob_edge": 2.1,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 7.5,
-            "odds": -113
-          },
-          "under": {
-            "line": 7.5,
-            "odds": -113
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 7.5,
-            "odds": -124
-          },
-          "under": {
-            "line": 7.5,
-            "odds": -106
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 7.5,
-            "odds": -135
-          },
-          "under": {
-            "line": 7.5,
-            "odds": 100
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 5.4,
-      "l10_avg": 4.6,
-      "l5_hit_rate": 40,
-      "l10_hit_rate": 60,
-      "streak": 0,
-      "home_avg": 6.1,
-      "away_avg": 4.7,
-      "opp_def_rank": 27,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 5.8,
-      "vs_bot10_avg": 4.9,
-      "insight": "CHI ranks #27 in assists defense \u2014 tough for unders.",
-      "insight_strength": "lean",
-      "pick_score": 6.3,
-      "score_factors": []
-    },
-    {
-      "player": "Karl-Anthony Towns",
-      "team": "NYK",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 20.5,
-      "projection": 12.7,
-      "confidence": 55.3,
-      "ev": 7.5,
-      "diff": -7.8,
-      "market_odds": -106,
-      "fair_odds": -124,
-      "prob_edge": 3.8,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 20.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 20.5,
-            "odds": -106
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 20.5,
             "odds": -123
-          },
-          "under": {
-            "line": 20.5,
-            "odds": -103
           }
         },
         "betmgm": {
           "over": {
-            "line": 20.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 20.5,
-            "odds": -110
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 12.0,
-      "l10_avg": 14.9,
-      "l5_hit_rate": 100,
-      "l10_hit_rate": 80,
-      "streak": 6,
-      "home_avg": 17.5,
-      "away_avg": 19.2,
-      "opp_def_rank": 29,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 17.4,
-      "vs_bot10_avg": 19.3,
-      "insight": "Has stayed UNDER 20.5 points in 6 straight games.",
-      "insight_strength": "strong",
-      "pick_score": 40.9,
-      "score_factors": [
-        "+7.8 edge",
-        "6-game streak"
-      ]
-    },
-    {
-      "player": "Matas Buzelis",
-      "team": "CHI",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 18.5,
-      "projection": 15.3,
-      "confidence": 54.8,
-      "ev": -1.0,
-      "diff": -3.2,
-      "market_odds": -124,
-      "fair_odds": -121,
-      "prob_edge": -0.6,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 18.5,
-            "odds": -108
-          },
-          "under": {
-            "line": 18.5,
-            "odds": -118
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 18.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 18.5,
-            "odds": -121
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 19.5,
+            "line": 4.5,
             "odds": 105
           },
           "under": {
-            "line": 19.5,
-            "odds": -135
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 14.0,
-      "l10_avg": 14.9,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 70,
-      "streak": 1,
-      "home_avg": 13.8,
-      "away_avg": 16.6,
-      "opp_def_rank": 14,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 17.9,
-      "vs_bot10_avg": 15.6,
-      "insight": "Averaging 14.9 points over last 10 games (-3.6 below line).",
-      "insight_strength": "good",
-      "pick_score": 19.6,
-      "score_factors": [
-        "+3.2 edge"
-      ]
-    },
-    {
-      "player": "Kyle Kuzma",
-      "team": "MIL",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 29.5,
-      "projection": 25.0,
-      "confidence": 55.8,
-      "ev": 4.7,
-      "diff": -4.5,
-      "market_odds": -114,
-      "fair_odds": -126,
-      "prob_edge": 2.5,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 30.5,
-            "odds": -111
-          },
-          "under": {
-            "line": 30.5,
-            "odds": -115
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 30.5,
-            "odds": -116
-          },
-          "under": {
-            "line": 30.5,
-            "odds": -113
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 29.5,
-            "odds": -115
-          },
-          "under": {
-            "line": 29.5,
-            "odds": -115
+            "line": 4.5,
+            "odds": -140
           }
         }
       },
       "best_book": "draftkings",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 26.0,
-      "l10_avg": 20.4,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 80,
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 2.6,
+      "l10_avg": 3.5,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
       "streak": 1,
-      "home_avg": 19.1,
-      "away_avg": 21.1,
-      "opp_def_rank": 26,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 20.2,
-      "vs_bot10_avg": 19.4,
-      "insight": "Averaging 20.4 PRA over last 10 games (-9.1 below line).",
-      "insight_strength": "good",
-      "pick_score": 28.1,
-      "score_factors": [
-        "+4.5 edge"
-      ]
-    },
-    {
-      "player": "Matas Buzelis",
-      "team": "CHI",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 28.5,
-      "projection": 24.9,
-      "confidence": 55.3,
-      "ev": 2.2,
-      "diff": -3.6,
-      "market_odds": -118,
-      "fair_odds": -124,
-      "prob_edge": 1.2,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 28.5,
-            "odds": -113
-          },
-          "under": {
-            "line": 28.5,
-            "odds": -113
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 28.5,
-            "odds": -114
-          },
-          "under": {
-            "line": 28.5,
-            "odds": -115
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 30.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 30.5,
-            "odds": -125
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 23.4,
-      "l10_avg": 24.3,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 80,
-      "streak": 1,
-      "home_avg": 22.4,
-      "away_avg": 23.3,
-      "opp_def_rank": 14,
+      "home_avg": 3.8,
+      "away_avg": 4.7,
+      "opp_def_rank": 19,
       "matchup_favorability": "neutral",
-      "vs_top10_avg": 24.9,
-      "vs_bot10_avg": 23.4,
-      "insight": "Averaging 24.3 PRA over last 10 games (-4.2 below line).",
-      "insight_strength": "good",
-      "pick_score": 30.3,
-      "score_factors": [
-        "+3.6 edge"
-      ]
+      "vs_top10_avg": 3.7,
+      "vs_bot10_avg": 4.6,
+      "pick_score": 5.0,
+      "score_factors": []
     },
     {
-      "player": "Lauri Markkanen",
-      "team": "UTA",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 7.5,
-      "projection": 9.3,
-      "confidence": 52.4,
-      "ev": 6.9,
-      "diff": 1.8,
-      "market_odds": 104,
-      "fair_odds": -110,
-      "prob_edge": 3.4,
+      "player": "Collin Gillespie",
+      "team": "PHX",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 23.5,
+      "projection": 22.2,
+      "confidence": 50.9,
+      "ev": -2.0,
+      "diff": -1.3,
+      "market_odds": -108,
+      "fair_odds": -104,
+      "prob_edge": -1.0,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 7.5,
-            "odds": -113
+            "line": 23.5,
+            "odds": -115
           },
           "under": {
-            "line": 7.5,
-            "odds": -113
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 8.5,
-            "odds": 130
-          },
-          "under": {
-            "line": 8.5,
-            "odds": -175
+            "line": 23.5,
+            "odds": -111
           }
         },
         "draftkings": {
           "over": {
-            "line": 7.5,
-            "odds": -101
+            "line": 23.5,
+            "odds": -126
           },
           "under": {
-            "line": 7.5,
-            "odds": -130
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 7.6,
-      "l10_avg": 7.5,
-      "l5_hit_rate": 40,
-      "l10_hit_rate": 40,
-      "streak": 1,
-      "home_avg": 7.0,
-      "away_avg": 7.4,
-      "opp_def_rank": 28,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 7.1,
-      "vs_bot10_avg": 7.9,
-      "insight": "IND ranks #28 in rebounds defense \u2014 favorable for overs.",
-      "insight_strength": "good",
-      "has_boost": true,
-      "injury_boost": 1.9,
-      "boosted_by": "John Konchar",
-      "injury_insight": "Averages 7.9 REB without John Konchar vs 5.9 with (+2.0 in 22 games)",
-      "injury_details": {
-        "avg_without": 7.9,
-        "avg_with": 5.9,
-        "games_without": 22
-      },
-      "teammate_injuries": [
-        {
-          "player": "John Konchar",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 27.7,
-      "score_factors": [
-        "Favorable matchup (#28 DEF)",
-        "Injury boosted"
-      ]
-    },
-    {
-      "player": "Chet Holmgren",
-      "team": "OKC",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 29.5,
-      "projection": 26.2,
-      "confidence": 54.2,
-      "ev": 4.4,
-      "diff": -3.3,
-      "market_odds": -108,
-      "fair_odds": -118,
-      "prob_edge": 2.3,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 26.5,
-            "odds": -122
-          },
-          "under": {
-            "line": 26.5,
+            "line": 23.5,
             "odds": -104
           }
         },
-        "draftkings": {
-          "over": {
-            "line": 26.5,
-            "odds": -114
-          },
-          "under": {
-            "line": 26.5,
-            "odds": -115
-          }
-        },
         "betmgm": {
           "over": {
-            "line": 26.5,
-            "odds": -125
+            "line": 23.5,
+            "odds": -120
           },
           "under": {
-            "line": 26.5,
-            "odds": -105
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 28.0,
-      "l10_avg": 27.0,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 70,
-      "streak": 2,
-      "home_avg": 29.3,
-      "away_avg": 26.1,
-      "opp_def_rank": 15,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 25.3,
-      "vs_bot10_avg": 31.0,
-      "insight": "Averaging 27.0 PRA over last 10 games (-2.5 below line).",
-      "insight_strength": "good",
-      "pick_score": 18.3,
-      "score_factors": [
-        "+3.3 edge"
-      ]
-    },
-    {
-      "player": "OG Anunoby",
-      "team": "NYK",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 16.5,
-      "projection": 19.9,
-      "confidence": 53.2,
-      "ev": -0.9,
-      "diff": 3.4,
-      "market_odds": -116,
-      "fair_odds": -114,
-      "prob_edge": -0.5,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 16.5,
-            "odds": -108
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -118
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 16.5,
-            "odds": -111
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -115
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 15.5,
-            "odds": -130
-          },
-          "under": {
-            "line": 15.5,
-            "odds": -105
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 22.6,
-      "l10_avg": 18.8,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 60,
-      "streak": 3,
-      "home_avg": 14.6,
-      "away_avg": 17.9,
-      "opp_def_rank": 29,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 16.0,
-      "vs_bot10_avg": 18.0,
-      "insight": "Averaging 18.8 points over last 10 games (+2.3 above line).",
-      "insight_strength": "good",
-      "pick_score": 38.3,
-      "score_factors": [
-        "60% L10 hit rate",
-        "Favorable matchup (#29 DEF)",
-        "+3.4 edge"
-      ]
-    },
-    {
-      "player": "Donovan Clingan",
-      "team": "POR",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 11.5,
-      "projection": 11.5,
-      "confidence": 53.2,
-      "ev": -1.3,
-      "diff": -0.0,
-      "market_odds": -117,
-      "fair_odds": -114,
-      "prob_edge": -0.7,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 11.5,
-            "odds": 100
-          },
-          "under": {
-            "line": 11.5,
-            "odds": -128
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 11.5,
+            "line": 23.5,
             "odds": -110
-          },
-          "under": {
-            "line": 11.5,
-            "odds": -119
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 11.5,
-            "odds": -125
-          },
-          "under": {
-            "line": 11.5,
-            "odds": -105
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "GOOD",
-      "l5_avg": 13.8,
-      "l10_avg": 12.6,
-      "l5_hit_rate": 20,
-      "l10_hit_rate": 40,
-      "streak": 0,
-      "home_avg": 11.7,
-      "away_avg": 11.8,
-      "opp_def_rank": 15,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 10.6,
-      "vs_bot10_avg": 12.7,
-      "teammate_injuries": [
-        {
-          "player": "Matisse Thybulle",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 12.2,
-      "score_factors": [
-        "60% L10 hit rate"
-      ]
-    },
-    {
-      "player": "Coby White",
-      "team": "CHI",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 21.5,
-      "projection": 18.5,
-      "confidence": 54.8,
-      "ev": 1.6,
-      "diff": -3.0,
-      "market_odds": -117,
-      "fair_odds": -121,
-      "prob_edge": 0.9,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 21.5,
-            "odds": -102
-          },
-          "under": {
-            "line": 21.5,
-            "odds": -125
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 20.5,
-            "odds": -115
-          },
-          "under": {
-            "line": 20.5,
-            "odds": -111
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 21.5,
-            "odds": -115
-          },
-          "under": {
-            "line": 21.5,
-            "odds": -115
           }
         }
       },
       "best_book": "draftkings",
-      "generated_at": "2026-02-03T17:06:15",
-      "edge": "LEAN",
-      "l5_avg": 17.8,
-      "l10_avg": 18.5,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 50,
-      "streak": 3,
-      "home_avg": 17.7,
-      "away_avg": 19.5,
-      "opp_def_rank": 14,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 16.5,
-      "vs_bot10_avg": 18.1,
-      "insight": "Averaging 18.5 points over last 10 games (-3.0 below line).",
-      "insight_strength": "good",
-      "pick_score": 22.4,
+      "generated_at": "2026-02-03T23:05:52",
+      "l5_avg": 21.0,
+      "l10_avg": 22.2,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "streak": 4,
+      "home_avg": 20.1,
+      "away_avg": 24.7,
+      "opp_def_rank": 22,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 19.3,
+      "vs_bot10_avg": 24.3,
+      "insight": "Has stayed UNDER 23.5 PRA in 4 straight games.",
+      "insight_strength": "strong",
+      "pick_score": 11.9,
       "score_factors": [
-        "+3.0 edge",
-        "3-game streak"
+        "4-game streak"
       ]
     }
   ],
   "top_picks": [
     {
-      "type": "prop",
-      "player": "Austin Reaves",
-      "team": "LAL",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 15.5,
-      "projection": 21.8,
-      "diff": 6.3,
-      "ev": 14.6,
-      "confidence": 58.7,
-      "pick_score": 56.9,
+      "type": "total",
+      "game": "HOU @ IND",
+      "away_team": "HOU",
+      "home_team": "IND",
+      "pick": "OVER 218.5",
+      "confidence": 67.4,
+      "pick_score": 40.0,
       "score_factors": [
-        "+12.6% EV",
-        "70% L10 hit rate",
-        "+6.3 edge"
+        "67.4% total conf"
       ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 14.5,
-            "odds": -106
-          },
-          "under": {
-            "line": 14.5,
-            "odds": -120
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 13.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 13.5,
-            "odds": -110
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 14.5,
-            "odds": 110
-          },
-          "under": {
-            "line": 14.5,
-            "odds": -145
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "insight": "Has gone OVER 15.5 points in 7 of last 10 games (25.3 avg).",
+      "commence_time": "2026-02-03T00:10:00Z",
       "top_pick_rank": 1
     },
     {
-      "type": "prop",
-      "player": "Peyton Watson",
-      "team": "DEN",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 16.5,
-      "projection": 26.0,
-      "diff": 9.5,
-      "ev": 10.6,
-      "confidence": 55.6,
-      "pick_score": 52.9,
+      "type": "spread",
+      "game": "MIN @ MEM",
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "pick": "MEM +6.5",
+      "confidence": 61.8,
+      "pick_score": 40.0,
       "score_factors": [
-        "+6.6% EV",
-        "80% L10 hit rate",
-        "+9.5 edge"
+        "61.8% spread conf"
+      ],
+      "commence_time": "2026-02-03T00:40:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "total",
+      "game": "PHI @ LAC",
+      "away_team": "PHI",
+      "home_team": "LAC",
+      "pick": "OVER 220.5",
+      "confidence": 67.9,
+      "pick_score": 40.0,
+      "score_factors": [
+        "67.9% total conf"
+      ],
+      "commence_time": "2026-02-03T03:10:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "total",
+      "game": "MIN @ MEM",
+      "away_team": "MIN",
+      "home_team": "MEM",
+      "pick": "OVER 229.5",
+      "confidence": 60.1,
+      "pick_score": 37.8,
+      "score_factors": [
+        "60.1% total conf"
+      ],
+      "commence_time": "2026-02-03T00:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "prop",
+      "player": "Alperen Sengun",
+      "team": "HOU",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 23.5,
+      "projection": 18.6,
+      "diff": -4.9,
+      "ev": 4.0,
+      "confidence": 56.1,
+      "pick_score": 36.7,
+      "score_factors": [
+        "+4.9 edge",
+        "3-game streak"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 16.5,
-            "odds": 106
+            "line": 23.5,
+            "odds": -111
           },
           "under": {
-            "line": 16.5,
-            "odds": -136
+            "line": 23.5,
+            "odds": -115
           }
         },
         "draftkings": {
           "over": {
-            "line": 15.5,
-            "odds": -110
+            "line": 23.5,
+            "odds": -107
           },
           "under": {
-            "line": 15.5,
-            "odds": -116
+            "line": 23.5,
+            "odds": -120
           }
         },
         "betmgm": {
           "over": {
-            "line": 16.5,
-            "odds": 100
+            "line": 23.5,
+            "odds": -118
           },
           "under": {
-            "line": 16.5,
-            "odds": -130
+            "line": 23.5,
+            "odds": -115
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Has gone OVER 16.5 points in 8 of last 10 games (21.6 avg).",
-      "top_pick_rank": 2
-    },
-    {
-      "type": "spread",
-      "game": "NYK @ WAS",
-      "away_team": "NYK",
-      "home_team": "WAS",
-      "pick": "WAS +13.0",
-      "confidence": 76.3,
-      "pick_score": 50.0,
-      "score_factors": [
-        "76.3% spread conf",
-        "High confidence"
-      ],
-      "commence_time": "2026-02-04T00:10:00Z",
-      "top_pick_rank": 3
-    },
-    {
-      "type": "ml",
-      "game": "NYK @ WAS",
-      "away_team": "NYK",
-      "home_team": "WAS",
-      "pick": "NYK",
-      "confidence": 67.7,
-      "pick_score": 50.0,
-      "score_factors": [
-        "67.7% ML conf"
-      ],
-      "commence_time": "2026-02-04T00:10:00Z",
-      "top_pick_rank": 4
-    },
-    {
-      "type": "ml",
-      "game": "ORL @ OKC",
-      "away_team": "ORL",
-      "home_team": "OKC",
-      "pick": "OKC",
-      "confidence": 69.7,
-      "pick_score": 50.0,
-      "score_factors": [
-        "69.7% ML conf"
-      ],
-      "commence_time": "2026-02-04T01:10:00Z",
+      "insight": "Averaging 18.6 points over last 10 games (-4.9 below line).",
       "top_pick_rank": 5
     }
-  ],
-  "locked_at": "2026-02-03T19:58:49",
-  "recommendations": {
-    "date": "2026-02-04",
-    "generated_at": "2026-02-04T05:06:47",
-    "game_bets": [
-      {
-        "qualified": true,
-        "score": 177.6,
-        "reasons": [
-          "76.3% confidence",
-          "High confidence"
-        ],
-        "type": "spread",
-        "bet_type": "SPREAD",
-        "game": "NYK @ WAS",
-        "away_team": "NYK",
-        "home_team": "WAS",
-        "pick": "WAS +13.0",
-        "confidence": 76.3,
-        "commence_time": "2026-02-04T00:10:00Z",
-        "rec_rank": 1
-      },
-      {
-        "qualified": true,
-        "score": 174.8,
-        "reasons": [
-          "74.9% confidence",
-          "High confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "PHX @ POR",
-        "away_team": "PHX",
-        "home_team": "POR",
-        "pick": "OVER 218.5",
-        "confidence": 74.9,
-        "commence_time": "2026-02-04T04:10:00Z",
-        "rec_rank": 2
-      },
-      {
-        "qualified": true,
-        "score": 166.8,
-        "reasons": [
-          "70.9% confidence",
-          "High confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "CHI @ MIL",
-        "away_team": "CHI",
-        "home_team": "MIL",
-        "pick": "OVER 222.5",
-        "confidence": 70.9,
-        "commence_time": "2026-02-04T01:10:00Z",
-        "rec_rank": 3
-      },
-      {
-        "qualified": true,
-        "score": 154.4,
-        "reasons": [
-          "69.7% confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "ORL @ OKC",
-        "away_team": "ORL",
-        "home_team": "OKC",
-        "pick": "OKC",
-        "confidence": 69.7,
-        "commence_time": "2026-02-04T01:10:00Z",
-        "rec_rank": 4
-      },
-      {
-        "qualified": true,
-        "score": 153.2,
-        "reasons": [
-          "69.1% confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "ORL @ OKC",
-        "away_team": "ORL",
-        "home_team": "OKC",
-        "pick": "OVER 220.5",
-        "confidence": 69.1,
-        "commence_time": "2026-02-04T01:10:00Z",
-        "rec_rank": 5
-      }
-    ],
-    "props": [
-      {
-        "qualified": true,
-        "score": 55.605000000000004,
-        "reasons": [
-          "+14.6% EV",
-          "70% L10 hit rate",
-          "+6.3 edge"
-        ],
-        "type": "prop",
-        "player": "Austin Reaves",
-        "team": "LAL",
-        "prop": "PTS",
-        "direction": "OVER",
-        "line": 15.5,
-        "projection": 21.8,
-        "diff": 6.3,
-        "confidence": 58.7,
-        "ev": 14.6,
-        "edge": 6.300000000000001,
-        "pick_score": 56.9,
-        "score_factors": [
-          "+12.6% EV",
-          "70% L10 hit rate",
-          "+6.3 edge"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 14.5,
-              "odds": -106
-            },
-            "under": {
-              "line": 14.5,
-              "odds": -120
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 13.5,
-              "odds": -120
-            },
-            "under": {
-              "line": 13.5,
-              "odds": -110
-            }
-          },
-          "betmgm": {
-            "over": {
-              "line": 14.5,
-              "odds": 110
-            },
-            "under": {
-              "line": 14.5,
-              "odds": -145
-            }
-          }
-        },
-        "best_book": "betmgm",
-        "insight": "Has gone OVER 15.5 points in 7 of last 10 games (25.3 avg).",
-        "matchup_favorability": "neutral",
-        "l10_hit_rate": 70,
-        "rec_rank": 1
-      },
-      {
-        "qualified": true,
-        "score": 54.30500000000001,
-        "reasons": [
-          "+17.5% EV"
-        ],
-        "type": "prop",
-        "player": "Jamal Murray",
-        "team": "DEN",
-        "prop": "AST",
-        "direction": "OVER",
-        "line": 6.5,
-        "projection": 7.7,
-        "diff": 1.2,
-        "confidence": 55.7,
-        "ev": 17.5,
-        "edge": 1.2000000000000002,
-        "pick_score": 25.9,
-        "score_factors": [
-          "+8.2% EV"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 6.5,
-              "odds": 126
-            },
-            "under": {
-              "line": 6.5,
-              "odds": -162
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 6.5,
-              "odds": 115
-            },
-            "under": {
-              "line": 6.5,
-              "odds": -151
-            }
-          },
-          "betmgm": {
-            "over": {
-              "line": 6.5,
-              "odds": -105
-            },
-            "under": {
-              "line": 6.5,
-              "odds": -130
-            }
-          }
-        },
-        "best_book": "fanduel",
-        "insight": "DET ranks #1 in assists defense \u2014 tough for overs.",
-        "matchup_favorability": "unfavorable",
-        "l10_hit_rate": 50,
-        "rec_rank": 2
-      },
-      {
-        "qualified": true,
-        "score": 51.84,
-        "reasons": [
-          "+10.6% EV",
-          "80% L10 hit rate",
-          "+9.5 edge"
-        ],
-        "type": "prop",
-        "player": "Peyton Watson",
-        "team": "DEN",
-        "prop": "PTS",
-        "direction": "OVER",
-        "line": 16.5,
-        "projection": 26.0,
-        "diff": 9.5,
-        "confidence": 55.6,
-        "ev": 10.6,
-        "edge": 9.5,
-        "pick_score": 52.9,
-        "score_factors": [
-          "+6.6% EV",
-          "80% L10 hit rate",
-          "+9.5 edge"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 16.5,
-              "odds": 106
-            },
-            "under": {
-              "line": 16.5,
-              "odds": -136
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 15.5,
-              "odds": -110
-            },
-            "under": {
-              "line": 15.5,
-              "odds": -116
-            }
-          },
-          "betmgm": {
-            "over": {
-              "line": 16.5,
-              "odds": 100
-            },
-            "under": {
-              "line": 16.5,
-              "odds": -130
-            }
-          }
-        },
-        "best_book": "fanduel",
-        "insight": "Has gone OVER 16.5 points in 8 of last 10 games (21.6 avg).",
-        "matchup_favorability": "unfavorable",
-        "l10_hit_rate": 80,
-        "rec_rank": 3
-      },
-      {
-        "qualified": true,
-        "score": 43.345,
-        "reasons": [
-          "+7.5% EV",
-          "80% L10 hit rate",
-          "6-game streak"
-        ],
-        "type": "prop",
-        "player": "Karl-Anthony Towns",
-        "team": "NYK",
-        "prop": "PTS",
-        "direction": "UNDER",
-        "line": 20.5,
-        "projection": 12.7,
-        "diff": -7.8,
-        "confidence": 55.3,
-        "ev": 7.5,
-        "edge": 7.800000000000001,
-        "pick_score": 40.9,
-        "score_factors": [
-          "+7.8 edge",
-          "6-game streak"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 20.5,
-              "odds": -120
-            },
-            "under": {
-              "line": 20.5,
-              "odds": -106
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 20.5,
-              "odds": -123
-            },
-            "under": {
-              "line": 20.5,
-              "odds": -103
-            }
-          },
-          "betmgm": {
-            "over": {
-              "line": 20.5,
-              "odds": -120
-            },
-            "under": {
-              "line": 20.5,
-              "odds": -110
-            }
-          }
-        },
-        "best_book": "draftkings",
-        "insight": "Has stayed UNDER 20.5 points in 6 straight games.",
-        "matchup_favorability": "unfavorable",
-        "l10_hit_rate": 80,
-        "rec_rank": 4
-      },
-      {
-        "qualified": true,
-        "score": 39.41,
-        "reasons": [
-          "+9.1% EV",
-          "70% L10 hit rate",
-          "+3.7 edge"
-        ],
-        "type": "prop",
-        "player": "Myles Turner",
-        "team": "MIL",
-        "prop": "PRA",
-        "direction": "UNDER",
-        "line": 25.5,
-        "projection": 21.8,
-        "diff": -3.7,
-        "confidence": 56.4,
-        "ev": 9.1,
-        "edge": 3.6999999999999993,
-        "pick_score": 29.8,
-        "score_factors": [
-          "+5.8% EV",
-          "+3.7 edge"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 28.5,
-              "odds": -120
-            },
-            "under": {
-              "line": 28.5,
-              "odds": -106
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 28.5,
-              "odds": -119
-            },
-            "under": {
-              "line": 28.5,
-              "odds": -110
-            }
-          },
-          "betmgm": {
-            "over": {
-              "line": 28.5,
-              "odds": -125
-            },
-            "under": {
-              "line": 28.5,
-              "odds": -105
-            }
-          }
-        },
-        "best_book": "betmgm",
-        "insight": "Averaging 21.9 PRA over last 10 games (-3.6 below line).",
-        "matchup_favorability": "unfavorable",
-        "l10_hit_rate": 70,
-        "rec_rank": 5
-      }
-    ],
-    "game_count": 5,
-    "prop_count": 5,
-    "has_recommendations": true,
-    "message": null
-  }
+  ]
 }
