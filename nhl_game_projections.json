@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NHL",
-  "updated": "2026-02-04T01:09:12",
+  "updated": "2026-02-04T01:10:54",
   "games": [
     {
       "away_team": "BOS",
@@ -178,7 +178,62 @@
       "status": "scheduled",
       "away_score": null,
       "home_score": null,
-      "odds": {},
+      "odds": {
+        "FD": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -260,
+            "home_line": -1.5,
+            "home_odds": 205
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 114,
+            "under_line": 6.5,
+            "under_odds": -140
+          },
+          "ml": {
+            "MTL": -105,
+            "WPG": -114
+          }
+        },
+        "DK": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -265,
+            "home_line": -1.5,
+            "home_odds": 215
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 105,
+            "under_line": 6.5,
+            "under_odds": -125
+          },
+          "ml": {
+            "MTL": -110,
+            "WPG": -110
+          }
+        },
+        "MGM": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -275,
+            "home_line": -1.5,
+            "home_odds": 220
+          },
+          "total": {
+            "over_line": 6.0,
+            "over_odds": -120,
+            "under_line": 6.0,
+            "under_odds": 100
+          },
+          "ml": {
+            "MTL": -110,
+            "WPG": -110
+          }
+        }
+      },
       "home_goalie": "Connor Hellebuyck",
       "away_goalie": "Jakub Dobes"
     },
@@ -312,16 +367,16 @@
             "under_odds": 105
           },
           "ml": {
-            "COL": -278,
-            "SJS": 225
+            "COL": -290,
+            "SJS": 235
           }
         },
         "MGM": {
           "spread": {
             "home_line": -1.5,
-            "home_odds": -118,
+            "home_odds": -120,
             "away_line": 1.5,
-            "away_odds": -102
+            "away_odds": 100
           },
           "total": {
             "over_line": 6.5,
@@ -330,7 +385,7 @@
             "under_odds": 105
           },
           "ml": {
-            "COL": -285,
+            "COL": -295,
             "SJS": 230
           }
         }
