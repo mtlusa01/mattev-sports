@@ -692,8 +692,16 @@
 
     // ── Banner ──
     function renderResultsBanner(data) {
-      const at = data.allTime;
-      if (!at) {
+      // Always compute allTime dynamically from days to avoid stale cached totals
+      const days = data.days || [];
+      const at = {};
+      ['props', 'spreads', 'totals', 'moneylines'].forEach(cat => {
+        const w = days.reduce((s, d) => s + (d[cat]?.wins || 0), 0);
+        const l = days.reduce((s, d) => s + (d[cat]?.losses || 0), 0);
+        const t = w + l;
+        at[cat] = { wins: w, losses: l, pct: t > 0 ? +(w / t * 100).toFixed(1) : 0 };
+      });
+      if (!days.length) {
         document.getElementById('results-banner').innerHTML = '<div class="results-banner-stat"><div class="rbs-value">--</div><div class="rbs-label">No results yet</div></div>';
         return;
       }
