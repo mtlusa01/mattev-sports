@@ -1940,22 +1940,14 @@
     }
 
     function getGameStatus(g) {
+      // Only trust backend status for "final" — never infer from time
       if (g.status === 'final') return 'final';
-      // If marked live but has scores and started 3+ hours ago, treat as final
-      if (g.status === 'live') {
-        if (g.away_score != null && g.home_score != null && g.commence_time) {
-          const ct = new Date(g.commence_time);
-          if (!isNaN(ct) && (Date.now() - ct) / 3600000 >= 2.5) return 'final';
-        }
-        return 'live';
-      }
+      if (g.status === 'live') return 'live';
       if (!g.commence_time) return 'scheduled';
       const ct = new Date(g.commence_time);
       if (isNaN(ct)) return 'scheduled';
       const hoursSinceStart = (Date.now() - ct) / 3600000;
-      if (hoursSinceStart > 0) {
-        return hoursSinceStart < 2.5 ? 'live' : 'final';
-      }
+      if (hoursSinceStart > 0) return 'live';
       if (-hoursSinceStart <= 1) return 'soon';
       return 'scheduled';
     }
