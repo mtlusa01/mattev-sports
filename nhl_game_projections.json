@@ -1,7 +1,7 @@
 {
   "date": "2026-02-03",
   "sport": "NHL",
-  "updated": "2026-02-03T13:58:36",
+  "updated": "2026-02-03T21:50:58",
   "games": [
     {
       "away_team": "CBJ",
@@ -16,9 +16,68 @@
       "ml_pick": "CBJ",
       "ml_conf": 73.2,
       "commence_time": "2026-02-04T00:00:00Z",
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null
+      "status": "final",
+      "away_score": 3,
+      "home_score": 0,
+      "odds": {
+        "FD": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -520,
+            "home_line": -1.5,
+            "home_odds": 340
+          },
+          "total": {
+            "over_line": 2.5,
+            "over_odds": -110,
+            "under_line": 2.5,
+            "under_odds": -118
+          },
+          "ml": {
+            "CBJ": -111,
+            "NJD": -115
+          }
+        },
+        "DK": {
+          "spread": {
+            "away_line": -1.5,
+            "away_odds": 340,
+            "home_line": 1.5,
+            "home_odds": -500
+          },
+          "total": {
+            "over_line": 2.5,
+            "over_odds": -115,
+            "under_line": 2.5,
+            "under_odds": -115
+          },
+          "ml": {
+            "CBJ": -130,
+            "NJD": 100
+          }
+        },
+        "MGM": {
+          "spread": {
+            "away_line": -1.5,
+            "away_odds": 375,
+            "home_line": 1.5,
+            "home_odds": -625
+          },
+          "total": {
+            "over_line": 2.5,
+            "over_odds": 100,
+            "under_line": 2.5,
+            "under_odds": -135
+          },
+          "ml": {
+            "CBJ": -125,
+            "NJD": 100
+          }
+        }
+      },
+      "spread_result": "W",
+      "total_result": "L",
+      "ml_result": "W"
     },
     {
       "away_team": "WSH",
@@ -33,9 +92,68 @@
       "ml_pick": "WSH",
       "ml_conf": 51.6,
       "commence_time": "2026-02-04T00:00:00Z",
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null
+      "status": "final",
+      "away_score": 2,
+      "home_score": 4,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 100,
+            "away_line": 1.5,
+            "away_odds": -130
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": 122,
+            "under_line": 5.5,
+            "under_odds": -160
+          },
+          "ml": {
+            "PHI": -410,
+            "WSH": 290
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 105,
+            "away_line": 1.5,
+            "away_odds": -135
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": 130,
+            "under_line": 5.5,
+            "under_odds": -166
+          },
+          "ml": {
+            "PHI": -375,
+            "WSH": 270
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 110,
+            "away_line": 1.5,
+            "away_odds": -150
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": 125,
+            "under_line": 5.5,
+            "under_odds": -165
+          },
+          "ml": {
+            "PHI": -375,
+            "WSH": 280
+          }
+        }
+      },
+      "spread_result": "L",
+      "total_result": "W",
+      "ml_result": "L"
     },
     {
       "away_team": "OTT",
@@ -50,9 +168,68 @@
       "ml_pick": "CAR",
       "ml_conf": 76.8,
       "commence_time": "2026-02-04T00:00:00Z",
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null
+      "status": "final",
+      "away_score": 3,
+      "home_score": 4,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": -122,
+            "away_line": 1.5,
+            "away_odds": -106
+          },
+          "total": {
+            "over_line": 7.5,
+            "over_odds": 104,
+            "under_line": 7.5,
+            "under_odds": -135
+          },
+          "ml": {
+            "CAR": -460,
+            "OTT": 320
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": -110,
+            "away_line": 1.5,
+            "away_odds": -120
+          },
+          "total": {
+            "over_line": 7.5,
+            "over_odds": 120,
+            "under_line": 7.5,
+            "under_odds": -154
+          },
+          "ml": {
+            "CAR": -500,
+            "OTT": 340
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": -115,
+            "away_line": 1.5,
+            "away_odds": -115
+          },
+          "total": {
+            "over_line": 7.5,
+            "over_odds": 110,
+            "under_line": 7.5,
+            "under_odds": -150
+          },
+          "ml": {
+            "CAR": -500,
+            "OTT": 350
+          }
+        }
+      },
+      "spread_result": "W",
+      "total_result": "W",
+      "ml_result": "W"
     },
     {
       "away_team": "BUF",
@@ -69,7 +246,63 @@
       "commence_time": "2026-02-04T00:30:00Z",
       "status": "scheduled",
       "away_score": null,
-      "home_score": null
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -260,
+            "home_line": -1.5,
+            "home_odds": 192
+          },
+          "total": {
+            "over_line": 4.5,
+            "over_odds": -260,
+            "under_line": 4.5,
+            "under_odds": 192
+          },
+          "ml": {
+            "BUF": 142,
+            "TBL": -184
+          }
+        },
+        "DK": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -280,
+            "home_line": -1.5,
+            "home_odds": 210
+          },
+          "total": {
+            "over_line": 4.5,
+            "over_odds": -210,
+            "under_line": 4.5,
+            "under_odds": 160
+          },
+          "ml": {
+            "BUF": 145,
+            "TBL": -188
+          }
+        },
+        "MGM": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -325,
+            "home_line": -1.5,
+            "home_odds": 230
+          },
+          "total": {
+            "over_line": 4.5,
+            "over_odds": -200,
+            "under_line": 4.5,
+            "under_odds": 150
+          },
+          "ml": {
+            "BUF": 135,
+            "TBL": -170
+          }
+        }
+      }
     },
     {
       "away_team": "PIT",
@@ -86,7 +319,63 @@
       "commence_time": "2026-02-04T00:30:00Z",
       "status": "scheduled",
       "away_score": null,
-      "home_score": null
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -132,
+            "away_line": -1.5,
+            "away_odds": 102
+          },
+          "total": {
+            "over_line": 7.5,
+            "over_odds": -118,
+            "under_line": 7.5,
+            "under_odds": -110
+          },
+          "ml": {
+            "NYI": 260,
+            "PIT": -360
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -154,
+            "away_line": -1.5,
+            "away_odds": 120
+          },
+          "total": {
+            "over_line": 7.5,
+            "over_odds": 100,
+            "under_line": 7.5,
+            "under_odds": -130
+          },
+          "ml": {
+            "NYI": 250,
+            "PIT": -345
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -165,
+            "away_line": -1.5,
+            "away_odds": 125
+          },
+          "total": {
+            "over_line": 7.5,
+            "over_odds": 110,
+            "under_line": 7.5,
+            "under_odds": -150
+          },
+          "ml": {
+            "NYI": 250,
+            "PIT": -325
+          }
+        }
+      }
     },
     {
       "away_team": "TOR",
@@ -103,7 +392,63 @@
       "commence_time": "2026-02-04T01:30:00Z",
       "status": "scheduled",
       "away_score": null,
-      "home_score": null
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 112,
+            "away_line": 1.5,
+            "away_odds": -146
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -138,
+            "under_line": 5.5,
+            "under_odds": 106
+          },
+          "ml": {
+            "EDM": -215,
+            "TOR": 164
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 130,
+            "away_line": 1.5,
+            "away_odds": -166
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -125,
+            "under_line": 5.5,
+            "under_odds": -105
+          },
+          "ml": {
+            "EDM": -200,
+            "TOR": 154
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 115,
+            "away_line": 1.5,
+            "away_odds": -155
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -125,
+            "under_line": 5.5,
+            "under_odds": -105
+          },
+          "ml": {
+            "EDM": -210,
+            "TOR": 165
+          }
+        }
+      }
     },
     {
       "away_team": "SEA",
@@ -120,7 +465,63 @@
       "commence_time": "2026-02-04T03:00:00Z",
       "status": "scheduled",
       "away_score": null,
-      "home_score": null
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 180,
+            "away_line": 1.5,
+            "away_odds": -225
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 104,
+            "under_line": 6.5,
+            "under_odds": -128
+          },
+          "ml": {
+            "ANA": -137,
+            "SEA": 114
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 180,
+            "away_line": 1.5,
+            "away_odds": -218
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -105,
+            "under_line": 6.5,
+            "under_odds": -115
+          },
+          "ml": {
+            "ANA": -135,
+            "SEA": 114
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 180,
+            "away_line": 1.5,
+            "away_odds": -220
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -105,
+            "under_line": 6.5,
+            "under_odds": -115
+          },
+          "ml": {
+            "ANA": -135,
+            "SEA": 115
+          }
+        }
+      }
     }
   ],
   "locked_at": "2026-02-03T14:04:29"
