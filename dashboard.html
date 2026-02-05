@@ -683,6 +683,12 @@
     .injury-status.doubtful { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
     .injury-status.questionable { background: rgba(234, 179, 8, 0.15); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.25); }
     .injury-status.day-to-day { background: rgba(234, 179, 8, 0.12); color: var(--yellow); border: 1px solid rgba(234, 179, 8, 0.2); }
+    .injury-status.probable { background: rgba(107, 114, 128, 0.15); color: #9ca3af; border: 1px solid rgba(107, 114, 128, 0.2); }
+    .injury-team-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin: 6px 0 4px; }
+    .injury-team-label:first-of-type { margin-top: 0; }
+    .injury-team-label.opp { color: var(--text-muted); }
+    .injury-reason { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
+    .injury-updated { font-size: 0.65rem; color: var(--text-muted); margin-left: auto; font-weight: 400; }
     .injury-player { color: var(--text-secondary); }
     .injury-note { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; font-style: italic; }
     .injury-stats-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
@@ -1931,11 +1937,13 @@
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
+    const INJURIES_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/injuries.json';
 
     let projections = [];
     let gameProjections = [];
     let nhlGameProjections = [];
     let topPicks = [];
+    let injuriesData = { teams: {}, updated_at: '' };
     let currentView = 'game-projections';
     let currentSport = 'nba';
     let currentConfFilter = 'all';
@@ -2631,6 +2639,74 @@
       return `<span>Avg: <strong>${avg}</strong></span><span>Med: <strong>${med}</strong></span><span>Hit: <strong>${hits}/${vals.length}</strong></span>`;
     }
 
+    function buildInjurySection(p) {
+      const team = p.team;
+      const opp = getOpponent(team);
+      const teamInj = (injuriesData.teams || {})[team] || [];
+      const oppInj = opp ? ((injuriesData.teams || {})[opp] || []) : [];
+
+      const significant = ['OUT', 'DOUBTFUL', 'QUESTIONABLE', 'DAY-TO-DAY'];
+      const teamSig = teamInj.filter(i => significant.includes(i.status));
+      const oppSig = oppInj.filter(i => significant.includes(i.status));
+
+      // Fall back to p.teammate_injuries if no ESPN data loaded yet
+      const hasEspn = teamSig.length > 0 || oppSig.length > 0;
+      const hasLegacy = p.teammate_injuries && p.teammate_injuries.length > 0;
+      if (!hasEspn && !hasLegacy && !p.injury_boost) return '';
+
+      const renderPlayers = (players) => players.map(inj => `
+        <div class="teammate-injury">
+          <span class="injury-status ${inj.status.toLowerCase().replace(/\s/g,'-')}">${inj.status}</span>
+          <span class="injury-player">${inj.player}</span>
+          ${inj.reason ? `<span class="injury-reason">${inj.reason}</span>` : ''}
+        </div>`).join('');
+
+      let html = '<div class="injury-section"><div class="injury-alert">';
+      html += '<div class="injury-header">';
+      html += '<span class="injury-icon">&#9888;</span>';
+      html += '<span class="injury-title">Injury Report</span>';
+      if (p.injury_boost) html += `<span class="boost-badge">+${p.injury_boost.toFixed(1)} boost</span>`;
+      if (injuriesData.updated_at) {
+        const t = new Date(injuriesData.updated_at);
+        if (!isNaN(t)) html += `<span class="injury-updated">${t.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})} ET</span>`;
+      }
+      html += '</div>';
+
+      if (hasEspn) {
+        if (teamSig.length > 0) {
+          html += `<div class="injury-team-label">${team}</div>`;
+          html += `<div class="injury-list">${renderPlayers(teamSig)}</div>`;
+        }
+        if (oppSig.length > 0) {
+          html += `<div class="injury-team-label opp">${opp} (opp)</div>`;
+          html += `<div class="injury-list">${renderPlayers(oppSig)}</div>`;
+        }
+      } else if (hasLegacy) {
+        html += '<div class="injury-list">' + p.teammate_injuries.map(inj => `
+          <div class="teammate-injury">
+            <span class="injury-status ${inj.status.toLowerCase().replace(/\s/g,'-')}">${inj.status}</span>
+            <span class="injury-player">${inj.player}</span>
+          </div>`).join('') + '</div>';
+      }
+
+      if (p.injury_insight) {
+        html += `<div class="injury-insight-text"><span class="insight-type-badge historical">Historical</span> ${p.injury_insight}</div>`;
+        if (p.injury_details) {
+          html += `<div class="injury-stats-row">
+            <div class="injury-stat-box without"><div class="injury-stat-label">Without</div><div class="injury-stat-value">${p.injury_details.avg_without}</div><div class="injury-stat-sub">${p.injury_details.games_without} games</div></div>
+            <div class="injury-stat-arrow">&#x2192;</div>
+            <div class="injury-stat-box with"><div class="injury-stat-label">With</div><div class="injury-stat-value">${p.injury_details.avg_with}</div></div>
+            <div class="injury-stat-box boost-box"><div class="injury-stat-label">Boost</div><div class="injury-stat-value ${p.injury_boost > 0 ? 'pos' : 'neg'}">${p.injury_boost > 0 ? '+' : ''}${p.injury_boost.toFixed(1)}</div></div>
+          </div>`;
+        }
+      } else if (p.boosted_by) {
+        html += `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>`;
+      }
+
+      html += '</div></div>';
+      return html;
+    }
+
     function buildGameLogChart(p) {
       const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
       const fmtRate = (hits, total) => {
@@ -2837,46 +2913,7 @@
                 </div>
                 ${buildGameLogChart(p)}
                 ${buildMatchupInsights(p)}
-                ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
-                <div class="injury-section">
-                  <div class="injury-alert">
-                    <div class="injury-header">
-                      <span class="injury-icon">&#9888;</span>
-                      <span class="injury-title">Team Injuries</span>
-                      ${p.injury_boost ? `<span class="boost-badge">+${p.injury_boost.toFixed(1)} boost</span>` : ''}
-                    </div>
-                    <div class="injury-list">
-                      ${p.teammate_injuries.map(inj => `
-                        <div class="teammate-injury">
-                          <span class="injury-status ${inj.status.toLowerCase().replace(/\s/g,'-')}">${inj.status}</span>
-                          <span class="injury-player">${inj.player}</span>
-                        </div>`).join('')}
-                    </div>
-                    ${p.injury_insight ? `
-                    <div class="injury-insight-text">
-                      <span class="insight-type-badge historical">Historical</span>
-                      ${p.injury_insight}
-                    </div>
-                    ${p.injury_details ? `
-                    <div class="injury-stats-row">
-                      <div class="injury-stat-box without">
-                        <div class="injury-stat-label">Without</div>
-                        <div class="injury-stat-value">${p.injury_details.avg_without}</div>
-                        <div class="injury-stat-sub">${p.injury_details.games_without} games</div>
-                      </div>
-                      <div class="injury-stat-arrow">&#x2192;</div>
-                      <div class="injury-stat-box with">
-                        <div class="injury-stat-label">With</div>
-                        <div class="injury-stat-value">${p.injury_details.avg_with}</div>
-                      </div>
-                      <div class="injury-stat-box boost-box">
-                        <div class="injury-stat-label">Boost</div>
-                        <div class="injury-stat-value ${p.injury_boost > 0 ? 'pos' : 'neg'}">${p.injury_boost > 0 ? '+' : ''}${p.injury_boost.toFixed(1)}</div>
-                      </div>
-                    </div>` : ''}
-                    ` : p.boosted_by ? `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>` : ''}
-                  </div>
-                </div>` : ''}
+                ${buildInjurySection(p)}
                 ${p.insight ? `
                 <div class="insight-section">
                   <div class="insight-card">
@@ -3953,10 +3990,22 @@
       }
     }
 
+    async function loadInjuries() {
+      try {
+        const resp = await fetch(INJURIES_URL + '?t=' + Date.now());
+        if (!resp.ok) return;
+        injuriesData = await resp.json();
+        if (projections.length > 0) render();
+      } catch (e) {
+        console.warn('Failed to load injuries:', e);
+      }
+    }
+
     // ── Init ──
     loadProjections();
     loadGameProjections();
     loadNhlGameProjections();
+    loadInjuries();
   </script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
