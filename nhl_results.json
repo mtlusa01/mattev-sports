@@ -1,41 +1,41 @@
 {
-  "updated": "2026-02-04T21:24:00",
+  "updated": "2026-02-04T21:49:59",
   "allTime": {
     "spreads": {
-      "wins": 5,
+      "wins": 6,
       "losses": 3,
-      "pct": 62.5
+      "pct": 66.7
     },
     "totals": {
-      "wins": 6,
+      "wins": 7,
       "losses": 1,
-      "pct": 85.7
+      "pct": 87.5
     },
     "moneylines": {
-      "wins": 5,
+      "wins": 6,
       "losses": 3,
-      "pct": 62.5
+      "pct": 66.7
     }
   },
   "days": [
     {
       "date": "2026-02-04",
       "spreads": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "picks": [
@@ -65,6 +65,33 @@
           "result": "0-4",
           "hit": true,
           "confidence": 67.6
+        },
+        {
+          "date": "2026-02-04",
+          "type": "spread",
+          "game": "MTL @ WPG",
+          "pick": "MTL +1.5",
+          "result": "5-1",
+          "hit": true,
+          "confidence": 55.2
+        },
+        {
+          "date": "2026-02-04",
+          "type": "total",
+          "game": "MTL @ WPG",
+          "pick": "OVER 5.5",
+          "result": "5-1",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-02-04",
+          "type": "ml",
+          "game": "MTL @ WPG",
+          "pick": "MTL",
+          "result": "5-1",
+          "hit": true,
+          "confidence": 68.4
         }
       ]
     },
