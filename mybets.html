@@ -109,8 +109,9 @@
       box-shadow: none !important;
       outline: none !important;
     }
-    /* Restore intentional borders that the nuclear rule removes */
-    .mobile-nav-drawer { border-bottom: 2px solid #2a2a3a !important; }
+    /* Restore intentional borders only when elements are visible/open */
+    .mobile-nav-drawer:not(.open) { pointer-events: none; }
+    .mobile-nav-drawer.open { border-bottom: 2px solid #2a2a3a !important; box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important; }
     .mobile-drawer-links a { border-bottom: 1px solid #2a2a3a !important; }
     .dropdown-header { border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
     .user-dropdown { border: 1px solid rgba(255,255,255,0.1) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important; }
