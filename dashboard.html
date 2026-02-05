@@ -599,7 +599,7 @@
 
     .prop-details-expanded { background: var(--bg-primary); padding: 16px 20px; }
     .details-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 1000px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; box-sizing: border-box;
     }
     .detail-card {
       background: var(--bg-secondary); border: 1px solid var(--border);
@@ -720,15 +720,15 @@
     .gl-stats strong { color: var(--text-primary); font-weight: 600; }
     /* Chart area — flex container, bars fill full width */
     .gl-chart-wrap { position: relative; margin-bottom: 4px; }
-    .gl-chart-bars { display: flex; justify-content: space-between; align-items: flex-end; height: 130px; gap: 4px; width: 100%; }
+    .gl-chart-bars { display: flex; justify-content: space-between; align-items: stretch; height: 130px; gap: 4px; width: 100%; }
     .gl-chart-line { position: absolute; left: 0; right: 0; border-top: 1.5px dashed rgba(255,255,255,0.25); pointer-events: none; z-index: 0; }
     .gl-chart-line-label { position: absolute; left: 0; font-size: 9px; color: var(--text-muted); font-weight: 600; transform: translateY(-100%); padding-right: 4px; z-index: 3; background: var(--bg-secondary); }
-    /* Bar column */
-    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; position: relative; z-index: 2; }
-    .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; }
+    /* Bar column — height:100% so percentage bar heights resolve correctly */
+    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; height: 100%; position: relative; z-index: 2; }
+    .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; flex-shrink: 0; }
     .gl-bar-val.hit { color: #10b981; }
     .gl-bar-val.miss { color: #ef4444; }
-    .gl-bar { width: 100%; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
+    .gl-bar { width: 100%; min-height: 4px; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
     .gl-bar.hit { background: #10b981; }
     .gl-bar.miss { background: #ef4444; opacity: 0.55; }
     .gl-bar:hover { opacity: 0.8; }
@@ -2583,15 +2583,15 @@
 
     function _glBuildBars(items, line, chartH) {
       const maxVal = Math.max(...items.map(g => g.val), line) || 1;
-      const linePct = (line / maxVal) * 100;
+      const linePx = Math.round((line / maxVal) * chartH);
       const bars = items.map(g => {
-        const hPct = Math.max(5, (g.val / maxVal) * 100);
+        const hPx = Math.max(4, Math.round((g.val / maxVal) * chartH));
         const cls = g.hit ? 'hit' : 'miss';
-        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPct}%"></div></div>`;
+        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
       }).join('');
       const barsHtml = `<div class="gl-chart-wrap">` +
-        `<span class="gl-chart-line-label" style="bottom:${linePct}%">${line}</span>` +
-        `<div class="gl-chart-line" style="bottom:${linePct}%"></div>` +
+        `<span class="gl-chart-line-label" style="bottom:${linePx}px">${line}</span>` +
+        `<div class="gl-chart-line" style="bottom:${linePx}px"></div>` +
         `<div class="gl-chart-bars">${bars}</div></div>`;
       const labelsHtml = items.map(g =>
         `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`
