@@ -1680,7 +1680,6 @@
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
         <button class="sport-tab" data-sport="nhl">NHL</button>
-        <button class="sport-tab" data-sport="nfl">NFL <span class="soon-badge">Soon</span></button>
         <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
       </div>
       <div class="nav-right">
@@ -1836,7 +1835,7 @@
       const supportedSports = ['nba', 'nhl'];
 
       if (!supportedSports.includes(sport)) {
-        // Coming Soon for NFL, MLB
+        // Coming Soon for MLB
         sportName.textContent = sport.toUpperCase();
         overlay.classList.add('visible');
         mainEl.style.display = 'none';
