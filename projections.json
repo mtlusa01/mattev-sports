@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T19:29:59",
+  "updated": "2026-02-04T19:42:36",
   "projections": [
     {
       "player": "Payton Pritchard",
@@ -2792,6 +2792,92 @@
       ],
       "added_live": true,
       "discovered_at": "2026-02-04T19:04:21"
+    },
+    {
+      "player": "Donovan Mitchell",
+      "team": "CLE",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 40.5,
+      "projection": 35.9,
+      "confidence": 52.4,
+      "ev": 1.0,
+      "diff": -4.6,
+      "market_odds": -108,
+      "fair_odds": -110,
+      "prob_edge": 0.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 39.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 39.5,
+            "odds": -102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 40.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 40.5,
+            "odds": -111
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 40.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 40.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-04T19:42:36",
+      "edge": "LEAN",
+      "l5_avg": 37.2,
+      "l10_avg": 37.6,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 60,
+      "streak": 3,
+      "home_avg": 38.4,
+      "away_avg": 38.5,
+      "opp_def_rank": 9,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 33.9,
+      "vs_bot10_avg": 41.9,
+      "insight": "Averaging 37.6 PRA over last 10 games (-2.9 below line).",
+      "insight_strength": "good",
+      "has_boost": true,
+      "injury_boost": -1.5,
+      "boosted_by": "James Harden",
+      "injury_insight": "Averages 38.6 PRA without James Harden vs 40.1 with (-1.5 in 28 games)",
+      "injury_details": {
+        "avg_without": 38.6,
+        "avg_with": 40.1,
+        "games_without": 28
+      },
+      "teammate_injuries": [
+        {
+          "player": "James Harden",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 36.3,
+      "score_factors": [
+        "Favorable matchup (#9 DEF)",
+        "+4.6 edge",
+        "3-game streak"
+      ],
+      "top_pick_rank": 4,
+      "added_live": true,
+      "discovered_at": "2026-02-04T19:42:36"
     }
   ],
   "locked_at": "2026-02-04T15:30:54"
