@@ -7,8 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none !important; margin: 0 !important; display: none !important; }
-    input[type="number"] { -moz-appearance: textfield !important; appearance: textfield !important; }
     :root {
       --bg-primary: #09090b; --bg-secondary: #18181b; --bg-tertiary: #27272a;
       --border: rgba(255,255,255,0.08); --border-light: rgba(255,255,255,0.12);
@@ -233,15 +231,15 @@
         <h2>Bet Settings</h2>
         <div class="field-row">
           <span class="field-label">Default Bet Size</span>
-          <input type="number" class="form-input short" id="set-betsize" min="1" value="10">
+          <input type="text" inputmode="numeric" class="form-input short" id="set-betsize" value="10">
         </div>
         <div class="field-row">
           <span class="field-label">Unit Size</span>
-          <input type="number" class="form-input short" id="set-unitsize" min="1" value="10">
+          <input type="text" inputmode="numeric" class="form-input short" id="set-unitsize" value="10">
         </div>
         <div class="field-row">
           <span class="field-label">Bankroll (optional)</span>
-          <input type="number" class="form-input short" id="set-bankroll" min="0" placeholder="--">
+          <input type="text" inputmode="numeric" class="form-input short" id="set-bankroll" placeholder="--">
         </div>
       </div>
 
@@ -255,7 +253,7 @@
           </div>
           <div style="display:flex;align-items:center;gap:4px;">
             <span style="color:var(--text-muted);font-size:14px;">$</span>
-            <input type="number" class="form-input short" id="set-tracking-unitsize" min="1" value="10" onchange="saveBetTrackingSettings()" style="width:80px;">
+            <input type="text" inputmode="numeric" class="form-input short" id="set-tracking-unitsize" value="10" onchange="saveBetTrackingSettings()" style="width:80px;">
           </div>
         </div>
         <div class="field-row">
