@@ -719,22 +719,22 @@
     .gl-stats span { color: var(--text-secondary); }
     .gl-stats strong { color: var(--text-primary); font-weight: 600; }
     /* Chart area */
-    .gl-chart { position: relative; height: 130px; display: flex; align-items: flex-end; gap: 0; padding-left: 32px; }
+    .gl-chart { position: relative; height: 130px; display: flex; align-items: flex-end; gap: 2px; padding-left: 32px; width: 100%; box-sizing: border-box; }
     /* Y-axis line label */
     .gl-line-label { position: absolute; left: 0; font-size: 10px; color: var(--text-muted); font-weight: 600; transform: translateY(50%); white-space: nowrap; }
     .gl-line { position: absolute; left: 30px; right: 0; border-top: 1.5px dashed rgba(255,255,255,0.25); pointer-events: none; z-index: 1; }
-    /* Bar column */
-    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; position: relative; z-index: 2; }
+    /* Bar column — flex:1 ensures equal distribution across full width */
+    .gl-bar-col { flex: 1 1 0%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; position: relative; z-index: 2; }
     .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; }
     .gl-bar-val.hit { color: #10b981; }
     .gl-bar-val.miss { color: #ef4444; }
-    .gl-bar { width: 70%; min-width: 8px; max-width: 36px; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
+    .gl-bar { width: 70%; max-width: 48px; min-width: 12px; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
     .gl-bar.hit { background: #10b981; }
     .gl-bar.miss { background: #ef4444; opacity: 0.55; }
     .gl-bar:hover { opacity: 0.8; }
     /* Labels below bars */
-    .gl-labels { display: flex; gap: 0; padding-left: 32px; margin-top: 4px; }
-    .gl-lbl-col { flex: 1; text-align: center; min-width: 0; overflow: hidden; }
+    .gl-labels { display: flex; gap: 2px; padding-left: 32px; margin-top: 4px; width: 100%; box-sizing: border-box; }
+    .gl-lbl-col { flex: 1 1 0%; text-align: center; min-width: 0; overflow: hidden; }
     .gl-lbl-date { font-size: 9px; color: var(--text-muted); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .gl-lbl-opp { font-size: 9px; color: var(--text-secondary); font-weight: 600; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     /* Streak badge */
@@ -2581,11 +2581,12 @@
 
     // ── Game Log Chart (Outlier-style, interactive pills) ──
     let _glChartId = 0;
+    const _glDataStore = {}; // chartId → { allItems, line, dir }
 
-    function _glRenderChart(container, items, line, chartH) {
+    function _glBuildBars(items, line, chartH) {
       const maxVal = Math.max(...items.map(g => g.val), line) || 1;
       const lineBottom = (line / maxVal) * chartH;
-      container.querySelector('.gl-chart').innerHTML =
+      const barsHtml =
         `<span class="gl-line-label" style="bottom:${lineBottom}px">${line}</span>` +
         `<div class="gl-line" style="bottom:${lineBottom}px"></div>` +
         items.map(g => {
@@ -2593,18 +2594,21 @@
           const cls = g.hit ? 'hit' : 'miss';
           return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
         }).join('');
-      container.querySelector('.gl-labels').innerHTML =
-        items.map(g => `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`).join('');
+      const labelsHtml = items.map(g =>
+        `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`
+      ).join('');
+      return { barsHtml, labelsHtml, lineBottom };
     }
 
-    function _glUpdateStats(container, items, line, direction) {
+    function _glBuildStats(items) {
       const vals = items.map(g => g.val);
-      const avg = vals.length ? (vals.reduce((a, v) => a + v, 0) / vals.length).toFixed(1) : '-';
+      if (!vals.length) return '';
+      const avg = (vals.reduce((a, v) => a + v, 0) / vals.length).toFixed(1);
       const sorted = [...vals].sort((a, b) => a - b);
-      const med = sorted.length ? (sorted.length % 2 === 0 ? ((sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2).toFixed(1) : sorted[Math.floor(sorted.length / 2)]) : '-';
+      const mid = Math.floor(sorted.length / 2);
+      const med = sorted.length % 2 === 0 ? ((sorted[mid - 1] + sorted[mid]) / 2).toFixed(1) : sorted[mid];
       const hits = items.filter(g => g.hit).length;
-      const statsEl = container.querySelector('.gl-stats');
-      if (statsEl) statsEl.innerHTML = `<span>Avg: <strong>${avg}</strong></span><span>Med: <strong>${med}</strong></span><span>Hit: <strong>${hits}/${vals.length}</strong></span>`;
+      return `<span>Avg: <strong>${avg}</strong></span><span>Med: <strong>${med}</strong></span><span>Hit: <strong>${hits}/${vals.length}</strong></span>`;
     }
 
     function buildGameLogChart(p) {
@@ -2617,18 +2621,25 @@
 
       // Build full game list from last_10_games or last_10_values
       const games = p.last_10_games || [];
-      const allVals = games.length > 0 ? games.map(g => g.val) : (p.last_10_values || []);
+      const rawVals = p.last_10_values || [];
+      const allVals = games.length > 0 ? games.map(g => g.val) : rawVals;
       if (allVals.length === 0) return '';
 
-      const line = p.line || 0;
+      const line = parseFloat(p.line) || 0;
       const dir = p.direction;
       const l10Count = allVals.length;
       const chartId = 'glc-' + (++_glChartId);
 
-      // Build items array (most-recent-first in data, reversed for display)
+      // Build items array (most-recent-first in data)
       const allItems = games.length > 0
-        ? games.map(g => ({ val: g.val, hit: g.hit, date: g.date, opp: g.opp }))
-        : allVals.map((v, i) => ({ val: v, hit: dir === 'OVER' ? v > line : v < line, date: `G${allVals.length - i}`, opp: '' }));
+        ? games.map(g => ({ val: parseFloat(g.val) || 0, hit: !!g.hit, date: g.date || '', opp: g.opp || '' }))
+        : rawVals.map((v, i) => {
+            const val = parseFloat(v) || 0;
+            return { val, hit: dir === 'OVER' ? val > line : val < line, date: 'G' + (rawVals.length - i), opp: '' };
+          });
+
+      // Store data in JS for pill interactions (avoids HTML attribute escaping issues)
+      _glDataStore[chartId] = { allItems, line, dir };
 
       // Hit rate pills — clickable
       const pillData = [];
@@ -2640,45 +2651,20 @@
         `<span class="gl-pill${pd.key === 'l10' ? ' active' : ''}" data-gl-range="${pd.key}" data-gl-n="${pd.n}" data-gl-target="${chartId}"><span class="gl-pill-label">${pd.label}</span>${pd.rate}</span>`
       ).join('');
 
-      // Default: show L10
+      // Default: show L10 (reversed = oldest on left)
       const defaultItems = [...allItems.slice(0, Math.min(10, allItems.length))].reverse();
-      const maxVal = Math.max(...defaultItems.map(g => g.val), line) || 1;
       const chartH = 130;
-      const lineBottom = (line / maxVal) * chartH;
-
-      const barsHtml = defaultItems.map(g => {
-        const hPx = Math.max(6, (g.val / maxVal) * chartH);
-        const cls = g.hit ? 'hit' : 'miss';
-        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
-      }).join('');
-
-      const labelsHtml = defaultItems.map(g =>
-        `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`
-      ).join('');
-
-      // Stats
-      const defVals = defaultItems.map(g => g.val);
-      const defAvg = defVals.length ? (defVals.reduce((a, v) => a + v, 0) / defVals.length).toFixed(1) : '-';
-      const defSorted = [...defVals].sort((a, b) => a - b);
-      const defMed = defSorted.length ? (defSorted.length % 2 === 0 ? ((defSorted[defSorted.length / 2 - 1] + defSorted[defSorted.length / 2]) / 2).toFixed(1) : defSorted[Math.floor(defSorted.length / 2)]) : '-';
-      const defHits = defaultItems.filter(g => g.hit).length;
-
+      const { barsHtml, labelsHtml } = _glBuildBars(defaultItems, line, chartH);
+      const statsHtml = _glBuildStats(defaultItems);
       const streakHtml = p.streak >= 3 ? `<div class="gl-streak">&#128293; ${p.streak} game streak</div>` : '';
 
-      // Embed full data as JSON in data attribute for interactive re-rendering
-      const dataAttr = JSON.stringify(allItems).replace(/"/g, '&quot;');
-
-      return `<div class="gl-section" id="${chartId}" data-gl-items="${dataAttr}" data-gl-line="${line}" data-gl-dir="${dir}">
+      return `<div class="gl-section" id="${chartId}">
         <div class="gl-header">
-          <span class="gl-title">Last ${Math.min(10, l10Count)} Games</span>
+          <span class="gl-title">Last ${defaultItems.length} Games</span>
           <div class="gl-pills">${pills}</div>
         </div>
-        <div class="gl-stats"><span>Avg: <strong>${defAvg}</strong></span><span>Med: <strong>${defMed}</strong></span><span>Hit: <strong>${defHits}/${defaultItems.length}</strong></span></div>
-        <div class="gl-chart">
-          <span class="gl-line-label" style="bottom:${lineBottom}px">${line}</span>
-          <div class="gl-line" style="bottom:${lineBottom}px"></div>
-          ${barsHtml}
-        </div>
+        <div class="gl-stats">${statsHtml}</div>
+        <div class="gl-chart">${barsHtml}</div>
         <div class="gl-labels">${labelsHtml}</div>
         ${streakHtml}
       </div>`;
@@ -2691,31 +2677,31 @@
       e.stopPropagation();
       const targetId = pill.dataset.glTarget;
       const container = document.getElementById(targetId);
-      if (!container) return;
+      const store = _glDataStore[targetId];
+      if (!container || !store) return;
 
       // Update active pill
       container.querySelectorAll('.gl-pill').forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
 
-      // Get data
-      const allItems = JSON.parse(container.dataset.glItems);
-      const line = parseFloat(container.dataset.glLine) || 0;
       const n = parseInt(pill.dataset.glN) || 10;
       const range = pill.dataset.glRange;
 
-      // Slice items (allItems is most-recent-first)
-      const sliced = allItems.slice(0, Math.min(n, allItems.length));
-      const items = [...sliced].reverse(); // oldest-left for chart
+      // Slice items (allItems is most-recent-first), reverse for display
+      const sliced = store.allItems.slice(0, Math.min(n, store.allItems.length));
+      const items = [...sliced].reverse();
 
       // Update title
       const titleEl = container.querySelector('.gl-title');
-      const showing = items.length;
-      const extra = range === 'season' && showing < n ? ` (showing ${showing})` : '';
-      if (titleEl) titleEl.textContent = `Last ${showing} Games${extra}`;
+      const extra = range === 'season' && items.length < n ? ` (showing ${items.length})` : '';
+      if (titleEl) titleEl.textContent = `Last ${items.length} Games${extra}`;
 
-      // Re-render chart and stats
-      _glRenderChart(container, items, line, 130);
-      _glUpdateStats(container, items, line, container.dataset.glDir);
+      // Re-render
+      const { barsHtml, labelsHtml } = _glBuildBars(items, store.line, 130);
+      container.querySelector('.gl-chart').innerHTML = barsHtml;
+      container.querySelector('.gl-labels').innerHTML = labelsHtml;
+      const statsEl = container.querySelector('.gl-stats');
+      if (statsEl) statsEl.innerHTML = _glBuildStats(items);
     });
 
     // ── Props Table ──
