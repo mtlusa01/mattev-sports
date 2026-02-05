@@ -1,44 +1,71 @@
 {
-  "updated": "2026-02-04T21:49:59",
+  "updated": "2026-02-04T22:17:23",
   "allTime": {
     "spreads": {
-      "wins": 6,
+      "wins": 7,
       "losses": 3,
-      "pct": 66.7
+      "pct": 70.0
     },
     "totals": {
-      "wins": 7,
+      "wins": 8,
       "losses": 1,
-      "pct": 87.5
+      "pct": 88.9
     },
     "moneylines": {
       "wins": 6,
-      "losses": 3,
-      "pct": 66.7
+      "losses": 4,
+      "pct": 60.0
     }
   },
   "days": [
     {
       "date": "2026-02-04",
       "spreads": {
-        "wins": 1,
+        "wins": 2,
         "losses": 1,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "2-1",
+        "pct": 66.7
       },
       "totals": {
-        "wins": 2,
+        "wins": 3,
         "losses": 0,
-        "record": "2-0",
+        "record": "3-0",
         "pct": 100.0
       },
       "moneylines": {
         "wins": 2,
-        "losses": 0,
-        "record": "2-0",
-        "pct": 100.0
+        "losses": 1,
+        "record": "2-1",
+        "pct": 66.7
       },
       "picks": [
+        {
+          "date": "2026-02-04",
+          "type": "spread",
+          "game": "BOS @ FLA",
+          "pick": "BOS +1.5",
+          "result": "4-5",
+          "hit": true,
+          "confidence": 55.5
+        },
+        {
+          "date": "2026-02-04",
+          "type": "total",
+          "game": "BOS @ FLA",
+          "pick": "OVER 6.5",
+          "result": "4-5",
+          "hit": true,
+          "confidence": 50.5
+        },
+        {
+          "date": "2026-02-04",
+          "type": "ml",
+          "game": "BOS @ FLA",
+          "pick": "BOS",
+          "result": "4-5",
+          "hit": false,
+          "confidence": 71.3
+        },
         {
           "date": "2026-02-04",
           "type": "spread",
