@@ -103,7 +103,6 @@
     .top-nav, .top-nav *,
     .nav-spacer,
     .page-gradient,
-    .page-header, .page-title,
     .mobile-nav-backdrop, .mobile-nav-drawer, .mobile-nav-drawer * {
       border-top: none !important;
       border-bottom: none !important;
@@ -119,11 +118,6 @@
     footer { border-top: 1px solid var(--border) !important; }
 
     .nav-spacer { height: 70px; }
-
-    /* ── Page Title ── */
-    .page-header { max-width: 960px; margin: 0 auto 24px; padding: 0 24px; }
-    .page-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
-    .page-title::before { content: ''; width: 4px; height: 22px; background: var(--brand); border-radius: 2px; }
 
     /* ── Main ── */
     main { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
@@ -414,7 +408,6 @@
       .soon-badge { font-size: 7px; padding: 1px 3px; }
       .nav-spacer { height: 100px !important; }
       main { padding: 0 12px 60px; }
-      .page-header { padding: 0 12px; }
       .overview-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .ov-card { padding: 14px 12px; }
       .ov-value { font-size: 22px; }
@@ -479,8 +472,6 @@
   </div>
 
   <div class="nav-spacer"></div>
-
-  <div class="page-header fade-section"><h1 class="page-title">My Bets</h1></div>
 
   <main>
     <!-- Overview -->
