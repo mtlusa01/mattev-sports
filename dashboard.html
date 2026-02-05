@@ -2525,7 +2525,7 @@
     function buildMatchupInsights(p) {
       const PROP_SHORT = { points: 'PTS', rebounds: 'REB', assists: 'AST', pts_rebs_asts: 'PRA' };
       const statLabel = PROP_SHORT[p.prop] || p.prop;
-      const opp = p.opponent || '??';
+      const opp = p.opponent || getOpponent(p.team) || '??';
       const dir = (p.direction || 'OVER').toUpperCase();
       const line = parseFloat(p.line) || 0;
       const insights = [];
@@ -2641,7 +2641,7 @@
       const games = p.last_10_games || [];
       const rawVals = p.last_10_values || [];
       const allVals = games.length > 0 ? games.map(g => g.val) : rawVals;
-      if (allVals.length === 0) return '';
+      if (allVals.length === 0) return `<div class="gl-section"><div class="gl-header"><span class="gl-title">Game Log</span></div><div style="padding:12px;font-size:11px;color:var(--text-muted);text-align:center">Game log data not available for newly discovered props</div></div>`;
 
       const line = parseFloat(p.line) || 0;
       const dir = p.direction;
@@ -2659,11 +2659,12 @@
       // (data store populated below with pills)
 
       // Build H2H items from h2h_games
+      const oppName = p.opponent || getOpponent(p.team) || '??';
       const h2hItems = (p.h2h_games || []).map(g => ({
         val: parseFloat(g.value) || 0,
         hit: !!g.hit,
         date: g.date || '',
-        opp: (g.venue || 'vs') + ' ' + (p.opponent || '??')
+        opp: (g.venue || 'vs') + ' ' + oppName
       }));
 
       // Store data in JS for pill interactions (includes h2h)
