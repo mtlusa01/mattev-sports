@@ -697,34 +697,46 @@
     .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
     .insight-type-badge.historical { background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
 
-    /* Hit Rates — full-width section below the 3 stat cards */
-    .hr-section {
+    /* ── Game Log Chart (Outlier-style) ── */
+    .gl-section {
       background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 8px; padding: 14px 16px; margin-top: 12px; max-width: 1000px;
+      border-radius: 8px; padding: 16px; margin-top: 12px; max-width: 1000px;
     }
-    .hr-section .dc-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-    .hr-val { font-weight: 700; }
-    .hr-val.hr-hot { color: var(--accent-light); }
-    .hr-val.hr-warm { color: var(--yellow); }
-    .hr-val.hr-cold { color: var(--red-light); }
-    .hr-table { width: 100%; font-size: 12px; border-collapse: collapse; }
-    .hr-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 4px 8px; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-    .hr-table td { padding: 5px 8px; }
-    .hr-streak { font-size: 12px; margin-top: 6px; color: var(--text-secondary); }
-
-    /* Sparkline — full width below table */
-    .hr-spark-wrap { margin-top: 10px; }
-    .hr-spark-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .hr-spark-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .hr-spark-legend { display: flex; gap: 10px; font-size: 10px; color: var(--text-muted); }
-    .hr-spark-legend span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
-    .hr-spark-legend .leg-hit::before { background: var(--accent); }
-    .hr-spark-legend .leg-miss::before { background: var(--red); opacity: 0.5; }
-    .sparkline-row { display: flex; gap: 3px; align-items: flex-end; height: 48px; position: relative; }
-    .spark-bar { flex: 1; min-width: 0; border-radius: 2px 2px 0 0; }
-    .spark-bar.hit { background: var(--accent); }
-    .spark-bar.miss { background: var(--red); opacity: 0.5; }
-    .spark-line-marker { position: absolute; left: 0; right: 0; border-top: 1.5px dashed var(--text-muted); opacity: 0.35; pointer-events: none; }
+    /* Header row: title left, hit rate pills right */
+    .gl-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+    .gl-title { font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; }
+    .gl-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .gl-pill { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
+    .gl-pill-label { color: var(--text-muted); margin-right: 3px; }
+    .gl-pill-val { font-weight: 700; }
+    .gl-pill-val.hr-hot { color: #10b981; }
+    .gl-pill-val.hr-warm { color: var(--yellow); }
+    .gl-pill-val.hr-cold { color: #ef4444; }
+    /* Stats sub-row */
+    .gl-stats { display: flex; gap: 14px; font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+    .gl-stats span { color: var(--text-secondary); }
+    .gl-stats strong { color: var(--text-primary); font-weight: 600; }
+    /* Chart area */
+    .gl-chart { position: relative; height: 130px; display: flex; align-items: flex-end; gap: 0; padding-left: 32px; }
+    /* Y-axis line label */
+    .gl-line-label { position: absolute; left: 0; font-size: 10px; color: var(--text-muted); font-weight: 600; transform: translateY(50%); white-space: nowrap; }
+    .gl-line { position: absolute; left: 30px; right: 0; border-top: 1.5px dashed rgba(255,255,255,0.25); pointer-events: none; z-index: 1; }
+    /* Bar column */
+    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; position: relative; z-index: 2; }
+    .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; }
+    .gl-bar-val.hit { color: #10b981; }
+    .gl-bar-val.miss { color: #ef4444; }
+    .gl-bar { width: 70%; min-width: 8px; max-width: 36px; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
+    .gl-bar.hit { background: #10b981; }
+    .gl-bar.miss { background: #ef4444; opacity: 0.55; }
+    .gl-bar:hover { opacity: 0.8; }
+    /* Labels below bars */
+    .gl-labels { display: flex; gap: 0; padding-left: 32px; margin-top: 4px; }
+    .gl-lbl-col { flex: 1; text-align: center; min-width: 0; overflow: hidden; }
+    .gl-lbl-date { font-size: 9px; color: var(--text-muted); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gl-lbl-opp { font-size: 9px; color: var(--text-secondary); font-weight: 600; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    /* Streak badge */
+    .gl-streak { font-size: 11px; color: var(--text-secondary); margin-top: 8px; }
 
     /* Head-to-Head section */
     .h2h-section { margin-top: 12px; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
@@ -772,8 +784,13 @@
       .odds-arrow { font-size: 14px; }
       .ev-display { font-size: 20px; margin-bottom: 4px; }
       .rating-badge { font-size: 10px; padding: 2px 8px; }
-      .hr-section { padding: 10px 12px; }
-      .sparkline-row { height: 36px; }
+      .gl-section { padding: 10px 12px; }
+      .gl-chart { height: 100px; padding-left: 26px; }
+      .gl-labels { padding-left: 26px; }
+      .gl-lbl-opp { display: none; }
+      .gl-bar-val { font-size: 9px; }
+      .gl-pills { gap: 4px; }
+      .gl-pill { font-size: 10px; padding: 1px 6px; }
     }
 
     .pick-value { font-weight: 600; font-size: 14px; }
@@ -1570,9 +1587,11 @@
       .proj-compare { font-size: 14px; }
       .odds-item .oi-value { font-size: 12px; }
       .ev-display { font-size: 18px; }
-      .hr-section { padding: 8px 10px; margin-top: 8px; }
-      .hr-table { font-size: 11px; }
-      .hr-table th, .hr-table td { padding: 3px 6px; }
+      .gl-section { padding: 8px 10px; margin-top: 8px; }
+      .gl-chart { height: 80px; padding-left: 22px; }
+      .gl-labels { padding-left: 22px; }
+      .gl-line-label { font-size: 9px; }
+      .gl-bar-val { font-size: 8px; }
 
       /* Top picks 2-col tight */
       .top-picks-section { padding: 12px; }
@@ -2558,50 +2577,73 @@
       </div>`;
     }
 
-    // ── Hit Rates Section (full-width, always visible) ──
-    function buildHitRatesSection(p) {
-      const l5 = p.l5_hit_rate, l10 = p.l10_hit_rate;
+    // ── Game Log Chart (Outlier-style) ──
+    function buildGameLogChart(p) {
       const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
-      const l5Str = l5 != null ? l5 + '%' : '-';
-      const l10Str = l10 != null ? l10 + '%' : '-';
+      const fmtRate = (hits, total) => {
+        if (!total) return '-';
+        const pct = Math.round(hits / total * 100);
+        return `<span class="gl-pill-val ${colorCls(pct)}">${pct}%</span>`;
+      };
 
-      // Table
-      let table = '<table class="hr-table"><tr><th>Window</th><th>Hit</th><th>Rate</th><th>Avg</th></tr>';
-      const l10Count = (p.last_10_values || []).length;
-      table += `<tr><td>Last 5</td><td>${p.l5_hit_count ?? '-'}/${Math.min(5, l10Count)}</td><td><span class="hr-val ${colorCls(l5)}">${l5Str}</span></td><td>${p.l5_avg ?? '-'}</td></tr>`;
-      table += `<tr><td>Last 10</td><td>${p.l10_hit_count ?? '-'}/${l10Count}</td><td><span class="hr-val ${colorCls(l10)}">${l10Str}</span></td><td>${p.l10_avg ?? '-'}</td></tr>`;
-      if (p.season_total) {
-        const sPct = Math.round(p.season_hit_count / p.season_total * 100);
-        table += `<tr><td>Season</td><td>${p.season_hit_count}/${p.season_total}</td><td><span class="hr-val ${colorCls(sPct)}">${sPct}%</span></td><td>${p.season_avg ?? '-'}</td></tr>`;
-      }
-      table += '</table>';
+      // Use last_10_games if available, fall back to last_10_values
+      const games = p.last_10_games || [];
+      const vals = games.length > 0 ? games.map(g => g.val) : (p.last_10_values || []);
+      if (vals.length === 0) return '';
 
-      const streakHtml = p.streak ? `<div class="hr-streak">&#128293; ${p.streak} game streak</div>` : '';
+      const line = p.line || 0;
+      const l5 = p.l5_hit_rate, l10 = p.l10_hit_rate;
+      const l10Count = vals.length;
 
-      // Sparkline — full width below table
-      let sparkHtml = '';
-      if (p.last_10_values && p.last_10_values.length > 0) {
-        const vals = p.last_10_values;
-        const line = p.line || 0;
-        const max = Math.max(...vals, line) || 1;
-        const linePos = Math.min(100, (line / max) * 100);
-        const bars = vals.map(v => {
-          const hPct = Math.max(8, (v / max) * 100);
-          const hit = p.direction === 'OVER' ? v > line : v < line;
-          return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${hPct}%" title="${v}"></div>`;
-        }).join('');
-        sparkHtml = `<div class="hr-spark-wrap">
-          <div class="hr-spark-header">
-            <span class="hr-spark-label">Last ${vals.length} games (line: ${p.line})</span>
-            <div class="hr-spark-legend"><span class="leg-hit">Hit</span><span class="leg-miss">Miss</span></div>
-          </div>
-          <div class="sparkline-row">${bars}<div class="spark-line-marker" style="bottom:${linePos}%"></div></div>
-        </div>`;
-      }
+      // Hit rate pills
+      let pills = '';
+      if (p.l5_hit_count != null) pills += `<span class="gl-pill"><span class="gl-pill-label">L5</span>${fmtRate(p.l5_hit_count, Math.min(5, l10Count))}</span>`;
+      if (p.l10_hit_count != null) pills += `<span class="gl-pill"><span class="gl-pill-label">L10</span>${fmtRate(p.l10_hit_count, l10Count)}</span>`;
+      if (p.season_total) pills += `<span class="gl-pill"><span class="gl-pill-label">Season</span>${fmtRate(p.season_hit_count, p.season_total)}</span>`;
 
-      return `<div class="hr-section">
-        <div class="dc-label">Hit Rates</div>
-        ${table}${streakHtml}${sparkHtml}
+      // Stats line
+      let statsHtml = '';
+      const statParts = [];
+      if (p.l10_avg != null) statParts.push(`Avg: <strong>${p.l10_avg}</strong>`);
+      if (p.l10_median != null) statParts.push(`Med: <strong>${p.l10_median}</strong>`);
+      if (p.season_avg != null) statParts.push(`Season: <strong>${p.season_avg}</strong>`);
+      if (statParts.length) statsHtml = `<div class="gl-stats">${statParts.map(s => `<span>${s}</span>`).join('')}</div>`;
+
+      // Compute chart dimensions
+      const maxVal = Math.max(...vals, line) || 1;
+      const chartH = 130; // px, matches CSS .gl-chart height
+      const lineBottom = (line / maxVal) * chartH;
+
+      // Bars — reversed so oldest on left, newest on right
+      const items = games.length > 0 ? [...games].reverse() : vals.map((v, i) => ({ val: v, hit: p.direction === 'OVER' ? v > line : v < line, date: `G${vals.length - i}`, opp: '' })).reverse();
+
+      const barsHtml = items.map(g => {
+        const v = g.val;
+        const hPx = Math.max(6, (v / maxVal) * chartH);
+        const hit = g.hit;
+        const cls = hit ? 'hit' : 'miss';
+        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${v}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
+      }).join('');
+
+      const labelsHtml = items.map(g => {
+        return `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`;
+      }).join('');
+
+      const streakHtml = p.streak >= 3 ? `<div class="gl-streak">&#128293; ${p.streak} game streak</div>` : '';
+
+      return `<div class="gl-section">
+        <div class="gl-header">
+          <span class="gl-title">Last ${l10Count} Games</span>
+          <div class="gl-pills">${pills}</div>
+        </div>
+        ${statsHtml}
+        <div class="gl-chart">
+          <span class="gl-line-label" style="bottom:${lineBottom}px">${line}</span>
+          <div class="gl-line" style="bottom:${lineBottom}px"></div>
+          ${barsHtml}
+        </div>
+        <div class="gl-labels">${labelsHtml}</div>
+        ${streakHtml}
       </div>`;
     }
 
@@ -2689,7 +2731,7 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
-                ${buildHitRatesSection(p)}
+                ${buildGameLogChart(p)}
                 ${buildH2HSection(p)}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
                 <div class="injury-section">
