@@ -700,7 +700,7 @@
     /* ── Game Log Chart (Outlier-style) ── */
     .gl-section {
       background: var(--bg-secondary); border: 1px solid var(--border);
-      border-radius: 8px; padding: 16px; margin-top: 12px; max-width: 1000px;
+      border-radius: 8px; padding: 16px; margin-top: 12px; width: 100%; box-sizing: border-box;
     }
     /* Header row: title left, hit rate pills right */
     .gl-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
@@ -718,23 +718,23 @@
     .gl-stats { display: flex; gap: 14px; font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
     .gl-stats span { color: var(--text-secondary); }
     .gl-stats strong { color: var(--text-primary); font-weight: 600; }
-    /* Chart area */
-    .gl-chart { position: relative; height: 130px; display: flex; align-items: flex-end; gap: 2px; padding-left: 32px; width: 100%; box-sizing: border-box; }
-    /* Y-axis line label */
-    .gl-line-label { position: absolute; left: 0; font-size: 10px; color: var(--text-muted); font-weight: 600; transform: translateY(50%); white-space: nowrap; }
-    .gl-line { position: absolute; left: 30px; right: 0; border-top: 1.5px dashed rgba(255,255,255,0.25); pointer-events: none; z-index: 1; }
-    /* Bar column — flex:1 ensures equal distribution across full width */
-    .gl-bar-col { flex: 1 1 0%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; position: relative; z-index: 2; }
+    /* Chart area — flex container, bars fill full width */
+    .gl-chart-wrap { position: relative; margin-bottom: 4px; }
+    .gl-chart-bars { display: flex; justify-content: space-between; align-items: flex-end; height: 130px; gap: 4px; width: 100%; }
+    .gl-chart-line { position: absolute; left: 0; right: 0; border-top: 1.5px dashed rgba(255,255,255,0.25); pointer-events: none; z-index: 0; }
+    .gl-chart-line-label { position: absolute; left: 0; font-size: 9px; color: var(--text-muted); font-weight: 600; transform: translateY(-100%); padding-right: 4px; z-index: 3; background: var(--bg-secondary); }
+    /* Bar column */
+    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; position: relative; z-index: 2; }
     .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; }
     .gl-bar-val.hit { color: #10b981; }
     .gl-bar-val.miss { color: #ef4444; }
-    .gl-bar { width: 70%; max-width: 48px; min-width: 12px; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
+    .gl-bar { width: 100%; border-radius: 3px 3px 0 0; transition: opacity 0.15s; }
     .gl-bar.hit { background: #10b981; }
     .gl-bar.miss { background: #ef4444; opacity: 0.55; }
     .gl-bar:hover { opacity: 0.8; }
     /* Labels below bars */
-    .gl-labels { display: flex; gap: 2px; padding-left: 32px; margin-top: 4px; width: 100%; box-sizing: border-box; }
-    .gl-lbl-col { flex: 1 1 0%; text-align: center; min-width: 0; overflow: hidden; }
+    .gl-labels { display: flex; justify-content: space-between; gap: 4px; width: 100%; }
+    .gl-lbl-col { flex: 1; text-align: center; min-width: 0; overflow: hidden; }
     .gl-lbl-date { font-size: 9px; color: var(--text-muted); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .gl-lbl-opp { font-size: 9px; color: var(--text-secondary); font-weight: 600; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     /* Streak badge */
@@ -787,8 +787,7 @@
       .ev-display { font-size: 20px; margin-bottom: 4px; }
       .rating-badge { font-size: 10px; padding: 2px 8px; }
       .gl-section { padding: 10px 12px; }
-      .gl-chart { height: 100px; padding-left: 26px; }
-      .gl-labels { padding-left: 26px; }
+      .gl-chart-bars { height: 100px; }
       .gl-lbl-opp { display: none; }
       .gl-bar-val { font-size: 9px; }
       .gl-pills { gap: 4px; }
@@ -1590,9 +1589,8 @@
       .odds-item .oi-value { font-size: 12px; }
       .ev-display { font-size: 18px; }
       .gl-section { padding: 8px 10px; margin-top: 8px; }
-      .gl-chart { height: 80px; padding-left: 22px; }
-      .gl-labels { padding-left: 22px; }
-      .gl-line-label { font-size: 9px; }
+      .gl-chart-bars { height: 80px; }
+      .gl-chart-line-label { font-size: 8px; }
       .gl-bar-val { font-size: 8px; }
 
       /* Top picks 2-col tight */
@@ -2585,19 +2583,20 @@
 
     function _glBuildBars(items, line, chartH) {
       const maxVal = Math.max(...items.map(g => g.val), line) || 1;
-      const lineBottom = (line / maxVal) * chartH;
-      const barsHtml =
-        `<span class="gl-line-label" style="bottom:${lineBottom}px">${line}</span>` +
-        `<div class="gl-line" style="bottom:${lineBottom}px"></div>` +
-        items.map(g => {
-          const hPx = Math.max(6, (g.val / maxVal) * chartH);
-          const cls = g.hit ? 'hit' : 'miss';
-          return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
-        }).join('');
+      const linePct = (line / maxVal) * 100;
+      const bars = items.map(g => {
+        const hPct = Math.max(5, (g.val / maxVal) * 100);
+        const cls = g.hit ? 'hit' : 'miss';
+        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPct}%"></div></div>`;
+      }).join('');
+      const barsHtml = `<div class="gl-chart-wrap">` +
+        `<span class="gl-chart-line-label" style="bottom:${linePct}%">${line}</span>` +
+        `<div class="gl-chart-line" style="bottom:${linePct}%"></div>` +
+        `<div class="gl-chart-bars">${bars}</div></div>`;
       const labelsHtml = items.map(g =>
         `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`
       ).join('');
-      return { barsHtml, labelsHtml, lineBottom };
+      return { barsHtml, labelsHtml };
     }
 
     function _glBuildStats(items) {
@@ -2664,7 +2663,7 @@
           <div class="gl-pills">${pills}</div>
         </div>
         <div class="gl-stats">${statsHtml}</div>
-        <div class="gl-chart">${barsHtml}</div>
+        <div class="gl-chart-area">${barsHtml}</div>
         <div class="gl-labels">${labelsHtml}</div>
         ${streakHtml}
       </div>`;
@@ -2698,7 +2697,7 @@
 
       // Re-render
       const { barsHtml, labelsHtml } = _glBuildBars(items, store.line, 130);
-      container.querySelector('.gl-chart').innerHTML = barsHtml;
+      container.querySelector('.gl-chart-area').innerHTML = barsHtml;
       container.querySelector('.gl-labels').innerHTML = labelsHtml;
       const statsEl = container.querySelector('.gl-stats');
       if (statsEl) statsEl.innerHTML = _glBuildStats(items);
