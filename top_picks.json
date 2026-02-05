@@ -1,165 +1,133 @@
 {
-  "date": "2026-02-04",
-  "generated_at": "2026-02-04T23:00:12",
+  "date": "2026-02-05",
+  "generated_at": "2026-02-05T00:49:56",
   "picks": [
     {
       "type": "prop",
       "player": "Austin Reaves",
       "team": "LAL",
-      "prop": "PTS",
+      "prop": "AST",
       "direction": "OVER",
-      "line": 15.5,
-      "projection": 21.8,
-      "diff": 6.3,
-      "ev": 14.6,
-      "confidence": 58.7,
-      "pick_score": 56.9,
+      "line": 3.5,
+      "projection": 5.1,
+      "diff": 1.6,
+      "ev": 31.2,
+      "confidence": 56.1,
+      "pick_score": 59.8,
       "score_factors": [
-        "+12.6% EV",
-        "70% L10 hit rate",
-        "+6.3 edge"
+        "+31.2% EV",
+        "Favorable matchup (#24 DEF)"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 14.5,
-            "odds": -106
+            "line": 3.5,
+            "odds": 142
           },
           "under": {
-            "line": 14.5,
-            "odds": -120
+            "line": 3.5,
+            "odds": -192
           }
         },
         "draftkings": {
           "over": {
-            "line": 13.5,
-            "odds": -120
+            "line": 3.5,
+            "odds": 126
           },
           "under": {
-            "line": 13.5,
-            "odds": -110
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 14.5,
-            "odds": 110
-          },
-          "under": {
-            "line": 14.5,
-            "odds": -145
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "insight": "Has gone OVER 15.5 points in 7 of last 10 games (25.3 avg).",
-      "top_pick_rank": 1,
-      "result": "LOSS",
-      "actual": 15
-    },
-    {
-      "type": "prop",
-      "player": "Peyton Watson",
-      "team": "DEN",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 16.5,
-      "projection": 26.0,
-      "diff": 9.5,
-      "ev": 10.6,
-      "confidence": 55.6,
-      "pick_score": 52.9,
-      "score_factors": [
-        "+6.6% EV",
-        "80% L10 hit rate",
-        "+9.5 edge"
-      ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 16.5,
-            "odds": 106
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -136
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 15.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 15.5,
-            "odds": -116
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 16.5,
-            "odds": 100
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -130
+            "line": 3.5,
+            "odds": -167
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Has gone OVER 16.5 points in 8 of last 10 games (21.6 avg).",
-      "top_pick_rank": 2,
-      "result": "WIN",
-      "actual": 17
+      "insight": "PHI ranks #24 in assists defense \u2014 favorable for overs.",
+      "top_pick_rank": 1
     },
     {
-      "type": "spread",
-      "game": "NYK @ WAS",
-      "away_team": "NYK",
-      "home_team": "WAS",
-      "pick": "WAS +13.0",
-      "confidence": 76.3,
-      "pick_score": 50.0,
+      "type": "prop",
+      "player": "Joel Embiid",
+      "team": "PHI",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 3.5,
+      "projection": 6.5,
+      "diff": 3.0,
+      "ev": 9.4,
+      "confidence": 55.5,
+      "pick_score": 56.1,
       "score_factors": [
-        "76.3% spread conf",
-        "High confidence"
+        "+9.4% EV",
+        "70% L10 hit rate",
+        "Favorable matchup (#26 DEF)"
       ],
-      "commence_time": "2026-02-04T00:10:00Z",
-      "top_pick_rank": 3,
-      "result": "LOSS",
-      "actual": "132-101"
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": 134
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -180
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 3.5,
+            "odds": -143
+          },
+          "under": {
+            "line": 3.5,
+            "odds": 109
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 3.5 assists in 7 of last 10 games (4.9 avg).",
+      "top_pick_rank": 2
     },
     {
       "type": "ml",
-      "game": "NYK @ WAS",
-      "away_team": "NYK",
-      "home_team": "WAS",
-      "pick": "NYK",
-      "confidence": 67.7,
+      "game": "WAS @ DET",
+      "away_team": "WAS",
+      "home_team": "DET",
+      "pick": "DET",
+      "confidence": 79.8,
       "pick_score": 50.0,
       "score_factors": [
-        "67.7% ML conf"
+        "79.8% ML conf"
       ],
-      "commence_time": "2026-02-04T00:10:00Z",
-      "top_pick_rank": 4,
-      "result": "WIN",
-      "actual": "132-101"
+      "commence_time": "2026-02-06T00:10:00Z",
+      "top_pick_rank": 3
     },
     {
       "type": "ml",
-      "game": "ORL @ OKC",
-      "away_team": "ORL",
-      "home_team": "OKC",
-      "pick": "OKC",
-      "confidence": 69.7,
+      "game": "UTA @ ATL",
+      "away_team": "UTA",
+      "home_team": "ATL",
+      "pick": "ATL",
+      "confidence": 66.8,
       "pick_score": 50.0,
       "score_factors": [
-        "69.7% ML conf"
+        "66.8% ML conf"
       ],
-      "commence_time": "2026-02-04T01:10:00Z",
-      "top_pick_rank": 5,
-      "result": "WIN",
-      "actual": "92-128"
+      "commence_time": "2026-02-06T00:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "ml",
+      "game": "CHA @ HOU",
+      "away_team": "CHA",
+      "home_team": "HOU",
+      "pick": "HOU",
+      "confidence": 65.8,
+      "pick_score": 50.0,
+      "score_factors": [
+        "65.8% ML conf"
+      ],
+      "commence_time": "2026-02-06T01:10:00Z",
+      "top_pick_rank": 5
     }
   ]
 }
