@@ -2600,16 +2600,16 @@
     const _glDataStore = {}; // chartId → { allItems, line, dir }
 
     function _glBuildBars(items, line, chartH) {
-      const maxVal = Math.max(...items.map(g => g.val), line) || 1;
-      const linePx = Math.round((line / maxVal) * chartH);
+      const maxVal = Math.max(...items.map(g => g.val), line * 1.05) || 1;
+      const linePct = (line / maxVal) * 100;
       const bars = items.map(g => {
-        const hPx = Math.max(4, Math.round((g.val / maxVal) * chartH));
+        const hPct = Math.max(3, (g.val / maxVal) * 100);
         const cls = g.hit ? 'hit' : 'miss';
-        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
+        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPct}%"></div></div>`;
       }).join('');
       const barsHtml = `<div class="gl-chart-wrap">` +
-        `<span class="gl-chart-line-label" style="bottom:${linePx}px">${line}</span>` +
-        `<div class="gl-chart-line" style="bottom:${linePx}px"></div>` +
+        `<span class="gl-chart-line-label" style="bottom:${linePct}%">${line}</span>` +
+        `<div class="gl-chart-line" style="bottom:${linePct}%"></div>` +
         `<div class="gl-chart-bars">${bars}</div></div>`;
       const labelsHtml = items.map(g =>
         `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`
