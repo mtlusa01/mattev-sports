@@ -706,7 +706,9 @@
     .gl-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
     .gl-title { font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; }
     .gl-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-    .gl-pill { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
+    .gl-pill { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); cursor: pointer; transition: all 0.15s; }
+    .gl-pill:hover { border-color: var(--border-light); background: rgba(255,255,255,0.08); }
+    .gl-pill.active { border-color: var(--accent); background: rgba(16, 185, 129, 0.1); }
     .gl-pill-label { color: var(--text-muted); margin-right: 3px; }
     .gl-pill-val { font-weight: 700; }
     .gl-pill-val.hr-hot { color: #10b981; }
@@ -2577,7 +2579,34 @@
       </div>`;
     }
 
-    // ── Game Log Chart (Outlier-style) ──
+    // ── Game Log Chart (Outlier-style, interactive pills) ──
+    let _glChartId = 0;
+
+    function _glRenderChart(container, items, line, chartH) {
+      const maxVal = Math.max(...items.map(g => g.val), line) || 1;
+      const lineBottom = (line / maxVal) * chartH;
+      container.querySelector('.gl-chart').innerHTML =
+        `<span class="gl-line-label" style="bottom:${lineBottom}px">${line}</span>` +
+        `<div class="gl-line" style="bottom:${lineBottom}px"></div>` +
+        items.map(g => {
+          const hPx = Math.max(6, (g.val / maxVal) * chartH);
+          const cls = g.hit ? 'hit' : 'miss';
+          return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
+        }).join('');
+      container.querySelector('.gl-labels').innerHTML =
+        items.map(g => `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`).join('');
+    }
+
+    function _glUpdateStats(container, items, line, direction) {
+      const vals = items.map(g => g.val);
+      const avg = vals.length ? (vals.reduce((a, v) => a + v, 0) / vals.length).toFixed(1) : '-';
+      const sorted = [...vals].sort((a, b) => a - b);
+      const med = sorted.length ? (sorted.length % 2 === 0 ? ((sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2).toFixed(1) : sorted[Math.floor(sorted.length / 2)]) : '-';
+      const hits = items.filter(g => g.hit).length;
+      const statsEl = container.querySelector('.gl-stats');
+      if (statsEl) statsEl.innerHTML = `<span>Avg: <strong>${avg}</strong></span><span>Med: <strong>${med}</strong></span><span>Hit: <strong>${hits}/${vals.length}</strong></span>`;
+    }
+
     function buildGameLogChart(p) {
       const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
       const fmtRate = (hits, total) => {
@@ -2586,57 +2615,65 @@
         return `<span class="gl-pill-val ${colorCls(pct)}">${pct}%</span>`;
       };
 
-      // Use last_10_games if available, fall back to last_10_values
+      // Build full game list from last_10_games or last_10_values
       const games = p.last_10_games || [];
-      const vals = games.length > 0 ? games.map(g => g.val) : (p.last_10_values || []);
-      if (vals.length === 0) return '';
+      const allVals = games.length > 0 ? games.map(g => g.val) : (p.last_10_values || []);
+      if (allVals.length === 0) return '';
 
       const line = p.line || 0;
-      const l5 = p.l5_hit_rate, l10 = p.l10_hit_rate;
-      const l10Count = vals.length;
+      const dir = p.direction;
+      const l10Count = allVals.length;
+      const chartId = 'glc-' + (++_glChartId);
 
-      // Hit rate pills
-      let pills = '';
-      if (p.l5_hit_count != null) pills += `<span class="gl-pill"><span class="gl-pill-label">L5</span>${fmtRate(p.l5_hit_count, Math.min(5, l10Count))}</span>`;
-      if (p.l10_hit_count != null) pills += `<span class="gl-pill"><span class="gl-pill-label">L10</span>${fmtRate(p.l10_hit_count, l10Count)}</span>`;
-      if (p.season_total) pills += `<span class="gl-pill"><span class="gl-pill-label">Season</span>${fmtRate(p.season_hit_count, p.season_total)}</span>`;
+      // Build items array (most-recent-first in data, reversed for display)
+      const allItems = games.length > 0
+        ? games.map(g => ({ val: g.val, hit: g.hit, date: g.date, opp: g.opp }))
+        : allVals.map((v, i) => ({ val: v, hit: dir === 'OVER' ? v > line : v < line, date: `G${allVals.length - i}`, opp: '' }));
 
-      // Stats line
-      let statsHtml = '';
-      const statParts = [];
-      if (p.l10_avg != null) statParts.push(`Avg: <strong>${p.l10_avg}</strong>`);
-      if (p.l10_median != null) statParts.push(`Med: <strong>${p.l10_median}</strong>`);
-      if (p.season_avg != null) statParts.push(`Season: <strong>${p.season_avg}</strong>`);
-      if (statParts.length) statsHtml = `<div class="gl-stats">${statParts.map(s => `<span>${s}</span>`).join('')}</div>`;
+      // Hit rate pills — clickable
+      const pillData = [];
+      if (p.l5_hit_count != null) pillData.push({ key: 'l5', label: 'L5', rate: fmtRate(p.l5_hit_count, Math.min(5, l10Count)), n: 5 });
+      if (p.l10_hit_count != null) pillData.push({ key: 'l10', label: 'L10', rate: fmtRate(p.l10_hit_count, l10Count), n: 10 });
+      if (p.season_total) pillData.push({ key: 'season', label: 'Season', rate: fmtRate(p.season_hit_count, p.season_total), n: 20 });
 
-      // Compute chart dimensions
-      const maxVal = Math.max(...vals, line) || 1;
-      const chartH = 130; // px, matches CSS .gl-chart height
+      const pills = pillData.map(pd =>
+        `<span class="gl-pill${pd.key === 'l10' ? ' active' : ''}" data-gl-range="${pd.key}" data-gl-n="${pd.n}" data-gl-target="${chartId}"><span class="gl-pill-label">${pd.label}</span>${pd.rate}</span>`
+      ).join('');
+
+      // Default: show L10
+      const defaultItems = [...allItems.slice(0, Math.min(10, allItems.length))].reverse();
+      const maxVal = Math.max(...defaultItems.map(g => g.val), line) || 1;
+      const chartH = 130;
       const lineBottom = (line / maxVal) * chartH;
 
-      // Bars — reversed so oldest on left, newest on right
-      const items = games.length > 0 ? [...games].reverse() : vals.map((v, i) => ({ val: v, hit: p.direction === 'OVER' ? v > line : v < line, date: `G${vals.length - i}`, opp: '' })).reverse();
-
-      const barsHtml = items.map(g => {
-        const v = g.val;
-        const hPx = Math.max(6, (v / maxVal) * chartH);
-        const hit = g.hit;
-        const cls = hit ? 'hit' : 'miss';
-        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${v}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
+      const barsHtml = defaultItems.map(g => {
+        const hPx = Math.max(6, (g.val / maxVal) * chartH);
+        const cls = g.hit ? 'hit' : 'miss';
+        return `<div class="gl-bar-col"><span class="gl-bar-val ${cls}">${g.val}</span><div class="gl-bar ${cls}" style="height:${hPx}px"></div></div>`;
       }).join('');
 
-      const labelsHtml = items.map(g => {
-        return `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`;
-      }).join('');
+      const labelsHtml = defaultItems.map(g =>
+        `<div class="gl-lbl-col"><div class="gl-lbl-date">${g.date || ''}</div>${g.opp ? `<div class="gl-lbl-opp">${g.opp}</div>` : ''}</div>`
+      ).join('');
+
+      // Stats
+      const defVals = defaultItems.map(g => g.val);
+      const defAvg = defVals.length ? (defVals.reduce((a, v) => a + v, 0) / defVals.length).toFixed(1) : '-';
+      const defSorted = [...defVals].sort((a, b) => a - b);
+      const defMed = defSorted.length ? (defSorted.length % 2 === 0 ? ((defSorted[defSorted.length / 2 - 1] + defSorted[defSorted.length / 2]) / 2).toFixed(1) : defSorted[Math.floor(defSorted.length / 2)]) : '-';
+      const defHits = defaultItems.filter(g => g.hit).length;
 
       const streakHtml = p.streak >= 3 ? `<div class="gl-streak">&#128293; ${p.streak} game streak</div>` : '';
 
-      return `<div class="gl-section">
+      // Embed full data as JSON in data attribute for interactive re-rendering
+      const dataAttr = JSON.stringify(allItems).replace(/"/g, '&quot;');
+
+      return `<div class="gl-section" id="${chartId}" data-gl-items="${dataAttr}" data-gl-line="${line}" data-gl-dir="${dir}">
         <div class="gl-header">
-          <span class="gl-title">Last ${l10Count} Games</span>
+          <span class="gl-title">Last ${Math.min(10, l10Count)} Games</span>
           <div class="gl-pills">${pills}</div>
         </div>
-        ${statsHtml}
+        <div class="gl-stats"><span>Avg: <strong>${defAvg}</strong></span><span>Med: <strong>${defMed}</strong></span><span>Hit: <strong>${defHits}/${defaultItems.length}</strong></span></div>
         <div class="gl-chart">
           <span class="gl-line-label" style="bottom:${lineBottom}px">${line}</span>
           <div class="gl-line" style="bottom:${lineBottom}px"></div>
@@ -2646,6 +2683,40 @@
         ${streakHtml}
       </div>`;
     }
+
+    // Global click handler for game log pills
+    document.addEventListener('click', function(e) {
+      const pill = e.target.closest('.gl-pill[data-gl-range]');
+      if (!pill) return;
+      e.stopPropagation();
+      const targetId = pill.dataset.glTarget;
+      const container = document.getElementById(targetId);
+      if (!container) return;
+
+      // Update active pill
+      container.querySelectorAll('.gl-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      // Get data
+      const allItems = JSON.parse(container.dataset.glItems);
+      const line = parseFloat(container.dataset.glLine) || 0;
+      const n = parseInt(pill.dataset.glN) || 10;
+      const range = pill.dataset.glRange;
+
+      // Slice items (allItems is most-recent-first)
+      const sliced = allItems.slice(0, Math.min(n, allItems.length));
+      const items = [...sliced].reverse(); // oldest-left for chart
+
+      // Update title
+      const titleEl = container.querySelector('.gl-title');
+      const showing = items.length;
+      const extra = range === 'season' && showing < n ? ` (showing ${showing})` : '';
+      if (titleEl) titleEl.textContent = `Last ${showing} Games${extra}`;
+
+      // Re-render chart and stats
+      _glRenderChart(container, items, line, 130);
+      _glUpdateStats(container, items, line, container.dataset.glDir);
+    });
 
     // ── Props Table ──
     function renderPropsTable(props) {
