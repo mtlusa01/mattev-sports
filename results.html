@@ -331,6 +331,7 @@
     .best-bet-star { color: var(--yellow); font-size: 12px; margin-left: 4px; vertical-align: middle; }
     .result-hit { font-size: 16px; font-weight: 700; color: var(--accent-light); }
     .result-miss { font-size: 16px; font-weight: 700; color: var(--red-light); }
+    .result-push { font-size: 14px; font-weight: 700; color: var(--yellow); }
     .result-player { font-weight: 600; }
     .result-game { font-size: 12px; color: var(--text-muted); }
     .result-conf { font-size: 12px; color: var(--text-muted); }
@@ -494,6 +495,7 @@
           <button class="filter-pill active" data-rresult="all">All</button>
           <button class="filter-pill" data-rresult="win">Wins</button>
           <button class="filter-pill" data-rresult="loss">Losses</button>
+          <button class="filter-pill" data-rresult="push">Pushes</button>
         </div>
       </div>
 
@@ -700,8 +702,9 @@
       ['props', 'spreads', 'totals', 'moneylines'].forEach(cat => {
         const w = days.reduce((s, d) => s + (d[cat]?.wins || 0), 0);
         const l = days.reduce((s, d) => s + (d[cat]?.losses || 0), 0);
+        const p = days.reduce((s, d) => s + (d[cat]?.pushes || 0), 0);
         const t = w + l;
-        at[cat] = { wins: w, losses: l, pct: t > 0 ? +(w / t * 100).toFixed(1) : 0 };
+        at[cat] = { wins: w, losses: l, pushes: p, pct: t > 0 ? +(w / t * 100).toFixed(1) : 0 };
       });
       if (!days.length) {
         document.getElementById('results-banner').innerHTML = '<div class="results-banner-stat"><div class="rbs-value">--</div><div class="rbs-label">No results yet</div></div>';
@@ -710,10 +713,12 @@
 
       const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
       const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
+      const totalP = (at.props?.pushes||0) + (at.spreads?.pushes||0) + (at.totals?.pushes||0) + (at.moneylines?.pushes||0);
       const totalT = totalW + totalL;
       const totalPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : 0;
       const totalProfit = totalW * 90.91 - totalL * 100;
       const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
+      const totalRecord = totalP > 0 ? `${totalW}-${totalL}-${totalP}` : `${totalW}-${totalL}`;
 
       // Best bets allTime (computed separately — not added to overall record)
       const bbW = days.reduce((s, d) => s + (d.best_bets?.wins || 0), 0);
@@ -731,7 +736,7 @@
 
       document.getElementById('results-banner').innerHTML = `
         <div class="results-banner-stat">
-          <div class="rbs-value">${totalW}-${totalL}</div>
+          <div class="rbs-value">${totalRecord}</div>
           <div class="rbs-label">${currentSport.toUpperCase()} All-Time Record</div>
         </div>
         <div class="results-banner-stat">
@@ -775,21 +780,23 @@
 
     function renderDaySummary(day) {
       function card(label, stats, extraClass) {
-        const w = stats.wins, l = stats.losses, t = w + l;
+        const w = stats.wins || 0, l = stats.losses || 0, p = stats.pushes || 0;
+        const t = w + l;
         const pct = t > 0 ? (w / t * 100).toFixed(1) : 0;
+        const record = p > 0 ? `${w}-${l}-${p}` : `${w}-${l}`;
         const cls = 'results-stat-card' + (extraClass ? ' ' + extraClass : '');
         return `<div class="${cls}">
-          <div class="rsc-record">${w}-${l}</div>
+          <div class="rsc-record">${record}</div>
           <div class="rsc-pct ${pctClass(parseFloat(pct))}">${t > 0 ? pct + '%' : '--'}</div>
           <div class="rsc-label">${label}</div>
         </div>`;
       }
       let summaryHtml = '';
-      summaryHtml += card('Props', day.props || {wins:0,losses:0});
-      summaryHtml += card('Spreads', day.spreads || {wins:0,losses:0});
-      summaryHtml += card('Totals', day.totals || {wins:0,losses:0});
-      summaryHtml += card('Moneylines', day.moneylines || {wins:0,losses:0});
-      summaryHtml += card('Best Bets', day.best_bets || {wins:0,losses:0}, 'best-bets');
+      summaryHtml += card('Props', day.props || {});
+      summaryHtml += card('Spreads', day.spreads || {});
+      summaryHtml += card('Totals', day.totals || {});
+      summaryHtml += card('Moneylines', day.moneylines || {});
+      summaryHtml += card('Best Bets', day.best_bets || {}, 'best-bets');
       document.getElementById('results-summary').innerHTML = summaryHtml;
     }
 
@@ -801,8 +808,9 @@
       } else if (resultsTypeFilter !== 'all') {
         picks = picks.filter(p => p.type === resultsTypeFilter);
       }
-      if (resultsResultFilter === 'win') picks = picks.filter(p => p.hit);
-      else if (resultsResultFilter === 'loss') picks = picks.filter(p => !p.hit);
+      if (resultsResultFilter === 'win') picks = picks.filter(p => p.hit === true);
+      else if (resultsResultFilter === 'loss') picks = picks.filter(p => p.hit === false);
+      else if (resultsResultFilter === 'push') picks = picks.filter(p => p.hit === null);
 
       const tbody = document.getElementById('results-table-body');
       if (picks.length === 0) {
@@ -813,7 +821,9 @@
       tbody.innerHTML = picks.map(p => {
         const typeClass = p.type;
         const typeLabel = p.type === 'ml' ? 'ML' : p.type.toUpperCase();
-        const hitIcon = p.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
+        const hitIcon = p.hit === true ? '<span class="result-hit">&#10003;</span>'
+          : p.hit === false ? '<span class="result-miss">&#10007;</span>'
+          : '<span class="result-push">&mdash; P</span>';
         const starBadge = p.best_bet ? '<span class="best-bet-star" title="Best Bet">&#9733;</span>' : '';
 
         let pickHtml = '';
