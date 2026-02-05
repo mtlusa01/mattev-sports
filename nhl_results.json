@@ -1,23 +1,73 @@
 {
-  "updated": "2026-02-04T00:52:16",
+  "updated": "2026-02-04T21:24:00",
   "allTime": {
     "spreads": {
       "wins": 5,
-      "losses": 2,
-      "pct": 71.4
+      "losses": 3,
+      "pct": 62.5
     },
     "totals": {
-      "wins": 5,
+      "wins": 6,
       "losses": 1,
-      "pct": 83.3
+      "pct": 85.7
     },
     "moneylines": {
-      "wins": 4,
+      "wins": 5,
       "losses": 3,
-      "pct": 57.1
+      "pct": 62.5
     }
   },
   "days": [
+    {
+      "date": "2026-02-04",
+      "spreads": {
+        "wins": 0,
+        "losses": 1,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "picks": [
+        {
+          "date": "2026-02-04",
+          "type": "spread",
+          "game": "CHI @ CBJ",
+          "pick": "CHI +1.5",
+          "result": "0-4",
+          "hit": false,
+          "confidence": 52.0
+        },
+        {
+          "date": "2026-02-04",
+          "type": "total",
+          "game": "CHI @ CBJ",
+          "pick": "UNDER 6.5",
+          "result": "0-4",
+          "hit": true,
+          "confidence": 51.2
+        },
+        {
+          "date": "2026-02-04",
+          "type": "ml",
+          "game": "CHI @ CBJ",
+          "pick": "CBJ",
+          "result": "0-4",
+          "hit": true,
+          "confidence": 67.6
+        }
+      ]
+    },
     {
       "date": "2026-02-03",
       "spreads": {
