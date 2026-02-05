@@ -1673,6 +1673,34 @@
     .dropdown-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
     .login-btn-pill { padding: 8px 20px; background: linear-gradient(135deg, #00c853, #00e676); color: #0a0e1a; border-radius: 20px; font-weight: 600; font-size: 14px; transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
     .login-btn-pill:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(0,200,83,0.3); }
+
+    /* ── Bet Tracking ── */
+    .track-icon { cursor: pointer; font-size: 14px; opacity: 0.35; transition: opacity 0.2s, color 0.2s; margin-left: 6px; display: inline-block; vertical-align: middle; }
+    .track-icon:hover { opacity: 0.85; }
+    .track-icon.tracked { opacity: 1; color: #10b981; }
+    .bet-count-badge { background: var(--accent); color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: 4px; vertical-align: middle; }
+
+    .track-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .track-modal-backdrop.visible { opacity: 1; pointer-events: auto; }
+    .track-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); max-width: 400px; width: calc(100% - 32px); background: #1e1e2e; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; z-index: 201; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; }
+    .track-modal.visible { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .track-modal-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 12px; }
+    .track-modal-pick { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .track-modal-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+    .track-modal-fields { display: flex; gap: 12px; margin-bottom: 16px; }
+    .track-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .track-field label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .track-field input, .track-field select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; color: var(--text-primary); padding: 8px 10px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .track-field input:focus, .track-field select:focus { border-color: var(--accent); }
+    .track-field select option { background: #1e1e2e; color: var(--text-primary); }
+    .track-modal-payout { font-size: 14px; color: #10b981; font-weight: 600; margin-bottom: 20px; }
+    .track-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .track-btn-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-secondary); padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .track-btn-cancel:hover { background: rgba(255,255,255,0.05); }
+    .track-btn-confirm { background: #10b981; border: none; color: #fff; padding: 8px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .track-btn-confirm:hover { background: #059669; }
+    .game-pick-row { position: relative; }
+    .game-pick-row .track-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
   </style>
 </head>
 <body>
@@ -1693,6 +1721,7 @@
       </div>
       <div class="nav-right">
         <a href="results.html" class="nav-link">Results</a>
+        <a href="mybets.html" class="nav-link">My Bets<span class="bet-count-badge" id="nav-bet-count" style="display:none"></span></a>
         <a href="about.html" class="nav-link">About</a>
       </div>
       <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Menu">&#9776;</button>
@@ -1719,6 +1748,7 @@
     <div class="mobile-drawer-links">
       <a href="dashboard.html" class="active"><span class="menu-icon">&#128200;</span> Projections</a>
       <a href="results.html"><span class="menu-icon">&#128202;</span> Results</a>
+      <a href="mybets.html"><span class="menu-icon">&#127919;</span> My Bets <span class="bet-count-badge" id="mobile-bet-count" style="display:none"></span></a>
       <a href="about.html"><span class="menu-icon">&#8505;&#65039;</span> About</a>
     </div>
     <div class="mobile-drawer-auth" id="mobile-drawer-auth">
@@ -1989,6 +2019,200 @@
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
     const INJURIES_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/injuries.json';
+
+    // ── Bet Tracking (localStorage) ──
+    const LS_SETTINGS = 'efe_user_settings';
+    const LS_BETS = 'efe_tracked_bets';
+
+    function getBetSettings() {
+      try { return JSON.parse(localStorage.getItem(LS_SETTINGS)) || {}; }
+      catch { return {}; }
+    }
+    function saveBetSettings(s) { localStorage.setItem(LS_SETTINGS, JSON.stringify(s)); }
+    function getTrackedBets() {
+      try { return JSON.parse(localStorage.getItem(LS_BETS)) || []; }
+      catch { return []; }
+    }
+    function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
+    function getUnitSize() { return getBetSettings().unit_size || 10; }
+    function getDisplayMode() { return getBetSettings().display_mode || 'units'; }
+
+    function calcProfit(odds, units) {
+      const o = parseInt(odds);
+      if (isNaN(o)) return 0;
+      if (o > 0) return units * (o / 100);
+      return units * (100 / Math.abs(o));
+    }
+
+    function makeBetId(date, type, player, team, game, propType, pick, line) {
+      const parts = [date, type];
+      if (type === 'prop') parts.push(player, propType, pick, line);
+      else parts.push(game, type, pick);
+      return parts.map(p => String(p || '').toLowerCase().replace(/\s+/g, '-')).join('_');
+    }
+
+    function isBetTracked(betId) {
+      return getTrackedBets().some(b => b.id === betId);
+    }
+
+    let pendingBet = null;
+
+    function openTrackModal(betData) {
+      pendingBet = betData;
+      document.getElementById('track-pick-desc').textContent = betData.pickDesc;
+      document.getElementById('track-pick-meta').innerHTML = betData.metaHtml;
+      document.getElementById('track-odds').value = betData.defaultOdds || -110;
+      document.getElementById('track-units').value = '1';
+      updateTrackPayout();
+      document.getElementById('track-modal-backdrop').classList.add('visible');
+      document.getElementById('track-modal').classList.add('visible');
+    }
+
+    function closeTrackModal() {
+      pendingBet = null;
+      document.getElementById('track-modal-backdrop').classList.remove('visible');
+      document.getElementById('track-modal').classList.remove('visible');
+    }
+
+    function updateTrackPayout() {
+      const odds = parseInt(document.getElementById('track-odds').value) || -110;
+      const units = parseFloat(document.getElementById('track-units').value) || 1;
+      const profit = calcProfit(odds, units);
+      const unitSize = getUnitSize();
+      const el = document.getElementById('track-payout');
+      el.textContent = 'Potential Win: +' + profit.toFixed(2) + ' units ($' + (profit * unitSize).toFixed(2) + ')';
+    }
+
+    function confirmTrackBet() {
+      if (!pendingBet) return;
+      const odds = parseInt(document.getElementById('track-odds').value) || -110;
+      const units = parseFloat(document.getElementById('track-units').value) || 1;
+      const book = document.getElementById('track-book').value;
+
+      const bet = {
+        id: pendingBet.id,
+        date: pendingBet.date,
+        sport: currentSport.toUpperCase(),
+        type: pendingBet.type,
+        player: pendingBet.player || null,
+        team: pendingBet.team || null,
+        game: pendingBet.game,
+        prop_type: pendingBet.propType || null,
+        pick: pendingBet.pick,
+        line: pendingBet.line,
+        odds: odds,
+        units: units,
+        book: book,
+        model_confidence: pendingBet.confidence,
+        model_ev: pendingBet.ev || null,
+        status: 'pending',
+        actual: null,
+        profit_units: null,
+        placed_at: new Date().toISOString()
+      };
+
+      const bets = getTrackedBets();
+      const existing = bets.findIndex(b => b.id === bet.id);
+      if (existing >= 0) bets[existing] = bet;
+      else bets.push(bet);
+      saveTrackedBets(bets);
+
+      closeTrackModal();
+      updateBetCountBadges();
+      render();
+    }
+
+    function trackPropClick(origIdx) {
+      const p = projections[origIdx];
+      if (!p) return;
+      const opp = getOpponent(p.team);
+      const game = opp ? (p.team + ' @ ' + opp) : p.team;
+      const date = projections._date || new Date().toISOString().slice(0, 10);
+      const betId = makeBetId(date, 'prop', p.player, p.team, game, p.prop, p.direction, p.line);
+      if (isBetTracked(betId)) return;
+
+      const bestOdds = p.odds || -110;
+
+      openTrackModal({
+        id: betId, date, type: 'prop',
+        player: p.player, team: p.team, game,
+        propType: p.prop, pick: p.direction, line: p.line,
+        confidence: p.confidence, ev: p.ev,
+        defaultOdds: bestOdds,
+        pickDesc: p.player + ' ' + p.direction + ' ' + p.line + ' ' + p.prop.toUpperCase(),
+        metaHtml: (p.confidence ? p.confidence.toFixed(1) + '% conf' : '') + (p.ev ? ' | +' + p.ev.toFixed(1) + '% EV' : '')
+      });
+    }
+
+    function trackGameClick(away, home, betType) {
+      const games = getActiveGameProjections();
+      const g = games.find(gm => gm.away_team === away && gm.home_team === home);
+      if (!g) return;
+
+      const game = away + ' @ ' + home;
+      const date = g.commence_time ? g.commence_time.slice(0, 10) : new Date().toISOString().slice(0, 10);
+      let pick, line, conf;
+      if (betType === 'spread') { pick = g.spread_pick; line = null; conf = g.spread_conf; }
+      else if (betType === 'total') { pick = g.total_pick + ' ' + g.total_line; line = g.total_line; conf = g.total_conf; }
+      else { pick = g.ml_pick; line = null; conf = g.ml_conf; }
+
+      const betId = makeBetId(date, betType, null, null, game, null, pick, line);
+      if (isBetTracked(betId)) return;
+
+      openTrackModal({
+        id: betId, date, type: betType, player: null,
+        team: betType === 'ml' ? pick : null, game,
+        propType: null, pick, line,
+        confidence: conf, ev: null,
+        defaultOdds: -110,
+        pickDesc: pick + ' (' + betType.charAt(0).toUpperCase() + betType.slice(1) + ')',
+        metaHtml: game + (conf ? ' | ' + conf.toFixed(1) + '% conf' : '')
+      });
+    }
+
+    function autoGradeTrackedBets() {
+      const bets = getTrackedBets();
+      if (!bets.length) return;
+      let changed = false;
+      for (const bet of bets) {
+        if (bet.status !== 'pending') continue;
+        if (bet.type === 'prop') {
+          const p = projections.find(pr => pr.player === bet.player && pr.prop === bet.prop_type
+            && pr.direction === bet.pick && pr.line === bet.line);
+          if (p && p.result) {
+            bet.status = p.result.toLowerCase();
+            bet.actual = p.actual;
+            bet.profit_units = bet.status === 'win' ? calcProfit(bet.odds, bet.units)
+              : bet.status === 'loss' ? -bet.units : 0;
+            changed = true;
+          }
+        } else {
+          const gamesArr = bet.sport === 'NHL' ? nhlGameProjections : gameProjections;
+          const parts = bet.game.split(' @ ');
+          const g = gamesArr.find(gm => gm.away_team === parts[0] && gm.home_team === parts[1]);
+          if (g) {
+            const resultKey = bet.type + '_result';
+            if (g[resultKey]) {
+              bet.status = g[resultKey].toLowerCase();
+              bet.profit_units = bet.status === 'win' ? calcProfit(bet.odds, bet.units)
+                : bet.status === 'loss' ? -bet.units : 0;
+              changed = true;
+            }
+          }
+        }
+      }
+      if (changed) saveTrackedBets(bets);
+    }
+
+    function updateBetCountBadges() {
+      const pending = getTrackedBets().filter(b => b.status === 'pending').length;
+      ['nav-bet-count', 'mobile-bet-count'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (pending > 0) { el.textContent = pending; el.style.display = ''; }
+        else el.style.display = 'none';
+      });
+    }
 
     let projections = [];
     let gameProjections = [];
@@ -2914,6 +3138,14 @@
         const newBadge = p.added_live ? '<span class="new-badge">NEW</span>' : '';
         const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
 
+        // Track bet icon
+        const propDate = projections._date || new Date().toISOString().slice(0, 10);
+        const propOpp = getOpponent(p.team);
+        const propGame = propOpp ? (p.team + ' @ ' + propOpp) : p.team;
+        const propBetId = makeBetId(propDate, 'prop', p.player, p.team, propGame, p.prop, p.direction, p.line);
+        const isPropTracked = isBetTracked(propBetId);
+        const trackBadge = `<span class="track-icon ${isPropTracked ? 'tracked' : ''}" onclick="event.stopPropagation();trackPropClick(${p._idx})" title="${isPropTracked ? 'Tracked' : 'Track this bet'}">${isPropTracked ? '&#10003;' : '&#9733;'}</span>`;
+
         // Result columns for graded props
         const hasResult = p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH';
         const actualHtml = p.actual != null ? `<td><span class="prop-result ${hasResult ? (p.result === 'WIN' ? 'win' : p.result === 'LOSS' ? 'loss' : 'push') : ''}">${p.actual}</span></td>` : (hasAnyGraded ? '<td>--</td>' : '');
@@ -2922,7 +3154,7 @@
 
         return `
           <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')" style="cursor:pointer">
-            <td><span class="pt-player">${p.player}</span>${newBadge}${injBadge} ${edgeBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
+            <td><span class="pt-player">${p.player}</span>${newBadge}${injBadge} ${edgeBadge}${trackBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
             <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
             <td><span class="pt-prop-badge">${p.prop}</span></td>
             <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
@@ -3556,6 +3788,19 @@
       const mlStr = g.ml_pick || 'N/A';
       const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
 
+      // Track icons for game bets
+      const gDate = g.commence_time ? g.commence_time.slice(0, 10) : new Date().toISOString().slice(0, 10);
+      const gGame = g.away_team + ' @ ' + g.home_team;
+      const escAway = g.away_team.replace(/'/g, "\\'");
+      const escHome = g.home_team.replace(/'/g, "\\'");
+      const spreadBetId = makeBetId(gDate, 'spread', null, null, gGame, null, g.spread_pick, null);
+      const totalBetId = makeBetId(gDate, 'total', null, null, gGame, null, (g.total_pick||'') + ' ' + (g.total_line||''), g.total_line);
+      const mlBetId = makeBetId(gDate, 'ml', null, null, gGame, null, g.ml_pick, null);
+      const isSpreadTracked = isBetTracked(spreadBetId);
+      const isTotalTracked = isBetTracked(totalBetId);
+      const isMlTracked = isBetTracked(mlBetId);
+      const gameTrackIcon = (type, tracked) => `<span class="track-icon ${tracked ? 'tracked' : ''}" onclick="event.stopPropagation();trackGameClick('${escAway}','${escHome}','${type}')" title="${tracked ? 'Tracked' : 'Track this bet'}">${tracked ? '&#10003;' : '&#9733;'}</span>`;
+
       // Final card layout
       if (isFinal) {
         const projParts = (g.proj_score || '').split('-');
@@ -3592,18 +3837,21 @@
                 <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
                 ${renderResultBadge(g.spread_result)}
+                ${gameTrackIcon('spread', isSpreadTracked)}
               </div>
               <div class="game-pick-row${dimClass(g.total_conf)}">
                 <span class="game-pick-label">Total</span>
                 <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
                 ${renderResultBadge(g.total_result)}
+                ${gameTrackIcon('total', isTotalTracked)}
               </div>
               <div class="game-pick-row${dimClass(g.ml_conf)}">
                 <span class="game-pick-label">ML</span>
                 <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
                 ${renderResultBadge(g.ml_result)}
+                ${gameTrackIcon('ml', isMlTracked)}
               </div>
             </div>
           </div>`;
@@ -3651,16 +3899,19 @@
               <span class="game-pick-label">Spread</span>
               <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge(g.spread_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+              ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.total_conf)}">
               <span class="game-pick-label">Total</span>
               <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge(g.total_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+              ${gameTrackIcon('total', isTotalTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.ml_conf)}">
               <span class="game-pick-label">ML</span>
               <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge(g.ml_conf || 0)}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+              ${gameTrackIcon('ml', isMlTracked)}
             </div>
           </div>
         </div>`;
@@ -3675,11 +3926,13 @@
         const matchup = g.away_team + ' @ ' + g.home_team;
         const status = getGameStatus(g);
         const time = g.commence_time;
+        const away = g.away_team;
+        const home = g.home_team;
 
         // Spread row
         if (g.spread_pick && g.spread_pick !== 'N/A') {
           rows.push({
-            type: 'spread', matchup, time, status,
+            type: 'spread', matchup, time, status, away, home,
             conf: g.spread_conf || 0,
             pick: g.spread_pick,
             vegas: g.spread_pick ? g.spread_pick.split(' ').pop() : '--',
@@ -3690,7 +3943,7 @@
         // Total row
         if (g.total_pick && g.total_pick !== 'N/A') {
           rows.push({
-            type: 'total', matchup, time, status,
+            type: 'total', matchup, time, status, away, home,
             conf: g.total_conf || 0,
             pick: g.total_pick + ' ' + (g.total_line || ''),
             vegas: g.total_line != null ? '' + g.total_line : '--',
@@ -3705,7 +3958,7 @@
         // ML row
         if (g.ml_pick && g.ml_pick !== 'N/A') {
           rows.push({
-            type: 'ml', matchup, time, status,
+            type: 'ml', matchup, time, status, away, home,
             conf: g.ml_conf || 0,
             pick: g.ml_pick,
             vegas: '--',
@@ -3750,7 +4003,13 @@
         return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
       };
 
-      const bodyRows = sorted.map(r => `
+      const bodyRows = sorted.map(r => {
+        const rDate = r.time ? r.time.slice(0, 10) : new Date().toISOString().slice(0, 10);
+        const rBetId = makeBetId(rDate, r.type, null, null, r.matchup, null, r.pick, r.type === 'total' ? r.vegas : null);
+        const rTracked = isBetTracked(rBetId);
+        const escA = (r.away || '').replace(/'/g, "\\'");
+        const escH = (r.home || '').replace(/'/g, "\\'");
+        return `
         <tr>
           <td><span class="conf-badge ${confTier(r.conf)}">${r.conf.toFixed(1)}%</span></td>
           <td><span class="type-badge ${r.type}">${r.type === 'ml' ? 'ML' : r.type}</span></td>
@@ -3760,7 +4019,9 @@
           <td class="col-model" style="color:var(--text-secondary)">${r.model}</td>
           <td style="color:var(--text-muted)">${timeStr(r.time)}</td>
           <td>${resultBadge(r.result)}</td>
-        </tr>`).join('');
+          <td><span class="track-icon ${rTracked ? 'tracked' : ''}" onclick="event.stopPropagation();trackGameClick('${escA}','${escH}','${r.type}')" title="${rTracked ? 'Tracked' : 'Track this bet'}">${rTracked ? '&#10003;' : '&#9733;'}</span></td>
+        </tr>`;
+      }).join('');
 
       return `
         <table class="bets-table">
@@ -3773,6 +4034,7 @@
             <th class="col-model">Model</th>
             <th class="${sortedCls('time')}" data-bets-sort="time">Time${arrow('time')}</th>
             <th>Result</th>
+            <th></th>
           </tr></thead>
           <tbody>${bodyRows}</tbody>
         </table>`;
@@ -3973,6 +4235,8 @@
         if (currentSport === 'nba') updateStatsBar();
         if (currentView === 'game-projections' && currentSport === 'nba') renderGameProjections();
         else if (currentSport === 'nba') render(); // re-render props with game pills + matchup info
+        autoGradeTrackedBets();
+        updateBetCountBadges();
       } catch (err) {
         console.error('Failed to load game projections:', err);
       }
@@ -3992,6 +4256,8 @@
           updateStatsBar();
           if (currentView === 'game-projections') renderGameProjections();
         }
+        autoGradeTrackedBets();
+        updateBetCountBadges();
       } catch (err) {
         console.error('Failed to load NHL game projections:', err);
       }
@@ -4003,6 +4269,8 @@
         if (!resp.ok) throw new Error('Failed to fetch');
         const data = await resp.json();
         projections = data.projections || [];
+        projections.forEach((p, i) => p._idx = i);
+        projections._date = data.date || new Date().toISOString().slice(0, 10);
         topPicks = data.top_picks || [];
         recommendations = data.recommendations || null;
 
@@ -4027,6 +4295,8 @@
 
         updateStatsBar();
         render();
+        autoGradeTrackedBets();
+        updateBetCountBadges();
       } catch (err) {
         console.error('Failed to load projections:', err);
         render();
@@ -4050,6 +4320,47 @@
     loadNhlGameProjections();
     loadInjuries();
   </script>
+  <!-- Track Bet Modal -->
+  <div class="track-modal-backdrop" id="track-modal-backdrop" onclick="closeTrackModal()"></div>
+  <div class="track-modal" id="track-modal">
+    <div class="track-modal-title">TRACK THIS BET</div>
+    <div class="track-modal-pick" id="track-pick-desc"></div>
+    <div class="track-modal-meta" id="track-pick-meta"></div>
+    <div class="track-modal-fields">
+      <div class="track-field">
+        <label>Odds You Got</label>
+        <input type="number" id="track-odds" value="-110" oninput="updateTrackPayout()">
+      </div>
+      <div class="track-field">
+        <label>Units</label>
+        <select id="track-units" onchange="updateTrackPayout()">
+          <option value="0.5">0.5</option>
+          <option value="1" selected>1</option>
+          <option value="1.5">1.5</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="track-field">
+        <label>Book</label>
+        <select id="track-book">
+          <option>FanDuel</option>
+          <option>DraftKings</option>
+          <option>BetMGM</option>
+          <option>Caesars</option>
+          <option>bet365</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="track-modal-payout" id="track-payout"></div>
+    <div class="track-modal-actions">
+      <button class="track-btn-cancel" onclick="closeTrackModal()">Cancel</button>
+      <button class="track-btn-confirm" id="track-confirm-btn" onclick="confirmTrackBet()">Track Bet</button>
+    </div>
+  </div>
+
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
