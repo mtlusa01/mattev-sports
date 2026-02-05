@@ -302,7 +302,7 @@
     .day-header { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
 
     /* Daily Summary Cards */
-    .results-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .results-summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
     .results-stat-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
     .results-stat-card .rsc-record { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
     .results-stat-card .rsc-pct { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
@@ -327,6 +327,8 @@
     .result-type-badge.spread { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
     .result-type-badge.total { background: rgba(234, 179, 8, 0.12); color: var(--yellow); }
     .result-type-badge.ml { background: rgba(16, 185, 129, 0.15); color: var(--accent-light); }
+    .results-stat-card.best-bets { border-color: rgba(234, 179, 8, 0.3); }
+    .best-bet-star { color: var(--yellow); font-size: 12px; margin-left: 4px; vertical-align: middle; }
     .result-hit { font-size: 16px; font-weight: 700; color: var(--accent-light); }
     .result-miss { font-size: 16px; font-weight: 700; color: var(--red-light); }
     .result-player { font-weight: 600; }
@@ -485,6 +487,7 @@
           <button class="filter-pill" data-rtype="spread">Spreads</button>
           <button class="filter-pill" data-rtype="total">Totals</button>
           <button class="filter-pill" data-rtype="ml">MLs</button>
+          <button class="filter-pill" data-rtype="best_bet">Best Bets</button>
         </div>
         <div class="filter-group">
           <span class="filter-label">Result</span>
@@ -712,10 +715,17 @@
       const totalProfit = totalW * 90.91 - totalL * 100;
       const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
 
+      // Best bets allTime (computed separately — not added to overall record)
+      const bbW = days.reduce((s, d) => s + (d.best_bets?.wins || 0), 0);
+      const bbL = days.reduce((s, d) => s + (d.best_bets?.losses || 0), 0);
+      const bbT = bbW + bbL;
+      at.best_bets = { wins: bbW, losses: bbL, pct: bbT > 0 ? +(bbW / bbT * 100).toFixed(1) : 0 };
+
       const cats = [];
       if (at.props && (at.props.wins + at.props.losses) > 0) cats.push({ name: 'Props', ...at.props });
       if (at.spreads) cats.push({ name: 'Spreads', ...at.spreads });
       if (at.moneylines) cats.push({ name: 'MLs', ...at.moneylines });
+      if (at.best_bets && bbT > 0) cats.push({ name: 'Best Bets', ...at.best_bets });
       const bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
       const roiCls = parseFloat(totalRoi) > 0 ? 'green' : parseFloat(totalRoi) < 0 ? 'red' : '';
 
@@ -764,27 +774,31 @@
     }
 
     function renderDaySummary(day) {
-      function card(label, stats) {
+      function card(label, stats, extraClass) {
         const w = stats.wins, l = stats.losses, t = w + l;
         const pct = t > 0 ? (w / t * 100).toFixed(1) : 0;
-        return `<div class="results-stat-card">
+        const cls = 'results-stat-card' + (extraClass ? ' ' + extraClass : '');
+        return `<div class="${cls}">
           <div class="rsc-record">${w}-${l}</div>
           <div class="rsc-pct ${pctClass(parseFloat(pct))}">${t > 0 ? pct + '%' : '--'}</div>
           <div class="rsc-label">${label}</div>
         </div>`;
       }
       let summaryHtml = '';
-      if (day.props && (day.props.wins + day.props.losses) > 0) summaryHtml += card('Props', day.props);
+      summaryHtml += card('Props', day.props || {wins:0,losses:0});
       summaryHtml += card('Spreads', day.spreads || {wins:0,losses:0});
       summaryHtml += card('Totals', day.totals || {wins:0,losses:0});
       summaryHtml += card('Moneylines', day.moneylines || {wins:0,losses:0});
+      summaryHtml += card('Best Bets', day.best_bets || {wins:0,losses:0}, 'best-bets');
       document.getElementById('results-summary').innerHTML = summaryHtml;
     }
 
     function renderResultsTable(day) {
       let picks = day.picks || [];
 
-      if (resultsTypeFilter !== 'all') {
+      if (resultsTypeFilter === 'best_bet') {
+        picks = picks.filter(p => p.best_bet === true);
+      } else if (resultsTypeFilter !== 'all') {
         picks = picks.filter(p => p.type === resultsTypeFilter);
       }
       if (resultsResultFilter === 'win') picks = picks.filter(p => p.hit);
@@ -800,6 +814,7 @@
         const typeClass = p.type;
         const typeLabel = p.type === 'ml' ? 'ML' : p.type.toUpperCase();
         const hitIcon = p.hit ? '<span class="result-hit">&#10003;</span>' : '<span class="result-miss">&#10007;</span>';
+        const starBadge = p.best_bet ? '<span class="best-bet-star" title="Best Bet">&#9733;</span>' : '';
 
         let pickHtml = '';
         if (p.type === 'prop') {
@@ -813,7 +828,7 @@
         const confStr = p.confidence != null ? p.confidence + '%' : '--';
 
         return `<tr>
-          <td><span class="result-type-badge ${typeClass}">${typeLabel}</span></td>
+          <td><span class="result-type-badge ${typeClass}">${typeLabel}</span>${starBadge}</td>
           <td>${pickHtml}</td>
           <td style="color:var(--text-secondary)">${lineStr}</td>
           <td style="color:var(--text-secondary)">${resultStr}</td>

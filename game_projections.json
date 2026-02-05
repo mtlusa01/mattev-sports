@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-04T22:48:02",
+  "updated": "2026-02-04T22:48:44",
   "games": [
     {
       "away_team": "DEN",
@@ -22,7 +22,105 @@
       "home_score": 134,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jalen Brunson",
+          "team": "NYK",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 5.8,
+          "actual": 9,
+          "hit": false,
+          "confidence": 54.4,
+          "ev": 5.8
+        },
+        {
+          "player": "Peyton Watson",
+          "team": "DEN",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 21.0,
+          "actual": 10,
+          "hit": false,
+          "confidence": 54.7,
+          "ev": 4.9
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 34.5,
+          "projection": 32.4,
+          "actual": 37,
+          "hit": false,
+          "confidence": 54.6,
+          "ev": 2.5
+        },
+        {
+          "player": "Peyton Watson",
+          "team": "DEN",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 26.8,
+          "actual": 17,
+          "hit": false,
+          "confidence": 56.0,
+          "ev": 2.2
+        },
+        {
+          "player": "Jamal Murray",
+          "team": "DEN",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 24.3,
+          "actual": 39,
+          "hit": true,
+          "confidence": 54.2,
+          "ev": 2.2
+        },
+        {
+          "player": "Jamal Murray",
+          "team": "DEN",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 32.5,
+          "projection": 34.7,
+          "actual": 50,
+          "hit": true,
+          "confidence": 52.9,
+          "ev": 1.9
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 14.8,
+          "actual": 24,
+          "hit": false,
+          "confidence": 54.3,
+          "ev": 1.5
+        },
+        {
+          "player": "OG Anunoby",
+          "team": "NYK",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.6,
+          "actual": 8,
+          "hit": true,
+          "confidence": 54.0,
+          "ev": 1.0
+        }
+      ]
     },
     {
       "away_team": "MIN",
@@ -43,7 +141,57 @@
       "home_score": 126,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Naz Reid",
+          "team": "MIN",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.6,
+          "actual": 8,
+          "hit": true,
+          "confidence": 57.0,
+          "ev": 15.7
+        },
+        {
+          "player": "Immanuel Quickley",
+          "team": "TOR",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.2,
+          "actual": 5,
+          "hit": true,
+          "confidence": 52.0,
+          "ev": 9.3
+        },
+        {
+          "player": "Immanuel Quickley",
+          "team": "TOR",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 8,
+          "hit": true,
+          "confidence": 53.6,
+          "ev": 3.3
+        },
+        {
+          "player": "Rudy Gobert",
+          "team": "MIN",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 23.3,
+          "actual": 24,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 1.8
+        }
+      ]
     },
     {
       "away_team": "BOS",
@@ -64,7 +212,81 @@
       "home_score": 93,
       "spread_result": "win",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Payton Pritchard",
+          "team": "BOS",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 5.2,
+          "actual": 7,
+          "hit": false,
+          "confidence": 53.4,
+          "ev": 8.5
+        },
+        {
+          "player": "Amen Thompson",
+          "team": "HOU",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 8.4,
+          "actual": 4,
+          "hit": false,
+          "confidence": 52.3,
+          "ev": 8.3
+        },
+        {
+          "player": "Alperen Sengun",
+          "team": "HOU",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 9.5,
+          "projection": 10.6,
+          "actual": 9,
+          "hit": false,
+          "confidence": 52.8,
+          "ev": 5.0
+        },
+        {
+          "player": "Payton Pritchard",
+          "team": "BOS",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 29.5,
+          "projection": 25.0,
+          "actual": 37,
+          "hit": false,
+          "confidence": 54.6,
+          "ev": 3.9
+        },
+        {
+          "player": "Payton Pritchard",
+          "team": "BOS",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 21.5,
+          "projection": 17.0,
+          "actual": 27,
+          "hit": false,
+          "confidence": 55.1,
+          "ev": 2.6
+        },
+        {
+          "player": "Derrick White",
+          "team": "BOS",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 13.3,
+          "actual": 28,
+          "hit": false,
+          "confidence": 54.9,
+          "ev": 1.8
+        }
+      ]
     },
     {
       "away_team": "NOP",
