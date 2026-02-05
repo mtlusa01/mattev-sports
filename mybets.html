@@ -48,7 +48,7 @@
     }
 
     /* ── Top Nav (exact match) ── */
-    .top-nav { background: var(--bg-primary); position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 100; display: flex; align-items: center; }
+    .top-nav { background: var(--bg-primary); position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 100; display: flex; align-items: center; border-bottom: none; box-shadow: none; }
     .top-nav-inner { position: relative; max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; }
     .nav-brand { position: relative; z-index: 2; }
     .sports-tabs { display: flex; align-items: center; gap: 4px; background: var(--bg-tertiary); border-radius: 10px; padding: 4px; position: absolute; left: 50%; transform: translateX(-50%); z-index: 1; }
@@ -80,11 +80,11 @@
     .top-nav, .top-nav *, .page-gradient,
     .mobile-nav-backdrop, .mobile-nav-drawer, .mobile-nav-drawer * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 
-    .nav-spacer { height: 70px; }
+    .nav-spacer { height: 70px; border: none; }
 
     /* ── Page Title ── */
-    .page-header { max-width: 960px; margin: 0 auto 24px; padding: 0 24px; }
-    .page-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+    .page-header { max-width: 960px; margin: 0 auto 24px; padding: 0 24px; border: none; box-shadow: none; }
+    .page-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; border: none; }
     .page-title::before { content: ''; width: 4px; height: 22px; background: var(--brand); border-radius: 2px; }
 
     /* ── Main ── */
