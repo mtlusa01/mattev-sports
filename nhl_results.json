@@ -1,42 +1,65 @@
 {
-  "updated": "2026-02-04T22:54:59",
+  "updated": "2026-02-04T23:47:28",
   "allTime": {
     "spreads": {
-      "wins": 8,
+      "wins": 9,
       "losses": 3,
-      "pct": 72.7
+      "pushes": 0,
+      "pct": 75.0,
+      "roi": 43.2
     },
     "totals": {
-      "wins": 9,
+      "wins": 10,
       "losses": 1,
-      "pct": 90.0
+      "pushes": 0,
+      "pct": 90.9,
+      "roi": 73.6
     },
     "moneylines": {
-      "wins": 7,
+      "wins": 8,
       "losses": 4,
-      "pct": 63.6
+      "pushes": 0,
+      "pct": 66.7,
+      "roi": 27.3
+    },
+    "best_bets": {
+      "wins": 4,
+      "losses": 1,
+      "pushes": 0,
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-02-04",
       "spreads": {
-        "wins": 3,
+        "wins": 4,
         "losses": 1,
-        "record": "3-1",
-        "pct": 75.0
+        "pushes": 0,
+        "record": "4-1",
+        "pct": 80.0
       },
       "totals": {
-        "wins": 4,
+        "wins": 5,
         "losses": 0,
-        "record": "4-0",
+        "pushes": 0,
+        "record": "5-0",
         "pct": 100.0
       },
       "moneylines": {
-        "wins": 3,
+        "wins": 4,
         "losses": 1,
-        "record": "3-1",
-        "pct": 75.0
+        "pushes": 0,
+        "record": "4-1",
+        "pct": 80.0
+      },
+      "best_bets": {
+        "wins": 4,
+        "losses": 1,
+        "pushes": 0,
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -64,7 +87,8 @@
           "pick": "BOS",
           "result": "4-5",
           "hit": false,
-          "confidence": 71.3
+          "confidence": 71.3,
+          "best_bet": true
         },
         {
           "date": "2026-02-04",
@@ -91,7 +115,8 @@
           "pick": "CBJ",
           "result": "0-4",
           "hit": true,
-          "confidence": 67.6
+          "confidence": 67.6,
+          "best_bet": true
         },
         {
           "date": "2026-02-04",
@@ -118,7 +143,8 @@
           "pick": "MTL",
           "result": "5-1",
           "hit": true,
-          "confidence": 68.4
+          "confidence": 68.4,
+          "best_bet": true
         },
         {
           "date": "2026-02-04",
@@ -146,6 +172,35 @@
           "result": "6-5",
           "hit": true,
           "confidence": 63.3
+        },
+        {
+          "date": "2026-02-04",
+          "type": "spread",
+          "game": "SJS @ COL",
+          "pick": "COL -1.5",
+          "result": "2-4",
+          "hit": true,
+          "confidence": 66.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-04",
+          "type": "total",
+          "game": "SJS @ COL",
+          "pick": "UNDER 6.5",
+          "result": "2-4",
+          "hit": true,
+          "confidence": 50.7
+        },
+        {
+          "date": "2026-02-04",
+          "type": "ml",
+          "game": "SJS @ COL",
+          "pick": "COL",
+          "result": "2-4",
+          "hit": true,
+          "confidence": 81.0,
+          "best_bet": true
         }
       ]
     },
