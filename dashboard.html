@@ -1680,17 +1680,18 @@
     .track-icon.tracked { opacity: 1; color: #10b981; }
     .bet-count-badge { background: var(--accent); color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: 4px; vertical-align: middle; }
 
-    .track-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .track-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; opacity: 0; pointer-events: none; transition: opacity 0.2s; overflow: hidden; }
     .track-modal-backdrop.visible { opacity: 1; pointer-events: auto; }
-    .track-modal { position: relative; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; background: #1e1e2e; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; z-index: 100000; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.2s; }
+    .track-modal { position: relative; width: calc(100% - 40px); max-width: 400px; overflow: hidden; overflow-x: hidden; overflow-y: hidden; background: #1e1e2e; border-radius: 16px; padding: 24px; z-index: 100000; box-shadow: 0 20px 60px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.2s; }
+    .track-modal * { box-sizing: border-box; max-width: 100%; }
     .track-modal-backdrop.visible .track-modal { transform: scale(1); }
     .track-modal-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 12px; }
     .track-modal-pick { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
     .track-modal-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
-    .track-modal-fields { display: flex; gap: 12px; margin-bottom: 16px; }
-    .track-field { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .track-modal-fields { display: flex; gap: 12px; margin-bottom: 16px; width: 100%; overflow: hidden; }
+    .track-field { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
     .track-field label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
-    .track-field input, .track-field select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; color: var(--text-primary); padding: 8px 10px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .track-field input, .track-field select { width: 100%; min-width: 0; box-sizing: border-box; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; color: var(--text-primary); padding: 8px 10px; font-size: 14px; outline: none; transition: border-color 0.2s; }
     .track-field input:focus, .track-field select:focus { border-color: var(--accent); }
     .track-field select option { background: #1e1e2e; color: var(--text-primary); }
     .track-modal-payout { font-size: 14px; color: #10b981; font-weight: 600; margin-bottom: 20px; }
