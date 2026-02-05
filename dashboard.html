@@ -721,10 +721,10 @@
     /* Chart area — flex container, bars fill full width */
     .gl-chart-wrap { position: relative; margin-bottom: 4px; }
     .gl-chart-bars { display: flex; justify-content: space-between; align-items: stretch; height: 130px; gap: 4px; width: 100%; }
-    .gl-chart-line { position: absolute; left: 0; right: 0; border-top: 1.5px dashed rgba(255,255,255,0.25); pointer-events: none; z-index: 0; }
-    .gl-chart-line-label { position: absolute; left: 0; font-size: 9px; color: var(--text-muted); font-weight: 600; transform: translateY(-100%); padding-right: 4px; z-index: 3; background: var(--bg-secondary); }
-    /* Bar column — height:100% so percentage bar heights resolve correctly */
-    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; height: 100%; position: relative; z-index: 2; }
+    .gl-chart-line { position: absolute; left: 0; right: 0; border-top: 2px dashed rgba(255,255,255,0.35); pointer-events: none; z-index: 10; }
+    .gl-chart-line-label { position: absolute; left: 0; font-size: 9px; color: var(--text-muted); font-weight: 600; transform: translateY(-100%); padding-right: 4px; z-index: 11; background: var(--bg-secondary); }
+    /* Bar column — height:100% so pixel bar heights fill correctly */
+    .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; height: 100%; position: relative; z-index: 1; }
     .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; flex-shrink: 0; }
     .gl-bar-val.hit { color: #10b981; }
     .gl-bar-val.miss { color: #ef4444; }
