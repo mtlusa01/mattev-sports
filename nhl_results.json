@@ -1,26 +1,26 @@
 {
-  "updated": "2026-02-05T00:30:11",
+  "updated": "2026-02-05T00:40:40",
   "allTime": {
     "spreads": {
-      "wins": 10,
+      "wins": 11,
       "losses": 4,
       "pushes": 0,
-      "pct": 71.4,
-      "roi": 36.4
+      "pct": 73.3,
+      "roi": 40.0
     },
     "totals": {
       "wins": 10,
-      "losses": 3,
-      "pushes": 0,
-      "pct": 76.9,
-      "roi": 46.9
-    },
-    "moneylines": {
-      "wins": 10,
       "losses": 4,
       "pushes": 0,
       "pct": 71.4,
       "roi": 36.4
+    },
+    "moneylines": {
+      "wins": 11,
+      "losses": 4,
+      "pushes": 0,
+      "pct": 73.3,
+      "roi": 40.0
     },
     "best_bets": {
       "wins": 8,
@@ -34,25 +34,25 @@
     {
       "date": "2026-02-04",
       "spreads": {
-        "wins": 5,
+        "wins": 6,
         "losses": 2,
         "pushes": 0,
-        "record": "5-2",
-        "pct": 71.4
+        "record": "6-2",
+        "pct": 75.0
       },
       "totals": {
         "wins": 5,
-        "losses": 2,
+        "losses": 3,
         "pushes": 0,
-        "record": "5-2",
-        "pct": 71.4
+        "record": "5-3",
+        "pct": 62.5
       },
       "moneylines": {
-        "wins": 6,
+        "wins": 7,
         "losses": 1,
         "pushes": 0,
-        "record": "6-1",
-        "pct": 85.7
+        "record": "7-1",
+        "pct": 87.5
       },
       "best_bets": {
         "wins": 4,
@@ -255,6 +255,33 @@
           "hit": true,
           "confidence": 88.1,
           "best_bet": true
+        },
+        {
+          "date": "2026-02-04",
+          "type": "spread",
+          "game": "EDM @ CGY",
+          "pick": "CGY +1.5",
+          "result": "3-4",
+          "hit": true,
+          "confidence": 58.1
+        },
+        {
+          "date": "2026-02-04",
+          "type": "total",
+          "game": "EDM @ CGY",
+          "pick": "UNDER 6.5",
+          "result": "3-4",
+          "hit": false,
+          "confidence": 60.6
+        },
+        {
+          "date": "2026-02-04",
+          "type": "ml",
+          "game": "EDM @ CGY",
+          "pick": "CGY",
+          "result": "3-4",
+          "hit": true,
+          "confidence": 50.8
         }
       ]
     },
