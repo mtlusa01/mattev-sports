@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NHL",
-  "updated": "2026-02-05T00:50:11",
+  "updated": "2026-02-05T00:56:38",
   "games": [
     {
       "away_team": "BOS",
@@ -575,67 +575,59 @@
       "ml_conf": 71.6,
       "ml_best_book": "DK",
       "commence_time": "2026-02-05T03:00:00Z",
-      "status": "live",
+      "status": "final",
       "away_score": 4,
       "home_score": 2,
       "odds": {
         "FD": {
           "spread": {
             "home_line": 2.5,
-            "home_odds": -104,
+            "home_odds": -165,
             "away_line": -2.5,
-            "away_odds": -125
+            "away_odds": 126
           },
-          "total": {
-            "over_line": 7.5,
-            "over_odds": 225,
-            "under_line": 7.5,
-            "under_odds": -310
-          },
-          "ml": {
-            "LAK": 1700,
-            "SEA": -10000
-          }
+          "total": {},
+          "ml": {}
         },
         "DK": {
           "spread": {
             "home_line": 2.5,
-            "home_odds": -120,
+            "home_odds": -260,
             "away_line": -2.5,
-            "away_odds": -110
+            "away_odds": 195
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": -410,
+            "over_odds": 160,
             "under_line": 6.5,
-            "under_odds": 290
+            "under_odds": -210
           },
-          "ml": {
-            "LAK": 1600,
-            "SEA": -4800
-          }
+          "ml": {}
         },
         "MGM": {
           "spread": {
-            "home_line": 2.5,
-            "home_odds": -125,
-            "away_line": -2.5,
-            "away_odds": -105
+            "home_line": 3.5,
+            "home_odds": -500,
+            "away_line": -3.5,
+            "away_odds": 325
           },
           "total": {
             "over_line": 7.5,
-            "over_odds": 210,
+            "over_odds": 230,
             "under_line": 7.5,
-            "under_odds": -295
+            "under_odds": -325
           },
           "ml": {
-            "LAK": 1500,
+            "LAK": 3300,
             "SEA": -10000
           }
         }
       },
       "home_goalie": "Darcy Kuemper",
-      "away_goalie": "Joey Daccord"
+      "away_goalie": "Joey Daccord",
+      "spread_result": "W",
+      "total_result": "L",
+      "ml_result": "W"
     }
   ],
   "locked_at": "2026-02-04T01:09:19"
