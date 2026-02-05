@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NHL",
-  "updated": "2026-02-05T00:40:40",
+  "updated": "2026-02-05T00:42:47",
   "games": [
     {
       "away_team": "BOS",
@@ -505,52 +505,47 @@
       "ml_conf": 82.8,
       "ml_best_book": "DK",
       "commence_time": "2026-02-05T03:00:00Z",
-      "status": "live",
+      "status": "final",
       "away_score": 2,
       "home_score": 5,
       "odds": {
         "FD": {
           "spread": {
             "away_line": 3.5,
-            "away_odds": -174,
+            "away_odds": -2000,
             "home_line": -3.5,
-            "home_odds": 132
+            "home_odds": 830
           },
-          "total": {
-            "over_line": 7.5,
-            "over_odds": -188,
-            "under_line": 7.5,
-            "under_odds": 142
-          },
+          "total": {},
           "ml": {}
         },
         "DK": {
           "spread": {
             "away_line": 3.5,
-            "away_odds": -166,
+            "away_odds": -720,
             "home_line": -3.5,
-            "home_odds": 130
+            "home_odds": 450
           },
           "total": {
             "over_line": 7.5,
-            "over_odds": -145,
+            "over_odds": 220,
             "under_line": 7.5,
-            "under_odds": 114
+            "under_odds": -298
           },
           "ml": {}
         },
         "MGM": {
           "spread": {
             "away_line": 3.5,
-            "away_odds": -220,
+            "away_odds": -10000,
             "home_line": -3.5,
-            "home_odds": 165
+            "home_odds": 1700
           },
           "total": {
             "over_line": 7.5,
-            "over_odds": -135,
+            "over_odds": 1250,
             "under_line": 7.5,
-            "under_odds": 100
+            "under_odds": -10000
           },
           "ml": {
             "VAN": 3300,
@@ -559,7 +554,10 @@
         }
       },
       "home_goalie": "Akira Schmid",
-      "away_goalie": "Kevin Lankinen"
+      "away_goalie": "Kevin Lankinen",
+      "spread_result": "W",
+      "total_result": "L",
+      "ml_result": "W"
     },
     {
       "away_team": "SEA",
@@ -584,55 +582,55 @@
         "FD": {
           "spread": {
             "home_line": 2.5,
-            "home_odds": -128,
+            "home_odds": -104,
             "away_line": -2.5,
-            "away_odds": -102
+            "away_odds": -125
           },
           "total": {
             "over_line": 7.5,
-            "over_odds": 114,
+            "over_odds": 225,
             "under_line": 7.5,
-            "under_odds": -148
+            "under_odds": -310
           },
           "ml": {
-            "LAK": 1100,
-            "SEA": -4000
+            "LAK": 1700,
+            "SEA": -10000
           }
         },
         "DK": {
           "spread": {
             "home_line": 2.5,
-            "home_odds": -154,
+            "home_odds": -120,
             "away_line": -2.5,
-            "away_odds": 120
+            "away_odds": -110
           },
           "total": {
-            "over_line": 7.5,
-            "over_odds": -120,
-            "under_line": 7.5,
-            "under_odds": -110
+            "over_line": 6.5,
+            "over_odds": -410,
+            "under_line": 6.5,
+            "under_odds": 290
           },
           "ml": {
-            "LAK": 700,
-            "SEA": -1300
+            "LAK": 1600,
+            "SEA": -4800
           }
         },
         "MGM": {
           "spread": {
             "home_line": 2.5,
-            "home_odds": -150,
+            "home_odds": -125,
             "away_line": -2.5,
-            "away_odds": 110
+            "away_odds": -105
           },
           "total": {
             "over_line": 7.5,
-            "over_odds": 115,
+            "over_odds": 210,
             "under_line": 7.5,
-            "under_odds": -155
+            "under_odds": -295
           },
           "ml": {
-            "LAK": 850,
-            "SEA": -2000
+            "LAK": 1500,
+            "SEA": -10000
           }
         }
       },
