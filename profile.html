@@ -93,6 +93,7 @@
     .field-row:last-child { margin-bottom: 0; }
     .field-label { font-size: 13px; color: var(--text-secondary); }
     .field-value { font-size: 13px; color: var(--text-muted); }
+    .field-hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; max-width: 280px; line-height: 1.4; }
 
     .form-input { width: 100%; padding: 10px 14px; background: var(--bg-primary); border: 1px solid #2a2a3a; border-radius: 8px; color: var(--text-primary); font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s; }
     .form-input:focus { border-color: var(--brand); }
@@ -239,6 +240,31 @@
         <div class="field-row">
           <span class="field-label">Bankroll (optional)</span>
           <input type="number" class="form-input short" id="set-bankroll" min="0" placeholder="--">
+        </div>
+      </div>
+
+      <!-- Bet Tracking (localStorage) -->
+      <div class="settings-card">
+        <h2>Bet Tracking</h2>
+        <div class="field-row">
+          <div>
+            <span class="field-label">Unit Size</span>
+            <div class="field-hint">How much is 1 unit worth to you? Used to calculate dollar amounts on My Bets.</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span style="color:var(--text-muted);font-size:14px;">$</span>
+            <input type="number" class="form-input short" id="set-tracking-unitsize" min="1" value="10" onchange="saveBetTrackingSettings()" style="width:80px;">
+          </div>
+        </div>
+        <div class="field-row">
+          <div>
+            <span class="field-label">Display Mode</span>
+            <div class="field-hint">Choose how profits are shown on My Bets.</div>
+          </div>
+          <div class="toggle-group" id="toggle-display-mode">
+            <button class="toggle-opt active" data-val="units" onclick="saveBetTrackingSettings()">Units</button>
+            <button class="toggle-opt" data-val="dollars" onclick="saveBetTrackingSettings()">Dollars</button>
+          </div>
         </div>
       </div>
 
@@ -396,6 +422,9 @@
       await updateUserProfile({ displayName: newName });
       await saveUserSettings(settings);
 
+      // Sync Firestore unitSize to localStorage bet tracking settings
+      saveBetTrackingSettings();
+
       btn.disabled = false;
       btn.textContent = 'Save All Settings';
       const msg = document.getElementById('save-msg');
@@ -434,6 +463,31 @@
         document.getElementById('delete-modal').style.display = 'none';
       }
     }
+
+    // ── Bet Tracking (localStorage) ──
+    const LS_SETTINGS = 'efe_user_settings';
+    function getBetTrackingSettings() {
+      try { return JSON.parse(localStorage.getItem(LS_SETTINGS)) || {}; }
+      catch { return {}; }
+    }
+
+    function saveBetTrackingSettings() {
+      const unitSize = Math.max(1, parseInt(document.getElementById('set-tracking-unitsize').value) || 10);
+      const displayMode = getToggleVal('toggle-display-mode') || 'units';
+      const s = getBetTrackingSettings();
+      s.unit_size = unitSize;
+      s.display_mode = displayMode;
+      localStorage.setItem(LS_SETTINGS, JSON.stringify(s));
+    }
+
+    function loadBetTrackingSettings() {
+      const s = getBetTrackingSettings();
+      document.getElementById('set-tracking-unitsize').value = s.unit_size || 10;
+      setToggle('toggle-display-mode', s.display_mode || 'units');
+    }
+
+    // Load on page init
+    loadBetTrackingSettings();
 
     function toggleMobileNav() {
       document.getElementById('mobile-nav-drawer').classList.toggle('open');
