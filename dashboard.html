@@ -1693,6 +1693,8 @@
     .track-field label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
     .track-field input, .track-field select { width: 100%; min-width: 0; box-sizing: border-box; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; color: var(--text-primary); padding: 8px 10px; font-size: 14px; outline: none; transition: border-color 0.2s; }
     .track-field input:focus, .track-field select:focus { border-color: var(--accent); }
+    .track-field input[type="number"]::-webkit-outer-spin-button, .track-field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .track-field input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .track-field select option { background: #1e1e2e; color: var(--text-primary); }
     .track-modal-payout { font-size: 14px; color: #10b981; font-weight: 600; margin-bottom: 20px; }
     .track-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
