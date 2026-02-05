@@ -1738,18 +1738,18 @@
 
   <!-- Stats Bar -->
   <div class="stats-bar" id="stats-bar">
-    <div class="stats-bar-inner">
+    <div class="stats-bar-inner" id="stats-bar-inner">
       <div class="stat">
         <div class="stat-value" id="stat-total">--</div>
-        <div class="stat-label">Total Props</div>
+        <div class="stat-label" id="stat-total-label">Total Props</div>
       </div>
       <div class="stat">
         <div class="stat-value green" id="stat-posev">--</div>
-        <div class="stat-label">Positive EV</div>
+        <div class="stat-label" id="stat-posev-label">Positive EV</div>
       </div>
       <div class="stat">
         <div class="stat-value green" id="stat-bestev">--</div>
-        <div class="stat-label">Best EV%</div>
+        <div class="stat-label" id="stat-bestev-label">Best EV%</div>
       </div>
       <div class="stat">
         <div class="stat-value" id="stat-avgconf">--</div>
@@ -1868,17 +1868,15 @@
               t.classList.toggle('active', t.dataset.view === 'game-projections');
             });
           }
-          // Hide NBA stats bar for NHL
-          statsBar.style.display = 'none';
         } else {
-          // NBA: show both tabs + stats bar
+          // NBA: show both tabs
           propsTab.style.display = '';
-          if (projections.length > 0) statsBar.style.display = '';
         }
 
         // Update the active game data and re-render
         updateActiveGameData();
         updateTimestamp();
+        updateStatsBar();
         if (updateHash !== false) updateLocationHash();
         render();
       }
@@ -1926,6 +1924,59 @@
             month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
+      }
+    }
+
+    function updateStatsBar() {
+      const statsBar = document.getElementById('stats-bar');
+      const isGameView = currentView === 'game-projections';
+
+      if (currentSport === 'nhl' || (currentSport === 'nba' && isGameView)) {
+        // Game projections stats (NHL or NBA game view)
+        const games = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+        if (!games || games.length === 0) { statsBar.style.display = 'none'; return; }
+
+        const allConfs = [];
+        let bestBets = 0;
+        for (const g of games) {
+          for (const key of ['spread_conf', 'total_conf', 'ml_conf']) {
+            const c = g[key];
+            if (c != null) {
+              allConfs.push(c);
+              if (c >= 60) bestBets++;
+            }
+          }
+        }
+        const bestConf = allConfs.length > 0 ? Math.max(...allConfs) : 0;
+        const avgConf = allConfs.length > 0 ? allConfs.reduce((s, v) => s + v, 0) / allConfs.length : 0;
+
+        document.getElementById('stat-total').textContent = games.length;
+        document.getElementById('stat-total-label').textContent = 'Total Games';
+        document.getElementById('stat-posev').textContent = bestBets;
+        document.getElementById('stat-posev-label').textContent = 'Best Bets';
+        document.getElementById('stat-bestev').textContent = bestConf > 0 ? bestConf.toFixed(1) + '%' : '--';
+        document.getElementById('stat-bestev-label').textContent = 'Best Conf';
+        document.getElementById('stat-avgconf').textContent = avgConf > 0 ? avgConf.toFixed(1) + '%' : '--';
+        statsBar.classList.add('visible');
+        statsBar.style.display = '';
+      } else if (currentSport === 'nba' && !isGameView) {
+        // Player props stats
+        if (projections.length === 0) { statsBar.style.display = 'none'; return; }
+        const posEV = projections.filter(p => p.ev > 0).length;
+        const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
+        const avgConf = projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length;
+
+        document.getElementById('stat-total').textContent = projections.length;
+        document.getElementById('stat-total-label').textContent = 'Total Props';
+        document.getElementById('stat-posev').textContent = posEV;
+        document.getElementById('stat-posev-label').textContent = 'Positive EV';
+        document.getElementById('stat-bestev').textContent = bestEV > -Infinity ? (bestEV >= 0 ? '+' : '') + bestEV.toFixed(1) + '%' : '--';
+        document.getElementById('stat-bestev-label').textContent = 'Best EV%';
+        document.getElementById('stat-avgconf').textContent = avgConf.toFixed(1) + '%';
+        statsBar.classList.add('visible');
+        statsBar.style.display = '';
+      } else {
+        statsBar.style.display = 'none';
       }
     }
 
@@ -3403,6 +3454,7 @@
       if (doUpdateHash !== false) {
         updateLocationHash();
       }
+      updateStatsBar();
       render();
     }
     document.querySelectorAll('#view-tabs .view-tab').forEach(tab => {
@@ -3918,6 +3970,7 @@
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
 
+        if (currentSport === 'nba') updateStatsBar();
         if (currentView === 'game-projections' && currentSport === 'nba') renderGameProjections();
         else if (currentSport === 'nba') render(); // re-render props with game pills + matchup info
       } catch (err) {
@@ -3936,6 +3989,7 @@
         if (currentSport === 'nhl') {
           updateActiveGameData();
           updateTimestamp();
+          updateStatsBar();
           if (currentView === 'game-projections') renderGameProjections();
         }
       } catch (err) {
@@ -3971,18 +4025,7 @@
           projections._lockedAt = data.locked_at;
         }
 
-        const posEV = projections.filter(p => p.ev > 0).length;
-        const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
-        const avgConf = projections.length > 0
-          ? projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length : 0;
-
-        const statsBar = document.getElementById('stats-bar');
-        statsBar.classList.add('visible');
-        document.getElementById('stat-total').textContent = projections.length;
-        document.getElementById('stat-posev').textContent = posEV;
-        document.getElementById('stat-bestev').textContent = bestEV > -Infinity ? (bestEV >= 0 ? '+' : '') + bestEV.toFixed(1) + '%' : '--';
-        document.getElementById('stat-avgconf').textContent = avgConf.toFixed(1) + '%';
-
+        updateStatsBar();
         render();
       } catch (err) {
         console.error('Failed to load projections:', err);
