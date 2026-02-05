@@ -1,7 +1,7 @@
 {
   "date": "2026-02-04",
   "sport": "NBA",
-  "updated": "2026-02-05T00:12:06",
+  "updated": "2026-02-05T00:13:55",
   "games": [
     {
       "away_team": "DEN",
@@ -426,7 +426,21 @@
       "home_score": 116,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Cason Wallace",
+          "team": "OKC",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 3.5,
+          "projection": 2.3,
+          "actual": 5,
+          "hit": false,
+          "confidence": 55.0,
+          "ev": 2.5
+        }
+      ]
     },
     {
       "away_team": "MEM",
@@ -443,7 +457,7 @@
       "commence_time": "2026-02-05T03:10:00Z",
       "status": "live",
       "locked_at": "2026-02-04T13:50:11Z",
-      "away_score": 104,
+      "away_score": 107,
       "home_score": 103
     },
     {
@@ -461,8 +475,8 @@
       "commence_time": "2026-02-05T03:40:00Z",
       "status": "live",
       "locked_at": "2026-02-04T13:50:11Z",
-      "away_score": 85,
-      "home_score": 64
+      "away_score": 87,
+      "home_score": 66
     }
   ],
   "locked_at": "2026-02-04T15:38:10"
