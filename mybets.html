@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bets | Edge Factor Elite</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-tertiary: #1a1a24;
+      --bg-elevated: rgba(37, 37, 50, 0.5);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --text-primary: #f0f0f0;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --brand: #dc2626;
+      --brand-light: #ef4444;
+      --brand-glow: rgba(220, 38, 38, 0.15);
+      --brand-border: rgba(220, 38, 38, 0.3);
+      --accent: #10b981;
+      --accent-light: #34d399;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --red: #ef4444;
+      --red-light: #f87171;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-gradient {
+      position: fixed; top: 0; left: 0; right: 0; height: 60vh;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(220, 38, 38, 0.08), transparent);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Top Nav ── */
+    .top-nav {
+      background: var(--bg-primary);
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 60px; z-index: 100;
+      display: flex; align-items: center;
+    }
+    .top-nav-inner {
+      position: relative; max-width: 1400px;
+      margin: 0 auto; padding: 0 1.5rem;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { position: relative; z-index: 2; }
+    .sports-tabs {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--bg-tertiary); border-radius: 10px; padding: 4px;
+      position: absolute; left: 50%; transform: translateX(-50%); z-index: 1;
+    }
+    .sport-tab {
+      position: relative; padding: 6px 18px; border-radius: 8px; border: none;
+      background: transparent; color: var(--text-muted); font-size: 13px;
+      font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sport-tab:hover { color: var(--text-secondary); }
+    .sport-tab.active { background: var(--brand); color: #fff; box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3); }
+    .soon-badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--text-muted); }
+    .sport-tab.active .soon-badge { display: none; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; flex: 0 0 auto; position: relative; z-index: 2; }
+    .nav-link { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; font-weight: 500; }
+    .nav-link:hover { color: #ffffff; }
+    .nav-link.active { color: #ffffff; }
+    .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .bet-count-badge { background: var(--accent); color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: 4px; vertical-align: middle; }
+
+    /* ── Mobile Drawer ── */
+    .mobile-nav-backdrop { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9998; }
+    .mobile-nav-backdrop.open { display: block; }
+    .mobile-nav-drawer {
+      position: fixed; top: 90px; left: 0; right: 0;
+      background: #1a1a24; border-bottom: 2px solid #2a2a3a;
+      z-index: 9999; overflow: hidden; max-height: 0;
+      transition: max-height 0.3s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .mobile-nav-drawer.open { max-height: 500px; }
+    .mobile-drawer-links a {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 24px; color: #ffffff; text-decoration: none;
+      font-size: 16px; font-weight: 500; border-bottom: 1px solid #2a2a3a; transition: all 0.15s;
+    }
+    .mobile-drawer-links a:hover, .mobile-drawer-links a.active { color: #dc2626; background: rgba(220,38,38,0.08); }
+    .mobile-drawer-links a .menu-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
+    .mobile-drawer-auth { padding: 12px 24px 16px; }
+    .mobile-drawer-login-btn {
+      display: block; width: 100%; padding: 12px; background: #dc2626; color: white;
+      border: none; border-radius: 8px; font-size: 16px; font-weight: 600;
+      cursor: pointer; text-align: center; text-decoration: none; transition: background 0.15s;
+    }
+    .mobile-drawer-login-btn:hover { background: #b91c1c; }
+
+    /* ── Resets for non-rendered elements ── */
+    header, nav, main, section, footer,
+    .top-nav, .top-nav *,
+    .page-gradient,
+    .mobile-nav-backdrop, .mobile-nav-drawer, .mobile-nav-drawer * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    .nav-spacer { height: 70px; }
+
+    /* ── Main Content ── */
+    main { max-width: 1000px; margin: 0 auto; padding: 0 24px 60px; position: relative; z-index: 1; }
+
+    /* ── Overview Banner ── */
+    .overview-banner {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stat-box {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; text-align: center;
+    }
+    .stat-box-value { font-size: 24px; font-weight: 800; line-height: 1.2; }
+    .stat-box-value.positive { color: var(--accent-light); }
+    .stat-box-value.negative { color: var(--red-light); }
+    .stat-box-value.neutral { color: var(--text-primary); }
+    .stat-box-label { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
+
+    /* ── Period Filters + Display Toggle ── */
+    .controls-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; gap: 12px; flex-wrap: wrap;
+    }
+    .period-filters { display: flex; gap: 4px; }
+    .period-btn {
+      padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted); font-size: 12px;
+      font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.2s;
+    }
+    .period-btn:hover { color: var(--text-secondary); border-color: var(--border-light); }
+    .period-btn.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .toggle-group { display: flex; gap: 0; }
+    .toggle-btn {
+      padding: 6px 14px; border: 1px solid var(--border); background: transparent;
+      color: var(--text-muted); font-size: 12px; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .toggle-btn:first-child { border-radius: 8px 0 0 8px; }
+    .toggle-btn:last-child { border-radius: 0 8px 8px 0; }
+    .toggle-btn.active { background: var(--bg-tertiary); color: var(--text-primary); border-color: var(--border-light); }
+
+    /* ── Calendar ── */
+    .calendar-section { margin-bottom: 24px; }
+    .calendar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .calendar-nav {
+      background: none; border: 1px solid var(--border); color: var(--text-secondary);
+      width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+      font-size: 14px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .calendar-nav:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .calendar-month-label { font-size: 16px; font-weight: 700; }
+    .calendar-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+    }
+    .calendar-dow {
+      text-align: center; font-size: 10px; font-weight: 600;
+      color: var(--text-muted); padding: 4px 0; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .calendar-cell {
+      aspect-ratio: 1; border-radius: 8px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; font-size: 12px;
+      cursor: pointer; transition: all 0.15s; border: 1px solid transparent;
+      position: relative; min-height: 48px;
+    }
+    .calendar-cell.empty { cursor: default; }
+    .calendar-cell .day-num { font-weight: 600; font-size: 13px; line-height: 1; }
+    .calendar-cell .day-pl { font-size: 10px; font-weight: 700; margin-top: 2px; }
+    .calendar-cell.today { border-color: var(--brand); }
+    .calendar-cell.selected { border-color: var(--text-primary); background: rgba(255,255,255,0.06) !important; }
+    .calendar-cell.win { background: rgba(16, 185, 129, 0.15); }
+    .calendar-cell.win .day-pl { color: var(--accent-light); }
+    .calendar-cell.win-strong { background: rgba(16, 185, 129, 0.3); }
+    .calendar-cell.win-strong .day-pl { color: var(--accent-light); }
+    .calendar-cell.loss { background: rgba(239, 68, 68, 0.15); }
+    .calendar-cell.loss .day-pl { color: var(--red-light); }
+    .calendar-cell.loss-strong { background: rgba(239, 68, 68, 0.3); }
+    .calendar-cell.loss-strong .day-pl { color: var(--red-light); }
+    .calendar-cell.neutral { background: rgba(255,255,255,0.03); }
+    .calendar-cell:not(.empty):hover { border-color: var(--border-light); }
+    .calendar-monthly-total {
+      text-align: center; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--text-secondary);
+    }
+    .calendar-monthly-total span { font-weight: 700; }
+
+    /* ── Day Detail ── */
+    .day-detail { margin-bottom: 24px; }
+    .day-detail-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .day-detail-title { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+    .day-detail-record { font-size: 13px; color: var(--text-secondary); }
+    .bet-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 10px; margin-bottom: 6px; font-size: 13px; transition: background 0.15s;
+    }
+    .bet-row:hover { background: var(--bg-tertiary); }
+    .bet-status-icon { font-size: 16px; flex-shrink: 0; width: 22px; text-align: center; }
+    .bet-desc { flex: 1; font-weight: 600; color: var(--text-primary); min-width: 0; }
+    .bet-desc .bet-game { font-weight: 400; color: var(--text-muted); font-size: 11px; display: block; }
+    .bet-odds { color: var(--text-secondary); font-size: 12px; white-space: nowrap; }
+    .bet-units { color: var(--text-secondary); font-size: 12px; white-space: nowrap; }
+    .bet-profit { font-weight: 700; font-size: 13px; white-space: nowrap; min-width: 60px; text-align: right; }
+    .bet-profit.win { color: var(--accent-light); }
+    .bet-profit.loss { color: var(--red-light); }
+    .bet-profit.pending { color: var(--yellow); }
+    .bet-book { font-size: 11px; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+    .bet-delete {
+      background: none; border: none; color: var(--text-muted); cursor: pointer;
+      font-size: 14px; padding: 4px; border-radius: 4px; transition: all 0.15s; opacity: 0.4;
+    }
+    .bet-delete:hover { opacity: 1; color: var(--red); }
+    .empty-day { text-align: center; padding: 32px; color: var(--text-muted); font-size: 14px; }
+
+    /* ── Analytics ── */
+    .analytics-section { margin-bottom: 24px; }
+    .section-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; letter-spacing: 0.02em; }
+    .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .analytics-card {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+    }
+    .analytics-card-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .analytics-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 0; border-bottom: 1px solid var(--border);
+    }
+    .analytics-row:last-child { border-bottom: none; }
+    .analytics-label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+    .analytics-value { font-size: 13px; font-weight: 700; }
+    .analytics-value.positive { color: var(--accent-light); }
+    .analytics-value.negative { color: var(--red-light); }
+    .analytics-record { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+
+    /* ── Settings ── */
+    .settings-section {
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; margin-bottom: 24px;
+    }
+    .settings-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .settings-row:last-child { border-bottom: none; }
+    .settings-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+    .settings-input {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; color: var(--text-primary); padding: 6px 10px;
+      font-size: 14px; width: 80px; text-align: center; outline: none;
+      font-family: inherit; transition: border-color 0.2s;
+    }
+    .settings-input:focus { border-color: var(--accent); }
+    .clear-all-btn {
+      background: transparent; border: 1px solid var(--red); color: var(--red);
+      padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .clear-all-btn:hover { background: rgba(239,68,68,0.1); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-brand { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .footer-disclaimer { font-size: 12px; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+
+    /* ── Delete Confirm Modal ── */
+    .confirm-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .confirm-backdrop.visible { opacity: 1; pointer-events: auto; }
+    .confirm-modal {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
+      max-width: 340px; width: calc(100% - 32px); background: #1e1e2e;
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; z-index: 201;
+      padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s;
+    }
+    .confirm-modal.visible { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .confirm-msg { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; text-align: center; }
+    .confirm-actions { display: flex; gap: 10px; justify-content: center; }
+    .confirm-cancel {
+      background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-secondary);
+      padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .confirm-delete {
+      background: var(--red); border: none; color: #fff;
+      padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .nav-right { display: none; }
+      .mobile-menu-btn { display: block; }
+      .top-nav { height: 90px; }
+      .top-nav-inner { padding: 0 1rem; flex-wrap: wrap; align-content: center; }
+      .sports-tabs { position: static; transform: none; width: 100%; justify-content: center; gap: 2px; padding: 3px; margin: 0; order: 3; }
+      .sport-tab { padding: 4px 10px; font-size: 11px; gap: 3px; }
+      .soon-badge { font-size: 7px; padding: 1px 3px; }
+      .nav-spacer { height: 100px !important; }
+      main { padding: 0 12px 60px; }
+      .overview-banner { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .stat-box { padding: 12px; }
+      .stat-box-value { font-size: 20px; }
+      .controls-row { gap: 8px; }
+      .period-btn { padding: 5px 10px; font-size: 11px; }
+      .calendar-cell { min-height: 40px; }
+      .calendar-cell .day-num { font-size: 11px; }
+      .calendar-cell .day-pl { font-size: 9px; }
+      .bet-row { flex-wrap: wrap; gap: 6px; padding: 10px 12px; }
+      .bet-desc { flex-basis: calc(100% - 32px); }
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .brand-name { display: none; }
+      .sports-tabs { gap: 1px; padding: 2px; }
+      .sport-tab { padding: 4px 8px; font-size: 10px; }
+      .soon-badge { font-size: 6px; padding: 0px 2px; }
+      .overview-banner { grid-template-columns: repeat(2, 1fr); }
+      .period-filters { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-gradient"></div>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-brand">
+        <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+          <span style="font-size:1.4rem;font-weight:800;color:#f0f0f0;letter-spacing:-0.02em;white-space:nowrap;">Edge Factor <span style="color:#dc2626;">Elite</span></span>
+        </a>
+      </div>
+      <div class="sports-tabs" id="sports-tabs">
+        <button class="sport-tab active" data-sport="nba">NBA</button>
+        <button class="sport-tab" data-sport="nhl">NHL</button>
+        <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+      </div>
+      <div class="nav-right">
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="mybets.html" class="nav-link active">My Bets<span class="bet-count-badge" id="nav-bet-count" style="display:none"></span></a>
+        <a href="about.html" class="nav-link">About</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-drawer-links">
+      <a href="dashboard.html"><span class="menu-icon">&#128200;</span> Projections</a>
+      <a href="results.html"><span class="menu-icon">&#128202;</span> Results</a>
+      <a href="mybets.html" class="active"><span class="menu-icon">&#127919;</span> My Bets <span class="bet-count-badge" id="mobile-bet-count" style="display:none"></span></a>
+      <a href="about.html"><span class="menu-icon">&#8505;&#65039;</span> About</a>
+    </div>
+    <div class="mobile-drawer-auth" id="mobile-drawer-auth">
+      <a href="login.html" class="mobile-drawer-login-btn">&#128100; Log In / Sign Up</a>
+    </div>
+  </div>
+
+  <div class="nav-spacer" style="height:70px"></div>
+
+  <main>
+    <!-- Overview Banner -->
+    <div class="overview-banner" id="overview-banner"></div>
+
+    <!-- Controls: Period filter + Display toggle -->
+    <div class="controls-row">
+      <div class="period-filters" id="period-filters">
+        <button class="period-btn" data-period="today" onclick="setPeriod('today')">Today</button>
+        <button class="period-btn" data-period="week" onclick="setPeriod('week')">This Week</button>
+        <button class="period-btn" data-period="month" onclick="setPeriod('month')">This Month</button>
+        <button class="period-btn active" data-period="all" onclick="setPeriod('all')">All Time</button>
+      </div>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="toggle-units" onclick="setDisplayMode('units')">Units</button>
+        <button class="toggle-btn" id="toggle-dollars" onclick="setDisplayMode('dollars')">Dollars</button>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="calendar-section">
+      <div class="calendar-header">
+        <button class="calendar-nav" onclick="changeMonth(-1)">&#9664;</button>
+        <span class="calendar-month-label" id="calendar-month-label"></span>
+        <button class="calendar-nav" onclick="changeMonth(1)">&#9654;</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+      <div class="calendar-monthly-total" id="calendar-monthly-total"></div>
+    </div>
+
+    <!-- Day Detail -->
+    <div class="day-detail" id="day-detail"></div>
+
+    <!-- Analytics -->
+    <div class="analytics-section">
+      <div class="section-title">ANALYTICS</div>
+      <div class="analytics-grid" id="analytics-grid"></div>
+    </div>
+
+    <!-- Settings -->
+    <div class="settings-section">
+      <div class="section-title">SETTINGS</div>
+      <div class="settings-row">
+        <span class="settings-label">Unit Size ($)</span>
+        <input class="settings-input" type="number" id="unit-size-input" value="10" min="1" step="1" onchange="saveUnitSize()">
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Display Mode</span>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="settings-toggle-units" onclick="setDisplayMode('units')">Units</button>
+          <button class="toggle-btn" id="settings-toggle-dollars" onclick="setDisplayMode('dollars')">Dollars</button>
+        </div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-label">Clear All Bets</span>
+        <button class="clear-all-btn" onclick="confirmClearAll()">Clear All</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Edge Factor Elite</div>
+      <div class="footer-disclaimer">For entertainment and informational purposes only. Please gamble responsibly.</div>
+    </div>
+  </footer>
+
+  <!-- Delete Confirm Modal -->
+  <div class="confirm-backdrop" id="confirm-backdrop" onclick="closeConfirm()"></div>
+  <div class="confirm-modal" id="confirm-modal">
+    <div class="confirm-msg" id="confirm-msg">Delete this bet?</div>
+    <div class="confirm-actions">
+      <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="confirm-delete" id="confirm-delete-btn" onclick="executeConfirm()">Delete</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Mobile Nav ──
+    function toggleMobileNav() {
+      document.getElementById('mobile-nav-drawer').classList.toggle('open');
+      document.getElementById('mobile-nav-backdrop').classList.toggle('open');
+    }
+    function closeMobileNav() {
+      document.getElementById('mobile-nav-drawer').classList.remove('open');
+      document.getElementById('mobile-nav-backdrop').classList.remove('open');
+    }
+
+    // ── localStorage Helpers ──
+    const LS_SETTINGS = 'efe_user_settings';
+    const LS_BETS = 'efe_tracked_bets';
+
+    function getBetSettings() {
+      try { return JSON.parse(localStorage.getItem(LS_SETTINGS)) || {}; }
+      catch { return {}; }
+    }
+    function saveBetSettings(s) { localStorage.setItem(LS_SETTINGS, JSON.stringify(s)); }
+    function getTrackedBets() {
+      try { return JSON.parse(localStorage.getItem(LS_BETS)) || []; }
+      catch { return []; }
+    }
+    function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
+    function getUnitSize() { return getBetSettings().unit_size || 10; }
+    function getDisplayMode() { return getBetSettings().display_mode || 'units'; }
+
+    function calcProfit(odds, units) {
+      const o = parseInt(odds);
+      if (isNaN(o)) return 0;
+      if (o > 0) return units * (o / 100);
+      return units * (100 / Math.abs(o));
+    }
+
+    // ── State ──
+    let currentPeriod = 'all';
+    let currentSport = 'all'; // 'all' on mybets = show all sports
+    let calYear, calMonth, selectedDate;
+
+    // Init calendar to current month
+    const now = new Date();
+    calYear = now.getFullYear();
+    calMonth = now.getMonth();
+    selectedDate = now.toISOString().slice(0, 10);
+
+    // ── Display Mode ──
+    function setDisplayMode(mode) {
+      const s = getBetSettings();
+      s.display_mode = mode;
+      saveBetSettings(s);
+      updateDisplayToggles();
+      renderAll();
+    }
+
+    function updateDisplayToggles() {
+      const mode = getDisplayMode();
+      document.getElementById('toggle-units').classList.toggle('active', mode === 'units');
+      document.getElementById('toggle-dollars').classList.toggle('active', mode === 'dollars');
+      document.getElementById('settings-toggle-units').classList.toggle('active', mode === 'units');
+      document.getElementById('settings-toggle-dollars').classList.toggle('active', mode === 'dollars');
+    }
+
+    function saveUnitSize() {
+      const v = parseInt(document.getElementById('unit-size-input').value) || 10;
+      const s = getBetSettings();
+      s.unit_size = Math.max(1, v);
+      saveBetSettings(s);
+      renderAll();
+    }
+
+    // ── Format Helpers ──
+    function formatPL(units) {
+      const mode = getDisplayMode();
+      if (mode === 'dollars') {
+        const dollars = units * getUnitSize();
+        return (dollars >= 0 ? '+' : '') + '$' + Math.abs(dollars).toFixed(2);
+      }
+      return (units >= 0 ? '+' : '') + Math.abs(units).toFixed(2) + 'u';
+    }
+
+    function formatPLShort(units) {
+      const mode = getDisplayMode();
+      if (mode === 'dollars') {
+        const dollars = units * getUnitSize();
+        return (dollars >= 0 ? '+' : '-') + '$' + Math.abs(dollars).toFixed(0);
+      }
+      return (units >= 0 ? '+' : '-') + Math.abs(units).toFixed(1) + 'u';
+    }
+
+    // ── Period Filter ──
+    function setPeriod(period) {
+      currentPeriod = period;
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.toggle('active', b.dataset.period === period));
+      renderAll();
+    }
+
+    function getFilteredBets() {
+      let bets = getTrackedBets();
+
+      // Sport filter
+      if (currentSport !== 'all') {
+        bets = bets.filter(b => (b.sport || '').toUpperCase() === currentSport.toUpperCase());
+      }
+
+      // Period filter
+      if (currentPeriod === 'all') return bets;
+
+      const today = new Date();
+      const todayStr = today.toISOString().slice(0, 10);
+
+      if (currentPeriod === 'today') {
+        return bets.filter(b => b.date === todayStr);
+      }
+      if (currentPeriod === 'week') {
+        const weekAgo = new Date(today);
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        const weekStr = weekAgo.toISOString().slice(0, 10);
+        return bets.filter(b => b.date >= weekStr);
+      }
+      if (currentPeriod === 'month') {
+        const monthStart = todayStr.slice(0, 7);
+        return bets.filter(b => b.date && b.date.startsWith(monthStart));
+      }
+      return bets;
+    }
+
+    // ── Sport Tabs ──
+    document.querySelectorAll('#sports-tabs .sport-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const sport = tab.dataset.sport;
+        if (sport === 'mlb') return; // coming soon
+        document.querySelectorAll('#sports-tabs .sport-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentSport = sport === 'nba' ? 'all' : sport; // default "NBA" tab shows all
+        renderAll();
+      });
+    });
+
+    // ── Overview Banner ──
+    function renderOverview() {
+      const bets = getFilteredBets();
+      const settled = bets.filter(b => b.status === 'win' || b.status === 'loss' || b.status === 'push');
+      const wins = settled.filter(b => b.status === 'win').length;
+      const losses = settled.filter(b => b.status === 'loss').length;
+      const total = bets.length;
+      const winRate = settled.length > 0 ? (wins / settled.length * 100).toFixed(1) : '0.0';
+      const totalProfit = bets.reduce((sum, b) => sum + (b.profit_units || 0), 0);
+      const profitClass = totalProfit > 0 ? 'positive' : totalProfit < 0 ? 'negative' : 'neutral';
+      const unitSize = getUnitSize();
+      const mode = getDisplayMode();
+
+      const profitDisplay = mode === 'dollars'
+        ? (totalProfit >= 0 ? '+' : '-') + '$' + Math.abs(totalProfit * unitSize).toFixed(2)
+        : (totalProfit >= 0 ? '+' : '') + totalProfit.toFixed(2) + 'u';
+
+      const dollarProfit = (totalProfit >= 0 ? '+' : '-') + '$' + Math.abs(totalProfit * unitSize).toFixed(2);
+
+      document.getElementById('overview-banner').innerHTML = `
+        <div class="stat-box">
+          <div class="stat-box-value ${profitClass}">${mode === 'dollars' ? dollarProfit : (totalProfit >= 0 ? '+' : '') + totalProfit.toFixed(2) + 'u'}</div>
+          <div class="stat-box-label">${mode === 'dollars' ? '$ Profit' : 'Units Profit'}</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-value neutral">${winRate}%</div>
+          <div class="stat-box-label">Win Rate (${wins}-${losses})</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-value neutral">${total}</div>
+          <div class="stat-box-label">Total Bets</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-value ${profitClass}">${mode === 'units' ? dollarProfit : profitDisplay}</div>
+          <div class="stat-box-label">${mode === 'units' ? '$ Profit' : 'Units Profit'}</div>
+        </div>
+      `;
+    }
+
+    // ── Calendar ──
+    function changeMonth(dir) {
+      calMonth += dir;
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('calendar-month-label').textContent = months[calMonth] + ' ' + calYear;
+
+      const bets = getTrackedBets();
+      // Group P/L by date
+      const dailyPL = {};
+      const dailyCounts = {};
+      bets.forEach(b => {
+        if (!b.date) return;
+        if (!dailyPL[b.date]) { dailyPL[b.date] = 0; dailyCounts[b.date] = { w: 0, l: 0, p: 0 }; }
+        if (b.profit_units != null) dailyPL[b.date] += b.profit_units;
+        if (b.status === 'win') dailyCounts[b.date].w++;
+        else if (b.status === 'loss') dailyCounts[b.date].l++;
+        else dailyCounts[b.date].p++;
+      });
+
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      const todayStr = new Date().toISOString().slice(0, 10);
+
+      let html = '';
+      const dows = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      dows.forEach(d => { html += `<div class="calendar-dow">${d}</div>`; });
+
+      // Empty cells before first day
+      for (let i = 0; i < firstDay; i++) {
+        html += '<div class="calendar-cell empty"></div>';
+      }
+
+      let monthPL = 0;
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        const pl = dailyPL[dateStr] || 0;
+        const hasBets = dailyPL.hasOwnProperty(dateStr);
+        const isToday = dateStr === todayStr;
+        const isSelected = dateStr === selectedDate;
+
+        let cls = '';
+        if (hasBets) {
+          monthPL += pl;
+          if (pl > 0) cls = Math.abs(pl) >= 3 ? 'win-strong' : 'win';
+          else if (pl < 0) cls = Math.abs(pl) >= 3 ? 'loss-strong' : 'loss';
+          else cls = 'neutral';
+        }
+        if (isToday) cls += ' today';
+        if (isSelected) cls += ' selected';
+
+        const plLabel = hasBets ? `<span class="day-pl">${formatPLShort(pl)}</span>` : '';
+
+        html += `<div class="calendar-cell ${cls}" onclick="selectDate('${dateStr}')">
+          <span class="day-num">${d}</span>${plLabel}
+        </div>`;
+      }
+
+      document.getElementById('calendar-grid').innerHTML = html;
+
+      // Monthly total
+      const monthPLStr = formatPL(monthPL);
+      const monthLabel = months[calMonth].slice(0, 3);
+      document.getElementById('calendar-monthly-total').innerHTML = `${months[calMonth]} P/L: <span style="color:${monthPL >= 0 ? 'var(--accent-light)' : 'var(--red-light)'}">${monthPLStr}</span>`;
+    }
+
+    function selectDate(dateStr) {
+      selectedDate = dateStr;
+      renderCalendar();
+      renderDayDetail();
+    }
+
+    // ── Day Detail ──
+    function renderDayDetail() {
+      const container = document.getElementById('day-detail');
+      if (!selectedDate) { container.innerHTML = ''; return; }
+
+      const bets = getTrackedBets().filter(b => b.date === selectedDate);
+      const d = new Date(selectedDate + 'T12:00:00');
+      const dateLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+
+      if (bets.length === 0) {
+        container.innerHTML = `
+          <div class="day-detail-header">
+            <span class="day-detail-title">${dateLabel}</span>
+          </div>
+          <div class="empty-day">No bets tracked for this day</div>`;
+        return;
+      }
+
+      const wins = bets.filter(b => b.status === 'win').length;
+      const losses = bets.filter(b => b.status === 'loss').length;
+      const pending = bets.filter(b => b.status === 'pending').length;
+      const dayPL = bets.reduce((s, b) => s + (b.profit_units || 0), 0);
+
+      let recordStr = `${wins}W-${losses}L`;
+      if (pending > 0) recordStr += ` (${pending} pending)`;
+      recordStr += ` | ${formatPL(dayPL)}`;
+
+      const rows = bets.map(b => {
+        const icon = b.status === 'win' ? '<span style="color:var(--accent-light)">&#10003;</span>'
+          : b.status === 'loss' ? '<span style="color:var(--red-light)">&#10007;</span>'
+          : '<span style="color:var(--yellow)">&#9203;</span>';
+
+        const desc = b.type === 'prop'
+          ? `${b.player} ${b.pick} ${b.line} ${(b.prop_type || '').toUpperCase()}`
+          : `${b.pick} (${b.type.charAt(0).toUpperCase() + b.type.slice(1)})`;
+
+        const gameStr = b.game || '';
+        const oddsStr = b.odds > 0 ? '+' + b.odds : '' + b.odds;
+        const unitsStr = b.units + 'u';
+
+        let profitStr, profitCls;
+        if (b.status === 'pending') {
+          const potentialWin = calcProfit(b.odds, b.units);
+          profitStr = 'pending';
+          profitCls = 'pending';
+        } else if (b.profit_units != null) {
+          profitStr = formatPL(b.profit_units);
+          profitCls = b.profit_units >= 0 ? 'win' : 'loss';
+        } else {
+          profitStr = '--';
+          profitCls = '';
+        }
+
+        const bookStr = b.book || '';
+
+        return `<div class="bet-row">
+          <span class="bet-status-icon">${icon}</span>
+          <span class="bet-desc">${desc}<span class="bet-game">${gameStr}</span></span>
+          <span class="bet-odds">${oddsStr}</span>
+          <span class="bet-units">${unitsStr}</span>
+          <span class="bet-profit ${profitCls}">${profitStr}</span>
+          <span class="bet-book">${bookStr}</span>
+          <button class="bet-delete" onclick="confirmDeleteBet('${b.id}')" title="Delete bet">&#128465;</button>
+        </div>`;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="day-detail-header">
+          <span class="day-detail-title">${dateLabel}</span>
+          <span class="day-detail-record">${recordStr}</span>
+        </div>
+        ${rows}`;
+    }
+
+    // ── Delete ──
+    let pendingDeleteId = null;
+    let pendingDeleteAction = null;
+
+    function confirmDeleteBet(betId) {
+      pendingDeleteId = betId;
+      pendingDeleteAction = 'single';
+      document.getElementById('confirm-msg').textContent = 'Delete this bet?';
+      document.getElementById('confirm-backdrop').classList.add('visible');
+      document.getElementById('confirm-modal').classList.add('visible');
+    }
+
+    function confirmClearAll() {
+      pendingDeleteAction = 'all';
+      document.getElementById('confirm-msg').textContent = 'Delete ALL tracked bets? This cannot be undone.';
+      document.getElementById('confirm-backdrop').classList.add('visible');
+      document.getElementById('confirm-modal').classList.add('visible');
+    }
+
+    function closeConfirm() {
+      pendingDeleteId = null;
+      pendingDeleteAction = null;
+      document.getElementById('confirm-backdrop').classList.remove('visible');
+      document.getElementById('confirm-modal').classList.remove('visible');
+    }
+
+    function executeConfirm() {
+      if (pendingDeleteAction === 'single' && pendingDeleteId) {
+        const bets = getTrackedBets().filter(b => b.id !== pendingDeleteId);
+        saveTrackedBets(bets);
+      } else if (pendingDeleteAction === 'all') {
+        saveTrackedBets([]);
+      }
+      closeConfirm();
+      renderAll();
+    }
+
+    // ── Analytics ──
+    function renderAnalytics() {
+      const bets = getFilteredBets();
+      const container = document.getElementById('analytics-grid');
+
+      function buildTable(title, groups) {
+        let rows = '';
+        for (const [label, subset] of groups) {
+          const wins = subset.filter(b => b.status === 'win').length;
+          const losses = subset.filter(b => b.status === 'loss').length;
+          const pushes = subset.filter(b => b.status === 'push').length;
+          const pl = subset.reduce((s, b) => s + (b.profit_units || 0), 0);
+          const plStr = formatPL(pl);
+          const plCls = pl > 0 ? 'positive' : pl < 0 ? 'negative' : '';
+          rows += `<div class="analytics-row">
+            <span class="analytics-label">${label}</span>
+            <span><span class="analytics-value ${plCls}">${plStr}</span><span class="analytics-record">${wins}-${losses}${pushes ? '-' + pushes : ''}</span></span>
+          </div>`;
+        }
+        return `<div class="analytics-card"><div class="analytics-card-title">${title}</div>${rows}</div>`;
+      }
+
+      // By Sport
+      const sports = [...new Set(bets.map(b => b.sport || 'NBA'))];
+      const sportGroups = sports.map(s => [s, bets.filter(b => (b.sport || 'NBA') === s)]);
+
+      // By Type
+      const types = [['Props', 'prop'], ['Spread', 'spread'], ['Total', 'total'], ['ML', 'ml']];
+      const typeGroups = types.map(([label, t]) => [label, bets.filter(b => b.type === t)]).filter(([, arr]) => arr.length > 0);
+
+      // By Book
+      const books = [...new Set(bets.map(b => b.book || 'Unknown'))];
+      const bookGroups = books.map(bk => [bk, bets.filter(b => (b.book || 'Unknown') === bk)]);
+
+      container.innerHTML =
+        buildTable('By Sport', sportGroups) +
+        buildTable('By Type', typeGroups) +
+        buildTable('By Book', bookGroups);
+    }
+
+    // ── Badge Count ──
+    function updateBetCountBadges() {
+      const pending = getTrackedBets().filter(b => b.status === 'pending').length;
+      ['nav-bet-count', 'mobile-bet-count'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (pending > 0) { el.textContent = pending; el.style.display = ''; }
+        else el.style.display = 'none';
+      });
+    }
+
+    // ── Render All ──
+    function renderAll() {
+      renderOverview();
+      renderCalendar();
+      renderDayDetail();
+      renderAnalytics();
+      updateBetCountBadges();
+    }
+
+    // ── Init ──
+    function init() {
+      // Load settings
+      const settings = getBetSettings();
+      document.getElementById('unit-size-input').value = settings.unit_size || 10;
+      updateDisplayToggles();
+      renderAll();
+    }
+
+    init();
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.replace('index.html');
+        return;
+      }
+    });
+  </script>
+</body>
+</html>
