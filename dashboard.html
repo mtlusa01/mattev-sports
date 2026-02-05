@@ -630,6 +630,9 @@
     .odds-item .oi-value { font-size: 17px; font-weight: 700; color: var(--text-secondary); }
     .odds-item .oi-value.fair { color: var(--accent-light); }
     .odds-arrow { color: var(--accent); font-size: 18px; }
+    .odds-timestamp { font-size: 10px; color: var(--text-muted); margin-top: 4px; opacity: 0.7; }
+    .line-shopping-header { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 1rem 0 6px; }
+    .line-shopping-ts { font-weight: 400; font-style: italic; text-transform: none; letter-spacing: 0; opacity: 0.7; }
     /* EV card */
     .ev-display { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
     .ev-display.pos { color: var(--accent-light); }
@@ -2824,6 +2827,7 @@
                       <div class="odds-item"><span class="oi-label">Fair</span><span class="oi-value fair">${fairOddsStr}</span></div>
                     </div>
                     <div class="dc-edge ${isVal(pe) && pe >= 0 ? 'pos' : 'neg'}">${probEdgeStr} prob edge</div>
+                    <div class="odds-timestamp">Opening line${projections._lockedAt ? ' · ' + new Date(projections._lockedAt).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : ''}</div>
                   </div>
                   <div class="detail-card">
                     <div class="dc-label">Expected Value</div>
@@ -2943,7 +2947,9 @@
                       }).join('')}
                     </div>`;
                   };
-                  return `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin-top:1rem;border-radius:8px;border:1px solid #2a2a3e;">
+                  const oddsTimeStr = projections._lockedAt ? new Date(projections._lockedAt).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : '';
+                  return `<div class="line-shopping-header">Line Shopping${oddsTimeStr ? ' <span class="line-shopping-ts">· Opening lines as of ' + oddsTimeStr + '</span>' : ''}</div>
+                  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;border-radius:8px;border:1px solid #2a2a3e;">
                     <div class="sportsbook-odds-table" style="min-width:550px;">
                       <div class="odds-table-header">
                         <div class="odds-col side-col"></div>
@@ -3923,6 +3929,9 @@
             });
             document.getElementById('nav-updated-time').textContent = 'Updated ' + updatedTime;
           }
+        }
+        if (data.locked_at) {
+          projections._lockedAt = data.locked_at;
         }
 
         const posEV = projections.filter(p => p.ev > 0).length;
