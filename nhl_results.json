@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-04T23:47:28",
+  "updated": "2026-02-04T23:57:32",
   "allTime": {
     "spreads": {
       "wins": 9,
@@ -23,8 +23,8 @@
       "roi": 27.3
     },
     "best_bets": {
-      "wins": 4,
-      "losses": 1,
+      "wins": 8,
+      "losses": 2,
       "pushes": 0,
       "pct": 80.0,
       "roi": 52.7
@@ -210,19 +210,22 @@
         "wins": 5,
         "losses": 2,
         "record": "5-2",
-        "pct": 71.4
+        "pct": 71.4,
+        "pushes": 0
       },
       "totals": {
         "wins": 5,
         "losses": 1,
         "record": "5-1",
-        "pct": 83.3
+        "pct": 83.3,
+        "pushes": 0
       },
       "moneylines": {
         "wins": 4,
         "losses": 3,
         "record": "4-3",
-        "pct": 57.1
+        "pct": 57.1,
+        "pushes": 0
       },
       "picks": [
         {
@@ -250,7 +253,8 @@
           "pick": "CBJ",
           "result": "3-0",
           "hit": true,
-          "confidence": 73.2
+          "confidence": 73.2,
+          "best_bet": true
         },
         {
           "date": "2026-02-03",
@@ -304,7 +308,8 @@
           "pick": "CAR",
           "result": "3-4",
           "hit": true,
-          "confidence": 76.8
+          "confidence": 76.8,
+          "best_bet": true
         },
         {
           "date": "2026-02-03",
@@ -331,7 +336,8 @@
           "pick": "TBL",
           "result": "3-4",
           "hit": true,
-          "confidence": 73.2
+          "confidence": 73.2,
+          "best_bet": true
         },
         {
           "date": "2026-02-03",
@@ -358,7 +364,8 @@
           "pick": "NYI",
           "result": "4-5",
           "hit": true,
-          "confidence": 58.2
+          "confidence": 58.2,
+          "best_bet": true
         },
         {
           "date": "2026-02-03",
@@ -376,7 +383,8 @@
           "pick": "EDM",
           "result": "5-2",
           "hit": false,
-          "confidence": 64.6
+          "confidence": 64.6,
+          "best_bet": true
         },
         {
           "date": "2026-02-03",
@@ -405,7 +413,14 @@
           "hit": false,
           "confidence": 52.4
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 4,
+        "losses": 1,
+        "pushes": 0,
+        "record": "4-1",
+        "pct": 80.0
+      }
     }
   ]
 }
