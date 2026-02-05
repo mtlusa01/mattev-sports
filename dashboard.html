@@ -741,36 +741,22 @@
     .gl-streak { font-size: 11px; color: var(--text-secondary); margin-top: 8px; }
 
     /* Head-to-Head section */
-    .h2h-section { margin-top: 12px; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
-    .h2h-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-secondary); border-bottom: 1px solid var(--border); }
-    .h2h-title { font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; }
-    .h2h-summary { font-size: 11px; color: var(--text-secondary); }
-    .h2h-summary .h2h-avg-val { font-weight: 700; color: var(--text-primary); }
-    .h2h-summary .h2h-hit-rate { font-weight: 700; margin-left: 8px; }
-    .h2h-summary .h2h-hit-rate.hr-hot { color: var(--accent-light); }
-    .h2h-summary .h2h-hit-rate.hr-warm { color: var(--yellow); }
-    .h2h-summary .h2h-hit-rate.hr-cold { color: var(--red-light); }
-    .h2h-row { display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--border); background: var(--bg-primary); }
-    .h2h-row:last-child { border-bottom: none; }
-    .h2h-date { font-size: 11px; color: var(--text-muted); min-width: 50px; }
-    .h2h-venue { font-size: 10px; color: var(--text-muted); min-width: 45px; }
-    .h2h-stat-val { font-size: 18px; font-weight: 700; min-width: 40px; text-align: center; }
-    .h2h-stat-val.hit { color: var(--accent-light); }
-    .h2h-stat-val.miss { color: var(--red-light); }
-    .h2h-mins { font-size: 11px; color: var(--text-muted); min-width: 45px; }
-    .h2h-result { font-size: 10px; font-weight: 700; min-width: 20px; }
-    .h2h-result.W { color: var(--accent-light); }
-    .h2h-result.L { color: var(--red-light); }
-    .h2h-hit-badge { font-size: 10px; font-weight: 700; }
-    .h2h-hit-badge.hit { color: var(--accent-light); }
-    .h2h-hit-badge.miss { color: var(--red-light); opacity: 0.7; }
-    .h2h-empty { padding: 12px 14px; font-size: 11px; color: var(--text-muted); text-align: center; }
+    /* Matchup Insights */
+    .mi-section { margin-top: 12px; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+    .mi-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-secondary); border-bottom: 1px solid var(--border); }
+    .mi-title { font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; }
+    .mi-list { padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+    .mi-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; line-height: 1.4; }
+    .mi-icon { flex-shrink: 0; font-size: 14px; width: 20px; text-align: center; }
+    .mi-text { color: var(--text-secondary); }
+    .mi-text strong { color: var(--text-primary); font-weight: 600; }
+    .mi-text .mi-green { color: var(--accent-light); font-weight: 600; }
+    .mi-text .mi-red { color: var(--red-light); font-weight: 600; }
+    .mi-text .mi-yellow { color: var(--yellow); font-weight: 600; }
+    .mi-empty { padding: 12px 14px; font-size: 11px; color: var(--text-muted); text-align: center; }
 
     @media (max-width: 768px) {
-      .h2h-row { flex-wrap: wrap; gap: 6px; padding: 6px 10px; }
-      .h2h-date { min-width: auto; }
-      .h2h-venue { min-width: auto; }
-      .h2h-stat-val { font-size: 16px; }
+      .mi-item { font-size: 11px; }
     }
 
     @media (max-width: 768px) {
@@ -2535,45 +2521,78 @@
       return `<span class="injury-badge ${cls}" title="${p.injury_headline || tip}">${s.toUpperCase()}${p.injury_type ? ` <span class="injury-type">${p.injury_type}</span>` : ''}</span>`;
     }
 
-    // ── Head-to-Head Section ──
-    function buildH2HSection(p) {
+    // ── Matchup Insights ──
+    function buildMatchupInsights(p) {
       const PROP_SHORT = { points: 'PTS', rebounds: 'REB', assists: 'AST', pts_rebs_asts: 'PRA' };
       const statLabel = PROP_SHORT[p.prop] || p.prop;
       const opp = p.opponent || '??';
-      const colorCls = (v) => v >= 70 ? 'hr-hot' : v >= 50 ? 'hr-warm' : 'hr-cold';
+      const dir = (p.direction || 'OVER').toUpperCase();
+      const line = parseFloat(p.line) || 0;
+      const insights = [];
 
-      if (!p.h2h_games || p.h2h_games.length === 0) {
-        return `<div class="h2h-section">
-          <div class="h2h-header">
-            <span class="h2h-title">Head to Head vs ${opp}</span>
-          </div>
-          <div class="h2h-empty">No previous matchups this season</div>
+      // 1. H2H insight
+      if (p.h2h_games && p.h2h_games.length > 0) {
+        const total = p.h2h_total_games || p.h2h_games.length;
+        const hits = p.h2h_record ? parseInt(p.h2h_record) : 0;
+        const pct = total > 0 ? Math.round(hits / total * 100) : 0;
+        const avg = p.h2h_avg != null ? p.h2h_avg : '-';
+        const cls = pct >= 70 ? 'mi-green' : pct >= 50 ? 'mi-yellow' : 'mi-red';
+        insights.push({ icon: '&#9878;', text: `<span class="${cls}">${hits}/${total} (${pct}%)</span> hit rate vs ${opp} this season, averaging <strong>${avg} ${statLabel}</strong>` });
+      }
+
+      // 2. Defense matchup insight
+      if (p.opp_def_rank != null) {
+        const rank = p.opp_def_rank;
+        const fav = p.matchup_favorability || (dir === 'OVER' ? (rank >= 20 ? 'favorable' : rank <= 10 ? 'unfavorable' : 'neutral') : (rank <= 10 ? 'favorable' : rank >= 20 ? 'unfavorable' : 'neutral'));
+        const cls = fav === 'favorable' ? 'mi-green' : fav === 'unfavorable' ? 'mi-red' : 'mi-yellow';
+        const desc = fav === 'favorable' ? 'allows more' : fav === 'unfavorable' ? 'limits' : 'average vs';
+        insights.push({ icon: '&#128737;', text: `${opp} ranks <span class="${cls}">#${rank}</span> in ${statLabel} defense &mdash; <span class="${cls}">${fav}</span> matchup (${desc} ${statLabel.toLowerCase()})` });
+      }
+
+      // 3. Home/Away split
+      if (p.home_avg != null && p.away_avg != null) {
+        const g = getGameForTeam(p.team);
+        const isHome = g ? g.home_team === p.team : null;
+        if (isHome !== null) {
+          const venue = isHome ? 'home' : 'away';
+          const venueAvg = isHome ? p.home_avg : p.away_avg;
+          const otherAvg = isHome ? p.away_avg : p.home_avg;
+          const better = venueAvg > otherAvg;
+          const cls = (dir === 'OVER' && better) || (dir === 'UNDER' && !better) ? 'mi-green' : (dir === 'OVER' && !better) || (dir === 'UNDER' && better) ? 'mi-red' : 'mi-yellow';
+          insights.push({ icon: isHome ? '&#127968;' : '&#9992;', text: `Averages <span class="${cls}">${venueAvg} ${statLabel}</span> ${venue} vs <strong>${otherAvg}</strong> ${isHome ? 'away' : 'home'}` });
+        }
+      }
+
+      // 4. Streak insight
+      if (p.streak >= 3) {
+        insights.push({ icon: '&#128293;', text: `On a <span class="mi-green">${p.streak}-game hit streak</span> for ${dir} ${line} ${statLabel}` });
+      }
+
+      // 5. Recent trend (L5 vs L10)
+      if (p.l5_avg != null && p.l10_avg != null) {
+        const trending = p.l5_avg > p.l10_avg ? 'up' : p.l5_avg < p.l10_avg ? 'down' : 'flat';
+        const diff = Math.abs(p.l5_avg - p.l10_avg).toFixed(1);
+        if (diff >= 0.5) {
+          const cls = (dir === 'OVER' && trending === 'up') || (dir === 'UNDER' && trending === 'down') ? 'mi-green' : (dir === 'OVER' && trending === 'down') || (dir === 'UNDER' && trending === 'up') ? 'mi-red' : 'mi-yellow';
+          const arrow = trending === 'up' ? '&#9650;' : '&#9660;';
+          insights.push({ icon: '&#128200;', text: `Trending <span class="${cls}">${arrow} ${trending}</span> &mdash; L5 avg <strong>${p.l5_avg}</strong> vs L10 avg <strong>${p.l10_avg}</strong> (${trending === 'up' ? '+' : '-'}${diff})` });
+        }
+      }
+
+      // Cap at 4 insights
+      const display = insights.slice(0, 4);
+
+      if (display.length === 0) {
+        return `<div class="mi-section">
+          <div class="mi-header"><span class="mi-title">Matchup Insights vs ${opp}</span></div>
+          <div class="mi-empty">No matchup data available</div>
         </div>`;
       }
 
-      const total = p.h2h_total_games || p.h2h_games.length;
-      const hits = p.h2h_record ? parseInt(p.h2h_record) : 0;
-      const hitPct = total > 0 ? Math.round(hits / total * 100) : 0;
-
-      let rows = p.h2h_games.map(g => {
-        const hitCls = g.hit ? 'hit' : 'miss';
-        const hitText = g.hit ? '&#10003; HIT' : '&#10007; MISS';
-        return `<div class="h2h-row">
-          <span class="h2h-date">${g.date}</span>
-          <span class="h2h-venue">${g.venue || '@'} ${opp}</span>
-          <span class="h2h-stat-val ${hitCls}">${g.value}</span>
-          <span class="h2h-mins">${g.minutes != null ? g.minutes + ' min' : '-'}</span>
-          <span class="h2h-result ${g.result || ''}">${g.result || '-'}</span>
-          <span class="h2h-hit-badge ${hitCls}">${hitText}</span>
-        </div>`;
-      }).join('');
-
-      return `<div class="h2h-section">
-        <div class="h2h-header">
-          <span class="h2h-title">Head to Head vs ${opp}</span>
-          <span class="h2h-summary">Avg: <span class="h2h-avg-val">${p.h2h_avg ?? '-'} ${statLabel}</span><span class="h2h-hit-rate ${colorCls(hitPct)}">${p.h2h_record || '-'} hit rate</span></span>
-        </div>
-        ${rows}
+      const items = display.map(i => `<div class="mi-item"><span class="mi-icon">${i.icon}</span><span class="mi-text">${i.text}</span></div>`).join('');
+      return `<div class="mi-section">
+        <div class="mi-header"><span class="mi-title">Matchup Insights vs ${opp}</span></div>
+        <div class="mi-list">${items}</div>
       </div>`;
     }
 
@@ -2637,14 +2656,29 @@
             return { val, hit: dir === 'OVER' ? val > line : val < line, date: 'G' + (rawVals.length - i), opp: '' };
           });
 
-      // Store data in JS for pill interactions (avoids HTML attribute escaping issues)
-      _glDataStore[chartId] = { allItems, line, dir };
+      // (data store populated below with pills)
+
+      // Build H2H items from h2h_games
+      const h2hItems = (p.h2h_games || []).map(g => ({
+        val: parseFloat(g.value) || 0,
+        hit: !!g.hit,
+        date: g.date || '',
+        opp: (g.venue || 'vs') + ' ' + (p.opponent || '??')
+      }));
+
+      // Store data in JS for pill interactions (includes h2h)
+      _glDataStore[chartId] = { allItems, line, dir, h2hItems };
 
       // Hit rate pills — clickable
       const pillData = [];
       if (p.l5_hit_count != null) pillData.push({ key: 'l5', label: 'L5', rate: fmtRate(p.l5_hit_count, Math.min(5, l10Count)), n: 5 });
       if (p.l10_hit_count != null) pillData.push({ key: 'l10', label: 'L10', rate: fmtRate(p.l10_hit_count, l10Count), n: 10 });
       if (p.season_total) pillData.push({ key: 'season', label: 'Season', rate: fmtRate(p.season_hit_count, p.season_total), n: 20 });
+      // H2H pill
+      if (h2hItems.length > 0) {
+        const h2hHits = h2hItems.filter(g => g.hit).length;
+        pillData.push({ key: 'h2h', label: 'H2H', rate: fmtRate(h2hHits, h2hItems.length), n: h2hItems.length });
+      }
 
       const pills = pillData.map(pd =>
         `<span class="gl-pill${pd.key === 'l10' ? ' active' : ''}" data-gl-range="${pd.key}" data-gl-n="${pd.n}" data-gl-target="${chartId}"><span class="gl-pill-label">${pd.label}</span>${pd.rate}</span>`
@@ -2686,14 +2720,24 @@
       const n = parseInt(pill.dataset.glN) || 10;
       const range = pill.dataset.glRange;
 
-      // Slice items (allItems is most-recent-first), reverse for display
-      const sliced = store.allItems.slice(0, Math.min(n, store.allItems.length));
-      const items = [...sliced].reverse();
+      let items;
+      if (range === 'h2h') {
+        // H2H: use h2h items (already in game order), reverse for display
+        items = [...(store.h2hItems || [])].reverse();
+      } else {
+        // Slice items (allItems is most-recent-first), reverse for display
+        const sliced = store.allItems.slice(0, Math.min(n, store.allItems.length));
+        items = [...sliced].reverse();
+      }
 
       // Update title
       const titleEl = container.querySelector('.gl-title');
-      const extra = range === 'season' && items.length < n ? ` (showing ${items.length})` : '';
-      if (titleEl) titleEl.textContent = `Last ${items.length} Games${extra}`;
+      if (range === 'h2h') {
+        if (titleEl) titleEl.textContent = `vs Opponent (${items.length} games)`;
+      } else {
+        const extra = range === 'season' && items.length < n ? ` (showing ${items.length})` : '';
+        if (titleEl) titleEl.textContent = `Last ${items.length} Games${extra}`;
+      }
 
       // Re-render
       const { barsHtml, labelsHtml } = _glBuildBars(items, store.line, 130);
@@ -2788,7 +2832,7 @@
                   </div>
                 </div>
                 ${buildGameLogChart(p)}
-                ${buildH2HSection(p)}
+                ${buildMatchupInsights(p)}
                 ${p.teammate_injuries && p.teammate_injuries.length > 0 ? `
                 <div class="injury-section">
                   <div class="injury-alert">
