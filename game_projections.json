@@ -2,7 +2,7 @@
   "date": "2026-02-05",
   "sport": "NBA",
   "locked_at": "2026-02-05T00:49:55",
-  "updated": "2026-02-05T22:08:10",
+  "updated": "2026-02-05T22:10:19",
   "games": [
     {
       "away_team": "WAS",
@@ -112,7 +112,69 @@
       "home_score": 123,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Scottie Barnes",
+          "team": "TOR",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 17.2,
+          "actual": 13,
+          "hit": true,
+          "confidence": 53.3,
+          "ev": 5.1
+        },
+        {
+          "player": "Immanuel Quickley",
+          "team": "TOR",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 27.5,
+          "projection": 27.4,
+          "actual": 31,
+          "hit": false,
+          "confidence": 52.4,
+          "ev": 3.9
+        },
+        {
+          "player": "Brandon Ingram",
+          "team": "TOR",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 32.5,
+          "projection": 30.8,
+          "actual": 45,
+          "hit": false,
+          "confidence": 53.1,
+          "ev": 3.3
+        },
+        {
+          "player": "Scottie Barnes",
+          "team": "TOR",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 33.5,
+          "projection": 32.3,
+          "actual": 26,
+          "hit": true,
+          "confidence": 53.1,
+          "ev": 3.1
+        },
+        {
+          "player": "Matas Buzelis",
+          "team": "CHI",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 29.5,
+          "projection": 25.3,
+          "actual": 27,
+          "hit": true,
+          "confidence": 54.0,
+          "ev": 1.0
+        }
+      ]
     },
     {
       "away_team": "CHA",
@@ -130,7 +192,7 @@
       "status": "live",
       "locked_at": "2026-02-05T05:49:55Z",
       "away_score": 103,
-      "home_score": 86
+      "home_score": 88
     },
     {
       "away_team": "SAS",
@@ -148,7 +210,7 @@
       "status": "live",
       "locked_at": "2026-02-05T05:49:55Z",
       "away_score": 93,
-      "home_score": 89
+      "home_score": 91
     },
     {
       "away_team": "GSW",
