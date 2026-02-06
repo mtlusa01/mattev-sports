@@ -2,7 +2,7 @@
   "date": "2026-02-05",
   "sport": "NBA",
   "locked_at": "2026-02-05T00:49:55",
-  "updated": "2026-02-05T23:46:54",
+  "updated": "2026-02-06T02:49:07",
   "games": [
     {
       "away_team": "WAS",
@@ -419,10 +419,63 @@
       "ml_pick": "PHX",
       "ml_conf": 54.8,
       "commence_time": "2026-02-06T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-05T05:49:55Z",
-      "away_score": 74,
-      "home_score": 77
+      "away_score": 101,
+      "home_score": 97,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Grayson Allen",
+          "team": "PHX",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.4,
+          "actual": 4,
+          "hit": false,
+          "confidence": 52.2,
+          "ev": 6.0
+        },
+        {
+          "player": "Dillon Brooks",
+          "team": "PHX",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 22.5,
+          "projection": 21.3,
+          "actual": 24,
+          "hit": false,
+          "confidence": 53.8,
+          "ev": 4.9
+        },
+        {
+          "player": "Dillon Brooks",
+          "team": "PHX",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 29.5,
+          "projection": 28.2,
+          "actual": 31,
+          "hit": false,
+          "confidence": 54.4,
+          "ev": 4.4
+        },
+        {
+          "player": "Brandin Podziemski",
+          "team": "GSW",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 15.5,
+          "projection": 12.1,
+          "actual": 0,
+          "hit": true,
+          "confidence": 52.8,
+          "ev": 1.6
+        }
+      ]
     },
     {
       "away_team": "PHI",
@@ -437,10 +490,111 @@
       "ml_pick": "LAL",
       "ml_conf": 56.6,
       "commence_time": "2026-02-06T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-05T05:49:55Z",
-      "away_score": 83,
-      "home_score": 76
+      "away_score": 115,
+      "home_score": 119,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 5.1,
+          "actual": 2,
+          "hit": false,
+          "confidence": 56.1,
+          "ev": 31.2
+        },
+        {
+          "player": "Quentin Grimes",
+          "team": "PHI",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 3.8,
+          "actual": 2,
+          "hit": false,
+          "confidence": 52.3,
+          "ev": 16.6
+        },
+        {
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 22.8,
+          "actual": 35,
+          "hit": true,
+          "confidence": 57.1,
+          "ev": 9.6
+        },
+        {
+          "player": "Joel Embiid",
+          "team": "PHI",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 6.5,
+          "actual": 7,
+          "hit": true,
+          "confidence": 55.5,
+          "ev": 9.4
+        },
+        {
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 30.9,
+          "actual": 43,
+          "hit": true,
+          "confidence": 57.5,
+          "ev": 7.5
+        },
+        {
+          "player": "Deandre Ayton",
+          "team": "LAL",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 23.3,
+          "actual": 16,
+          "hit": false,
+          "confidence": 53.9,
+          "ev": 5.3
+        },
+        {
+          "player": "LeBron James",
+          "team": "LAL",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 4,
+          "hit": false,
+          "confidence": 52.4,
+          "ev": 2.3
+        },
+        {
+          "player": "Deandre Ayton",
+          "team": "LAL",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 8.5,
+          "projection": 8.5,
+          "actual": 6,
+          "hit": false,
+          "confidence": 52.6,
+          "ev": 1.8
+        }
+      ]
     }
   ]
 }

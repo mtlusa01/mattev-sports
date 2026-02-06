@@ -1,40 +1,40 @@
 {
-  "updated": "2026-02-05T23:46:54",
+  "updated": "2026-02-06T02:49:07",
   "allTime": {
     "props": {
-      "wins": 65,
-      "losses": 79,
+      "wins": 69,
+      "losses": 87,
       "pushes": 0,
-      "pct": 45.1,
-      "roi": -13.8
+      "pct": 44.2,
+      "roi": -15.6
     },
     "spreads": {
-      "wins": 12,
-      "losses": 14,
+      "wins": 13,
+      "losses": 15,
       "pushes": 1,
-      "pct": 46.2,
-      "roi": -11.9
+      "pct": 46.4,
+      "roi": -11.4
     },
     "totals": {
       "wins": 16,
-      "losses": 11,
+      "losses": 13,
       "pushes": 0,
-      "pct": 59.3,
-      "roi": 13.1
+      "pct": 55.2,
+      "roi": 5.3
     },
     "moneylines": {
-      "wins": 15,
-      "losses": 12,
+      "wins": 16,
+      "losses": 13,
       "pushes": 0,
-      "pct": 55.6,
-      "roi": 6.1
+      "pct": 55.2,
+      "roi": 5.3
     },
     "best_bets": {
-      "wins": 3,
+      "wins": 4,
       "losses": 2,
       "pushes": 0,
-      "pct": 60.0,
-      "roi": 14.5
+      "pct": 66.7,
+      "roi": 27.3
     },
     "best_prop_type": "",
     "best_prop_pct": 0
@@ -43,32 +43,32 @@
     {
       "date": "2026-02-05",
       "props": {
-        "wins": 7,
-        "losses": 15,
+        "wins": 11,
+        "losses": 23,
         "pushes": 0,
-        "record": "7-15",
-        "pct": 31.8
+        "record": "11-23",
+        "pct": 32.4
       },
       "spreads": {
-        "wins": 1,
-        "losses": 5,
+        "wins": 2,
+        "losses": 6,
         "pushes": 0,
-        "record": "1-5",
-        "pct": 16.7
+        "record": "2-6",
+        "pct": 25.0
       },
       "totals": {
         "wins": 4,
-        "losses": 2,
+        "losses": 4,
         "pushes": 0,
-        "record": "4-2",
-        "pct": 66.7
+        "record": "4-4",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 4,
-        "losses": 2,
+        "wins": 5,
+        "losses": 3,
         "pushes": 0,
-        "record": "4-2",
-        "pct": 66.7
+        "record": "5-3",
+        "pct": 62.5
       },
       "picks": [
         {
@@ -235,6 +235,60 @@
         },
         {
           "date": "2026-02-05",
+          "type": "spread",
+          "game": "GSW @ PHX",
+          "pick": "GSW +6.5",
+          "result": "101-97",
+          "hit": true,
+          "confidence": 57.1
+        },
+        {
+          "date": "2026-02-05",
+          "type": "total",
+          "game": "GSW @ PHX",
+          "pick": "OVER 217.5",
+          "result": "101-97",
+          "hit": false,
+          "confidence": 68.6
+        },
+        {
+          "date": "2026-02-05",
+          "type": "ml",
+          "game": "GSW @ PHX",
+          "pick": "PHX",
+          "result": "101-97",
+          "hit": false,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-02-05",
+          "type": "spread",
+          "game": "PHI @ LAL",
+          "pick": "PHI +3.5",
+          "result": "115-119",
+          "hit": false,
+          "confidence": 51.3
+        },
+        {
+          "date": "2026-02-05",
+          "type": "total",
+          "game": "PHI @ LAL",
+          "pick": "UNDER 231.5",
+          "result": "115-119",
+          "hit": false,
+          "confidence": 51.0
+        },
+        {
+          "date": "2026-02-05",
+          "type": "ml",
+          "game": "PHI @ LAL",
+          "pick": "LAL",
+          "result": "115-119",
+          "hit": true,
+          "confidence": 56.6
+        },
+        {
+          "date": "2026-02-05",
           "type": "prop",
           "player": "Nickeil Alexander-Walker",
           "team": "ATL",
@@ -269,6 +323,40 @@
         {
           "date": "2026-02-05",
           "type": "prop",
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "pick": "AST OVER 3.5",
+          "line": 3.5,
+          "result": 2,
+          "hit": false,
+          "confidence": 56.1
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "pick": "PTS OVER 15.5",
+          "line": 15.5,
+          "result": 35,
+          "hit": true,
+          "confidence": 57.1,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 52.4
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
           "player": "Anthony Black",
           "team": "ORL",
           "pick": "PTS OVER 16.5",
@@ -276,6 +364,50 @@
           "result": 18,
           "hit": true,
           "confidence": 52.4
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Joel Embiid",
+          "team": "PHI",
+          "pick": "AST OVER 3.5",
+          "line": 3.5,
+          "result": 7,
+          "hit": true,
+          "confidence": 55.5
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Grayson Allen",
+          "team": "PHX",
+          "pick": "AST OVER 4.5",
+          "line": 4.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 52.2
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Dillon Brooks",
+          "team": "PHX",
+          "pick": "PTS UNDER 22.5",
+          "line": 22.5,
+          "result": 24,
+          "hit": false,
+          "confidence": 53.8
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Dillon Brooks",
+          "team": "PHX",
+          "pick": "PRA UNDER 29.5",
+          "line": 29.5,
+          "result": 31,
+          "hit": false,
+          "confidence": 54.4
         },
         {
           "date": "2026-02-05",
@@ -412,6 +544,17 @@
         {
           "date": "2026-02-05",
           "type": "prop",
+          "player": "Deandre Ayton",
+          "team": "LAL",
+          "pick": "REB OVER 8.5",
+          "line": 8.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 52.6
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
           "player": "Lauri Markkanen",
           "team": "UTA",
           "pick": "PRA OVER 33.5",
@@ -419,6 +562,17 @@
           "result": 24,
           "hit": false,
           "confidence": 52.9
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Austin Reaves",
+          "team": "LAL",
+          "pick": "PRA OVER 22.5",
+          "line": 22.5,
+          "result": 43,
+          "hit": true,
+          "confidence": 57.5
         },
         {
           "date": "2026-02-05",
@@ -467,6 +621,17 @@
         {
           "date": "2026-02-05",
           "type": "prop",
+          "player": "Brandin Podziemski",
+          "team": "GSW",
+          "pick": "PTS UNDER 15.5",
+          "line": 15.5,
+          "result": 0,
+          "hit": true,
+          "confidence": 52.8
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
           "player": "Paolo Banchero",
           "team": "ORL",
           "pick": "PTS OVER 22.5",
@@ -474,14 +639,36 @@
           "result": 22,
           "hit": false,
           "confidence": 54.0
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Deandre Ayton",
+          "team": "LAL",
+          "pick": "PRA OVER 22.5",
+          "line": 22.5,
+          "result": 16,
+          "hit": false,
+          "confidence": 53.9
+        },
+        {
+          "date": "2026-02-05",
+          "type": "prop",
+          "player": "Quentin Grimes",
+          "team": "PHI",
+          "pick": "AST OVER 3.5",
+          "line": 3.5,
+          "result": 2,
+          "hit": false,
+          "confidence": 52.3
         }
       ],
       "best_bets": {
-        "wins": 0,
+        "wins": 1,
         "losses": 0,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "1-0",
+        "pct": 100.0
       }
     },
     {
