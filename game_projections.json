@@ -2,7 +2,7 @@
   "date": "2026-02-05",
   "sport": "NBA",
   "locked_at": "2026-02-05T00:49:55",
-  "updated": "2026-02-05T22:12:22",
+  "updated": "2026-02-05T22:14:31",
   "games": [
     {
       "away_team": "WAS",
@@ -70,7 +70,57 @@
       "home_score": 118,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Paolo Banchero",
+          "team": "ORL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 6.5,
+          "actual": 4,
+          "hit": false,
+          "confidence": 54.4,
+          "ev": 9.8
+        },
+        {
+          "player": "Anthony Black",
+          "team": "ORL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 22.4,
+          "actual": 18,
+          "hit": true,
+          "confidence": 52.4,
+          "ev": 3.9
+        },
+        {
+          "player": "Paolo Banchero",
+          "team": "ORL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 26.9,
+          "actual": 22,
+          "hit": false,
+          "confidence": 54.0,
+          "ev": 2.2
+        },
+        {
+          "player": "Paolo Banchero",
+          "team": "ORL",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 36.5,
+          "projection": 41.6,
+          "actual": 31,
+          "hit": false,
+          "confidence": 52.9,
+          "ev": 1.0
+        }
+      ]
     },
     {
       "away_team": "UTA",
@@ -192,7 +242,7 @@
       "status": "live",
       "locked_at": "2026-02-05T05:49:55Z",
       "away_score": 104,
-      "home_score": 88
+      "home_score": 92
     },
     {
       "away_team": "SAS",
@@ -209,8 +259,8 @@
       "commence_time": "2026-02-06T01:40:00Z",
       "status": "live",
       "locked_at": "2026-02-05T05:49:55Z",
-      "away_score": 93,
-      "home_score": 91
+      "away_score": 97,
+      "home_score": 94
     },
     {
       "away_team": "GSW",
