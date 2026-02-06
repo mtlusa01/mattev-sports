@@ -1,65 +1,65 @@
 {
-  "updated": "2026-02-05T21:36:50",
+  "updated": "2026-02-05T21:40:58",
   "allTime": {
     "spreads": {
-      "wins": 15,
+      "wins": 16,
       "losses": 4,
-      "pushes": 0,
-      "pct": 78.9,
-      "roi": 50.7
-    },
-    "totals": {
-      "wins": 11,
-      "losses": 7,
-      "pushes": 0,
-      "pct": 61.1,
-      "roi": 16.7
-    },
-    "moneylines": {
-      "wins": 15,
-      "losses": 4,
-      "pushes": 0,
-      "pct": 78.9,
-      "roi": 50.7
-    },
-    "best_bets": {
-      "wins": 12,
-      "losses": 3,
       "pushes": 0,
       "pct": 80.0,
       "roi": 52.7
+    },
+    "totals": {
+      "wins": 11,
+      "losses": 8,
+      "pushes": 0,
+      "pct": 57.9,
+      "roi": 10.5
+    },
+    "moneylines": {
+      "wins": 16,
+      "losses": 4,
+      "pushes": 0,
+      "pct": 80.0,
+      "roi": 52.7
+    },
+    "best_bets": {
+      "wins": 13,
+      "losses": 2,
+      "pushes": 0,
+      "pct": 86.7,
+      "roi": 65.5
     }
   },
   "days": [
     {
       "date": "2026-02-05",
       "spreads": {
-        "wins": 2,
+        "wins": 3,
         "losses": 0,
         "pushes": 0,
-        "record": "2-0",
+        "record": "3-0",
         "pct": 100.0
       },
       "totals": {
         "wins": 1,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "1-2",
+        "pct": 33.3
       },
       "moneylines": {
-        "wins": 2,
+        "wins": 3,
         "losses": 0,
         "pushes": 0,
-        "record": "2-0",
+        "record": "3-0",
         "pct": 100.0
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 5,
+        "losses": 0,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -79,8 +79,7 @@
           "pick": "OVER 5.5",
           "result": "3-1",
           "hit": false,
-          "confidence": 52.7,
-          "best_bet": true
+          "confidence": 52.7
         },
         {
           "date": "2026-02-05",
@@ -89,8 +88,7 @@
           "pick": "NYI",
           "result": "3-1",
           "hit": true,
-          "confidence": 52.9,
-          "best_bet": true
+          "confidence": 52.9
         },
         {
           "date": "2026-02-05",
@@ -119,6 +117,35 @@
           "result": "2-0",
           "hit": true,
           "confidence": 87.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-05",
+          "type": "spread",
+          "game": "OTT @ PHI",
+          "pick": "PHI +1.5",
+          "result": "2-1",
+          "hit": true,
+          "confidence": 57.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-05",
+          "type": "total",
+          "game": "OTT @ PHI",
+          "pick": "OVER 5.5",
+          "result": "2-1",
+          "hit": false,
+          "confidence": 51.6
+        },
+        {
+          "date": "2026-02-05",
+          "type": "ml",
+          "game": "OTT @ PHI",
+          "pick": "OTT",
+          "result": "2-1",
+          "hit": true,
+          "confidence": 58.9,
           "best_bet": true
         }
       ]

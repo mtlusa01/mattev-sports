@@ -1,7 +1,7 @@
 {
   "date": "2026-02-05",
   "sport": "NHL",
-  "updated": "2026-02-05T21:38:57",
+  "updated": "2026-02-05T21:40:58",
   "games": [
     {
       "away_team": "PIT",
@@ -26,55 +26,55 @@
         "FD": {
           "spread": {
             "home_line": 1.5,
-            "home_odds": -115,
+            "home_odds": -132,
             "away_line": -1.5,
-            "away_odds": -113
+            "away_odds": 102
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": -182,
+            "over_odds": -114,
             "under_line": 6.5,
-            "under_odds": 138
+            "under_odds": -114
           },
           "ml": {
-            "BUF": 470,
-            "PIT": -770
+            "BUF": 500,
+            "PIT": -850
           }
         },
         "DK": {
           "spread": {
-            "home_line": 1.5,
-            "home_odds": -160,
-            "away_line": -1.5,
-            "away_odds": 124
+            "home_line": 2.5,
+            "home_odds": 140,
+            "away_line": -2.5,
+            "away_odds": -180
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": -130,
+            "over_odds": -345,
             "under_line": 6.5,
-            "under_odds": 100
+            "under_odds": 250
           },
           "ml": {
-            "BUF": 370,
-            "PIT": -560
+            "BUF": 3000,
+            "PIT": -20000
           }
         },
         "MGM": {
           "spread": {
-            "home_line": 1.5,
-            "home_odds": -165,
-            "away_line": -1.5,
-            "away_odds": 125
+            "home_line": 2.5,
+            "home_odds": 100,
+            "away_line": -2.5,
+            "away_odds": -135
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": -135,
+            "over_odds": -500,
             "under_line": 6.5,
-            "under_odds": 100
+            "under_odds": 325
           },
           "ml": {
-            "BUF": 425,
-            "PIT": -625
+            "BUF": 2000,
+            "PIT": -10000
           }
         }
       },
@@ -214,7 +214,7 @@
       "ml_conf": 58.9,
       "ml_best_book": "FD",
       "commence_time": "2026-02-06T00:00:00Z",
-      "status": "live",
+      "status": "final",
       "away_score": 2,
       "home_score": 1,
       "odds": {
@@ -222,8 +222,8 @@
           "spread": {},
           "total": {},
           "ml": {
-            "OTT": -120,
-            "PHI": -106
+            "OTT": -140,
+            "PHI": 110
           }
         },
         "DK": {
@@ -244,7 +244,10 @@
         }
       },
       "home_goalie": "Dan Vladar",
-      "away_goalie": "Linus Ullmark"
+      "away_goalie": "Linus Ullmark",
+      "spread_result": "W",
+      "total_result": "L",
+      "ml_result": "W"
     },
     {
       "away_team": "NSH",
@@ -268,56 +271,56 @@
       "odds": {
         "FD": {
           "spread": {
-            "away_line": 1.5,
-            "away_odds": -102,
-            "home_line": -1.5,
-            "home_odds": -128
+            "away_line": 2.5,
+            "away_odds": 116,
+            "home_line": -2.5,
+            "home_odds": -152
           },
           "total": {
-            "over_line": 6.5,
-            "over_odds": -210,
-            "under_line": 6.5,
-            "under_odds": 154
+            "over_line": 7.5,
+            "over_odds": 185,
+            "under_line": 7.5,
+            "under_odds": -250
           },
           "ml": {
-            "NSH": 520,
-            "WSH": -900
+            "NSH": 2000,
+            "WSH": -20000
           }
         },
         "DK": {
           "spread": {
-            "away_line": 1.5,
-            "away_odds": -135,
-            "home_line": -1.5,
-            "home_odds": 105
+            "away_line": 2.5,
+            "away_odds": 130,
+            "home_line": -2.5,
+            "home_odds": -166
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": -130,
+            "over_odds": -425,
             "under_line": 6.5,
-            "under_odds": 100
+            "under_odds": 300
           },
           "ml": {
-            "NSH": 520,
-            "WSH": -850
+            "NSH": 3500,
+            "WSH": -50000
           }
         },
         "MGM": {
           "spread": {
-            "away_line": 1.5,
-            "away_odds": -150,
-            "home_line": -1.5,
-            "home_odds": 110
+            "away_line": 2.5,
+            "away_odds": 105,
+            "home_line": -2.5,
+            "home_odds": -140
           },
           "total": {
-            "over_line": 6.5,
-            "over_odds": -135,
-            "under_line": 6.5,
-            "under_odds": 100
+            "over_line": 7.5,
+            "over_odds": 230,
+            "under_line": 7.5,
+            "under_odds": -325
           },
           "ml": {
-            "NSH": 500,
-            "WSH": -750
+            "NSH": 2200,
+            "WSH": -10000
           }
         }
       },
@@ -368,9 +371,9 @@
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -135,
+            "over_odds": -130,
             "under_line": 5.5,
-            "under_odds": 105
+            "under_odds": 100
           },
           "ml": {}
         },
