@@ -2036,6 +2036,13 @@
       catch { return []; }
     }
     function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
+    function getLocalDateStr() {
+      // Returns YYYY-MM-DD in local timezone (not UTC)
+      const now = new Date();
+      return now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+    }
     function getUnitSize() { return getBetSettings().unit_size || 10; }
     function getDisplayMode() { return getBetSettings().display_mode || 'units'; }
 
@@ -2129,7 +2136,8 @@
       if (!p) return;
       const opp = getOpponent(p.team);
       const game = opp ? (p.team + ' @ ' + opp) : p.team;
-      const date = projections._date || new Date().toISOString().slice(0, 10);
+      // Use local date for bet tracking (not UTC)
+      const date = getLocalDateStr();
       const betId = makeBetId(date, 'prop', p.player, p.team, game, p.prop, p.direction, p.line);
       if (isBetTracked(betId)) return;
 
@@ -2152,7 +2160,8 @@
       if (!g) return;
 
       const game = away + ' @ ' + home;
-      const date = g.commence_time ? g.commence_time.slice(0, 10) : new Date().toISOString().slice(0, 10);
+      // Use local date for bet tracking (not UTC from commence_time)
+      const date = getLocalDateStr();
       let pick, line, conf;
       if (betType === 'spread') { pick = g.spread_pick; line = null; conf = g.spread_conf; }
       else if (betType === 'total') { pick = g.total_pick + ' ' + g.total_line; line = g.total_line; conf = g.total_conf; }

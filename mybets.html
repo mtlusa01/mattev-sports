@@ -576,6 +576,13 @@
     function saveBetSettings(s) { localStorage.setItem(LS_SETTINGS, JSON.stringify(s)); }
     function getTrackedBets() { try { return JSON.parse(localStorage.getItem(LS_BETS)) || []; } catch { return []; } }
     function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
+    function getLocalDateStr(d) {
+      // Returns YYYY-MM-DD in local timezone (not UTC)
+      const dt = d || new Date();
+      return dt.getFullYear() + '-' +
+        String(dt.getMonth() + 1).padStart(2, '0') + '-' +
+        String(dt.getDate()).padStart(2, '0');
+    }
     function getUnitSize() { return getBetSettings().unit_size || 10; }
     function getDisplayMode() { return getBetSettings().display_mode || 'units'; }
     function calcProfit(odds, units) {
@@ -589,7 +596,7 @@
     let analyticsTab = 'sport';
     const now = new Date();
     let calYear = now.getFullYear(), calMonth = now.getMonth();
-    let selectedDate = now.toISOString().slice(0, 10);
+    let selectedDate = getLocalDateStr(now);
 
     // ── Display Helpers ──
     function formatPL(u) {
@@ -623,9 +630,9 @@
       let bets = getTrackedBets();
       if (currentSport !== 'all') bets = bets.filter(b => (b.sport || '').toUpperCase() === currentSport.toUpperCase());
       if (currentPeriod === 'all') return bets;
-      const td = new Date().toISOString().slice(0, 10);
+      const td = getLocalDateStr();
       if (currentPeriod === 'today') return bets.filter(b => b.date === td);
-      if (currentPeriod === 'week') { const w = new Date(); w.setDate(w.getDate() - 7); return bets.filter(b => b.date >= w.toISOString().slice(0, 10)); }
+      if (currentPeriod === 'week') { const w = new Date(); w.setDate(w.getDate() - 7); return bets.filter(b => b.date >= getLocalDateStr(w)); }
       if (currentPeriod === 'month') return bets.filter(b => b.date && b.date.startsWith(td.slice(0, 7)));
       return bets;
     }
@@ -700,7 +707,7 @@
 
       const firstDay = new Date(calYear, calMonth, 1).getDay();
       const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-      const todayStr = new Date().toISOString().slice(0, 10);
+      const todayStr = getLocalDateStr();
 
       let html = '';
       ['S','M','T','W','T','F','S'].forEach(d => { html += `<div class="cal-dow">${d}</div>`; });
