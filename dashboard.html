@@ -1943,6 +1943,12 @@
     }
 
     function getActiveGameProjections() {
+      const today = new Date().toISOString().slice(0, 10);
+      // For historical dates, check cache first
+      if (selectedDate !== today && historicalGamesCache[selectedDate]) {
+        return historicalGamesCache[selectedDate];
+      }
+      // For today or if no cache, use current data
       return currentSport === 'nhl' ? nhlGameProjections : gameProjections;
     }
 
@@ -3779,14 +3785,48 @@
       return { label, formatted };
     }
 
-    function changeDate(delta) {
+    // Cache for historical game projections by date
+    const historicalGamesCache = {};
+    let isLoadingHistory = false;
+
+    async function loadHistoricalGames(date) {
+      // If it's today, use current gameProjections
+      const today = new Date().toISOString().slice(0, 10);
+      if (date === today) return null; // Use current data
+
+      // Check cache first
+      if (historicalGamesCache[date]) {
+        return historicalGamesCache[date];
+      }
+
+      // Try to fetch from archive
+      try {
+        const resp = await fetch(`archive/projections_${date}.json`);
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        const games = data.game_projections?.games || [];
+        historicalGamesCache[date] = games;
+        return games;
+      } catch (e) {
+        console.log(`No archive for ${date}:`, e.message);
+        return null;
+      }
+    }
+
+    async function changeDate(delta) {
       const current = new Date(selectedDate + 'T12:00:00');
       current.setDate(current.getDate() + delta);
       selectedDate = current.toISOString().slice(0, 10);
+
+      // Load historical data if navigating to a past date
+      isLoadingHistory = true;
+      renderGameProjections(); // Show loading state
+      await loadHistoricalGames(selectedDate);
+      isLoadingHistory = false;
       renderGameProjections();
     }
 
-    function goToToday() {
+    async function goToToday() {
       selectedDate = new Date().toISOString().slice(0, 10);
       renderGameProjections();
     }
@@ -4164,34 +4204,50 @@
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
       const activeGames = getActiveGameProjections();
+      const today = new Date().toISOString().slice(0, 10);
 
       // Hide the static filter element — we render filters inline now
       document.getElementById('game-status-filter').innerHTML = '';
 
-      // Filter games by selected date
+      // Render date picker first
+      const datePickerHtml = renderDatePicker();
+
+      // Show loading state
+      if (isLoadingHistory) {
+        container.innerHTML = datePickerHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon" style="animation: pulse-live 1s infinite">&#8987;</div><div class="empty-state-title">Loading...</div><div class="empty-state-text">Fetching historical projections...</div></div>`;
+        updatedEl.textContent = '';
+        return;
+      }
+
+      // Filter games by selected date (for today's data which may have multiple dates)
       const dateFiltered = activeGames.filter(g => {
         const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
         return gameDate === selectedDate;
       });
 
-      // Render date picker first
-      const datePickerHtml = renderDatePicker();
+      // If no date-filtered games but we have games, show all (for historical data)
+      const gamesToShow = dateFiltered.length > 0 ? dateFiltered : activeGames;
 
-      if (dateFiltered.length === 0) {
+      if (gamesToShow.length === 0) {
         const sportLabel = currentSport.toUpperCase();
         const { formatted } = formatDateDisplay(selectedDate);
-        const today = new Date().toISOString().slice(0, 10);
         const isToday = selectedDate === today;
-        const emptyMsg = isToday
-          ? `${sportLabel} game projections will appear here when today's games are loaded.`
-          : `No ${sportLabel} games scheduled for ${formatted}. Try another date to see more games.`;
+        const isPast = new Date(selectedDate) < new Date(today);
+        let emptyMsg;
+        if (isToday) {
+          emptyMsg = `${sportLabel} game projections will appear here when today's games are loaded.`;
+        } else if (isPast) {
+          emptyMsg = `No archived projections found for ${formatted}. Historical data may not be available for this date.`;
+        } else {
+          emptyMsg = `${sportLabel} projections for ${formatted} will be available closer to game day.`;
+        }
         container.innerHTML = datePickerHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#128197;</div><div class="empty-state-title">No games scheduled</div><div class="empty-state-text">${emptyMsg}</div></div>`;
         updatedEl.textContent = '';
         return;
       }
 
       // Apply status filter
-      let filtered = [...dateFiltered];
+      let filtered = [...gamesToShow];
       if (currentStatusFilter !== 'all') {
         filtered = filtered.filter(g => {
           const s = getGameStatus(g);
