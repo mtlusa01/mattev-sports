@@ -1089,29 +1089,29 @@
 
     /* ── Date Picker ── */
     .date-picker {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 0; margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: flex-start; gap: 6px;
+      padding: 8px 0; margin-bottom: 12px;
     }
     .date-picker-btn {
-      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--bg-secondary); color: var(--text-secondary); font-size: 16px;
+      width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--bg-secondary); color: var(--text-muted); font-size: 14px;
       cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center;
     }
     .date-picker-btn:hover { border-color: var(--border-light); color: var(--text-primary); background: var(--bg-tertiary); }
     .date-picker-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .date-picker-today {
-      padding: 8px 16px; border-radius: 8px; border: 1px solid var(--brand-border);
-      background: var(--brand-glow); color: var(--brand-light); font-size: 13px; font-weight: 600;
+      padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--bg-secondary); color: var(--text-secondary); font-size: 11px; font-weight: 600;
       cursor: pointer; transition: all 0.15s;
     }
-    .date-picker-today:hover { background: var(--brand-border); }
-    .date-picker-today:disabled { opacity: 0.5; cursor: default; }
+    .date-picker-today:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .date-picker-today:disabled { opacity: 0.4; cursor: default; }
+    .date-picker-today.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
     .date-picker-display {
-      padding: 8px 20px; font-size: 15px; font-weight: 600; color: var(--text-primary);
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px;
-      min-width: 180px; text-align: center;
+      padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      background: transparent; border: none; border-radius: 6px;
     }
-    .date-picker-display .date-label { color: var(--text-secondary); font-weight: 400; font-size: 11px; display: block; margin-bottom: 2px; }
+    .date-picker-display .date-label { color: var(--text-muted); font-weight: 400; font-size: 10px; margin-right: 6px; }
 
     /* ── Game Cards ── */
     .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
@@ -1945,10 +1945,14 @@
     function getActiveGameProjections() {
       const today = new Date().toISOString().slice(0, 10);
       // For historical dates, check cache first
-      if (selectedDate !== today && historicalGamesCache[selectedDate]) {
-        return historicalGamesCache[selectedDate];
+      if (selectedDate !== today) {
+        if (historicalGamesCache[selectedDate] !== undefined) {
+          return historicalGamesCache[selectedDate];
+        }
+        // No cache yet (still loading) - return empty array
+        return [];
       }
-      // For today or if no cache, use current data
+      // For today, use current data
       return currentSport === 'nhl' ? nhlGameProjections : gameProjections;
     }
 
@@ -3794,22 +3798,26 @@
       const today = new Date().toISOString().slice(0, 10);
       if (date === today) return null; // Use current data
 
-      // Check cache first
-      if (historicalGamesCache[date]) {
+      // Check cache first (use !== undefined to allow empty arrays)
+      if (historicalGamesCache[date] !== undefined) {
         return historicalGamesCache[date];
       }
 
       // Try to fetch from archive
       try {
         const resp = await fetch(`archive/projections_${date}.json`);
-        if (!resp.ok) return null;
+        if (!resp.ok) {
+          historicalGamesCache[date] = []; // Cache empty array for missing dates
+          return [];
+        }
         const data = await resp.json();
         const games = data.game_projections?.games || [];
         historicalGamesCache[date] = games;
         return games;
       } catch (e) {
         console.log(`No archive for ${date}:`, e.message);
-        return null;
+        historicalGamesCache[date] = []; // Cache empty array on error
+        return [];
       }
     }
 
@@ -3839,7 +3847,7 @@
       return `
         <div class="date-picker">
           <button class="date-picker-btn" onclick="changeDate(-1)" title="Previous day">&larr;</button>
-          <button class="date-picker-today" onclick="goToToday()" ${isToday ? 'disabled' : ''}>Today</button>
+          <button class="date-picker-today${isToday ? ' active' : ''}" onclick="goToToday()" ${isToday ? 'disabled' : ''}>Today</button>
           <div class="date-picker-display">
             ${label ? `<span class="date-label">${label}</span>` : ''}
             <span>${formatted}</span>
@@ -4220,13 +4228,15 @@
       }
 
       // Filter games by selected date (for today's data which may have multiple dates)
+      const today = new Date().toISOString().slice(0, 10);
       const dateFiltered = activeGames.filter(g => {
         const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
         return gameDate === selectedDate;
       });
 
-      // If no date-filtered games but we have games, show all (for historical data)
-      const gamesToShow = dateFiltered.length > 0 ? dateFiltered : activeGames;
+      // For today, fallback to all if date filter found none (handles edge cases)
+      // For historical dates, trust the filtered result - don't show today's data
+      const gamesToShow = (dateFiltered.length > 0 || selectedDate !== today) ? dateFiltered : activeGames;
 
       if (gamesToShow.length === 0) {
         const sportLabel = currentSport.toUpperCase();
