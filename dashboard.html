@@ -184,14 +184,13 @@
       left: 0;
       right: 0;
       background: #1a1a24;
-      border-bottom: 2px solid #2a2a3a;
       z-index: 9999;
       overflow: hidden;
       max-height: 0;
       transition: max-height 0.3s ease;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
-    .mobile-nav-drawer.open { max-height: 500px; }
+    .mobile-nav-drawer:not(.open) { pointer-events: none; border: none !important; box-shadow: none !important; }
+    .mobile-nav-drawer.open { max-height: 500px; border-bottom: 2px solid #2a2a3a; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
     .mobile-drawer-links a {
       display: flex;
       align-items: center;

@@ -83,8 +83,9 @@
     /* ── Mobile Drawer ── */
     .mobile-nav-backdrop { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9998; }
     .mobile-nav-backdrop.open { display: block; }
-    .mobile-nav-drawer { position: fixed; top: 90px; left: 0; right: 0; background: #1a1a24; border-bottom: 2px solid #2a2a3a; z-index: 9999; overflow: hidden; max-height: 0; transition: max-height 0.3s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
-    .mobile-nav-drawer.open { max-height: 500px; }
+    .mobile-nav-drawer { position: fixed; top: 90px; left: 0; right: 0; background: #1a1a24; z-index: 9999; overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+    .mobile-nav-drawer:not(.open) { pointer-events: none; border: none !important; box-shadow: none !important; }
+    .mobile-nav-drawer.open { max-height: 500px; border-bottom: 2px solid #2a2a3a; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
     .mobile-drawer-links a { display: flex; align-items: center; gap: 12px; padding: 14px 24px; color: #fff; text-decoration: none; font-size: 16px; font-weight: 500; border-bottom: 1px solid #2a2a3a; transition: all 0.15s; }
     .mobile-drawer-links a:hover, .mobile-drawer-links a.active { color: #dc2626; background: rgba(220,38,38,0.08); }
     .mobile-drawer-links a .menu-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
@@ -110,8 +111,6 @@
       outline: none !important;
     }
     /* Restore intentional borders only when elements are visible/open */
-    .mobile-nav-drawer:not(.open) { pointer-events: none; }
-    .mobile-nav-drawer.open { border-bottom: 2px solid #2a2a3a !important; box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important; }
     .mobile-drawer-links a { border-bottom: 1px solid #2a2a3a !important; }
     .dropdown-header { border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
     .user-dropdown { border: 1px solid rgba(255,255,255,0.1) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important; }
