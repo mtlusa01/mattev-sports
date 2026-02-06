@@ -2,7 +2,7 @@
   "date": "2026-02-05",
   "sport": "NBA",
   "locked_at": "2026-02-05T00:49:55",
-  "updated": "2026-02-05T23:10:21",
+  "updated": "2026-02-05T23:12:31",
   "games": [
     {
       "away_team": "WAS",
@@ -390,7 +390,21 @@
       "home_score": 123,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Cooper Flagg",
+          "team": "DAL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 7.3,
+          "actual": 4,
+          "hit": false,
+          "confidence": 54.9,
+          "ev": 7.6
+        }
+      ]
     },
     {
       "away_team": "GSW",
