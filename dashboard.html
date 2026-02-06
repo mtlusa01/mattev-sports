@@ -2791,10 +2791,7 @@
     // ── Sort props ──
     function sortPropsBy(props, sortBy) {
       return [...props].sort((a, b) => {
-        // Original picks first, new (live-discovered) picks after
-        const aNew = a.added_live ? 1 : 0;
-        const bNew = b.added_live ? 1 : 0;
-        if (aNew !== bNew) return aNew - bNew;
+        // Sort by selected metric (high to low)
         if (sortBy === 'ev') return (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0);
         if (sortBy === 'confidence') return (parseFloat(b.confidence) || 0) - (parseFloat(a.confidence) || 0);
         if (sortBy === 'edge') return Math.abs(parseFloat(b.diff) || 0) - Math.abs(parseFloat(a.diff) || 0);
