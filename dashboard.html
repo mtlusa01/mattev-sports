@@ -1106,11 +1106,14 @@
     .game-live-score-row .leading { color: var(--accent-light); }
     .game-card-score { font-size: 13px; color: var(--text-muted); }
     .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
-    .game-pick-row { display: flex; justify-content: space-between; align-items: center; }
+    .game-pick-row { display: flex; align-items: center; gap: 8px; }
     .game-pick-row.dimmed { opacity: 0.35; }
-    .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 70px; }
-    .game-pick-value { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 50px; }
+    .game-pick-value { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
+    .game-pick-row .track-icon { padding: 2px 6px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; font-size: 14px; flex-shrink: 0; }
+    .game-pick-row .track-icon:hover { opacity: 0.8; }
+    .game-pick-row .track-icon.tracked { opacity: 1; color: #10b981; }
     .game-pick-value.low-conf { color: var(--text-muted); font-weight: 400; }
     .game-pick-value.best-bet { color: var(--accent-light); }
     .game-pick-best-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.03em; background: rgba(16, 185, 129, 0.15); color: var(--accent-light); margin-left: 6px; vertical-align: middle; }
@@ -1700,8 +1703,6 @@
     .track-btn-cancel:hover { background: rgba(255,255,255,0.05); }
     .track-btn-confirm { background: #10b981; border: none; color: #fff; padding: 8px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
     .track-btn-confirm:hover { background: #059669; }
-    .game-pick-row { position: relative; }
-    .game-pick-row .track-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
   </style>
 </head>
 <body>
