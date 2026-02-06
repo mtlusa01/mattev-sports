@@ -1,219 +1,908 @@
 {
   "date": "2026-02-06",
   "sport": "NBA",
-  "updated": "2026-02-06T09:47:16",
+  "locked_at": "2026-02-06T09:50:18",
+  "updated": "2026-02-06T09:50:19",
   "projections": [
     {
-      "player": "Tobias Harris",
-      "team": "DET",
-      "prop": "REB",
+      "player": "Jaylen Brown",
+      "team": "BOS",
+      "prop": "AST",
       "direction": "OVER",
       "line": 4.5,
-      "projection": 5.0,
-      "confidence": 54.1,
-      "ev": 14.1,
-      "diff": 0.5,
-      "market_odds": -109,
-      "fair_odds": -118,
-      "prob_edge": 6.7,
+      "projection": 4.7,
+      "confidence": 52.1,
+      "ev": 7.9,
+      "diff": 0.2,
+      "market_odds": 107,
+      "fair_odds": -109,
+      "prob_edge": 3.8,
       "book_odds": {
         "fanduel": {
           "over": {
             "line": 4.5,
-            "odds": -114
+            "odds": 106
           },
           "under": {
             "line": 4.5,
-            "odds": -114
+            "odds": -140
           }
         },
         "draftkings": {
           "over": {
             "line": 4.5,
-            "odds": -111
+            "odds": 116
           },
           "under": {
             "line": 4.5,
-            "odds": -118
+            "odds": -153
           }
         },
         "betmgm": {
           "over": {
             "line": 4.5,
-            "odds": -105
+            "odds": -100
           },
           "under": {
             "line": 4.5,
-            "odds": -130
+            "odds": -135
           }
         }
       },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-06T09:37:33",
+      "best_book": "draftkings",
+      "generated_at": "2026-02-06T09:50:18",
       "edge": "STRONG",
-      "l5_avg": 5.8,
-      "l10_avg": 4.6,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 4,
-      "l10_hit_count": 6,
-      "l10_median": 5.0,
-      "season_avg": 4.6,
-      "season_hit_count": 18,
-      "season_total": 34,
-      "streak": 1,
-      "home_avg": 4.1,
-      "away_avg": 4.5,
-      "opp_def_rank": 5,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 3.6,
-      "vs_bot10_avg": 4.7,
-      "insight": "NYK ranks #5 in rebounds defense \u2014 tough for overs.",
-      "insight_strength": "lean",
+      "l5_avg": 3.4,
+      "l10_avg": 3.8,
+      "l5_hit_rate": 20,
+      "l10_hit_rate": 30,
+      "l5_hit_count": 1,
+      "l10_hit_count": 3,
+      "l10_median": 3.0,
+      "season_avg": 4.8,
+      "season_hit_count": 20,
+      "season_total": 46,
+      "streak": 0,
+      "home_avg": 5.1,
+      "away_avg": 5.1,
+      "opp_def_rank": 22,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 4.8,
+      "vs_bot10_avg": 5.8,
+      "insight": "MIA ranks #22 in assists defense \u2014 favorable for overs.",
+      "insight_strength": "good",
       "last_10_values": [
-        6,
-        2,
-        8,
-        5,
-        8,
-        2,
-        1,
-        6,
         3,
-        5
+        2,
+        3,
+        4,
+        5,
+        12,
+        5,
+        2,
+        2,
+        0
       ],
       "last_10_games": [
         {
           "date": "2/03",
-          "opp": "vs DEN",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "2/01",
-          "opp": "vs BKN",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "1/30",
-          "opp": "@GSW",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/29",
-          "opp": "@PHX",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/27",
-          "opp": "@DEN",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/25",
-          "opp": "vs SAC",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "1/23",
-          "opp": "vs HOU",
-          "val": 1,
-          "hit": false
-        },
-        {
-          "date": "1/21",
-          "opp": "@NOP",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "1/19",
-          "opp": "vs BOS",
+          "opp": "@DAL",
           "val": 3,
           "hit": false
         },
         {
-          "date": "1/17",
+          "date": "2/01",
+          "opp": "vs MIL",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/28",
+          "opp": "vs ATL",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/26",
+          "opp": "vs POR",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/24",
+          "opp": "@CHI",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "@BKN",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/21",
           "opp": "vs IND",
           "val": 5,
           "hit": true
         },
         {
+          "date": "1/19",
+          "opp": "@DET",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/17",
+          "opp": "@ATL",
+          "val": 2,
+          "hit": false
+        },
+        {
           "date": "1/15",
-          "opp": "vs PHX",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/30",
-          "opp": "@LAL",
+          "opp": "@MIA",
           "val": 0,
           "hit": false
         },
         {
-          "date": "12/28",
+          "date": "1/10",
+          "opp": "vs SAS",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/09",
+          "opp": "vs TOR",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/07",
+          "opp": "vs DEN",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/05",
+          "opp": "vs CHI",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/03",
           "opp": "@LAC",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "12/26",
-          "opp": "@UTA",
-          "val": 7,
+          "val": 5,
           "hit": true
         },
         {
-          "date": "12/23",
+          "date": "1/01",
           "opp": "@SAC",
           "val": 4,
           "hit": false
         },
         {
-          "date": "12/22",
+          "date": "12/30",
+          "opp": "@UTA",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "12/28",
           "opp": "@POR",
           "val": 4,
           "hit": false
         },
         {
-          "date": "12/20",
-          "opp": "vs CHA",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "12/18",
-          "opp": "@DAL",
+          "date": "12/26",
+          "opp": "@IND",
           "val": 4,
           "hit": false
         },
         {
-          "date": "12/15",
-          "opp": "@BOS",
+          "date": "12/22",
+          "opp": "vs IND",
+          "val": 2,
+          "hit": false
+        }
+      ],
+      "opponent": "MIA",
+      "h2h_games": [
+        {
+          "date": "Jan 15",
+          "value": 0,
+          "minutes": 30,
+          "result": "W",
+          "hit": false,
+          "venue": "@"
+        },
+        {
+          "date": "Dec 19",
+          "value": 7,
+          "minutes": 35,
+          "result": "W",
+          "hit": true,
+          "venue": "vs"
+        }
+      ],
+      "h2h_avg": 3.5,
+      "h2h_record": "1/2",
+      "h2h_total_games": 2,
+      "pick_score": 26.9,
+      "score_factors": [
+        "+7.9% EV",
+        "Favorable matchup (#22 DEF)"
+      ]
+    },
+    {
+      "player": "Saddiq Bey",
+      "team": "NOP",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 7.0,
+      "confidence": 52.1,
+      "ev": 3.7,
+      "diff": 1.5,
+      "market_odds": -101,
+      "fair_odds": -109,
+      "prob_edge": 1.9,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -130
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -129
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -135
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-06T09:50:18",
+      "edge": "GOOD",
+      "l5_avg": 6.6,
+      "l10_avg": 5.8,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 40,
+      "l5_hit_count": 3,
+      "l10_hit_count": 4,
+      "l10_median": 4.0,
+      "season_avg": 5.8,
+      "season_hit_count": 23,
+      "season_total": 46,
+      "streak": 0,
+      "home_avg": 6.1,
+      "away_avg": 5.7,
+      "opp_def_rank": 10,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 5.0,
+      "vs_bot10_avg": 6.3,
+      "insight": "MIN ranks #10 in rebounds defense \u2014 tough for overs.",
+      "insight_strength": "lean",
+      "last_10_values": [
+        3,
+        3,
+        6,
+        8,
+        13,
+        10,
+        4,
+        3,
+        4,
+        4
+      ],
+      "last_10_games": [
+        {
+          "date": "2/04",
+          "opp": "@MIL",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "2/02",
+          "opp": "@CHA",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/31",
+          "opp": "@PHI",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "vs MEM",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "@OKC",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "@SAS",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "@MEM",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/21",
+          "opp": "vs DET",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/18",
+          "opp": "@HOU",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/16",
+          "opp": "@IND",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/14",
+          "opp": "vs BKN",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "vs DEN",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "12/31",
+          "opp": "@CHI",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "12/29",
+          "opp": "vs NYK",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "vs PHX",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "12/26",
+          "opp": "vs PHX",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "12/23",
+          "opp": "@CLE",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "12/22",
+          "opp": "vs DAL",
           "val": 7,
           "hit": true
         },
         {
-          "date": "12/12",
-          "opp": "vs ATL",
+          "date": "12/20",
+          "opp": "vs IND",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "12/18",
+          "opp": "vs HOU",
+          "val": 9,
+          "hit": true
+        }
+      ],
+      "opponent": "MIN",
+      "h2h_games": [
+        {
+          "date": "Dec 04",
+          "value": 6,
+          "minutes": 33,
+          "result": "L",
+          "hit": true,
+          "venue": "vs"
+        },
+        {
+          "date": "Dec 02",
+          "value": 6,
+          "minutes": 35,
+          "result": "L",
+          "hit": true,
+          "venue": "vs"
+        }
+      ],
+      "h2h_avg": 6.0,
+      "h2h_record": "2/2",
+      "h2h_total_games": 2,
+      "pick_score": 10.1,
+      "score_factors": []
+    },
+    {
+      "player": "Deni Avdija",
+      "team": "POR",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 6.5,
+      "projection": 6.6,
+      "confidence": 53.3,
+      "ev": 7.1,
+      "diff": 0.1,
+      "market_odds": 101,
+      "fair_odds": -114,
+      "prob_edge": 3.5,
+      "book_odds": {
+        "draftkings": {
+          "over": {
+            "line": 6.5,
+            "odds": 101
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -133
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 6.5,
+            "odds": 105
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -140
+          }
+        },
+        "fanduel": {
+          "over": {
+            "line": 6.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -130
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-06T09:50:18",
+      "edge": "STRONG",
+      "l5_avg": 7.4,
+      "l10_avg": 7.1,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 60,
+      "l5_hit_count": 3,
+      "l10_hit_count": 6,
+      "l10_median": 7.0,
+      "season_avg": 7.2,
+      "season_hit_count": 25,
+      "season_total": 44,
+      "streak": 0,
+      "home_avg": 7.7,
+      "away_avg": 7.3,
+      "opp_def_rank": 20,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 6.8,
+      "vs_bot10_avg": 7.6,
+      "insight": "MEM ranks #20 in rebounds defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "last_10_values": [
+        5,
+        12,
+        7,
+        8,
+        5,
+        3,
+        6,
+        8,
+        10,
+        7
+      ],
+      "last_10_games": [
+        {
+          "date": "1/30",
+          "opp": "@NYK",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "@WAS",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs MIA",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@SAC",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NYK",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "vs HOU",
           "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "vs HOU",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/05",
+          "opp": "vs UTA",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/03",
+          "opp": "@SAS",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@NOP",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "@OKC",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/29",
+          "opp": "vs DAL",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "12/28",
+          "opp": "vs BOS",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/26",
+          "opp": "vs LAC",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "12/23",
+          "opp": "vs ORL",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "12/22",
+          "opp": "vs DET",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "12/20",
+          "opp": "@SAC",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/18",
+          "opp": "vs SAC",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "12/14",
+          "opp": "vs GSW",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/11",
+          "opp": "@NOP",
+          "val": 6,
           "hit": false
         }
       ],
-      "opponent": "NYK",
-      "h2h_total_games": 0,
-      "pick_score": 17.6,
+      "opponent": "MEM",
+      "h2h_games": [
+        {
+          "date": "Dec 07",
+          "value": 7,
+          "minutes": 31,
+          "result": "L",
+          "hit": true,
+          "venue": "@"
+        }
+      ],
+      "h2h_avg": 7.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 20.7,
       "score_factors": [
-        "+14.1% EV",
-        "60% L10 hit rate"
+        "+7.1% EV",
+        "60% L10 hit rate",
+        "Favorable matchup (#20 DEF)"
       ],
       "injury_status": "Questionable",
-      "injury_type": "Left hip (soreness)",
-      "injury_headline": "Left hip (soreness)"
+      "injury_type": "back (strain)",
+      "injury_headline": "back (strain)"
+    },
+    {
+      "player": "Donovan Clingan",
+      "team": "POR",
+      "prop": "REB",
+      "direction": "UNDER",
+      "line": 12.5,
+      "projection": 11.7,
+      "confidence": 53.58,
+      "ev": 5.9,
+      "diff": -0.8,
+      "market_odds": -114,
+      "fair_odds": -129,
+      "prob_edge": 3.1,
+      "book_odds": {
+        "draftkings": {
+          "over": {
+            "line": 12.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 12.5,
+            "odds": -125
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 11.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -100
+          }
+        },
+        "fanduel": {
+          "over": {
+            "line": 12.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 12.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-06T09:50:18",
+      "edge": "STRONG",
+      "l5_avg": 13.6,
+      "l10_avg": 13.2,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 50,
+      "l5_hit_count": 2,
+      "l10_hit_count": 5,
+      "l10_median": 13.5,
+      "season_avg": 11.2,
+      "season_hit_count": 32,
+      "season_total": 47,
+      "streak": 0,
+      "home_avg": 12.1,
+      "away_avg": 11.8,
+      "opp_def_rank": 20,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 10.6,
+      "vs_bot10_avg": 12.7,
+      "insight": "MEM ranks #20 in rebounds defense \u2014 tough for unders.",
+      "insight_strength": "lean",
+      "last_10_values": [
+        15,
+        12,
+        6,
+        20,
+        15,
+        16,
+        8,
+        17,
+        11,
+        12
+      ],
+      "last_10_games": [
+        {
+          "date": "2/03",
+          "opp": "vs PHX",
+          "val": 15,
+          "hit": false
+        },
+        {
+          "date": "2/01",
+          "opp": "vs CLE",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "@NYK",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "@WAS",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "1/26",
+          "opp": "@BOS",
+          "val": 15,
+          "hit": false
+        },
+        {
+          "date": "1/23",
+          "opp": "vs TOR",
+          "val": 16,
+          "hit": false
+        },
+        {
+          "date": "1/22",
+          "opp": "vs MIA",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@SAC",
+          "val": 17,
+          "hit": false
+        },
+        {
+          "date": "1/17",
+          "opp": "vs LAL",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "1/15",
+          "opp": "vs ATL",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/13",
+          "opp": "@GSW",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NYK",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/09",
+          "opp": "vs HOU",
+          "val": 15,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "vs HOU",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/05",
+          "opp": "vs UTA",
+          "val": 17,
+          "hit": false
+        },
+        {
+          "date": "1/03",
+          "opp": "@SAS",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@NOP",
+          "val": 15,
+          "hit": false
+        },
+        {
+          "date": "12/31",
+          "opp": "@OKC",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "12/29",
+          "opp": "vs DAL",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "12/28",
+          "opp": "vs BOS",
+          "val": 18,
+          "hit": false
+        }
+      ],
+      "opponent": "MEM",
+      "h2h_total_games": 0,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 8.9,
+      "score_factors": [
+        "+5.9% EV"
+      ]
     },
     {
       "player": "Jerami Grant",
@@ -222,12 +911,12 @@
       "direction": "OVER",
       "line": 16.5,
       "projection": 19.6,
-      "confidence": 57.2,
-      "ev": 7.8,
+      "confidence": 55.9,
+      "ev": 4.8,
       "diff": 3.1,
       "market_odds": -114,
-      "fair_odds": -134,
-      "prob_edge": 4.1,
+      "fair_odds": -127,
+      "prob_edge": 2.6,
       "book_odds": {
         "draftkings": {
           "over": {
@@ -246,13 +935,13 @@
           },
           "under": {
             "line": 15.5,
-            "odds": 100
+            "odds": -100
           }
         },
         "fanduel": {
           "over": {
             "line": 16.5,
-            "odds": 100
+            "odds": -100
           },
           "under": {
             "line": 16.5,
@@ -261,8 +950,8 @@
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-06T09:37:33",
-      "edge": "STRONG",
+      "generated_at": "2026-02-06T09:50:18",
+      "edge": "GOOD",
       "l5_avg": 15.6,
       "l10_avg": 15.6,
       "l5_hit_rate": 40,
@@ -436,227 +1125,12 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 46.0,
+      "pick_score": 41.5,
       "score_factors": [
-        "+7.8% EV",
         "Favorable matchup (#21 DEF)",
         "+3.1 edge"
       ],
       "top_pick_rank": 1
-    },
-    {
-      "player": "Donovan Clingan",
-      "team": "POR",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 12.5,
-      "projection": 11.7,
-      "confidence": 53.295,
-      "ev": 5.4,
-      "diff": -0.8,
-      "market_odds": -114,
-      "fair_odds": -128,
-      "prob_edge": 2.8,
-      "book_odds": {
-        "draftkings": {
-          "over": {
-            "line": 12.5,
-            "odds": -106
-          },
-          "under": {
-            "line": 12.5,
-            "odds": -125
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 11.5,
-            "odds": -130
-          },
-          "under": {
-            "line": 11.5,
-            "odds": 100
-          }
-        },
-        "fanduel": {
-          "over": {
-            "line": 12.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 12.5,
-            "odds": -120
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-06T09:37:33",
-      "edge": "STRONG",
-      "l5_avg": 13.6,
-      "l10_avg": 13.2,
-      "l5_hit_rate": 40,
-      "l10_hit_rate": 50,
-      "l5_hit_count": 2,
-      "l10_hit_count": 5,
-      "l10_median": 13.5,
-      "season_avg": 11.2,
-      "season_hit_count": 32,
-      "season_total": 47,
-      "streak": 0,
-      "home_avg": 12.1,
-      "away_avg": 11.8,
-      "opp_def_rank": 20,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 10.6,
-      "vs_bot10_avg": 12.7,
-      "insight": "MEM ranks #20 in rebounds defense \u2014 tough for unders.",
-      "insight_strength": "lean",
-      "last_10_values": [
-        15,
-        12,
-        6,
-        20,
-        15,
-        16,
-        8,
-        17,
-        11,
-        12
-      ],
-      "last_10_games": [
-        {
-          "date": "2/03",
-          "opp": "vs PHX",
-          "val": 15,
-          "hit": false
-        },
-        {
-          "date": "2/01",
-          "opp": "vs CLE",
-          "val": 12,
-          "hit": true
-        },
-        {
-          "date": "1/30",
-          "opp": "@NYK",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "1/27",
-          "opp": "@WAS",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "1/26",
-          "opp": "@BOS",
-          "val": 15,
-          "hit": false
-        },
-        {
-          "date": "1/23",
-          "opp": "vs TOR",
-          "val": 16,
-          "hit": false
-        },
-        {
-          "date": "1/22",
-          "opp": "vs MIA",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/18",
-          "opp": "@SAC",
-          "val": 17,
-          "hit": false
-        },
-        {
-          "date": "1/17",
-          "opp": "vs LAL",
-          "val": 11,
-          "hit": true
-        },
-        {
-          "date": "1/15",
-          "opp": "vs ATL",
-          "val": 12,
-          "hit": true
-        },
-        {
-          "date": "1/13",
-          "opp": "@GSW",
-          "val": 9,
-          "hit": true
-        },
-        {
-          "date": "1/11",
-          "opp": "vs NYK",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/09",
-          "opp": "vs HOU",
-          "val": 15,
-          "hit": false
-        },
-        {
-          "date": "1/07",
-          "opp": "vs HOU",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/05",
-          "opp": "vs UTA",
-          "val": 17,
-          "hit": false
-        },
-        {
-          "date": "1/03",
-          "opp": "@SAS",
-          "val": 12,
-          "hit": true
-        },
-        {
-          "date": "1/02",
-          "opp": "@NOP",
-          "val": 15,
-          "hit": false
-        },
-        {
-          "date": "12/31",
-          "opp": "@OKC",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "12/29",
-          "opp": "vs DAL",
-          "val": 11,
-          "hit": true
-        },
-        {
-          "date": "12/28",
-          "opp": "vs BOS",
-          "val": 18,
-          "hit": false
-        }
-      ],
-      "opponent": "MEM",
-      "h2h_total_games": 0,
-      "teammate_injuries": [
-        {
-          "player": "Matisse Thybulle",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 8.1,
-      "score_factors": [
-        "+5.4% EV"
-      ]
     }
   ],
   "top_picks": [
