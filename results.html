@@ -698,20 +698,30 @@
 
     // ── Banner ──
     function renderResultsBanner(data) {
-      // Always compute allTime dynamically from days to avoid stale cached totals
-      const days = data.days || [];
-      const at = {};
-      ['props', 'spreads', 'totals', 'moneylines'].forEach(cat => {
-        const w = days.reduce((s, d) => s + (d[cat]?.wins || 0), 0);
-        const l = days.reduce((s, d) => s + (d[cat]?.losses || 0), 0);
-        const p = days.reduce((s, d) => s + (d[cat]?.pushes || 0), 0);
-        const t = w + l;
-        at[cat] = { wins: w, losses: l, pushes: p, pct: t > 0 ? +(w / t * 100).toFixed(1) : 0 };
-      });
-      if (!days.length) {
+      const allDays = data.days || [];
+      if (!allDays.length) {
         document.getElementById('results-banner').innerHTML = '<div class="results-banner-stat"><div class="rbs-value">--</div><div class="rbs-label">No results yet</div></div>';
         return;
       }
+
+      // Only use today and yesterday for NBA (last 2 days)
+      const today = todayKey();
+      const yesterday = (() => {
+        const d = new Date();
+        d.setDate(d.getDate() - 1);
+        return dateKey(d.getFullYear(), d.getMonth(), d.getDate());
+      })();
+      const recentDays = allDays.filter(d => d.date === today || d.date === yesterday);
+
+      // Compute stats from recent days only
+      const at = {};
+      ['props', 'spreads', 'totals', 'moneylines'].forEach(cat => {
+        const w = recentDays.reduce((s, d) => s + (d[cat]?.wins || 0), 0);
+        const l = recentDays.reduce((s, d) => s + (d[cat]?.losses || 0), 0);
+        const p = recentDays.reduce((s, d) => s + (d[cat]?.pushes || 0), 0);
+        const t = w + l;
+        at[cat] = { wins: w, losses: l, pushes: p, pct: t > 0 ? +(w / t * 100).toFixed(1) : 0 };
+      });
 
       const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
       const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
@@ -722,24 +732,19 @@
       const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
       const totalRecord = totalP > 0 ? `${totalW}-${totalL}-${totalP}` : `${totalW}-${totalL}`;
 
-      // Best bets allTime (computed separately — not added to overall record)
-      const bbW = days.reduce((s, d) => s + (d.best_bets?.wins || 0), 0);
-      const bbL = days.reduce((s, d) => s + (d.best_bets?.losses || 0), 0);
+      // Best bets from recent days
+      const bbW = recentDays.reduce((s, d) => s + (d.best_bets?.wins || 0), 0);
+      const bbL = recentDays.reduce((s, d) => s + (d.best_bets?.losses || 0), 0);
       const bbT = bbW + bbL;
-      at.best_bets = { wins: bbW, losses: bbL, pct: bbT > 0 ? +(bbW / bbT * 100).toFixed(1) : 0 };
+      const bbPct = bbT > 0 ? (bbW / bbT * 100).toFixed(1) : 0;
+      const bbRecord = `${bbW}-${bbL}`;
 
-      const cats = [];
-      if (at.props && (at.props.wins + at.props.losses) > 0) cats.push({ name: 'Props', ...at.props });
-      if (at.spreads) cats.push({ name: 'Spreads', ...at.spreads });
-      if (at.moneylines) cats.push({ name: 'MLs', ...at.moneylines });
-      if (at.best_bets && bbT > 0) cats.push({ name: 'Best Bets', ...at.best_bets });
-      const bestCat = cats.filter(c => (c.wins + c.losses) > 0).sort((a, b) => b.pct - a.pct)[0];
       const roiCls = parseFloat(totalRoi) > 0 ? 'green' : parseFloat(totalRoi) < 0 ? 'red' : '';
 
       document.getElementById('results-banner').innerHTML = `
         <div class="results-banner-stat">
           <div class="rbs-value">${totalRecord}</div>
-          <div class="rbs-label">${currentSport.toUpperCase()} All-Time Record</div>
+          <div class="rbs-label">Last 2 Days Record</div>
         </div>
         <div class="results-banner-stat">
           <div class="rbs-value ${pctClass(parseFloat(totalPct))}">${totalPct}%</div>
@@ -750,8 +755,8 @@
           <div class="rbs-label">ROI (-110)</div>
         </div>
         <div class="results-banner-stat">
-          <div class="rbs-value">${bestCat ? bestCat.name : '--'}</div>
-          <div class="rbs-label">${bestCat ? bestCat.pct + '% Win Rate' : 'Best Category'}</div>
+          <div class="rbs-value ${pctClass(parseFloat(bbPct))}">${bbRecord}</div>
+          <div class="rbs-label">Best Bets ${bbT > 0 ? '(' + bbPct + '%)' : ''}</div>
         </div>`;
     }
 
