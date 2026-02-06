@@ -1,7 +1,8 @@
 {
   "date": "2026-02-06",
   "sport": "NBA",
-  "updated": "2026-02-06T09:37:06",
+  "locked_at": "2026-02-06T09:37:33",
+  "updated": "2026-02-06T09:37:34",
   "projections": [
     {
       "player": "Tobias Harris",
@@ -10,46 +11,46 @@
       "direction": "OVER",
       "line": 4.5,
       "projection": 5.0,
-      "confidence": 53.1,
-      "ev": 12.0,
+      "confidence": 54.1,
+      "ev": 14.1,
       "diff": 0.5,
-      "market_odds": -101,
-      "fair_odds": -113,
-      "prob_edge": 5.7,
+      "market_odds": 111,
+      "fair_odds": -118,
+      "prob_edge": 6.7,
       "book_odds": {
         "fanduel": {
           "over": {
             "line": 4.5,
-            "odds": 102
+            "odds": 122
           },
           "under": {
             "line": 4.5,
-            "odds": -136
+            "odds": -162
           }
         },
         "draftkings": {
           "over": {
             "line": 4.5,
-            "odds": -101
+            "odds": 106
           },
           "under": {
             "line": 4.5,
-            "odds": -131
+            "odds": -140
           }
         },
         "betmgm": {
           "over": {
             "line": 4.5,
-            "odds": -105
+            "odds": 105
           },
           "under": {
             "line": 4.5,
-            "odds": -130
+            "odds": -145
           }
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-06T09:26:59",
+      "generated_at": "2026-02-06T09:37:33",
       "edge": "STRONG",
       "l5_avg": 5.8,
       "l10_avg": 4.6,
@@ -206,245 +207,14 @@
       ],
       "opponent": "NYK",
       "h2h_total_games": 0,
-      "pick_score": 10.8,
+      "pick_score": 17.6,
       "score_factors": [
-        "+12.0% EV",
+        "+14.1% EV",
         "60% L10 hit rate"
       ],
       "injury_status": "Questionable",
       "injury_type": "Left hip (soreness)",
       "injury_headline": "Left hip (soreness)"
-    },
-    {
-      "player": "Deni Avdija",
-      "team": "POR",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 6.5,
-      "projection": 6.6,
-      "confidence": 52.8,
-      "ev": 10.2,
-      "diff": 0.1,
-      "market_odds": 110,
-      "fair_odds": -112,
-      "prob_edge": 5.0,
-      "book_odds": {
-        "draftkings": {
-          "over": {
-            "line": 6.5,
-            "odds": 114
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -151
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 6.5,
-            "odds": 105
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -140
-          }
-        },
-        "fanduel": {
-          "over": {
-            "line": 6.5,
-            "odds": 112
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -148
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-06T09:26:59",
-      "edge": "STRONG",
-      "l5_avg": 7.4,
-      "l10_avg": 7.1,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 3,
-      "l10_hit_count": 6,
-      "l10_median": 7.0,
-      "season_avg": 7.2,
-      "season_hit_count": 25,
-      "season_total": 44,
-      "streak": 0,
-      "home_avg": 7.7,
-      "away_avg": 7.3,
-      "opp_def_rank": 20,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 6.8,
-      "vs_bot10_avg": 7.6,
-      "insight": "MEM ranks #20 in rebounds defense \u2014 favorable for overs.",
-      "insight_strength": "good",
-      "last_10_values": [
-        5,
-        12,
-        7,
-        8,
-        5,
-        3,
-        6,
-        8,
-        10,
-        7
-      ],
-      "last_10_games": [
-        {
-          "date": "1/30",
-          "opp": "@NYK",
-          "val": 5,
-          "hit": false
-        },
-        {
-          "date": "1/27",
-          "opp": "@WAS",
-          "val": 12,
-          "hit": true
-        },
-        {
-          "date": "1/22",
-          "opp": "vs MIA",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/18",
-          "opp": "@SAC",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/11",
-          "opp": "vs NYK",
-          "val": 5,
-          "hit": false
-        },
-        {
-          "date": "1/09",
-          "opp": "vs HOU",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "1/07",
-          "opp": "vs HOU",
-          "val": 6,
-          "hit": false
-        },
-        {
-          "date": "1/05",
-          "opp": "vs UTA",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/03",
-          "opp": "@SAS",
-          "val": 10,
-          "hit": true
-        },
-        {
-          "date": "1/02",
-          "opp": "@NOP",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/31",
-          "opp": "@OKC",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/29",
-          "opp": "vs DAL",
-          "val": 9,
-          "hit": true
-        },
-        {
-          "date": "12/28",
-          "opp": "vs BOS",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/26",
-          "opp": "vs LAC",
-          "val": 9,
-          "hit": true
-        },
-        {
-          "date": "12/23",
-          "opp": "vs ORL",
-          "val": 6,
-          "hit": false
-        },
-        {
-          "date": "12/22",
-          "opp": "vs DET",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "12/20",
-          "opp": "@SAC",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/18",
-          "opp": "vs SAC",
-          "val": 5,
-          "hit": false
-        },
-        {
-          "date": "12/14",
-          "opp": "vs GSW",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/11",
-          "opp": "@NOP",
-          "val": 6,
-          "hit": false
-        }
-      ],
-      "opponent": "MEM",
-      "h2h_games": [
-        {
-          "date": "Dec 07",
-          "value": 7,
-          "minutes": 31,
-          "result": "L",
-          "hit": true,
-          "venue": "@"
-        }
-      ],
-      "h2h_avg": 7.0,
-      "h2h_record": "1/1",
-      "h2h_total_games": 1,
-      "teammate_injuries": [
-        {
-          "player": "Matisse Thybulle",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 16.8,
-      "score_factors": [
-        "+10.2% EV",
-        "60% L10 hit rate",
-        "Favorable matchup (#20 DEF)"
-      ],
-      "injury_status": "Questionable",
-      "injury_type": "back (strain)",
-      "injury_headline": "back (strain)"
     },
     {
       "player": "Jerami Grant",
@@ -453,12 +223,12 @@
       "direction": "OVER",
       "line": 16.5,
       "projection": 19.6,
-      "confidence": 56.8,
-      "ev": 7.0,
+      "confidence": 57.2,
+      "ev": 7.8,
       "diff": 3.1,
       "market_odds": -113,
-      "fair_odds": -131,
-      "prob_edge": 3.7,
+      "fair_odds": -134,
+      "prob_edge": 4.1,
       "book_odds": {
         "draftkings": {
           "over": {
@@ -477,22 +247,22 @@
           },
           "under": {
             "line": 15.5,
-            "odds": 100
+            "odds": -100
           }
         },
         "fanduel": {
           "over": {
             "line": 16.5,
-            "odds": 100
+            "odds": 102
           },
           "under": {
             "line": 16.5,
-            "odds": -132
+            "odds": -136
           }
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-06T09:26:59",
+      "generated_at": "2026-02-06T09:37:33",
       "edge": "STRONG",
       "l5_avg": 15.6,
       "l10_avg": 15.6,
@@ -667,9 +437,9 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 44.8,
+      "pick_score": 46.0,
       "score_factors": [
-        "+7.0% EV",
+        "+7.8% EV",
         "Favorable matchup (#21 DEF)",
         "+3.1 edge"
       ],
@@ -682,12 +452,12 @@
       "direction": "UNDER",
       "line": 12.5,
       "projection": 11.7,
-      "confidence": 53.675,
-      "ev": 6.0,
+      "confidence": 53.295,
+      "ev": 5.4,
       "diff": -0.8,
       "market_odds": -114,
-      "fair_odds": -130,
-      "prob_edge": 3.2,
+      "fair_odds": -128,
+      "prob_edge": 2.8,
       "book_odds": {
         "draftkings": {
           "over": {
@@ -706,7 +476,7 @@
           },
           "under": {
             "line": 11.5,
-            "odds": 100
+            "odds": -100
           }
         },
         "fanduel": {
@@ -721,7 +491,7 @@
         }
       },
       "best_book": "betmgm",
-      "generated_at": "2026-02-06T09:26:59",
+      "generated_at": "2026-02-06T09:37:33",
       "edge": "STRONG",
       "l5_avg": 13.6,
       "l10_avg": 13.2,
@@ -884,9 +654,9 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 9.0,
+      "pick_score": 8.1,
       "score_factors": [
-        "+6.0% EV"
+        "+5.4% EV"
       ]
     }
   ],
