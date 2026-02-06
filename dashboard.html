@@ -727,11 +727,11 @@
     .gl-stats span { color: var(--text-secondary); }
     .gl-stats strong { color: var(--text-primary); font-weight: 600; }
     /* Chart area — flex container, bars fill full width */
-    .gl-chart-wrap { position: relative; margin-bottom: 4px; }
-    .gl-chart-bars { display: flex; justify-content: space-between; align-items: stretch; height: 130px; gap: 4px; width: 100%; }
+    .gl-chart-wrap { position: relative; margin-bottom: 4px; height: 130px; }
+    .gl-chart-bars { display: flex; justify-content: space-between; align-items: flex-end; height: 100%; gap: 4px; width: 100%; }
     .gl-chart-line { position: absolute; left: 0; right: 0; border-top: 2px dashed rgba(255,255,255,0.35); pointer-events: none; z-index: 10; }
     .gl-chart-line-label { position: absolute; left: 0; font-size: 9px; color: var(--text-muted); font-weight: 600; transform: translateY(-100%); padding-right: 4px; z-index: 11; background: var(--bg-secondary); }
-    /* Bar column — height:100% so pixel bar heights fill correctly */
+    /* Bar column — bars grow from bottom, value label above */
     .gl-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; height: 100%; position: relative; z-index: 1; }
     .gl-bar-val { font-size: 10px; font-weight: 700; margin-bottom: 2px; line-height: 1; flex-shrink: 0; }
     .gl-bar-val.hit { color: #10b981; }
@@ -781,7 +781,7 @@
       .ev-display { font-size: 20px; margin-bottom: 4px; }
       .rating-badge { font-size: 10px; padding: 2px 8px; }
       .gl-section { padding: 10px 12px; }
-      .gl-chart-bars { height: 100px; }
+      .gl-chart-wrap { height: 100px; }
       .gl-lbl-opp { display: none; }
       .gl-bar-val { font-size: 9px; }
       .gl-pills { gap: 4px; }
@@ -1586,7 +1586,7 @@
       .odds-item .oi-value { font-size: 12px; }
       .ev-display { font-size: 18px; }
       .gl-section { padding: 8px 10px; margin-top: 8px; }
-      .gl-chart-bars { height: 80px; }
+      .gl-chart-wrap { height: 80px; }
       .gl-chart-line-label { font-size: 8px; }
       .gl-bar-val { font-size: 8px; }
 
@@ -2888,8 +2888,11 @@
     const _glDataStore = {}; // chartId → { allItems, line, dir }
 
     function _glBuildBars(items, line, chartH) {
+      // Calculate max value for scaling (include line with 5% padding)
       const maxVal = Math.max(...items.map(g => g.val), line * 1.05) || 1;
+      // Line position as percentage from bottom (same scale as bars)
       const linePct = (line / maxVal) * 100;
+      // Build bars with percentage heights (relative to chart-wrap height)
       const bars = items.map(g => {
         const hPct = Math.max(3, (g.val / maxVal) * 100);
         const cls = g.hit ? 'hit' : 'miss';
