@@ -2,7 +2,7 @@
   "date": "2026-02-05",
   "sport": "NBA",
   "locked_at": "2026-02-05T00:49:55",
-  "updated": "2026-02-05T23:00:09",
+  "updated": "2026-02-05T23:02:10",
   "games": [
     {
       "away_team": "WAS",
@@ -331,7 +331,45 @@
       "home_score": 99,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Alperen Sengun",
+          "team": "HOU",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.2,
+          "actual": 5,
+          "hit": false,
+          "confidence": 53.0,
+          "ev": 7.1
+        },
+        {
+          "player": "Kon Knueppel",
+          "team": "CHA",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 25.5,
+          "projection": 25.2,
+          "actual": 30,
+          "hit": false,
+          "confidence": 53.4,
+          "ev": 2.3
+        },
+        {
+          "player": "Alperen Sengun",
+          "team": "HOU",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 18.5,
+          "projection": 17.9,
+          "actual": 7,
+          "hit": true,
+          "confidence": 52.5,
+          "ev": 2.0
+        }
+      ]
     },
     {
       "away_team": "SAS",
@@ -370,7 +408,7 @@
       "status": "live",
       "locked_at": "2026-02-05T05:49:55Z",
       "away_score": 53,
-      "home_score": 46
+      "home_score": 49
     },
     {
       "away_team": "PHI",
