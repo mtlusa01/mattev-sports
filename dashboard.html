@@ -1087,6 +1087,32 @@
       body { overflow-x: hidden; }
     }
 
+    /* ── Date Picker ── */
+    .date-picker {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 0; margin-bottom: 16px;
+    }
+    .date-picker-btn {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg-secondary); color: var(--text-secondary); font-size: 16px;
+      cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center;
+    }
+    .date-picker-btn:hover { border-color: var(--border-light); color: var(--text-primary); background: var(--bg-tertiary); }
+    .date-picker-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .date-picker-today {
+      padding: 8px 16px; border-radius: 8px; border: 1px solid var(--brand-border);
+      background: var(--brand-glow); color: var(--brand-light); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .date-picker-today:hover { background: var(--brand-border); }
+    .date-picker-today:disabled { opacity: 0.5; cursor: default; }
+    .date-picker-display {
+      padding: 8px 20px; font-size: 15px; font-weight: 600; color: var(--text-primary);
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px;
+      min-width: 180px; text-align: center;
+    }
+    .date-picker-display .date-label { color: var(--text-secondary); font-weight: 400; font-size: 11px; display: block; margin-bottom: 2px; }
+
     /* ── Game Cards ── */
     .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
     .game-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.15s; }
@@ -2245,6 +2271,7 @@
     let betsSortBy = 'conf';   // 'conf', 'time', 'type'
     let betsSortDir = 'desc';  // 'asc' or 'desc'
     let currentGameSearch = '';
+    let selectedDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
 
     const PROP_CATEGORIES = [
       { key: 'all', label: 'ALL' },
@@ -3730,6 +3757,57 @@
 
     // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
 
+    // ── Date Picker ──
+    function formatDateDisplay(dateStr) {
+      const date = new Date(dateStr + 'T12:00:00');
+      const today = new Date();
+      today.setHours(12, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      const dateOnly = new Date(date);
+      dateOnly.setHours(12, 0, 0, 0);
+
+      let label = '';
+      if (dateOnly.getTime() === today.getTime()) label = 'Today';
+      else if (dateOnly.getTime() === tomorrow.getTime()) label = 'Tomorrow';
+      else if (dateOnly.getTime() === yesterday.getTime()) label = 'Yesterday';
+
+      const formatted = date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      return { label, formatted };
+    }
+
+    function changeDate(delta) {
+      const current = new Date(selectedDate + 'T12:00:00');
+      current.setDate(current.getDate() + delta);
+      selectedDate = current.toISOString().slice(0, 10);
+      renderGameProjections();
+    }
+
+    function goToToday() {
+      selectedDate = new Date().toISOString().slice(0, 10);
+      renderGameProjections();
+    }
+
+    function renderDatePicker() {
+      const { label, formatted } = formatDateDisplay(selectedDate);
+      const today = new Date().toISOString().slice(0, 10);
+      const isToday = selectedDate === today;
+
+      return `
+        <div class="date-picker">
+          <button class="date-picker-btn" onclick="changeDate(-1)" title="Previous day">&larr;</button>
+          <button class="date-picker-today" onclick="goToToday()" ${isToday ? 'disabled' : ''}>Today</button>
+          <div class="date-picker-display">
+            ${label ? `<span class="date-label">${label}</span>` : ''}
+            <span>${formatted}</span>
+          </div>
+          <button class="date-picker-btn" onclick="changeDate(1)" title="Next day">&rarr;</button>
+        </div>`;
+    }
+
     // ── Game Projections View ──
     function renderResultsSummary() {
       const finals = getActiveGameProjections().filter(g => getGameStatus(g) === 'final' && g.away_score != null);
@@ -4090,15 +4168,30 @@
       // Hide the static filter element — we render filters inline now
       document.getElementById('game-status-filter').innerHTML = '';
 
-      if (activeGames.length === 0) {
+      // Filter games by selected date
+      const dateFiltered = activeGames.filter(g => {
+        const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        return gameDate === selectedDate;
+      });
+
+      // Render date picker first
+      const datePickerHtml = renderDatePicker();
+
+      if (dateFiltered.length === 0) {
         const sportLabel = currentSport.toUpperCase();
-        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No ${sportLabel} game projections available</div><div class="empty-state-text">${sportLabel} game projections will appear here when today's games are loaded.</div></div>`;
+        const { formatted } = formatDateDisplay(selectedDate);
+        const today = new Date().toISOString().slice(0, 10);
+        const isToday = selectedDate === today;
+        const emptyMsg = isToday
+          ? `${sportLabel} game projections will appear here when today's games are loaded.`
+          : `No ${sportLabel} games scheduled for ${formatted}. Try another date to see more games.`;
+        container.innerHTML = datePickerHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#128197;</div><div class="empty-state-title">No games scheduled</div><div class="empty-state-text">${emptyMsg}</div></div>`;
         updatedEl.textContent = '';
         return;
       }
 
       // Apply status filter
-      let filtered = [...activeGames];
+      let filtered = [...dateFiltered];
       if (currentStatusFilter !== 'all') {
         filtered = filtered.filter(g => {
           const s = getGameStatus(g);
@@ -4161,7 +4254,7 @@
       filtersHtml += '</div></div>';
 
       if (filtered.length === 0) {
-        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
+        container.innerHTML = datePickerHtml + gameRecsHtml + summaryHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
         attachGameFilterHandlers(container);
         return;
       }
@@ -4188,7 +4281,7 @@
           betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
         }
         const toggleHtml = makeToggleHtml(`${betRows.length} bet${betRows.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + renderBetsList(betRows);
+        container.innerHTML = datePickerHtml + gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + renderBetsList(betRows);
         // Attach sort handlers
         container.querySelectorAll('[data-bets-sort]').forEach(th => {
           th.addEventListener('click', () => {
@@ -4205,7 +4298,7 @@
       } else {
         // Grid view — flat list sorted by time
         const toggleHtml = makeToggleHtml(`${filtered.length} game${filtered.length !== 1 ? 's' : ''}`);
-        container.innerHTML = gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
+        container.innerHTML = datePickerHtml + gameRecsHtml + summaryHtml + filtersHtml + toggleHtml + `<div class="game-cards-grid">${filtered.map(renderGameCard).join('')}</div>`;
       }
 
       // Attach filter + view toggle handlers
