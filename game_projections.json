@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T18:19:21",
+  "updated": "2026-02-07T18:21:27",
   "games": [
     {
       "away_team": "WAS",
@@ -89,7 +89,7 @@
       "ml_pick": "OKC",
       "ml_conf": 69.1,
       "commence_time": "2026-02-07T20:40:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -11.6,
@@ -150,8 +150,11 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 110,
-      "home_score": 106
+      "away_score": 112,
+      "home_score": 106,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "loss"
     },
     {
       "away_team": "DAL",
