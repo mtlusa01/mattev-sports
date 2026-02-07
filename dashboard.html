@@ -4271,15 +4271,14 @@
         return;
       }
 
-      // Filter games by selected date (for today's data which may have multiple dates)
+      // Filter games by selected date - always filter by game_date
       const dateFiltered = activeGames.filter(g => {
         const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
         return gameDate === selectedDate;
       });
 
-      // For today, fallback to all if date filter found none (handles edge cases)
-      // For historical dates, trust the filtered result - don't show today's data
-      const gamesToShow = (dateFiltered.length > 0 || selectedDate !== today) ? dateFiltered : activeGames;
+      // Always use filtered results - don't fallback to stale games from wrong dates
+      const gamesToShow = dateFiltered;
 
       if (gamesToShow.length === 0) {
         const sportLabel = currentSport.toUpperCase();
