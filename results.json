@@ -1,40 +1,40 @@
 {
-  "updated": "2026-02-06T22:19:38",
+  "updated": "2026-02-07T01:22:28",
   "allTime": {
     "props": {
-      "wins": 33,
-      "losses": 57,
+      "wins": 55,
+      "losses": 73,
       "pushes": 0,
-      "pct": 36.7,
-      "roi": -30.0
+      "pct": 43.0,
+      "roi": -18.0
     },
     "spreads": {
-      "wins": 6,
+      "wins": 8,
       "losses": 10,
       "pushes": 1,
-      "pct": 37.5,
-      "roi": -28.4
+      "pct": 44.4,
+      "roi": -15.2
     },
     "totals": {
-      "wins": 7,
-      "losses": 10,
+      "wins": 8,
+      "losses": 11,
       "pushes": 0,
-      "pct": 41.2,
-      "roi": -21.4
+      "pct": 42.1,
+      "roi": -19.6
     },
     "moneylines": {
-      "wins": 11,
-      "losses": 6,
+      "wins": 12,
+      "losses": 7,
       "pushes": 0,
-      "pct": 64.7,
-      "roi": 23.5
+      "pct": 63.2,
+      "roi": 20.6
     },
     "best_bets": {
       "wins": 11,
-      "losses": 10,
+      "losses": 11,
       "pushes": 0,
-      "pct": 52.4,
-      "roi": 0.0
+      "pct": 50.0,
+      "roi": -4.5
     },
     "best_prop_type": "assists",
     "best_prop_pct": 9.1
@@ -43,32 +43,32 @@
     {
       "date": "2026-02-06",
       "props": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 22,
+        "losses": 16,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "22-16",
+        "pct": 57.9
       },
       "spreads": {
-        "wins": 1,
+        "wins": 3,
         "losses": 1,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "3-1",
+        "pct": 75.0
       },
       "totals": {
-        "wins": 0,
-        "losses": 2,
+        "wins": 1,
+        "losses": 3,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "1-3",
+        "pct": 25.0
       },
       "moneylines": {
-        "wins": 2,
-        "losses": 0,
+        "wins": 3,
+        "losses": 1,
         "pushes": 0,
-        "record": "2-0",
-        "pct": 100.0
+        "record": "3-1",
+        "pct": 75.0
       },
       "picks": [
         {
@@ -126,14 +126,487 @@
           "result": "80-118",
           "hit": true,
           "confidence": 53.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "spread",
+          "game": "IND @ MIL",
+          "pick": "MIL -1.5",
+          "result": "99-105",
+          "hit": true,
+          "confidence": 56.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "total",
+          "game": "IND @ MIL",
+          "pick": "OVER 223.5",
+          "result": "99-105",
+          "hit": false,
+          "confidence": 57.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "ml",
+          "game": "IND @ MIL",
+          "pick": "MIL",
+          "result": "99-105",
+          "hit": true,
+          "confidence": 58.9
+        },
+        {
+          "date": "2026-02-06",
+          "type": "spread",
+          "game": "NOP @ MIN",
+          "pick": "NOP +10.0",
+          "result": "119-115",
+          "hit": true,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-02-06",
+          "type": "total",
+          "game": "NOP @ MIN",
+          "pick": "UNDER 236.5",
+          "result": "119-115",
+          "hit": true,
+          "confidence": 54.3
+        },
+        {
+          "date": "2026-02-06",
+          "type": "ml",
+          "game": "NOP @ MIN",
+          "pick": "MIN",
+          "result": "119-115",
+          "hit": false,
+          "confidence": 66.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "pick": "AST OVER 4.5",
+          "line": 4.5,
+          "result": 2,
+          "hit": false,
+          "confidence": 52.1
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Donovan Clingan",
+          "team": "POR",
+          "pick": "REB UNDER 12.5",
+          "line": 12.5,
+          "result": 17,
+          "hit": false,
+          "confidence": 53.295
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jerami Grant",
+          "team": "POR",
+          "pick": "PTS OVER 16.5",
+          "line": 16.5,
+          "result": 23,
+          "hit": true,
+          "confidence": 56.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Tobias Harris",
+          "team": "DET",
+          "pick": "REB OVER 4.5",
+          "line": 4.5,
+          "result": 6,
+          "hit": true,
+          "confidence": 54.1
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Aaron Nesmith",
+          "team": "IND",
+          "pick": "PRA UNDER 22.5",
+          "line": 22.5,
+          "result": 14,
+          "hit": true,
+          "confidence": 53.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Bam Adebayo",
+          "team": "MIA",
+          "pick": "PRA UNDER 32.5",
+          "line": 32.5,
+          "result": 24,
+          "hit": true,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Kris Dunn",
+          "team": "LAC",
+          "pick": "AST UNDER 4.5",
+          "line": 4.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 52.4
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Saddiq Bey",
+          "team": "NOP",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 9,
+          "hit": true,
+          "confidence": 52.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 7,
+          "hit": true,
+          "confidence": 54.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Naz Reid",
+          "team": "MIN",
+          "pick": "REB OVER 6.5",
+          "line": 6.5,
+          "result": 3,
+          "hit": false,
+          "confidence": 55.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Mikal Bridges",
+          "team": "NYK",
+          "pick": "PTS OVER 15.5",
+          "line": 15.5,
+          "result": 19,
+          "hit": true,
+          "confidence": 53.0
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Russell Westbrook",
+          "team": "SAC",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 3,
+          "hit": true,
+          "confidence": 54.1
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "DeMar DeRozan",
+          "team": "SAC",
+          "pick": "PTS OVER 16.5",
+          "line": 16.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 53.2
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "pick": "REB OVER 7.5",
+          "line": 7.5,
+          "result": 7,
+          "hit": false,
+          "confidence": 53.1
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Trey Murphy III",
+          "team": "NOP",
+          "pick": "PTS OVER 21.5",
+          "line": 21.5,
+          "result": 26,
+          "hit": true,
+          "confidence": 52.8
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "pick": "PRA UNDER 32.5",
+          "line": 32.5,
+          "result": 30,
+          "hit": true,
+          "confidence": 55.5
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Julius Randle",
+          "team": "MIN",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 7,
+          "hit": true,
+          "confidence": 52.0
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jerami Grant",
+          "team": "POR",
+          "pick": "PRA OVER 22.5",
+          "line": 22.5,
+          "result": 27,
+          "hit": true,
+          "confidence": 53.5
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Aaron Nesmith",
+          "team": "IND",
+          "pick": "PTS UNDER 14.5",
+          "line": 14.5,
+          "result": 12,
+          "hit": true,
+          "confidence": 52.0
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "pick": "PTS OVER 15.5",
+          "line": 15.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 52.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Cade Cunningham",
+          "team": "DET",
+          "pick": "AST UNDER 9.5",
+          "line": 9.5,
+          "result": 7,
+          "hit": true,
+          "confidence": 52.8
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jaylen Wells",
+          "team": "MEM",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 13,
+          "hit": false,
+          "confidence": 53.4
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Derrick White",
+          "team": "BOS",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 3,
+          "hit": true,
+          "confidence": 53.1
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Trey Murphy III",
+          "team": "NOP",
+          "pick": "PRA OVER 30.5",
+          "line": 30.5,
+          "result": 37,
+          "hit": true,
+          "confidence": 53.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "pick": "AST UNDER 6.5",
+          "line": 6.5,
+          "result": 4,
+          "hit": true,
+          "confidence": 52.5
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Naz Reid",
+          "team": "MIN",
+          "pick": "PRA OVER 23.5",
+          "line": 23.5,
+          "result": 13,
+          "hit": false,
+          "confidence": 54.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Russell Westbrook",
+          "team": "SAC",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 53.4
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Cade Cunningham",
+          "team": "DET",
+          "pick": "PRA UNDER 41.5",
+          "line": 41.5,
+          "result": 23,
+          "hit": true,
+          "confidence": 54.4
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "pick": "PRA OVER 23.5",
+          "line": 23.5,
+          "result": 9,
+          "hit": false,
+          "confidence": 53.2
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Andrew Nembhard",
+          "team": "IND",
+          "pick": "AST OVER 7.5",
+          "line": 7.5,
+          "result": 8,
+          "hit": true,
+          "confidence": 55.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Kevin Porter Jr.",
+          "team": "MIL",
+          "pick": "PTS UNDER 17.5",
+          "line": 17.5,
+          "result": 23,
+          "hit": false,
+          "confidence": 55.099999999999994
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "pick": "PTS UNDER 20.5",
+          "line": 20.5,
+          "result": 22,
+          "hit": false,
+          "confidence": 52.154999999999994
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Saddiq Bey",
+          "team": "NOP",
+          "pick": "PTS OVER 16.5",
+          "line": 16.5,
+          "result": 30,
+          "hit": true,
+          "confidence": 55.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Zion Williamson",
+          "team": "NOP",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 57.7
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Trey Murphy III",
+          "team": "NOP",
+          "pick": "REB UNDER 5.5",
+          "line": 5.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 53.39
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Julius Randle",
+          "team": "MIN",
+          "pick": "PTS OVER 21.5",
+          "line": 21.5,
+          "result": 24,
+          "hit": true,
+          "confidence": 53.6
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 20,
+          "hit": true,
+          "confidence": 53.4
+        },
+        {
+          "date": "2026-02-06",
+          "type": "prop",
+          "player": "Toumani Camara",
+          "team": "POR",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 52.0
         }
       ],
       "best_bets": {
         "wins": 1,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "1-2",
+        "pct": 33.3
       }
     },
     {

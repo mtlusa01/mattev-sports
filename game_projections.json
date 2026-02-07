@@ -2,7 +2,7 @@
   "date": "2026-02-06",
   "sport": "NBA",
   "locked_at": "2026-02-06T10:39:08",
-  "updated": "2026-02-06T22:19:07",
+  "updated": "2026-02-07T01:22:28",
   "games": [
     {
       "away_team": "MIA",
@@ -23,7 +23,57 @@
       "home_score": 98,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 8.3,
+          "actual": 7,
+          "hit": false,
+          "confidence": 53.1,
+          "ev": 9.9
+        },
+        {
+          "player": "Bam Adebayo",
+          "team": "MIA",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 32.5,
+          "projection": 32.3,
+          "actual": 24,
+          "hit": true,
+          "confidence": 54.8,
+          "ev": 4.1
+        },
+        {
+          "player": "Derrick White",
+          "team": "BOS",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.8,
+          "actual": 3,
+          "hit": true,
+          "confidence": 53.1,
+          "ev": 3.8
+        },
+        {
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.7,
+          "actual": 2,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 1.8
+        }
+      ]
     },
     {
       "away_team": "NYK",
@@ -44,7 +94,57 @@
       "home_score": 118,
       "spread_result": "win",
       "total_result": "loss",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Mikal Bridges",
+          "team": "NYK",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 16.8,
+          "actual": 19,
+          "hit": true,
+          "confidence": 53.0,
+          "ev": 4.0
+        },
+        {
+          "player": "Tobias Harris",
+          "team": "DET",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.9,
+          "actual": 6,
+          "hit": true,
+          "confidence": 54.1,
+          "ev": 3.7
+        },
+        {
+          "player": "Cade Cunningham",
+          "team": "DET",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 41.5,
+          "projection": 38.5,
+          "actual": 23,
+          "hit": true,
+          "confidence": 54.4,
+          "ev": 2.5
+        },
+        {
+          "player": "Cade Cunningham",
+          "team": "DET",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 9.5,
+          "projection": 9.3,
+          "actual": 7,
+          "hit": true,
+          "confidence": 52.8,
+          "ev": 2.1
+        }
+      ]
     },
     {
       "away_team": "IND",
@@ -59,10 +159,99 @@
       "ml_pick": "MIL",
       "ml_conf": 58.9,
       "commence_time": "2026-02-07T01:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-06T15:39:07Z",
-      "away_score": 97,
-      "home_score": 103
+      "away_score": 99,
+      "home_score": 105,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Kevin Porter Jr.",
+          "team": "MIL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 17.5,
+          "projection": 14.0,
+          "actual": 23,
+          "hit": false,
+          "confidence": 55.099999999999994,
+          "ev": 10.3
+        },
+        {
+          "player": "Andrew Nembhard",
+          "team": "IND",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 8.0,
+          "actual": 8,
+          "hit": true,
+          "confidence": 55.7,
+          "ev": 6.8
+        },
+        {
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 32.5,
+          "projection": 30.1,
+          "actual": 30,
+          "hit": true,
+          "confidence": 55.5,
+          "ev": 4.2
+        },
+        {
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 20.5,
+          "projection": 19.7,
+          "actual": 22,
+          "hit": false,
+          "confidence": 52.154999999999994,
+          "ev": 3.4
+        },
+        {
+          "player": "Aaron Nesmith",
+          "team": "IND",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 22.5,
+          "projection": 21.6,
+          "actual": 14,
+          "hit": true,
+          "confidence": 53.7,
+          "ev": 2.0
+        },
+        {
+          "player": "Aaron Nesmith",
+          "team": "IND",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 14.5,
+          "projection": 13.9,
+          "actual": 12,
+          "hit": true,
+          "confidence": 52.0,
+          "ev": 1.6
+        },
+        {
+          "player": "Ryan Rollins",
+          "team": "MIL",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 5.7,
+          "actual": 4,
+          "hit": true,
+          "confidence": 52.5,
+          "ev": 1.1
+        }
+      ]
     },
     {
       "away_team": "NOP",
@@ -77,10 +266,159 @@
       "ml_pick": "MIN",
       "ml_conf": 66.9,
       "commence_time": "2026-02-07T01:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-06T15:39:07Z",
-      "away_score": 112,
-      "home_score": 110
+      "away_score": 119,
+      "home_score": 115,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Saddiq Bey",
+          "team": "NOP",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 18.7,
+          "actual": 30,
+          "hit": true,
+          "confidence": 55.7,
+          "ev": 5.9
+        },
+        {
+          "player": "Zion Williamson",
+          "team": "NOP",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 7.3,
+          "actual": 4,
+          "hit": false,
+          "confidence": 57.7,
+          "ev": 5.8
+        },
+        {
+          "player": "Saddiq Bey",
+          "team": "NOP",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.9,
+          "actual": 9,
+          "hit": true,
+          "confidence": 52.6,
+          "ev": 4.2
+        },
+        {
+          "player": "Trey Murphy III",
+          "team": "NOP",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 30.5,
+          "projection": 32.0,
+          "actual": 37,
+          "hit": true,
+          "confidence": 53.6,
+          "ev": 4.2
+        },
+        {
+          "player": "Trey Murphy III",
+          "team": "NOP",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.8,
+          "actual": 6,
+          "hit": false,
+          "confidence": 53.39,
+          "ev": 4.2
+        },
+        {
+          "player": "Trey Murphy III",
+          "team": "NOP",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 23.1,
+          "actual": 26,
+          "hit": true,
+          "confidence": 52.8,
+          "ev": 2.0
+        },
+        {
+          "player": "Naz Reid",
+          "team": "MIN",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 23.5,
+          "projection": 26.1,
+          "actual": 13,
+          "hit": false,
+          "confidence": 54.7,
+          "ev": 1.9
+        },
+        {
+          "player": "Naz Reid",
+          "team": "MIN",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.7,
+          "actual": 3,
+          "hit": false,
+          "confidence": 55.6,
+          "ev": 1.3
+        },
+        {
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 18.2,
+          "actual": 6,
+          "hit": false,
+          "confidence": 52.6,
+          "ev": 1.3
+        },
+        {
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 23.5,
+          "projection": 25.2,
+          "actual": 9,
+          "hit": false,
+          "confidence": 53.2,
+          "ev": 1.2
+        },
+        {
+          "player": "Julius Randle",
+          "team": "MIN",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.6,
+          "actual": 7,
+          "hit": true,
+          "confidence": 52.0,
+          "ev": 1.1
+        },
+        {
+          "player": "Julius Randle",
+          "team": "MIN",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 22.5,
+          "actual": 24,
+          "hit": true,
+          "confidence": 53.6,
+          "ev": 1.1
+        }
+      ]
     },
     {
       "away_team": "MEM",
@@ -95,8 +433,94 @@
       "ml_pick": "POR",
       "ml_conf": 56.9,
       "commence_time": "2026-02-07T03:00:00Z",
-      "status": "scheduled",
-      "locked_at": "2026-02-06T15:39:07Z"
+      "status": "final",
+      "locked_at": "2026-02-06T15:39:07Z",
+      "graded_props": [
+        {
+          "player": "Donovan Clingan",
+          "team": "POR",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 12.5,
+          "projection": 11.7,
+          "actual": 17,
+          "hit": false,
+          "confidence": 53.295,
+          "ev": 7.6
+        },
+        {
+          "player": "Jerami Grant",
+          "team": "POR",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 19.6,
+          "actual": 23,
+          "hit": true,
+          "confidence": 56.6,
+          "ev": 7.2
+        },
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 16.3,
+          "actual": 20,
+          "hit": true,
+          "confidence": 53.4,
+          "ev": 2.9
+        },
+        {
+          "player": "Toumani Camara",
+          "team": "POR",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.9,
+          "actual": 4,
+          "hit": false,
+          "confidence": 52.0,
+          "ev": 2.4
+        },
+        {
+          "player": "Jerami Grant",
+          "team": "POR",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 23.9,
+          "actual": 27,
+          "hit": true,
+          "confidence": 53.5,
+          "ev": 2.1
+        },
+        {
+          "player": "Jaylen Wells",
+          "team": "MEM",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 14.8,
+          "actual": 13,
+          "hit": false,
+          "confidence": 53.4,
+          "ev": 1.6
+        },
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.0,
+          "actual": 7,
+          "hit": true,
+          "confidence": 54.7,
+          "ev": 1.5
+        }
+      ]
     },
     {
       "away_team": "LAC",
@@ -111,8 +535,58 @@
       "ml_pick": "LAC",
       "ml_conf": 55.1,
       "commence_time": "2026-02-07T03:10:00Z",
-      "status": "scheduled",
-      "locked_at": "2026-02-06T15:39:07Z"
+      "status": "final",
+      "locked_at": "2026-02-06T15:39:07Z",
+      "graded_props": [
+        {
+          "player": "Kris Dunn",
+          "team": "LAC",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.5,
+          "actual": 5,
+          "hit": false,
+          "confidence": 52.4,
+          "ev": 12.1
+        },
+        {
+          "player": "Russell Westbrook",
+          "team": "SAC",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.9,
+          "actual": 3,
+          "hit": true,
+          "confidence": 54.1,
+          "ev": 4.2
+        },
+        {
+          "player": "DeMar DeRozan",
+          "team": "SAC",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 21.0,
+          "actual": 5,
+          "hit": false,
+          "confidence": 53.2,
+          "ev": 3.8
+        },
+        {
+          "player": "Russell Westbrook",
+          "team": "SAC",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 16.4,
+          "actual": 6,
+          "hit": false,
+          "confidence": 53.4,
+          "ev": 3.3
+        }
+      ]
     }
   ]
 }
