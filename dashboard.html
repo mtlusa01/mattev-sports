@@ -4272,7 +4272,6 @@
       }
 
       // Filter games by selected date (for today's data which may have multiple dates)
-      const today = new Date().toISOString().slice(0, 10);
       const dateFiltered = activeGames.filter(g => {
         const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
         return gameDate === selectedDate;
