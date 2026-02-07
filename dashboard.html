@@ -4000,14 +4000,35 @@
         return historicalGamesCache[date];
       }
 
-      // Try to fetch from archive first
-      const archiveUrl = `https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/archive/projections_${date}.json`;
-      try {
-        const resp = await fetch(archiveUrl + '?t=' + Date.now());
-        if (resp.ok) {
+      // Try to fetch from archive - check both exact date and next day (archive naming offset)
+      const archiveBase = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/archive/projections_';
+      const nextDay = (() => {
+        const d = new Date(date + 'T12:00:00');
+        d.setDate(d.getDate() + 1);
+        return d.toISOString().slice(0, 10);
+      })();
+
+      // Try next day's archive first (common case: archive dated X contains games for X-1)
+      const archivesToTry = [nextDay, date];
+      for (const archiveDate of archivesToTry) {
+        try {
+          const resp = await fetch(archiveBase + archiveDate + '.json?t=' + Date.now());
+          if (!resp.ok) continue;
+
           const data = await resp.json();
-          let games = data.game_projections?.games || [];
-          let nhlGames = data.nhl_game_projections?.games || [];
+          const archiveGameDate = data.game_projections?.date;
+          const archiveNhlDate = data.nhl_game_projections?.date;
+
+          // Only use if the games inside match our requested date
+          let games = [];
+          let nhlGames = [];
+
+          if (archiveGameDate === date) {
+            games = data.game_projections?.games || [];
+          }
+          if (archiveNhlDate === date) {
+            nhlGames = data.nhl_game_projections?.games || [];
+          }
 
           if (games.length > 0 || nhlGames.length > 0) {
             // Load results to merge actual outcomes into projections
@@ -4026,9 +4047,9 @@
             historicalNhlCache[date] = nhlGames;
             return games;
           }
+        } catch (e) {
+          console.log(`Archive fetch failed for ${archiveDate}:`, e.message);
         }
-      } catch (e) {
-        console.log(`Archive fetch failed for ${date}:`, e.message);
       }
 
       // Fallback: load from results.json
