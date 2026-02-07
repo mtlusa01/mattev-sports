@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:10",
-  "updated": "2026-02-07T14:40:25",
+  "updated": "2026-02-07T14:46:38",
   "projections": [
     {
       "player": "Jalen Johnson",
@@ -6515,6 +6515,236 @@
       ],
       "added_live": true,
       "discovered_at": "2026-02-07T12:06:46"
+    },
+    {
+      "player": "Jrue Holiday",
+      "team": "POR",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 14.5,
+      "projection": 18.0,
+      "confidence": 55.4,
+      "ev": 4.0,
+      "diff": 3.5,
+      "market_odds": -114,
+      "fair_odds": -124,
+      "prob_edge": 2.1,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 14.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 14.5,
+            "odds": -111
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -115
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 14.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-07T14:46:38",
+      "edge": "GOOD",
+      "l5_avg": 11.8,
+      "l10_avg": 12.8,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 40,
+      "l5_hit_count": 2,
+      "l10_hit_count": 4,
+      "l10_median": 13.0,
+      "season_avg": 14.6,
+      "season_hit_count": 10,
+      "season_total": 23,
+      "streak": 2,
+      "home_avg": 13.9,
+      "away_avg": 15.4,
+      "opp_def_rank": 21,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 14.3,
+      "vs_bot10_avg": 16.3,
+      "insight": "MEM ranks #21 in points defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "last_10_values": [
+        20,
+        15,
+        5,
+        5,
+        14,
+        21,
+        15,
+        9,
+        12,
+        12
+      ],
+      "last_10_games": [
+        {
+          "date": "2/06",
+          "opp": "vs MEM",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "2/03",
+          "opp": "vs PHX",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "@NYK",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "@WAS",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/26",
+          "opp": "@BOS",
+          "val": 14,
+          "hit": false
+        },
+        {
+          "date": "1/23",
+          "opp": "vs TOR",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs MIA",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "1/17",
+          "opp": "vs LAL",
+          "val": 9,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "vs ATL",
+          "val": 12,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "@GSW",
+          "val": 12,
+          "hit": false
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NYK",
+          "val": 8,
+          "hit": false
+        },
+        {
+          "date": "11/14",
+          "opp": "@HOU",
+          "val": 13,
+          "hit": false
+        },
+        {
+          "date": "11/12",
+          "opp": "@NOP",
+          "val": 17,
+          "hit": true
+        },
+        {
+          "date": "11/10",
+          "opp": "@ORL",
+          "val": 13,
+          "hit": false
+        },
+        {
+          "date": "11/08",
+          "opp": "@MIA",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "11/05",
+          "opp": "vs OKC",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "11/03",
+          "opp": "vs LAL",
+          "val": 8,
+          "hit": false
+        },
+        {
+          "date": "10/31",
+          "opp": "vs DEN",
+          "val": 11,
+          "hit": false
+        },
+        {
+          "date": "10/29",
+          "opp": "@UTA",
+          "val": 27,
+          "hit": true
+        },
+        {
+          "date": "10/27",
+          "opp": "@LAL",
+          "val": 24,
+          "hit": true
+        }
+      ],
+      "opponent": "MEM",
+      "h2h_games": [
+        {
+          "date": "Feb 06",
+          "value": 20,
+          "minutes": 25,
+          "result": "W",
+          "hit": true,
+          "venue": "vs"
+        }
+      ],
+      "h2h_avg": 20.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 41.5,
+      "score_factors": [
+        "Favorable matchup (#21 DEF)",
+        "+3.5 edge"
+      ],
+      "top_pick_rank": 3,
+      "added_live": true,
+      "discovered_at": "2026-02-07T14:46:38"
     }
   ],
   "top_picks": [
