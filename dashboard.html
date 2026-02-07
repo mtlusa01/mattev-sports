@@ -1988,8 +1988,14 @@
       const today = getLocalDateStr();
       // For historical dates, check cache first
       if (selectedDate !== today) {
-        if (historicalGamesCache[selectedDate] !== undefined) {
-          return historicalGamesCache[selectedDate];
+        if (currentSport === 'nhl') {
+          if (historicalNhlCache[selectedDate] !== undefined) {
+            return historicalNhlCache[selectedDate];
+          }
+        } else {
+          if (historicalGamesCache[selectedDate] !== undefined) {
+            return historicalGamesCache[selectedDate];
+          }
         }
         // No cache yet (still loading) - return empty array
         return [];
@@ -3833,8 +3839,9 @@
       return { label, formatted };
     }
 
-    // Cache for historical game projections by date
+    // Cache for historical game projections by date (NBA and NHL separate)
     const historicalGamesCache = {};
+    const historicalNhlCache = {};
     let isLoadingHistory = false;
 
     async function loadHistoricalGames(date) {
@@ -3843,7 +3850,7 @@
       if (date === today) return null; // Use current data
 
       // Check cache first (use !== undefined to allow empty arrays)
-      if (historicalGamesCache[date] !== undefined) {
+      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined) {
         return historicalGamesCache[date];
       }
 
@@ -3851,16 +3858,20 @@
       try {
         const resp = await fetch(`archive/projections_${date}.json`);
         if (!resp.ok) {
-          historicalGamesCache[date] = []; // Cache empty array for missing dates
+          historicalGamesCache[date] = [];
+          historicalNhlCache[date] = [];
           return [];
         }
         const data = await resp.json();
         const games = data.game_projections?.games || [];
+        const nhlGames = data.nhl_game_projections?.games || [];
         historicalGamesCache[date] = games;
+        historicalNhlCache[date] = nhlGames;
         return games;
       } catch (e) {
         console.log(`No archive for ${date}:`, e.message);
-        historicalGamesCache[date] = []; // Cache empty array on error
+        historicalGamesCache[date] = [];
+        historicalNhlCache[date] = [];
         return [];
       }
     }
@@ -3868,7 +3879,10 @@
     async function changeDate(delta) {
       const current = new Date(selectedDate + 'T12:00:00');
       current.setDate(current.getDate() + delta);
-      selectedDate = current.toISOString().slice(0, 10);
+      // Use local date format, not UTC
+      selectedDate = current.getFullYear() + '-' +
+        String(current.getMonth() + 1).padStart(2, '0') + '-' +
+        String(current.getDate()).padStart(2, '0');
 
       // Load historical data if navigating to a past date
       isLoadingHistory = true;
