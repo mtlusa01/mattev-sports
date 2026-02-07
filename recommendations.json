@@ -1,323 +1,350 @@
 {
-  "date": "2026-02-06",
-  "generated_at": "2026-02-06T02:53:40",
+  "date": "2026-02-07",
+  "generated_at": "2026-02-07T01:29:20",
   "game_bets": [
     {
       "qualified": true,
-      "score": 150.6,
+      "score": 185.4,
       "reasons": [
-        "67.8% confidence"
+        "80.2% confidence",
+        "High confidence"
       ],
       "type": "total",
       "bet_type": "TOTAL",
-      "game": "LAC @ SAC",
-      "away_team": "LAC",
-      "home_team": "SAC",
-      "pick": "OVER 221.5",
-      "confidence": 67.8,
-      "commence_time": "2026-02-07T03:10:00Z",
+      "game": "HOU @ OKC",
+      "away_team": "HOU",
+      "home_team": "OKC",
+      "pick": "OVER 212.5",
+      "confidence": 80.2,
+      "commence_time": "2026-02-07T20:40:00Z",
       "rec_rank": 1
     },
     {
       "qualified": true,
-      "score": 149.0,
+      "score": 153.2,
       "reasons": [
-        "67.0% confidence"
+        "69.1% confidence"
       ],
       "type": "ml",
       "bet_type": "ML",
-      "game": "NOP @ MIN",
-      "away_team": "NOP",
-      "home_team": "MIN",
-      "pick": "MIN",
-      "confidence": 67.0,
-      "commence_time": "2026-02-07T01:10:00Z",
+      "game": "HOU @ OKC",
+      "away_team": "HOU",
+      "home_team": "OKC",
+      "pick": "OKC",
+      "confidence": 69.1,
+      "commence_time": "2026-02-07T20:40:00Z",
       "rec_rank": 2
     },
     {
       "qualified": true,
-      "score": 148.6,
+      "score": 146.4,
       "reasons": [
-        "66.8% confidence"
+        "65.7% confidence"
       ],
-      "type": "ml",
-      "bet_type": "ML",
-      "game": "MIA @ BOS",
-      "away_team": "MIA",
-      "home_team": "BOS",
-      "pick": "BOS",
-      "confidence": 66.8,
-      "commence_time": "2026-02-07T00:40:00Z",
+      "type": "total",
+      "bet_type": "TOTAL",
+      "game": "GSW @ LAL",
+      "away_team": "GSW",
+      "home_team": "LAL",
+      "pick": "OVER 222.5",
+      "confidence": 65.7,
+      "commence_time": "2026-02-08T01:40:00Z",
       "rec_rank": 3
     },
     {
       "qualified": true,
-      "score": 126.8,
+      "score": 146.2,
       "reasons": [
-        "63.4% confidence"
+        "65.6% confidence"
       ],
-      "type": "spread",
-      "bet_type": "SPREAD",
-      "game": "NYK @ DET",
-      "away_team": "NYK",
-      "home_team": "DET",
-      "pick": "DET +1.5",
-      "confidence": 63.4,
-      "commence_time": "2026-02-07T00:40:00Z",
+      "type": "ml",
+      "bet_type": "ML",
+      "game": "CLE @ SAC",
+      "away_team": "CLE",
+      "home_team": "SAC",
+      "pick": "CLE",
+      "confidence": 65.6,
+      "commence_time": "2026-02-08T03:10:00Z",
       "rec_rank": 4
     },
     {
       "qualified": true,
-      "score": 126.8,
+      "score": 129.6,
       "reasons": [
-        "63.4% confidence"
+        "64.8% confidence"
       ],
-      "type": "spread",
-      "bet_type": "SPREAD",
-      "game": "IND @ MIL",
-      "away_team": "IND",
-      "home_team": "MIL",
-      "pick": "MIL +1.5",
-      "confidence": 63.4,
-      "commence_time": "2026-02-07T01:10:00Z",
+      "type": "ml",
+      "bet_type": "ML",
+      "game": "DAL @ SAS",
+      "away_team": "DAL",
+      "home_team": "SAS",
+      "pick": "SAS",
+      "confidence": 64.8,
+      "commence_time": "2026-02-07T23:10:00Z",
       "rec_rank": 5
     }
   ],
   "props": [
     {
       "qualified": true,
-      "score": 63.235,
+      "score": 74.735,
       "reasons": [
-        "+21.8% EV"
+        "+21.0% EV",
+        "70% L10 hit rate",
+        "Favorable matchup"
       ],
       "type": "prop",
-      "player": "Jrue Holiday",
-      "team": "POR",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 5.5,
-      "projection": 6.0,
-      "diff": 0.5,
-      "confidence": 54.9,
-      "ev": 21.8,
-      "edge": 0.5,
-      "pick_score": 35.0,
+      "player": "Chet Holmgren",
+      "team": "OKC",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 19.5,
+      "projection": 13.1,
+      "diff": -6.4,
+      "confidence": 58.9,
+      "ev": 21.0,
+      "edge": 6.4,
+      "pick_score": 76.0,
       "score_factors": [
-        "+21.8% EV"
+        "+21.0% EV",
+        "Favorable matchup (#4 DEF)",
+        "+6.4 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 5.5,
-            "odds": 122
+            "line": 19.5,
+            "odds": -130
           },
           "under": {
-            "line": 5.5,
-            "odds": -162
+            "line": 19.5,
+            "odds": -102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 19.5,
+            "odds": -117
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -109
           }
         }
       },
       "best_book": "fanduel",
-      "insight": null,
-      "matchup_favorability": "neutral",
-      "l10_hit_rate": 20,
+      "insight": "Averaging 17.1 points over last 10 games (-2.4 below line).",
+      "matchup_favorability": "favorable",
+      "l10_hit_rate": 70,
       "rec_rank": 1
     },
     {
       "qualified": true,
-      "score": 46.485,
+      "score": 68.735,
       "reasons": [
-        "+13.3% EV",
-        "Favorable matchup",
-        "+2.7 edge"
+        "+21.9% EV",
+        "70% L10 hit rate"
       ],
       "type": "prop",
-      "player": "Jerami Grant",
-      "team": "POR",
-      "prop": "PTS",
+      "player": "Amen Thompson",
+      "team": "HOU",
+      "prop": "AST",
       "direction": "OVER",
-      "line": 16.5,
-      "projection": 19.2,
-      "diff": 2.7,
-      "confidence": 56.9,
-      "ev": 13.3,
-      "edge": 2.6999999999999993,
-      "pick_score": 53.1,
+      "line": 5.5,
+      "projection": 6.6,
+      "diff": 1.1,
+      "confidence": 55.9,
+      "ev": 21.9,
+      "edge": 1.0999999999999996,
+      "pick_score": 52.5,
       "score_factors": [
-        "+13.3% EV",
-        "Favorable matchup (#21 DEF)",
-        "+2.7 edge"
+        "+21.9% EV",
+        "70% L10 hit rate",
+        "Injury boosted"
       ],
       "book_odds": {
-        "draftkings": {
-          "over": {
-            "line": 16.5,
-            "odds": -103
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -124
-          }
-        },
         "fanduel": {
           "over": {
-            "line": 16.5,
-            "odds": -100
+            "line": 5.5,
+            "odds": 118
           },
           "under": {
-            "line": 16.5,
-            "odds": -132
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "insight": "MEM ranks #21 in points defense \u2014 favorable for overs.",
-      "matchup_favorability": "favorable",
-      "l10_hit_rate": 40,
-      "rec_rank": 2
-    },
-    {
-      "qualified": true,
-      "score": 42.16,
-      "reasons": [
-        "+12.1% EV",
-        "Favorable matchup"
-      ],
-      "type": "prop",
-      "player": "Deni Avdija",
-      "team": "POR",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 6.5,
-      "projection": 6.9,
-      "diff": 0.4,
-      "confidence": 53.4,
-      "ev": 12.1,
-      "edge": 0.40000000000000036,
-      "pick_score": 26.0,
-      "score_factors": [
-        "+12.1% EV",
-        "60% L10 hit rate",
-        "Favorable matchup (#20 DEF)"
-      ],
-      "book_odds": {
-        "draftkings": {
-          "over": {
-            "line": 6.5,
-            "odds": 110
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -145
+            "line": 5.5,
+            "odds": -158
           }
         },
-        "fanduel": {
+        "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": 110
+            "line": 5.5,
+            "odds": 119
           },
           "under": {
-            "line": 6.5,
-            "odds": -146
+            "line": 5.5,
+            "odds": -156
           }
         }
       },
       "best_book": "draftkings",
-      "insight": "MEM ranks #20 in rebounds defense \u2014 favorable for overs.",
-      "matchup_favorability": "favorable",
-      "l10_hit_rate": 60,
-      "rec_rank": 3
+      "insight": "Has gone OVER 5.5 assists in 7 of last 10 games (7.2 avg).",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 70,
+      "rec_rank": 2
     },
     {
       "qualified": true,
-      "score": 28.36,
+      "score": 39.754999999999995,
       "reasons": [
-        "+6.7% EV",
-        "Favorable matchup"
+        "+8.8% EV",
+        "80% L10 hit rate",
+        "+2.9 edge"
       ],
       "type": "prop",
-      "player": "Karl-Anthony Towns",
-      "team": "NYK",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 32.5,
-      "projection": 30.7,
-      "diff": -1.8,
-      "confidence": 55.4,
-      "ev": 6.7,
-      "edge": 1.8000000000000007,
-      "pick_score": 28.3,
-      "score_factors": [
-        "+6.7% EV",
-        "Favorable matchup (#4 DEF)"
-      ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 32.5,
-            "odds": -122
-          },
-          "under": {
-            "line": 32.5,
-            "odds": -108
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "insight": "DET ranks #4 in PRA defense \u2014 favorable for unders.",
-      "matchup_favorability": "favorable",
-      "l10_hit_rate": 50,
-      "rec_rank": 4
-    },
-    {
-      "qualified": true,
-      "score": 27.555,
-      "reasons": [
-        "70% L10 hit rate",
-        "Favorable matchup"
-      ],
-      "type": "prop",
-      "player": "Naz Reid",
-      "team": "MIN",
-      "prop": "REB",
+      "player": "Joel Embiid",
+      "team": "PHI",
+      "prop": "PTS",
       "direction": "OVER",
-      "line": 6.5,
-      "projection": 7.6,
-      "diff": 1.1,
-      "confidence": 54.7,
-      "ev": 4.9,
-      "edge": 1.0999999999999996,
-      "pick_score": 33.6,
+      "line": 28.5,
+      "projection": 31.4,
+      "diff": 2.9,
+      "confidence": 55.7,
+      "ev": 8.8,
+      "edge": 2.8999999999999986,
+      "pick_score": 30.7,
       "score_factors": [
-        "70% L10 hit rate",
-        "Favorable matchup (#25 DEF)"
+        "+8.8% EV",
+        "80% L10 hit rate",
+        "+2.9 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 7.5,
-            "odds": 116
+            "line": 28.5,
+            "odds": -106
           },
           "under": {
-            "line": 7.5,
-            "odds": -154
+            "line": 28.5,
+            "odds": -125
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -138
+            "line": 28.5,
+            "odds": -105
           },
           "under": {
-            "line": 6.5,
-            "odds": 105
+            "line": 28.5,
+            "odds": -121
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": "Has gone OVER 28.5 points in 8 of last 10 games (31.8 avg).",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 80,
+      "rec_rank": 3
+    },
+    {
+      "qualified": true,
+      "score": 38.519999999999996,
+      "reasons": [
+        "+8.6% EV",
+        "80% L10 hit rate",
+        "4-game streak"
+      ],
+      "type": "prop",
+      "player": "Jalen Johnson",
+      "team": "ATL",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 10.5,
+      "projection": 11.3,
+      "diff": 0.8,
+      "confidence": 54.8,
+      "ev": 8.6,
+      "edge": 0.8000000000000007,
+      "pick_score": 32.9,
+      "score_factors": [
+        "+8.6% EV",
+        "80% L10 hit rate",
+        "4-game streak"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 10.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 10.5,
+            "odds": -130
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 10.5,
+            "odds": -103
+          },
+          "under": {
+            "line": 10.5,
+            "odds": -128
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Has gone OVER 6.5 rebounds in 7 of last 10 games (7.0 avg).",
+      "insight": "Has gone OVER 10.5 rebounds in 8 of last 10 games (12.7 avg).",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 80,
+      "rec_rank": 4
+    },
+    {
+      "qualified": true,
+      "score": 28.67,
+      "reasons": [
+        "+7.6% EV",
+        "Favorable matchup"
+      ],
+      "type": "prop",
+      "player": "Noah Clowney",
+      "team": "BKN",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 4.6,
+      "diff": 0.1,
+      "confidence": 53.8,
+      "ev": 7.6,
+      "edge": 0.09999999999999964,
+      "pick_score": 26.4,
+      "score_factors": [
+        "+7.6% EV",
+        "Favorable matchup (#30 DEF)"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -132
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -101
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -131
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "WAS ranks #30 in rebounds defense \u2014 favorable for overs.",
       "matchup_favorability": "favorable",
-      "l10_hit_rate": 70,
+      "l10_hit_rate": 50,
       "rec_rank": 5
     }
   ],

@@ -1,127 +1,164 @@
 {
-  "date": "2026-02-06",
-  "generated_at": "2026-02-06T22:07:01",
+  "date": "2026-02-07",
+  "generated_at": "2026-02-07T01:29:20",
   "picks": [
     {
       "type": "prop",
-      "player": "Jerami Grant",
-      "team": "POR",
+      "player": "Chet Holmgren",
+      "team": "OKC",
       "prop": "PTS",
-      "direction": "OVER",
-      "line": 16.5,
-      "projection": 19.2,
-      "diff": 2.7,
-      "ev": 13.3,
-      "confidence": 56.9,
-      "pick_score": 53.1,
+      "direction": "UNDER",
+      "line": 19.5,
+      "projection": 13.1,
+      "diff": -6.4,
+      "ev": 21.0,
+      "confidence": 58.9,
+      "pick_score": 76.0,
       "score_factors": [
-        "+13.3% EV",
-        "Favorable matchup (#21 DEF)",
-        "+2.7 edge"
+        "+21.0% EV",
+        "Favorable matchup (#4 DEF)",
+        "+6.4 edge"
       ],
       "book_odds": {
-        "draftkings": {
-          "over": {
-            "line": 16.5,
-            "odds": -103
-          },
-          "under": {
-            "line": 16.5,
-            "odds": -124
-          }
-        },
         "fanduel": {
           "over": {
-            "line": 16.5,
-            "odds": -100
+            "line": 19.5,
+            "odds": -130
           },
           "under": {
-            "line": 16.5,
-            "odds": -132
+            "line": 19.5,
+            "odds": -102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 19.5,
+            "odds": -117
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -109
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "MEM ranks #21 in points defense \u2014 favorable for overs.",
+      "insight": "Averaging 17.1 points over last 10 games (-2.4 below line).",
       "top_pick_rank": 1
     },
     {
-      "type": "ml",
-      "game": "MIA @ BOS",
-      "away_team": "MIA",
-      "home_team": "BOS",
-      "pick": "BOS",
-      "confidence": 66.8,
-      "pick_score": 50.0,
+      "type": "total",
+      "game": "HOU @ OKC",
+      "away_team": "HOU",
+      "home_team": "OKC",
+      "pick": "OVER 212.5",
+      "confidence": 80.2,
+      "pick_score": 55.0,
       "score_factors": [
-        "66.8% ML conf"
+        "80.2% total conf",
+        "Very high confidence"
       ],
-      "commence_time": "2026-02-07T00:40:00Z",
-      "top_pick_rank": 2,
-      "result": "WIN",
-      "actual": "96-98"
+      "commence_time": "2026-02-07T20:40:00Z",
+      "top_pick_rank": 2
     },
     {
-      "type": "ml",
-      "game": "NOP @ MIN",
-      "away_team": "NOP",
-      "home_team": "MIN",
-      "pick": "MIN",
-      "confidence": 67.0,
-      "pick_score": 50.0,
+      "type": "prop",
+      "player": "Devin Booker",
+      "team": "PHX",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 21.5,
+      "projection": 26.6,
+      "diff": 5.1,
+      "ev": 1.7,
+      "confidence": 55.0,
+      "pick_score": 54.5,
       "score_factors": [
-        "67.0% ML conf"
+        "80% L10 hit rate",
+        "+5.1 edge",
+        "5-game streak"
       ],
-      "commence_time": "2026-02-07T01:10:00Z",
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 21.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -107
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -119
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": "Has gone OVER 21.5 points in 8 of last 10 games (24.5 avg).",
       "top_pick_rank": 3
     },
     {
       "type": "prop",
-      "player": "Karl-Anthony Towns",
-      "team": "NYK",
-      "prop": "PRA",
-      "direction": "UNDER",
-      "line": 32.5,
-      "projection": 30.7,
-      "diff": -1.8,
-      "ev": 6.7,
-      "confidence": 55.4,
-      "pick_score": 40.5,
+      "player": "Amen Thompson",
+      "team": "HOU",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.6,
+      "diff": 1.1,
+      "ev": 21.9,
+      "confidence": 55.9,
+      "pick_score": 52.5,
       "score_factors": [
-        "+6.7% EV",
-        "Favorable matchup (#4 DEF)"
+        "+21.9% EV",
+        "70% L10 hit rate",
+        "Injury boosted"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 32.5,
-            "odds": -122
+            "line": 5.5,
+            "odds": 118
           },
           "under": {
-            "line": 32.5,
-            "odds": -108
+            "line": 5.5,
+            "odds": -158
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": 119
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -156
           }
         }
       },
-      "best_book": "fanduel",
-      "insight": "DET ranks #4 in PRA defense \u2014 favorable for unders.",
+      "best_book": "draftkings",
+      "insight": "Has gone OVER 5.5 assists in 7 of last 10 games (7.2 avg).",
       "top_pick_rank": 4
     },
     {
-      "type": "spread",
-      "game": "NYK @ DET",
-      "away_team": "NYK",
-      "home_team": "DET",
-      "pick": "DET +1.5",
-      "confidence": 63.4,
-      "pick_score": 40.0,
+      "type": "ml",
+      "game": "HOU @ OKC",
+      "away_team": "HOU",
+      "home_team": "OKC",
+      "pick": "OKC",
+      "confidence": 69.1,
+      "pick_score": 50.0,
       "score_factors": [
-        "63.4% spread conf"
+        "69.1% ML conf"
       ],
-      "commence_time": "2026-02-07T00:40:00Z",
-      "top_pick_rank": 5,
-      "result": "WIN",
-      "actual": "80-118"
+      "commence_time": "2026-02-07T20:40:00Z",
+      "top_pick_rank": 5
     }
   ]
 }
