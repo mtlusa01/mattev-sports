@@ -1,40 +1,40 @@
 {
-  "updated": "2026-02-07T16:55:57",
+  "updated": "2026-02-07T17:44:25",
   "allTime": {
     "props": {
       "wins": 61,
-      "losses": 75,
+      "losses": 76,
       "pushes": 0,
-      "pct": 44.9,
-      "roi": -14.4
+      "pct": 44.5,
+      "roi": -15.0
     },
     "spreads": {
-      "wins": 13,
+      "wins": 14,
       "losses": 18,
       "pushes": 1,
-      "pct": 41.9,
-      "roi": -19.9
+      "pct": 43.8,
+      "roi": -16.5
     },
     "totals": {
-      "wins": 16,
+      "wins": 17,
       "losses": 16,
       "pushes": 0,
-      "pct": 50.0,
-      "roi": -4.5
+      "pct": 51.5,
+      "roi": -1.7
     },
     "moneylines": {
-      "wins": 20,
+      "wins": 21,
       "losses": 12,
       "pushes": 0,
-      "pct": 62.5,
-      "roi": 19.3
+      "pct": 63.6,
+      "roi": 21.5
     },
     "best_bets": {
-      "wins": 20,
+      "wins": 21,
       "losses": 20,
       "pushes": 0,
-      "pct": 50.0,
-      "roi": -4.5
+      "pct": 51.2,
+      "roi": -2.2
     },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 69.2
@@ -44,33 +44,61 @@
       "date": "2026-02-07",
       "props": {
         "wins": 0,
-        "losses": 0,
+        "losses": 1,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "0-1",
+        "pct": 0.0
       },
       "spreads": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "picks": [
+        {
+          "date": "2026-02-07",
+          "type": "spread",
+          "game": "WAS @ BKN",
+          "pick": "BKN -4.5",
+          "result": "113-127",
+          "hit": true,
+          "confidence": 48.3
+        },
+        {
+          "date": "2026-02-07",
+          "type": "total",
+          "game": "WAS @ BKN",
+          "pick": "OVER 220.5",
+          "result": "113-127",
+          "hit": true,
+          "confidence": 62.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "ml",
+          "game": "WAS @ BKN",
+          "pick": "BKN",
+          "result": "113-127",
+          "hit": true,
+          "confidence": 56.6
+        },
         {
           "date": "2026-02-07",
           "type": "spread",
@@ -99,14 +127,25 @@
           "result": "115-135",
           "hit": true,
           "confidence": 58.3
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Noah Clowney",
+          "team": "BKN",
+          "pick": "REB OVER 4.5",
+          "line": 4.5,
+          "result": 3,
+          "hit": false,
+          "confidence": 53.8
         }
       ],
       "best_bets": {
-        "wins": 0,
+        "wins": 1,
         "losses": 2,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "1-2",
+        "pct": 33.3
       }
     },
     {

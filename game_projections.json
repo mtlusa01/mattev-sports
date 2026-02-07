@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T16:55:57",
+  "updated": "2026-02-07T17:44:25",
   "games": [
     {
       "away_team": "WAS",
@@ -17,7 +17,7 @@
       "ml_pick": "BKN",
       "ml_conf": 56.6,
       "commence_time": "2026-02-07T20:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": 0.0,
@@ -56,8 +56,25 @@
         "ev": 27.6,
         "confidence": "high"
       },
-      "away_score": 82,
-      "home_score": 101
+      "away_score": 113,
+      "home_score": 127,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Noah Clowney",
+          "team": "BKN",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.6,
+          "actual": 3,
+          "hit": false,
+          "confidence": 53.8,
+          "ev": 7.6
+        }
+      ]
     },
     {
       "away_team": "HOU",
@@ -133,8 +150,8 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 47,
-      "home_score": 52
+      "away_score": 91,
+      "home_score": 91
     },
     {
       "away_team": "DAL",
