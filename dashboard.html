@@ -1985,7 +1985,7 @@
     }
 
     function getActiveGameProjections() {
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getLocalDateStr();
       // For historical dates, check cache first
       if (selectedDate !== today) {
         if (historicalGamesCache[selectedDate] !== undefined) {
@@ -2325,7 +2325,7 @@
     let betsSortBy = 'conf';   // 'conf', 'time', 'type'
     let betsSortDir = 'desc';  // 'asc' or 'desc'
     let currentGameSearch = '';
-    let selectedDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
+    let selectedDate = getLocalDateStr(); // YYYY-MM-DD in local timezone
 
     const PROP_CATEGORIES = [
       { key: 'all', label: 'ALL' },
@@ -3839,7 +3839,7 @@
 
     async function loadHistoricalGames(date) {
       // If it's today, use current gameProjections
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getLocalDateStr();
       if (date === today) return null; // Use current data
 
       // Check cache first (use !== undefined to allow empty arrays)
@@ -3879,13 +3879,13 @@
     }
 
     async function goToToday() {
-      selectedDate = new Date().toISOString().slice(0, 10);
+      selectedDate = getLocalDateStr();
       renderGameProjections();
     }
 
     function renderDatePicker() {
       const { label, formatted } = formatDateDisplay(selectedDate);
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getLocalDateStr();
       const isToday = selectedDate === today;
 
       return `
@@ -4256,7 +4256,7 @@
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
       const activeGames = getActiveGameProjections();
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getLocalDateStr();
 
       // Hide the static filter element — we render filters inline now
       document.getElementById('game-status-filter').innerHTML = '';
@@ -4482,7 +4482,7 @@
         const data = await resp.json();
         projections = data.projections || [];
         projections.forEach((p, i) => p._idx = i);
-        projections._date = data.date || new Date().toISOString().slice(0, 10);
+        projections._date = data.date || getLocalDateStr();
         topPicks = data.top_picks || [];
         recommendations = data.recommendations || null;
 
