@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T01:29:20",
+  "updated": "2026-02-07T09:09:44",
   "games": [
     {
       "away_team": "WAS",
@@ -594,6 +594,49 @@
         "pick": "SAC +12.0",
         "edge": -5.4,
         "ev": 25.3,
+        "confidence": "high"
+      }
+    },
+    {
+      "away_team": "MEM",
+      "home_team": "POR",
+      "game_date": "2026-02-07",
+      "proj_score": "112.0-115.2",
+      "spread_pick": "MEM +10.0",
+      "spread_conf": 63.2,
+      "total_line": 237.5,
+      "total_pick": "UNDER",
+      "total_conf": 69.2,
+      "ml_pick": "POR",
+      "ml_conf": 58.3,
+      "commence_time": "2026-02-08T03:10:00Z",
+      "status": "scheduled",
+      "locked_at": "2026-02-07T14:09:44Z",
+      "injury_impact": {
+        "home": 0.0,
+        "away": 0.0,
+        "total": 0.0,
+        "home_injuries": [],
+        "away_injuries": []
+      },
+      "edge": {
+        "spread": 7.1,
+        "total": -10.3,
+        "spread_ev": 0.25,
+        "total_ev": 0.35,
+        "spread_prob": 0.632,
+        "total_prob": 0.692
+      },
+      "spread_rec": {
+        "pick": "MEM +10.0",
+        "edge": 7.1,
+        "ev": 25.0,
+        "confidence": "high"
+      },
+      "total_rec": {
+        "pick": "UNDER 237.5",
+        "edge": 10.3,
+        "ev": 35.0,
         "confidence": "high"
       }
     }
