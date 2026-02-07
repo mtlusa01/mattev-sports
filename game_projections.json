@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T18:40:11",
+  "updated": "2026-02-07T18:41:49",
   "games": [
     {
       "away_team": "WAS",
@@ -154,7 +154,45 @@
       "home_score": 106,
       "spread_result": "loss",
       "total_result": "win",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Chet Holmgren",
+          "team": "OKC",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 13.1,
+          "actual": 17,
+          "hit": true,
+          "confidence": 58.9,
+          "ev": 21.0
+        },
+        {
+          "player": "Isaiah Hartenstein",
+          "team": "OKC",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 10.3,
+          "actual": 8,
+          "hit": true,
+          "confidence": 57.9,
+          "ev": 10.0
+        },
+        {
+          "player": "Chet Holmgren",
+          "team": "OKC",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 8.5,
+          "projection": 5.9,
+          "actual": 14,
+          "hit": false,
+          "confidence": 57.0,
+          "ev": 4.4
+        }
+      ]
     },
     {
       "away_team": "DAL",
