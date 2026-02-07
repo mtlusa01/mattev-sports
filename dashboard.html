@@ -2105,6 +2105,95 @@
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
     const INJURIES_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/injuries.json';
+    const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
+    const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
+
+    // ── Historical Results ──
+    let historicalResults = null;
+    let nhlHistoricalResults = null;
+
+    async function loadHistoricalResults(sport) {
+      const url = sport === 'nhl' ? NHL_RESULTS_URL : RESULTS_URL;
+      const cacheKey = sport === 'nhl' ? 'nhlHistoricalResults' : 'historicalResults';
+      try {
+        const resp = await fetch(url + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch results');
+        const data = await resp.json();
+        if (sport === 'nhl') nhlHistoricalResults = data;
+        else historicalResults = data;
+        return data;
+      } catch (err) {
+        console.error('Failed to load historical results:', err);
+        return null;
+      }
+    }
+
+    function transformResultsToGames(resultsData, dateStr) {
+      if (!resultsData || !resultsData.days) return [];
+      const day = resultsData.days.find(d => d.date === dateStr);
+      if (!day || !day.picks) return [];
+
+      // Group picks by game
+      const gameMap = {};
+      for (const pick of day.picks) {
+        if (!pick.game) continue; // skip prop picks
+        const gameKey = pick.game;
+        if (!gameMap[gameKey]) {
+          // Parse "AWAY @ HOME" format
+          const parts = gameKey.split(' @ ');
+          if (parts.length !== 2) continue;
+          const [away, home] = parts;
+
+          // Parse result score "99-109" format
+          let awayScore = null, homeScore = null;
+          if (pick.result && typeof pick.result === 'string' && pick.result.includes('-')) {
+            const scores = pick.result.split('-').map(s => parseInt(s.trim()));
+            if (scores.length === 2 && !isNaN(scores[0]) && !isNaN(scores[1])) {
+              awayScore = scores[0];
+              homeScore = scores[1];
+            }
+          }
+
+          gameMap[gameKey] = {
+            away_team: away,
+            home_team: home,
+            game_date: dateStr,
+            proj_score: null,
+            actual_score: pick.result || null,
+            away_score: awayScore,
+            home_score: homeScore,
+            status: 'final',
+            _isHistorical: true
+          };
+        }
+
+        // Store pick results as 'win'/'loss'/'push' strings for renderResultBadge
+        const g = gameMap[gameKey];
+        const hitToResult = h => h === true ? 'win' : h === false ? 'loss' : h === null ? 'push' : '';
+        if (pick.type === 'spread') {
+          g.spread_pick = pick.pick;
+          g.spread_conf = pick.confidence;
+          g.spread_result = hitToResult(pick.hit);
+        } else if (pick.type === 'total') {
+          // Parse "OVER 227.5" or "UNDER 220" format
+          const totalMatch = (pick.pick || '').match(/(OVER|UNDER)\s+([\d.]+)/i);
+          if (totalMatch) {
+            g.total_pick = totalMatch[1].toUpperCase();
+            g.total_line = parseFloat(totalMatch[2]);
+          } else {
+            g.total_pick = pick.pick;
+          }
+          g.total_conf = pick.confidence;
+          g.total_result = hitToResult(pick.hit);
+        } else if (pick.type === 'ml') {
+          g.ml_pick = pick.pick;
+          g.ml_conf = pick.confidence;
+          g.ml_result = hitToResult(pick.hit);
+        }
+      }
+
+      return Object.values(gameMap);
+    }
 
     // ── Bet Tracking (localStorage) ──
     const LS_SETTINGS = 'efe_user_settings';
@@ -3854,22 +3943,41 @@
         return historicalGamesCache[date];
       }
 
-      // Try to fetch from archive
+      // Try to fetch from archive first
+      const archiveUrl = `https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/archive/projections_${date}.json`;
       try {
-        const resp = await fetch(`archive/projections_${date}.json`);
-        if (!resp.ok) {
-          historicalGamesCache[date] = [];
-          historicalNhlCache[date] = [];
-          return [];
+        const resp = await fetch(archiveUrl + '?t=' + Date.now());
+        if (resp.ok) {
+          const data = await resp.json();
+          const games = data.game_projections?.games || [];
+          const nhlGames = data.nhl_game_projections?.games || [];
+          // Mark games with their results if available
+          if (games.length > 0 || nhlGames.length > 0) {
+            historicalGamesCache[date] = games;
+            historicalNhlCache[date] = nhlGames;
+            return games;
+          }
         }
-        const data = await resp.json();
-        const games = data.game_projections?.games || [];
-        const nhlGames = data.nhl_game_projections?.games || [];
-        historicalGamesCache[date] = games;
-        historicalNhlCache[date] = nhlGames;
-        return games;
       } catch (e) {
-        console.log(`No archive for ${date}:`, e.message);
+        console.log(`Archive fetch failed for ${date}:`, e.message);
+      }
+
+      // Fallback: load from results.json
+      console.log(`Falling back to results.json for ${date}`);
+      try {
+        if (!historicalResults) {
+          await loadHistoricalResults('nba');
+        }
+        if (!nhlHistoricalResults) {
+          await loadHistoricalResults('nhl');
+        }
+        const nbaGames = transformResultsToGames(historicalResults, date);
+        const nhlGames = transformResultsToGames(nhlHistoricalResults, date);
+        historicalGamesCache[date] = nbaGames;
+        historicalNhlCache[date] = nhlGames;
+        return nbaGames;
+      } catch (e) {
+        console.log(`Results fallback failed for ${date}:`, e.message);
         historicalGamesCache[date] = [];
         historicalNhlCache[date] = [];
         return [];
@@ -3894,6 +4002,12 @@
 
     async function goToToday() {
       selectedDate = getLocalDateStr();
+      // Reload current projections (not historical)
+      if (currentSport === 'nba') {
+        await loadGameProjections();
+      } else {
+        await loadNhlGameProjections();
+      }
       renderGameProjections();
     }
 
