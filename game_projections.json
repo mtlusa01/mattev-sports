@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T09:54:57",
+  "updated": "2026-02-07T16:47:40",
   "games": [
     {
       "away_team": "WAS",
@@ -17,7 +17,7 @@
       "ml_pick": "BKN",
       "ml_conf": 56.6,
       "commence_time": "2026-02-07T20:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": 0.0,
@@ -55,7 +55,9 @@
         "edge": 7.0,
         "ev": 27.6,
         "confidence": "high"
-      }
+      },
+      "away_score": 70,
+      "home_score": 92
     },
     {
       "away_team": "HOU",
@@ -70,7 +72,7 @@
       "ml_pick": "OKC",
       "ml_conf": 69.1,
       "commence_time": "2026-02-07T20:40:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -11.6,
@@ -130,7 +132,9 @@
         "edge": 11.9,
         "ev": 37.5,
         "confidence": "high"
-      }
+      },
+      "away_score": 46,
+      "home_score": 52
     },
     {
       "away_team": "DAL",
@@ -610,7 +614,7 @@
       "ml_pick": "POR",
       "ml_conf": 58.3,
       "commence_time": "2026-02-08T03:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-07T14:09:44Z",
       "injury_impact": {
         "home": 0.0,
