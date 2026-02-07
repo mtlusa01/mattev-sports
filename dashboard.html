@@ -2195,6 +2195,63 @@
       return Object.values(gameMap);
     }
 
+    function mergeResultsIntoProjections(projections, resultsData, dateStr) {
+      if (!resultsData || !resultsData.days || !projections || !projections.length) {
+        return projections;
+      }
+
+      const day = resultsData.days.find(d => d.date === dateStr);
+      if (!day || !day.picks) return projections;
+
+      // Build a lookup of results by game
+      const resultsByGame = {};
+      for (const pick of day.picks) {
+        if (!pick.game) continue; // skip prop picks
+        const gameKey = pick.game; // "AWAY @ HOME"
+        if (!resultsByGame[gameKey]) {
+          resultsByGame[gameKey] = { score: null };
+        }
+        const r = resultsByGame[gameKey];
+
+        // Parse score from result (e.g., "99-109")
+        if (pick.result && typeof pick.result === 'string' && pick.result.includes('-') && !r.score) {
+          const scores = pick.result.split('-').map(s => parseInt(s.trim()));
+          if (scores.length === 2 && !isNaN(scores[0]) && !isNaN(scores[1])) {
+            r.score = pick.result;
+            r.awayScore = scores[0];
+            r.homeScore = scores[1];
+          }
+        }
+
+        // Store hit results
+        if (pick.type === 'spread') r.spreadHit = pick.hit;
+        else if (pick.type === 'total') r.totalHit = pick.hit;
+        else if (pick.type === 'ml') r.mlHit = pick.hit;
+      }
+
+      // Merge results into projection games
+      const hitToResult = h => h === true ? 'win' : h === false ? 'loss' : h === null ? 'push' : '';
+      for (const g of projections) {
+        const gameKey = g.away_team + ' @ ' + g.home_team;
+        const r = resultsByGame[gameKey];
+        if (r) {
+          // Add actual scores
+          if (r.score) {
+            g.actual_score = r.score;
+            g.away_score = r.awayScore;
+            g.home_score = r.homeScore;
+            g.status = 'final';
+          }
+          // Add result badges
+          if (r.spreadHit !== undefined) g.spread_result = hitToResult(r.spreadHit);
+          if (r.totalHit !== undefined) g.total_result = hitToResult(r.totalHit);
+          if (r.mlHit !== undefined) g.ml_result = hitToResult(r.mlHit);
+        }
+      }
+
+      return projections;
+    }
+
     // ── Bet Tracking (localStorage) ──
     const LS_SETTINGS = 'efe_user_settings';
     const LS_BETS = 'efe_tracked_bets';
@@ -3949,10 +4006,22 @@
         const resp = await fetch(archiveUrl + '?t=' + Date.now());
         if (resp.ok) {
           const data = await resp.json();
-          const games = data.game_projections?.games || [];
-          const nhlGames = data.nhl_game_projections?.games || [];
-          // Mark games with their results if available
+          let games = data.game_projections?.games || [];
+          let nhlGames = data.nhl_game_projections?.games || [];
+
           if (games.length > 0 || nhlGames.length > 0) {
+            // Load results to merge actual outcomes into projections
+            if (!historicalResults) await loadHistoricalResults('nba');
+            if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
+
+            // Merge actual scores and results into projections
+            if (games.length > 0 && historicalResults) {
+              games = mergeResultsIntoProjections(games, historicalResults, date);
+            }
+            if (nhlGames.length > 0 && nhlHistoricalResults) {
+              nhlGames = mergeResultsIntoProjections(nhlGames, nhlHistoricalResults, date);
+            }
+
             historicalGamesCache[date] = games;
             historicalNhlCache[date] = nhlGames;
             return games;
