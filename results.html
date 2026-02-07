@@ -698,31 +698,13 @@
 
     // ── Banner ──
     function renderResultsBanner(data) {
-      const allDays = data.days || [];
-      if (!allDays.length) {
+      const at = data.allTime;
+      if (!at) {
         document.getElementById('results-banner').innerHTML = '<div class="results-banner-stat"><div class="rbs-value">--</div><div class="rbs-label">No results yet</div></div>';
         return;
       }
 
-      // Only use today and yesterday for NBA (last 2 days)
-      const today = todayKey();
-      const yesterday = (() => {
-        const d = new Date();
-        d.setDate(d.getDate() - 1);
-        return dateKey(d.getFullYear(), d.getMonth(), d.getDate());
-      })();
-      const recentDays = allDays.filter(d => d.date === today || d.date === yesterday);
-
-      // Compute stats from recent days only
-      const at = {};
-      ['props', 'spreads', 'totals', 'moneylines'].forEach(cat => {
-        const w = recentDays.reduce((s, d) => s + (d[cat]?.wins || 0), 0);
-        const l = recentDays.reduce((s, d) => s + (d[cat]?.losses || 0), 0);
-        const p = recentDays.reduce((s, d) => s + (d[cat]?.pushes || 0), 0);
-        const t = w + l;
-        at[cat] = { wins: w, losses: l, pushes: p, pct: t > 0 ? +(w / t * 100).toFixed(1) : 0 };
-      });
-
+      // Use pre-computed all-time stats from results.json
       const totalW = (at.props?.wins||0) + (at.spreads?.wins||0) + (at.totals?.wins||0) + (at.moneylines?.wins||0);
       const totalL = (at.props?.losses||0) + (at.spreads?.losses||0) + (at.totals?.losses||0) + (at.moneylines?.losses||0);
       const totalP = (at.props?.pushes||0) + (at.spreads?.pushes||0) + (at.totals?.pushes||0) + (at.moneylines?.pushes||0);
@@ -732,9 +714,10 @@
       const totalRoi = totalT > 0 ? (totalProfit / (totalT * 100) * 100).toFixed(1) : 0;
       const totalRecord = totalP > 0 ? `${totalW}-${totalL}-${totalP}` : `${totalW}-${totalL}`;
 
-      // Best bets from recent days
-      const bbW = recentDays.reduce((s, d) => s + (d.best_bets?.wins || 0), 0);
-      const bbL = recentDays.reduce((s, d) => s + (d.best_bets?.losses || 0), 0);
+      // Best bets from allTime
+      const bb = at.best_bets || {};
+      const bbW = bb.wins || 0;
+      const bbL = bb.losses || 0;
       const bbT = bbW + bbL;
       const bbPct = bbT > 0 ? (bbW / bbT * 100).toFixed(1) : 0;
       const bbRecord = `${bbW}-${bbL}`;
@@ -744,7 +727,7 @@
       document.getElementById('results-banner').innerHTML = `
         <div class="results-banner-stat">
           <div class="rbs-value">${totalRecord}</div>
-          <div class="rbs-label">Wed-Thu Record</div>
+          <div class="rbs-label">All-Time Record</div>
         </div>
         <div class="results-banner-stat">
           <div class="rbs-value ${pctClass(parseFloat(totalPct))}">${totalPct}%</div>
