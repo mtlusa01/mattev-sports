@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T23:00:15",
+  "updated": "2026-02-07T23:01:14",
   "games": [
     {
       "away_team": "WAS",
@@ -207,7 +207,7 @@
       "ml_pick": "SAS",
       "ml_conf": 64.8,
       "commence_time": "2026-02-07T23:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -4.8,
@@ -262,8 +262,49 @@
         "ev": 22.2,
         "confidence": "medium"
       },
-      "away_score": 78,
-      "home_score": 97
+      "away_score": 125,
+      "home_score": 138,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Cooper Flagg",
+          "team": "DAL",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.9,
+          "actual": 4,
+          "hit": true,
+          "confidence": 54.815,
+          "ev": 18.4
+        },
+        {
+          "player": "Victor Wembanyama",
+          "team": "SAS",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 24.5,
+          "projection": 25.3,
+          "actual": 16,
+          "hit": false,
+          "confidence": 52.2,
+          "ev": 3.0
+        },
+        {
+          "player": "De'Aaron Fox",
+          "team": "SAS",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.2,
+          "actual": 5,
+          "hit": false,
+          "confidence": 55.1,
+          "ev": 1.4
+        }
+      ]
     },
     {
       "away_team": "UTA",
@@ -278,7 +319,7 @@
       "ml_pick": "ORL",
       "ml_conf": 63.7,
       "commence_time": "2026-02-08T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -3.6,
@@ -328,8 +369,49 @@
         "ev": 14.1,
         "confidence": "medium"
       },
-      "away_score": 37,
-      "home_score": 38
+      "away_score": 117,
+      "home_score": 120,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jalen Suggs",
+          "team": "ORL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.2,
+          "actual": 6,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 4.7
+        },
+        {
+          "player": "Lauri Markkanen",
+          "team": "UTA",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 25.9,
+          "actual": 27,
+          "hit": true,
+          "confidence": 54.0,
+          "ev": 1.3
+        },
+        {
+          "player": "Keyonte George",
+          "team": "UTA",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 30.2,
+          "actual": 5,
+          "hit": false,
+          "confidence": 54.9,
+          "ev": 1.0
+        }
+      ]
     },
     {
       "away_team": "CHA",
@@ -344,7 +426,7 @@
       "ml_pick": "ATL",
       "ml_conf": 51.5,
       "commence_time": "2026-02-08T00:40:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -2.4,
@@ -388,7 +470,38 @@
         "edge": -2.1,
         "ev": 7.4,
         "confidence": "low"
-      }
+      },
+      "away_score": 126,
+      "home_score": 119,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Jalen Johnson",
+          "team": "ATL",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 10.5,
+          "projection": 11.3,
+          "actual": 9,
+          "hit": false,
+          "confidence": 54.8,
+          "ev": 8.6
+        },
+        {
+          "player": "LaMelo Ball",
+          "team": "CHA",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 20.5,
+          "projection": 19.8,
+          "actual": 19,
+          "hit": true,
+          "confidence": 52.25,
+          "ev": 3.2
+        }
+      ]
     },
     {
       "away_team": "DEN",
@@ -403,7 +516,7 @@
       "ml_pick": "DEN",
       "ml_conf": 55.4,
       "commence_time": "2026-02-08T01:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -3.6,
@@ -463,7 +576,26 @@
         "edge": 3.5,
         "ev": 12.0,
         "confidence": "low"
-      }
+      },
+      "away_score": 136,
+      "home_score": 120,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jamal Murray",
+          "team": "DEN",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.2,
+          "actual": 3,
+          "hit": true,
+          "confidence": 53.865,
+          "ev": 2.3
+        }
+      ]
     },
     {
       "away_team": "GSW",
@@ -478,7 +610,7 @@
       "ml_pick": "LAL",
       "ml_conf": 52.9,
       "commence_time": "2026-02-08T01:40:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -8.0,
@@ -533,7 +665,9 @@
         "edge": 8.1,
         "ev": 32.1,
         "confidence": "high"
-      }
+      },
+      "away_score": 96,
+      "home_score": 105
     },
     {
       "away_team": "PHI",
@@ -548,7 +682,7 @@
       "ml_pick": "PHX",
       "ml_conf": 55.5,
       "commence_time": "2026-02-08T02:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -8.4,
@@ -597,7 +731,9 @@
         "edge": 5.6,
         "ev": 21.5,
         "confidence": "medium"
-      }
+      },
+      "away_score": 85,
+      "home_score": 71
     },
     {
       "away_team": "CLE",
@@ -612,7 +748,7 @@
       "ml_pick": "CLE",
       "ml_conf": 65.6,
       "commence_time": "2026-02-08T03:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -2.8,
@@ -661,7 +797,9 @@
         "edge": -5.4,
         "ev": 25.3,
         "confidence": "high"
-      }
+      },
+      "away_score": 55,
+      "home_score": 46
     },
     {
       "away_team": "MEM",
@@ -676,7 +814,7 @@
       "ml_pick": "POR",
       "ml_conf": 58.3,
       "commence_time": "2026-02-08T03:10:00Z",
-      "status": "final",
+      "status": "live",
       "locked_at": "2026-02-07T14:09:44Z",
       "injury_impact": {
         "home": 0.0,
@@ -705,11 +843,8 @@
         "ev": 35.0,
         "confidence": "high"
       },
-      "away_score": 115,
-      "home_score": 135,
-      "spread_result": "loss",
-      "total_result": "loss",
-      "ml_result": "win"
+      "away_score": 48,
+      "home_score": 51
     }
   ]
 }

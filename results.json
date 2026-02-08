@@ -1,40 +1,40 @@
 {
-  "updated": "2026-02-07T23:00:15",
+  "updated": "2026-02-07T23:01:14",
   "allTime": {
     "props": {
-      "wins": 63,
-      "losses": 77,
+      "wins": 67,
+      "losses": 82,
       "pushes": 0,
       "pct": 45.0,
-      "roi": -14.1
+      "roi": -14.2
     },
     "spreads": {
-      "wins": 14,
-      "losses": 19,
+      "wins": 15,
+      "losses": 21,
       "pushes": 1,
-      "pct": 42.4,
-      "roi": -19.0
+      "pct": 41.7,
+      "roi": -20.5
     },
     "totals": {
-      "wins": 18,
+      "wins": 21,
       "losses": 16,
       "pushes": 0,
-      "pct": 52.9,
-      "roi": 1.1
+      "pct": 56.8,
+      "roi": 8.4
     },
     "moneylines": {
-      "wins": 21,
-      "losses": 13,
+      "wins": 23,
+      "losses": 14,
       "pushes": 0,
-      "pct": 61.8,
-      "roi": 17.9
+      "pct": 62.2,
+      "roi": 18.7
     },
     "best_bets": {
-      "wins": 22,
-      "losses": 21,
+      "wins": 24,
+      "losses": 20,
       "pushes": 0,
-      "pct": 51.2,
-      "roi": -2.3
+      "pct": 54.5,
+      "roi": 4.1
     },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 69.2
@@ -43,31 +43,31 @@
     {
       "date": "2026-02-07",
       "props": {
-        "wins": 2,
-        "losses": 2,
+        "wins": 6,
+        "losses": 7,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "6-7",
+        "pct": 46.2
       },
       "spreads": {
-        "wins": 1,
-        "losses": 2,
+        "wins": 2,
+        "losses": 4,
         "pushes": 0,
-        "record": "1-2",
+        "record": "2-4",
         "pct": 33.3
       },
       "totals": {
-        "wins": 2,
+        "wins": 5,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "5-1",
+        "pct": 83.3
       },
       "moneylines": {
-        "wins": 2,
-        "losses": 1,
+        "wins": 4,
+        "losses": 2,
         "pushes": 0,
-        "record": "2-1",
+        "record": "4-2",
         "pct": 66.7
       },
       "picks": [
@@ -131,31 +131,124 @@
         {
           "date": "2026-02-07",
           "type": "spread",
-          "game": "MEM @ POR",
-          "pick": "MEM +10.0",
-          "result": "115-135",
+          "game": "DAL @ SAS",
+          "pick": "DAL +11.0",
+          "result": "125-138",
           "hit": false,
-          "confidence": 63.2,
+          "confidence": 61.6,
           "best_bet": true
         },
         {
           "date": "2026-02-07",
           "type": "total",
-          "game": "MEM @ POR",
-          "pick": "UNDER 237.5",
-          "result": "115-135",
+          "game": "DAL @ SAS",
+          "pick": "UNDER 229.5",
+          "result": "125-138",
           "hit": false,
-          "confidence": 69.2,
-          "best_bet": true
+          "confidence": 49.9
         },
         {
           "date": "2026-02-07",
           "type": "ml",
-          "game": "MEM @ POR",
-          "pick": "POR",
-          "result": "115-135",
+          "game": "DAL @ SAS",
+          "pick": "SAS",
+          "result": "125-138",
           "hit": true,
-          "confidence": 58.3
+          "confidence": 64.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "spread",
+          "game": "UTA @ ORL",
+          "pick": "UTA +9.0",
+          "result": "117-120",
+          "hit": true,
+          "confidence": 57.8
+        },
+        {
+          "date": "2026-02-07",
+          "type": "total",
+          "game": "UTA @ ORL",
+          "pick": "UNDER 237.5",
+          "result": "117-120",
+          "hit": true,
+          "confidence": 52.0
+        },
+        {
+          "date": "2026-02-07",
+          "type": "ml",
+          "game": "UTA @ ORL",
+          "pick": "ORL",
+          "result": "117-120",
+          "hit": true,
+          "confidence": 63.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "spread",
+          "game": "CHA @ ATL",
+          "pick": "ATL +2.0",
+          "result": "126-119",
+          "hit": false,
+          "confidence": 56.8
+        },
+        {
+          "date": "2026-02-07",
+          "type": "total",
+          "game": "CHA @ ATL",
+          "pick": "OVER 231.5",
+          "result": "126-119",
+          "hit": true,
+          "confidence": 52.5
+        },
+        {
+          "date": "2026-02-07",
+          "type": "ml",
+          "game": "CHA @ ATL",
+          "pick": "ATL",
+          "result": "126-119",
+          "hit": false,
+          "confidence": 51.5
+        },
+        {
+          "date": "2026-02-07",
+          "type": "spread",
+          "game": "DEN @ CHI",
+          "pick": "CHI +5.5",
+          "result": "136-120",
+          "hit": false,
+          "confidence": 59.8
+        },
+        {
+          "date": "2026-02-07",
+          "type": "total",
+          "game": "DEN @ CHI",
+          "pick": "OVER 232.5",
+          "result": "136-120",
+          "hit": true,
+          "confidence": 59.1
+        },
+        {
+          "date": "2026-02-07",
+          "type": "ml",
+          "game": "DEN @ CHI",
+          "pick": "DEN",
+          "result": "136-120",
+          "hit": true,
+          "confidence": 55.4
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Jalen Johnson",
+          "team": "ATL",
+          "pick": "REB OVER 10.5",
+          "line": 10.5,
+          "result": 9,
+          "hit": false,
+          "confidence": 54.8
         },
         {
           "date": "2026-02-07",
@@ -193,6 +286,72 @@
         {
           "date": "2026-02-07",
           "type": "prop",
+          "player": "Lauri Markkanen",
+          "team": "UTA",
+          "pick": "PTS OVER 21.5",
+          "line": 21.5,
+          "result": 27,
+          "hit": true,
+          "confidence": 54.0
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Keyonte George",
+          "team": "UTA",
+          "pick": "PTS OVER 21.5",
+          "line": 21.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 54.9
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Cooper Flagg",
+          "team": "DAL",
+          "pick": "AST UNDER 4.5",
+          "line": 4.5,
+          "result": 4,
+          "hit": true,
+          "confidence": 54.815
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Jalen Suggs",
+          "team": "ORL",
+          "pick": "AST OVER 6.5",
+          "line": 6.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 52.1
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Victor Wembanyama",
+          "team": "SAS",
+          "pick": "PTS OVER 24.5",
+          "line": 24.5,
+          "result": 16,
+          "hit": false,
+          "confidence": 52.2
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "De'Aaron Fox",
+          "team": "SAS",
+          "pick": "AST OVER 6.5",
+          "line": 6.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 55.1
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
           "player": "Isaiah Hartenstein",
           "team": "OKC",
           "pick": "REB OVER 7.5",
@@ -200,14 +359,36 @@
           "result": 8,
           "hit": true,
           "confidence": 57.9
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Jamal Murray",
+          "team": "DEN",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 3,
+          "hit": true,
+          "confidence": 53.865
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "LaMelo Ball",
+          "team": "CHA",
+          "pick": "PTS UNDER 20.5",
+          "line": 20.5,
+          "result": 19,
+          "hit": true,
+          "confidence": 52.25
         }
       ],
       "best_bets": {
-        "wins": 2,
-        "losses": 3,
+        "wins": 4,
+        "losses": 2,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "4-2",
+        "pct": 66.7
       }
     },
     {
