@@ -11185,47 +11185,217 @@
     "total_nhl_games": 7
   },
   "results": {
-    "updated": "2026-02-07T10:00:04",
+    "updated": "2026-02-07T23:00:15",
     "allTime": {
       "props": {
-        "wins": 61,
-        "losses": 75,
+        "wins": 63,
+        "losses": 77,
         "pushes": 0,
-        "pct": 44.9,
-        "roi": -14.4
+        "pct": 45.0,
+        "roi": -14.1
       },
       "spreads": {
-        "wins": 13,
-        "losses": 17,
+        "wins": 14,
+        "losses": 19,
         "pushes": 1,
-        "pct": 43.3,
-        "roi": -17.3
+        "pct": 42.4,
+        "roi": -19.0
       },
       "totals": {
-        "wins": 16,
-        "losses": 15,
+        "wins": 18,
+        "losses": 16,
         "pushes": 0,
-        "pct": 51.6,
-        "roi": -1.5
+        "pct": 52.9,
+        "roi": 1.1
       },
       "moneylines": {
-        "wins": 19,
-        "losses": 12,
+        "wins": 21,
+        "losses": 13,
         "pushes": 0,
-        "pct": 61.3,
-        "roi": 17.0
+        "pct": 61.8,
+        "roi": 17.9
       },
       "best_bets": {
-        "wins": 20,
-        "losses": 18,
+        "wins": 22,
+        "losses": 21,
         "pushes": 0,
-        "pct": 52.6,
-        "roi": 0.5
+        "pct": 51.2,
+        "roi": -2.3
       },
       "best_prop_type": "pts_rebs_asts",
       "best_prop_pct": 69.2
     },
     "days": [
+      {
+        "date": "2026-02-07",
+        "props": {
+          "wins": 2,
+          "losses": 2,
+          "pushes": 0,
+          "record": "2-2",
+          "pct": 50.0
+        },
+        "spreads": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0,
+          "record": "1-2",
+          "pct": 33.3
+        },
+        "totals": {
+          "wins": 2,
+          "losses": 1,
+          "pushes": 0,
+          "record": "2-1",
+          "pct": 66.7
+        },
+        "moneylines": {
+          "wins": 2,
+          "losses": 1,
+          "pushes": 0,
+          "record": "2-1",
+          "pct": 66.7
+        },
+        "picks": [
+          {
+            "date": "2026-02-07",
+            "type": "spread",
+            "game": "WAS @ BKN",
+            "pick": "BKN -4.5",
+            "result": "113-127",
+            "hit": true,
+            "confidence": 48.3
+          },
+          {
+            "date": "2026-02-07",
+            "type": "total",
+            "game": "WAS @ BKN",
+            "pick": "OVER 220.5",
+            "result": "113-127",
+            "hit": true,
+            "confidence": 62.2,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-07",
+            "type": "ml",
+            "game": "WAS @ BKN",
+            "pick": "BKN",
+            "result": "113-127",
+            "hit": true,
+            "confidence": 56.6
+          },
+          {
+            "date": "2026-02-07",
+            "type": "spread",
+            "game": "HOU @ OKC",
+            "pick": "OKC -3.5",
+            "result": "112-106",
+            "hit": false,
+            "confidence": 58.6
+          },
+          {
+            "date": "2026-02-07",
+            "type": "total",
+            "game": "HOU @ OKC",
+            "pick": "OVER 212.5",
+            "result": "112-106",
+            "hit": true,
+            "confidence": 80.2,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-07",
+            "type": "ml",
+            "game": "HOU @ OKC",
+            "pick": "OKC",
+            "result": "112-106",
+            "hit": false,
+            "confidence": 69.1,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-07",
+            "type": "spread",
+            "game": "MEM @ POR",
+            "pick": "MEM +10.0",
+            "result": "115-135",
+            "hit": false,
+            "confidence": 63.2,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-07",
+            "type": "total",
+            "game": "MEM @ POR",
+            "pick": "UNDER 237.5",
+            "result": "115-135",
+            "hit": false,
+            "confidence": 69.2,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-07",
+            "type": "ml",
+            "game": "MEM @ POR",
+            "pick": "POR",
+            "result": "115-135",
+            "hit": true,
+            "confidence": 58.3
+          },
+          {
+            "date": "2026-02-07",
+            "type": "prop",
+            "player": "Noah Clowney",
+            "team": "BKN",
+            "pick": "REB OVER 4.5",
+            "line": 4.5,
+            "result": 3,
+            "hit": false,
+            "confidence": 53.8
+          },
+          {
+            "date": "2026-02-07",
+            "type": "prop",
+            "player": "Chet Holmgren",
+            "team": "OKC",
+            "pick": "PTS UNDER 19.5",
+            "line": 19.5,
+            "result": 17,
+            "hit": true,
+            "confidence": 58.9
+          },
+          {
+            "date": "2026-02-07",
+            "type": "prop",
+            "player": "Chet Holmgren",
+            "team": "OKC",
+            "pick": "REB UNDER 8.5",
+            "line": 8.5,
+            "result": 14,
+            "hit": false,
+            "confidence": 57.0
+          },
+          {
+            "date": "2026-02-07",
+            "type": "prop",
+            "player": "Isaiah Hartenstein",
+            "team": "OKC",
+            "pick": "REB OVER 7.5",
+            "line": 7.5,
+            "result": 8,
+            "hit": true,
+            "confidence": 57.9
+          }
+        ],
+        "best_bets": {
+          "wins": 2,
+          "losses": 3,
+          "pushes": 0,
+          "record": "2-3",
+          "pct": 40.0
+        }
+      },
       {
         "date": "2026-02-06",
         "props": {
@@ -13719,5 +13889,5 @@
       }
     ]
   },
-  "results_added_at": "2026-02-07T10:00:04"
+  "results_added_at": "2026-02-07T23:00:15"
 }
