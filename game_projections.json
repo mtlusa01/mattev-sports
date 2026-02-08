@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T23:45:38",
+  "updated": "2026-02-08T02:48:32",
   "games": [
     {
       "away_team": "WAS",
@@ -777,7 +777,105 @@
       "home_score": 103,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Joel Embiid",
+          "team": "PHI",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 28.5,
+          "projection": 31.4,
+          "actual": 33,
+          "hit": true,
+          "confidence": 55.7,
+          "ev": 8.8
+        },
+        {
+          "player": "Joel Embiid",
+          "team": "PHI",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.2,
+          "actual": 3,
+          "hit": false,
+          "confidence": 52.5,
+          "ev": 8.7
+        },
+        {
+          "player": "VJ Edgecombe",
+          "team": "PHI",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.0,
+          "actual": 6,
+          "hit": true,
+          "confidence": 52.2,
+          "ev": 7.5
+        },
+        {
+          "player": "Devin Booker",
+          "team": "PHX",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 26.6,
+          "actual": 21,
+          "hit": false,
+          "confidence": 55.0,
+          "ev": 1.7
+        },
+        {
+          "player": "Dillon Brooks",
+          "team": "PHX",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 19.5,
+          "projection": 23.4,
+          "actual": 28,
+          "hit": true,
+          "confidence": 52.3,
+          "ev": 1.7
+        },
+        {
+          "player": "Devin Booker",
+          "team": "PHX",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.8,
+          "actual": 9,
+          "hit": true,
+          "confidence": 54.3,
+          "ev": 1.5
+        },
+        {
+          "player": "Collin Gillespie",
+          "team": "PHX",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 15.6,
+          "actual": 6,
+          "hit": false,
+          "confidence": 52.9,
+          "ev": 1.4
+        },
+        {
+          "player": "Royce O'Neale",
+          "team": "PHX",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.7,
+          "actual": 11,
+          "hit": false,
+          "confidence": 53.01,
+          "ev": 1.2
+        }
+      ]
     },
     {
       "away_team": "CLE",
@@ -792,7 +890,7 @@
       "ml_pick": "CLE",
       "ml_conf": 65.6,
       "commence_time": "2026-02-08T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -2.8,
@@ -842,8 +940,49 @@
         "ev": 25.3,
         "confidence": "high"
       },
-      "away_score": 87,
-      "home_score": 86
+      "away_score": 132,
+      "home_score": 126,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Donovan Mitchell",
+          "team": "CLE",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.6,
+          "actual": 4,
+          "hit": false,
+          "confidence": 54.6,
+          "ev": 2.1
+        },
+        {
+          "player": "Russell Westbrook",
+          "team": "SAC",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.1,
+          "actual": 5,
+          "hit": false,
+          "confidence": 53.675,
+          "ev": 1.3
+        },
+        {
+          "player": "Jaylon Tyson",
+          "team": "CLE",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 15.8,
+          "actual": 10,
+          "hit": false,
+          "confidence": 53.6,
+          "ev": 1.0
+        }
+      ]
     },
     {
       "away_team": "MEM",
@@ -858,7 +997,7 @@
       "ml_pick": "POR",
       "ml_conf": 58.3,
       "commence_time": "2026-02-08T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T14:09:44Z",
       "injury_impact": {
         "home": 0.0,
@@ -887,8 +1026,61 @@
         "ev": 35.0,
         "confidence": "high"
       },
-      "away_score": 87,
-      "home_score": 83
+      "away_score": 115,
+      "home_score": 122,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.5,
+          "actual": 4,
+          "hit": false,
+          "confidence": 55.8,
+          "ev": 7.1
+        },
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 18.0,
+          "actual": 21,
+          "hit": true,
+          "confidence": 55.4,
+          "ev": 4.0
+        },
+        {
+          "player": "Toumani Camara",
+          "team": "POR",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.2,
+          "actual": 7,
+          "hit": true,
+          "confidence": 53.8,
+          "ev": 3.6
+        },
+        {
+          "player": "Jerami Grant",
+          "team": "POR",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 18.8,
+          "actual": 29,
+          "hit": true,
+          "confidence": 53.2,
+          "ev": 1.1
+        }
+      ]
     }
   ]
 }

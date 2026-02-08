@@ -1,40 +1,40 @@
 {
-  "updated": "2026-02-07T23:45:38",
+  "updated": "2026-02-08T02:48:32",
   "allTime": {
     "props": {
-      "wins": 68,
-      "losses": 84,
+      "wins": 75,
+      "losses": 92,
       "pushes": 0,
-      "pct": 44.7,
-      "roi": -14.6
+      "pct": 44.9,
+      "roi": -14.3
     },
     "spreads": {
-      "wins": 15,
+      "wins": 17,
       "losses": 23,
       "pushes": 1,
-      "pct": 39.5,
-      "roi": -24.6
+      "pct": 42.5,
+      "roi": -18.9
     },
     "totals": {
-      "wins": 21,
-      "losses": 18,
+      "wins": 22,
+      "losses": 19,
       "pushes": 0,
-      "pct": 53.8,
-      "roi": 2.8
+      "pct": 53.7,
+      "roi": 2.4
     },
     "moneylines": {
-      "wins": 24,
+      "wins": 26,
       "losses": 15,
       "pushes": 0,
-      "pct": 61.5,
-      "roi": 17.5
+      "pct": 63.4,
+      "roi": 21.1
     },
     "best_bets": {
-      "wins": 24,
+      "wins": 29,
       "losses": 22,
       "pushes": 0,
-      "pct": 52.2,
-      "roi": -0.4
+      "pct": 56.9,
+      "roi": 8.6
     },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 69.2
@@ -43,32 +43,32 @@
     {
       "date": "2026-02-07",
       "props": {
-        "wins": 7,
-        "losses": 9,
+        "wins": 14,
+        "losses": 17,
         "pushes": 0,
-        "record": "7-9",
-        "pct": 43.8
+        "record": "14-17",
+        "pct": 45.2
       },
       "spreads": {
-        "wins": 2,
+        "wins": 4,
         "losses": 6,
         "pushes": 0,
-        "record": "2-6",
-        "pct": 25.0
+        "record": "4-6",
+        "pct": 40.0
       },
       "totals": {
-        "wins": 5,
-        "losses": 3,
+        "wins": 6,
+        "losses": 4,
         "pushes": 0,
-        "record": "5-3",
-        "pct": 62.5
+        "record": "6-4",
+        "pct": 60.0
       },
       "moneylines": {
-        "wins": 5,
+        "wins": 7,
         "losses": 3,
         "pushes": 0,
-        "record": "5-3",
-        "pct": 62.5
+        "record": "7-3",
+        "pct": 70.0
       },
       "picks": [
         {
@@ -297,6 +297,64 @@
         },
         {
           "date": "2026-02-07",
+          "type": "spread",
+          "game": "CLE @ SAC",
+          "pick": "SAC +12.0",
+          "result": "132-126",
+          "hit": true,
+          "confidence": 64.1,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "total",
+          "game": "CLE @ SAC",
+          "pick": "UNDER 233.5",
+          "result": "132-126",
+          "hit": false,
+          "confidence": 54.9
+        },
+        {
+          "date": "2026-02-07",
+          "type": "ml",
+          "game": "CLE @ SAC",
+          "pick": "CLE",
+          "result": "132-126",
+          "hit": true,
+          "confidence": 65.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "spread",
+          "game": "MEM @ POR",
+          "pick": "MEM +10.0",
+          "result": "115-122",
+          "hit": true,
+          "confidence": 63.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "total",
+          "game": "MEM @ POR",
+          "pick": "UNDER 237.5",
+          "result": "115-122",
+          "hit": true,
+          "confidence": 69.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "ml",
+          "game": "MEM @ POR",
+          "pick": "POR",
+          "result": "115-122",
+          "hit": true,
+          "confidence": 58.3
+        },
+        {
+          "date": "2026-02-07",
           "type": "prop",
           "player": "Jalen Johnson",
           "team": "ATL",
@@ -338,6 +396,61 @@
           "result": 14,
           "hit": false,
           "confidence": 57.0
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Joel Embiid",
+          "team": "PHI",
+          "pick": "PTS OVER 28.5",
+          "line": 28.5,
+          "result": 33,
+          "hit": true,
+          "confidence": 55.7
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "VJ Edgecombe",
+          "team": "PHI",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 6,
+          "hit": true,
+          "confidence": 52.2
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Devin Booker",
+          "team": "PHX",
+          "pick": "PTS OVER 21.5",
+          "line": 21.5,
+          "result": 21,
+          "hit": false,
+          "confidence": 55.0
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Dillon Brooks",
+          "team": "PHX",
+          "pick": "PTS OVER 19.5",
+          "line": 19.5,
+          "result": 28,
+          "hit": true,
+          "confidence": 52.3
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Royce O'Neale",
+          "team": "PHX",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 11,
+          "hit": false,
+          "confidence": 53.01
         },
         {
           "date": "2026-02-07",
@@ -408,6 +521,29 @@
         {
           "date": "2026-02-07",
           "type": "prop",
+          "player": "Collin Gillespie",
+          "team": "PHX",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 52.9
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Jerami Grant",
+          "team": "POR",
+          "pick": "PTS OVER 16.5",
+          "line": 16.5,
+          "result": 29,
+          "hit": true,
+          "confidence": 53.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
           "player": "Victor Wembanyama",
           "team": "SAS",
           "pick": "PTS OVER 24.5",
@@ -441,6 +577,61 @@
         {
           "date": "2026-02-07",
           "type": "prop",
+          "player": "Devin Booker",
+          "team": "PHX",
+          "pick": "AST OVER 4.5",
+          "line": 4.5,
+          "result": 9,
+          "hit": true,
+          "confidence": 54.3
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 55.8
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Toumani Camara",
+          "team": "POR",
+          "pick": "REB OVER 4.5",
+          "line": 4.5,
+          "result": 7,
+          "hit": true,
+          "confidence": 53.8
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Russell Westbrook",
+          "team": "SAC",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 53.675
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Donovan Mitchell",
+          "team": "CLE",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 54.6
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
           "player": "Jamal Murray",
           "team": "DEN",
           "pick": "REB UNDER 4.5",
@@ -463,6 +654,39 @@
         {
           "date": "2026-02-07",
           "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 21,
+          "hit": true,
+          "confidence": 55.4
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Jaylon Tyson",
+          "team": "CLE",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 10,
+          "hit": false,
+          "confidence": 53.6
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
+          "player": "Joel Embiid",
+          "team": "PHI",
+          "pick": "AST OVER 4.5",
+          "line": 4.5,
+          "result": 3,
+          "hit": false,
+          "confidence": 52.5
+        },
+        {
+          "date": "2026-02-07",
+          "type": "prop",
           "player": "LaMelo Ball",
           "team": "CHA",
           "pick": "PTS UNDER 20.5",
@@ -473,11 +697,11 @@
         }
       ],
       "best_bets": {
-        "wins": 4,
+        "wins": 9,
         "losses": 4,
         "pushes": 0,
-        "record": "4-4",
-        "pct": 50.0
+        "record": "9-4",
+        "pct": 69.2
       }
     },
     {
