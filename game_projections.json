@@ -2,7 +2,7 @@
   "date": "2026-02-08",
   "sport": "NBA",
   "locked_at": "2026-02-08T11:48:42",
-  "updated": "2026-02-08T14:07:54",
+  "updated": "2026-02-08T17:17:05",
   "games": [
     {
       "away_team": "NYK",
@@ -17,7 +17,7 @@
       "ml_pick": "BOS",
       "ml_conf": 57.3,
       "commence_time": "2026-02-08T17:40:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
         "home": -6.8,
@@ -62,8 +62,37 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 65,
-      "home_score": 61
+      "away_score": 111,
+      "home_score": 89,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 18.5,
+          "projection": 15.9,
+          "actual": 11,
+          "hit": true,
+          "confidence": 52.059999999999995,
+          "ev": 5.5
+        },
+        {
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 8.3,
+          "actual": 2,
+          "hit": false,
+          "confidence": 58.0,
+          "ev": 3.2
+        }
+      ]
     },
     {
       "away_team": "MIA",
@@ -78,7 +107,7 @@
       "ml_pick": "MIA",
       "ml_conf": 65.6,
       "commence_time": "2026-02-08T19:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
         "home": -15.2,
@@ -138,7 +167,33 @@
         "edge": -3.5,
         "ev": 12.0,
         "confidence": "low"
-      }
+      },
+      "graded_props": [
+        {
+          "player": "Kyshawn George",
+          "team": "WAS",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.9,
+          "actual": 3,
+          "hit": false,
+          "confidence": 52.8,
+          "ev": 13.6
+        },
+        {
+          "player": "Andrew Wiggins",
+          "team": "MIA",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 16.3,
+          "actual": 11,
+          "hit": false,
+          "confidence": 54.8,
+          "ev": 2.5
+        }
+      ]
     },
     {
       "away_team": "IND",

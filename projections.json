@@ -2,7 +2,7 @@
   "date": "2026-02-08",
   "sport": "NBA",
   "locked_at": "2026-02-08T11:48:34",
-  "updated": "2026-02-08T14:11:00",
+  "updated": "2026-02-08T17:17:05",
   "projections": [
     {
       "player": "Jaylen Brown",
@@ -232,6 +232,8 @@
         "90% L10 hit rate",
         "9-game streak"
       ],
+      "actual": 2,
+      "result": "LOSS",
       "top_pick_rank": 2
     },
     {
@@ -916,7 +918,9 @@
       "score_factors": [
         "60% L10 hit rate",
         "Favorable matchup (#29 DEF)"
-      ]
+      ],
+      "actual": 11,
+      "result": "LOSS"
     },
     {
       "player": "Anthony Edwards",
@@ -1802,7 +1806,9 @@
       ],
       "injury_status": "Questionable",
       "injury_type": "Right knee (bruise)",
-      "injury_headline": "Right knee (bruise)"
+      "injury_headline": "Right knee (bruise)",
+      "actual": 3,
+      "result": "LOSS"
     },
     {
       "player": "Ayo Dosunmu",
@@ -2247,7 +2253,6 @@
         "Favorable matchup (#6 DEF)",
         "8-game streak"
       ],
-      "top_pick_rank": 5,
       "added_live": true,
       "discovered_at": "2026-02-08T12:12:43"
     },
@@ -2480,9 +2485,10 @@
         "Favorable matchup (#2 DEF)",
         "+2.6 edge"
       ],
-      "top_pick_rank": 3,
       "added_live": true,
-      "discovered_at": "2026-02-08T12:12:43"
+      "discovered_at": "2026-02-08T12:12:43",
+      "actual": 11,
+      "result": "WIN"
     },
     {
       "player": "Andrew Nembhard",
@@ -2720,7 +2726,6 @@
         "80% L10 hit rate",
         "7-game streak"
       ],
-      "top_pick_rank": 4,
       "added_live": true,
       "discovered_at": "2026-02-08T12:42:56"
     }
@@ -2781,7 +2786,9 @@
       },
       "best_book": "fanduel",
       "insight": "Has gone OVER 6.5 rebounds in 9 of last 10 games (9.1 avg).",
-      "top_pick_rank": 2
+      "top_pick_rank": 2,
+      "result": "LOSS",
+      "actual": 2
     },
     {
       "type": "total",
@@ -2795,7 +2802,9 @@
         "71.9% total conf"
       ],
       "commence_time": "2026-02-08T17:40:00Z",
-      "top_pick_rank": 3
+      "top_pick_rank": 3,
+      "result": "LOSS",
+      "actual": "111-89"
     },
     {
       "type": "ml",
