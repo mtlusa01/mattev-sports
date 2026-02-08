@@ -76,167 +76,147 @@
 
     /* ── Main Container ── */
     .main-container {
-      max-width: 1200px; margin: 0 auto; padding: 80px 1.5rem 2rem;
+      max-width: 900px; margin: 0 auto; padding: 80px 1.5rem 2rem;
       position: relative; z-index: 1;
     }
 
-    .page-header {
-      margin-bottom: 1.5rem;
-    }
-    .page-title {
-      font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem;
-    }
-    .page-subtitle {
-      color: var(--text-secondary); font-size: 0.95rem;
-    }
-
-    /* ── Date Picker ── */
-    .date-picker {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem;
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px;
-      padding: 8px 12px; width: fit-content;
-    }
-    .date-picker-btn {
-      background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px;
-      color: var(--text-secondary); font-size: 16px; padding: 6px 10px; cursor: pointer;
-      transition: all 0.15s;
-    }
-    .date-picker-btn:hover { background: var(--bg-elevated); color: var(--text-primary); border-color: var(--border-light); }
-    .date-picker-today {
-      background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px;
-      color: var(--text-secondary); font-size: 12px; font-weight: 600; padding: 6px 12px;
-      cursor: pointer; transition: all 0.15s;
-    }
-    .date-picker-today:hover:not(:disabled) { background: var(--bg-elevated); color: var(--text-primary); }
-    .date-picker-today.active { background: var(--brand); border-color: var(--brand); color: #fff; }
-    .date-picker-today:disabled { opacity: 0.5; cursor: default; }
-    .date-picker-alltime {
-      background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px;
-      color: var(--text-secondary); font-size: 12px; font-weight: 600; padding: 6px 12px;
-      cursor: pointer; transition: all 0.15s;
-    }
-    .date-picker-alltime:hover { background: var(--bg-elevated); color: var(--text-primary); }
-    .date-picker-alltime.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .date-picker-display {
-      display: flex; align-items: center; gap: 8px; min-width: 100px; cursor: pointer;
-      padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);
-      background: var(--bg-tertiary); transition: all 0.15s;
-    }
-    .date-picker-display:hover { border-color: var(--border-light); background: var(--bg-elevated); }
-    .date-picker-display .cal-icon { font-size: 14px; }
-    .date-picker-display .date-text { display: flex; flex-direction: column; align-items: flex-start; }
-    .date-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .date-picker-display .date-value { font-size: 14px; font-weight: 600; }
-
-    /* ── Calendar Modal ── */
-    .cal-modal-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200;
-      opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s;
-      display: flex; align-items: center; justify-content: center; padding: 20px;
-    }
-    .cal-modal-backdrop.visible { opacity: 1; visibility: visible; }
-    .cal-modal {
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px;
-      width: calc(100% - 32px); max-width: 380px; padding: 20px;
-      transform: scale(0.95); transition: transform 0.2s;
-    }
-    .cal-modal-backdrop.visible .cal-modal { transform: scale(1); }
-    .cal-modal-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; text-align: center; }
-
-    /* Quick Filters */
-    .cal-quick-filters {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px;
-    }
-    .cal-quick-btn {
-      padding: 10px 8px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s; text-align: center;
-    }
-    .cal-quick-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .cal-quick-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-    /* Calendar Grid */
-    .cal-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
-    }
-    .cal-title { font-size: 15px; font-weight: 600; }
-    .cal-nav { display: flex; gap: 4px; }
-    .cal-nav button {
-      width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);
-      background: var(--bg-tertiary); color: var(--text-secondary); cursor: pointer;
-      font-size: 14px; transition: all 0.15s;
-    }
-    .cal-nav button:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .cal-weekdays {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 4px;
-    }
-    .cal-weekday {
-      text-align: center; font-size: 10px; font-weight: 600; color: var(--text-muted);
-      text-transform: uppercase; padding: 4px 0;
-    }
-    .cal-grid {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
-    }
-    .cal-day {
-      aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      font-size: 13px; color: var(--text-secondary); border-radius: 8px; cursor: pointer;
-      position: relative; transition: all 0.15s; border: 1px solid transparent;
-    }
-    .cal-day:hover { background: var(--bg-tertiary); }
-    .cal-day.other-month { color: rgba(107, 114, 128, 0.3); }
-    .cal-day.today { border-color: var(--border-light); font-weight: 600; }
-    .cal-day.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .cal-day.has-bets { font-weight: 600; color: var(--text-primary); }
-    .cal-day.future { color: rgba(107, 114, 128, 0.2); cursor: default; }
-    .cal-day.future:hover { background: transparent; }
-    .cal-dot {
-      position: absolute; bottom: 3px; width: 5px; height: 5px; border-radius: 50%;
-    }
-    .cal-dot.win { background: var(--accent); }
-    .cal-dot.loss { background: var(--red); }
-    .cal-dot.mixed { background: var(--yellow); }
-    .cal-dot.pending { background: var(--text-muted); }
-
-    /* Calendar Stats */
-    .cal-stats {
+    /* ── Top Stats Row ── */
+    .top-bar {
       display: flex; justify-content: space-between; align-items: center;
-      margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
     }
-    .cal-stat { text-align: center; }
-    .cal-stat-value { font-size: 16px; font-weight: 700; }
-    .cal-stat-value.positive { color: var(--accent); }
-    .cal-stat-value.negative { color: var(--red-light); }
-    .cal-stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 2px; }
+    .stats-row {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .stat-pill {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 20px; min-width: 100px;
+    }
+    .stat-pill-value { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+    .stat-pill-value.positive { color: var(--accent); }
+    .stat-pill-value.negative { color: var(--red-light); }
+    .stat-pill-value.neutral { color: var(--text-primary); }
+    .stat-pill-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
 
-    .cal-close-btn {
-      width: 100%; margin-top: 16px; padding: 12px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--bg-tertiary); color: var(--text-secondary); font-size: 14px; font-weight: 600;
+    .display-toggle {
+      display: flex; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .display-toggle button {
+      padding: 8px 16px; border: none; background: transparent; color: var(--text-secondary);
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+    }
+    .display-toggle button:hover { color: var(--text-primary); }
+    .display-toggle button.active { background: var(--accent); color: #fff; }
+
+    /* ── Quick Filters ── */
+    .quick-filters {
+      display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .quick-btn {
+      padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg-secondary); color: var(--text-secondary); font-size: 13px; font-weight: 600;
       cursor: pointer; transition: all 0.15s;
     }
-    .cal-close-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .quick-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .quick-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    /* ── Stats Cards ── */
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
-      margin-bottom: 1.5rem;
+    /* ── Calendar ── */
+    .calendar-card {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; margin-bottom: 24px;
     }
-    .stat-card {
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
-      padding: 16px; text-align: center;
+    .calendar-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
     }
-    .stat-value { font-size: 1.75rem; font-weight: 700; margin-bottom: 4px; }
-    .stat-value.positive { color: var(--accent); }
-    .stat-value.negative { color: var(--red-light); }
-    .stat-value.neutral { color: var(--text-primary); }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .calendar-title { font-size: 20px; font-weight: 700; }
+    .calendar-nav { display: flex; gap: 8px; }
+    .calendar-nav button {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg-tertiary); color: var(--text-secondary); cursor: pointer;
+      font-size: 18px; transition: all 0.15s; display: flex; align-items: center; justify-content: center;
+    }
+    .calendar-nav button:hover { border-color: var(--border-light); color: var(--text-primary); background: var(--bg-elevated); }
 
-    /* ── Filters ── */
-    .filters-bar {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; flex-wrap: wrap;
+    .calendar-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px;
+    }
+    .calendar-weekday {
+      text-align: center; font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; padding: 8px 0;
+    }
+
+    .calendar-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+    }
+    .calendar-day {
+      aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 500; color: var(--text-secondary); border-radius: 12px; cursor: pointer;
+      position: relative; transition: all 0.15s; border: 2px solid transparent;
+      min-height: 48px;
+    }
+    .calendar-day:hover { background: var(--bg-tertiary); }
+    .calendar-day.other-month { color: rgba(107, 114, 128, 0.25); }
+    .calendar-day.other-month:hover { background: transparent; cursor: default; }
+    .calendar-day.today { border-color: var(--border-light); font-weight: 700; color: var(--text-primary); }
+    .calendar-day.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .calendar-day.selected:hover { background: var(--accent-light); }
+    .calendar-day.has-bets { font-weight: 600; color: var(--text-primary); }
+    .calendar-day.future { color: rgba(107, 114, 128, 0.15); cursor: default; }
+    .calendar-day.future:hover { background: transparent; }
+    .calendar-day.win-day { background: rgba(16, 185, 129, 0.15); }
+    .calendar-day.loss-day { background: rgba(239, 68, 68, 0.15); }
+    .calendar-day.mixed-day { background: rgba(245, 158, 11, 0.15); }
+    .calendar-day.pending-day { background: rgba(107, 114, 128, 0.1); }
+
+    .calendar-dot {
+      position: absolute; bottom: 6px; width: 6px; height: 6px; border-radius: 50%;
+    }
+    .calendar-dot.win { background: var(--accent); }
+    .calendar-dot.loss { background: var(--red); }
+    .calendar-dot.mixed { background: var(--yellow); }
+    .calendar-dot.pending { background: var(--text-muted); }
+
+    /* ── Monthly Summary ── */
+    .month-summary {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 16px;
+    }
+    .month-stat {
+      display: flex; flex-direction: column; align-items: center; min-width: 80px;
+    }
+    .month-stat-value { font-size: 18px; font-weight: 700; }
+    .month-stat-value.positive { color: var(--accent); }
+    .month-stat-value.negative { color: var(--red-light); }
+    .month-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 2px; }
+
+    .win-rate-bar {
+      flex: 1; max-width: 200px; min-width: 120px;
+    }
+    .win-rate-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; text-align: center; }
+    .win-rate-track {
+      height: 8px; background: var(--bg-tertiary); border-radius: 4px; overflow: hidden;
+      display: flex;
+    }
+    .win-rate-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+    .win-rate-fill.loss { background: var(--red); }
+    .win-rate-value { font-size: 14px; font-weight: 700; text-align: center; margin-top: 4px; }
+
+    /* ── Bets Section ── */
+    .bets-section {
+      margin-top: 24px;
+    }
+    .bets-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+    }
+    .bets-title { font-size: 16px; font-weight: 600; color: var(--text-secondary); }
+    .bets-filter-row {
+      display: flex; gap: 8px; align-items: center;
     }
     .filter-btn {
-      padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--bg-secondary); color: var(--text-secondary); font-size: 13px; font-weight: 600;
+      padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted); font-size: 12px; font-weight: 600;
       cursor: pointer; transition: all 0.15s;
     }
     .filter-btn:hover { border-color: var(--border-light); color: var(--text-primary); }
@@ -244,18 +224,18 @@
     .filter-btn.active-green { background: var(--accent); border-color: var(--accent); color: #fff; }
     .filter-btn.active-red { background: var(--red); border-color: var(--red); color: #fff; }
 
-    .clear-btn {
-      margin-left: auto; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
-      background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 500;
-      cursor: pointer; transition: all 0.15s;
-    }
-    .clear-btn:hover { border-color: var(--red); color: var(--red-light); }
-
     .grading-status {
       font-size: 11px; color: var(--text-muted); padding: 4px 10px;
       background: var(--bg-tertiary); border-radius: 6px;
     }
     .grading-status.grading { color: var(--yellow); }
+
+    .clear-btn {
+      padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
+      background: transparent; color: var(--text-muted); font-size: 12px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .clear-btn:hover { border-color: var(--red); color: var(--red-light); }
 
     /* ── Bets Table ── */
     .bets-table-container {
@@ -266,91 +246,96 @@
       width: 100%; border-collapse: collapse;
     }
     .bets-table th {
-      text-align: left; padding: 14px 16px; font-size: 11px; font-weight: 600;
+      text-align: left; padding: 12px 14px; font-size: 11px; font-weight: 600;
       color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;
       border-bottom: 1px solid var(--border); background: var(--bg-tertiary);
     }
     .bets-table td {
-      padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px;
+      padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 13px;
       vertical-align: middle;
     }
     .bets-table tr:last-child td { border-bottom: none; }
     .bets-table tr:hover { background: rgba(255,255,255,0.02); }
 
     .bet-pick { font-weight: 600; color: var(--text-primary); }
-    .bet-game { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .bet-type { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+    .bet-game { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .bet-type { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
     .bet-type.prop { background: rgba(139, 92, 246, 0.2); color: var(--purple); }
     .bet-type.spread { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
     .bet-type.total { background: rgba(245, 158, 11, 0.2); color: var(--yellow); }
     .bet-type.ml { background: rgba(16, 185, 129, 0.2); color: var(--accent); }
 
-    .bet-status { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
+    .bet-status { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
     .bet-status.pending { background: rgba(107, 114, 128, 0.2); color: var(--text-secondary); }
     .bet-status.win { background: rgba(16, 185, 129, 0.2); color: var(--accent); }
     .bet-status.loss { background: rgba(239, 68, 68, 0.2); color: var(--red-light); }
     .bet-status.push { background: rgba(245, 158, 11, 0.2); color: var(--yellow); }
 
-    .bet-profit { font-weight: 600; }
+    .bet-profit { font-weight: 600; font-size: 13px; }
     .bet-profit.positive { color: var(--accent); }
     .bet-profit.negative { color: var(--red-light); }
     .bet-profit.neutral { color: var(--text-muted); }
 
     .bet-delete {
       background: none; border: none; color: var(--text-muted); cursor: pointer;
-      font-size: 16px; padding: 4px 8px; opacity: 0.5; transition: all 0.15s;
+      font-size: 14px; padding: 4px 8px; opacity: 0.4; transition: all 0.15s;
     }
     .bet-delete:hover { opacity: 1; color: var(--red-light); }
 
     .empty-state {
-      text-align: center; padding: 60px 20px; color: var(--text-muted);
+      text-align: center; padding: 48px 20px; color: var(--text-muted);
     }
-    .empty-state-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
-    .empty-state-title { font-size: 18px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
-    .empty-state-text { font-size: 14px; }
+    .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
+    .empty-state-title { font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+    .empty-state-text { font-size: 13px; }
     .empty-state a { color: var(--brand-light); text-decoration: none; }
     .empty-state a:hover { text-decoration: underline; }
 
     /* ── Settings Card ── */
     .settings-card {
       background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
-      padding: 24px; margin-top: 2rem;
+      padding: 20px; margin-top: 24px;
     }
-    .settings-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--text-secondary); }
+    .settings-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--text-muted); }
     .settings-row {
-      display: flex; align-items: center; gap: 16px; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 12px;
     }
-    .settings-row:last-child { margin-bottom: 0; }
-    .settings-label { font-size: 13px; color: var(--text-muted); min-width: 100px; }
+    .settings-label { font-size: 13px; color: var(--text-secondary); }
     .settings-input {
       padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);
-      background: var(--bg-primary); color: var(--text-primary); font-size: 14px; width: 120px;
+      background: var(--bg-primary); color: var(--text-primary); font-size: 14px; width: 100px;
     }
     .settings-input:focus { outline: none; border-color: var(--brand-border); }
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
       .nav-right { display: none; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .bets-table th, .bets-table td { padding: 10px 12px; font-size: 12px; }
+      .top-bar { flex-direction: column; align-items: stretch; }
+      .stats-row { justify-content: space-between; }
+      .stat-pill { flex: 1; min-width: 70px; padding: 10px 12px; }
+      .stat-pill-value { font-size: 1.25rem; }
+      .display-toggle { align-self: flex-end; }
+      .calendar-day { min-height: 40px; font-size: 13px; }
+      .calendar-day .calendar-dot { bottom: 4px; width: 5px; height: 5px; }
+      .month-summary { justify-content: center; }
+      .bets-table th, .bets-table td { padding: 10px 10px; font-size: 12px; }
       .col-hide-mobile { display: none; }
-      .date-picker { flex-wrap: wrap; }
+      .quick-filters { justify-content: center; }
     }
 
     /* ── Confirm Modal ── */
     .confirm-modal-backdrop {
       position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200;
       opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s;
+      display: flex; align-items: center; justify-content: center;
     }
     .confirm-modal-backdrop.visible { opacity: 1; visibility: visible; }
     .confirm-modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
       width: calc(100% - 32px); max-width: 400px; background: var(--bg-secondary);
       border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-      z-index: 201; opacity: 0; visibility: hidden; transition: all 0.2s;
-      text-align: center;
+      text-align: center; transform: scale(0.95); transition: transform 0.2s;
     }
-    .confirm-modal.visible { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+    .confirm-modal-backdrop.visible .confirm-modal { transform: scale(1); }
     .confirm-modal-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
     .confirm-modal-text { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
     .confirm-modal-actions { display: flex; gap: 12px; }
@@ -384,75 +369,81 @@
   </nav>
 
   <main class="main-container">
-    <div class="page-header">
-      <h1 class="page-title">My Bets</h1>
-      <p class="page-subtitle">Track your bets and monitor your performance</p>
+    <!-- Top Stats Row -->
+    <div class="top-bar">
+      <div class="stats-row" id="stats-row"></div>
+      <div class="display-toggle">
+        <button id="toggle-units" class="active" onclick="setDisplayMode('units')">Units</button>
+        <button id="toggle-dollars" onclick="setDisplayMode('dollars')">Dollars</button>
+      </div>
     </div>
 
-    <div class="date-picker" id="date-picker"></div>
-
-    <div class="stats-grid" id="stats-grid"></div>
-
-    <div class="filters-bar">
-      <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
-      <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">Pending</button>
-      <button class="filter-btn" data-filter="win" onclick="setFilter('win')">Wins</button>
-      <button class="filter-btn" data-filter="loss" onclick="setFilter('loss')">Losses</button>
-      <span class="grading-status" id="grading-status"></span>
-      <button class="clear-btn" onclick="showClearConfirm()">Clear All</button>
+    <!-- Quick Filters -->
+    <div class="quick-filters">
+      <button class="quick-btn active" data-range="today" onclick="selectRange('today')">Today</button>
+      <button class="quick-btn" data-range="week" onclick="selectRange('week')">This Week</button>
+      <button class="quick-btn" data-range="month" onclick="selectRange('month')">This Month</button>
+      <button class="quick-btn" data-range="all" onclick="selectRange('all')">All Time</button>
     </div>
 
-    <div class="bets-table-container" id="bets-container"></div>
+    <!-- Calendar -->
+    <div class="calendar-card">
+      <div class="calendar-header">
+        <span class="calendar-title" id="calendar-title">February 2026</span>
+        <div class="calendar-nav">
+          <button onclick="navMonth(-1)">&#8249;</button>
+          <button onclick="navMonth(1)">&#8250;</button>
+        </div>
+      </div>
+      <div class="calendar-weekdays">
+        <div class="calendar-weekday">S</div>
+        <div class="calendar-weekday">M</div>
+        <div class="calendar-weekday">T</div>
+        <div class="calendar-weekday">W</div>
+        <div class="calendar-weekday">T</div>
+        <div class="calendar-weekday">F</div>
+        <div class="calendar-weekday">S</div>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+      <div class="month-summary" id="month-summary"></div>
+    </div>
 
+    <!-- Bets Section -->
+    <div class="bets-section">
+      <div class="bets-header">
+        <span class="bets-title" id="bets-title">Today's Bets</span>
+        <div class="bets-filter-row">
+          <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+          <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">Pending</button>
+          <button class="filter-btn" data-filter="win" onclick="setFilter('win')">Wins</button>
+          <button class="filter-btn" data-filter="loss" onclick="setFilter('loss')">Losses</button>
+          <span class="grading-status" id="grading-status"></span>
+          <button class="clear-btn" onclick="showClearConfirm()">Clear</button>
+        </div>
+      </div>
+      <div class="bets-table-container" id="bets-container"></div>
+    </div>
+
+    <!-- Settings -->
     <div class="settings-card">
-      <div class="settings-title">Bet Settings</div>
+      <div class="settings-title">Settings</div>
       <div class="settings-row">
-        <span class="settings-label">Unit Size ($)</span>
+        <span class="settings-label">Unit Size</span>
         <input type="number" class="settings-input" id="unit-size" value="10" min="1" onchange="saveSettings()">
+        <span class="settings-label">dollars</span>
       </div>
     </div>
   </main>
 
   <!-- Confirm Modal -->
-  <div class="confirm-modal-backdrop" id="confirm-backdrop" onclick="hideConfirm()"></div>
-  <div class="confirm-modal" id="confirm-modal">
-    <div class="confirm-modal-title" id="confirm-title">Clear All Bets?</div>
-    <div class="confirm-modal-text" id="confirm-text">This will permanently delete all tracked bets. This action cannot be undone.</div>
-    <div class="confirm-modal-actions">
-      <button class="confirm-btn cancel" onclick="hideConfirm()">Cancel</button>
-      <button class="confirm-btn danger" id="confirm-action" onclick="confirmClearAll()">Clear All</button>
-    </div>
-  </div>
-
-  <!-- Calendar Modal -->
-  <div class="cal-modal-backdrop" id="cal-backdrop" onclick="closeCalendar()">
-    <div class="cal-modal" onclick="event.stopPropagation()">
-      <div class="cal-modal-title">Select Date Range</div>
-      <div class="cal-quick-filters">
-        <button class="cal-quick-btn" data-range="today" onclick="selectQuickRange('today')">Today</button>
-        <button class="cal-quick-btn" data-range="week" onclick="selectQuickRange('week')">This Week</button>
-        <button class="cal-quick-btn" data-range="month" onclick="selectQuickRange('month')">This Month</button>
-        <button class="cal-quick-btn" data-range="all" onclick="selectQuickRange('all')">All Time</button>
+  <div class="confirm-modal-backdrop" id="confirm-backdrop" onclick="hideConfirm()">
+    <div class="confirm-modal" onclick="event.stopPropagation()">
+      <div class="confirm-modal-title" id="confirm-title">Clear All Bets?</div>
+      <div class="confirm-modal-text" id="confirm-text">This will permanently delete all tracked bets.</div>
+      <div class="confirm-modal-actions">
+        <button class="confirm-btn cancel" onclick="hideConfirm()">Cancel</button>
+        <button class="confirm-btn danger" onclick="confirmClearAll()">Clear</button>
       </div>
-      <div class="cal-header">
-        <span class="cal-title" id="cal-title">February 2026</span>
-        <div class="cal-nav">
-          <button onclick="calNavMonth(-1)">&#8249;</button>
-          <button onclick="calNavMonth(1)">&#8250;</button>
-        </div>
-      </div>
-      <div class="cal-weekdays">
-        <div class="cal-weekday">Su</div>
-        <div class="cal-weekday">Mo</div>
-        <div class="cal-weekday">Tu</div>
-        <div class="cal-weekday">We</div>
-        <div class="cal-weekday">Th</div>
-        <div class="cal-weekday">Fr</div>
-        <div class="cal-weekday">Sa</div>
-      </div>
-      <div class="cal-grid" id="cal-grid"></div>
-      <div class="cal-stats" id="cal-stats"></div>
-      <button class="cal-close-btn" onclick="closeCalendar()">Close</button>
     </div>
   </div>
 
@@ -464,22 +455,20 @@
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
     const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
+    const MONTH_NAMES = ['January','February','March','April','May','June',
+                         'July','August','September','October','November','December'];
 
     // ── State ──
+    let displayMode = 'units'; // 'units' or 'dollars'
     let currentFilter = 'all';
-    let selectedDate = null; // null = all time
-    let dateRangeMode = 'today'; // 'today', 'week', 'month', 'all', or 'single'
+    let dateRangeMode = 'today'; // 'today', 'week', 'month', 'all', 'single'
+    let selectedDate = null;
+    let calViewMonth = new Date().getMonth();
+    let calViewYear = new Date().getFullYear();
     let gameProjections = [];
     let nhlGameProjections = [];
     let resultsData = null;
     let nhlResultsData = null;
-    let isGrading = false;
-
-    // Calendar state
-    let calViewMonth = new Date().getMonth();
-    let calViewYear = new Date().getFullYear();
-    const MONTH_NAMES = ['January','February','March','April','May','June',
-                         'July','August','September','October','November','December'];
 
     // ── Helpers ──
     function getBetSettings() {
@@ -508,277 +497,65 @@
       return units * (100 / Math.abs(o));
     }
 
-    function formatDateDisplay(dateStr) {
-      if (!dateStr) return { label: '', formatted: 'All Time' };
+    function formatDateLabel(dateStr) {
       const today = getLocalDateStr();
       const d = new Date(dateStr + 'T12:00:00');
-      const formatted = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-
-      const yesterday = (() => {
-        const y = new Date();
-        y.setDate(y.getDate() - 1);
-        return y.toISOString().slice(0, 10);
-      })();
-
-      let label = '';
-      if (dateStr === today) label = 'Today';
-      else if (dateStr === yesterday) label = 'Yesterday';
-
-      return { label, formatted };
+      if (dateStr === today) return 'Today';
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      if (dateStr === yesterday.toISOString().slice(0, 10)) return 'Yesterday';
+      return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     }
 
-    // ── Date Picker ──
-    function renderDatePicker() {
-      const today = getLocalDateStr();
-      const isToday = dateRangeMode === 'today';
-      const isAllTime = dateRangeMode === 'all';
-
-      let displayText = '';
-      let labelText = '';
-      if (dateRangeMode === 'all') {
-        displayText = 'All Time';
-      } else if (dateRangeMode === 'today') {
-        displayText = formatDateDisplay(today).formatted;
-        labelText = 'Today';
-      } else if (dateRangeMode === 'week') {
-        displayText = 'This Week';
-      } else if (dateRangeMode === 'month') {
-        displayText = MONTH_NAMES[new Date().getMonth()];
-      } else if (dateRangeMode === 'single' && selectedDate) {
-        const { label, formatted } = formatDateDisplay(selectedDate);
-        displayText = formatted;
-        labelText = label;
-      }
-
-      document.getElementById('date-picker').innerHTML = `
-        <button class="date-picker-btn" onclick="changeDate(-1)" title="Previous day">&larr;</button>
-        <button class="date-picker-alltime ${isAllTime ? 'active' : ''}" onclick="selectQuickRange('all')">All Time</button>
-        <button class="date-picker-today ${isToday ? 'active' : ''}" onclick="selectQuickRange('today')">Today</button>
-        <div class="date-picker-display" onclick="openCalendar()" title="Open calendar">
-          <span class="cal-icon">&#128197;</span>
-          <div class="date-text">
-            ${labelText ? `<span class="date-label">${labelText}</span>` : ''}
-            <span class="date-value">${displayText}</span>
-          </div>
-        </div>
-        <button class="date-picker-btn" onclick="changeDate(1)" title="Next day">&rarr;</button>
-      `;
-    }
-
-    function changeDate(delta) {
-      const base = selectedDate || getLocalDateStr();
-      const d = new Date(base + 'T12:00:00');
-      d.setDate(d.getDate() + delta);
-      selectedDate = d.toISOString().slice(0, 10);
-      dateRangeMode = 'single';
-      renderDatePicker();
+    // ── Display Mode ──
+    function setDisplayMode(mode) {
+      displayMode = mode;
+      document.getElementById('toggle-units').classList.toggle('active', mode === 'units');
+      document.getElementById('toggle-dollars').classList.toggle('active', mode === 'dollars');
+      const settings = getBetSettings();
+      settings.display_mode = mode;
+      saveBetSettings(settings);
       renderStats();
       renderBets();
-      autoGradeBets();
+      renderMonthSummary();
     }
 
-    function goToToday() {
-      selectedDate = getLocalDateStr();
-      dateRangeMode = 'today';
-      renderDatePicker();
-      renderStats();
-      renderBets();
-      autoGradeBets();
-    }
-
-    function setAllTime() {
-      selectedDate = null;
-      dateRangeMode = 'all';
-      renderDatePicker();
-      renderStats();
-      renderBets();
-    }
-
-    // ── Calendar Modal ──
-    function openCalendar() {
-      // Set calendar view to current selected date or today
-      const viewDate = selectedDate ? new Date(selectedDate + 'T12:00:00') : new Date();
-      calViewMonth = viewDate.getMonth();
-      calViewYear = viewDate.getFullYear();
-      renderCalendarGrid();
-      updateQuickFilterButtons();
-      renderCalendarStats();
-      document.getElementById('cal-backdrop').classList.add('visible');
-    }
-
-    function closeCalendar() {
-      document.getElementById('cal-backdrop').classList.remove('visible');
-    }
-
-    function calNavMonth(delta) {
-      calViewMonth += delta;
-      if (calViewMonth < 0) { calViewMonth = 11; calViewYear--; }
-      if (calViewMonth > 11) { calViewMonth = 0; calViewYear++; }
-      renderCalendarGrid();
-      renderCalendarStats();
-    }
-
-    function selectQuickRange(range) {
+    // ── Date Range ──
+    function selectRange(range) {
       dateRangeMode = range;
-      const today = getLocalDateStr();
-
-      if (range === 'today') {
-        selectedDate = today;
-      } else if (range === 'week' || range === 'month' || range === 'all') {
-        selectedDate = null; // Range modes don't use single selectedDate
-      }
-
-      updateQuickFilterButtons();
-      renderCalendarStats();
-      closeCalendar();
-      renderDatePicker();
+      selectedDate = range === 'today' ? getLocalDateStr() : null;
+      document.querySelectorAll('.quick-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.range === range);
+      });
+      updateBetsTitle();
       renderStats();
       renderBets();
+      renderCalendar();
       if (range === 'today') autoGradeBets();
     }
 
     function selectCalendarDate(dateStr) {
       selectedDate = dateStr;
       dateRangeMode = 'single';
-      closeCalendar();
-      renderDatePicker();
+      document.querySelectorAll('.quick-btn').forEach(btn => btn.classList.remove('active'));
+      updateBetsTitle();
       renderStats();
       renderBets();
+      renderCalendar();
       autoGradeBets();
     }
 
-    function updateQuickFilterButtons() {
-      document.querySelectorAll('.cal-quick-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.range === dateRangeMode);
-      });
+    function updateBetsTitle() {
+      let title = 'All Bets';
+      if (dateRangeMode === 'today') title = "Today's Bets";
+      else if (dateRangeMode === 'week') title = "This Week's Bets";
+      else if (dateRangeMode === 'month') title = MONTH_NAMES[new Date().getMonth()] + ' Bets';
+      else if (dateRangeMode === 'all') title = 'All Time Bets';
+      else if (dateRangeMode === 'single' && selectedDate) title = formatDateLabel(selectedDate) + ' Bets';
+      document.getElementById('bets-title').textContent = title;
     }
 
-    function getBetsByDate() {
-      const bets = getTrackedBets();
-      const byDate = {};
-      for (const b of bets) {
-        const date = b.date || (b.placed_at ? b.placed_at.slice(0, 10) : null);
-        if (!date) continue;
-        if (!byDate[date]) byDate[date] = { wins: 0, losses: 0, pending: 0, pushes: 0 };
-        if (b.status === 'win') byDate[date].wins++;
-        else if (b.status === 'loss') byDate[date].losses++;
-        else if (b.status === 'push') byDate[date].pushes++;
-        else byDate[date].pending++;
-      }
-      return byDate;
-    }
-
-    function renderCalendarGrid() {
-      const today = getLocalDateStr();
-      const betsByDate = getBetsByDate();
-      document.getElementById('cal-title').textContent = `${MONTH_NAMES[calViewMonth]} ${calViewYear}`;
-
-      const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
-      const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
-      const daysInPrev = new Date(calViewYear, calViewMonth, 0).getDate();
-      const prevM = calViewMonth === 0 ? 11 : calViewMonth - 1;
-      const prevY = calViewMonth === 0 ? calViewYear - 1 : calViewYear;
-      const nextM = calViewMonth === 11 ? 0 : calViewMonth + 1;
-      const nextY = calViewMonth === 11 ? calViewYear + 1 : calViewYear;
-
-      let html = '';
-
-      // Previous month days
-      for (let i = firstDay - 1; i >= 0; i--) {
-        const d = daysInPrev - i;
-        const key = `${prevY}-${String(prevM + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        html += calDayHtml(key, d, today, betsByDate, true);
-      }
-
-      // Current month days
-      for (let d = 1; d <= daysInMonth; d++) {
-        const key = `${calViewYear}-${String(calViewMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        html += calDayHtml(key, d, today, betsByDate, false);
-      }
-
-      // Next month days
-      const totalCells = firstDay + daysInMonth;
-      const remaining = (totalCells % 7 === 0) ? 0 : 7 - (totalCells % 7);
-      for (let d = 1; d <= remaining; d++) {
-        const key = `${nextY}-${String(nextM + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        html += calDayHtml(key, d, today, betsByDate, true);
-      }
-
-      document.getElementById('cal-grid').innerHTML = html;
-    }
-
-    function calDayHtml(dateStr, day, today, betsByDate, isOtherMonth) {
-      const bets = betsByDate[dateStr];
-      const hasBets = !!bets;
-      const isToday = dateStr === today;
-      const isFuture = dateStr > today;
-      const isSelected = dateStr === selectedDate && dateRangeMode === 'single';
-
-      let cls = 'cal-day';
-      if (isOtherMonth) cls += ' other-month';
-      if (isToday) cls += ' today';
-      if (isFuture && !hasBets) cls += ' future';
-      if (hasBets) cls += ' has-bets';
-      if (isSelected) cls += ' selected';
-
-      let dot = '';
-      if (hasBets) {
-        const { wins, losses, pending } = bets;
-        if (pending > 0 && wins === 0 && losses === 0) {
-          dot = '<span class="cal-dot pending"></span>';
-        } else if (losses === 0 && wins > 0) {
-          dot = '<span class="cal-dot win"></span>';
-        } else if (wins === 0 && losses > 0) {
-          dot = '<span class="cal-dot loss"></span>';
-        } else if (wins > 0 || losses > 0) {
-          dot = '<span class="cal-dot mixed"></span>';
-        }
-      }
-
-      const clickable = !isFuture || hasBets;
-      const onclick = clickable ? `onclick="selectCalendarDate('${dateStr}')"` : '';
-
-      return `<div class="${cls}" ${onclick}>${day}${dot}</div>`;
-    }
-
-    function renderCalendarStats() {
-      const bets = getTrackedBets();
-      const unitSize = getUnitSize();
-
-      // Get bets for the viewing month
-      const monthKey = `${calViewYear}-${String(calViewMonth + 1).padStart(2, '0')}`;
-      const monthBets = bets.filter(b => {
-        const date = b.date || (b.placed_at ? b.placed_at.slice(0, 10) : null);
-        return date && date.startsWith(monthKey);
-      });
-
-      let monthWins = 0, monthLosses = 0, monthProfit = 0;
-      for (const b of monthBets) {
-        if (b.status === 'win') monthWins++;
-        else if (b.status === 'loss') monthLosses++;
-        if (b.profit_units != null) monthProfit += b.profit_units;
-      }
-
-      const profitClass = monthProfit > 0 ? 'positive' : monthProfit < 0 ? 'negative' : '';
-      const profitSign = monthProfit >= 0 ? '+' : '';
-
-      document.getElementById('cal-stats').innerHTML = `
-        <div class="cal-stat">
-          <div class="cal-stat-value ${profitClass}">${profitSign}${monthProfit.toFixed(2)}u</div>
-          <div class="cal-stat-label">${MONTH_NAMES[calViewMonth].slice(0, 3)} P/L</div>
-        </div>
-        <div class="cal-stat">
-          <div class="cal-stat-value">${monthBets.length}</div>
-          <div class="cal-stat-label">${MONTH_NAMES[calViewMonth].slice(0, 3)} Bets</div>
-        </div>
-        <div class="cal-stat">
-          <div class="cal-stat-value">${monthWins}-${monthLosses}</div>
-          <div class="cal-stat-label">${MONTH_NAMES[calViewMonth].slice(0, 3)} Record</div>
-        </div>
-      `;
-    }
-
-    // ── Filter by date ──
+    // ── Get Bets for Display ──
     function getBetsForDisplay() {
       const bets = getTrackedBets();
       const today = getLocalDateStr();
@@ -793,7 +570,6 @@
       }
 
       if (dateRangeMode === 'week') {
-        // Get start of week (Sunday)
         const now = new Date();
         const dayOfWeek = now.getDay();
         const weekStart = new Date(now);
@@ -828,201 +604,195 @@
       return bets;
     }
 
-    // ── Auto-Grading ──
-    async function loadGameData() {
-      try {
-        const [nbaResp, nhlResp, resultsResp, nhlResultsResp] = await Promise.all([
-          fetch(GAME_DATA_URL + '?t=' + Date.now()),
-          fetch(NHL_GAME_DATA_URL + '?t=' + Date.now()),
-          fetch(RESULTS_URL + '?t=' + Date.now()),
-          fetch(NHL_RESULTS_URL + '?t=' + Date.now())
-        ]);
-
-        if (nbaResp.ok) {
-          const data = await nbaResp.json();
-          gameProjections = data.games || [];
-        }
-        if (nhlResp.ok) {
-          const data = await nhlResp.json();
-          nhlGameProjections = data.games || [];
-        }
-        if (resultsResp.ok) {
-          resultsData = await resultsResp.json();
-        }
-        if (nhlResultsResp.ok) {
-          nhlResultsData = await nhlResultsResp.json();
-        }
-      } catch (err) {
-        console.error('Failed to load game data:', err);
-      }
-    }
-
-    function findGameResult(bet) {
-      // Try current game projections first (for today's games)
-      const games = bet.sport === 'NHL' ? nhlGameProjections : gameProjections;
-      const gameParts = (bet.game || '').split(' @ ');
-      if (gameParts.length !== 2) return null;
-      const [away, home] = gameParts;
-
-      // Check current projections
-      const currentGame = games.find(g => g.away_team === away && g.home_team === home);
-      if (currentGame && (currentGame.status === 'final' || currentGame.status === 'closed')) {
-        if (currentGame.away_score != null && currentGame.home_score != null) {
-          return {
-            awayScore: currentGame.away_score,
-            homeScore: currentGame.home_score,
-            spreadResult: currentGame.spread_result,
-            totalResult: currentGame.total_result,
-            mlResult: currentGame.ml_result
-          };
-        }
-      }
-
-      // Check historical results
-      const results = bet.sport === 'NHL' ? nhlResultsData : resultsData;
-      if (!results || !results.days) return null;
-
-      const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
-      if (!betDate) return null;
-
-      const day = results.days.find(d => d.date === betDate);
-      if (!day || !day.picks) return null;
-
-      // Find matching game picks
-      const gamePicks = day.picks.filter(p => p.game === bet.game);
-      if (gamePicks.length === 0) return null;
-
-      // Get score from first pick with result
-      const pickWithScore = gamePicks.find(p => p.result && p.result.includes('-'));
-      if (!pickWithScore) return null;
-
-      const scores = pickWithScore.result.split('-').map(s => parseInt(s.trim()));
-      if (scores.length !== 2 || isNaN(scores[0]) || isNaN(scores[1])) return null;
-
-      // Get individual results
-      const spreadPick = gamePicks.find(p => p.type === 'spread');
-      const totalPick = gamePicks.find(p => p.type === 'total');
-      const mlPick = gamePicks.find(p => p.type === 'ml');
-
-      return {
-        awayScore: scores[0],
-        homeScore: scores[1],
-        spreadResult: spreadPick ? (spreadPick.hit === true ? 'win' : spreadPick.hit === false ? 'loss' : 'push') : null,
-        totalResult: totalPick ? (totalPick.hit === true ? 'win' : totalPick.hit === false ? 'loss' : 'push') : null,
-        mlResult: mlPick ? (mlPick.hit === true ? 'win' : mlPick.hit === false ? 'loss' : 'push') : null
-      };
-    }
-
-    function gradeBet(bet, gameResult) {
-      if (!gameResult) return null;
-
-      const { awayScore, homeScore } = gameResult;
-      const actualSpread = homeScore - awayScore; // positive = home won by X
-
-      if (bet.type === 'spread') {
-        // Use pre-computed result if available
-        if (gameResult.spreadResult) {
-          return gameResult.spreadResult;
-        }
-        // Otherwise compute (for props/custom bets)
-        const pickMatch = (bet.pick || '').match(/([A-Z]{2,3})\s*([+-]?\d+\.?\d*)/);
-        if (!pickMatch) return null;
-        const pickTeam = pickMatch[1];
-        const pickLine = parseFloat(pickMatch[2]);
-
-        const gameParts = (bet.game || '').split(' @ ');
-        const isHome = pickTeam === gameParts[1];
-        const coverMargin = isHome ? actualSpread + pickLine : -actualSpread + pickLine;
-
-        if (coverMargin > 0) return 'win';
-        if (coverMargin < 0) return 'loss';
-        return 'push';
-      }
-
-      if (bet.type === 'total') {
-        if (gameResult.totalResult) {
-          return gameResult.totalResult;
-        }
-        const total = awayScore + homeScore;
-        const pickMatch = (bet.pick || '').match(/(OVER|UNDER)\s+([\d.]+)/i);
-        if (!pickMatch) return null;
-        const direction = pickMatch[1].toUpperCase();
-        const line = parseFloat(pickMatch[2]);
-
-        if (direction === 'OVER') {
-          if (total > line) return 'win';
-          if (total < line) return 'loss';
-          return 'push';
-        } else {
-          if (total < line) return 'win';
-          if (total > line) return 'loss';
-          return 'push';
-        }
-      }
-
-      if (bet.type === 'ml') {
-        if (gameResult.mlResult) {
-          return gameResult.mlResult;
-        }
-        const gameParts = (bet.game || '').split(' @ ');
-        const winner = homeScore > awayScore ? gameParts[1] : gameParts[0];
-        return bet.pick === winner ? 'win' : 'loss';
-      }
-
-      return null;
-    }
-
-    async function autoGradeBets() {
-      const statusEl = document.getElementById('grading-status');
-      statusEl.textContent = 'Checking...';
-      statusEl.classList.add('grading');
-      isGrading = true;
-
-      await loadGameData();
-
+    function getBetsByDate() {
       const bets = getTrackedBets();
-      let changed = false;
-      let gradedCount = 0;
+      const byDate = {};
+      for (const b of bets) {
+        const date = b.date || (b.placed_at ? b.placed_at.slice(0, 10) : null);
+        if (!date) continue;
+        if (!byDate[date]) byDate[date] = { wins: 0, losses: 0, pending: 0, pushes: 0, profit: 0 };
+        if (b.status === 'win') byDate[date].wins++;
+        else if (b.status === 'loss') byDate[date].losses++;
+        else if (b.status === 'push') byDate[date].pushes++;
+        else byDate[date].pending++;
+        if (b.profit_units != null) byDate[date].profit += b.profit_units;
+      }
+      return byDate;
+    }
 
-      for (const bet of bets) {
-        if (bet.status !== 'pending') continue;
-        if (bet.type === 'prop') continue; // Props need special handling
+    // ── Render Stats ──
+    function renderStats() {
+      const bets = getBetsForDisplay();
+      const unitSize = getUnitSize();
 
-        const gameResult = findGameResult(bet);
-        if (!gameResult) continue;
+      const wins = bets.filter(b => b.status === 'win').length;
+      const losses = bets.filter(b => b.status === 'loss').length;
+      const graded = wins + losses;
+      const winRate = graded > 0 ? ((wins / graded) * 100).toFixed(1) : '0.0';
 
-        const result = gradeBet(bet, gameResult);
-        if (!result) continue;
+      let totalUnits = 0;
+      for (const b of bets) {
+        if (b.profit_units != null) totalUnits += b.profit_units;
+      }
+      const totalDollars = totalUnits * unitSize;
 
-        bet.status = result;
-        bet.actual = `${gameResult.awayScore}-${gameResult.homeScore}`;
+      const profitClass = totalUnits > 0 ? 'positive' : totalUnits < 0 ? 'negative' : 'neutral';
+      const profitSign = totalUnits >= 0 ? '+' : '';
 
-        if (result === 'win') {
-          bet.profit_units = calcProfit(bet.odds, bet.units);
-        } else if (result === 'loss') {
-          bet.profit_units = -bet.units;
-        } else {
-          bet.profit_units = 0;
-        }
+      const profitDisplay = displayMode === 'units'
+        ? `${profitSign}${totalUnits.toFixed(2)}u`
+        : `${profitSign}$${totalDollars.toFixed(2)}`;
 
-        changed = true;
-        gradedCount++;
+      document.getElementById('stats-row').innerHTML = `
+        <div class="stat-pill">
+          <div class="stat-pill-value ${profitClass}">${profitDisplay}</div>
+          <div class="stat-pill-label">Profit</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-value ${parseFloat(winRate) >= 50 ? 'positive' : parseFloat(winRate) > 0 ? 'negative' : 'neutral'}">${winRate}%</div>
+          <div class="stat-pill-label">Win Rate</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-value neutral">${bets.length}</div>
+          <div class="stat-pill-label">Total Bets</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-value positive">${wins}-${losses}</div>
+          <div class="stat-pill-label">Record</div>
+        </div>
+      `;
+    }
+
+    // ── Calendar ──
+    function navMonth(delta) {
+      calViewMonth += delta;
+      if (calViewMonth < 0) { calViewMonth = 11; calViewYear--; }
+      if (calViewMonth > 11) { calViewMonth = 0; calViewYear++; }
+      renderCalendar();
+      renderMonthSummary();
+    }
+
+    function renderCalendar() {
+      const today = getLocalDateStr();
+      const betsByDate = getBetsByDate();
+      document.getElementById('calendar-title').textContent = `${MONTH_NAMES[calViewMonth]} ${calViewYear}`;
+
+      const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
+      const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+      const daysInPrev = new Date(calViewYear, calViewMonth, 0).getDate();
+      const prevM = calViewMonth === 0 ? 11 : calViewMonth - 1;
+      const prevY = calViewMonth === 0 ? calViewYear - 1 : calViewYear;
+      const nextM = calViewMonth === 11 ? 0 : calViewMonth + 1;
+      const nextY = calViewMonth === 11 ? calViewYear + 1 : calViewYear;
+
+      let html = '';
+
+      // Previous month days
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const d = daysInPrev - i;
+        const key = `${prevY}-${String(prevM + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        html += calDayHtml(key, d, today, betsByDate, true);
       }
 
-      if (changed) {
-        saveTrackedBets(bets);
-        renderStats();
-        renderBets();
+      // Current month days
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key = `${calViewYear}-${String(calViewMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        html += calDayHtml(key, d, today, betsByDate, false);
       }
 
-      isGrading = false;
-      if (gradedCount > 0) {
-        statusEl.textContent = `Graded ${gradedCount} bet${gradedCount > 1 ? 's' : ''}`;
-        setTimeout(() => { statusEl.textContent = ''; }, 3000);
-      } else {
-        statusEl.textContent = '';
+      // Next month days
+      const totalCells = firstDay + daysInMonth;
+      const remaining = (totalCells % 7 === 0) ? 0 : 7 - (totalCells % 7);
+      for (let d = 1; d <= remaining; d++) {
+        const key = `${nextY}-${String(nextM + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        html += calDayHtml(key, d, today, betsByDate, true);
       }
-      statusEl.classList.remove('grading');
+
+      document.getElementById('calendar-grid').innerHTML = html;
+      renderMonthSummary();
+    }
+
+    function calDayHtml(dateStr, day, today, betsByDate, isOtherMonth) {
+      const bets = betsByDate[dateStr];
+      const hasBets = !!bets;
+      const isToday = dateStr === today;
+      const isFuture = dateStr > today;
+      const isSelected = dateStr === selectedDate && dateRangeMode === 'single';
+
+      let cls = 'calendar-day';
+      if (isOtherMonth) cls += ' other-month';
+      if (isToday) cls += ' today';
+      if (isFuture && !hasBets) cls += ' future';
+      if (hasBets) {
+        cls += ' has-bets';
+        const { wins, losses, pending } = bets;
+        if (pending > 0 && wins === 0 && losses === 0) cls += ' pending-day';
+        else if (losses === 0 && wins > 0) cls += ' win-day';
+        else if (wins === 0 && losses > 0) cls += ' loss-day';
+        else if (wins > 0 || losses > 0) cls += ' mixed-day';
+      }
+      if (isSelected) cls += ' selected';
+
+      let dot = '';
+      if (hasBets) {
+        const { wins, losses, pending } = bets;
+        if (pending > 0 && wins === 0 && losses === 0) dot = '<span class="calendar-dot pending"></span>';
+        else if (losses === 0 && wins > 0) dot = '<span class="calendar-dot win"></span>';
+        else if (wins === 0 && losses > 0) dot = '<span class="calendar-dot loss"></span>';
+        else if (wins > 0 || losses > 0) dot = '<span class="calendar-dot mixed"></span>';
+      }
+
+      const clickable = !isOtherMonth && (!isFuture || hasBets);
+      const onclick = clickable ? `onclick="selectCalendarDate('${dateStr}')"` : '';
+
+      return `<div class="${cls}" ${onclick}>${day}${dot}</div>`;
+    }
+
+    function renderMonthSummary() {
+      const bets = getTrackedBets();
+      const unitSize = getUnitSize();
+      const monthKey = `${calViewYear}-${String(calViewMonth + 1).padStart(2, '0')}`;
+
+      const monthBets = bets.filter(b => {
+        const date = b.date || (b.placed_at ? b.placed_at.slice(0, 10) : null);
+        return date && date.startsWith(monthKey);
+      });
+
+      let wins = 0, losses = 0, profit = 0;
+      for (const b of monthBets) {
+        if (b.status === 'win') wins++;
+        else if (b.status === 'loss') losses++;
+        if (b.profit_units != null) profit += b.profit_units;
+      }
+
+      const graded = wins + losses;
+      const winRate = graded > 0 ? (wins / graded) * 100 : 0;
+      const profitClass = profit > 0 ? 'positive' : profit < 0 ? 'negative' : '';
+      const profitSign = profit >= 0 ? '+' : '';
+
+      const profitDisplay = displayMode === 'units'
+        ? `${profitSign}${profit.toFixed(2)}u`
+        : `${profitSign}$${(profit * unitSize).toFixed(2)}`;
+
+      const monthShort = MONTH_NAMES[calViewMonth].slice(0, 3);
+
+      document.getElementById('month-summary').innerHTML = `
+        <div class="month-stat">
+          <div class="month-stat-value ${profitClass}">${profitDisplay}</div>
+          <div class="month-stat-label">${monthShort} P/L</div>
+        </div>
+        <div class="win-rate-bar">
+          <div class="win-rate-label">Win Rate</div>
+          <div class="win-rate-track">
+            <div class="win-rate-fill" style="width: ${winRate}%"></div>
+          </div>
+          <div class="win-rate-value">${winRate.toFixed(1)}%</div>
+        </div>
+        <div class="month-stat">
+          <div class="month-stat-value">${wins}-${losses}</div>
+          <div class="month-stat-label">${monthShort} Record</div>
+        </div>
+      `;
     }
 
     // ── Filters ──
@@ -1039,56 +809,7 @@
       renderBets();
     }
 
-    // ── Render Stats ──
-    function renderStats() {
-      const bets = getBetsForDisplay();
-      const unitSize = getUnitSize();
-
-      const pending = bets.filter(b => b.status === 'pending').length;
-      const wins = bets.filter(b => b.status === 'win').length;
-      const losses = bets.filter(b => b.status === 'loss').length;
-      const pushes = bets.filter(b => b.status === 'push').length;
-      const graded = wins + losses + pushes;
-      const winRate = graded > 0 ? ((wins / graded) * 100).toFixed(1) : '0.0';
-
-      let totalUnits = 0;
-      for (const b of bets) {
-        if (b.profit_units != null) totalUnits += b.profit_units;
-      }
-      const totalDollars = totalUnits * unitSize;
-
-      const profitClass = totalUnits > 0 ? 'positive' : totalUnits < 0 ? 'negative' : 'neutral';
-      const profitSign = totalUnits >= 0 ? '+' : '';
-
-      document.getElementById('stats-grid').innerHTML = `
-        <div class="stat-card">
-          <div class="stat-value neutral">${bets.length}</div>
-          <div class="stat-label">Total Bets</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value neutral">${pending}</div>
-          <div class="stat-label">Pending</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value positive">${wins}-${losses}</div>
-          <div class="stat-label">Record</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value ${winRate >= 50 ? 'positive' : 'negative'}">${winRate}%</div>
-          <div class="stat-label">Win Rate</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value ${profitClass}">${profitSign}${totalUnits.toFixed(2)}u</div>
-          <div class="stat-label">Profit (Units)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value ${profitClass}">${profitSign}$${totalDollars.toFixed(2)}</div>
-          <div class="stat-label">Profit ($)</div>
-        </div>
-      `;
-    }
-
-    // ── Render Bets Table ──
+    // ── Render Bets ──
     function renderBets() {
       const allBets = getTrackedBets();
       let bets = getBetsForDisplay();
@@ -1098,7 +819,6 @@
         bets = bets.filter(b => b.status === currentFilter);
       }
 
-      // Sort: pending first, then by date descending
       bets.sort((a, b) => {
         if (a.status === 'pending' && b.status !== 'pending') return -1;
         if (b.status === 'pending' && a.status !== 'pending') return 1;
@@ -1106,35 +826,32 @@
       });
 
       if (bets.length === 0) {
-        const dateLabel = selectedDate ? formatDateDisplay(selectedDate).formatted : 'all time';
-        const msg = currentFilter === 'all'
-          ? `No bets tracked for ${dateLabel}. <a href="dashboard.html">Go to Dashboard</a> to start tracking.`
-          : `No ${currentFilter} bets for ${dateLabel}.`;
         document.getElementById('bets-container').innerHTML = `
           <div class="empty-state">
             <div class="empty-state-icon">&#127919;</div>
             <div class="empty-state-title">No bets to show</div>
-            <div class="empty-state-text">${msg}</div>
+            <div class="empty-state-text"><a href="dashboard.html">Go to Dashboard</a> to start tracking bets.</div>
           </div>
         `;
         return;
       }
 
-      const rows = bets.map((b, idx) => {
+      const rows = bets.map((b) => {
         const typeClass = b.type === 'prop' ? 'prop' : b.type;
         const typeLabel = b.type === 'prop' ? b.prop_type?.toUpperCase() || 'PROP' : b.type.toUpperCase();
-        const pickDesc = b.type === 'prop'
-          ? `${b.player} ${b.pick} ${b.line}`
-          : b.pick;
+        const pickDesc = b.type === 'prop' ? `${b.player} ${b.pick} ${b.line}` : b.pick;
         const gameStr = b.game || '';
-        const dateStr = b.placed_at ? new Date(b.placed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '--';
         const oddsStr = b.odds > 0 ? `+${b.odds}` : b.odds;
 
         let profitStr = '--';
         let profitClass = 'neutral';
         if (b.profit_units != null) {
-          const profitDollars = b.profit_units * unitSize;
-          profitStr = (b.profit_units >= 0 ? '+' : '') + b.profit_units.toFixed(2) + 'u';
+          if (displayMode === 'units') {
+            profitStr = (b.profit_units >= 0 ? '+' : '') + b.profit_units.toFixed(2) + 'u';
+          } else {
+            const dollars = b.profit_units * unitSize;
+            profitStr = (dollars >= 0 ? '+' : '') + '$' + dollars.toFixed(2);
+          }
           profitClass = b.profit_units > 0 ? 'positive' : b.profit_units < 0 ? 'negative' : 'neutral';
         }
 
@@ -1147,14 +864,11 @@
               <div class="bet-game">${gameStr}${b.actual ? ' | ' + b.actual : ''}</div>
             </td>
             <td><span class="bet-type ${typeClass}">${typeLabel}</span></td>
-            <td class="col-hide-mobile">${b.sport || 'NBA'}</td>
-            <td>${oddsStr}</td>
-            <td>${b.units}u</td>
-            <td class="col-hide-mobile">${b.book || '--'}</td>
+            <td class="col-hide-mobile">${oddsStr}</td>
+            <td class="col-hide-mobile">${b.units}u</td>
             <td><span class="bet-status ${b.status}">${b.status}</span></td>
             <td><span class="bet-profit ${profitClass}">${profitStr}</span></td>
-            <td class="col-hide-mobile">${dateStr}</td>
-            <td><button class="bet-delete" onclick="deleteBet(${origIdx})" title="Delete bet">&#10005;</button></td>
+            <td><button class="bet-delete" onclick="deleteBet(${origIdx})" title="Delete">&#10005;</button></td>
           </tr>
         `;
       }).join('');
@@ -1165,13 +879,10 @@
             <tr>
               <th>Pick</th>
               <th>Type</th>
-              <th class="col-hide-mobile">Sport</th>
-              <th>Odds</th>
-              <th>Units</th>
-              <th class="col-hide-mobile">Book</th>
+              <th class="col-hide-mobile">Odds</th>
+              <th class="col-hide-mobile">Units</th>
               <th>Status</th>
               <th>P/L</th>
-              <th class="col-hide-mobile">Date</th>
               <th></th>
             </tr>
           </thead>
@@ -1187,39 +898,34 @@
         saveTrackedBets(bets);
         renderStats();
         renderBets();
+        renderCalendar();
       }
     }
 
+    // ── Clear Confirm ──
     function showClearConfirm() {
       const bets = getBetsForDisplay();
       if (bets.length === 0) return;
 
-      let dateLabel = 'all time';
-      if (dateRangeMode === 'today') dateLabel = 'today';
-      else if (dateRangeMode === 'week') dateLabel = 'this week';
-      else if (dateRangeMode === 'month') dateLabel = 'this month';
-      else if (dateRangeMode === 'single' && selectedDate) dateLabel = formatDateDisplay(selectedDate).formatted;
+      let dateLabel = 'all';
+      if (dateRangeMode === 'today') dateLabel = "today's";
+      else if (dateRangeMode === 'week') dateLabel = "this week's";
+      else if (dateRangeMode === 'month') dateLabel = "this month's";
+      else if (dateRangeMode === 'single' && selectedDate) dateLabel = formatDateLabel(selectedDate);
 
-      const isAll = dateRangeMode === 'all';
-      document.getElementById('confirm-title').textContent = isAll ? 'Clear All Bets?' : `Clear ${dateLabel} Bets?`;
-      document.getElementById('confirm-text').textContent = isAll
-        ? `This will permanently delete all ${bets.length} tracked bets.`
-        : `This will delete ${bets.length} bet(s) from ${dateLabel}.`;
-
+      document.getElementById('confirm-title').textContent = `Clear ${dateLabel} bets?`;
+      document.getElementById('confirm-text').textContent = `This will delete ${bets.length} bet(s).`;
       document.getElementById('confirm-backdrop').classList.add('visible');
-      document.getElementById('confirm-modal').classList.add('visible');
     }
 
     function hideConfirm() {
       document.getElementById('confirm-backdrop').classList.remove('visible');
-      document.getElementById('confirm-modal').classList.remove('visible');
     }
 
     function confirmClearAll() {
       if (dateRangeMode === 'all') {
         saveTrackedBets([]);
       } else {
-        // Get the bets that should be deleted (current display)
         const betsToDelete = getBetsForDisplay();
         const idsToDelete = new Set(betsToDelete.map(b => b.id));
         const allBets = getTrackedBets();
@@ -1229,8 +935,10 @@
       hideConfirm();
       renderStats();
       renderBets();
+      renderCalendar();
     }
 
+    // ── Settings ──
     function saveSettings() {
       const unitSize = parseFloat(document.getElementById('unit-size').value) || 10;
       const settings = getBetSettings();
@@ -1238,35 +946,189 @@
       saveBetSettings(settings);
       renderStats();
       renderBets();
+      renderMonthSummary();
     }
 
     function loadSettings() {
       const settings = getBetSettings();
       document.getElementById('unit-size').value = settings.unit_size || 10;
+      displayMode = settings.display_mode || 'units';
+      document.getElementById('toggle-units').classList.toggle('active', displayMode === 'units');
+      document.getElementById('toggle-dollars').classList.toggle('active', displayMode === 'dollars');
+    }
+
+    // ── Auto-Grading ──
+    async function loadGameData() {
+      try {
+        const [nbaResp, nhlResp, resultsResp, nhlResultsResp] = await Promise.all([
+          fetch(GAME_DATA_URL + '?t=' + Date.now()),
+          fetch(NHL_GAME_DATA_URL + '?t=' + Date.now()),
+          fetch(RESULTS_URL + '?t=' + Date.now()),
+          fetch(NHL_RESULTS_URL + '?t=' + Date.now())
+        ]);
+
+        if (nbaResp.ok) gameProjections = (await nbaResp.json()).games || [];
+        if (nhlResp.ok) nhlGameProjections = (await nhlResp.json()).games || [];
+        if (resultsResp.ok) resultsData = await resultsResp.json();
+        if (nhlResultsResp.ok) nhlResultsData = await nhlResultsResp.json();
+      } catch (err) {
+        console.error('Failed to load game data:', err);
+      }
+    }
+
+    function findGameResult(bet) {
+      const games = bet.sport === 'NHL' ? nhlGameProjections : gameProjections;
+      const gameParts = (bet.game || '').split(' @ ');
+      if (gameParts.length !== 2) return null;
+      const [away, home] = gameParts;
+
+      const currentGame = games.find(g => g.away_team === away && g.home_team === home);
+      if (currentGame && (currentGame.status === 'final' || currentGame.status === 'closed')) {
+        if (currentGame.away_score != null && currentGame.home_score != null) {
+          return {
+            awayScore: currentGame.away_score,
+            homeScore: currentGame.home_score,
+            spreadResult: currentGame.spread_result,
+            totalResult: currentGame.total_result,
+            mlResult: currentGame.ml_result
+          };
+        }
+      }
+
+      const results = bet.sport === 'NHL' ? nhlResultsData : resultsData;
+      if (!results || !results.days) return null;
+
+      const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
+      if (!betDate) return null;
+
+      const day = results.days.find(d => d.date === betDate);
+      if (!day || !day.picks) return null;
+
+      const gamePicks = day.picks.filter(p => p.game === bet.game);
+      if (gamePicks.length === 0) return null;
+
+      const pickWithScore = gamePicks.find(p => p.result && p.result.includes('-'));
+      if (!pickWithScore) return null;
+
+      const scores = pickWithScore.result.split('-').map(s => parseInt(s.trim()));
+      if (scores.length !== 2 || isNaN(scores[0]) || isNaN(scores[1])) return null;
+
+      const spreadPick = gamePicks.find(p => p.type === 'spread');
+      const totalPick = gamePicks.find(p => p.type === 'total');
+      const mlPick = gamePicks.find(p => p.type === 'ml');
+
+      return {
+        awayScore: scores[0],
+        homeScore: scores[1],
+        spreadResult: spreadPick ? (spreadPick.hit === true ? 'win' : spreadPick.hit === false ? 'loss' : 'push') : null,
+        totalResult: totalPick ? (totalPick.hit === true ? 'win' : totalPick.hit === false ? 'loss' : 'push') : null,
+        mlResult: mlPick ? (mlPick.hit === true ? 'win' : mlPick.hit === false ? 'loss' : 'push') : null
+      };
+    }
+
+    function gradeBet(bet, gameResult) {
+      if (!gameResult) return null;
+      const { awayScore, homeScore } = gameResult;
+
+      if (bet.type === 'spread') {
+        if (gameResult.spreadResult) return gameResult.spreadResult;
+        const pickMatch = (bet.pick || '').match(/([A-Z]{2,3})\s*([+-]?\d+\.?\d*)/);
+        if (!pickMatch) return null;
+        const pickTeam = pickMatch[1];
+        const pickLine = parseFloat(pickMatch[2]);
+        const gameParts = (bet.game || '').split(' @ ');
+        const isHome = pickTeam === gameParts[1];
+        const actualSpread = homeScore - awayScore;
+        const coverMargin = isHome ? actualSpread + pickLine : -actualSpread + pickLine;
+        if (coverMargin > 0) return 'win';
+        if (coverMargin < 0) return 'loss';
+        return 'push';
+      }
+
+      if (bet.type === 'total') {
+        if (gameResult.totalResult) return gameResult.totalResult;
+        const total = awayScore + homeScore;
+        const pickMatch = (bet.pick || '').match(/(OVER|UNDER)\s+([\d.]+)/i);
+        if (!pickMatch) return null;
+        const direction = pickMatch[1].toUpperCase();
+        const line = parseFloat(pickMatch[2]);
+        if (direction === 'OVER') return total > line ? 'win' : total < line ? 'loss' : 'push';
+        return total < line ? 'win' : total > line ? 'loss' : 'push';
+      }
+
+      if (bet.type === 'ml') {
+        if (gameResult.mlResult) return gameResult.mlResult;
+        const gameParts = (bet.game || '').split(' @ ');
+        const winner = homeScore > awayScore ? gameParts[1] : gameParts[0];
+        return bet.pick === winner ? 'win' : 'loss';
+      }
+
+      return null;
+    }
+
+    async function autoGradeBets() {
+      const statusEl = document.getElementById('grading-status');
+      statusEl.textContent = 'Checking...';
+      statusEl.classList.add('grading');
+
+      await loadGameData();
+
+      const bets = getTrackedBets();
+      let changed = false;
+      let gradedCount = 0;
+
+      for (const bet of bets) {
+        if (bet.status !== 'pending') continue;
+        if (bet.type === 'prop') continue;
+
+        const gameResult = findGameResult(bet);
+        if (!gameResult) continue;
+
+        const result = gradeBet(bet, gameResult);
+        if (!result) continue;
+
+        bet.status = result;
+        bet.actual = `${gameResult.awayScore}-${gameResult.homeScore}`;
+
+        if (result === 'win') bet.profit_units = calcProfit(bet.odds, bet.units);
+        else if (result === 'loss') bet.profit_units = -bet.units;
+        else bet.profit_units = 0;
+
+        changed = true;
+        gradedCount++;
+      }
+
+      if (changed) {
+        saveTrackedBets(bets);
+        renderStats();
+        renderBets();
+        renderCalendar();
+      }
+
+      if (gradedCount > 0) {
+        statusEl.textContent = `Graded ${gradedCount}`;
+        setTimeout(() => { statusEl.textContent = ''; }, 3000);
+      } else {
+        statusEl.textContent = '';
+      }
+      statusEl.classList.remove('grading');
     }
 
     // ── Initialize ──
     async function init() {
       loadSettings();
-      selectedDate = getLocalDateStr(); // Default to today
+      selectedDate = getLocalDateStr();
       dateRangeMode = 'today';
-      renderDatePicker();
+      updateBetsTitle();
       renderStats();
+      renderCalendar();
       renderBets();
-
-      // Auto-grade on load
       await autoGradeBets();
-
-      // Auto-grade every 5 minutes
       setInterval(autoGradeBets, 5 * 60 * 1000);
     }
 
-    // Close calendar on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeCalendar();
-        hideConfirm();
-      }
+      if (e.key === 'Escape') hideConfirm();
     });
 
     init();
