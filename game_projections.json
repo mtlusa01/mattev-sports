@@ -1,30 +1,88 @@
 {
-  "date": "2026-02-07",
+  "date": "2026-02-08",
   "sport": "NBA",
-  "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-08T02:48:32",
+  "locked_at": "2026-02-08T02:51:44",
+  "updated": "2026-02-08T02:51:44",
   "games": [
     {
-      "away_team": "WAS",
-      "home_team": "BKN",
-      "game_date": "2026-02-07",
-      "proj_score": "112.1-115.4",
-      "spread_pick": "BKN -4.5",
-      "spread_conf": 48.3,
-      "total_line": 220.5,
+      "away_team": "NYK",
+      "home_team": "BOS",
+      "game_date": "2026-02-08",
+      "proj_score": "110.4-115.1",
+      "spread_pick": "BOS -4.0",
+      "spread_conf": 51.7,
+      "total_line": 214.5,
       "total_pick": "OVER",
-      "total_conf": 62.2,
-      "ml_pick": "BKN",
-      "ml_conf": 56.6,
-      "commence_time": "2026-02-07T20:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
+      "total_conf": 71.9,
+      "ml_pick": "BOS",
+      "ml_conf": 60.6,
+      "commence_time": "2026-02-08T17:40:00Z",
+      "status": "scheduled",
+      "locked_at": "2026-02-08T07:51:43Z",
       "injury_impact": {
-        "home": 0.0,
-        "away": -15.2,
-        "total": -15.2,
-        "home_injuries": [],
+        "home": -6.4,
+        "away": -4.2,
+        "total": -10.6,
+        "home_injuries": [
+          {
+            "player": "Jayson Tatum",
+            "status": "Out",
+            "impact": 7.5
+          }
+        ],
         "away_injuries": [
+          {
+            "player": "Karl-Anthony Towns",
+            "status": "Day-To-Day",
+            "impact": 2.2
+          },
+          {
+            "player": "OG Anunoby",
+            "status": "Day-To-Day",
+            "impact": 1.5
+          },
+          {
+            "player": "Miles McBride",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": -0.7,
+        "total": 11.0,
+        "spread_ev": 0.0,
+        "total_ev": 0.3745,
+        "spread_prob": 0.5,
+        "total_prob": 0.72
+      },
+      "total_rec": {
+        "pick": "OVER 214.5",
+        "edge": 11.0,
+        "ev": 37.5,
+        "confidence": "high"
+      }
+    },
+    {
+      "away_team": "MIA",
+      "home_team": "WAS",
+      "game_date": "2026-02-08",
+      "proj_score": "119.3-114.2",
+      "spread_pick": "WAS +11.0",
+      "spread_conf": 65.9,
+      "total_line": 235.5,
+      "total_pick": "UNDER",
+      "total_conf": 55.9,
+      "ml_pick": "MIA",
+      "ml_conf": 62.7,
+      "commence_time": "2026-02-08T19:10:00Z",
+      "status": "scheduled",
+      "locked_at": "2026-02-08T07:51:43Z",
+      "injury_impact": {
+        "home": -14.8,
+        "away": -5.8,
+        "total": -20.6,
+        "home_injuries": [
           {
             "player": "Anthony Davis",
             "status": "Out",
@@ -36,1051 +94,171 @@
             "impact": 5.5
           },
           {
-            "player": "Jaden Hardy",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": 1.2,
-        "total": 7.0,
-        "spread_ev": 0.0,
-        "total_ev": 0.2756,
-        "spread_prob": 0.5,
-        "total_prob": 0.668
-      },
-      "total_rec": {
-        "pick": "OVER 220.5",
-        "edge": 7.0,
-        "ev": 27.6,
-        "confidence": "high"
-      },
-      "away_score": 113,
-      "home_score": 127,
-      "spread_result": "win",
-      "total_result": "win",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "Noah Clowney",
-          "team": "BKN",
-          "prop": "REB",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 4.6,
-          "actual": 3,
-          "hit": false,
-          "confidence": 53.8,
-          "ev": 7.6
-        }
-      ]
-    },
-    {
-      "away_team": "HOU",
-      "home_team": "OKC",
-      "game_date": "2026-02-07",
-      "proj_score": "108.9-115.5",
-      "spread_pick": "OKC -3.5",
-      "spread_conf": 58.6,
-      "total_line": 212.5,
-      "total_pick": "OVER",
-      "total_conf": 80.2,
-      "ml_pick": "OKC",
-      "ml_conf": 69.1,
-      "commence_time": "2026-02-07T20:40:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
-      "injury_impact": {
-        "home": -11.6,
-        "away": -2.4,
-        "total": -14.0,
-        "home_injuries": [
-          {
-            "player": "Shai Gilgeous-Alexander",
-            "status": "Out",
-            "impact": 8.0
-          },
-          {
-            "player": "Jalen Williams",
-            "status": "Out",
-            "impact": 3.5
-          },
-          {
-            "player": "Ajay Mitchell",
+            "player": "D'Angelo Russell",
             "status": "Out",
             "impact": 1.0
           }
         ],
         "away_injuries": [
           {
-            "player": "Jae'Sean Tate",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Steven Adams",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Fred VanVleet",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": -3.1,
-        "total": 11.9,
-        "spread_ev": 0.1301,
-        "total_ev": 0.3745,
-        "spread_prob": 0.592,
-        "total_prob": 0.72
-      },
-      "spread_rec": {
-        "pick": "OKC -3.5",
-        "edge": -3.1,
-        "ev": 13.0,
-        "confidence": "medium"
-      },
-      "total_rec": {
-        "pick": "OVER 212.5",
-        "edge": 11.9,
-        "ev": 37.5,
-        "confidence": "high"
-      },
-      "away_score": 112,
-      "home_score": 106,
-      "spread_result": "loss",
-      "total_result": "win",
-      "ml_result": "loss",
-      "graded_props": [
-        {
-          "player": "Chet Holmgren",
-          "team": "OKC",
-          "prop": "PTS",
-          "direction": "UNDER",
-          "line": 19.5,
-          "projection": 13.1,
-          "actual": 17,
-          "hit": true,
-          "confidence": 58.9,
-          "ev": 21.0
-        },
-        {
-          "player": "Isaiah Hartenstein",
-          "team": "OKC",
-          "prop": "REB",
-          "direction": "OVER",
-          "line": 7.5,
-          "projection": 10.3,
-          "actual": 8,
-          "hit": true,
-          "confidence": 57.9,
-          "ev": 10.0
-        },
-        {
-          "player": "Chet Holmgren",
-          "team": "OKC",
-          "prop": "REB",
-          "direction": "UNDER",
-          "line": 8.5,
-          "projection": 5.9,
-          "actual": 14,
-          "hit": false,
-          "confidence": 57.0,
-          "ev": 4.4
-        }
-      ]
-    },
-    {
-      "away_team": "DAL",
-      "home_team": "SAS",
-      "game_date": "2026-02-07",
-      "proj_score": "111.6-117.8",
-      "spread_pick": "DAL +11.0",
-      "spread_conf": 61.6,
-      "total_line": 229.5,
-      "total_pick": "UNDER",
-      "total_conf": 49.9,
-      "ml_pick": "SAS",
-      "ml_conf": 64.8,
-      "commence_time": "2026-02-07T23:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
-      "injury_impact": {
-        "home": -4.8,
-        "away": -7.2,
-        "total": -12.0,
-        "home_injuries": [
-          {
-            "player": "De'Aaron Fox",
-            "status": "Day-To-Day",
-            "impact": 2.5
-          },
-          {
-            "player": "Jeremy Sochan",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Lindy Waters III",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Kyrie Irving",
-            "status": "Out",
-            "impact": 5.0
-          },
-          {
-            "player": "Brandon Williams",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Dereck Lively II",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": 4.8,
-        "total": -0.1,
-        "spread_ev": 0.2221,
-        "total_ev": 0.0,
-        "spread_prob": 0.64,
-        "total_prob": 0.5
-      },
-      "spread_rec": {
-        "pick": "DAL +11.0",
-        "edge": 4.8,
-        "ev": 22.2,
-        "confidence": "medium"
-      },
-      "away_score": 125,
-      "home_score": 138,
-      "spread_result": "loss",
-      "total_result": "loss",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "Cooper Flagg",
-          "team": "DAL",
-          "prop": "AST",
-          "direction": "UNDER",
-          "line": 4.5,
-          "projection": 3.9,
-          "actual": 4,
-          "hit": true,
-          "confidence": 54.815,
-          "ev": 18.4
-        },
-        {
-          "player": "Victor Wembanyama",
-          "team": "SAS",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 24.5,
-          "projection": 25.3,
-          "actual": 16,
-          "hit": false,
-          "confidence": 52.2,
-          "ev": 3.0
-        },
-        {
-          "player": "De'Aaron Fox",
-          "team": "SAS",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 6.5,
-          "projection": 7.2,
-          "actual": 5,
-          "hit": false,
-          "confidence": 55.1,
-          "ev": 1.4
-        }
-      ]
-    },
-    {
-      "away_team": "UTA",
-      "home_team": "ORL",
-      "game_date": "2026-02-07",
-      "proj_score": "115.4-121.1",
-      "spread_pick": "UTA +9.0",
-      "spread_conf": 57.8,
-      "total_line": 237.5,
-      "total_pick": "UNDER",
-      "total_conf": 52.0,
-      "ml_pick": "ORL",
-      "ml_conf": 63.7,
-      "commence_time": "2026-02-08T00:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
-      "injury_impact": {
-        "home": -3.6,
-        "away": -2.8,
-        "total": -6.4,
-        "home_injuries": [
-          {
-            "player": "Franz Wagner",
-            "status": "Out",
-            "impact": 3.5
-          },
-          {
-            "player": "Colin Castleton",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Keyonte George",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Elijah Harkless",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Walker Kessler",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": 3.3,
-        "total": -1.0,
-        "spread_ev": 0.1411,
-        "total_ev": 0.0,
-        "spread_prob": 0.598,
-        "total_prob": 0.5
-      },
-      "spread_rec": {
-        "pick": "UTA +9.0",
-        "edge": 3.3,
-        "ev": 14.1,
-        "confidence": "medium"
-      },
-      "away_score": 117,
-      "home_score": 120,
-      "spread_result": "win",
-      "total_result": "win",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "Jalen Suggs",
-          "team": "ORL",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 6.5,
-          "projection": 7.2,
-          "actual": 6,
-          "hit": false,
-          "confidence": 52.1,
-          "ev": 4.7
-        },
-        {
-          "player": "Lauri Markkanen",
-          "team": "UTA",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 21.5,
-          "projection": 25.9,
-          "actual": 27,
-          "hit": true,
-          "confidence": 54.0,
-          "ev": 1.3
-        },
-        {
-          "player": "Keyonte George",
-          "team": "UTA",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 21.5,
-          "projection": 30.2,
-          "actual": 5,
-          "hit": false,
-          "confidence": 54.9,
-          "ev": 1.0
-        }
-      ]
-    },
-    {
-      "away_team": "CHA",
-      "home_team": "ATL",
-      "game_date": "2026-02-07",
-      "proj_score": "116.3-116.4",
-      "spread_pick": "ATL +2.0",
-      "spread_conf": 56.8,
-      "total_line": 231.5,
-      "total_pick": "OVER",
-      "total_conf": 52.5,
-      "ml_pick": "ATL",
-      "ml_conf": 51.5,
-      "commence_time": "2026-02-08T00:40:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
-      "injury_impact": {
-        "home": -2.4,
-        "away": -3.6,
-        "total": -6.0,
-        "home_injuries": [
-          {
-            "player": "Jonathan Kuminga",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Onyeka Okongwu",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Coby White",
+            "player": "Tyler Herro",
             "status": "Out",
             "impact": 3.0
           },
           {
-            "player": "Malaki Branham",
+            "player": "Bam Adebayo",
+            "status": "Day-To-Day",
+            "impact": 2.2
+          },
+          {
+            "player": "Terry Rozier",
             "status": "Out",
             "impact": 1.0
           }
         ]
       },
       "edge": {
-        "spread": -2.1,
-        "total": 1.2,
-        "spread_ev": 0.0742,
+        "spread": -5.9,
+        "total": -2.0,
+        "spread_ev": 0.279,
         "total_ev": 0.0,
-        "spread_prob": 0.563,
+        "spread_prob": 0.67,
         "total_prob": 0.5
       },
       "spread_rec": {
-        "pick": "ATL +2.0",
-        "edge": -2.1,
-        "ev": 7.4,
-        "confidence": "low"
-      },
-      "away_score": 126,
-      "home_score": 119,
-      "spread_result": "loss",
-      "total_result": "win",
-      "ml_result": "loss",
-      "graded_props": [
-        {
-          "player": "Jalen Johnson",
-          "team": "ATL",
-          "prop": "REB",
-          "direction": "OVER",
-          "line": 10.5,
-          "projection": 11.3,
-          "actual": 9,
-          "hit": false,
-          "confidence": 54.8,
-          "ev": 8.6
-        },
-        {
-          "player": "LaMelo Ball",
-          "team": "CHA",
-          "prop": "PTS",
-          "direction": "UNDER",
-          "line": 20.5,
-          "projection": 19.8,
-          "actual": 19,
-          "hit": true,
-          "confidence": 52.25,
-          "ev": 3.2
-        }
-      ]
-    },
-    {
-      "away_team": "DEN",
-      "home_team": "CHI",
-      "game_date": "2026-02-07",
-      "proj_score": "119.0-117.0",
-      "spread_pick": "CHI +5.5",
-      "spread_conf": 59.8,
-      "total_line": 232.5,
-      "total_pick": "OVER",
-      "total_conf": 59.1,
-      "ml_pick": "DEN",
-      "ml_conf": 55.4,
-      "commence_time": "2026-02-08T01:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
-      "injury_impact": {
-        "home": -3.6,
-        "away": -9.2,
-        "total": -12.8,
-        "home_injuries": [
-          {
-            "player": "Tre Jones",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Josh Giddey",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Zach Collins",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Nikola Jokic",
-            "status": "Day-To-Day",
-            "impact": 4.5
-          },
-          {
-            "player": "Aaron Gordon",
-            "status": "Out",
-            "impact": 2.5
-          },
-          {
-            "player": "Spencer Jones",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": -3.5,
-        "total": 3.5,
-        "spread_ev": 0.1521,
-        "total_ev": 0.1199,
-        "spread_prob": 0.603,
-        "total_prob": 0.587
-      },
-      "spread_rec": {
-        "pick": "CHI +5.5",
-        "edge": -3.5,
-        "ev": 15.2,
-        "confidence": "medium"
-      },
-      "total_rec": {
-        "pick": "OVER 232.5",
-        "edge": 3.5,
-        "ev": 12.0,
-        "confidence": "low"
-      },
-      "away_score": 136,
-      "home_score": 120,
-      "spread_result": "loss",
-      "total_result": "win",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "Jamal Murray",
-          "team": "DEN",
-          "prop": "REB",
-          "direction": "UNDER",
-          "line": 4.5,
-          "projection": 4.2,
-          "actual": 3,
-          "hit": true,
-          "confidence": 53.865,
-          "ev": 2.3
-        }
-      ]
-    },
-    {
-      "away_team": "GSW",
-      "home_team": "LAL",
-      "game_date": "2026-02-07",
-      "proj_score": "114.6-116.0",
-      "spread_pick": "GSW +3.5",
-      "spread_conf": 54.8,
-      "total_line": 222.5,
-      "total_pick": "OVER",
-      "total_conf": 65.7,
-      "ml_pick": "LAL",
-      "ml_conf": 52.9,
-      "commence_time": "2026-02-08T01:40:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
-      "injury_impact": {
-        "home": -8.0,
-        "away": -11.6,
-        "total": -19.6,
-        "home_injuries": [
-          {
-            "player": "Luka Doncic",
-            "status": "Out",
-            "impact": 8.5
-          },
-          {
-            "player": "Adou Thiero",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Stephen Curry",
-            "status": "Out",
-            "impact": 7.0
-          },
-          {
-            "player": "Kristaps Porzingis",
-            "status": "Out",
-            "impact": 4.0
-          },
-          {
-            "player": "L.J. Cryer",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": 2.1,
-        "total": 8.1,
-        "spread_ev": 0.0742,
-        "total_ev": 0.3213,
-        "spread_prob": 0.563,
-        "total_prob": 0.692
-      },
-      "spread_rec": {
-        "pick": "GSW +3.5",
-        "edge": 2.1,
-        "ev": 7.4,
-        "confidence": "low"
-      },
-      "total_rec": {
-        "pick": "OVER 222.5",
-        "edge": 8.1,
-        "ev": 32.1,
+        "pick": "WAS +11.0",
+        "edge": -5.9,
+        "ev": 27.9,
         "confidence": "high"
-      },
-      "away_score": 99,
-      "home_score": 105,
-      "spread_result": "loss",
-      "total_result": "loss",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "LeBron James",
-          "team": "LAL",
-          "prop": "REB",
-          "direction": "UNDER",
-          "line": 5.5,
-          "projection": 4.5,
-          "actual": 7,
-          "hit": false,
-          "confidence": 52.059999999999995,
-          "ev": 9.1
-        },
-        {
-          "player": "LeBron James",
-          "team": "LAL",
-          "prop": "PTS",
-          "direction": "UNDER",
-          "line": 23.5,
-          "projection": 21.5,
-          "actual": 20,
-          "hit": true,
-          "confidence": 53.199999999999996,
-          "ev": 2.3
-        },
-        {
-          "player": "LeBron James",
-          "team": "LAL",
-          "prop": "AST",
-          "direction": "UNDER",
-          "line": 8.5,
-          "projection": 6.8,
-          "actual": 10,
-          "hit": false,
-          "confidence": 56.24,
-          "ev": 1.7
-        }
-      ]
+      }
     },
     {
-      "away_team": "PHI",
-      "home_team": "PHX",
-      "game_date": "2026-02-07",
-      "proj_score": "112.5-114.6",
-      "spread_pick": "PHX -1.5",
-      "spread_conf": 52.4,
-      "total_line": 221.5,
+      "away_team": "IND",
+      "home_team": "TOR",
+      "game_date": "2026-02-08",
+      "proj_score": "109.7-117.3",
+      "spread_pick": "TOR -9.0",
+      "spread_conf": 47.9,
+      "total_line": 224.5,
       "total_pick": "OVER",
-      "total_conf": 63.0,
-      "ml_pick": "PHX",
-      "ml_conf": 55.5,
-      "commence_time": "2026-02-08T02:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
+      "total_conf": 54.2,
+      "ml_pick": "TOR",
+      "ml_conf": 64.0,
+      "commence_time": "2026-02-08T20:10:00Z",
+      "status": "scheduled",
+      "locked_at": "2026-02-08T07:51:43Z",
       "injury_impact": {
-        "home": -8.4,
-        "away": -5.0,
-        "total": -13.4,
+        "home": -2.0,
+        "away": -9.2,
+        "total": -11.2,
         "home_injuries": [
           {
-            "player": "Devin Booker",
+            "player": "Jakob Poeltl",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Chucky Hepburn",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Tyrese Haliburton",
             "status": "Out",
             "impact": 5.5
           },
           {
-            "player": "Jalen Green",
+            "player": "Ivica Zubac",
             "status": "Out",
-            "impact": 3.0
+            "impact": 2.5
           },
           {
-            "player": "Isaiah Livers",
+            "player": "Kobe Brown",
             "status": "Out",
             "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Joel Embiid",
-            "status": "Day-To-Day",
-            "impact": 4.0
-          },
-          {
-            "player": "Paul George",
-            "status": "Suspension",
-            "impact": 2.2
           }
         ]
       },
       "edge": {
-        "spread": -0.6,
-        "total": 5.6,
+        "spread": 1.4,
+        "total": 2.5,
         "spread_ev": 0.0,
-        "total_ev": 0.215,
+        "total_ev": 0.0,
         "spread_prob": 0.5,
-        "total_prob": 0.636
-      },
-      "total_rec": {
-        "pick": "OVER 221.5",
-        "edge": 5.6,
-        "ev": 21.5,
-        "confidence": "medium"
-      },
-      "away_score": 109,
-      "home_score": 103,
-      "spread_result": "loss",
-      "total_result": "loss",
-      "ml_result": "loss",
-      "graded_props": [
-        {
-          "player": "Joel Embiid",
-          "team": "PHI",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 28.5,
-          "projection": 31.4,
-          "actual": 33,
-          "hit": true,
-          "confidence": 55.7,
-          "ev": 8.8
-        },
-        {
-          "player": "Joel Embiid",
-          "team": "PHI",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 5.2,
-          "actual": 3,
-          "hit": false,
-          "confidence": 52.5,
-          "ev": 8.7
-        },
-        {
-          "player": "VJ Edgecombe",
-          "team": "PHI",
-          "prop": "REB",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 6.0,
-          "actual": 6,
-          "hit": true,
-          "confidence": 52.2,
-          "ev": 7.5
-        },
-        {
-          "player": "Devin Booker",
-          "team": "PHX",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 21.5,
-          "projection": 26.6,
-          "actual": 21,
-          "hit": false,
-          "confidence": 55.0,
-          "ev": 1.7
-        },
-        {
-          "player": "Dillon Brooks",
-          "team": "PHX",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 19.5,
-          "projection": 23.4,
-          "actual": 28,
-          "hit": true,
-          "confidence": 52.3,
-          "ev": 1.7
-        },
-        {
-          "player": "Devin Booker",
-          "team": "PHX",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 4.8,
-          "actual": 9,
-          "hit": true,
-          "confidence": 54.3,
-          "ev": 1.5
-        },
-        {
-          "player": "Collin Gillespie",
-          "team": "PHX",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 14.5,
-          "projection": 15.6,
-          "actual": 6,
-          "hit": false,
-          "confidence": 52.9,
-          "ev": 1.4
-        },
-        {
-          "player": "Royce O'Neale",
-          "team": "PHX",
-          "prop": "REB",
-          "direction": "UNDER",
-          "line": 4.5,
-          "projection": 3.7,
-          "actual": 11,
-          "hit": false,
-          "confidence": 53.01,
-          "ev": 1.2
-        }
-      ]
+        "total_prob": 0.5
+      }
     },
     {
-      "away_team": "CLE",
-      "home_team": "SAC",
-      "game_date": "2026-02-07",
-      "proj_score": "118.9-112.3",
-      "spread_pick": "SAC +12.0",
-      "spread_conf": 64.1,
-      "total_line": 233.5,
-      "total_pick": "UNDER",
-      "total_conf": 54.9,
-      "ml_pick": "CLE",
-      "ml_conf": 65.6,
-      "commence_time": "2026-02-08T03:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T06:29:17Z",
+      "away_team": "LAC",
+      "home_team": "MIN",
+      "game_date": "2026-02-08",
+      "proj_score": "111.9-116.7",
+      "spread_pick": "LAC +8.5",
+      "spread_conf": 58.7,
+      "total_line": 224.5,
+      "total_pick": "OVER",
+      "total_conf": 60.8,
+      "ml_pick": "MIN",
+      "ml_conf": 61.9,
+      "commence_time": "2026-02-08T20:10:00Z",
+      "status": "scheduled",
+      "locked_at": "2026-02-08T07:51:43Z",
       "injury_impact": {
-        "home": -2.8,
-        "away": -8.0,
-        "total": -10.8,
+        "home": -1.6,
+        "away": -5.6,
+        "total": -7.2,
         "home_injuries": [
           {
-            "player": "Domantas Sabonis",
-            "status": "Day-To-Day",
-            "impact": 2.0
+            "player": "Julian Phillips",
+            "status": "Out",
+            "impact": 1.0
           },
           {
-            "player": "Keegan Murray",
+            "player": "Terrence Shannon Jr.",
             "status": "Out",
             "impact": 1.0
           }
         ],
         "away_injuries": [
           {
-            "player": "James Harden",
-            "status": "Out",
-            "impact": 4.5
-          },
-          {
-            "player": "Evan Mobley",
+            "player": "Darius Garland",
             "status": "Out",
             "impact": 4.0
           },
           {
-            "player": "Max Strus",
+            "player": "Isaiah Jackson",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Bennedict Mathurin",
             "status": "Out",
             "impact": 1.0
           }
         ]
       },
       "edge": {
-        "spread": -5.4,
-        "total": -2.3,
-        "spread_ev": 0.2534,
-        "total_ev": 0.0,
-        "spread_prob": 0.657,
-        "total_prob": 0.5
+        "spread": 3.7,
+        "total": 4.1,
+        "spread_ev": 0.163,
+        "total_ev": 0.1475,
+        "spread_prob": 0.609,
+        "total_prob": 0.601
       },
       "spread_rec": {
-        "pick": "SAC +12.0",
-        "edge": -5.4,
-        "ev": 25.3,
-        "confidence": "high"
-      },
-      "away_score": 132,
-      "home_score": 126,
-      "spread_result": "win",
-      "total_result": "loss",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "Donovan Mitchell",
-          "team": "CLE",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 6.6,
-          "actual": 4,
-          "hit": false,
-          "confidence": 54.6,
-          "ev": 2.1
-        },
-        {
-          "player": "Russell Westbrook",
-          "team": "SAC",
-          "prop": "REB",
-          "direction": "UNDER",
-          "line": 4.5,
-          "projection": 4.1,
-          "actual": 5,
-          "hit": false,
-          "confidence": 53.675,
-          "ev": 1.3
-        },
-        {
-          "player": "Jaylon Tyson",
-          "team": "CLE",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 14.5,
-          "projection": 15.8,
-          "actual": 10,
-          "hit": false,
-          "confidence": 53.6,
-          "ev": 1.0
-        }
-      ]
-    },
-    {
-      "away_team": "MEM",
-      "home_team": "POR",
-      "game_date": "2026-02-07",
-      "proj_score": "112.0-115.2",
-      "spread_pick": "MEM +10.0",
-      "spread_conf": 63.2,
-      "total_line": 237.5,
-      "total_pick": "UNDER",
-      "total_conf": 69.2,
-      "ml_pick": "POR",
-      "ml_conf": 58.3,
-      "commence_time": "2026-02-08T03:10:00Z",
-      "status": "final",
-      "locked_at": "2026-02-07T14:09:44Z",
-      "injury_impact": {
-        "home": 0.0,
-        "away": 0.0,
-        "total": 0.0,
-        "home_injuries": [],
-        "away_injuries": []
-      },
-      "edge": {
-        "spread": 7.1,
-        "total": -10.3,
-        "spread_ev": 0.25,
-        "total_ev": 0.35,
-        "spread_prob": 0.632,
-        "total_prob": 0.692
-      },
-      "spread_rec": {
-        "pick": "MEM +10.0",
-        "edge": 7.1,
-        "ev": 25.0,
-        "confidence": "high"
+        "pick": "LAC +8.5",
+        "edge": 3.7,
+        "ev": 16.3,
+        "confidence": "medium"
       },
       "total_rec": {
-        "pick": "UNDER 237.5",
-        "edge": 10.3,
-        "ev": 35.0,
-        "confidence": "high"
-      },
-      "away_score": 115,
-      "home_score": 122,
-      "spread_result": "win",
-      "total_result": "win",
-      "ml_result": "win",
-      "graded_props": [
-        {
-          "player": "Jrue Holiday",
-          "team": "POR",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 6.5,
-          "actual": 4,
-          "hit": false,
-          "confidence": 55.8,
-          "ev": 7.1
-        },
-        {
-          "player": "Jrue Holiday",
-          "team": "POR",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 14.5,
-          "projection": 18.0,
-          "actual": 21,
-          "hit": true,
-          "confidence": 55.4,
-          "ev": 4.0
-        },
-        {
-          "player": "Toumani Camara",
-          "team": "POR",
-          "prop": "REB",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 5.2,
-          "actual": 7,
-          "hit": true,
-          "confidence": 53.8,
-          "ev": 3.6
-        },
-        {
-          "player": "Jerami Grant",
-          "team": "POR",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 16.5,
-          "projection": 18.8,
-          "actual": 29,
-          "hit": true,
-          "confidence": 53.2,
-          "ev": 1.1
-        }
-      ]
+        "pick": "OVER 224.5",
+        "edge": 4.1,
+        "ev": 14.8,
+        "confidence": "medium"
+      }
     }
   ]
 }

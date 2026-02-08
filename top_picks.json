@@ -1,170 +1,105 @@
 {
-  "date": "2026-02-07",
-  "generated_at": "2026-02-07T23:00:15",
+  "date": "2026-02-08",
+  "generated_at": "2026-02-08T02:51:45",
   "picks": [
     {
-      "type": "prop",
-      "player": "Chet Holmgren",
-      "team": "OKC",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 19.5,
-      "projection": 13.1,
-      "diff": -6.4,
-      "ev": 21.0,
-      "confidence": 58.9,
-      "pick_score": 76.0,
+      "type": "spread",
+      "game": "MIA @ WAS",
+      "away_team": "MIA",
+      "home_team": "WAS",
+      "pick": "WAS +11.0",
+      "confidence": 65.9,
+      "pick_score": 50.0,
       "score_factors": [
-        "+21.0% EV",
-        "Favorable matchup (#4 DEF)",
-        "+6.4 edge"
+        "65.9% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-02-08T19:10:00Z",
+      "top_pick_rank": 1
+    },
+    {
+      "type": "prop",
+      "player": "Jaylen Brown",
+      "team": "BOS",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 6.5,
+      "projection": 8.3,
+      "diff": 1.8,
+      "ev": 3.6,
+      "confidence": 58.2,
+      "pick_score": 46.8,
+      "score_factors": [
+        "90% L10 hit rate",
+        "9-game streak"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 19.5,
-            "odds": -130
+            "line": 6.5,
+            "odds": -125
           },
           "under": {
-            "line": 19.5,
-            "odds": -102
+            "line": 6.5,
+            "odds": -106
           }
         },
         "draftkings": {
           "over": {
-            "line": 19.5,
-            "odds": -117
+            "line": 6.5,
+            "odds": -132
           },
           "under": {
-            "line": 19.5,
-            "odds": -109
+            "line": 6.5,
+            "odds": 101
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Averaging 17.1 points over last 10 games (-2.4 below line).",
-      "top_pick_rank": 1,
-      "result": "WIN",
-      "actual": 17
+      "insight": "Has gone OVER 6.5 rebounds in 9 of last 10 games (9.1 avg).",
+      "top_pick_rank": 2
     },
     {
       "type": "total",
-      "game": "HOU @ OKC",
-      "away_team": "HOU",
-      "home_team": "OKC",
-      "pick": "OVER 212.5",
-      "confidence": 80.2,
-      "pick_score": 55.0,
+      "game": "NYK @ BOS",
+      "away_team": "NYK",
+      "home_team": "BOS",
+      "pick": "OVER 214.5",
+      "confidence": 71.9,
+      "pick_score": 40.0,
       "score_factors": [
-        "80.2% total conf",
-        "Very high confidence"
+        "71.9% total conf"
       ],
-      "commence_time": "2026-02-07T20:40:00Z",
-      "top_pick_rank": 2,
-      "result": "WIN",
-      "actual": "112-106"
-    },
-    {
-      "type": "prop",
-      "player": "Devin Booker",
-      "team": "PHX",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 21.5,
-      "projection": 26.6,
-      "diff": 5.1,
-      "ev": 1.7,
-      "confidence": 55.0,
-      "pick_score": 54.5,
-      "score_factors": [
-        "80% L10 hit rate",
-        "+5.1 edge",
-        "5-game streak"
-      ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 21.5,
-            "odds": -130
-          },
-          "under": {
-            "line": 21.5,
-            "odds": -102
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 22.5,
-            "odds": -107
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -119
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "insight": "Has gone OVER 21.5 points in 8 of last 10 games (24.5 avg).",
+      "commence_time": "2026-02-08T17:40:00Z",
       "top_pick_rank": 3
     },
     {
-      "type": "prop",
-      "player": "Amen Thompson",
-      "team": "HOU",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 5.5,
-      "projection": 6.6,
-      "diff": 1.1,
-      "ev": 21.9,
-      "confidence": 55.9,
-      "pick_score": 52.5,
+      "type": "ml",
+      "game": "MIA @ WAS",
+      "away_team": "MIA",
+      "home_team": "WAS",
+      "pick": "MIA",
+      "confidence": 62.7,
+      "pick_score": 40.0,
       "score_factors": [
-        "+21.9% EV",
-        "70% L10 hit rate",
-        "Injury boosted"
+        "62.7% ML conf"
       ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 5.5,
-            "odds": 118
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -158
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 5.5,
-            "odds": 119
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -156
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "insight": "Has gone OVER 5.5 assists in 7 of last 10 games (7.2 avg).",
+      "commence_time": "2026-02-08T19:10:00Z",
       "top_pick_rank": 4
     },
     {
       "type": "ml",
-      "game": "HOU @ OKC",
-      "away_team": "HOU",
-      "home_team": "OKC",
-      "pick": "OKC",
-      "confidence": 69.1,
-      "pick_score": 50.0,
+      "game": "IND @ TOR",
+      "away_team": "IND",
+      "home_team": "TOR",
+      "pick": "TOR",
+      "confidence": 64.0,
+      "pick_score": 40.0,
       "score_factors": [
-        "69.1% ML conf"
+        "64.0% ML conf"
       ],
-      "commence_time": "2026-02-07T20:40:00Z",
-      "top_pick_rank": 5,
-      "result": "LOSS",
-      "actual": "112-106"
+      "commence_time": "2026-02-08T20:10:00Z",
+      "top_pick_rank": 5
     }
   ]
 }
