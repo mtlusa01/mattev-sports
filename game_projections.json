@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T23:41:28",
+  "updated": "2026-02-07T23:43:38",
   "games": [
     {
       "away_team": "WAS",
@@ -723,7 +723,7 @@
       "ml_pick": "PHX",
       "ml_conf": 55.5,
       "commence_time": "2026-02-08T02:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-07T06:29:17Z",
       "injury_impact": {
         "home": -8.4,
@@ -774,7 +774,10 @@
         "confidence": "medium"
       },
       "away_score": 109,
-      "home_score": 103
+      "home_score": 103,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "loss"
     },
     {
       "away_team": "CLE",
@@ -839,7 +842,7 @@
         "ev": 25.3,
         "confidence": "high"
       },
-      "away_score": 82,
+      "away_score": 87,
       "home_score": 86
     },
     {
@@ -884,8 +887,8 @@
         "ev": 35.0,
         "confidence": "high"
       },
-      "away_score": 82,
-      "home_score": 77
+      "away_score": 87,
+      "home_score": 83
     }
   ]
 }
