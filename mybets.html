@@ -81,7 +81,7 @@
     }
 
     .page-header {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     .page-title {
       font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem;
@@ -90,20 +90,53 @@
       color: var(--text-secondary); font-size: 0.95rem;
     }
 
+    /* ── Date Picker ── */
+    .date-picker {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px;
+      padding: 8px 12px; width: fit-content;
+    }
+    .date-picker-btn {
+      background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text-secondary); font-size: 16px; padding: 6px 10px; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .date-picker-btn:hover { background: var(--bg-elevated); color: var(--text-primary); border-color: var(--border-light); }
+    .date-picker-today {
+      background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text-secondary); font-size: 12px; font-weight: 600; padding: 6px 12px;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .date-picker-today:hover:not(:disabled) { background: var(--bg-elevated); color: var(--text-primary); }
+    .date-picker-today.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .date-picker-today:disabled { opacity: 0.5; cursor: default; }
+    .date-picker-alltime {
+      background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text-secondary); font-size: 12px; font-weight: 600; padding: 6px 12px;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .date-picker-alltime:hover { background: var(--bg-elevated); color: var(--text-primary); }
+    .date-picker-alltime.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .date-picker-display {
+      display: flex; flex-direction: column; align-items: center; min-width: 100px;
+    }
+    .date-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .date-picker-display span:last-child { font-size: 14px; font-weight: 600; }
+
     /* ── Stats Cards ── */
     .stats-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;
-      margin-bottom: 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
+      margin-bottom: 1.5rem;
     }
     .stat-card {
       background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; text-align: center;
+      padding: 16px; text-align: center;
     }
-    .stat-value { font-size: 2rem; font-weight: 700; margin-bottom: 4px; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; margin-bottom: 4px; }
     .stat-value.positive { color: var(--accent); }
     .stat-value.negative { color: var(--red-light); }
     .stat-value.neutral { color: var(--text-primary); }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
     /* ── Filters ── */
     .filters-bar {
@@ -125,6 +158,12 @@
       cursor: pointer; transition: all 0.15s;
     }
     .clear-btn:hover { border-color: var(--red); color: var(--red-light); }
+
+    .grading-status {
+      font-size: 11px; color: var(--text-muted); padding: 4px 10px;
+      background: var(--bg-tertiary); border-radius: 6px;
+    }
+    .grading-status.grading { color: var(--yellow); }
 
     /* ── Bets Table ── */
     .bets-table-container {
@@ -203,6 +242,7 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .bets-table th, .bets-table td { padding: 10px 12px; font-size: 12px; }
       .col-hide-mobile { display: none; }
+      .date-picker { flex-wrap: wrap; }
     }
 
     /* ── Confirm Modal ── */
@@ -257,6 +297,8 @@
       <p class="page-subtitle">Track your bets and monitor your performance</p>
     </div>
 
+    <div class="date-picker" id="date-picker"></div>
+
     <div class="stats-grid" id="stats-grid"></div>
 
     <div class="filters-bar">
@@ -264,6 +306,7 @@
       <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">Pending</button>
       <button class="filter-btn" data-filter="win" onclick="setFilter('win')">Wins</button>
       <button class="filter-btn" data-filter="loss" onclick="setFilter('loss')">Losses</button>
+      <span class="grading-status" id="grading-status"></span>
       <button class="clear-btn" onclick="showClearConfirm()">Clear All</button>
     </div>
 
@@ -290,9 +333,24 @@
   </div>
 
   <script>
+    // ── Constants ──
     const LS_SETTINGS = 'efe_user_settings';
     const LS_BETS = 'efe_tracked_bets';
+    const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
+    const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
+    const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
+    const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
 
+    // ── State ──
+    let currentFilter = 'all';
+    let selectedDate = null; // null = all time
+    let gameProjections = [];
+    let nhlGameProjections = [];
+    let resultsData = null;
+    let nhlResultsData = null;
+    let isGrading = false;
+
+    // ── Helpers ──
     function getBetSettings() {
       try { return JSON.parse(localStorage.getItem(LS_SETTINGS)) || {}; }
       catch { return {}; }
@@ -305,6 +363,13 @@
     function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
     function getUnitSize() { return getBetSettings().unit_size || 10; }
 
+    function getLocalDateStr() {
+      const now = new Date();
+      return now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+    }
+
     function calcProfit(odds, units) {
       const o = parseInt(odds);
       if (isNaN(o)) return 0;
@@ -312,9 +377,282 @@
       return units * (100 / Math.abs(o));
     }
 
-    let currentFilter = 'all';
-    let pendingAction = null;
+    function formatDateDisplay(dateStr) {
+      if (!dateStr) return { label: '', formatted: 'All Time' };
+      const today = getLocalDateStr();
+      const d = new Date(dateStr + 'T12:00:00');
+      const formatted = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 
+      const yesterday = (() => {
+        const y = new Date();
+        y.setDate(y.getDate() - 1);
+        return y.toISOString().slice(0, 10);
+      })();
+
+      let label = '';
+      if (dateStr === today) label = 'Today';
+      else if (dateStr === yesterday) label = 'Yesterday';
+
+      return { label, formatted };
+    }
+
+    // ── Date Picker ──
+    function renderDatePicker() {
+      const today = getLocalDateStr();
+      const { label, formatted } = formatDateDisplay(selectedDate);
+      const isToday = selectedDate === today;
+      const isAllTime = selectedDate === null;
+
+      document.getElementById('date-picker').innerHTML = `
+        <button class="date-picker-btn" onclick="changeDate(-1)" title="Previous day">&larr;</button>
+        <button class="date-picker-alltime ${isAllTime ? 'active' : ''}" onclick="setAllTime()">All Time</button>
+        <button class="date-picker-today ${isToday ? 'active' : ''}" onclick="goToToday()" ${isToday ? 'disabled' : ''}>Today</button>
+        <div class="date-picker-display">
+          ${label ? `<span class="date-label">${label}</span>` : ''}
+          <span>${formatted}</span>
+        </div>
+        <button class="date-picker-btn" onclick="changeDate(1)" title="Next day">&rarr;</button>
+      `;
+    }
+
+    function changeDate(delta) {
+      const base = selectedDate || getLocalDateStr();
+      const d = new Date(base + 'T12:00:00');
+      d.setDate(d.getDate() + delta);
+      selectedDate = d.toISOString().slice(0, 10);
+      renderDatePicker();
+      renderStats();
+      renderBets();
+      autoGradeBets();
+    }
+
+    function goToToday() {
+      selectedDate = getLocalDateStr();
+      renderDatePicker();
+      renderStats();
+      renderBets();
+      autoGradeBets();
+    }
+
+    function setAllTime() {
+      selectedDate = null;
+      renderDatePicker();
+      renderStats();
+      renderBets();
+    }
+
+    // ── Filter by date ──
+    function getBetsForDisplay() {
+      const bets = getTrackedBets();
+      if (selectedDate === null) return bets; // All time
+
+      return bets.filter(b => {
+        // Check bet date field first
+        if (b.date) return b.date === selectedDate;
+        // Fallback to placed_at date
+        if (b.placed_at) return b.placed_at.slice(0, 10) === selectedDate;
+        return false;
+      });
+    }
+
+    // ── Auto-Grading ──
+    async function loadGameData() {
+      try {
+        const [nbaResp, nhlResp, resultsResp, nhlResultsResp] = await Promise.all([
+          fetch(GAME_DATA_URL + '?t=' + Date.now()),
+          fetch(NHL_GAME_DATA_URL + '?t=' + Date.now()),
+          fetch(RESULTS_URL + '?t=' + Date.now()),
+          fetch(NHL_RESULTS_URL + '?t=' + Date.now())
+        ]);
+
+        if (nbaResp.ok) {
+          const data = await nbaResp.json();
+          gameProjections = data.games || [];
+        }
+        if (nhlResp.ok) {
+          const data = await nhlResp.json();
+          nhlGameProjections = data.games || [];
+        }
+        if (resultsResp.ok) {
+          resultsData = await resultsResp.json();
+        }
+        if (nhlResultsResp.ok) {
+          nhlResultsData = await nhlResultsResp.json();
+        }
+      } catch (err) {
+        console.error('Failed to load game data:', err);
+      }
+    }
+
+    function findGameResult(bet) {
+      // Try current game projections first (for today's games)
+      const games = bet.sport === 'NHL' ? nhlGameProjections : gameProjections;
+      const gameParts = (bet.game || '').split(' @ ');
+      if (gameParts.length !== 2) return null;
+      const [away, home] = gameParts;
+
+      // Check current projections
+      const currentGame = games.find(g => g.away_team === away && g.home_team === home);
+      if (currentGame && (currentGame.status === 'final' || currentGame.status === 'closed')) {
+        if (currentGame.away_score != null && currentGame.home_score != null) {
+          return {
+            awayScore: currentGame.away_score,
+            homeScore: currentGame.home_score,
+            spreadResult: currentGame.spread_result,
+            totalResult: currentGame.total_result,
+            mlResult: currentGame.ml_result
+          };
+        }
+      }
+
+      // Check historical results
+      const results = bet.sport === 'NHL' ? nhlResultsData : resultsData;
+      if (!results || !results.days) return null;
+
+      const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
+      if (!betDate) return null;
+
+      const day = results.days.find(d => d.date === betDate);
+      if (!day || !day.picks) return null;
+
+      // Find matching game picks
+      const gamePicks = day.picks.filter(p => p.game === bet.game);
+      if (gamePicks.length === 0) return null;
+
+      // Get score from first pick with result
+      const pickWithScore = gamePicks.find(p => p.result && p.result.includes('-'));
+      if (!pickWithScore) return null;
+
+      const scores = pickWithScore.result.split('-').map(s => parseInt(s.trim()));
+      if (scores.length !== 2 || isNaN(scores[0]) || isNaN(scores[1])) return null;
+
+      // Get individual results
+      const spreadPick = gamePicks.find(p => p.type === 'spread');
+      const totalPick = gamePicks.find(p => p.type === 'total');
+      const mlPick = gamePicks.find(p => p.type === 'ml');
+
+      return {
+        awayScore: scores[0],
+        homeScore: scores[1],
+        spreadResult: spreadPick ? (spreadPick.hit === true ? 'win' : spreadPick.hit === false ? 'loss' : 'push') : null,
+        totalResult: totalPick ? (totalPick.hit === true ? 'win' : totalPick.hit === false ? 'loss' : 'push') : null,
+        mlResult: mlPick ? (mlPick.hit === true ? 'win' : mlPick.hit === false ? 'loss' : 'push') : null
+      };
+    }
+
+    function gradeBet(bet, gameResult) {
+      if (!gameResult) return null;
+
+      const { awayScore, homeScore } = gameResult;
+      const actualSpread = homeScore - awayScore; // positive = home won by X
+
+      if (bet.type === 'spread') {
+        // Use pre-computed result if available
+        if (gameResult.spreadResult) {
+          return gameResult.spreadResult;
+        }
+        // Otherwise compute (for props/custom bets)
+        const pickMatch = (bet.pick || '').match(/([A-Z]{2,3})\s*([+-]?\d+\.?\d*)/);
+        if (!pickMatch) return null;
+        const pickTeam = pickMatch[1];
+        const pickLine = parseFloat(pickMatch[2]);
+
+        const gameParts = (bet.game || '').split(' @ ');
+        const isHome = pickTeam === gameParts[1];
+        const coverMargin = isHome ? actualSpread + pickLine : -actualSpread + pickLine;
+
+        if (coverMargin > 0) return 'win';
+        if (coverMargin < 0) return 'loss';
+        return 'push';
+      }
+
+      if (bet.type === 'total') {
+        if (gameResult.totalResult) {
+          return gameResult.totalResult;
+        }
+        const total = awayScore + homeScore;
+        const pickMatch = (bet.pick || '').match(/(OVER|UNDER)\s+([\d.]+)/i);
+        if (!pickMatch) return null;
+        const direction = pickMatch[1].toUpperCase();
+        const line = parseFloat(pickMatch[2]);
+
+        if (direction === 'OVER') {
+          if (total > line) return 'win';
+          if (total < line) return 'loss';
+          return 'push';
+        } else {
+          if (total < line) return 'win';
+          if (total > line) return 'loss';
+          return 'push';
+        }
+      }
+
+      if (bet.type === 'ml') {
+        if (gameResult.mlResult) {
+          return gameResult.mlResult;
+        }
+        const gameParts = (bet.game || '').split(' @ ');
+        const winner = homeScore > awayScore ? gameParts[1] : gameParts[0];
+        return bet.pick === winner ? 'win' : 'loss';
+      }
+
+      return null;
+    }
+
+    async function autoGradeBets() {
+      const statusEl = document.getElementById('grading-status');
+      statusEl.textContent = 'Checking...';
+      statusEl.classList.add('grading');
+      isGrading = true;
+
+      await loadGameData();
+
+      const bets = getTrackedBets();
+      let changed = false;
+      let gradedCount = 0;
+
+      for (const bet of bets) {
+        if (bet.status !== 'pending') continue;
+        if (bet.type === 'prop') continue; // Props need special handling
+
+        const gameResult = findGameResult(bet);
+        if (!gameResult) continue;
+
+        const result = gradeBet(bet, gameResult);
+        if (!result) continue;
+
+        bet.status = result;
+        bet.actual = `${gameResult.awayScore}-${gameResult.homeScore}`;
+
+        if (result === 'win') {
+          bet.profit_units = calcProfit(bet.odds, bet.units);
+        } else if (result === 'loss') {
+          bet.profit_units = -bet.units;
+        } else {
+          bet.profit_units = 0;
+        }
+
+        changed = true;
+        gradedCount++;
+      }
+
+      if (changed) {
+        saveTrackedBets(bets);
+        renderStats();
+        renderBets();
+      }
+
+      isGrading = false;
+      if (gradedCount > 0) {
+        statusEl.textContent = `Graded ${gradedCount} bet${gradedCount > 1 ? 's' : ''}`;
+        setTimeout(() => { statusEl.textContent = ''; }, 3000);
+      } else {
+        statusEl.textContent = '';
+      }
+      statusEl.classList.remove('grading');
+    }
+
+    // ── Filters ──
     function setFilter(filter) {
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -328,8 +666,9 @@
       renderBets();
     }
 
+    // ── Render Stats ──
     function renderStats() {
-      const bets = getTrackedBets();
+      const bets = getBetsForDisplay();
       const unitSize = getUnitSize();
 
       const pending = bets.filter(b => b.status === 'pending').length;
@@ -376,26 +715,28 @@
       `;
     }
 
+    // ── Render Bets Table ──
     function renderBets() {
-      const bets = getTrackedBets();
+      const allBets = getTrackedBets();
+      let bets = getBetsForDisplay();
       const unitSize = getUnitSize();
 
-      let filtered = bets;
       if (currentFilter !== 'all') {
-        filtered = bets.filter(b => b.status === currentFilter);
+        bets = bets.filter(b => b.status === currentFilter);
       }
 
       // Sort: pending first, then by date descending
-      filtered.sort((a, b) => {
+      bets.sort((a, b) => {
         if (a.status === 'pending' && b.status !== 'pending') return -1;
         if (b.status === 'pending' && a.status !== 'pending') return 1;
         return new Date(b.placed_at) - new Date(a.placed_at);
       });
 
-      if (filtered.length === 0) {
+      if (bets.length === 0) {
+        const dateLabel = selectedDate ? formatDateDisplay(selectedDate).formatted : 'all time';
         const msg = currentFilter === 'all'
-          ? 'You haven\'t tracked any bets yet. <a href="dashboard.html">Go to Dashboard</a> to start tracking.'
-          : `No ${currentFilter} bets found.`;
+          ? `No bets tracked for ${dateLabel}. <a href="dashboard.html">Go to Dashboard</a> to start tracking.`
+          : `No ${currentFilter} bets for ${dateLabel}.`;
         document.getElementById('bets-container').innerHTML = `
           <div class="empty-state">
             <div class="empty-state-icon">&#127919;</div>
@@ -406,14 +747,14 @@
         return;
       }
 
-      const rows = filtered.map((b, idx) => {
+      const rows = bets.map((b, idx) => {
         const typeClass = b.type === 'prop' ? 'prop' : b.type;
         const typeLabel = b.type === 'prop' ? b.prop_type?.toUpperCase() || 'PROP' : b.type.toUpperCase();
         const pickDesc = b.type === 'prop'
           ? `${b.player} ${b.pick} ${b.line}`
           : b.pick;
         const gameStr = b.game || '';
-        const dateStr = new Date(b.placed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const dateStr = b.placed_at ? new Date(b.placed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '--';
         const oddsStr = b.odds > 0 ? `+${b.odds}` : b.odds;
 
         let profitStr = '--';
@@ -424,13 +765,13 @@
           profitClass = b.profit_units > 0 ? 'positive' : b.profit_units < 0 ? 'negative' : 'neutral';
         }
 
-        const origIdx = bets.findIndex(x => x.id === b.id);
+        const origIdx = allBets.findIndex(x => x.id === b.id);
 
         return `
           <tr>
             <td>
               <div class="bet-pick">${pickDesc}</div>
-              <div class="bet-game">${gameStr}</div>
+              <div class="bet-game">${gameStr}${b.actual ? ' | ' + b.actual : ''}</div>
             </td>
             <td><span class="bet-type ${typeClass}">${typeLabel}</span></td>
             <td class="col-hide-mobile">${b.sport || 'NBA'}</td>
@@ -477,8 +818,15 @@
     }
 
     function showClearConfirm() {
-      const bets = getTrackedBets();
+      const bets = getBetsForDisplay();
       if (bets.length === 0) return;
+
+      const dateLabel = selectedDate ? formatDateDisplay(selectedDate).formatted : 'all time';
+      document.getElementById('confirm-title').textContent = selectedDate ? `Clear ${dateLabel} Bets?` : 'Clear All Bets?';
+      document.getElementById('confirm-text').textContent = selectedDate
+        ? `This will delete ${bets.length} bet(s) from ${dateLabel}.`
+        : `This will permanently delete all ${bets.length} tracked bets.`;
+
       document.getElementById('confirm-backdrop').classList.add('visible');
       document.getElementById('confirm-modal').classList.add('visible');
     }
@@ -489,7 +837,18 @@
     }
 
     function confirmClearAll() {
-      saveTrackedBets([]);
+      if (selectedDate) {
+        // Clear only bets for selected date
+        const bets = getTrackedBets();
+        const filtered = bets.filter(b => {
+          const betDate = b.date || (b.placed_at ? b.placed_at.slice(0, 10) : null);
+          return betDate !== selectedDate;
+        });
+        saveTrackedBets(filtered);
+      } else {
+        // Clear all bets
+        saveTrackedBets([]);
+      }
       hideConfirm();
       renderStats();
       renderBets();
@@ -509,10 +868,22 @@
       document.getElementById('unit-size').value = settings.unit_size || 10;
     }
 
-    // Initialize
-    loadSettings();
-    renderStats();
-    renderBets();
+    // ── Initialize ──
+    async function init() {
+      loadSettings();
+      selectedDate = getLocalDateStr(); // Default to today
+      renderDatePicker();
+      renderStats();
+      renderBets();
+
+      // Auto-grade on load
+      await autoGradeBets();
+
+      // Auto-grade every 5 minutes
+      setInterval(autoGradeBets, 5 * 60 * 1000);
+    }
+
+    init();
   </script>
 </body>
 </html>
