@@ -1,45 +1,45 @@
 {
   "date": "2026-02-08",
   "sport": "NBA",
-  "locked_at": "2026-02-08T02:51:44",
-  "updated": "2026-02-08T11:45:06",
+  "locked_at": "2026-02-08T11:48:42",
+  "updated": "2026-02-08T11:48:42",
   "games": [
     {
       "away_team": "NYK",
       "home_team": "BOS",
       "game_date": "2026-02-08",
-      "proj_score": "110.4-115.1",
-      "spread_pick": "BOS -4.0",
-      "spread_conf": 51.7,
-      "total_line": 214.5,
+      "proj_score": "111.3-115.0",
+      "spread_pick": "BOS -3.5",
+      "spread_conf": 50.4,
+      "total_line": 212.5,
       "total_pick": "OVER",
-      "total_conf": 71.9,
+      "total_conf": 76.7,
       "ml_pick": "BOS",
-      "ml_conf": 60.6,
+      "ml_conf": 57.3,
       "commence_time": "2026-02-08T17:40:00Z",
       "status": "scheduled",
-      "locked_at": "2026-02-08T07:51:43Z",
+      "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
-        "home": -6.4,
-        "away": -4.2,
-        "total": -10.6,
+        "home": -6.8,
+        "away": -3.2,
+        "total": -10.0,
         "home_injuries": [
           {
             "player": "Jayson Tatum",
             "status": "Out",
             "impact": 7.5
+          },
+          {
+            "player": "Sam Hauser",
+            "status": "Out",
+            "impact": 1.0
           }
         ],
         "away_injuries": [
           {
-            "player": "Karl-Anthony Towns",
-            "status": "Day-To-Day",
-            "impact": 2.2
-          },
-          {
             "player": "OG Anunoby",
-            "status": "Day-To-Day",
-            "impact": 1.5
+            "status": "Out",
+            "impact": 3.0
           },
           {
             "player": "Miles McBride",
@@ -49,16 +49,16 @@
         ]
       },
       "edge": {
-        "spread": -0.7,
-        "total": 11.0,
+        "spread": -0.2,
+        "total": 13.8,
         "spread_ev": 0.0,
         "total_ev": 0.3745,
         "spread_prob": 0.5,
         "total_prob": 0.72
       },
       "total_rec": {
-        "pick": "OVER 214.5",
-        "edge": 11.0,
+        "pick": "OVER 212.5",
+        "edge": 13.8,
         "ev": 37.5,
         "confidence": "high"
       }
@@ -67,21 +67,21 @@
       "away_team": "MIA",
       "home_team": "WAS",
       "game_date": "2026-02-08",
-      "proj_score": "119.3-114.2",
-      "spread_pick": "WAS +11.0",
-      "spread_conf": 65.9,
-      "total_line": 235.5,
+      "proj_score": "120.1-113.9",
+      "spread_pick": "WAS +12.5",
+      "spread_conf": 65.6,
+      "total_line": 237.5,
       "total_pick": "UNDER",
-      "total_conf": 55.9,
+      "total_conf": 57.8,
       "ml_pick": "MIA",
-      "ml_conf": 62.7,
+      "ml_conf": 65.6,
       "commence_time": "2026-02-08T19:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-02-08T07:51:43Z",
+      "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
-        "home": -14.8,
-        "away": -5.8,
-        "total": -20.6,
+        "home": -15.2,
+        "away": -6.2,
+        "total": -21.4,
         "home_injuries": [
           {
             "player": "Anthony Davis",
@@ -111,46 +111,52 @@
             "impact": 2.2
           },
           {
-            "player": "Terry Rozier",
+            "player": "Pelle Larsson",
             "status": "Out",
             "impact": 1.0
           }
         ]
       },
       "edge": {
-        "spread": -5.9,
-        "total": -2.0,
-        "spread_ev": 0.279,
-        "total_ev": 0.0,
-        "spread_prob": 0.67,
-        "total_prob": 0.5
+        "spread": -6.3,
+        "total": -3.5,
+        "spread_ev": 0.2991,
+        "total_ev": 0.1199,
+        "spread_prob": 0.68,
+        "total_prob": 0.587
       },
       "spread_rec": {
-        "pick": "WAS +11.0",
-        "edge": -5.9,
-        "ev": 27.9,
+        "pick": "WAS +12.5",
+        "edge": -6.3,
+        "ev": 29.9,
         "confidence": "high"
+      },
+      "total_rec": {
+        "pick": "UNDER 237.5",
+        "edge": -3.5,
+        "ev": 12.0,
+        "confidence": "low"
       }
     },
     {
       "away_team": "IND",
       "home_team": "TOR",
       "game_date": "2026-02-08",
-      "proj_score": "109.7-117.3",
+      "proj_score": "110.4-118.2",
       "spread_pick": "TOR -9.0",
-      "spread_conf": 47.9,
-      "total_line": 224.5,
+      "spread_conf": 48.1,
+      "total_line": 225.5,
       "total_pick": "OVER",
-      "total_conf": 54.2,
+      "total_conf": 57.3,
       "ml_pick": "TOR",
-      "ml_conf": 64.0,
+      "ml_conf": 63.5,
       "commence_time": "2026-02-08T20:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-02-08T07:51:43Z",
+      "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
         "home": -2.0,
-        "away": -9.2,
-        "total": -11.2,
+        "away": -9.6,
+        "total": -11.6,
         "home_injuries": [
           {
             "player": "Jakob Poeltl",
@@ -175,36 +181,42 @@
             "impact": 2.5
           },
           {
-            "player": "Kobe Brown",
+            "player": "Ethan Thompson",
             "status": "Out",
             "impact": 1.0
           }
         ]
       },
       "edge": {
-        "spread": 1.4,
-        "total": 2.5,
+        "spread": 1.2,
+        "total": 3.1,
         "spread_ev": 0.0,
-        "total_ev": 0.0,
+        "total_ev": 0.1013,
         "spread_prob": 0.5,
-        "total_prob": 0.5
+        "total_prob": 0.577
+      },
+      "total_rec": {
+        "pick": "OVER 225.5",
+        "edge": 3.1,
+        "ev": 10.1,
+        "confidence": "low"
       }
     },
     {
       "away_team": "LAC",
       "home_team": "MIN",
       "game_date": "2026-02-08",
-      "proj_score": "111.9-116.7",
-      "spread_pick": "LAC +8.5",
-      "spread_conf": 58.7,
-      "total_line": 224.5,
+      "proj_score": "111.8-117.6",
+      "spread_pick": "LAC +9.0",
+      "spread_conf": 57.2,
+      "total_line": 223.5,
       "total_pick": "OVER",
-      "total_conf": 60.8,
+      "total_conf": 66.0,
       "ml_pick": "MIN",
-      "ml_conf": 61.9,
+      "ml_conf": 64.6,
       "commence_time": "2026-02-08T20:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-02-08T07:51:43Z",
+      "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
         "home": -1.6,
         "away": -5.6,
@@ -240,26 +252,25 @@
         ]
       },
       "edge": {
-        "spread": 3.7,
-        "total": 4.1,
-        "spread_ev": 0.163,
-        "total_ev": 0.1475,
-        "spread_prob": 0.609,
-        "total_prob": 0.601
+        "spread": 3.2,
+        "total": 5.9,
+        "spread_ev": 0.1356,
+        "total_ev": 0.2282,
+        "spread_prob": 0.595,
+        "total_prob": 0.643
       },
       "spread_rec": {
-        "pick": "LAC +8.5",
-        "edge": 3.7,
-        "ev": 16.3,
+        "pick": "LAC +9.0",
+        "edge": 3.2,
+        "ev": 13.6,
         "confidence": "medium"
       },
       "total_rec": {
-        "pick": "OVER 224.5",
-        "edge": 4.1,
-        "ev": 14.8,
+        "pick": "OVER 223.5",
+        "edge": 5.9,
+        "ev": 22.8,
         "confidence": "medium"
       }
     }
-  ],
-  "locked": false
+  ]
 }
