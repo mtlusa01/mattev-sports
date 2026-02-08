@@ -2,7 +2,7 @@
   "date": "2026-02-07",
   "sport": "NBA",
   "locked_at": "2026-02-07T01:29:20",
-  "updated": "2026-02-07T23:22:05",
+  "updated": "2026-02-07T23:24:14",
   "games": [
     {
       "away_team": "WAS",
@@ -670,7 +670,45 @@
       "home_score": 105,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "win"
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "LeBron James",
+          "team": "LAL",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.5,
+          "actual": 7,
+          "hit": false,
+          "confidence": 52.059999999999995,
+          "ev": 9.1
+        },
+        {
+          "player": "LeBron James",
+          "team": "LAL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 21.5,
+          "actual": 20,
+          "hit": true,
+          "confidence": 53.199999999999996,
+          "ev": 2.3
+        },
+        {
+          "player": "LeBron James",
+          "team": "LAL",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 8.5,
+          "projection": 6.8,
+          "actual": 10,
+          "hit": false,
+          "confidence": 56.24,
+          "ev": 1.7
+        }
+      ]
     },
     {
       "away_team": "PHI",
