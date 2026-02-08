@@ -1,40 +1,40 @@
 {
-  "updated": "2026-02-08T17:25:21",
+  "updated": "2026-02-08T18:50:27",
   "allTime": {
     "props": {
-      "wins": 87,
-      "losses": 104,
+      "wins": 89,
+      "losses": 110,
       "pushes": 0,
-      "pct": 45.5,
-      "roi": -13.0
+      "pct": 44.7,
+      "roi": -14.6
     },
     "spreads": {
-      "wins": 17,
+      "wins": 19,
       "losses": 25,
       "pushes": 1,
-      "pct": 40.5,
-      "roi": -22.7
+      "pct": 43.2,
+      "roi": -17.6
     },
     "totals": {
-      "wins": 23,
-      "losses": 20,
+      "wins": 24,
+      "losses": 21,
       "pushes": 0,
-      "pct": 53.5,
-      "roi": 2.1
+      "pct": 53.3,
+      "roi": 1.8
     },
     "moneylines": {
-      "wins": 27,
-      "losses": 16,
+      "wins": 28,
+      "losses": 17,
       "pushes": 0,
-      "pct": 62.8,
-      "roi": 19.9
+      "pct": 62.2,
+      "roi": 18.8
     },
     "best_bets": {
-      "wins": 31,
-      "losses": 24,
+      "wins": 32,
+      "losses": 26,
       "pushes": 0,
-      "pct": 56.4,
-      "roi": 7.6
+      "pct": 55.2,
+      "roi": 5.3
     },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 65.5
@@ -43,31 +43,31 @@
     {
       "date": "2026-02-08",
       "props": {
-        "wins": 1,
-        "losses": 3,
+        "wins": 3,
+        "losses": 9,
         "pushes": 0,
-        "record": "1-3",
+        "record": "3-9",
         "pct": 25.0
       },
       "spreads": {
-        "wins": 0,
+        "wins": 2,
         "losses": 2,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "2-2",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 2,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-1",
+        "record": "2-2",
         "pct": 50.0
       },
       "moneylines": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 2,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-1",
+        "record": "2-2",
         "pct": 50.0
       },
       "picks": [
@@ -130,6 +130,63 @@
         },
         {
           "date": "2026-02-08",
+          "type": "spread",
+          "game": "IND @ TOR",
+          "pick": "TOR -9.0",
+          "result": "104-122",
+          "hit": true,
+          "confidence": 48.1
+        },
+        {
+          "date": "2026-02-08",
+          "type": "total",
+          "game": "IND @ TOR",
+          "pick": "OVER 225.5",
+          "result": "104-122",
+          "hit": true,
+          "confidence": 57.3
+        },
+        {
+          "date": "2026-02-08",
+          "type": "ml",
+          "game": "IND @ TOR",
+          "pick": "TOR",
+          "result": "104-122",
+          "hit": true,
+          "confidence": 63.5,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-08",
+          "type": "spread",
+          "game": "LAC @ MIN",
+          "pick": "LAC +9.0",
+          "result": "115-96",
+          "hit": true,
+          "confidence": 57.2
+        },
+        {
+          "date": "2026-02-08",
+          "type": "total",
+          "game": "LAC @ MIN",
+          "pick": "OVER 223.5",
+          "result": "115-96",
+          "hit": false,
+          "confidence": 66.0,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-08",
+          "type": "ml",
+          "game": "LAC @ MIN",
+          "pick": "MIN",
+          "result": "115-96",
+          "hit": false,
+          "confidence": 64.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-08",
           "type": "prop",
           "player": "Jaylen Brown",
           "team": "BOS",
@@ -138,6 +195,28 @@
           "result": 2,
           "hit": false,
           "confidence": 58.0
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
+          "player": "Pascal Siakam",
+          "team": "IND",
+          "pick": "PTS OVER 22.5",
+          "line": 22.5,
+          "result": 18,
+          "hit": false,
+          "confidence": 56.0
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
+          "player": "John Collins",
+          "team": "LAC",
+          "pick": "PTS OVER 15.5",
+          "line": 15.5,
+          "result": 15,
+          "hit": false,
+          "confidence": 54.4
         },
         {
           "date": "2026-02-08",
@@ -153,6 +232,39 @@
         {
           "date": "2026-02-08",
           "type": "prop",
+          "player": "Anthony Edwards",
+          "team": "MIN",
+          "pick": "PTS OVER 28.5",
+          "line": 28.5,
+          "result": 23,
+          "hit": false,
+          "confidence": 53.3
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
+          "player": "Anthony Edwards",
+          "team": "MIN",
+          "pick": "AST UNDER 4.5",
+          "line": 4.5,
+          "result": 2,
+          "hit": true,
+          "confidence": 54.434999999999995
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
+          "player": "Immanuel Quickley",
+          "team": "TOR",
+          "pick": "REB OVER 4.5",
+          "line": 4.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 53.1
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
           "player": "Kyshawn George",
           "team": "WAS",
           "pick": "AST OVER 4.5",
@@ -164,6 +276,28 @@
         {
           "date": "2026-02-08",
           "type": "prop",
+          "player": "Ayo Dosunmu",
+          "team": "MIN",
+          "pick": "AST OVER 3.5",
+          "line": 3.5,
+          "result": 1,
+          "hit": false,
+          "confidence": 52.0
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 2,
+          "hit": true,
+          "confidence": 53.865
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
           "player": "Karl-Anthony Towns",
           "team": "NYK",
           "pick": "PTS UNDER 18.5",
@@ -171,13 +305,24 @@
           "result": 11,
           "hit": true,
           "confidence": 52.059999999999995
+        },
+        {
+          "date": "2026-02-08",
+          "type": "prop",
+          "player": "Andrew Nembhard",
+          "team": "IND",
+          "pick": "AST OVER 7.5",
+          "line": 7.5,
+          "result": 2,
+          "hit": false,
+          "confidence": 54.0
         }
       ],
       "best_bets": {
-        "wins": 1,
-        "losses": 2,
+        "wins": 2,
+        "losses": 4,
         "pushes": 0,
-        "record": "1-2",
+        "record": "2-4",
         "pct": 33.3
       }
     },

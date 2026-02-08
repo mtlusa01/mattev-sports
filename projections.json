@@ -2,7 +2,7 @@
   "date": "2026-02-08",
   "sport": "NBA",
   "locked_at": "2026-02-08T11:48:34",
-  "updated": "2026-02-08T17:17:05",
+  "updated": "2026-02-08T18:50:27",
   "projections": [
     {
       "player": "Jaylen Brown",
@@ -470,7 +470,9 @@
       "pick_score": 27.0,
       "score_factors": [
         "70% L10 hit rate"
-      ]
+      ],
+      "actual": 18,
+      "result": "LOSS"
     },
     {
       "player": "John Collins",
@@ -694,7 +696,9 @@
       "pick_score": 16.6,
       "score_factors": [
         "60% L10 hit rate"
-      ]
+      ],
+      "actual": 15,
+      "result": "LOSS"
     },
     {
       "player": "Andrew Wiggins",
@@ -1141,7 +1145,9 @@
       "score_factors": [
         "70% L10 hit rate",
         "4-game streak"
-      ]
+      ],
+      "actual": 23,
+      "result": "LOSS"
     },
     {
       "player": "Anthony Edwards",
@@ -1361,7 +1367,9 @@
       "pick_score": 16.5,
       "score_factors": [
         "Favorable matchup (#10 DEF)"
-      ]
+      ],
+      "actual": 2,
+      "result": "WIN"
     },
     {
       "player": "Immanuel Quickley",
@@ -1594,7 +1602,9 @@
       ],
       "injury_status": "Questionable",
       "injury_type": "Right ankle (sprain)",
-      "injury_headline": "Right ankle (sprain)"
+      "injury_headline": "Right ankle (sprain)",
+      "actual": 4,
+      "result": "LOSS"
     },
     {
       "player": "Kyshawn George",
@@ -2031,7 +2041,9 @@
         "60% L10 hit rate"
       ],
       "added_live": true,
-      "discovered_at": "2026-02-08T12:12:43"
+      "discovered_at": "2026-02-08T12:12:43",
+      "actual": 1,
+      "result": "LOSS"
     },
     {
       "player": "Jaden McDaniels",
@@ -2254,7 +2266,9 @@
         "8-game streak"
       ],
       "added_live": true,
-      "discovered_at": "2026-02-08T12:12:43"
+      "discovered_at": "2026-02-08T12:12:43",
+      "actual": 2,
+      "result": "WIN"
     },
     {
       "player": "Karl-Anthony Towns",
@@ -2727,7 +2741,9 @@
         "7-game streak"
       ],
       "added_live": true,
-      "discovered_at": "2026-02-08T12:42:56"
+      "discovered_at": "2026-02-08T12:42:56",
+      "actual": 2,
+      "result": "LOSS"
     }
   ],
   "top_picks": [
@@ -2836,7 +2852,9 @@
         "64.0% ML conf"
       ],
       "commence_time": "2026-02-08T20:10:00Z",
-      "top_pick_rank": 5
+      "top_pick_rank": 5,
+      "result": "WIN",
+      "actual": "104-122"
     }
   ]
 }

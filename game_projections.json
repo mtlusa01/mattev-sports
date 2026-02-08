@@ -2,7 +2,7 @@
   "date": "2026-02-08",
   "sport": "NBA",
   "locked_at": "2026-02-08T11:48:42",
-  "updated": "2026-02-08T17:25:21",
+  "updated": "2026-02-08T18:50:27",
   "games": [
     {
       "away_team": "NYK",
@@ -213,7 +213,7 @@
       "ml_pick": "TOR",
       "ml_conf": 63.5,
       "commence_time": "2026-02-08T20:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
         "home": -2.0,
@@ -263,8 +263,49 @@
         "ev": 10.1,
         "confidence": "low"
       },
-      "away_score": 100,
-      "home_score": 119
+      "away_score": 104,
+      "home_score": 122,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Immanuel Quickley",
+          "team": "TOR",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.9,
+          "actual": 4,
+          "hit": false,
+          "confidence": 53.1,
+          "ev": 7.3
+        },
+        {
+          "player": "Andrew Nembhard",
+          "team": "IND",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 7.7,
+          "actual": 2,
+          "hit": false,
+          "confidence": 54.0,
+          "ev": 3.5
+        },
+        {
+          "player": "Pascal Siakam",
+          "team": "IND",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 22.5,
+          "projection": 24.0,
+          "actual": 18,
+          "hit": false,
+          "confidence": 56.0,
+          "ev": 3.0
+        }
+      ]
     },
     {
       "away_team": "LAC",
@@ -279,7 +320,7 @@
       "ml_pick": "MIN",
       "ml_conf": 64.6,
       "commence_time": "2026-02-08T20:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-08T16:48:40Z",
       "injury_impact": {
         "home": -1.6,
@@ -335,8 +376,73 @@
         "ev": 22.8,
         "confidence": "medium"
       },
-      "away_score": 104,
-      "home_score": 82
+      "away_score": 115,
+      "home_score": 96,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Ayo Dosunmu",
+          "team": "MIN",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 3.8,
+          "actual": 1,
+          "hit": false,
+          "confidence": 52.0,
+          "ev": 8.2
+        },
+        {
+          "player": "Anthony Edwards",
+          "team": "MIN",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 28.5,
+          "projection": 29.5,
+          "actual": 23,
+          "hit": false,
+          "confidence": 53.3,
+          "ev": 3.1
+        },
+        {
+          "player": "John Collins",
+          "team": "LAC",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 16.8,
+          "actual": 15,
+          "hit": false,
+          "confidence": 54.4,
+          "ev": 2.5
+        },
+        {
+          "player": "Anthony Edwards",
+          "team": "MIN",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.4,
+          "actual": 2,
+          "hit": true,
+          "confidence": 54.434999999999995,
+          "ev": 1.0
+        },
+        {
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.8,
+          "actual": 2,
+          "hit": true,
+          "confidence": 53.865,
+          "ev": 1.0
+        }
+      ]
     }
   ]
 }
