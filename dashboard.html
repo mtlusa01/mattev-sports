@@ -1119,42 +1119,6 @@
     .track-icon.tracked { opacity: 1; color: #10b981; cursor: default; }
     .bet-count-badge { background: var(--accent); color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: 4px; }
 
-    .track-modal-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200;
-      opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s;
-    }
-    .track-modal-backdrop.visible { opacity: 1; visibility: visible; }
-    .track-modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
-      width: calc(100% - 32px); max-width: 380px; background: var(--bg-secondary);
-      border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-      z-index: 201; opacity: 0; visibility: hidden; transition: all 0.2s;
-    }
-    .track-modal.visible { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
-    .track-modal-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
-    .track-modal-pick { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
-    .track-modal-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
-    .track-modal-fields { display: flex; gap: 12px; margin-bottom: 16px; }
-    .track-field { flex: 1; }
-    .track-field label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; font-weight: 500; }
-    .track-field input, .track-field select {
-      width: 100%; padding: 10px 12px; background: var(--bg-primary); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text-primary); font-size: 14px;
-    }
-    .track-field input:focus, .track-field select:focus { outline: none; border-color: var(--brand-border); }
-    .track-modal-payout { font-size: 14px; color: #10b981; font-weight: 600; margin-bottom: 20px; text-align: center; }
-    .track-modal-actions { display: flex; gap: 12px; }
-    .track-btn-cancel {
-      flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border);
-      background: transparent; color: var(--text-secondary); font-weight: 600; cursor: pointer;
-    }
-    .track-btn-cancel:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .track-btn-confirm {
-      flex: 2; padding: 12px; border-radius: 8px; border: none;
-      background: #10b981; color: #fff; font-weight: 600; cursor: pointer;
-    }
-    .track-btn-confirm:hover { background: #059669; }
-
     /* ── Game Cards ── */
     .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
     .game-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.15s; }
@@ -4806,45 +4770,5 @@
     });
   </script>
 
-  <!-- Bet Tracking Modal -->
-  <div class="track-modal-backdrop" id="track-modal-backdrop" onclick="closeTrackModal()"></div>
-  <div class="track-modal" id="track-modal">
-    <div class="track-modal-title">TRACK THIS BET</div>
-    <div class="track-modal-pick" id="track-pick-desc"></div>
-    <div class="track-modal-meta" id="track-pick-meta"></div>
-    <div class="track-modal-fields">
-      <div class="track-field">
-        <label>Odds You Got</label>
-        <input type="number" id="track-odds" value="-110" oninput="updateTrackPayout()">
-      </div>
-      <div class="track-field">
-        <label>Units</label>
-        <select id="track-units" onchange="updateTrackPayout()">
-          <option value="0.5">0.5</option>
-          <option value="1" selected>1</option>
-          <option value="1.5">1.5</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-      <div class="track-field">
-        <label>Book</label>
-        <select id="track-book">
-          <option>FanDuel</option>
-          <option>DraftKings</option>
-          <option>BetMGM</option>
-          <option>Caesars</option>
-          <option>bet365</option>
-          <option>Other</option>
-        </select>
-      </div>
-    </div>
-    <div class="track-modal-payout" id="track-payout"></div>
-    <div class="track-modal-actions">
-      <button class="track-btn-cancel" onclick="closeTrackModal()">Cancel</button>
-      <button class="track-btn-confirm" onclick="confirmTrackBet()">Track Bet</button>
-    </div>
-  </div>
 </body>
 </html>
