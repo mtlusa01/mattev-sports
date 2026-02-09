@@ -1,916 +1,1086 @@
 {
-  "date": "2026-02-08",
+  "date": "2026-02-09",
   "sport": "NBA",
-  "locked_at": "2026-02-08T11:48:34",
-  "updated": "2026-02-08T23:12:36",
+  "locked_at": "2026-02-09T02:22:21",
+  "updated": "2026-02-09T02:22:30",
   "projections": [
     {
-      "player": "Jaylen Brown",
-      "team": "BOS",
-      "prop": "REB",
+      "player": "Dyson Daniels",
+      "team": "ATL",
+      "prop": "AST",
       "direction": "OVER",
-      "line": 6.5,
-      "projection": 8.3,
-      "confidence": 58.0,
-      "ev": 3.2,
-      "diff": 1.8,
-      "market_odds": -128,
-      "fair_odds": -138,
-      "prob_edge": 1.9,
+      "line": 5.5,
+      "projection": 6.1,
+      "confidence": 53.6,
+      "ev": 1.1,
+      "diff": 0.6,
+      "market_odds": -113,
+      "fair_odds": -116,
+      "prob_edge": 0.5,
       "book_odds": {
         "fanduel": {
           "over": {
             "line": 6.5,
-            "odds": -128
+            "odds": 116
           },
           "under": {
             "line": 6.5,
-            "odds": -100
+            "odds": -154
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -138
+            "line": 5.5,
+            "odds": -150
           },
           "under": {
-            "line": 6.5,
-            "odds": 105
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 6.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -110
+            "line": 5.5,
+            "odds": 113
           }
         }
       },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "GOOD",
-      "l5_avg": 9.2,
-      "l10_avg": 9.1,
-      "l5_hit_rate": 100,
-      "l10_hit_rate": 90,
-      "l5_hit_count": 5,
-      "l10_hit_count": 9,
-      "l10_median": 9.0,
-      "season_avg": 7.0,
-      "season_hit_count": 27,
-      "season_total": 47,
-      "streak": 9,
-      "home_avg": 8.3,
-      "away_avg": 7.4,
-      "opp_def_rank": 5,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 7.5,
-      "vs_bot10_avg": 7.6,
-      "insight": "Has gone OVER 6.5 rebounds in 9 of last 10 games (9.1 avg).",
-      "insight_strength": "strong",
-      "last_10_values": [
-        7,
-        11,
-        13,
-        7,
-        8,
-        8,
-        10,
-        10,
-        11,
-        6
-      ],
-      "last_10_games": [
-        {
-          "date": "2/06",
-          "opp": "vs MIA",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "2/03",
-          "opp": "@DAL",
-          "val": 11,
-          "hit": true
-        },
-        {
-          "date": "2/01",
-          "opp": "vs MIL",
-          "val": 13,
-          "hit": true
-        },
-        {
-          "date": "1/28",
-          "opp": "vs ATL",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/26",
-          "opp": "vs POR",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/24",
-          "opp": "@CHI",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/23",
-          "opp": "@BKN",
-          "val": 10,
-          "hit": true
-        },
-        {
-          "date": "1/21",
-          "opp": "vs IND",
-          "val": 10,
-          "hit": true
-        },
-        {
-          "date": "1/19",
-          "opp": "@DET",
-          "val": 11,
-          "hit": true
-        },
-        {
-          "date": "1/17",
-          "opp": "@ATL",
-          "val": 6,
-          "hit": false
-        },
-        {
-          "date": "1/15",
-          "opp": "@MIA",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/10",
-          "opp": "vs SAS",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/09",
-          "opp": "vs TOR",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/07",
-          "opp": "vs DEN",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/05",
-          "opp": "vs CHI",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/03",
-          "opp": "@LAC",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "1/01",
-          "opp": "@SAC",
-          "val": 10,
-          "hit": true
-        },
-        {
-          "date": "12/30",
-          "opp": "@UTA",
-          "val": 6,
-          "hit": false
-        },
-        {
-          "date": "12/28",
-          "opp": "@POR",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/26",
-          "opp": "@IND",
-          "val": 3,
-          "hit": false
-        }
-      ],
-      "opponent": "NYK",
-      "h2h_games": [
-        {
-          "date": "Dec 02",
-          "value": 4,
-          "minutes": 40,
-          "result": "W",
-          "hit": false,
-          "venue": "vs"
-        },
-        {
-          "date": "Oct 24",
-          "value": 4,
-          "minutes": 35,
-          "result": "L",
-          "hit": false,
-          "venue": "@"
-        }
-      ],
-      "h2h_avg": 4.0,
-      "h2h_record": "0/2",
-      "h2h_total_games": 2,
-      "pick_score": 46.2,
-      "score_factors": [
-        "90% L10 hit rate",
-        "9-game streak"
-      ],
-      "actual": 2,
-      "result": "LOSS",
-      "top_pick_rank": 2
-    },
-    {
-      "player": "Pascal Siakam",
-      "team": "IND",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 22.5,
-      "projection": 24.0,
-      "confidence": 56.0,
-      "ev": 3.0,
-      "diff": 1.5,
-      "market_odds": -114,
-      "fair_odds": -127,
-      "prob_edge": 1.7,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 22.5,
-            "odds": -125
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -102
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 22.5,
-            "odds": -104
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -123
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 22.5,
-            "odds": -115
-          },
-          "under": {
-            "line": 22.5,
-            "odds": -118
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "GOOD",
-      "l5_avg": 23.4,
-      "l10_avg": 24.7,
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "LEAN",
+      "l5_avg": 5.6,
+      "l10_avg": 6.8,
       "l5_hit_rate": 60,
       "l10_hit_rate": 70,
       "l5_hit_count": 3,
       "l10_hit_count": 7,
-      "l10_median": 25.5,
-      "season_avg": 23.7,
-      "season_hit_count": 32,
-      "season_total": 49,
+      "l10_median": 7.0,
+      "season_avg": 6.2,
+      "season_hit_count": 31,
+      "season_total": 52,
       "streak": 0,
-      "home_avg": 20.9,
-      "away_avg": 25.5,
-      "opp_def_rank": 8,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 23.5,
-      "vs_bot10_avg": 23.4,
-      "insight": "Has gone OVER 22.5 points in 7 of last 10 games (24.7 avg).",
+      "home_avg": 6.3,
+      "away_avg": 6.5,
+      "opp_def_rank": 11,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 7.5,
+      "vs_bot10_avg": 5.9,
+      "insight": "Has gone OVER 5.5 assists in 7 of last 10 games (6.8 avg).",
       "insight_strength": "strong",
       "last_10_values": [
-        19,
-        27,
-        25,
-        20,
-        26,
-        21,
-        32,
-        24,
-        27,
-        26
+        3,
+        6,
+        5,
+        7,
+        7,
+        9,
+        9,
+        4,
+        8,
+        10
       ],
       "last_10_games": [
         {
-          "date": "2/06",
-          "opp": "@MIL",
-          "val": 19,
-          "hit": false
-        },
-        {
-          "date": "2/02",
-          "opp": "vs HOU",
-          "val": 27,
-          "hit": true
-        },
-        {
-          "date": "1/31",
-          "opp": "vs ATL",
-          "val": 25,
-          "hit": true
-        },
-        {
-          "date": "1/28",
-          "opp": "vs CHI",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "1/26",
-          "opp": "@ATL",
-          "val": 26,
-          "hit": true
-        },
-        {
-          "date": "1/23",
-          "opp": "@OKC",
-          "val": 21,
-          "hit": false
-        },
-        {
-          "date": "1/21",
-          "opp": "@BOS",
-          "val": 32,
-          "hit": true
-        },
-        {
-          "date": "1/19",
-          "opp": "@PHI",
-          "val": 24,
-          "hit": true
-        },
-        {
-          "date": "1/16",
-          "opp": "vs NOP",
-          "val": 27,
-          "hit": true
-        },
-        {
-          "date": "1/14",
-          "opp": "vs TOR",
-          "val": 26,
-          "hit": true
-        },
-        {
-          "date": "1/12",
-          "opp": "vs BOS",
-          "val": 21,
-          "hit": false
-        },
-        {
-          "date": "1/10",
-          "opp": "vs MIA",
-          "val": 11,
-          "hit": false
-        },
-        {
-          "date": "1/08",
-          "opp": "@CHA",
-          "val": 30,
-          "hit": true
-        },
-        {
-          "date": "1/06",
-          "opp": "vs CLE",
-          "val": 22,
-          "hit": false
-        },
-        {
-          "date": "1/04",
-          "opp": "@ORL",
-          "val": 34,
-          "hit": true
-        },
-        {
-          "date": "1/02",
-          "opp": "vs SAS",
-          "val": 23,
-          "hit": true
-        },
-        {
-          "date": "12/31",
-          "opp": "vs ORL",
-          "val": 26,
-          "hit": true
-        },
-        {
-          "date": "12/29",
-          "opp": "@HOU",
-          "val": 23,
-          "hit": true
-        },
-        {
-          "date": "12/27",
-          "opp": "@MIA",
-          "val": 33,
-          "hit": true
-        },
-        {
-          "date": "12/26",
-          "opp": "vs BOS",
-          "val": 11,
-          "hit": false
-        }
-      ],
-      "opponent": "TOR",
-      "h2h_games": [
-        {
-          "date": "Jan 14",
-          "value": 26,
-          "minutes": 35,
-          "result": "L",
-          "hit": true,
-          "venue": "vs"
-        },
-        {
-          "date": "Nov 26",
-          "value": 11,
-          "minutes": 31,
-          "result": "L",
-          "hit": false,
-          "venue": "@"
-        },
-        {
-          "date": "Nov 15",
-          "value": 30,
-          "minutes": 36,
-          "result": "L",
-          "hit": true,
-          "venue": "vs"
-        }
-      ],
-      "h2h_avg": 22.3,
-      "h2h_record": "2/3",
-      "h2h_total_games": 3,
-      "pick_score": 27.0,
-      "score_factors": [
-        "70% L10 hit rate"
-      ],
-      "actual": 18,
-      "result": "LOSS"
-    },
-    {
-      "player": "John Collins",
-      "team": "LAC",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 15.5,
-      "projection": 16.8,
-      "confidence": 54.4,
-      "ev": 2.5,
-      "diff": 1.3,
-      "market_odds": -110,
-      "fair_odds": -119,
-      "prob_edge": 1.3,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 15.5,
-            "odds": -108
-          },
-          "under": {
-            "line": 15.5,
-            "odds": -118
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 15.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 15.5,
-            "odds": -121
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 15.5,
-            "odds": -120
-          },
-          "under": {
-            "line": 15.5,
-            "odds": -110
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "GOOD",
-      "l5_avg": 18.0,
-      "l10_avg": 16.6,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 4,
-      "l10_hit_count": 6,
-      "l10_median": 17.0,
-      "season_avg": 13.8,
-      "season_hit_count": 21,
-      "season_total": 48,
-      "streak": 2,
-      "home_avg": 13.7,
-      "away_avg": 16.0,
-      "opp_def_rank": 12,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 17.7,
-      "vs_bot10_avg": 14.0,
-      "last_10_values": [
-        22,
-        19,
-        15,
-        16,
-        18,
-        11,
-        18,
-        13,
-        23,
-        11
-      ],
-      "last_10_games": [
-        {
-          "date": "2/06",
-          "opp": "@SAC",
-          "val": 22,
-          "hit": true
-        },
-        {
-          "date": "2/04",
-          "opp": "vs CLE",
-          "val": 19,
-          "hit": true
-        },
-        {
-          "date": "2/02",
-          "opp": "vs PHI",
-          "val": 15,
-          "hit": false
-        },
-        {
-          "date": "2/01",
-          "opp": "@PHX",
-          "val": 16,
-          "hit": true
-        },
-        {
-          "date": "1/30",
-          "opp": "@DEN",
-          "val": 18,
-          "hit": true
-        },
-        {
-          "date": "1/27",
-          "opp": "@UTA",
-          "val": 11,
-          "hit": false
-        },
-        {
-          "date": "1/25",
-          "opp": "vs BKN",
-          "val": 18,
-          "hit": true
-        },
-        {
-          "date": "1/22",
-          "opp": "vs LAL",
-          "val": 13,
-          "hit": false
-        },
-        {
-          "date": "1/20",
-          "opp": "@CHI",
-          "val": 23,
-          "hit": true
-        },
-        {
-          "date": "1/19",
-          "opp": "@WAS",
-          "val": 11,
-          "hit": false
-        },
-        {
-          "date": "1/12",
+          "date": "2/07",
           "opp": "vs CHA",
           "val": 3,
           "hit": false
         },
         {
-          "date": "1/10",
-          "opp": "@DET",
-          "val": 25,
+          "date": "2/05",
+          "opp": "vs UTA",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "2/03",
+          "opp": "@MIA",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/31",
+          "opp": "@IND",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "vs HOU",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/28",
+          "opp": "@BOS",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/26",
+          "opp": "vs IND",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "vs PHX",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/21",
+          "opp": "@MEM",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "vs MIL",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "1/15",
+          "opp": "@POR",
+          "val": 1,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "@LAL",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/11",
+          "opp": "@GSW",
+          "val": 9,
           "hit": true
         },
         {
           "date": "1/09",
-          "opp": "@BKN",
-          "val": 16,
+          "opp": "@DEN",
+          "val": 10,
           "hit": true
         },
         {
           "date": "1/07",
-          "opp": "@NYK",
-          "val": 18,
+          "opp": "vs NOP",
+          "val": 8,
           "hit": true
         },
         {
           "date": "1/05",
-          "opp": "vs GSW",
-          "val": 18,
-          "hit": true
+          "opp": "@TOR",
+          "val": 3,
+          "hit": false
         },
         {
           "date": "1/03",
-          "opp": "vs BOS",
-          "val": 22,
+          "opp": "@TOR",
+          "val": 12,
           "hit": true
         },
         {
-          "date": "1/01",
-          "opp": "vs UTA",
+          "date": "1/02",
+          "opp": "@NYK",
           "val": 8,
-          "hit": false
-        },
-        {
-          "date": "12/30",
-          "opp": "vs SAC",
-          "val": 16,
           "hit": true
         },
         {
-          "date": "12/26",
-          "opp": "@POR",
-          "val": 8,
-          "hit": false
+          "date": "12/31",
+          "opp": "vs MIN",
+          "val": 9,
+          "hit": true
         },
         {
-          "date": "12/23",
-          "opp": "vs HOU",
-          "val": 13,
-          "hit": false
+          "date": "12/29",
+          "opp": "@OKC",
+          "val": 7,
+          "hit": true
         }
       ],
       "opponent": "MIN",
       "h2h_games": [
         {
-          "date": "Dec 06",
-          "value": 12,
-          "minutes": 30,
-          "result": "L",
-          "hit": false,
-          "venue": "@"
+          "date": "Dec 31",
+          "value": 9,
+          "minutes": 28,
+          "result": "W",
+          "hit": true,
+          "venue": "vs"
         }
       ],
-      "h2h_avg": 12.0,
-      "h2h_record": "0/1",
+      "h2h_avg": 9.0,
+      "h2h_record": "1/1",
       "h2h_total_games": 1,
-      "teammate_injuries": [
-        {
-          "player": "TyTy Washington Jr.",
-          "status": "OUT"
-        }
-      ],
-      "pick_score": 16.6,
+      "pick_score": 10.3,
       "score_factors": [
-        "60% L10 hit rate"
+        "70% L10 hit rate"
       ],
-      "actual": 15,
-      "result": "LOSS"
+      "injury_status": "Questionable",
+      "injury_type": "Right ankle (inflammation)",
+      "injury_headline": "Right ankle (inflammation)"
     },
     {
-      "player": "Andrew Wiggins",
-      "team": "MIA",
-      "prop": "PTS",
+      "player": "Donovan Mitchell",
+      "team": "CLE",
+      "prop": "AST",
       "direction": "OVER",
-      "line": 15.5,
-      "projection": 16.3,
-      "confidence": 54.8,
-      "ev": 2.5,
-      "diff": 0.8,
-      "market_odds": -121,
-      "fair_odds": -121,
-      "prob_edge": 1.3,
+      "line": 4.5,
+      "projection": 7.0,
+      "confidence": 56.0,
+      "ev": 5.5,
+      "diff": 2.5,
+      "market_odds": -113,
+      "fair_odds": -127,
+      "prob_edge": 2.9,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 15.5,
-            "odds": -120
+            "line": 4.5,
+            "odds": -152
           },
           "under": {
-            "line": 15.5,
-            "odds": -106
+            "line": 4.5,
+            "odds": 114
           }
         },
         "draftkings": {
           "over": {
-            "line": 15.5,
-            "odds": -116
+            "line": 5.5,
+            "odds": 119
           },
           "under": {
-            "line": 15.5,
-            "odds": -109
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 14.5,
-            "odds": -130
-          },
-          "under": {
-            "line": 14.5,
-            "odds": 100
+            "line": 5.5,
+            "odds": -158
           }
         }
       },
       "best_book": "draftkings",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "GOOD",
-      "l5_avg": 16.6,
-      "l10_avg": 16.1,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 3,
-      "l10_hit_count": 6,
-      "l10_median": 16.5,
-      "season_avg": 15.8,
-      "season_hit_count": 24,
-      "season_total": 48,
-      "streak": 1,
-      "home_avg": 16.3,
-      "away_avg": 15.3,
-      "opp_def_rank": 29,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 15.4,
-      "vs_bot10_avg": 15.8,
-      "insight": "WAS ranks #29 in points defense \u2014 favorable for overs.",
-      "insight_strength": "good",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 6.6,
+      "l10_avg": 6.3,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "l10_median": 6.0,
+      "season_avg": 5.9,
+      "season_hit_count": 37,
+      "season_total": 49,
+      "streak": 0,
+      "home_avg": 5.1,
+      "away_avg": 7.1,
+      "opp_def_rank": 13,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 5.9,
+      "vs_bot10_avg": 6.0,
+      "insight": "Has gone OVER 4.5 assists in 7 of last 10 games (6.3 avg).",
+      "insight_strength": "strong",
       "last_10_values": [
-        26,
-        14,
-        17,
-        10,
-        16,
-        10,
-        17,
-        14,
-        19,
-        18
+        4,
+        9,
+        9,
+        6,
+        5,
+        4,
+        9,
+        8,
+        6,
+        3
       ],
       "last_10_games": [
         {
-          "date": "2/06",
-          "opp": "@BOS",
-          "val": 26,
+          "date": "2/07",
+          "opp": "@SAC",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2/04",
+          "opp": "@LAC",
+          "val": 9,
           "hit": true
         },
         {
           "date": "2/01",
-          "opp": "vs CHI",
-          "val": 14,
-          "hit": false
-        },
-        {
-          "date": "1/31",
-          "opp": "vs CHI",
-          "val": 17,
+          "opp": "@POR",
+          "val": 9,
           "hit": true
         },
         {
-          "date": "1/29",
-          "opp": "@CHI",
-          "val": 10,
-          "hit": false
+          "date": "1/30",
+          "opp": "@PHX",
+          "val": 6,
+          "hit": true
         },
         {
           "date": "1/28",
-          "opp": "vs ORL",
-          "val": 16,
+          "opp": "vs LAL",
+          "val": 5,
           "hit": true
         },
         {
-          "date": "1/25",
-          "opp": "@PHX",
-          "val": 10,
+          "date": "1/26",
+          "opp": "vs ORL",
+          "val": 4,
           "hit": false
         },
         {
           "date": "1/24",
-          "opp": "@UTA",
-          "val": 17,
+          "opp": "@ORL",
+          "val": 9,
           "hit": true
         },
         {
-          "date": "1/22",
-          "opp": "@POR",
-          "val": 14,
-          "hit": false
+          "date": "1/23",
+          "opp": "vs SAC",
+          "val": 8,
+          "hit": true
         },
         {
-          "date": "1/20",
-          "opp": "@SAC",
-          "val": 19,
+          "date": "1/21",
+          "opp": "@CHA",
+          "val": 6,
           "hit": true
         },
         {
           "date": "1/19",
+          "opp": "vs OKC",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/16",
+          "opp": "@PHI",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/14",
+          "opp": "@PHI",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/12",
+          "opp": "vs UTA",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/10",
+          "opp": "vs MIN",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/08",
+          "opp": "@MIN",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/04",
+          "opp": "vs DET",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/02",
+          "opp": "vs DEN",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "vs PHX",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/29",
+          "opp": "@SAS",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "@HOU",
+          "val": 6,
+          "hit": true
+        }
+      ],
+      "opponent": "DEN",
+      "h2h_games": [
+        {
+          "date": "Jan 02",
+          "value": 5,
+          "minutes": 35,
+          "result": "W",
+          "hit": true,
+          "venue": "vs"
+        }
+      ],
+      "h2h_avg": 5.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "has_boost": true,
+      "injury_boost": 0.3,
+      "boosted_by": "James Harden",
+      "injury_insight": "Averages 6.0 AST without James Harden vs 5.7 with (+0.3 in 29 games)",
+      "injury_details": {
+        "avg_without": 6.0,
+        "avg_with": 5.7,
+        "games_without": 29
+      },
+      "teammate_injuries": [
+        {
+          "player": "James Harden",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 39.4,
+      "score_factors": [
+        "+5.5% EV",
+        "70% L10 hit rate",
+        "+2.5 edge"
+      ]
+    },
+    {
+      "player": "Jamal Murray",
+      "team": "DEN",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 6.5,
+      "projection": 7.5,
+      "confidence": 52.6,
+      "ev": 1.8,
+      "diff": 1.0,
+      "market_odds": -107,
+      "fair_odds": -111,
+      "prob_edge": 0.9,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 6.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -114
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 6.5,
+            "odds": -101
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -131
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "LEAN",
+      "l5_avg": 9.2,
+      "l10_avg": 8.0,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 60,
+      "l5_hit_count": 4,
+      "l10_hit_count": 6,
+      "l10_median": 8.5,
+      "season_avg": 7.5,
+      "season_hit_count": 27,
+      "season_total": 48,
+      "streak": 1,
+      "home_avg": 7.4,
+      "away_avg": 8.8,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 8.1,
+      "vs_bot10_avg": 8.0,
+      "last_10_values": [
+        11,
+        6,
+        8,
+        12,
+        9,
+        6,
+        10,
+        5,
+        11,
+        2
+      ],
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "@CHI",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "2/04",
+          "opp": "@NYK",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "2/03",
+          "opp": "@DET",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "2/01",
+          "opp": "vs OKC",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "vs LAC",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "vs BKN",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "vs DET",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "@WAS",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/20",
+          "opp": "vs LAL",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "vs CHA",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/17",
+          "opp": "vs WAS",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/14",
+          "opp": "@DAL",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "@NOP",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/07",
+          "opp": "@BOS",
+          "val": 17,
+          "hit": true
+        },
+        {
+          "date": "1/04",
+          "opp": "@BKN",
+          "val": 16,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@CLE",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "@TOR",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "12/29",
+          "opp": "@MIA",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "@ORL",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "12/25",
+          "opp": "vs MIN",
+          "val": 10,
+          "hit": true
+        }
+      ],
+      "opponent": "CLE",
+      "h2h_games": [
+        {
+          "date": "Jan 02",
+          "value": 7,
+          "minutes": 39,
+          "result": "L",
+          "hit": true,
+          "venue": "@"
+        }
+      ],
+      "h2h_avg": 7.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "pick_score": 10.3,
+      "score_factors": [
+        "60% L10 hit rate"
+      ],
+      "injury_status": "Questionable",
+      "injury_type": "Left hip (inflammation)",
+      "injury_headline": "Left hip (inflammation)"
+    },
+    {
+      "player": "Jalen Duren",
+      "team": "DET",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 16.5,
+      "projection": 18.3,
+      "confidence": 54.0,
+      "ev": 3.1,
+      "diff": 1.8,
+      "market_odds": -110,
+      "fair_odds": -117,
+      "prob_edge": 1.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 17.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -132
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 16.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 16.5,
+            "odds": -107
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "GOOD",
+      "l5_avg": 17.6,
+      "l10_avg": 17.6,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 80,
+      "l5_hit_count": 4,
+      "l10_hit_count": 8,
+      "l10_median": 18.5,
+      "season_avg": 17.7,
+      "season_hit_count": 26,
+      "season_total": 43,
+      "streak": 0,
+      "home_avg": 16.3,
+      "away_avg": 16.6,
+      "opp_def_rank": 11,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 16.2,
+      "vs_bot10_avg": 16.1,
+      "insight": "Has gone OVER 16.5 points in 8 of last 10 games (17.6 avg).",
+      "insight_strength": "strong",
+      "last_10_values": [
+        4,
+        19,
+        21,
+        21,
+        23,
+        14,
+        18,
+        18,
+        20,
+        18
+      ],
+      "last_10_games": [
+        {
+          "date": "2/05",
+          "opp": "vs WAS",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2/03",
+          "opp": "vs DEN",
+          "val": 19,
+          "hit": true
+        },
+        {
+          "date": "2/01",
+          "opp": "vs BKN",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/30",
           "opp": "@GSW",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "@PHX",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "@DEN",
+          "val": 14,
+          "hit": false
+        },
+        {
+          "date": "1/25",
+          "opp": "vs SAC",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "vs HOU",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "1/21",
+          "opp": "@NOP",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "vs BOS",
           "val": 18,
           "hit": true
         },
         {
           "date": "1/17",
-          "opp": "vs OKC",
+          "opp": "vs IND",
           "val": 15,
           "hit": false
         },
         {
           "date": "1/15",
-          "opp": "vs BOS",
-          "val": 16,
-          "hit": true
-        },
-        {
-          "date": "1/13",
           "opp": "vs PHX",
-          "val": 8,
+          "val": 16,
           "hit": false
         },
         {
-          "date": "1/11",
-          "opp": "@OKC",
-          "val": 23,
+          "date": "1/01",
+          "opp": "vs MIA",
+          "val": 12,
+          "hit": false
+        },
+        {
+          "date": "12/30",
+          "opp": "@LAL",
+          "val": 14,
+          "hit": false
+        },
+        {
+          "date": "12/28",
+          "opp": "@LAC",
+          "val": 18,
           "hit": true
         },
         {
-          "date": "1/10",
-          "opp": "@IND",
+          "date": "12/26",
+          "opp": "@UTA",
           "val": 11,
           "hit": false
         },
         {
+          "date": "12/23",
+          "opp": "@SAC",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "12/22",
+          "opp": "@POR",
+          "val": 26,
+          "hit": true
+        },
+        {
+          "date": "12/20",
+          "opp": "vs CHA",
+          "val": 19,
+          "hit": true
+        },
+        {
+          "date": "12/18",
+          "opp": "@DAL",
+          "val": 17,
+          "hit": true
+        }
+      ],
+      "opponent": "CHA",
+      "h2h_games": [
+        {
+          "date": "Dec 20",
+          "value": 19,
+          "minutes": 25,
+          "result": "W",
+          "hit": true,
+          "venue": "vs"
+        }
+      ],
+      "h2h_avg": 19.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "pick_score": 18.9,
+      "score_factors": [
+        "80% L10 hit rate"
+      ],
+      "injury_status": "Questionable",
+      "injury_type": "Right knee (soreness)",
+      "injury_headline": "Right knee (soreness)"
+    },
+    {
+      "player": "Norman Powell",
+      "team": "MIA",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 23.5,
+      "projection": 23.3,
+      "confidence": 54.529999999999994,
+      "ev": 6.0,
+      "diff": -0.2,
+      "market_odds": -118,
+      "fair_odds": -135,
+      "prob_edge": 3.3,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 23.5,
+            "odds": -104
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -128
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 23.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -108
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 20.8,
+      "l10_avg": 19.7,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 90,
+      "l5_hit_count": 4,
+      "l10_hit_count": 9,
+      "l10_median": 21.0,
+      "season_avg": 23.0,
+      "season_hit_count": 26,
+      "season_total": 45,
+      "streak": 1,
+      "home_avg": 23.1,
+      "away_avg": 20.5,
+      "opp_def_rank": 30,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 22.6,
+      "vs_bot10_avg": 20.1,
+      "insight": "Averaging 19.7 points over last 10 games (-3.8 below line).",
+      "insight_strength": "good",
+      "last_10_values": [
+        21,
+        24,
+        21,
+        22,
+        16,
+        13,
+        18,
+        22,
+        21,
+        19
+      ],
+      "last_10_games": [
+        {
+          "date": "2/08",
+          "opp": "@WAS",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "2/06",
+          "opp": "@BOS",
+          "val": 24,
+          "hit": false
+        },
+        {
+          "date": "1/29",
+          "opp": "@CHI",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/28",
+          "opp": "vs ORL",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "@PHX",
+          "val": 16,
+          "hit": true
+        },
+        {
+          "date": "1/24",
+          "opp": "@UTA",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "@POR",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "1/20",
+          "opp": "@SAC",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "@GSW",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/17",
+          "opp": "vs OKC",
+          "val": 19,
+          "hit": true
+        },
+        {
+          "date": "1/15",
+          "opp": "vs BOS",
+          "val": 26,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "vs PHX",
+          "val": 27,
+          "hit": false
+        },
+        {
+          "date": "1/10",
+          "opp": "@IND",
+          "val": 6,
+          "hit": true
+        },
+        {
           "date": "1/06",
           "opp": "@MIN",
-          "val": 10,
-          "hit": false
+          "val": 21,
+          "hit": true
         },
         {
           "date": "1/04",
           "opp": "vs NOP",
-          "val": 10,
+          "val": 34,
           "hit": false
         },
         {
           "date": "1/03",
           "opp": "vs MIN",
-          "val": 12,
-          "hit": false
+          "val": 21,
+          "hit": true
         },
         {
           "date": "1/01",
           "opp": "@DET",
-          "val": 17,
-          "hit": true
+          "val": 36,
+          "hit": false
         },
         {
           "date": "12/29",
           "opp": "vs DEN",
-          "val": 19,
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "12/27",
+          "opp": "vs IND",
+          "val": 23,
           "hit": true
+        },
+        {
+          "date": "12/26",
+          "opp": "@ATL",
+          "val": 25,
+          "hit": false
         }
       ],
-      "opponent": "WAS",
-      "h2h_total_games": 0,
+      "opponent": "UTA",
+      "h2h_games": [
+        {
+          "date": "Jan 24",
+          "value": 13,
+          "minutes": 25,
+          "result": "W",
+          "hit": true,
+          "venue": "@"
+        }
+      ],
+      "h2h_avg": 13.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
       "has_boost": true,
-      "injury_boost": -0.5,
+      "injury_boost": 2.1,
       "boosted_by": "Tyler Herro",
-      "injury_insight": "Averages 15.7 PTS without Tyler Herro vs 16.2 with (-0.5 in 38 games)",
+      "injury_insight": "Averages 23.4 PTS without Tyler Herro vs 21.2 with (+2.2 in 37 games)",
       "injury_details": {
-        "avg_without": 15.7,
-        "avg_with": 16.2,
-        "games_without": 38
+        "avg_without": 23.4,
+        "avg_with": 21.2,
+        "games_without": 37
       },
       "teammate_injuries": [
         {
@@ -918,707 +1088,438 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 22.8,
+      "pick_score": 9.2,
       "score_factors": [
-        "60% L10 hit rate",
-        "Favorable matchup (#29 DEF)"
+        "+6.0% EV",
+        "Injury boosted"
       ],
-      "actual": 11,
-      "result": "LOSS"
+      "injury_status": "Questionable",
+      "injury_type": "back (soreness)",
+      "injury_headline": "back (soreness)"
     },
     {
-      "player": "Anthony Edwards",
-      "team": "MIN",
+      "player": "Kevin Porter Jr.",
+      "team": "MIL",
       "prop": "PTS",
-      "direction": "OVER",
-      "line": 28.5,
-      "projection": 29.5,
-      "confidence": 53.3,
-      "ev": 3.1,
-      "diff": 1.0,
-      "market_odds": -109,
-      "fair_odds": -114,
-      "prob_edge": 1.6,
+      "direction": "UNDER",
+      "line": 19.5,
+      "projection": 15.6,
+      "confidence": 54.529999999999994,
+      "ev": 4.0,
+      "diff": -3.9,
+      "market_odds": -123,
+      "fair_odds": -135,
+      "prob_edge": 2.2,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 28.5,
-            "odds": 100
+            "line": 19.5,
+            "odds": -108
           },
           "under": {
-            "line": 28.5,
-            "odds": -128
+            "line": 19.5,
+            "odds": -122
           }
         },
         "draftkings": {
           "over": {
-            "line": 28.5,
-            "odds": -110
+            "line": 19.5,
+            "odds": -103
           },
           "under": {
-            "line": 28.5,
-            "odds": -116
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 27.5,
-            "odds": -118
-          },
-          "under": {
-            "line": 27.5,
-            "odds": -110
+            "line": 19.5,
+            "odds": -124
           }
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-08T11:48:34",
+      "generated_at": "2026-02-09T02:22:21",
       "edge": "GOOD",
-      "l5_avg": 32.6,
-      "l10_avg": 32.8,
+      "l5_avg": 12.6,
+      "l10_avg": 14.5,
       "l5_hit_rate": 80,
       "l10_hit_rate": 70,
       "l5_hit_count": 4,
       "l10_hit_count": 7,
-      "l10_median": 32.5,
-      "season_avg": 29.8,
-      "season_hit_count": 24,
-      "season_total": 43,
-      "streak": 4,
-      "home_avg": 28.6,
-      "away_avg": 32.7,
-      "opp_def_rank": 9,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 31.7,
-      "vs_bot10_avg": 31.2,
-      "insight": "Has gone OVER 28.5 points in 7 of last 10 games (32.8 avg).",
-      "insight_strength": "strong",
+      "l10_median": 14.0,
+      "season_avg": 17.1,
+      "season_hit_count": 15,
+      "season_total": 25,
+      "streak": 0,
+      "home_avg": 17.5,
+      "away_avg": 16.8,
+      "opp_def_rank": 15,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 18.8,
+      "vs_bot10_avg": 18.2,
+      "insight": "Averaging 14.5 points over last 10 games (-5.0 below line).",
+      "insight_strength": "good",
       "last_10_values": [
-        35,
-        30,
-        39,
-        33,
-        26,
-        20,
-        32,
-        20,
-        38,
-        55
+        23,
+        18,
+        9,
+        0,
+        13,
+        10,
+        22,
+        15,
+        25,
+        10
       ],
       "last_10_games": [
         {
           "date": "2/06",
-          "opp": "vs NOP",
-          "val": 35,
-          "hit": true
+          "opp": "vs IND",
+          "val": 23,
+          "hit": false
         },
         {
           "date": "2/04",
-          "opp": "@TOR",
-          "val": 30,
+          "opp": "vs NOP",
+          "val": 18,
           "hit": true
         },
         {
-          "date": "2/02",
-          "opp": "@MEM",
-          "val": 39,
+          "date": "1/19",
+          "opp": "@ATL",
+          "val": 9,
           "hit": true
         },
         {
-          "date": "1/31",
-          "opp": "@MEM",
-          "val": 33,
-          "hit": true
-        },
-        {
-          "date": "1/29",
-          "opp": "vs OKC",
-          "val": 26,
-          "hit": false
-        },
-        {
-          "date": "1/28",
-          "opp": "@DAL",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "1/25",
-          "opp": "vs GSW",
-          "val": 32,
-          "hit": true
-        },
-        {
-          "date": "1/22",
-          "opp": "vs CHI",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "1/20",
-          "opp": "@UTA",
-          "val": 38,
-          "hit": true
-        },
-        {
-          "date": "1/17",
+          "date": "1/15",
           "opp": "@SAS",
-          "val": 55,
+          "val": 0,
+          "hit": true
+        },
+        {
+          "date": "1/13",
+          "opp": "vs MIN",
+          "val": 13,
           "hit": true
         },
         {
           "date": "1/11",
-          "opp": "vs SAS",
-          "val": 23,
-          "hit": false
-        },
-        {
-          "date": "1/10",
-          "opp": "@CLE",
-          "val": 25,
-          "hit": false
-        },
-        {
-          "date": "1/08",
-          "opp": "vs CLE",
-          "val": 25,
-          "hit": false
-        },
-        {
-          "date": "1/06",
-          "opp": "vs MIA",
-          "val": 26,
-          "hit": false
-        },
-        {
-          "date": "1/04",
-          "opp": "@WAS",
-          "val": 35,
+          "opp": "@DEN",
+          "val": 10,
           "hit": true
         },
         {
-          "date": "1/03",
-          "opp": "@MIA",
-          "val": 33,
+          "date": "1/09",
+          "opp": "@LAL",
+          "val": 22,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "@GSW",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "1/04",
+          "opp": "@SAC",
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "1/02",
+          "opp": "vs CHA",
+          "val": 10,
           "hit": true
         },
         {
           "date": "12/31",
-          "opp": "@ATL",
-          "val": 30,
+          "opp": "vs WAS",
+          "val": 19,
           "hit": true
         },
         {
           "date": "12/29",
-          "opp": "@CHI",
-          "val": 23,
-          "hit": false
+          "opp": "@CHA",
+          "val": 15,
+          "hit": true
         },
         {
           "date": "12/27",
-          "opp": "vs BKN",
-          "val": 28,
+          "opp": "@CHI",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "12/26",
+          "opp": "@MEM",
+          "val": 16,
+          "hit": true
+        },
+        {
+          "date": "12/23",
+          "opp": "@IND",
+          "val": 24,
           "hit": false
         },
         {
-          "date": "12/25",
-          "opp": "@DEN",
-          "val": 44,
-          "hit": true
-        }
-      ],
-      "opponent": "LAC",
-      "h2h_games": [
+          "date": "12/21",
+          "opp": "@MIN",
+          "val": 24,
+          "hit": false
+        },
         {
-          "date": "Dec 06",
-          "value": 15,
-          "minutes": 37,
-          "result": "W",
-          "hit": false,
-          "venue": "vs"
+          "date": "12/18",
+          "opp": "vs TOR",
+          "val": 22,
+          "hit": false
+        },
+        {
+          "date": "12/14",
+          "opp": "@BKN",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "12/11",
+          "opp": "vs BOS",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "12/06",
+          "opp": "@DET",
+          "val": 32,
+          "hit": false
         }
       ],
-      "h2h_avg": 15.0,
-      "h2h_record": "0/1",
-      "h2h_total_games": 1,
-      "pick_score": 23.6,
+      "opponent": "ORL",
+      "h2h_total_games": 0,
+      "pick_score": 22.7,
       "score_factors": [
-        "70% L10 hit rate",
-        "4-game streak"
-      ],
-      "actual": 23,
-      "result": "LOSS"
+        "+3.9 edge"
+      ]
     },
     {
-      "player": "Anthony Edwards",
+      "player": "Naz Reid",
       "team": "MIN",
-      "prop": "AST",
-      "direction": "UNDER",
-      "line": 4.5,
-      "projection": 4.4,
-      "confidence": 54.434999999999995,
-      "ev": 1.0,
-      "diff": -0.1,
-      "market_odds": -136,
-      "fair_odds": -134,
-      "prob_edge": 0.6,
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 6.5,
+      "projection": 7.8,
+      "confidence": 56.5,
+      "ev": 4.4,
+      "diff": 1.3,
+      "market_odds": -118,
+      "fair_odds": -130,
+      "prob_edge": 2.4,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 4.5,
-            "odds": 136
+            "line": 6.5,
+            "odds": -114
           },
           "under": {
-            "line": 4.5,
-            "odds": -174
+            "line": 6.5,
+            "odds": -114
           }
         },
         "draftkings": {
           "over": {
-            "line": 3.5,
-            "odds": -166
+            "line": 6.5,
+            "odds": -123
           },
           "under": {
-            "line": 3.5,
-            "odds": 126
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 4.5,
-            "odds": 140
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -190
+            "line": 6.5,
+            "odds": -107
           }
         }
       },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "LEAN",
-      "l5_avg": 4.0,
-      "l10_avg": 3.7,
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "GOOD",
+      "l5_avg": 7.0,
+      "l10_avg": 7.3,
       "l5_hit_rate": 60,
       "l10_hit_rate": 70,
       "l5_hit_count": 3,
       "l10_hit_count": 7,
-      "l10_median": 3.0,
-      "season_avg": 3.7,
-      "season_hit_count": 29,
-      "season_total": 43,
+      "l10_median": 7.5,
+      "season_avg": 6.4,
+      "season_hit_count": 25,
+      "season_total": 54,
       "streak": 1,
-      "home_avg": 3.9,
-      "away_avg": 3.7,
-      "opp_def_rank": 10,
+      "home_avg": 7.3,
+      "away_avg": 6.1,
+      "opp_def_rank": 26,
       "matchup_favorability": "favorable",
-      "vs_top10_avg": 4.0,
-      "vs_bot10_avg": 3.3,
-      "insight": "LAC ranks #10 in assists defense \u2014 favorable for unders.",
-      "insight_strength": "good",
+      "vs_top10_avg": 7.1,
+      "vs_bot10_avg": 6.6,
+      "insight": "Has gone OVER 6.5 rebounds in 7 of last 10 games (7.3 avg).",
+      "insight_strength": "strong",
       "last_10_values": [
-        4,
-        5,
+        9,
         3,
-        3,
-        5,
+        8,
         6,
-        2,
-        3,
-        3,
-        3
+        9,
+        7,
+        8,
+        7,
+        10,
+        6
       ],
       "last_10_games": [
         {
+          "date": "2/08",
+          "opp": "vs LAC",
+          "val": 9,
+          "hit": true
+        },
+        {
           "date": "2/06",
           "opp": "vs NOP",
-          "val": 4,
-          "hit": true
+          "val": 3,
+          "hit": false
         },
         {
           "date": "2/04",
           "opp": "@TOR",
-          "val": 5,
-          "hit": false
+          "val": 8,
+          "hit": true
         },
         {
           "date": "2/02",
           "opp": "@MEM",
-          "val": 3,
-          "hit": true
+          "val": 6,
+          "hit": false
         },
         {
           "date": "1/31",
           "opp": "@MEM",
-          "val": 3,
+          "val": 9,
           "hit": true
         },
         {
           "date": "1/29",
           "opp": "vs OKC",
-          "val": 5,
-          "hit": false
-        },
-        {
-          "date": "1/28",
-          "opp": "@DAL",
-          "val": 6,
-          "hit": false
-        },
-        {
-          "date": "1/25",
-          "opp": "vs GSW",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "1/22",
-          "opp": "vs CHI",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/20",
-          "opp": "@UTA",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/17",
-          "opp": "@SAS",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/11",
-          "opp": "vs SAS",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/10",
-          "opp": "@CLE",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/08",
-          "opp": "vs CLE",
-          "val": 9,
-          "hit": false
-        },
-        {
-          "date": "1/06",
-          "opp": "vs MIA",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/04",
-          "opp": "@WAS",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "1/03",
-          "opp": "@MIA",
-          "val": 5,
-          "hit": false
-        },
-        {
-          "date": "12/31",
-          "opp": "@ATL",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "12/29",
-          "opp": "@CHI",
-          "val": 4,
-          "hit": true
-        },
-        {
-          "date": "12/27",
-          "opp": "vs BKN",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "12/25",
-          "opp": "@DEN",
-          "val": 3,
-          "hit": true
-        }
-      ],
-      "opponent": "LAC",
-      "h2h_games": [
-        {
-          "date": "Dec 06",
-          "value": 4,
-          "minutes": 37,
-          "result": "W",
-          "hit": true,
-          "venue": "vs"
-        }
-      ],
-      "h2h_avg": 4.0,
-      "h2h_record": "1/1",
-      "h2h_total_games": 1,
-      "pick_score": 16.5,
-      "score_factors": [
-        "Favorable matchup (#10 DEF)"
-      ],
-      "actual": 2,
-      "result": "WIN"
-    },
-    {
-      "player": "Immanuel Quickley",
-      "team": "TOR",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 4.5,
-      "projection": 4.9,
-      "confidence": 53.1,
-      "ev": 7.3,
-      "diff": 0.4,
-      "market_odds": -105,
-      "fair_odds": -113,
-      "prob_edge": 3.6,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 4.5,
-            "odds": -115
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -111
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 4.5,
-            "odds": 103
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -136
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 4.5,
-            "odds": -105
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -125
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "STRONG",
-      "l5_avg": 4.6,
-      "l10_avg": 5.3,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 3,
-      "l10_hit_count": 6,
-      "l10_median": 5.0,
-      "season_avg": 4.4,
-      "season_hit_count": 24,
-      "season_total": 50,
-      "streak": 0,
-      "home_avg": 3.5,
-      "away_avg": 4.8,
-      "opp_def_rank": 27,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 3.4,
-      "vs_bot10_avg": 4.7,
-      "insight": "IND ranks #27 in rebounds defense \u2014 favorable for overs.",
-      "insight_strength": "good",
-      "last_10_values": [
-        2,
-        5,
-        5,
-        7,
-        4,
-        11,
-        8,
-        6,
-        2,
-        3
-      ],
-      "last_10_games": [
-        {
-          "date": "2/05",
-          "opp": "vs CHI",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "2/04",
-          "opp": "vs MIN",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "2/01",
-          "opp": "vs UTA",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/30",
-          "opp": "@ORL",
           "val": 7,
           "hit": true
         },
         {
           "date": "1/28",
-          "opp": "vs NYK",
-          "val": 4,
-          "hit": false
-        },
-        {
-          "date": "1/25",
-          "opp": "@OKC",
-          "val": 11,
-          "hit": true
-        },
-        {
-          "date": "1/23",
-          "opp": "@POR",
+          "opp": "@DAL",
           "val": 8,
           "hit": true
         },
         {
-          "date": "1/21",
-          "opp": "@SAC",
-          "val": 6,
+          "date": "1/26",
+          "opp": "vs GSW",
+          "val": 7,
           "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "vs GSW",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs CHI",
+          "val": 6,
+          "hit": false
         },
         {
           "date": "1/20",
-          "opp": "@GSW",
-          "val": 2,
+          "opp": "@UTA",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/17",
+          "opp": "@SAS",
+          "val": 0,
           "hit": false
         },
         {
-          "date": "1/18",
-          "opp": "@LAL",
+          "date": "1/16",
+          "opp": "@HOU",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/13",
+          "opp": "@MIL",
           "val": 3,
           "hit": false
-        },
-        {
-          "date": "1/12",
-          "opp": "vs PHI",
-          "val": 6,
-          "hit": true
         },
         {
           "date": "1/11",
-          "opp": "vs PHI",
-          "val": 5,
+          "opp": "vs SAS",
+          "val": 11,
           "hit": true
         },
         {
-          "date": "1/09",
-          "opp": "@BOS",
-          "val": 2,
+          "date": "1/10",
+          "opp": "@CLE",
+          "val": 5,
           "hit": false
         },
         {
-          "date": "1/07",
-          "opp": "@CHA",
-          "val": 4,
+          "date": "1/08",
+          "opp": "vs CLE",
+          "val": 6,
           "hit": false
         },
         {
-          "date": "1/05",
-          "opp": "vs ATL",
-          "val": 3,
+          "date": "1/06",
+          "opp": "vs MIA",
+          "val": 6,
           "hit": false
+        },
+        {
+          "date": "1/04",
+          "opp": "@WAS",
+          "val": 7,
+          "hit": true
         },
         {
           "date": "1/03",
-          "opp": "vs ATL",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "12/31",
-          "opp": "vs DEN",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "12/29",
-          "opp": "vs ORL",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "12/28",
-          "opp": "vs GSW",
-          "val": 4,
-          "hit": false
-        },
-        {
-          "date": "12/26",
-          "opp": "@WAS",
+          "opp": "@MIA",
           "val": 4,
           "hit": false
         }
       ],
-      "opponent": "IND",
+      "opponent": "ATL",
       "h2h_games": [
         {
-          "date": "Nov 26",
-          "value": 5,
-          "minutes": 35,
-          "result": "W",
+          "date": "Dec 31",
+          "value": 7,
+          "minutes": 22,
+          "result": "L",
           "hit": true,
-          "venue": "vs"
-        },
-        {
-          "date": "Nov 15",
-          "value": 3,
-          "minutes": 29,
-          "result": "W",
-          "hit": false,
           "venue": "@"
         }
       ],
-      "h2h_avg": 4.0,
-      "h2h_record": "1/2",
-      "h2h_total_games": 2,
-      "pick_score": 20.9,
+      "h2h_avg": 7.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "pick_score": 43.5,
       "score_factors": [
-        "+7.3% EV",
-        "60% L10 hit rate",
-        "Favorable matchup (#27 DEF)"
+        "70% L10 hit rate",
+        "Favorable matchup (#26 DEF)"
       ],
-      "injury_status": "Questionable",
-      "injury_type": "Right ankle (sprain)",
-      "injury_headline": "Right ankle (sprain)",
-      "actual": 4,
-      "result": "LOSS"
+      "top_pick_rank": 3
     },
     {
-      "player": "Kyshawn George",
-      "team": "WAS",
-      "prop": "AST",
-      "direction": "OVER",
+      "player": "Jaden McDaniels",
+      "team": "MIN",
+      "prop": "REB",
+      "direction": "UNDER",
       "line": 4.5,
-      "projection": 4.9,
-      "confidence": 52.8,
-      "ev": 13.6,
-      "diff": 0.4,
-      "market_odds": -109,
-      "fair_odds": -112,
-      "prob_edge": 6.3,
+      "projection": 3.1,
+      "confidence": 55.765,
+      "ev": 3.8,
+      "diff": -1.4,
+      "market_odds": -130,
+      "fair_odds": -142,
+      "prob_edge": 2.2,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -1627,504 +1528,61 @@
           },
           "under": {
             "line": 4.5,
-            "odds": -132
+            "odds": -136
           }
         },
         "draftkings": {
           "over": {
             "line": 4.5,
-            "odds": 123
+            "odds": -106
           },
           "under": {
             "line": 4.5,
-            "odds": -162
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 3.5,
-            "odds": -165
-          },
-          "under": {
-            "line": 3.5,
-            "odds": 125
+            "odds": -124
           }
         }
       },
       "best_book": "draftkings",
-      "generated_at": "2026-02-08T11:48:34",
-      "edge": "STRONG",
-      "l5_avg": 3.8,
-      "l10_avg": 5.1,
-      "l5_hit_rate": 40,
-      "l10_hit_rate": 70,
-      "l5_hit_count": 2,
-      "l10_hit_count": 7,
-      "l10_median": 5.5,
-      "season_avg": 4.9,
-      "season_hit_count": 23,
-      "season_total": 41,
-      "streak": 0,
-      "home_avg": 4.5,
-      "away_avg": 5.6,
-      "opp_def_rank": 19,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 4.1,
-      "vs_bot10_avg": 5.0,
-      "insight": "Has gone OVER 4.5 assists in 7 of last 10 games (5.1 avg).",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "GOOD",
+      "l5_avg": 2.4,
+      "l10_avg": 2.9,
+      "l5_hit_rate": 100,
+      "l10_hit_rate": 90,
+      "l5_hit_count": 5,
+      "l10_hit_count": 9,
+      "l10_median": 3.0,
+      "season_avg": 4.2,
+      "season_hit_count": 29,
+      "season_total": 52,
+      "streak": 9,
+      "home_avg": 3.7,
+      "away_avg": 4.1,
+      "opp_def_rank": 26,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 3.6,
+      "vs_bot10_avg": 3.5,
+      "insight": "Has stayed UNDER 4.5 rebounds in 9 straight games.",
       "insight_strength": "strong",
       "last_10_values": [
-        3,
-        3,
         2,
-        6,
-        5,
-        5,
-        7,
-        7,
-        6,
-        7
-      ],
-      "last_10_games": [
-        {
-          "date": "2/05",
-          "opp": "@DET",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "2/03",
-          "opp": "vs NYK",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "2/01",
-          "opp": "vs SAC",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "1/30",
-          "opp": "vs LAL",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "1/29",
-          "opp": "vs MIL",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/27",
-          "opp": "vs POR",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/24",
-          "opp": "@CHA",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/22",
-          "opp": "vs DEN",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/19",
-          "opp": "vs LAC",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "1/17",
-          "opp": "@DEN",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "1/16",
-          "opp": "@SAC",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "1/14",
-          "opp": "@LAC",
-          "val": 4,
-          "hit": false
-        },
-        {
-          "date": "1/11",
-          "opp": "@PHX",
-          "val": 4,
-          "hit": false
-        },
-        {
-          "date": "1/09",
-          "opp": "vs NOP",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "12/26",
-          "opp": "vs TOR",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "12/23",
-          "opp": "@CHA",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "12/21",
-          "opp": "vs SAS",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/20",
-          "opp": "@MEM",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/18",
-          "opp": "@SAS",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/14",
-          "opp": "@IND",
-          "val": 9,
-          "hit": true
-        }
-      ],
-      "opponent": "MIA",
-      "h2h_total_games": 0,
-      "pick_score": 0.1,
-      "score_factors": [
-        "+13.6% EV",
-        "70% L10 hit rate"
-      ],
-      "injury_status": "Questionable",
-      "injury_type": "Left ankle (sprain)",
-      "injury_headline": "Left ankle (sprain)",
-      "actual": 3,
-      "result": "LOSS"
-    },
-    {
-      "player": "Ayo Dosunmu",
-      "team": "MIN",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 3.5,
-      "projection": 3.8,
-      "confidence": 52.0,
-      "ev": 8.2,
-      "diff": 0.3,
-      "market_odds": 107,
-      "fair_odds": -108,
-      "prob_edge": 3.9,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 3.5,
-            "odds": 136
-          },
-          "under": {
-            "line": 3.5,
-            "odds": -174
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 2.5,
-            "odds": -150
-          },
-          "under": {
-            "line": 2.5,
-            "odds": 114
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 3.5,
-            "odds": 135
-          },
-          "under": {
-            "line": 3.5,
-            "odds": -185
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "generated_at": "2026-02-08T12:12:43",
-      "edge": "STRONG",
-      "l5_avg": 5.4,
-      "l10_avg": 4.1,
-      "l5_hit_rate": 80,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 4,
-      "l10_hit_count": 6,
-      "l10_median": 4.0,
-      "season_avg": 3.6,
-      "season_hit_count": 22,
-      "season_total": 45,
-      "streak": 1,
-      "home_avg": 4.3,
-      "away_avg": 3.7,
-      "opp_def_rank": 10,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 3.9,
-      "vs_bot10_avg": 3.2,
-      "insight": "LAC ranks #10 in assists defense \u2014 tough for overs.",
-      "insight_strength": "lean",
-      "last_10_values": [
-        8,
         1,
-        9,
-        5,
+        1,
+        4,
+        4,
         4,
         2,
-        0,
         3,
-        4,
+        3,
         5
       ],
       "last_10_games": [
         {
-          "date": "2/03",
-          "opp": "@MIL",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "2/01",
-          "opp": "@MIA",
-          "val": 1,
-          "hit": false
-        },
-        {
-          "date": "1/31",
-          "opp": "@MIA",
-          "val": 9,
-          "hit": true
-        },
-        {
-          "date": "1/29",
-          "opp": "vs MIA",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/28",
-          "opp": "@IND",
-          "val": 4,
-          "hit": true
-        },
-        {
-          "date": "1/26",
-          "opp": "vs LAL",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "1/24",
-          "opp": "vs BOS",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "1/22",
-          "opp": "@MIN",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "1/20",
+          "date": "2/08",
           "opp": "vs LAC",
-          "val": 4,
+          "val": 2,
           "hit": true
         },
-        {
-          "date": "1/18",
-          "opp": "vs BKN",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/16",
-          "opp": "@BKN",
-          "val": 1,
-          "hit": false
-        },
-        {
-          "date": "1/14",
-          "opp": "vs UTA",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "1/13",
-          "opp": "@HOU",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "1/10",
-          "opp": "vs DAL",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/07",
-          "opp": "@DET",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "1/05",
-          "opp": "@BOS",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "1/03",
-          "opp": "vs CHA",
-          "val": 4,
-          "hit": true
-        },
-        {
-          "date": "1/02",
-          "opp": "vs ORL",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "12/31",
-          "opp": "vs NOP",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "12/29",
-          "opp": "vs MIN",
-          "val": 7,
-          "hit": true
-        }
-      ],
-      "opponent": "LAC",
-      "h2h_games": [
-        {
-          "date": "Jan 20",
-          "value": 4,
-          "minutes": 29,
-          "result": "W",
-          "hit": true,
-          "venue": "vs"
-        }
-      ],
-      "h2h_avg": 4.0,
-      "h2h_record": "1/1",
-      "h2h_total_games": 1,
-      "pick_score": 16.3,
-      "score_factors": [
-        "+8.2% EV",
-        "60% L10 hit rate"
-      ],
-      "added_live": true,
-      "discovered_at": "2026-02-08T12:12:43",
-      "actual": 1,
-      "result": "LOSS"
-    },
-    {
-      "player": "Jaden McDaniels",
-      "team": "MIN",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 4.5,
-      "projection": 3.8,
-      "confidence": 53.865,
-      "ev": 1.0,
-      "diff": -0.7,
-      "market_odds": -158,
-      "fair_odds": -131,
-      "prob_edge": 0.6,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 4.5,
-            "odds": 130
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -166
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 4.5,
-            "odds": 117
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -155
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 4.5,
-            "odds": 115
-          },
-          "under": {
-            "line": 4.5,
-            "odds": -155
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "generated_at": "2026-02-08T12:12:43",
-      "edge": "LEAN",
-      "l5_avg": 2.8,
-      "l10_avg": 3.3,
-      "l5_hit_rate": 100,
-      "l10_hit_rate": 80,
-      "l5_hit_count": 5,
-      "l10_hit_count": 8,
-      "l10_median": 3.5,
-      "season_avg": 4.3,
-      "season_hit_count": 28,
-      "season_total": 51,
-      "streak": 8,
-      "home_avg": 3.7,
-      "away_avg": 4.1,
-      "opp_def_rank": 6,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 4.1,
-      "vs_bot10_avg": 3.5,
-      "insight": "Has stayed UNDER 4.5 rebounds in 8 straight games.",
-      "insight_strength": "strong",
-      "last_10_values": [
-        1,
-        1,
-        4,
-        4,
-        4,
-        2,
-        3,
-        3,
-        5,
-        6
-      ],
-      "last_10_games": [
         {
           "date": "2/06",
           "opp": "vs NOP",
@@ -2238,623 +1696,2949 @@
           "opp": "@MIA",
           "val": 2,
           "hit": true
-        },
-        {
-          "date": "12/31",
-          "opp": "@ATL",
-          "val": 4,
-          "hit": true
         }
       ],
-      "opponent": "LAC",
+      "opponent": "ATL",
       "h2h_games": [
         {
-          "date": "Dec 06",
-          "value": 1,
-          "minutes": 37,
-          "result": "W",
+          "date": "Dec 31",
+          "value": 4,
+          "minutes": 22,
+          "result": "L",
           "hit": true,
-          "venue": "vs"
+          "venue": "@"
         }
       ],
-      "h2h_avg": 1.0,
+      "h2h_avg": 4.0,
       "h2h_record": "1/1",
       "h2h_total_games": 1,
-      "pick_score": 26.5,
+      "pick_score": 29.9,
       "score_factors": [
-        "Favorable matchup (#6 DEF)",
-        "8-game streak"
-      ],
-      "added_live": true,
-      "discovered_at": "2026-02-08T12:12:43",
-      "actual": 2,
-      "result": "WIN"
+        "9-game streak"
+      ]
     },
     {
-      "player": "Karl-Anthony Towns",
-      "team": "NYK",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 18.5,
-      "projection": 15.9,
-      "confidence": 52.059999999999995,
-      "ev": 5.5,
-      "diff": -2.6,
-      "market_odds": -108,
-      "fair_odds": -121,
-      "prob_edge": 2.9,
+      "player": "Zion Williamson",
+      "team": "NOP",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 6.5,
+      "projection": 6.5,
+      "confidence": 55.0,
+      "ev": 6.3,
+      "diff": 0.0,
+      "market_odds": -107,
+      "fair_odds": -122,
+      "prob_edge": 3.3,
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 18.5,
-            "odds": -122
+            "line": 6.5,
+            "odds": -106
           },
           "under": {
-            "line": 18.5,
-            "odds": -104
+            "line": 6.5,
+            "odds": -122
           }
         },
         "draftkings": {
           "over": {
-            "line": 18.5,
-            "odds": -111
+            "line": 6.5,
+            "odds": -109
           },
           "under": {
-            "line": 18.5,
-            "odds": -115
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 18.5,
-            "odds": -125
-          },
-          "under": {
-            "line": 18.5,
-            "odds": -105
+            "line": 6.5,
+            "odds": -120
           }
         }
       },
       "best_book": "fanduel",
-      "generated_at": "2026-02-08T12:12:43",
+      "generated_at": "2026-02-09T02:22:21",
       "edge": "STRONG",
-      "l5_avg": 15.2,
-      "l10_avg": 16.2,
-      "l5_hit_rate": 60,
-      "l10_hit_rate": 60,
-      "l5_hit_count": 3,
-      "l10_hit_count": 6,
-      "l10_median": 15.5,
-      "season_avg": 19.9,
-      "season_hit_count": 21,
-      "season_total": 48,
+      "l5_avg": 6.4,
+      "l10_avg": 7.4,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 50,
+      "l5_hit_count": 2,
+      "l10_hit_count": 5,
+      "l10_median": 6.5,
+      "season_avg": 6.2,
+      "season_hit_count": 16,
+      "season_total": 38,
       "streak": 0,
-      "home_avg": 18.5,
-      "away_avg": 19.2,
-      "opp_def_rank": 2,
+      "home_avg": 5.6,
+      "away_avg": 6.7,
+      "opp_def_rank": 21,
       "matchup_favorability": "favorable",
-      "vs_top10_avg": 17.4,
-      "vs_bot10_avg": 17.3,
-      "insight": "Averaging 16.2 points over last 10 games (-2.3 below line).",
+      "vs_top10_avg": 5.6,
+      "vs_bot10_avg": 7.3,
+      "insight": "SAC ranks #21 in rebounds defense \u2014 favorable for overs.",
       "insight_strength": "good",
       "last_10_values": [
-        24,
-        19,
-        11,
-        14,
-        8,
-        17,
-        10,
-        14,
-        22,
-        23
-      ],
-      "last_10_games": [
-        {
-          "date": "2/04",
-          "opp": "vs DEN",
-          "val": 24,
-          "hit": false
-        },
-        {
-          "date": "2/03",
-          "opp": "@WAS",
-          "val": 19,
-          "hit": false
-        },
-        {
-          "date": "2/01",
-          "opp": "vs LAL",
-          "val": 11,
-          "hit": true
-        },
-        {
-          "date": "1/30",
-          "opp": "vs POR",
-          "val": 14,
-          "hit": true
-        },
-        {
-          "date": "1/28",
-          "opp": "@TOR",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/27",
-          "opp": "vs SAC",
-          "val": 17,
-          "hit": true
-        },
-        {
-          "date": "1/24",
-          "opp": "@PHI",
-          "val": 10,
-          "hit": true
-        },
-        {
-          "date": "1/21",
-          "opp": "vs BKN",
-          "val": 14,
-          "hit": true
-        },
-        {
-          "date": "1/19",
-          "opp": "vs DAL",
-          "val": 22,
-          "hit": false
-        },
-        {
-          "date": "1/17",
-          "opp": "vs PHX",
-          "val": 23,
-          "hit": false
-        },
-        {
-          "date": "1/15",
-          "opp": "@GSW",
-          "val": 17,
-          "hit": true
-        },
-        {
-          "date": "1/14",
-          "opp": "@SAC",
-          "val": 13,
-          "hit": true
-        },
-        {
-          "date": "1/11",
-          "opp": "@POR",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "1/09",
-          "opp": "@PHX",
-          "val": 15,
-          "hit": true
-        },
-        {
-          "date": "1/07",
-          "opp": "vs LAC",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "1/05",
-          "opp": "@DET",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "1/03",
-          "opp": "vs PHI",
-          "val": 23,
-          "hit": false
-        },
-        {
-          "date": "12/31",
-          "opp": "@SAS",
-          "val": 20,
-          "hit": false
-        },
-        {
-          "date": "12/29",
-          "opp": "@NOP",
-          "val": 12,
-          "hit": true
-        },
-        {
-          "date": "12/27",
-          "opp": "@ATL",
-          "val": 36,
-          "hit": false
-        }
-      ],
-      "opponent": "BOS",
-      "h2h_games": [
-        {
-          "date": "Dec 02",
-          "value": 29,
-          "minutes": 33,
-          "result": "L",
-          "hit": false,
-          "venue": "@"
-        },
-        {
-          "date": "Oct 24",
-          "value": 26,
-          "minutes": 33,
-          "result": "W",
-          "hit": false,
-          "venue": "vs"
-        }
-      ],
-      "h2h_avg": 27.5,
-      "h2h_record": "0/2",
-      "h2h_total_games": 2,
-      "pick_score": 31.1,
-      "score_factors": [
-        "+5.5% EV",
-        "Favorable matchup (#2 DEF)",
-        "+2.6 edge"
-      ],
-      "added_live": true,
-      "discovered_at": "2026-02-08T12:12:43",
-      "actual": 11,
-      "result": "WIN"
-    },
-    {
-      "player": "Andrew Nembhard",
-      "team": "IND",
-      "prop": "AST",
-      "direction": "OVER",
-      "line": 7.5,
-      "projection": 7.7,
-      "confidence": 54.0,
-      "ev": 3.5,
-      "diff": 0.2,
-      "market_odds": 102,
-      "fair_odds": -117,
-      "prob_edge": 1.8,
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 7.5,
-            "odds": -104
-          },
-          "under": {
-            "line": 7.5,
-            "odds": -120
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 7.5,
-            "odds": -103
-          },
-          "under": {
-            "line": 7.5,
-            "odds": -128
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 8.5,
-            "odds": 115
-          },
-          "under": {
-            "line": 8.5,
-            "odds": -150
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "generated_at": "2026-02-08T12:42:56",
-      "edge": "GOOD",
-      "l5_avg": 9.6,
-      "l10_avg": 8.9,
-      "l5_hit_rate": 100,
-      "l10_hit_rate": 80,
-      "l5_hit_count": 5,
-      "l10_hit_count": 8,
-      "l10_median": 9.0,
-      "season_avg": 7.5,
-      "season_hit_count": 18,
-      "season_total": 41,
-      "streak": 7,
-      "home_avg": 8.1,
-      "away_avg": 7.8,
-      "opp_def_rank": 3,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 7.8,
-      "vs_bot10_avg": 8.4,
-      "insight": "Has gone OVER 7.5 assists in 8 of last 10 games (8.9 avg).",
-      "insight_strength": "strong",
-      "last_10_values": [
-        8,
-        8,
-        10,
-        9,
-        13,
-        11,
-        9,
+        4,
         5,
+        11,
+        5,
+        7,
+        11,
         10,
+        11,
+        4,
         6
       ],
       "last_10_games": [
         {
           "date": "2/06",
+          "opp": "@MIN",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2/04",
           "opp": "@MIL",
-          "val": 8,
-          "hit": true
+          "val": 5,
+          "hit": false
         },
         {
           "date": "2/02",
-          "opp": "vs HOU",
-          "val": 8,
-          "hit": true
-        },
-        {
-          "date": "1/31",
-          "opp": "vs ATL",
-          "val": 10,
-          "hit": true
-        },
-        {
-          "date": "1/28",
-          "opp": "vs CHI",
-          "val": 9,
-          "hit": true
-        },
-        {
-          "date": "1/26",
-          "opp": "@ATL",
-          "val": 13,
-          "hit": true
-        },
-        {
-          "date": "1/23",
-          "opp": "@OKC",
+          "opp": "@CHA",
           "val": 11,
           "hit": true
         },
         {
-          "date": "1/21",
-          "opp": "@BOS",
-          "val": 9,
-          "hit": true
-        },
-        {
-          "date": "1/19",
+          "date": "1/31",
           "opp": "@PHI",
           "val": 5,
           "hit": false
         },
         {
-          "date": "1/16",
-          "opp": "vs NOP",
+          "date": "1/30",
+          "opp": "vs MEM",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "@OKC",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "@SAS",
           "val": 10,
           "hit": true
         },
         {
-          "date": "1/14",
-          "opp": "vs TOR",
+          "date": "1/23",
+          "opp": "@MEM",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "1/21",
+          "opp": "vs DET",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/18",
+          "opp": "@HOU",
           "val": 6,
           "hit": false
         },
         {
-          "date": "1/12",
-          "opp": "vs BOS",
-          "val": 9,
+          "date": "1/16",
+          "opp": "@IND",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/14",
+          "opp": "vs BKN",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "vs DEN",
+          "val": 7,
           "hit": true
         },
         {
-          "date": "1/10",
-          "opp": "vs MIA",
-          "val": 9,
+          "date": "1/11",
+          "opp": "@ORL",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "@WAS",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "@ATL",
+          "val": 8,
           "hit": true
         },
         {
           "date": "1/06",
-          "opp": "vs CLE",
-          "val": 11,
-          "hit": true
+          "opp": "vs LAL",
+          "val": 4,
+          "hit": false
         },
         {
           "date": "1/04",
-          "opp": "@ORL",
-          "val": 11,
-          "hit": true
+          "opp": "@MIA",
+          "val": 5,
+          "hit": false
         },
         {
           "date": "1/02",
-          "opp": "vs SAS",
-          "val": 6,
+          "opp": "vs POR",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "@CHI",
+          "val": 7,
+          "hit": true
+        }
+      ],
+      "opponent": "SAC",
+      "h2h_total_games": 0,
+      "pick_score": 34.5,
+      "score_factors": [
+        "+6.3% EV",
+        "Favorable matchup (#21 DEF)"
+      ]
+    },
+    {
+      "player": "Saddiq Bey",
+      "team": "NOP",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 17.5,
+      "projection": 20.0,
+      "confidence": 54.7,
+      "ev": 5.3,
+      "diff": 2.5,
+      "market_odds": -108,
+      "fair_odds": -121,
+      "prob_edge": 2.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 17.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -114
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 17.5,
+            "odds": -103
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -124
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 23.2,
+      "l10_avg": 22.3,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "l10_median": 22.0,
+      "season_avg": 16.7,
+      "season_hit_count": 22,
+      "season_total": 47,
+      "streak": 2,
+      "home_avg": 18.7,
+      "away_avg": 19.9,
+      "opp_def_rank": 27,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 19.0,
+      "vs_bot10_avg": 19.3,
+      "insight": "Has gone OVER 17.5 points in 7 of last 10 games (22.3 avg).",
+      "insight_strength": "strong",
+      "last_10_values": [
+        30,
+        22,
+        8,
+        34,
+        22,
+        16,
+        24,
+        36,
+        20,
+        11
+      ],
+      "last_10_games": [
+        {
+          "date": "2/06",
+          "opp": "@MIN",
+          "val": 30,
+          "hit": true
+        },
+        {
+          "date": "2/04",
+          "opp": "@MIL",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "2/02",
+          "opp": "@CHA",
+          "val": 8,
+          "hit": false
+        },
+        {
+          "date": "1/31",
+          "opp": "@PHI",
+          "val": 34,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "vs MEM",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "@OKC",
+          "val": 16,
+          "hit": false
+        },
+        {
+          "date": "1/25",
+          "opp": "@SAS",
+          "val": 24,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "@MEM",
+          "val": 36,
+          "hit": true
+        },
+        {
+          "date": "1/21",
+          "opp": "vs DET",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@HOU",
+          "val": 11,
+          "hit": false
+        },
+        {
+          "date": "1/16",
+          "opp": "@IND",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "1/14",
+          "opp": "vs BKN",
+          "val": 12,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "vs DEN",
+          "val": 17,
           "hit": false
         },
         {
           "date": "12/31",
-          "opp": "vs ORL",
+          "opp": "@CHI",
+          "val": 16,
+          "hit": false
+        },
+        {
+          "date": "12/29",
+          "opp": "vs NYK",
+          "val": 26,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "vs PHX",
+          "val": 17,
+          "hit": false
+        },
+        {
+          "date": "12/26",
+          "opp": "vs PHX",
+          "val": 9,
+          "hit": false
+        },
+        {
+          "date": "12/23",
+          "opp": "@CLE",
+          "val": 11,
+          "hit": false
+        },
+        {
+          "date": "12/22",
+          "opp": "vs DAL",
+          "val": 19,
+          "hit": true
+        },
+        {
+          "date": "12/20",
+          "opp": "vs IND",
+          "val": 18,
+          "hit": true
+        }
+      ],
+      "opponent": "SAC",
+      "h2h_total_games": 0,
+      "pick_score": 38.5,
+      "score_factors": [
+        "+5.3% EV",
+        "70% L10 hit rate",
+        "Favorable matchup (#27 DEF)"
+      ]
+    },
+    {
+      "player": "Zion Williamson",
+      "team": "NOP",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 23.5,
+      "projection": 22.2,
+      "confidence": 52.059999999999995,
+      "ev": 3.3,
+      "diff": -1.3,
+      "market_odds": -113,
+      "fair_odds": -121,
+      "prob_edge": 1.7,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 23.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 23.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 23.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "GOOD",
+      "l5_avg": 19.0,
+      "l10_avg": 18.8,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "l10_median": 20.5,
+      "season_avg": 21.6,
+      "season_hit_count": 21,
+      "season_total": 38,
+      "streak": 0,
+      "home_avg": 20.5,
+      "away_avg": 22.3,
+      "opp_def_rank": 27,
+      "matchup_favorability": "unfavorable",
+      "vs_top10_avg": 19.7,
+      "vs_bot10_avg": 25.0,
+      "insight": "Averaging 18.8 points over last 10 games (-4.7 below line).",
+      "insight_strength": "good",
+      "last_10_values": [
+        29,
+        20,
+        14,
+        11,
+        21,
+        21,
+        24,
+        24,
+        4,
+        20
+      ],
+      "last_10_games": [
+        {
+          "date": "2/06",
+          "opp": "@MIN",
+          "val": 29,
+          "hit": false
+        },
+        {
+          "date": "2/04",
+          "opp": "@MIL",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "2/02",
+          "opp": "@CHA",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "1/31",
+          "opp": "@PHI",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "vs MEM",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "@OKC",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "@SAS",
+          "val": 24,
+          "hit": false
+        },
+        {
+          "date": "1/23",
+          "opp": "@MEM",
+          "val": 24,
+          "hit": false
+        },
+        {
+          "date": "1/21",
+          "opp": "vs DET",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@HOU",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "1/16",
+          "opp": "@IND",
+          "val": 27,
+          "hit": false
+        },
+        {
+          "date": "1/14",
+          "opp": "vs BKN",
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "vs DEN",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "@ORL",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "1/09",
+          "opp": "@WAS",
+          "val": 31,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "@ATL",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "1/06",
+          "opp": "vs LAL",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "1/04",
+          "opp": "@MIA",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "vs POR",
+          "val": 35,
+          "hit": false
+        },
+        {
+          "date": "12/31",
+          "opp": "@CHI",
+          "val": 31,
+          "hit": false
+        }
+      ],
+      "opponent": "SAC",
+      "h2h_total_games": 0,
+      "pick_score": 8.8,
+      "score_factors": []
+    },
+    {
+      "player": "Paolo Banchero",
+      "team": "ORL",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 4.5,
+      "projection": 5.4,
+      "confidence": 52.0,
+      "ev": 5.6,
+      "diff": 0.9,
+      "market_odds": 103,
+      "fair_odds": -108,
+      "prob_edge": 2.7,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": 102
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -136
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": 104
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -137
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 5.2,
+      "l10_avg": 5.0,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 40,
+      "l5_hit_count": 2,
+      "l10_hit_count": 4,
+      "l10_median": 4.0,
+      "season_avg": 4.9,
+      "season_hit_count": 18,
+      "season_total": 41,
+      "streak": 1,
+      "home_avg": 4.6,
+      "away_avg": 5.7,
+      "opp_def_rank": 20,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 4.4,
+      "vs_bot10_avg": 5.9,
+      "insight": "MIL ranks #20 in assists defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "last_10_values": [
+        8,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        2,
+        5,
+        9
+      ],
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "vs UTA",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "2/05",
+          "opp": "vs BKN",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2/03",
+          "opp": "@OKC",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2/01",
+          "opp": "@SAS",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/30",
+          "opp": "vs TOR",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/28",
+          "opp": "@MIA",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/26",
+          "opp": "@CLE",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/24",
+          "opp": "vs CLE",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/22",
+          "opp": "vs CHA",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@MEM",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/15",
+          "opp": "vs MEM",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NOP",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/09",
+          "opp": "vs PHI",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/07",
+          "opp": "@BKN",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/06",
+          "opp": "@WAS",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/04",
+          "opp": "vs IND",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@CHI",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "@IND",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "12/29",
+          "opp": "@TOR",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "vs DEN",
+          "val": 6,
+          "hit": true
+        }
+      ],
+      "opponent": "MIL",
+      "h2h_total_games": 0,
+      "has_boost": true,
+      "injury_boost": 1.3,
+      "boosted_by": "Franz Wagner",
+      "injury_insight": "Averages 5.4 AST without Franz Wagner vs 4.1 with (+1.3 in 25 games)",
+      "injury_details": {
+        "avg_without": 5.4,
+        "avg_with": 4.1,
+        "games_without": 25
+      },
+      "teammate_injuries": [
+        {
+          "player": "Franz Wagner",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 26.0,
+      "score_factors": [
+        "+5.6% EV",
+        "Favorable matchup (#20 DEF)",
+        "Injury boosted"
+      ]
+    },
+    {
+      "player": "Desmond Bane",
+      "team": "ORL",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 19.5,
+      "projection": 23.7,
+      "confidence": 52.6,
+      "ev": 3.2,
+      "diff": 4.2,
+      "market_odds": -104,
+      "fair_odds": -111,
+      "prob_edge": 1.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 19.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -132
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 19.5,
+            "odds": -109
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -117
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "GOOD",
+      "l5_avg": 21.8,
+      "l10_avg": 20.3,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 70,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "l10_median": 21.5,
+      "season_avg": 19.3,
+      "season_hit_count": 25,
+      "season_total": 51,
+      "streak": 2,
+      "home_avg": 21.7,
+      "away_avg": 17.1,
+      "opp_def_rank": 16,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 20.5,
+      "vs_bot10_avg": 19.7,
+      "insight": "Has gone OVER 19.5 points in 7 of last 10 games (20.3 avg).",
+      "insight_strength": "strong",
+      "last_10_values": [
+        22,
+        23,
+        7,
+        25,
+        32,
+        23,
+        19,
+        20,
+        21,
+        11
+      ],
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "vs UTA",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "2/05",
+          "opp": "vs BKN",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "2/03",
+          "opp": "@OKC",
+          "val": 7,
+          "hit": false
+        },
+        {
+          "date": "2/01",
+          "opp": "@SAS",
+          "val": 25,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "vs TOR",
+          "val": 32,
+          "hit": true
+        },
+        {
+          "date": "1/28",
+          "opp": "@MIA",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "1/26",
+          "opp": "@CLE",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "1/24",
+          "opp": "vs CLE",
+          "val": 20,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs CHA",
+          "val": 21,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@MEM",
+          "val": 11,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "vs MEM",
+          "val": 13,
+          "hit": false
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NOP",
+          "val": 27,
+          "hit": true
+        },
+        {
+          "date": "1/09",
+          "opp": "vs PHI",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "1/07",
+          "opp": "@BKN",
+          "val": 9,
+          "hit": false
+        },
+        {
+          "date": "1/06",
+          "opp": "@WAS",
+          "val": 15,
+          "hit": false
+        },
+        {
+          "date": "1/04",
+          "opp": "vs IND",
+          "val": 31,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@CHI",
+          "val": 14,
+          "hit": false
+        },
+        {
+          "date": "12/31",
+          "opp": "@IND",
+          "val": 18,
+          "hit": false
+        },
+        {
+          "date": "12/29",
+          "opp": "@TOR",
+          "val": 18,
+          "hit": false
+        },
+        {
+          "date": "12/27",
+          "opp": "vs DEN",
+          "val": 24,
+          "hit": true
+        }
+      ],
+      "opponent": "MIL",
+      "h2h_total_games": 0,
+      "has_boost": true,
+      "injury_boost": 3.1,
+      "boosted_by": "Franz Wagner",
+      "injury_insight": "Averages 20.9 PTS without Franz Wagner vs 17.8 with (+3.1 in 25 games)",
+      "injury_details": {
+        "avg_without": 20.9,
+        "avg_with": 17.8,
+        "games_without": 25
+      },
+      "teammate_injuries": [
+        {
+          "player": "Franz Wagner",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 35.4,
+      "score_factors": [
+        "70% L10 hit rate",
+        "+4.2 edge",
+        "Injury boosted"
+      ]
+    },
+    {
+      "player": "Desmond Bane",
+      "team": "ORL",
+      "prop": "REB",
+      "direction": "UNDER",
+      "line": 4.5,
+      "projection": 3.0,
+      "confidence": 53.675,
+      "ev": 1.8,
+      "diff": -1.5,
+      "market_odds": -125,
+      "fair_odds": -130,
+      "prob_edge": 0.9,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 4.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -125
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 4.5,
+            "odds": -104
+          },
+          "under": {
+            "line": 4.5,
+            "odds": -126
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "LEAN",
+      "l5_avg": 2.6,
+      "l10_avg": 3.1,
+      "l5_hit_rate": 100,
+      "l10_hit_rate": 90,
+      "l5_hit_count": 5,
+      "l10_hit_count": 9,
+      "l10_median": 3.5,
+      "season_avg": 4.3,
+      "season_hit_count": 29,
+      "season_total": 51,
+      "streak": 8,
+      "home_avg": 4.1,
+      "away_avg": 3.9,
+      "opp_def_rank": 19,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 4.8,
+      "vs_bot10_avg": 4.0,
+      "insight": "Has stayed UNDER 4.5 rebounds in 8 straight games.",
+      "insight_strength": "strong",
+      "last_10_values": [
+        3,
+        3,
+        2,
+        4,
+        1,
+        1,
+        4,
+        4,
+        5,
+        4
+      ],
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "vs UTA",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2/05",
+          "opp": "vs BKN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2/03",
+          "opp": "@OKC",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2/01",
+          "opp": "@SAS",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/30",
+          "opp": "vs TOR",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "1/28",
+          "opp": "@MIA",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "1/26",
+          "opp": "@CLE",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/24",
+          "opp": "vs CLE",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs CHA",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/18",
+          "opp": "@MEM",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/15",
+          "opp": "vs MEM",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NOP",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "vs PHI",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "@BKN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "1/06",
+          "opp": "@WAS",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "1/04",
+          "opp": "vs IND",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/02",
+          "opp": "@CHI",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "@IND",
           "val": 7,
           "hit": false
         },
         {
           "date": "12/29",
-          "opp": "@HOU",
-          "val": 2,
+          "opp": "@TOR",
+          "val": 6,
           "hit": false
         },
         {
           "date": "12/27",
+          "opp": "vs DEN",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "opponent": "MIL",
+      "h2h_total_games": 0,
+      "has_boost": true,
+      "injury_boost": -0.2,
+      "boosted_by": "Franz Wagner",
+      "injury_insight": "Averages 4.2 REB without Franz Wagner vs 4.3 with (-0.1 in 25 games)",
+      "injury_details": {
+        "avg_without": 4.2,
+        "avg_with": 4.3,
+        "games_without": 25
+      },
+      "teammate_injuries": [
+        {
+          "player": "Franz Wagner",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 22.2,
+      "score_factors": [
+        "8-game streak"
+      ]
+    },
+    {
+      "player": "Paolo Banchero",
+      "team": "ORL",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 21.5,
+      "projection": 24.5,
+      "confidence": 53.1,
+      "ev": 1.4,
+      "diff": 3.0,
+      "market_odds": -110,
+      "fair_odds": -113,
+      "prob_edge": 0.7,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 22.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -130
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 21.5,
+            "odds": -119
+          },
+          "under": {
+            "line": 21.5,
+            "odds": -107
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "LEAN",
+      "l5_avg": 20.2,
+      "l10_avg": 23.5,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 60,
+      "l5_hit_count": 2,
+      "l10_hit_count": 6,
+      "l10_median": 22.5,
+      "season_avg": 21.7,
+      "season_hit_count": 24,
+      "season_total": 41,
+      "streak": 2,
+      "home_avg": 20.7,
+      "away_avg": 23.0,
+      "opp_def_rank": 16,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 18.8,
+      "vs_bot10_avg": 23.3,
+      "insight": "Model projects 24.5 points \u2014 +3.0 above line.",
+      "insight_strength": "lean",
+      "last_10_values": [
+        23,
+        22,
+        17,
+        19,
+        20,
+        31,
+        37,
+        27,
+        23,
+        16
+      ],
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "vs UTA",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "2/05",
+          "opp": "vs BKN",
+          "val": 22,
+          "hit": true
+        },
+        {
+          "date": "2/03",
+          "opp": "@OKC",
+          "val": 17,
+          "hit": false
+        },
+        {
+          "date": "2/01",
+          "opp": "@SAS",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "1/30",
+          "opp": "vs TOR",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "1/28",
           "opp": "@MIA",
+          "val": 31,
+          "hit": true
+        },
+        {
+          "date": "1/26",
+          "opp": "@CLE",
+          "val": 37,
+          "hit": true
+        },
+        {
+          "date": "1/24",
+          "opp": "vs CLE",
+          "val": 27,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs CHA",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "@MEM",
           "val": 16,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "vs MEM",
+          "val": 26,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NOP",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "1/09",
+          "opp": "vs PHI",
+          "val": 14,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "@BKN",
+          "val": 30,
+          "hit": true
+        },
+        {
+          "date": "1/06",
+          "opp": "@WAS",
+          "val": 14,
+          "hit": false
+        },
+        {
+          "date": "1/04",
+          "opp": "vs IND",
+          "val": 28,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@CHI",
+          "val": 31,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "@IND",
+          "val": 29,
+          "hit": true
+        },
+        {
+          "date": "12/29",
+          "opp": "@TOR",
+          "val": 23,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "vs DEN",
+          "val": 12,
+          "hit": false
+        }
+      ],
+      "opponent": "MIL",
+      "h2h_total_games": 0,
+      "has_boost": true,
+      "injury_boost": 2.0,
+      "boosted_by": "Franz Wagner",
+      "injury_insight": "Averages 22.4 PTS without Franz Wagner vs 20.4 with (+2.0 in 25 games)",
+      "injury_details": {
+        "avg_without": 22.4,
+        "avg_with": 20.4,
+        "games_without": 25
+      },
+      "teammate_injuries": [
+        {
+          "player": "Franz Wagner",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 24.1,
+      "score_factors": [
+        "60% L10 hit rate",
+        "+3.0 edge",
+        "Injury boosted"
+      ]
+    },
+    {
+      "player": "Joel Embiid",
+      "team": "PHI",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 28.5,
+      "projection": 31.6,
+      "confidence": 57.4,
+      "ev": 6.5,
+      "diff": 3.1,
+      "market_odds": -117,
+      "fair_odds": -135,
+      "prob_edge": 3.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 29.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 29.5,
+            "odds": -118
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 28.5,
+            "odds": -123
+          },
+          "under": {
+            "line": 28.5,
+            "odds": -104
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 33.8,
+      "l10_avg": 33.1,
+      "l5_hit_rate": 80,
+      "l10_hit_rate": 90,
+      "l5_hit_count": 4,
+      "l10_hit_count": 9,
+      "l10_median": 33.0,
+      "season_avg": 26.6,
+      "season_hit_count": 14,
+      "season_total": 31,
+      "streak": 2,
+      "home_avg": 28.7,
+      "away_avg": 25.0,
+      "opp_def_rank": 23,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 24.5,
+      "vs_bot10_avg": 29.9,
+      "insight": "Has gone OVER 28.5 points in 9 of last 10 games (33.1 avg).",
+      "insight_strength": "strong",
+      "last_10_values": [
+        33,
+        35,
+        24,
+        40,
+        37,
+        29,
+        38,
+        32,
+        30,
+        33
+      ],
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "@PHX",
+          "val": 33,
+          "hit": true
+        },
+        {
+          "date": "2/05",
+          "opp": "@LAL",
+          "val": 35,
+          "hit": true
+        },
+        {
+          "date": "2/02",
+          "opp": "@LAC",
+          "val": 24,
+          "hit": false
+        },
+        {
+          "date": "1/31",
+          "opp": "vs NOP",
+          "val": 40,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "vs SAC",
+          "val": 37,
+          "hit": true
+        },
+        {
+          "date": "1/27",
+          "opp": "vs MIL",
+          "val": 29,
+          "hit": true
+        },
+        {
+          "date": "1/24",
+          "opp": "vs NYK",
+          "val": 38,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs HOU",
+          "val": 32,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "vs IND",
+          "val": 30,
+          "hit": true
+        },
+        {
+          "date": "1/16",
+          "opp": "vs CLE",
+          "val": 33,
+          "hit": true
+        },
+        {
+          "date": "1/14",
+          "opp": "vs CLE",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "1/12",
+          "opp": "@TOR",
+          "val": 27,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "@ORL",
+          "val": 22,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "vs WAS",
+          "val": 28,
+          "hit": false
+        },
+        {
+          "date": "1/05",
+          "opp": "vs DEN",
+          "val": 32,
+          "hit": true
+        },
+        {
+          "date": "1/03",
+          "opp": "@NYK",
+          "val": 26,
+          "hit": false
+        },
+        {
+          "date": "1/01",
+          "opp": "@DAL",
+          "val": 22,
+          "hit": false
+        },
+        {
+          "date": "12/30",
+          "opp": "@MEM",
+          "val": 34,
           "hit": true
         },
         {
           "date": "12/26",
-          "opp": "vs BOS",
-          "val": 8,
+          "opp": "@CHI",
+          "val": 31,
           "hit": true
         },
         {
           "date": "12/23",
-          "opp": "vs MIL",
-          "val": 6,
+          "opp": "vs BKN",
+          "val": 27,
           "hit": false
         }
       ],
-      "opponent": "TOR",
-      "h2h_games": [
+      "opponent": "POR",
+      "h2h_total_games": 0,
+      "pick_score": 42.0,
+      "score_factors": [
+        "+6.5% EV",
+        "90% L10 hit rate",
+        "Favorable matchup (#23 DEF)"
+      ],
+      "injury_status": "Questionable",
+      "injury_type": "Right knee",
+      "injury_headline": "Right knee",
+      "top_pick_rank": 1
+    },
+    {
+      "player": "VJ Edgecombe",
+      "team": "PHI",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.2,
+      "confidence": 52.4,
+      "ev": 1.0,
+      "diff": 0.7,
+      "market_odds": -108,
+      "fair_odds": -110,
+      "prob_edge": 0.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -130
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -114
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "LEAN",
+      "l5_avg": 5.8,
+      "l10_avg": 5.8,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 60,
+      "l5_hit_count": 3,
+      "l10_hit_count": 6,
+      "l10_median": 6.0,
+      "season_avg": 5.4,
+      "season_hit_count": 26,
+      "season_total": 48,
+      "streak": 3,
+      "home_avg": 5.3,
+      "away_avg": 5.2,
+      "opp_def_rank": 12,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 5.3,
+      "vs_bot10_avg": 4.8,
+      "last_10_values": [
+        6,
+        10,
+        7,
+        3,
+        3,
+        5,
+        8,
+        6,
+        3,
+        7
+      ],
+      "last_10_games": [
         {
-          "date": "Jan 14",
-          "value": 6,
-          "minutes": 32,
-          "result": "L",
-          "hit": false,
-          "venue": "vs"
+          "date": "2/07",
+          "opp": "@PHX",
+          "val": 6,
+          "hit": true
         },
         {
-          "date": "Nov 26",
-          "value": 4,
-          "minutes": 35,
-          "result": "L",
-          "hit": false,
-          "venue": "@"
+          "date": "2/05",
+          "opp": "@LAL",
+          "val": 10,
+          "hit": true
         },
         {
-          "date": "Nov 15",
-          "value": 5,
-          "minutes": 31,
-          "result": "L",
-          "hit": false,
-          "venue": "vs"
+          "date": "2/03",
+          "opp": "@GSW",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "2/02",
+          "opp": "@LAC",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/31",
+          "opp": "vs NOP",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/29",
+          "opp": "vs SAC",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "vs MIL",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/26",
+          "opp": "@CHA",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/24",
+          "opp": "vs NYK",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/22",
+          "opp": "vs HOU",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/20",
+          "opp": "vs PHX",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "vs IND",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/16",
+          "opp": "vs CLE",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/14",
+          "opp": "vs CLE",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/12",
+          "opp": "@TOR",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/11",
+          "opp": "@TOR",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "@ORL",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/07",
+          "opp": "vs WAS",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/05",
+          "opp": "vs DEN",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/03",
+          "opp": "@NYK",
+          "val": 2,
+          "hit": false
         }
       ],
-      "h2h_avg": 5.0,
-      "h2h_record": "0/3",
-      "h2h_total_games": 3,
-      "pick_score": 27.2,
+      "opponent": "POR",
+      "h2h_total_games": 0,
+      "pick_score": 16.5,
       "score_factors": [
-        "80% L10 hit rate",
-        "7-game streak"
+        "60% L10 hit rate",
+        "3-game streak"
+      ]
+    },
+    {
+      "player": "Jrue Holiday",
+      "team": "POR",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.7,
+      "confidence": 55.9,
+      "ev": 9.7,
+      "diff": 1.2,
+      "market_odds": -104,
+      "fair_odds": -127,
+      "prob_edge": 4.9,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -132
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -122
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 5.0,
+      "l10_avg": 5.0,
+      "l5_hit_rate": 20,
+      "l10_hit_rate": 30,
+      "l5_hit_count": 1,
+      "l10_hit_count": 3,
+      "l10_median": 4.5,
+      "season_avg": 6.5,
+      "season_hit_count": 14,
+      "season_total": 24,
+      "streak": 0,
+      "home_avg": 6.3,
+      "away_avg": 6.7,
+      "opp_def_rank": 23,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 5.1,
+      "vs_bot10_avg": 6.4,
+      "insight": "PHI ranks #23 in assists defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "last_10_values": [
+        4,
+        7,
+        5,
+        4,
+        5,
+        3,
+        7,
+        7,
+        4,
+        4
       ],
-      "added_live": true,
-      "discovered_at": "2026-02-08T12:42:56",
-      "actual": 2,
-      "result": "LOSS"
+      "last_10_games": [
+        {
+          "date": "2/07",
+          "opp": "vs MEM",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2/06",
+          "opp": "vs MEM",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "2/03",
+          "opp": "vs PHX",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/30",
+          "opp": "@NYK",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "@WAS",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/26",
+          "opp": "@BOS",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/23",
+          "opp": "vs TOR",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "vs MIA",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/17",
+          "opp": "vs LAL",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "vs ATL",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "@GSW",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/11",
+          "opp": "vs NYK",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "11/14",
+          "opp": "@HOU",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "11/12",
+          "opp": "@NOP",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "11/10",
+          "opp": "@ORL",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "11/08",
+          "opp": "@MIA",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "11/05",
+          "opp": "vs OKC",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "11/03",
+          "opp": "vs LAL",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "10/31",
+          "opp": "vs DEN",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "10/29",
+          "opp": "@UTA",
+          "val": 8,
+          "hit": true
+        }
+      ],
+      "opponent": "PHI",
+      "h2h_total_games": 0,
+      "teammate_injuries": [
+        {
+          "player": "Matisse Thybulle",
+          "status": "OUT"
+        }
+      ],
+      "pick_score": 43.1,
+      "score_factors": [
+        "+9.7% EV",
+        "Favorable matchup (#23 DEF)"
+      ]
+    },
+    {
+      "player": "Domantas Sabonis",
+      "team": "SAC",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 3.5,
+      "projection": 4.5,
+      "confidence": 56.1,
+      "ev": 15.5,
+      "diff": 1.0,
+      "market_odds": 106,
+      "fair_odds": -128,
+      "prob_edge": 7.6,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 3.5,
+            "odds": 106
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -140
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "STRONG",
+      "l5_avg": 5.4,
+      "l10_avg": 4.5,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 50,
+      "l5_hit_count": 3,
+      "l10_hit_count": 5,
+      "l10_median": 4.0,
+      "season_avg": 4.1,
+      "season_hit_count": 9,
+      "season_total": 19,
+      "streak": 0,
+      "home_avg": 2.9,
+      "away_avg": 5.2,
+      "opp_def_rank": 27,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 6.0,
+      "vs_bot10_avg": 3.3,
+      "insight": "NOP ranks #27 in assists defense \u2014 favorable for overs.",
+      "insight_strength": "good",
+      "last_10_values": [
+        3,
+        3,
+        7,
+        8,
+        6,
+        3,
+        2,
+        5,
+        5,
+        3
+      ],
+      "last_10_games": [
+        {
+          "date": "2/04",
+          "opp": "vs MEM",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/29",
+          "opp": "@PHI",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "@NYK",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "@DET",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "@CLE",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "1/20",
+          "opp": "vs MIA",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "1/18",
+          "opp": "vs POR",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "1/16",
+          "opp": "vs WAS",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "11/16",
+          "opp": "@SAS",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "11/14",
+          "opp": "@MIN",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "11/12",
+          "opp": "vs ATL",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "11/11",
+          "opp": "vs DEN",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "11/09",
+          "opp": "vs MIN",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "11/03",
+          "opp": "@DEN",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "11/01",
+          "opp": "@MIL",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "10/29",
+          "opp": "@CHI",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "10/28",
+          "opp": "@OKC",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "10/26",
+          "opp": "vs LAL",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "10/24",
+          "opp": "vs UTA",
+          "val": 1,
+          "hit": false
+        }
+      ],
+      "opponent": "NOP",
+      "h2h_total_games": 0,
+      "pick_score": 35.8,
+      "score_factors": [
+        "+15.5% EV",
+        "Favorable matchup (#27 DEF)"
+      ],
+      "injury_status": "Questionable",
+      "injury_type": "back (soreness)",
+      "injury_headline": "back (soreness)",
+      "top_pick_rank": 2
+    },
+    {
+      "player": "Domantas Sabonis",
+      "team": "SAC",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 7.5,
+      "projection": 11.3,
+      "confidence": 58.3,
+      "ev": 3.2,
+      "diff": 3.8,
+      "market_odds": -130,
+      "fair_odds": -140,
+      "prob_edge": 1.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 7.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 7.5,
+            "odds": -102
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "generated_at": "2026-02-09T02:22:21",
+      "edge": "GOOD",
+      "l5_avg": 11.4,
+      "l10_avg": 10.5,
+      "l5_hit_rate": 60,
+      "l10_hit_rate": 70,
+      "l5_hit_count": 3,
+      "l10_hit_count": 7,
+      "l10_median": 10.5,
+      "season_avg": 11.4,
+      "season_hit_count": 15,
+      "season_total": 19,
+      "streak": 1,
+      "home_avg": 10.1,
+      "away_avg": 12.5,
+      "opp_def_rank": 25,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 11.7,
+      "vs_bot10_avg": 11.0,
+      "insight": "Has gone OVER 7.5 rebounds in 7 of last 10 games (10.5 avg).",
+      "insight_strength": "strong",
+      "last_10_values": [
+        15,
+        7,
+        12,
+        7,
+        16,
+        10,
+        8,
+        6,
+        13,
+        11
+      ],
+      "last_10_games": [
+        {
+          "date": "2/04",
+          "opp": "vs MEM",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "@PHI",
+          "val": 7,
+          "hit": false
+        },
+        {
+          "date": "1/27",
+          "opp": "@NYK",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "@DET",
+          "val": 7,
+          "hit": false
+        },
+        {
+          "date": "1/23",
+          "opp": "@CLE",
+          "val": 16,
+          "hit": true
+        },
+        {
+          "date": "1/20",
+          "opp": "vs MIA",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "1/18",
+          "opp": "vs POR",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "1/16",
+          "opp": "vs WAS",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "11/16",
+          "opp": "@SAS",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "11/14",
+          "opp": "@MIN",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "11/12",
+          "opp": "vs ATL",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "11/11",
+          "opp": "vs DEN",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "11/09",
+          "opp": "vs MIN",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "11/03",
+          "opp": "@DEN",
+          "val": 17,
+          "hit": true
+        },
+        {
+          "date": "11/01",
+          "opp": "@MIL",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "10/29",
+          "opp": "@CHI",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "10/28",
+          "opp": "@OKC",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "10/26",
+          "opp": "vs LAL",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "10/24",
+          "opp": "vs UTA",
+          "val": 12,
+          "hit": true
+        }
+      ],
+      "opponent": "NOP",
+      "h2h_total_games": 0,
+      "pick_score": 34.4,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup (#25 DEF)",
+        "+3.8 edge"
+      ],
+      "injury_status": "Questionable",
+      "injury_type": "back (soreness)",
+      "injury_headline": "back (soreness)"
     }
   ],
   "top_picks": [
     {
-      "type": "spread",
-      "game": "MIA @ WAS",
-      "away_team": "MIA",
-      "home_team": "WAS",
-      "pick": "WAS +11.0",
-      "confidence": 65.9,
-      "pick_score": 50.0,
+      "type": "prop",
+      "player": "Joel Embiid",
+      "team": "PHI",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 28.5,
+      "projection": 31.6,
+      "diff": 3.1,
+      "ev": 6.5,
+      "confidence": 57.4,
+      "pick_score": 60.0,
       "score_factors": [
-        "65.9% spread conf",
-        "High confidence"
+        "+6.5% EV",
+        "90% L10 hit rate",
+        "Favorable matchup (#23 DEF)"
       ],
-      "commence_time": "2026-02-08T19:10:00Z",
-      "top_pick_rank": 1,
-      "result": "LOSS",
-      "actual": "132-101"
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 29.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 29.5,
+            "odds": -118
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 28.5,
+            "odds": -123
+          },
+          "under": {
+            "line": 28.5,
+            "odds": -104
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 28.5 points in 9 of last 10 games (33.1 avg).",
+      "top_pick_rank": 1
     },
     {
       "type": "prop",
-      "player": "Jaylen Brown",
-      "team": "BOS",
+      "player": "Domantas Sabonis",
+      "team": "SAC",
+      "prop": "AST",
+      "direction": "OVER",
+      "line": 3.5,
+      "projection": 4.5,
+      "diff": 1.0,
+      "ev": 15.5,
+      "confidence": 56.1,
+      "pick_score": 51.2,
+      "score_factors": [
+        "+15.5% EV",
+        "Favorable matchup (#27 DEF)"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 3.5,
+            "odds": 106
+          },
+          "under": {
+            "line": 3.5,
+            "odds": -140
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "NOP ranks #27 in assists defense \u2014 favorable for overs.",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "prop",
+      "player": "Naz Reid",
+      "team": "MIN",
       "prop": "REB",
       "direction": "OVER",
       "line": 6.5,
-      "projection": 8.3,
-      "diff": 1.8,
-      "ev": 3.6,
-      "confidence": 58.2,
-      "pick_score": 46.8,
+      "projection": 7.8,
+      "diff": 1.3,
+      "ev": 4.4,
+      "confidence": 56.5,
+      "pick_score": 43.5,
       "score_factors": [
-        "90% L10 hit rate",
-        "9-game streak"
+        "70% L10 hit rate",
+        "Favorable matchup (#26 DEF)"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
             "line": 6.5,
-            "odds": -125
+            "odds": -114
           },
           "under": {
             "line": 6.5,
-            "odds": -106
+            "odds": -114
           }
         },
         "draftkings": {
           "over": {
             "line": 6.5,
-            "odds": -132
+            "odds": -123
           },
           "under": {
             "line": 6.5,
-            "odds": 101
+            "odds": -107
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Has gone OVER 6.5 rebounds in 9 of last 10 games (9.1 avg).",
-      "top_pick_rank": 2,
-      "result": "LOSS",
-      "actual": 2
+      "insight": "Has gone OVER 6.5 rebounds in 7 of last 10 games (7.3 avg).",
+      "top_pick_rank": 3
     },
     {
       "type": "total",
-      "game": "NYK @ BOS",
-      "away_team": "NYK",
-      "home_team": "BOS",
-      "pick": "OVER 214.5",
-      "confidence": 71.9,
+      "game": "CHI @ BKN",
+      "away_team": "CHI",
+      "home_team": "BKN",
+      "pick": "OVER 223.5",
+      "confidence": 63.1,
       "pick_score": 40.0,
       "score_factors": [
-        "71.9% total conf"
+        "63.1% total conf"
       ],
-      "commence_time": "2026-02-08T17:40:00Z",
-      "top_pick_rank": 3,
-      "result": "LOSS",
-      "actual": "111-89"
+      "commence_time": "2026-02-10T00:40:00Z",
+      "top_pick_rank": 4
     },
     {
-      "type": "ml",
-      "game": "MIA @ WAS",
-      "away_team": "MIA",
-      "home_team": "WAS",
-      "pick": "MIA",
-      "confidence": 62.7,
+      "type": "total",
+      "game": "UTA @ MIA",
+      "away_team": "UTA",
+      "home_team": "MIA",
+      "pick": "UNDER 243.5",
+      "confidence": 62.9,
       "pick_score": 40.0,
       "score_factors": [
-        "62.7% ML conf"
+        "62.9% total conf"
       ],
-      "commence_time": "2026-02-08T19:10:00Z",
-      "top_pick_rank": 4,
-      "result": "WIN",
-      "actual": "132-101"
-    },
-    {
-      "type": "ml",
-      "game": "IND @ TOR",
-      "away_team": "IND",
-      "home_team": "TOR",
-      "pick": "TOR",
-      "confidence": 64.0,
-      "pick_score": 40.0,
-      "score_factors": [
-        "64.0% ML conf"
-      ],
-      "commence_time": "2026-02-08T20:10:00Z",
-      "top_pick_rank": 5,
-      "result": "WIN",
-      "actual": "104-122"
+      "commence_time": "2026-02-10T00:40:00Z",
+      "top_pick_rank": 5
     }
-  ]
+  ],
+  "recommendations": {
+    "date": "2026-02-09",
+    "generated_at": "2026-02-09T02:22:31",
+    "game_bets": [
+      {
+        "qualified": true,
+        "score": 168.0,
+        "reasons": [
+          "71.5% confidence",
+          "High confidence"
+        ],
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "OKC @ LAL",
+        "away_team": "OKC",
+        "home_team": "LAL",
+        "pick": "OVER 219.5",
+        "confidence": 71.5,
+        "commence_time": "2026-02-10T03:10:00Z",
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 128.8,
+        "reasons": [
+          "64.4% confidence"
+        ],
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "MIL @ ORL",
+        "away_team": "MIL",
+        "home_team": "ORL",
+        "pick": "OVER 218.5",
+        "confidence": 64.4,
+        "commence_time": "2026-02-10T00:40:00Z",
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 126.2,
+        "reasons": [
+          "63.1% confidence"
+        ],
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "CHI @ BKN",
+        "away_team": "CHI",
+        "home_team": "BKN",
+        "pick": "OVER 223.5",
+        "confidence": 63.1,
+        "commence_time": "2026-02-10T00:40:00Z",
+        "rec_rank": 3
+      },
+      {
+        "qualified": true,
+        "score": 125.8,
+        "reasons": [
+          "62.9% confidence"
+        ],
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "UTA @ MIA",
+        "away_team": "UTA",
+        "home_team": "MIA",
+        "pick": "UNDER 243.5",
+        "confidence": 62.9,
+        "commence_time": "2026-02-10T00:40:00Z",
+        "rec_rank": 4
+      },
+      {
+        "qualified": true,
+        "score": 124.6,
+        "reasons": [
+          "62.3% confidence"
+        ],
+        "type": "ml",
+        "bet_type": "ML",
+        "game": "UTA @ MIA",
+        "away_team": "UTA",
+        "home_team": "MIA",
+        "pick": "MIA",
+        "confidence": 62.3,
+        "commence_time": "2026-02-10T00:40:00Z",
+        "rec_rank": 5
+      }
+    ],
+    "props": [
+      {
+        "qualified": true,
+        "score": 49.665,
+        "reasons": [
+          "+15.5% EV",
+          "Favorable matchup",
+          "56.1% confidence"
+        ],
+        "type": "prop",
+        "player": "Domantas Sabonis",
+        "team": "SAC",
+        "prop": "AST",
+        "direction": "OVER",
+        "line": 3.5,
+        "projection": 4.5,
+        "diff": 1.0,
+        "confidence": 56.1,
+        "ev": 15.5,
+        "edge": 1.0,
+        "pick_score": 35.8,
+        "score_factors": [
+          "+15.5% EV",
+          "Favorable matchup (#27 DEF)"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 3.5,
+              "odds": 106
+            },
+            "under": {
+              "line": 3.5,
+              "odds": -140
+            }
+          }
+        },
+        "best_book": "fanduel",
+        "insight": "NOP ranks #27 in assists defense \u2014 favorable for overs.",
+        "matchup_favorability": "favorable",
+        "l10_hit_rate": 50,
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 38.46,
+        "reasons": [
+          "+6.5% EV",
+          "90% L10 hit rate",
+          "Favorable matchup"
+        ],
+        "type": "prop",
+        "player": "Joel Embiid",
+        "team": "PHI",
+        "prop": "PTS",
+        "direction": "OVER",
+        "line": 28.5,
+        "projection": 31.6,
+        "diff": 3.1,
+        "confidence": 57.4,
+        "ev": 6.5,
+        "edge": 3.1000000000000014,
+        "pick_score": 42.0,
+        "score_factors": [
+          "+6.5% EV",
+          "90% L10 hit rate",
+          "Favorable matchup (#23 DEF)"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 29.5,
+              "odds": -112
+            },
+            "under": {
+              "line": 29.5,
+              "odds": -118
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 28.5,
+              "odds": -123
+            },
+            "under": {
+              "line": 28.5,
+              "odds": -104
+            }
+          }
+        },
+        "best_book": "fanduel",
+        "insight": "Has gone OVER 28.5 points in 9 of last 10 games (33.1 avg).",
+        "matchup_favorability": "favorable",
+        "l10_hit_rate": 90,
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 35.335,
+        "reasons": [
+          "+9.7% EV",
+          "Favorable matchup"
+        ],
+        "type": "prop",
+        "player": "Jrue Holiday",
+        "team": "POR",
+        "prop": "AST",
+        "direction": "OVER",
+        "line": 5.5,
+        "projection": 6.7,
+        "diff": 1.2,
+        "confidence": 55.9,
+        "ev": 9.7,
+        "edge": 1.2000000000000002,
+        "pick_score": 43.1,
+        "score_factors": [
+          "+9.7% EV",
+          "Favorable matchup (#23 DEF)"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 5.5,
+              "odds": -100
+            },
+            "under": {
+              "line": 5.5,
+              "odds": -132
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 5.5,
+              "odds": -108
+            },
+            "under": {
+              "line": 5.5,
+              "odds": -122
+            }
+          }
+        },
+        "best_book": "fanduel",
+        "insight": "PHI ranks #23 in assists defense \u2014 favorable for overs.",
+        "matchup_favorability": "favorable",
+        "l10_hit_rate": 30,
+        "rec_rank": 3
+      },
+      {
+        "qualified": true,
+        "score": 31.879499999999997,
+        "reasons": [
+          "+6.0% EV",
+          "90% L10 hit rate"
+        ],
+        "type": "prop",
+        "player": "Norman Powell",
+        "team": "MIA",
+        "prop": "PTS",
+        "direction": "UNDER",
+        "line": 23.5,
+        "projection": 23.3,
+        "diff": -0.2,
+        "confidence": 54.529999999999994,
+        "ev": 6.0,
+        "edge": 0.1999999999999993,
+        "pick_score": 9.2,
+        "score_factors": [
+          "+6.0% EV",
+          "Injury boosted"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 23.5,
+              "odds": -104
+            },
+            "under": {
+              "line": 23.5,
+              "odds": -128
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 23.5,
+              "odds": -118
+            },
+            "under": {
+              "line": 23.5,
+              "odds": -108
+            }
+          }
+        },
+        "best_book": "draftkings",
+        "insight": "Averaging 19.7 points over last 10 games (-3.8 below line).",
+        "matchup_favorability": "unfavorable",
+        "l10_hit_rate": 90,
+        "rec_rank": 4
+      },
+      {
+        "qualified": true,
+        "score": 30.455,
+        "reasons": [
+          "+5.3% EV",
+          "70% L10 hit rate",
+          "Favorable matchup"
+        ],
+        "type": "prop",
+        "player": "Saddiq Bey",
+        "team": "NOP",
+        "prop": "PTS",
+        "direction": "OVER",
+        "line": 17.5,
+        "projection": 20.0,
+        "diff": 2.5,
+        "confidence": 54.7,
+        "ev": 5.3,
+        "edge": 2.5,
+        "pick_score": 38.5,
+        "score_factors": [
+          "+5.3% EV",
+          "70% L10 hit rate",
+          "Favorable matchup (#27 DEF)"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 17.5,
+              "odds": -114
+            },
+            "under": {
+              "line": 17.5,
+              "odds": -114
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 17.5,
+              "odds": -103
+            },
+            "under": {
+              "line": 17.5,
+              "odds": -124
+            }
+          }
+        },
+        "best_book": "draftkings",
+        "insight": "Has gone OVER 17.5 points in 7 of last 10 games (22.3 avg).",
+        "matchup_favorability": "favorable",
+        "l10_hit_rate": 70,
+        "rec_rank": 5
+      }
+    ],
+    "game_count": 5,
+    "prop_count": 5,
+    "has_recommendations": true,
+    "message": null
+  }
 }
