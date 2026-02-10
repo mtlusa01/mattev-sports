@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Bets | Edge Factor Elite</title>
   <meta name="description" content="Track your bets and view your betting history with Edge Factor Elite.">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -346,6 +350,34 @@
     .confirm-btn.cancel:hover { background: var(--bg-elevated); }
     .confirm-btn.danger { background: var(--red); color: #fff; }
     .confirm-btn.danger:hover { background: #dc2626; }
+
+    /* ── Sync Status Indicator ── */
+    .sync-status {
+      position: fixed; top: 70px; right: 20px; z-index: 50;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--text-muted);
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 20px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .sync-status.visible { opacity: 1; }
+    .sync-indicator { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .sync-indicator.syncing { background: var(--yellow); animation: pulse 1s infinite; }
+    .sync-indicator.error { background: var(--red); }
+    .sync-indicator.offline { background: var(--text-muted); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .login-prompt {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; margin-bottom: 20px; text-align: center;
+    }
+    .login-prompt-text { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+    .login-prompt-btn {
+      display: inline-block; padding: 10px 24px; background: var(--brand); color: #fff;
+      border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;
+      transition: background 0.2s;
+    }
+    .login-prompt-btn:hover { background: var(--brand-light); }
   </style>
 </head>
 <body>
@@ -367,6 +399,18 @@
       </div>
     </div>
   </nav>
+
+  <!-- Sync Status Indicator -->
+  <div class="sync-status" id="sync-status">
+    <span class="sync-indicator" id="sync-indicator"></span>
+    <span id="sync-text">Synced</span>
+  </div>
+
+  <!-- Login Prompt (shown when not logged in) -->
+  <div class="login-prompt" id="login-prompt" style="display: none;">
+    <div class="login-prompt-text">Log in to sync your bets across all devices</div>
+    <a href="login.html" class="login-prompt-btn">Log In</a>
+  </div>
 
   <main class="main-container">
     <!-- Top Stats Row -->
@@ -448,9 +492,23 @@
   </div>
 
   <script>
+    // ── Firebase Config ──
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZtHCHKutZzbQXgwUPfOfJvCtbQh3e-r4",
+      authDomain: "edge-factor-elite.firebaseapp.com",
+      projectId: "edge-factor-elite",
+      storageBucket: "edge-factor-elite.firebasestorage.app",
+      messagingSenderId: "469124201044",
+      appId: "1:469124201044:web:d1466e2b198db6d7df4bc1"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
     // ── Constants ──
     const LS_SETTINGS = 'efe_user_settings';
     const LS_BETS = 'efe_tracked_bets';
+    const LS_LAST_SYNC = 'efe_last_sync';
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
     const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
@@ -469,6 +527,9 @@
     let nhlGameProjections = [];
     let resultsData = null;
     let nhlResultsData = null;
+    let currentUser = null;
+    let isSyncing = false;
+    let syncDebounceTimer = null;
 
     // ── Helpers ──
     function getBetSettings() {
@@ -480,8 +541,171 @@
       try { return JSON.parse(localStorage.getItem(LS_BETS)) || []; }
       catch { return []; }
     }
-    function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
+    function saveTrackedBets(bets, skipSync = false) {
+      localStorage.setItem(LS_BETS, JSON.stringify(bets));
+      if (!skipSync && currentUser) {
+        debouncedSyncToCloud();
+      }
+    }
     function getUnitSize() { return getBetSettings().unit_size || 10; }
+
+    // ══════════════════════════════════════════
+    // CLOUD SYNC FUNCTIONS
+    // ══════════════════════════════════════════
+
+    function updateSyncStatus(status, text) {
+      const statusEl = document.getElementById('sync-status');
+      const indicator = document.getElementById('sync-indicator');
+      const textEl = document.getElementById('sync-text');
+
+      indicator.className = 'sync-indicator';
+      if (status === 'syncing') indicator.classList.add('syncing');
+      else if (status === 'error') indicator.classList.add('error');
+      else if (status === 'offline') indicator.classList.add('offline');
+
+      textEl.textContent = text || 'Synced';
+      statusEl.classList.add('visible');
+
+      // Hide after 3 seconds unless syncing
+      if (status !== 'syncing') {
+        setTimeout(() => statusEl.classList.remove('visible'), 3000);
+      }
+    }
+
+    function debouncedSyncToCloud() {
+      if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+      syncDebounceTimer = setTimeout(() => syncBetsToCloud(), 1000);
+    }
+
+    async function syncBetsToCloud() {
+      if (!currentUser || isSyncing) return;
+      isSyncing = true;
+      updateSyncStatus('syncing', 'Syncing...');
+
+      try {
+        const localBets = getTrackedBets();
+        const betsRef = db.collection('users').doc(currentUser.uid).collection('bets');
+
+        // Get current cloud bets
+        const snapshot = await betsRef.get();
+        const cloudBets = [];
+        snapshot.forEach(doc => cloudBets.push({ ...doc.data(), _docId: doc.id }));
+
+        // Merge: local bets take precedence based on timestamp
+        const mergedBets = mergeBets(localBets, cloudBets);
+
+        // Batch write to Firestore
+        const batch = db.batch();
+
+        // Delete all existing cloud bets
+        snapshot.forEach(doc => batch.delete(doc.ref));
+
+        // Add all merged bets
+        for (const bet of mergedBets) {
+          const betCopy = { ...bet };
+          delete betCopy._docId;
+          // Ensure bet has an ID
+          if (!betCopy.id) {
+            betCopy.id = 'bet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+          }
+          const docRef = betsRef.doc(betCopy.id);
+          batch.set(docRef, betCopy);
+        }
+
+        await batch.commit();
+
+        // Update last sync timestamp
+        await db.collection('users').doc(currentUser.uid).update({
+          lastBetSync: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        localStorage.setItem(LS_LAST_SYNC, new Date().toISOString());
+        updateSyncStatus('synced', 'Synced');
+
+      } catch (error) {
+        console.error('Cloud sync failed:', error);
+        updateSyncStatus('error', 'Sync failed');
+      } finally {
+        isSyncing = false;
+      }
+    }
+
+    async function syncBetsFromCloud() {
+      if (!currentUser) return;
+      updateSyncStatus('syncing', 'Loading...');
+
+      try {
+        const betsRef = db.collection('users').doc(currentUser.uid).collection('bets');
+        const snapshot = await betsRef.get();
+
+        const cloudBets = [];
+        snapshot.forEach(doc => cloudBets.push(doc.data()));
+
+        const localBets = getTrackedBets();
+
+        // Merge cloud and local bets
+        const mergedBets = mergeBets(localBets, cloudBets);
+
+        // Save merged bets locally (skip sync to avoid loop)
+        saveTrackedBets(mergedBets, true);
+
+        console.log(`Synced: ${cloudBets.length} cloud + ${localBets.length} local = ${mergedBets.length} merged`);
+        updateSyncStatus('synced', 'Synced');
+
+        // Re-render with synced data
+        renderStats();
+        renderBets();
+        renderCalendar();
+
+      } catch (error) {
+        console.error('Failed to sync from cloud:', error);
+        updateSyncStatus('error', 'Load failed');
+      }
+    }
+
+    function mergeBets(localBets, cloudBets) {
+      const betMap = new Map();
+
+      // Create unique key for each bet
+      function getBetKey(bet) {
+        if (bet.id) return bet.id;
+        // Fallback key for bets without ID
+        return `${bet.game || ''}_${bet.pick || ''}_${bet.date || ''}_${bet.type || ''}`;
+      }
+
+      // Add cloud bets first
+      for (const bet of cloudBets) {
+        const key = getBetKey(bet);
+        betMap.set(key, bet);
+      }
+
+      // Add/update with local bets (local takes precedence if newer or has updates)
+      for (const bet of localBets) {
+        const key = getBetKey(bet);
+        const existing = betMap.get(key);
+
+        if (!existing) {
+          betMap.set(key, bet);
+        } else {
+          // Compare timestamps - prefer newer
+          const localTime = bet.placed_at ? new Date(bet.placed_at).getTime() : 0;
+          const cloudTime = existing.placed_at ? new Date(existing.placed_at).getTime() : 0;
+
+          // If local is newer or has graded status, prefer local
+          if (localTime > cloudTime ||
+              (bet.status !== 'pending' && existing.status === 'pending')) {
+            betMap.set(key, bet);
+          }
+        }
+      }
+
+      return Array.from(betMap.values());
+    }
+
+    function showLoginPrompt(show) {
+      const prompt = document.getElementById('login-prompt');
+      if (prompt) prompt.style.display = show ? 'block' : 'none';
+    }
 
     function getLocalDateStr() {
       const now = new Date();
@@ -894,8 +1118,17 @@
     function deleteBet(idx) {
       const bets = getTrackedBets();
       if (idx >= 0 && idx < bets.length) {
+        const deletedBet = bets[idx];
         bets.splice(idx, 1);
-        saveTrackedBets(bets);
+        saveTrackedBets(bets); // This will trigger cloud sync
+
+        // Also delete from Firestore directly for immediate sync
+        if (currentUser && deletedBet.id) {
+          db.collection('users').doc(currentUser.uid)
+            .collection('bets').doc(deletedBet.id).delete()
+            .catch(err => console.error('Failed to delete from cloud:', err));
+        }
+
         renderStats();
         renderBets();
         renderCalendar();
@@ -922,16 +1155,37 @@
       document.getElementById('confirm-backdrop').classList.remove('visible');
     }
 
-    function confirmClearAll() {
+    async function confirmClearAll() {
+      const betsToDelete = dateRangeMode === 'all' ? getTrackedBets() : getBetsForDisplay();
+      const idsToDelete = new Set(betsToDelete.map(b => b.id));
+
       if (dateRangeMode === 'all') {
-        saveTrackedBets([]);
+        saveTrackedBets([], true); // Skip auto-sync, we'll do batch delete
       } else {
-        const betsToDelete = getBetsForDisplay();
-        const idsToDelete = new Set(betsToDelete.map(b => b.id));
         const allBets = getTrackedBets();
         const remaining = allBets.filter(b => !idsToDelete.has(b.id));
-        saveTrackedBets(remaining);
+        saveTrackedBets(remaining, true); // Skip auto-sync
       }
+
+      // Delete from Firestore
+      if (currentUser && betsToDelete.length > 0) {
+        updateSyncStatus('syncing', 'Deleting...');
+        try {
+          const batch = db.batch();
+          const betsRef = db.collection('users').doc(currentUser.uid).collection('bets');
+          for (const bet of betsToDelete) {
+            if (bet.id) {
+              batch.delete(betsRef.doc(bet.id));
+            }
+          }
+          await batch.commit();
+          updateSyncStatus('synced', 'Deleted');
+        } catch (err) {
+          console.error('Failed to delete from cloud:', err);
+          updateSyncStatus('error', 'Delete failed');
+        }
+      }
+
       hideConfirm();
       renderStats();
       renderBets();
@@ -947,6 +1201,13 @@
       renderStats();
       renderBets();
       renderMonthSummary();
+
+      // Also save to Firestore if logged in
+      if (currentUser) {
+        db.collection('users').doc(currentUser.uid).update({
+          'settings.unitSize': unitSize
+        }).catch(err => console.error('Failed to save settings:', err));
+      }
     }
 
     function loadSettings() {
@@ -955,6 +1216,24 @@
       displayMode = settings.display_mode || 'units';
       document.getElementById('toggle-units').classList.toggle('active', displayMode === 'units');
       document.getElementById('toggle-dollars').classList.toggle('active', displayMode === 'dollars');
+    }
+
+    async function loadCloudSettings() {
+      if (!currentUser) return;
+      try {
+        const doc = await db.collection('users').doc(currentUser.uid).get();
+        if (doc.exists) {
+          const data = doc.data();
+          if (data.settings?.unitSize) {
+            const settings = getBetSettings();
+            settings.unit_size = data.settings.unitSize;
+            saveBetSettings(settings);
+            document.getElementById('unit-size').value = data.settings.unitSize;
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load cloud settings:', err);
+      }
     }
 
     // ── Auto-Grading ──
@@ -1099,7 +1378,7 @@
       }
 
       if (changed) {
-        saveTrackedBets(bets);
+        saveTrackedBets(bets); // This triggers cloud sync
         renderStats();
         renderBets();
         renderCalendar();
@@ -1114,6 +1393,19 @@
       statusEl.classList.remove('grading');
     }
 
+    // ── Manual Sync Button ──
+    async function manualSync() {
+      if (!currentUser) {
+        alert('Please log in to sync your bets');
+        return;
+      }
+      await syncBetsToCloud();
+      await syncBetsFromCloud();
+      renderStats();
+      renderBets();
+      renderCalendar();
+    }
+
     // ── Initialize ──
     async function init() {
       loadSettings();
@@ -1123,12 +1415,61 @@
       renderStats();
       renderCalendar();
       renderBets();
+
+      // Set up auth state listener
+      auth.onAuthStateChanged(async (user) => {
+        currentUser = user;
+
+        if (user) {
+          console.log('User logged in:', user.email);
+          showLoginPrompt(false);
+
+          // Sync bets from cloud
+          await syncBetsFromCloud();
+          await loadCloudSettings();
+
+          // Re-render with synced data
+          renderStats();
+          renderBets();
+          renderCalendar();
+        } else {
+          console.log('User not logged in');
+          showLoginPrompt(true);
+          updateSyncStatus('offline', 'Local only');
+        }
+      });
+
       await autoGradeBets();
+
+      // Auto-grade every 5 minutes
       setInterval(autoGradeBets, 5 * 60 * 1000);
+
+      // Sync to cloud every 5 minutes if logged in
+      setInterval(() => {
+        if (currentUser) syncBetsToCloud();
+      }, 5 * 60 * 1000);
     }
+
+    // Listen for bets from other tabs/windows
+    window.addEventListener('storage', (e) => {
+      if (e.key === LS_BETS) {
+        renderStats();
+        renderBets();
+        renderCalendar();
+      }
+    });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') hideConfirm();
+    });
+
+    // Sync before page unload
+    window.addEventListener('beforeunload', () => {
+      if (currentUser && !isSyncing) {
+        // Use sendBeacon for reliable sync on page close
+        const bets = getTrackedBets();
+        // Note: sendBeacon doesn't work with Firestore, so we'll rely on debounced sync
+      }
     });
 
     init();

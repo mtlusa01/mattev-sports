@@ -2229,7 +2229,41 @@
       try { return JSON.parse(localStorage.getItem(LS_BETS)) || []; }
       catch { return []; }
     }
-    function saveTrackedBets(bets) { localStorage.setItem(LS_BETS, JSON.stringify(bets)); }
+    function saveTrackedBets(bets) {
+      localStorage.setItem(LS_BETS, JSON.stringify(bets));
+      // Sync to Firestore if logged in
+      syncBetToCloud();
+    }
+
+    // Debounced cloud sync for bets
+    let betSyncTimer = null;
+    function syncBetToCloud() {
+      if (betSyncTimer) clearTimeout(betSyncTimer);
+      betSyncTimer = setTimeout(async () => {
+        const user = firebase.auth().currentUser;
+        if (!user) return;
+        try {
+          const bets = getTrackedBets();
+          const batch = firebase.firestore().batch();
+          const betsRef = firebase.firestore().collection('users').doc(user.uid).collection('bets');
+
+          // Get existing bets to delete
+          const snapshot = await betsRef.get();
+          snapshot.forEach(doc => batch.delete(doc.ref));
+
+          // Add all current bets
+          for (const bet of bets) {
+            if (!bet.id) bet.id = 'bet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            batch.set(betsRef.doc(bet.id), bet);
+          }
+
+          await batch.commit();
+          console.log('Bets synced to cloud');
+        } catch (err) {
+          console.error('Failed to sync bets:', err);
+        }
+      }, 1500);
+    }
     function getLocalDateStr() {
       // Returns YYYY-MM-DD in local timezone (not UTC)
       const now = new Date();
