@@ -2,7 +2,7 @@
   "date": "2026-02-10",
   "sport": "NBA",
   "locked_at": "2026-02-10T17:37:08",
-  "updated": "2026-02-10T17:50:21",
+  "updated": "2026-02-10T17:54:44",
   "projections": [
     {
       "player": "Amen Thompson",
@@ -231,8 +231,7 @@
       "score_factors": [
         "+12.5% EV",
         "70% L10 hit rate"
-      ],
-      "top_pick_rank": 1
+      ]
     },
     {
       "player": "Pascal Siakam",
@@ -452,8 +451,7 @@
       "pick_score": 8.9,
       "score_factors": [
         "60% L10 hit rate"
-      ],
-      "top_pick_rank": 5
+      ]
     },
     {
       "player": "LeBron James",
@@ -670,11 +668,13 @@
       "h2h_avg": 15.0,
       "h2h_record": "0/1",
       "h2h_total_games": 1,
-      "pick_score": 20.5,
+      "pick_score": 0,
       "score_factors": [
         "+10.3% EV"
       ],
-      "top_pick_rank": 3
+      "injury_status": "Out",
+      "injury_type": "Left foot (soreness)",
+      "injury_headline": "Left foot (soreness)"
     },
     {
       "player": "Deandre Ayton",
@@ -905,11 +905,13 @@
       "h2h_avg": 8.0,
       "h2h_record": "1/3",
       "h2h_total_games": 3,
-      "pick_score": 15.5,
+      "pick_score": 10.8,
       "score_factors": [
         "+7.0% EV"
       ],
-      "top_pick_rank": 4
+      "injury_status": "Questionable",
+      "injury_type": "Right knee (soreness)",
+      "injury_headline": "Right knee (soreness)"
     },
     {
       "player": "Josh Hart",
@@ -1118,8 +1120,7 @@
       "score_factors": [
         "+6.0% EV",
         "6-game streak"
-      ],
-      "top_pick_rank": 2
+      ]
     },
     {
       "player": "Jake LaRavia",
@@ -1357,7 +1358,6 @@
         "+5.5% EV",
         "10-game streak"
       ],
-      "top_pick_rank": 2,
       "added_live": true,
       "discovered_at": "2026-02-10T17:50:21"
     },
@@ -1576,15 +1576,17 @@
       "h2h_avg": 16.0,
       "h2h_record": "1/1",
       "h2h_total_games": 1,
-      "pick_score": 46.4,
+      "pick_score": 32.5,
       "score_factors": [
         "70% L10 hit rate",
         "Favorable matchup (#24 DEF)",
         "+3.6 edge"
       ],
-      "top_pick_rank": 1,
       "added_live": true,
-      "discovered_at": "2026-02-10T17:50:21"
+      "discovered_at": "2026-02-10T17:50:21",
+      "injury_status": "Questionable",
+      "injury_type": "Right toe (soreness)",
+      "injury_headline": "Right toe (soreness)"
     },
     {
       "player": "Karl-Anthony Towns",
@@ -1793,9 +1795,82 @@
       "score_factors": [
         "Favorable matchup (#28 DEF)"
       ],
-      "top_pick_rank": 4,
       "added_live": true,
       "discovered_at": "2026-02-10T17:50:21"
+    }
+  ],
+  "top_picks": [
+    {
+      "type": "total",
+      "game": "LAC @ HOU",
+      "away_team": "LAC",
+      "home_team": "HOU",
+      "pick": "OVER 209.5",
+      "confidence": 86.9,
+      "pick_score": 55.0,
+      "score_factors": [
+        "86.9% total conf",
+        "Very high confidence"
+      ],
+      "commence_time": "2026-02-11T01:10:00Z",
+      "top_pick_rank": 1
+    },
+    {
+      "type": "ml",
+      "game": "IND @ NYK",
+      "away_team": "IND",
+      "home_team": "NYK",
+      "pick": "NYK",
+      "confidence": 67.5,
+      "pick_score": 50.0,
+      "score_factors": [
+        "67.5% ML conf"
+      ],
+      "commence_time": "2026-02-11T00:40:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "ml",
+      "game": "LAC @ HOU",
+      "away_team": "LAC",
+      "home_team": "HOU",
+      "pick": "HOU",
+      "confidence": 70.7,
+      "pick_score": 50.0,
+      "score_factors": [
+        "70.7% ML conf"
+      ],
+      "commence_time": "2026-02-11T01:10:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "spread",
+      "game": "DAL @ PHX",
+      "away_team": "DAL",
+      "home_team": "PHX",
+      "pick": "PHX +6.5",
+      "confidence": 77.6,
+      "pick_score": 50.0,
+      "score_factors": [
+        "77.6% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-02-12T02:10:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "total",
+      "game": "DAL @ PHX",
+      "away_team": "DAL",
+      "home_team": "PHX",
+      "pick": "OVER 217.5",
+      "confidence": 72.2,
+      "pick_score": 40.0,
+      "score_factors": [
+        "72.2% total conf"
+      ],
+      "commence_time": "2026-02-12T02:10:00Z",
+      "top_pick_rank": 5
     }
   ]
 }
