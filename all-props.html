@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Player Props | EFE Sports</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root {
+      --bg-primary: #0f1118;
+      --bg-secondary: #1a1f2e;
+      --bg-tertiary: #2a3347;
+      --text-primary: #fff;
+      --text-secondary: #888;
+      --accent: #22c55e;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--bg-tertiary);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Page Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .props-count {
+      background: var(--bg-tertiary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .props-count span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Search Bar */
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px 16px 12px 44px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    /* Filter Section */
+    .filters-section {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      min-width: 80px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      padding: 8px 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--accent);
+    }
+
+    .filter-pill.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .filter-pill .count {
+      background: rgba(255,255,255,0.2);
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 11px;
+      margin-left: 6px;
+    }
+
+    .filter-pill.active .count {
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* Sort Dropdown */
+    .sort-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+
+    .sort-select {
+      padding: 8px 32px 8px 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-primary);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .sort-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Props Table */
+    .table-container {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .props-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .props-table thead {
+      background: var(--bg-primary);
+    }
+
+    .props-table th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--bg-tertiary);
+      white-space: nowrap;
+    }
+
+    .props-table th.sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .props-table th.sortable:hover {
+      color: var(--text-primary);
+    }
+
+    .props-table th .sort-arrow {
+      margin-left: 4px;
+      opacity: 0.5;
+    }
+
+    .props-table th.sorted .sort-arrow {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    .props-table tbody tr {
+      border-bottom: 1px solid var(--bg-tertiary);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .props-table tbody tr:hover {
+      background: var(--bg-primary);
+    }
+
+    .props-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .props-table td {
+      padding: 16px;
+      vertical-align: middle;
+    }
+
+    /* Player Cell */
+    .player-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .player-name {
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .player-opponent {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge.STRONG { background: var(--accent); color: #000; }
+    .badge.GOOD { background: var(--accent-blue); color: #fff; }
+    .badge.FAIR { background: var(--bg-tertiary); color: var(--text-secondary); }
+    .badge.AVOID { background: var(--accent-red); color: #fff; opacity: 0.7; }
+
+    /* Team Badge */
+    .team-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Stat Badge */
+    .stat-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .stat-badge.PTS { background: var(--accent-orange); color: #000; }
+    .stat-badge.REB { background: var(--accent-blue); color: #fff; }
+    .stat-badge.AST { background: var(--accent-purple); color: #fff; }
+    .stat-badge.PRA { background: #ec4899; color: #fff; }
+    .stat-badge.BLK { background: #14b8a6; color: #fff; }
+    .stat-badge.STL { background: #f97316; color: #fff; }
+    .stat-badge.TO { background: #64748b; color: #fff; }
+
+    /* Pick Direction */
+    .pick-over {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .pick-under {
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+
+    /* Edge & EV Colors */
+    .positive { color: var(--accent); font-weight: 600; }
+    .negative { color: var(--accent-red); font-weight: 600; }
+    .neutral { color: var(--text-secondary); }
+
+    .ev-cell {
+      font-weight: 700;
+    }
+
+    /* L10 Sparkline */
+    .sparkline {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 24px;
+    }
+
+    .spark-bar {
+      width: 4px;
+      background: var(--accent-blue);
+      border-radius: 1px;
+      min-height: 2px;
+    }
+
+    .spark-bar.hit {
+      background: var(--accent);
+    }
+
+    .spark-bar.miss {
+      background: var(--accent-red);
+      opacity: 0.6;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state-text {
+      font-size: 16px;
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--bg-tertiary);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px;
+      }
+
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .filter-label {
+        margin-bottom: 8px;
+      }
+
+      .sort-container {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+
+      .props-table {
+        font-size: 13px;
+      }
+
+      .props-table th, .props-table td {
+        padding: 12px 10px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .props-table {
+        min-width: 800px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Updated timestamp */
+    .updated-time {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="dashboard.html" class="logo">EFE Sports</a>
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="dashboard.html#props">Best Props</a>
+      <a href="all-props.html" class="active">All Props</a>
+      <a href="results.html">Results</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">All Player Props</h1>
+      <div class="props-count">
+        <span id="props-count">0</span> props available
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" id="player-search" class="search-input" placeholder="Search player name...">
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-section">
+      <div class="filter-row">
+        <span class="filter-label">Edge</span>
+        <div class="filter-pills" id="edge-filters">
+          <button class="filter-pill active" data-group="edge" data-value="All">All</button>
+          <button class="filter-pill" data-group="edge" data-value="STRONG">Strong <span class="count" id="count-strong">0</span></button>
+          <button class="filter-pill" data-group="edge" data-value="GOOD">Good <span class="count" id="count-good">0</span></button>
+          <button class="filter-pill" data-group="edge" data-value="FAIR">Fair <span class="count" id="count-fair">0</span></button>
+        </div>
+
+        <div class="sort-container">
+          <span class="filter-label">Sort by</span>
+          <select class="sort-select" id="sort-select">
+            <option value="ev">EV% (Best First)</option>
+            <option value="confidence">Confidence</option>
+            <option value="edge">Edge (Proj - Line)</option>
+            <option value="player">Player Name</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-label">Direction</span>
+        <div class="filter-pills" id="direction-filters">
+          <button class="filter-pill active" data-group="direction" data-value="All">All</button>
+          <button class="filter-pill" data-group="direction" data-value="OVER">Overs</button>
+          <button class="filter-pill" data-group="direction" data-value="UNDER">Unders</button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-label">Stat Type</span>
+        <div class="filter-pills" id="stat-filters">
+          <button class="filter-pill active" data-group="stat" data-value="All">All</button>
+          <button class="filter-pill" data-group="stat" data-value="PTS">Points <span class="count" id="count-pts">0</span></button>
+          <button class="filter-pill" data-group="stat" data-value="REB">Rebounds <span class="count" id="count-reb">0</span></button>
+          <button class="filter-pill" data-group="stat" data-value="AST">Assists <span class="count" id="count-ast">0</span></button>
+          <button class="filter-pill" data-group="stat" data-value="PRA">PRA <span class="count" id="count-pra">0</span></button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-label">Game</span>
+        <div class="filter-pills" id="game-filters">
+          <button class="filter-pill active" data-group="game" data-value="All">All Games</button>
+          <!-- Game pills will be populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table class="props-table">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Prop</th>
+            <th>Pick</th>
+            <th class="sortable" data-sort="line">Line</th>
+            <th class="sortable" data-sort="projection">Proj</th>
+            <th class="sortable" data-sort="diff">Edge</th>
+            <th class="sortable" data-sort="confidence">Conf %</th>
+            <th class="sortable sorted" data-sort="ev">EV % <span class="sort-arrow">&#9660;</span></th>
+            <th>L10</th>
+          </tr>
+        </thead>
+        <tbody id="props-tbody">
+          <tr>
+            <td colspan="10">
+              <div class="loading">
+                <div class="loading-spinner"></div>
+                Loading props...
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="updated-time" id="updated-time"></div>
+  </div>
+
+  <script>
+    let allProps = [];
+    let filteredProps = [];
+    let currentFilters = {
+      search: '',
+      edge: 'All',
+      direction: 'All',
+      stat: 'All',
+      game: 'All'
+    };
+    let currentSort = { field: 'ev', direction: 'desc' };
+
+    // Load data
+    async function loadAllProps() {
+      try {
+        const response = await fetch('all_props.json');
+        const data = await response.json();
+        allProps = data.props || [];
+
+        // Update timestamp
+        if (data.updated_at) {
+          const updated = new Date(data.updated_at);
+          document.getElementById('updated-time').textContent =
+            `Last updated: ${updated.toLocaleString()}`;
+        }
+
+        updateCounts();
+        populateGameFilters();
+        applyFilters();
+      } catch (error) {
+        console.error('Error loading props:', error);
+        document.getElementById('props-tbody').innerHTML = `
+          <tr><td colspan="10">
+            <div class="empty-state">
+              <div class="empty-state-icon">&#9888;</div>
+              <div class="empty-state-text">Error loading props data</div>
+            </div>
+          </td></tr>`;
+      }
+    }
+
+    // Update count badges
+    function updateCounts() {
+      const counts = {
+        strong: 0, good: 0, fair: 0,
+        pts: 0, reb: 0, ast: 0, pra: 0
+      };
+
+      allProps.forEach(p => {
+        // Edge counts
+        if (p.edge === 'STRONG') counts.strong++;
+        else if (p.edge === 'GOOD') counts.good++;
+        else if (p.edge === 'FAIR') counts.fair++;
+
+        // Stat counts
+        if (p.prop === 'PTS') counts.pts++;
+        else if (p.prop === 'REB') counts.reb++;
+        else if (p.prop === 'AST') counts.ast++;
+        else if (p.prop === 'PRA') counts.pra++;
+      });
+
+      document.getElementById('count-strong').textContent = counts.strong;
+      document.getElementById('count-good').textContent = counts.good;
+      document.getElementById('count-fair').textContent = counts.fair;
+      document.getElementById('count-pts').textContent = counts.pts;
+      document.getElementById('count-reb').textContent = counts.reb;
+      document.getElementById('count-ast').textContent = counts.ast;
+      document.getElementById('count-pra').textContent = counts.pra;
+    }
+
+    // Populate game filter pills dynamically
+    function populateGameFilters() {
+      const games = new Set();
+      allProps.forEach(p => {
+        if (p.team && p.opponent) {
+          // Normalize game format
+          const teams = [p.team, p.opponent].sort();
+          games.add(`${teams[0]} vs ${teams[1]}`);
+        }
+      });
+
+      const container = document.getElementById('game-filters');
+      games.forEach(game => {
+        const pill = document.createElement('button');
+        pill.className = 'filter-pill';
+        pill.dataset.group = 'game';
+        pill.dataset.value = game;
+        pill.textContent = game;
+        pill.addEventListener('click', handleFilterClick);
+        container.appendChild(pill);
+      });
+    }
+
+    // Apply all filters
+    function applyFilters() {
+      filteredProps = allProps.filter(prop => {
+        // Search filter
+        if (currentFilters.search) {
+          const search = currentFilters.search.toLowerCase();
+          if (!prop.player.toLowerCase().includes(search)) {
+            return false;
+          }
+        }
+
+        // Edge filter
+        if (currentFilters.edge !== 'All' && prop.edge !== currentFilters.edge) {
+          return false;
+        }
+
+        // Direction filter
+        if (currentFilters.direction !== 'All' && prop.direction !== currentFilters.direction) {
+          return false;
+        }
+
+        // Stat filter
+        if (currentFilters.stat !== 'All' && prop.prop !== currentFilters.stat) {
+          return false;
+        }
+
+        // Game filter
+        if (currentFilters.game !== 'All') {
+          const gameTeams = currentFilters.game.split(' vs ');
+          if (!gameTeams.includes(prop.team) || !gameTeams.includes(prop.opponent)) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      // Apply sorting
+      sortProps();
+
+      // Render
+      renderTable();
+    }
+
+    // Sort props
+    function sortProps() {
+      const { field, direction } = currentSort;
+      const mult = direction === 'desc' ? -1 : 1;
+
+      filteredProps.sort((a, b) => {
+        let aVal = a[field];
+        let bVal = b[field];
+
+        // Handle nulls
+        if (aVal == null) aVal = -Infinity;
+        if (bVal == null) bVal = -Infinity;
+
+        // String comparison for player name
+        if (field === 'player') {
+          return mult * aVal.localeCompare(bVal);
+        }
+
+        // Calculate diff for edge sort
+        if (field === 'diff') {
+          aVal = (a.projection || 0) - (a.line || 0);
+          bVal = (b.projection || 0) - (b.line || 0);
+          // For unders, flip the sign
+          if (a.direction === 'UNDER') aVal = -aVal;
+          if (b.direction === 'UNDER') bVal = -bVal;
+        }
+
+        return mult * (bVal - aVal);
+      });
+    }
+
+    // Render table
+    function renderTable() {
+      const tbody = document.getElementById('props-tbody');
+
+      if (filteredProps.length === 0) {
+        tbody.innerHTML = `
+          <tr><td colspan="10">
+            <div class="empty-state">
+              <div class="empty-state-icon">&#128270;</div>
+              <div class="empty-state-text">No props match your filters</div>
+            </div>
+          </td></tr>`;
+        document.getElementById('props-count').textContent = '0';
+        return;
+      }
+
+      tbody.innerHTML = filteredProps.map(prop => {
+        const diff = (prop.projection || 0) - (prop.line || 0);
+        const displayDiff = prop.direction === 'UNDER' ? -diff : diff;
+        const diffClass = displayDiff > 0 ? 'positive' : displayDiff < 0 ? 'negative' : 'neutral';
+        const evClass = (prop.ev || 0) > 0 ? 'positive' : (prop.ev || 0) < 0 ? 'negative' : 'neutral';
+
+        // Build L10 sparkline
+        let sparkline = '';
+        if (prop.last_10_values && prop.last_10_values.length > 0) {
+          const max = Math.max(...prop.last_10_values, prop.line || 0);
+          sparkline = '<div class="sparkline">' +
+            prop.last_10_values.map(v => {
+              const height = Math.max(2, (v / max) * 24);
+              const hit = prop.direction === 'OVER' ? v > prop.line : v < prop.line;
+              return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${height}px"></div>`;
+            }).join('') + '</div>';
+        }
+
+        return `
+          <tr>
+            <td>
+              <div class="player-cell">
+                <div class="player-name">
+                  ${prop.player}
+                  ${prop.edge && prop.edge !== 'AVOID' ? `<span class="badge ${prop.edge}">${prop.edge}</span>` : ''}
+                </div>
+                <div class="player-opponent">vs ${prop.opponent || '?'}</div>
+              </div>
+            </td>
+            <td><span class="team-badge">${prop.team}</span></td>
+            <td><span class="stat-badge ${prop.prop}">${prop.prop}</span></td>
+            <td><span class="pick-${prop.direction.toLowerCase()}">${prop.direction}</span></td>
+            <td>${prop.line}</td>
+            <td>${(prop.projection || 0).toFixed(1)}</td>
+            <td class="${diffClass}">${displayDiff >= 0 ? '+' : ''}${displayDiff.toFixed(1)}</td>
+            <td>${(prop.confidence || 0).toFixed(1)}%</td>
+            <td class="ev-cell ${evClass}">${(prop.ev || 0) >= 0 ? '+' : ''}${(prop.ev || 0).toFixed(1)}%</td>
+            <td>${sparkline}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('props-count').textContent = filteredProps.length;
+    }
+
+    // Handle filter pill clicks
+    function handleFilterClick(e) {
+      const pill = e.target.closest('.filter-pill');
+      if (!pill) return;
+
+      const group = pill.dataset.group;
+      const value = pill.dataset.value;
+
+      // Update active state
+      document.querySelectorAll(`.filter-pill[data-group="${group}"]`).forEach(p => {
+        p.classList.remove('active');
+      });
+      pill.classList.add('active');
+
+      // Update filter
+      currentFilters[group] = value;
+      applyFilters();
+    }
+
+    // Event Listeners
+    document.getElementById('player-search').addEventListener('input', (e) => {
+      currentFilters.search = e.target.value;
+      applyFilters();
+    });
+
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', handleFilterClick);
+    });
+
+    document.getElementById('sort-select').addEventListener('change', (e) => {
+      currentSort.field = e.target.value;
+      currentSort.direction = 'desc';
+      applyFilters();
+    });
+
+    // Column header sorting
+    document.querySelectorAll('.props-table th.sortable').forEach(th => {
+      th.addEventListener('click', () => {
+        const field = th.dataset.sort;
+        if (currentSort.field === field) {
+          currentSort.direction = currentSort.direction === 'desc' ? 'asc' : 'desc';
+        } else {
+          currentSort.field = field;
+          currentSort.direction = 'desc';
+        }
+
+        // Update UI
+        document.querySelectorAll('.props-table th').forEach(h => h.classList.remove('sorted'));
+        th.classList.add('sorted');
+
+        applyFilters();
+      });
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', loadAllProps);
+  </script>
+</body>
+</html>
