@@ -2,7 +2,7 @@
   "date": "2026-02-09",
   "sport": "NBA",
   "locked_at": "2026-02-09T02:22:30",
-  "updated": "2026-02-09T20:41:46",
+  "updated": "2026-02-09T23:22:22",
   "games": [
     {
       "away_team": "DET",
@@ -17,7 +17,7 @@
       "ml_pick": "DET",
       "ml_conf": 50.9,
       "commence_time": "2026-02-10T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -3.2,
@@ -68,8 +68,25 @@
         "ev": 16.6,
         "confidence": "medium"
       },
-      "away_score": 70,
-      "home_score": 62
+      "away_score": 110,
+      "home_score": 104,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jalen Duren",
+          "team": "DET",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 18.3,
+          "actual": 15,
+          "hit": false,
+          "confidence": 54.0,
+          "ev": 3.1
+        }
+      ]
     },
     {
       "away_team": "CHI",
@@ -84,7 +101,7 @@
       "ml_pick": "BKN",
       "ml_conf": 52.6,
       "commence_time": "2026-02-10T00:40:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -3.2,
@@ -139,7 +156,26 @@
         "edge": 6.7,
         "ev": 26.3,
         "confidence": "high"
-      }
+      },
+      "away_score": 115,
+      "home_score": 123,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Noah Clowney",
+          "team": "BKN",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 14.5,
+          "projection": 12.0,
+          "actual": 22,
+          "hit": false,
+          "confidence": 53.199999999999996,
+          "ev": 2.2
+        }
+      ]
     },
     {
       "away_team": "UTA",
@@ -154,7 +190,7 @@
       "ml_pick": "MIA",
       "ml_conf": 62.3,
       "commence_time": "2026-02-10T00:40:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -4.4,
@@ -214,7 +250,26 @@
         "edge": -5.5,
         "ev": 21.1,
         "confidence": "medium"
-      }
+      },
+      "away_score": 115,
+      "home_score": 111,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Davion Mitchell",
+          "team": "MIA",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 6.9,
+          "actual": 5,
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 1.2
+        }
+      ]
     },
     {
       "away_team": "MIL",
@@ -229,7 +284,7 @@
       "ml_pick": "ORL",
       "ml_conf": 55.8,
       "commence_time": "2026-02-10T00:40:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -3.6,
@@ -280,8 +335,73 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 45,
-      "home_score": 46
+      "away_score": 99,
+      "home_score": 118,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Paolo Banchero",
+          "team": "ORL",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.4,
+          "actual": 3,
+          "hit": false,
+          "confidence": 52.0,
+          "ev": 5.6
+        },
+        {
+          "player": "Kevin Porter Jr.",
+          "team": "MIL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 15.6,
+          "actual": 28,
+          "hit": false,
+          "confidence": 54.529999999999994,
+          "ev": 4.0
+        },
+        {
+          "player": "Desmond Bane",
+          "team": "ORL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 19.5,
+          "projection": 23.7,
+          "actual": 25,
+          "hit": true,
+          "confidence": 52.6,
+          "ev": 3.2
+        },
+        {
+          "player": "Desmond Bane",
+          "team": "ORL",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.0,
+          "actual": 3,
+          "hit": true,
+          "confidence": 53.675,
+          "ev": 1.8
+        },
+        {
+          "player": "Paolo Banchero",
+          "team": "ORL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 24.5,
+          "actual": 11,
+          "hit": false,
+          "confidence": 53.1,
+          "ev": 1.4
+        }
+      ]
     },
     {
       "away_team": "ATL",
@@ -296,7 +416,7 @@
       "ml_pick": "MIN",
       "ml_conf": 55.2,
       "commence_time": "2026-02-10T01:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -0.8,
@@ -336,7 +456,62 @@
         "edge": -5.5,
         "ev": 21.1,
         "confidence": "medium"
-      }
+      },
+      "away_score": 116,
+      "home_score": 138,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Naz Reid",
+          "team": "MIN",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.8,
+          "actual": 6,
+          "hit": false,
+          "confidence": 56.5,
+          "ev": 4.4
+        },
+        {
+          "player": "Jaden McDaniels",
+          "team": "MIN",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.1,
+          "actual": 5,
+          "hit": false,
+          "confidence": 55.765,
+          "ev": 3.8
+        },
+        {
+          "player": "Nickeil Alexander-Walker",
+          "team": "ATL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 18.4,
+          "actual": 23,
+          "hit": false,
+          "confidence": 52.629999999999995,
+          "ev": 2.3
+        },
+        {
+          "player": "Nickeil Alexander-Walker",
+          "team": "ATL",
+          "prop": "AST",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.5,
+          "actual": 5,
+          "hit": true,
+          "confidence": 53.48499999999999,
+          "ev": 1.0
+        }
+      ]
     },
     {
       "away_team": "SAC",
@@ -351,7 +526,7 @@
       "ml_pick": "NOP",
       "ml_conf": 58.3,
       "commence_time": "2026-02-10T01:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -2.8,
@@ -389,7 +564,50 @@
         "total_ev": 0.0,
         "spread_prob": 0.5,
         "total_prob": 0.5
-      }
+      },
+      "away_score": 94,
+      "home_score": 120,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Zion Williamson",
+          "team": "NOP",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 6.5,
+          "actual": 5,
+          "hit": false,
+          "confidence": 55.0,
+          "ev": 6.3
+        },
+        {
+          "player": "Saddiq Bey",
+          "team": "NOP",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 17.5,
+          "projection": 20.0,
+          "actual": 12,
+          "hit": false,
+          "confidence": 54.7,
+          "ev": 5.3
+        },
+        {
+          "player": "Zion Williamson",
+          "team": "NOP",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 22.2,
+          "actual": 18,
+          "hit": true,
+          "confidence": 52.059999999999995,
+          "ev": 3.3
+        }
+      ]
     },
     {
       "away_team": "CLE",
@@ -404,7 +622,7 @@
       "ml_pick": "DEN",
       "ml_conf": 53.3,
       "commence_time": "2026-02-10T02:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -10.0,
@@ -453,7 +671,9 @@
         "edge": -3.1,
         "ev": 13.0,
         "confidence": "medium"
-      }
+      },
+      "away_score": 104,
+      "home_score": 109
     },
     {
       "away_team": "MEM",
@@ -468,7 +688,7 @@
       "ml_pick": "GSW",
       "ml_conf": 56.5,
       "commence_time": "2026-02-10T03:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -11.2,
@@ -528,7 +748,9 @@
         "edge": 5.9,
         "ev": 22.8,
         "confidence": "medium"
-      }
+      },
+      "away_score": 65,
+      "home_score": 57
     },
     {
       "away_team": "OKC",
@@ -543,7 +765,7 @@
       "ml_pick": "OKC",
       "ml_conf": 58.2,
       "commence_time": "2026-02-10T03:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -8.0,
@@ -598,7 +820,9 @@
         "edge": 10.7,
         "ev": 37.5,
         "confidence": "high"
-      }
+      },
+      "away_score": 67,
+      "home_score": 58
     },
     {
       "away_team": "PHI",
@@ -613,7 +837,7 @@
       "ml_pick": "POR",
       "ml_conf": 52.1,
       "commence_time": "2026-02-10T03:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -8.8,
@@ -662,7 +886,9 @@
         "edge": -3.6,
         "ev": 15.8,
         "confidence": "medium"
-      }
+      },
+      "away_score": 65,
+      "home_score": 64
     }
   ]
 }
