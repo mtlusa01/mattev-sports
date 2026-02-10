@@ -2,7 +2,7 @@
   "date": "2026-02-09",
   "sport": "NBA",
   "locked_at": "2026-02-09T02:22:30",
-  "updated": "2026-02-09T23:32:36",
+  "updated": "2026-02-10T02:35:20",
   "games": [
     {
       "away_team": "DET",
@@ -622,7 +622,7 @@
       "ml_pick": "DEN",
       "ml_conf": 53.3,
       "commence_time": "2026-02-10T02:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -10.0,
@@ -672,8 +672,37 @@
         "ev": 13.0,
         "confidence": "medium"
       },
-      "away_score": 112,
-      "home_score": 113
+      "away_score": 119,
+      "home_score": 117,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Donovan Mitchell",
+          "team": "CLE",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 7.0,
+          "actual": 10,
+          "hit": true,
+          "confidence": 56.0,
+          "ev": 5.5
+        },
+        {
+          "player": "Jamal Murray",
+          "team": "DEN",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.5,
+          "actual": 11,
+          "hit": true,
+          "confidence": 52.6,
+          "ev": 1.8
+        }
+      ]
     },
     {
       "away_team": "MEM",
@@ -688,7 +717,7 @@
       "ml_pick": "GSW",
       "ml_conf": 56.5,
       "commence_time": "2026-02-10T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -11.2,
@@ -749,8 +778,25 @@
         "ev": 22.8,
         "confidence": "medium"
       },
-      "away_score": 67,
-      "home_score": 57
+      "away_score": 113,
+      "home_score": 114,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Brandin Podziemski",
+          "team": "GSW",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 15.5,
+          "projection": 11.9,
+          "actual": 16,
+          "hit": false,
+          "confidence": 53.105,
+          "ev": 2.5
+        }
+      ]
     },
     {
       "away_team": "OKC",
@@ -765,7 +811,7 @@
       "ml_pick": "OKC",
       "ml_conf": 58.2,
       "commence_time": "2026-02-10T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -8.0,
@@ -821,8 +867,37 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 72,
-      "home_score": 63
+      "away_score": 119,
+      "home_score": 110,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Isaiah Hartenstein",
+          "team": "OKC",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 9.0,
+          "actual": 9,
+          "hit": true,
+          "confidence": 57.1,
+          "ev": 6.4
+        },
+        {
+          "player": "Chet Holmgren",
+          "team": "OKC",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 8.3,
+          "actual": 10,
+          "hit": true,
+          "confidence": 56.0,
+          "ev": 5.9
+        }
+      ]
     },
     {
       "away_team": "PHI",
@@ -837,7 +912,7 @@
       "ml_pick": "POR",
       "ml_conf": 52.1,
       "commence_time": "2026-02-10T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-09T07:22:29Z",
       "injury_impact": {
         "home": -8.8,
@@ -887,8 +962,61 @@
         "ev": 15.8,
         "confidence": "medium"
       },
-      "away_score": 69,
-      "home_score": 74
+      "away_score": 118,
+      "home_score": 135,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.7,
+          "actual": 7,
+          "hit": true,
+          "confidence": 55.9,
+          "ev": 9.7
+        },
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 18.0,
+          "actual": 13,
+          "hit": false,
+          "confidence": 55.9,
+          "ev": 7.1
+        },
+        {
+          "player": "Donovan Clingan",
+          "team": "POR",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 11.5,
+          "projection": 13.4,
+          "actual": 7,
+          "hit": false,
+          "confidence": 56.0,
+          "ev": 1.8
+        },
+        {
+          "player": "VJ Edgecombe",
+          "team": "PHI",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 6.2,
+          "actual": 6,
+          "hit": true,
+          "confidence": 52.4,
+          "ev": 1.0
+        }
+      ]
     }
   ]
 }
