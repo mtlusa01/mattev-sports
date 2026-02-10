@@ -1142,6 +1142,7 @@
     .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 50px; }
     .game-pick-value { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
+    .game-pick-odds { font-size: 12px; color: #888; font-weight: 500; margin-left: 2px; }
     .game-pick-row .track-icon { padding: 2px 6px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; font-size: 14px; flex-shrink: 0; }
     .game-pick-row .track-icon:hover { opacity: 0.8; }
     .game-pick-row .track-icon.tracked { opacity: 1; color: #10b981; }
@@ -1399,6 +1400,7 @@
     .rec-pick { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
     .rec-pick.over { color: var(--accent-light); }
     .rec-pick.under { color: var(--red-light); }
+    .rec-odds { font-size: 12px; font-weight: 500; color: #888; }
     .rec-proj { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
     .rec-proj .pos { color: var(--accent-light); }
     .rec-proj .neg { color: var(--red-light); }
@@ -2797,12 +2799,13 @@
       // Build best bets dynamically from game projections
       const { spread: spT, total: totT, ml: mlT } = thresholds;
       const bets = [];
+      const fmtOdds = (o) => o == null ? '' : (o > 0 ? `(+${o})` : `(${o})`);
       for (const g of games) {
         if (g.status === 'final') continue;
         const matchup = g.away_team + ' @ ' + g.home_team;
-        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, confidence: g.spread_conf, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`] });
-        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
-        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
+        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, odds: fmtOdds(g.spread_odds), confidence: g.spread_conf, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`] });
+        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, odds: fmtOdds(g.total_odds), confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
+        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, odds: fmtOdds(g.ml_odds), confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
       }
       bets.sort((a, b) => (parseFloat(b.confidence) || 0) - (parseFloat(a.confidence) || 0));
       return bets.slice(0, MAX_RECOMMENDED);
@@ -2832,7 +2835,7 @@
           <div class="rec-rank">#${i + 1}</div>
           <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
           <div class="rec-matchup">${r.game || ''}</div>
-          <div class="rec-pick">${r.pick}</div>
+          <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds || ''}</span></div>
           <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
           ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
         </div>`;
@@ -4193,6 +4196,15 @@
       const mlStr = g.ml_pick || 'N/A';
       const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
 
+      // Format odds for display
+      const fmtOdds = (odds) => {
+        if (odds == null) return '';
+        return odds > 0 ? `(+${odds})` : `(${odds})`;
+      };
+      const spreadOddsStr = fmtOdds(g.spread_odds);
+      const totalOddsStr = fmtOdds(g.total_odds);
+      const mlOddsStr = fmtOdds(g.ml_odds);
+
       // Track icons for game bets (use local date to match trackGameClick)
       const gDate = getLocalDateStr();
       const gGame = g.away_team + ' @ ' + g.home_team;
@@ -4240,6 +4252,7 @@
               <div class="game-pick-row${dimClass(g.spread_conf)}">
                 <span class="game-pick-label">Spread</span>
                 <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
+                <span class="game-pick-odds">${spreadOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
                 ${renderResultBadge(g.spread_result)}
                 ${gameTrackIcon('spread', isSpreadTracked)}
@@ -4247,6 +4260,7 @@
               <div class="game-pick-row${dimClass(g.total_conf)}">
                 <span class="game-pick-label">Total</span>
                 <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
+                <span class="game-pick-odds">${totalOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
                 ${renderResultBadge(g.total_result)}
                 ${gameTrackIcon('total', isTotalTracked)}
@@ -4254,6 +4268,7 @@
               <div class="game-pick-row${dimClass(g.ml_conf)}">
                 <span class="game-pick-label">ML</span>
                 <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
+                <span class="game-pick-odds">${mlOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
                 ${renderResultBadge(g.ml_result)}
                 ${gameTrackIcon('ml', isMlTracked)}
@@ -4303,18 +4318,21 @@
             <div class="game-pick-row${dimClass(g.spread_conf)}">
               <span class="game-pick-label">Spread</span>
               <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge(g.spread_conf || 0)}</span>
+              <span class="game-pick-odds">${spreadOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
               ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.total_conf)}">
               <span class="game-pick-label">Total</span>
               <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge(g.total_conf || 0)}</span>
+              <span class="game-pick-odds">${totalOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
               ${gameTrackIcon('total', isTotalTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.ml_conf)}">
               <span class="game-pick-label">ML</span>
               <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge(g.ml_conf || 0)}</span>
+              <span class="game-pick-odds">${mlOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
               ${gameTrackIcon('ml', isMlTracked)}
             </div>
