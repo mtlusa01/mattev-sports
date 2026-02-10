@@ -509,6 +509,37 @@
       color: var(--accent);
     }
 
+    /* Clear filters button */
+    .clear-filters-btn {
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--bg-tertiary);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .clear-filters-btn:hover {
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Active filter indicator */
+    .filter-active-count {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
     /* Modal */
     .modal {
       display: none;
@@ -827,10 +858,13 @@
       </div>
     </div>
 
-    <!-- Search -->
-    <div class="search-container">
-      <span class="search-icon">&#128269;</span>
-      <input type="text" id="player-search" class="search-input" placeholder="Search player name...">
+    <!-- Search and Clear -->
+    <div class="search-container" style="display: flex; gap: 12px; align-items: center;">
+      <div style="position: relative; flex: 1; max-width: 400px;">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="player-search" class="search-input" placeholder="Search player name...">
+      </div>
+      <button class="clear-filters-btn" onclick="clearAllFilters()">Clear Filters</button>
     </div>
 
     <!-- Filters -->
@@ -987,24 +1021,31 @@
       document.getElementById('count-pra').textContent = counts.pra;
     }
 
-    // Populate game filter pills dynamically
+    // Populate game filter pills dynamically with counts
     function populateGameFilters() {
-      const games = new Set();
+      const gameCounts = {};
       allProps.forEach(p => {
         if (p.team && p.opponent) {
-          // Normalize game format
+          // Normalize game format (alphabetical order)
           const teams = [p.team, p.opponent].sort();
-          games.add(`${teams[0]} vs ${teams[1]}`);
+          const gameKey = `${teams[0]} vs ${teams[1]}`;
+          gameCounts[gameKey] = (gameCounts[gameKey] || 0) + 1;
         }
       });
 
       const container = document.getElementById('game-filters');
-      games.forEach(game => {
+      // Clear existing dynamic pills (keep the "All" pill)
+      const allPill = container.querySelector('[data-value="All"]');
+      container.innerHTML = '';
+      if (allPill) container.appendChild(allPill);
+
+      // Sort games and add pills with counts
+      Object.entries(gameCounts).sort((a, b) => a[0].localeCompare(b[0])).forEach(([game, count]) => {
         const pill = document.createElement('button');
         pill.className = 'filter-pill';
         pill.dataset.group = 'game';
         pill.dataset.value = game;
-        pill.textContent = game;
+        pill.innerHTML = `${game} <span class="count">${count}</span>`;
         pill.addEventListener('click', handleFilterClick);
         container.appendChild(pill);
       });
@@ -1036,10 +1077,12 @@
           return false;
         }
 
-        // Game filter
+        // Game filter - match if both teams are in the selected game
         if (currentFilters.game !== 'All') {
           const gameTeams = currentFilters.game.split(' vs ');
-          if (!gameTeams.includes(prop.team) || !gameTeams.includes(prop.opponent)) {
+          const propTeams = [prop.team, prop.opponent].sort();
+          const filterTeams = gameTeams.sort();
+          if (propTeams[0] !== filterTeams[0] || propTeams[1] !== filterTeams[1]) {
             return false;
           }
         }
@@ -1146,6 +1189,28 @@
       }).join('');
 
       document.getElementById('props-count').textContent = filteredProps.length;
+
+      // Update active filters indicator
+      const activeFilters = [
+        currentFilters.search ? 1 : 0,
+        currentFilters.edge !== 'All' ? 1 : 0,
+        currentFilters.direction !== 'All' ? 1 : 0,
+        currentFilters.stat !== 'All' ? 1 : 0,
+        currentFilters.game !== 'All' ? 1 : 0
+      ].reduce((a, b) => a + b, 0);
+
+      const clearBtn = document.querySelector('.clear-filters-btn');
+      if (clearBtn) {
+        if (activeFilters > 0) {
+          clearBtn.innerHTML = `Clear Filters (${activeFilters})`;
+          clearBtn.style.borderColor = 'var(--accent)';
+          clearBtn.style.color = 'var(--accent)';
+        } else {
+          clearBtn.innerHTML = 'Clear Filters';
+          clearBtn.style.borderColor = '';
+          clearBtn.style.color = '';
+        }
+      }
     }
 
     // Handle filter pill clicks
@@ -1167,10 +1232,14 @@
       applyFilters();
     }
 
-    // Event Listeners
+    // Event Listeners - Debounced search for performance
+    let searchTimeout;
     document.getElementById('player-search').addEventListener('input', (e) => {
-      currentFilters.search = e.target.value;
-      applyFilters();
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        currentFilters.search = e.target.value.trim();
+        applyFilters();
+      }, 200);
     });
 
     document.querySelectorAll('.filter-pill').forEach(pill => {
@@ -1201,6 +1270,36 @@
         applyFilters();
       });
     });
+
+    // Clear all filters
+    function clearAllFilters() {
+      // Reset all filters
+      currentFilters = {
+        search: '',
+        edge: 'All',
+        direction: 'All',
+        stat: 'All',
+        game: 'All'
+      };
+
+      // Clear search input
+      document.getElementById('player-search').value = '';
+
+      // Reset all pills to "All"
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.classList.remove('active');
+        if (pill.dataset.value === 'All') {
+          pill.classList.add('active');
+        }
+      });
+
+      // Reset sort
+      document.getElementById('sort-select').value = 'ev';
+      currentSort = { field: 'ev', direction: 'desc' };
+
+      // Re-apply
+      applyFilters();
+    }
 
     // Initialize
     document.addEventListener('DOMContentLoaded', loadAllProps);
