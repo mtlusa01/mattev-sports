@@ -378,6 +378,17 @@
       transition: background 0.2s;
     }
     .login-prompt-btn:hover { background: var(--brand-light); }
+
+    /* ── Debug Log ── */
+    .debug-log {
+      position: fixed; bottom: 0; left: 0; right: 0; max-height: 150px;
+      background: rgba(0,0,0,0.9); color: #0f0; font-family: monospace;
+      font-size: 11px; padding: 8px; overflow-y: auto; z-index: 9999;
+      display: none;
+    }
+    .debug-log.visible { display: block; }
+    .debug-log-line { margin: 2px 0; }
+    .debug-log-line.error { color: #f66; }
   </style>
 </head>
 <body>
@@ -405,6 +416,9 @@
     <span class="sync-indicator" id="sync-indicator"></span>
     <span id="sync-text">Synced</span>
   </div>
+
+  <!-- Debug Log (shown with ?debug in URL) -->
+  <div class="debug-log" id="debug-log"></div>
 
   <!-- Login Prompt (shown when not logged in) -->
   <div class="login-prompt" id="login-prompt" style="display: none;">
@@ -516,6 +530,21 @@
     const MONTH_NAMES = ['January','February','March','April','May','June',
                          'July','August','September','October','November','December'];
 
+    // ── Debug Mode ──
+    const DEBUG_MODE = window.location.search.includes('debug');
+    function debugLog(msg, isError = false) {
+      console.log(msg);
+      if (!DEBUG_MODE) return;
+      const log = document.getElementById('debug-log');
+      if (!log) return;
+      log.classList.add('visible');
+      const line = document.createElement('div');
+      line.className = 'debug-log-line' + (isError ? ' error' : '');
+      line.textContent = new Date().toLocaleTimeString() + ': ' + msg;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
     // ── State ──
     let displayMode = 'units'; // 'units' or 'dollars'
     let currentFilter = 'all';
@@ -623,17 +652,18 @@
 
     async function syncBetsFromCloud() {
       if (!currentUser) {
-        console.log('syncBetsFromCloud: No current user');
+        debugLog('syncBetsFromCloud: No current user');
         return;
       }
-      console.log('syncBetsFromCloud: Starting for user', currentUser.uid);
+      debugLog('syncBetsFromCloud: Starting for user ' + currentUser.uid);
+      debugLog('User email: ' + currentUser.email);
       updateSyncStatus('syncing', 'Loading...');
 
       try {
         // Read bets from user document field
-        console.log('Fetching user document...');
+        debugLog('Fetching user document...');
         const userDoc = await db.collection('users').doc(currentUser.uid).get();
-        console.log('User document exists:', userDoc.exists);
+        debugLog('User document exists: ' + userDoc.exists);
 
         if (!userDoc.exists) {
           console.log('No user document found');
@@ -689,12 +719,12 @@
         renderCalendar();
 
       } catch (error) {
+        debugLog('ERROR: ' + (error.code || 'unknown'), true);
+        debugLog('Message: ' + (error.message || 'no message'), true);
         console.error('Failed to sync from cloud:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
 
         // Show error but still render local bets
-        updateSyncStatus('error', (error.code || 'error').replace('/', '-'));
+        updateSyncStatus('error', (error.code || 'error').replace('firestore/', ''));
 
         // Render local bets anyway
         renderStats();
@@ -1445,14 +1475,17 @@
       renderBets();
 
       // Set up auth state listener
+      debugLog('Setting up auth listener...');
       auth.onAuthStateChanged(async (user) => {
         currentUser = user;
+        debugLog('Auth state changed: ' + (user ? user.email : 'null'));
 
         if (user) {
-          console.log('User logged in:', user.email);
+          debugLog('User logged in: ' + user.email);
           showLoginPrompt(false);
 
           // Sync bets from cloud
+          debugLog('Starting cloud sync...');
           await syncBetsFromCloud();
           await loadCloudSettings();
 
