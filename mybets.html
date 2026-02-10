@@ -584,47 +584,38 @@
 
       try {
         const localBets = getTrackedBets();
-        const betsRef = db.collection('users').doc(currentUser.uid).collection('bets');
 
-        // Get current cloud bets
-        const snapshot = await betsRef.get();
-        const cloudBets = [];
-        snapshot.forEach(doc => cloudBets.push({ ...doc.data(), _docId: doc.id }));
-
-        // Merge: local bets take precedence based on timestamp
-        const mergedBets = mergeBets(localBets, cloudBets);
-
-        // Batch write to Firestore
-        const batch = db.batch();
-
-        // Delete all existing cloud bets
-        snapshot.forEach(doc => batch.delete(doc.ref));
-
-        // Add all merged bets
-        for (const bet of mergedBets) {
-          const betCopy = { ...bet };
-          delete betCopy._docId;
-          // Ensure bet has an ID
-          if (!betCopy.id) {
-            betCopy.id = 'bet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        // Ensure all bets have IDs
+        for (const bet of localBets) {
+          if (!bet.id) {
+            bet.id = 'bet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
           }
-          const docRef = betsRef.doc(betCopy.id);
-          batch.set(docRef, betCopy);
         }
 
-        await batch.commit();
-
-        // Update last sync timestamp
+        // Store bets as a field in the user document (not subcollection)
+        // This works with existing Firestore security rules
         await db.collection('users').doc(currentUser.uid).update({
+          trackedBets: localBets,
           lastBetSync: firebase.firestore.FieldValue.serverTimestamp()
         });
 
         localStorage.setItem(LS_LAST_SYNC, new Date().toISOString());
         updateSyncStatus('synced', 'Synced');
+        console.log('Synced', localBets.length, 'bets to cloud');
 
       } catch (error) {
         console.error('Cloud sync failed:', error);
-        updateSyncStatus('error', 'Sync failed');
+        // If update fails (field doesn't exist), try set with merge
+        try {
+          await db.collection('users').doc(currentUser.uid).set({
+            trackedBets: getTrackedBets(),
+            lastBetSync: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+          updateSyncStatus('synced', 'Synced');
+        } catch (retryError) {
+          console.error('Retry failed:', retryError);
+          updateSyncStatus('error', 'Sync failed');
+        }
       } finally {
         isSyncing = false;
       }
@@ -635,12 +626,17 @@
       updateSyncStatus('syncing', 'Loading...');
 
       try {
-        const betsRef = db.collection('users').doc(currentUser.uid).collection('bets');
-        const snapshot = await betsRef.get();
+        // Read bets from user document field
+        const userDoc = await db.collection('users').doc(currentUser.uid).get();
 
-        const cloudBets = [];
-        snapshot.forEach(doc => cloudBets.push(doc.data()));
+        if (!userDoc.exists) {
+          console.log('No user document found');
+          updateSyncStatus('synced', 'Synced');
+          return;
+        }
 
+        const userData = userDoc.data();
+        const cloudBets = userData.trackedBets || [];
         const localBets = getTrackedBets();
 
         // Merge cloud and local bets
@@ -1118,17 +1114,8 @@
     function deleteBet(idx) {
       const bets = getTrackedBets();
       if (idx >= 0 && idx < bets.length) {
-        const deletedBet = bets[idx];
         bets.splice(idx, 1);
-        saveTrackedBets(bets); // This will trigger cloud sync
-
-        // Also delete from Firestore directly for immediate sync
-        if (currentUser && deletedBet.id) {
-          db.collection('users').doc(currentUser.uid)
-            .collection('bets').doc(deletedBet.id).delete()
-            .catch(err => console.error('Failed to delete from cloud:', err));
-        }
-
+        saveTrackedBets(bets); // This will trigger cloud sync via debouncedSyncToCloud
         renderStats();
         renderBets();
         renderCalendar();
@@ -1159,29 +1146,26 @@
       const betsToDelete = dateRangeMode === 'all' ? getTrackedBets() : getBetsForDisplay();
       const idsToDelete = new Set(betsToDelete.map(b => b.id));
 
+      let remaining = [];
       if (dateRangeMode === 'all') {
-        saveTrackedBets([], true); // Skip auto-sync, we'll do batch delete
+        saveTrackedBets([], true); // Skip auto-sync
       } else {
         const allBets = getTrackedBets();
-        const remaining = allBets.filter(b => !idsToDelete.has(b.id));
+        remaining = allBets.filter(b => !idsToDelete.has(b.id));
         saveTrackedBets(remaining, true); // Skip auto-sync
       }
 
-      // Delete from Firestore
-      if (currentUser && betsToDelete.length > 0) {
+      // Sync remaining bets to Firestore
+      if (currentUser) {
         updateSyncStatus('syncing', 'Deleting...');
         try {
-          const batch = db.batch();
-          const betsRef = db.collection('users').doc(currentUser.uid).collection('bets');
-          for (const bet of betsToDelete) {
-            if (bet.id) {
-              batch.delete(betsRef.doc(bet.id));
-            }
-          }
-          await batch.commit();
+          await db.collection('users').doc(currentUser.uid).update({
+            trackedBets: remaining,
+            lastBetSync: firebase.firestore.FieldValue.serverTimestamp()
+          });
           updateSyncStatus('synced', 'Deleted');
         } catch (err) {
-          console.error('Failed to delete from cloud:', err);
+          console.error('Failed to sync deletion:', err);
           updateSyncStatus('error', 'Delete failed');
         }
       }
