@@ -636,7 +636,36 @@
         }
 
         const userData = userDoc.data();
-        const cloudBets = userData.trackedBets || [];
+        let cloudBets = userData.trackedBets || [];
+
+        // Migration: Check for old subcollection structure and migrate if found
+        try {
+          const oldBetsRef = db.collection('users').doc(currentUser.uid).collection('bets');
+          const oldSnapshot = await oldBetsRef.get();
+          if (!oldSnapshot.empty) {
+            console.log('Migrating', oldSnapshot.size, 'bets from old subcollection...');
+            const oldBets = [];
+            oldSnapshot.forEach(doc => oldBets.push(doc.data()));
+
+            // Merge old subcollection bets with document field bets
+            cloudBets = mergeBets(cloudBets, oldBets);
+
+            // Save merged to document field
+            await db.collection('users').doc(currentUser.uid).update({
+              trackedBets: cloudBets
+            });
+
+            // Delete old subcollection documents
+            const batch = db.batch();
+            oldSnapshot.forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+            console.log('Migration complete');
+          }
+        } catch (migrationErr) {
+          // Subcollection access failed, likely permission denied - that's OK
+          console.log('No old bets to migrate (or no permission)');
+        }
+
         const localBets = getTrackedBets();
 
         // Merge cloud and local bets
