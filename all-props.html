@@ -498,6 +498,311 @@
       margin-top: 16px;
       text-align: center;
     }
+
+    /* Player link in table */
+    .player-link {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .player-link:hover {
+      color: var(--accent);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10000;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .modal-content {
+      position: relative;
+      background: var(--bg-primary);
+      border: 2px solid var(--bg-tertiary);
+      border-radius: 16px;
+      max-width: 700px;
+      width: 90%;
+      max-height: 85vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: modalSlideIn 0.2s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: 24px 28px;
+      border-bottom: 2px solid var(--bg-tertiary);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background: var(--bg-secondary);
+    }
+
+    .modal-header h2 {
+      font-size: 26px;
+      margin: 0 0 6px 0;
+    }
+
+    .modal-header .matchup {
+      color: var(--text-secondary);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-header .team-badge {
+      font-size: 11px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 28px;
+      cursor: pointer;
+      padding: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+      border-radius: 8px;
+    }
+
+    .close-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .modal-body {
+      padding: 24px 28px;
+      overflow-y: auto;
+    }
+
+    /* Player prop cards in modal */
+    .player-prop-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+
+    .player-prop-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .player-prop-card:hover {
+      border-color: var(--accent);
+    }
+
+    .player-prop-card.recommended {
+      border: 2px solid var(--accent);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 50%);
+    }
+
+    .prop-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .prop-stat-type {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .prop-stat-type .stat-badge {
+      font-size: 13px;
+      padding: 6px 14px;
+    }
+
+    .prop-pick-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .prop-pick {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .prop-pick.over { color: var(--accent); }
+    .prop-pick.under { color: var(--accent-red); }
+
+    .prop-odds {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .recommended-badge {
+      background: var(--accent);
+      color: #000;
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .prop-card-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--bg-tertiary);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .stat-value.positive { color: var(--accent); }
+    .stat-value.negative { color: var(--accent-red); }
+
+    .prop-card-details {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--bg-tertiary);
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .prop-card-details strong {
+      color: var(--text-primary);
+    }
+
+    /* Modal L10 sparkline */
+    .modal-sparkline {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 32px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--bg-tertiary);
+    }
+
+    .modal-sparkline .spark-bar {
+      flex: 1;
+      max-width: 20px;
+      background: var(--accent-blue);
+      border-radius: 2px;
+      min-height: 3px;
+      position: relative;
+    }
+
+    .modal-sparkline .spark-bar.hit {
+      background: var(--accent);
+    }
+
+    .modal-sparkline .spark-bar.miss {
+      background: var(--accent-red);
+      opacity: 0.6;
+    }
+
+    .sparkline-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    /* Edge badge in modal */
+    .modal-edge-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    .modal-edge-badge.STRONG { background: var(--accent); color: #000; }
+    .modal-edge-badge.GOOD { background: var(--accent-blue); color: #fff; }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        width: 95%;
+        max-height: 90vh;
+      }
+
+      .modal-header {
+        padding: 20px;
+      }
+
+      .modal-header h2 {
+        font-size: 22px;
+      }
+
+      .modal-body {
+        padding: 16px;
+      }
+
+      .prop-card-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .prop-card-details {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -819,7 +1124,9 @@
             <td>
               <div class="player-cell">
                 <div class="player-name">
-                  ${prop.player}
+                  <span class="player-link" onclick="showPlayerModal('${prop.player.replace(/'/g, "\\'")}')">
+                    ${prop.player}
+                  </span>
                   ${prop.edge && prop.edge !== 'AVOID' ? `<span class="badge ${prop.edge}">${prop.edge}</span>` : ''}
                 </div>
                 <div class="player-opponent">vs ${prop.opponent || '?'}</div>
@@ -897,6 +1204,148 @@
 
     // Initialize
     document.addEventListener('DOMContentLoaded', loadAllProps);
+
+    // ═══════════════════════════════════════════════════════════════════
+    // PLAYER MODAL FUNCTIONS
+    // ═══════════════════════════════════════════════════════════════════
+
+    function showPlayerModal(playerName) {
+      // Get all props for this player
+      const playerProps = allProps.filter(p => p.player === playerName);
+
+      if (playerProps.length === 0) return;
+
+      // Get player info from first prop
+      const firstProp = playerProps[0];
+
+      // Update modal header
+      document.getElementById('player-modal-name').textContent = playerName;
+      document.getElementById('player-modal-team').innerHTML = `
+        <span class="team-badge">${firstProp.team}</span>
+        <span>vs ${firstProp.opponent || '?'}</span>
+      `;
+
+      // Sort props by EV (best first)
+      playerProps.sort((a, b) => (b.ev || 0) - (a.ev || 0));
+
+      // Render props
+      const propsList = document.getElementById('player-props-list');
+
+      if (playerProps.length === 0) {
+        propsList.innerHTML = '<div style="text-align: center; padding: 40px; color: #888;">No props available for this player</div>';
+      } else {
+        propsList.innerHTML = playerProps.map(prop => {
+          const diff = (prop.projection || 0) - (prop.line || 0);
+          const displayDiff = prop.direction === 'UNDER' ? -diff : diff;
+          const isRecommended = (prop.ev || 0) >= 5;
+          const evPositive = (prop.ev || 0) > 0;
+
+          // Build L10 sparkline for modal
+          let sparkline = '';
+          if (prop.last_10_values && prop.last_10_values.length > 0) {
+            const max = Math.max(...prop.last_10_values, prop.line || 0);
+            sparkline = `
+              <div class="sparkline-label">Last 10 Games</div>
+              <div class="modal-sparkline">
+                ${prop.last_10_values.map(v => {
+                  const height = Math.max(3, (v / max) * 32);
+                  const hit = prop.direction === 'OVER' ? v > prop.line : v < prop.line;
+                  return `<div class="spark-bar ${hit ? 'hit' : 'miss'}" style="height:${height}px" title="${v}"></div>`;
+                }).join('')}
+              </div>
+            `;
+          }
+
+          return `
+            <div class="player-prop-card ${isRecommended ? 'recommended' : ''}">
+              <div class="prop-card-header">
+                <div class="prop-stat-type">
+                  <span class="stat-badge ${prop.prop}">${prop.prop}</span>
+                  <div class="prop-pick-info">
+                    <div class="prop-pick ${prop.direction.toLowerCase()}">
+                      ${prop.direction} ${prop.line}
+                    </div>
+                    <div class="prop-odds">${prop.odds ? `(${prop.odds > 0 ? '+' : ''}${prop.odds})` : '(-110)'}</div>
+                  </div>
+                </div>
+                ${isRecommended ? '<span class="recommended-badge">&#11088; BEST BET</span>' :
+                  prop.edge === 'GOOD' ? '<span class="modal-edge-badge GOOD">GOOD</span>' : ''}
+              </div>
+
+              <div class="prop-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">Projection</span>
+                  <span class="stat-value">${(prop.projection || 0).toFixed(1)}</span>
+                </div>
+
+                <div class="stat-item">
+                  <span class="stat-label">Edge</span>
+                  <span class="stat-value ${displayDiff > 0 ? 'positive' : displayDiff < 0 ? 'negative' : ''}">
+                    ${displayDiff >= 0 ? '+' : ''}${displayDiff.toFixed(1)}
+                  </span>
+                </div>
+
+                <div class="stat-item">
+                  <span class="stat-label">Confidence</span>
+                  <span class="stat-value">${(prop.confidence || 0).toFixed(1)}%</span>
+                </div>
+
+                <div class="stat-item">
+                  <span class="stat-label">EV</span>
+                  <span class="stat-value ${evPositive ? 'positive' : 'negative'}">
+                    ${(prop.ev || 0) >= 0 ? '+' : ''}${(prop.ev || 0).toFixed(1)}%
+                  </span>
+                </div>
+              </div>
+
+              <div class="prop-card-details">
+                <span>L10 Avg: <strong>${prop.l10_avg?.toFixed(1) || '--'}</strong></span>
+                <span>Season Avg: <strong>${prop.season_avg?.toFixed(1) || '--'}</strong></span>
+                <span>H2H Avg: <strong>${prop.h2h_avg?.toFixed(1) || '--'}</strong></span>
+                <span>H2H Record: <strong>${prop.h2h_record || '--'}</strong></span>
+              </div>
+
+              ${sparkline}
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Show modal
+      document.getElementById('player-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePlayerModal() {
+      document.getElementById('player-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePlayerModal();
+      }
+    });
   </script>
+
+  <!-- Player Detail Modal -->
+  <div id="player-modal" class="modal">
+    <div class="modal-overlay" onclick="closePlayerModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2 id="player-modal-name">Player Name</h2>
+          <div id="player-modal-team" class="matchup"></div>
+        </div>
+        <button class="close-btn" onclick="closePlayerModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="player-props-list">
+          <!-- Props populated here -->
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
