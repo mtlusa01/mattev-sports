@@ -966,8 +966,11 @@
     // Load data
     async function loadAllProps() {
       try {
+        console.log('Fetching all_props.json...');
         const response = await fetch('all_props.json?v=' + Date.now());
         const data = await response.json();
+        console.log('Loaded data:', data);
+        console.log('Props count:', data.props ? data.props.length : 0);
         allProps = data.props || [];
 
         // Update timestamp
