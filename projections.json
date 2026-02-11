@@ -2,7 +2,7 @@
   "date": "2026-02-11",
   "sport": "NBA",
   "locked_at": "2026-02-11T04:03:40",
-  "updated": "2026-02-11T07:21:48",
+  "updated": "2026-02-11T10:05:39",
   "projections": [
     {
       "player": "Jalen Johnson",
@@ -6121,6 +6121,437 @@
       ],
       "added_live": true,
       "discovered_at": "2026-02-11T06:46:27"
+    },
+    {
+      "player": "Kevin Porter Jr.",
+      "team": "MIL",
+      "prop": "REB",
+      "direction": "UNDER",
+      "line": 5.5,
+      "projection": 4.0,
+      "confidence": 52.724999999999994,
+      "ev": 1.0,
+      "diff": -1.5,
+      "market_odds": -122,
+      "fair_odds": -125,
+      "prob_edge": 0.5,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -125
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -111
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -119
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-11T10:05:39",
+      "edge": "LEAN",
+      "l5_avg": 4.8,
+      "l10_avg": 5.0,
+      "l5_hit_rate": 40,
+      "l10_hit_rate": 60,
+      "l5_hit_count": 2,
+      "l10_hit_count": 6,
+      "l10_median": 4.5,
+      "season_avg": 5.1,
+      "season_hit_count": 15,
+      "season_total": 26,
+      "streak": 1,
+      "home_avg": 4.9,
+      "away_avg": 5.3,
+      "opp_def_rank": 13,
+      "matchup_favorability": "neutral",
+      "vs_top10_avg": 5.6,
+      "vs_bot10_avg": 5.4,
+      "last_10_values": [
+        4,
+        7,
+        6,
+        6,
+        1,
+        4,
+        9,
+        5,
+        4,
+        4
+      ],
+      "last_10_games": [
+        {
+          "date": "2/09",
+          "opp": "@ORL",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "2/06",
+          "opp": "vs IND",
+          "val": 7,
+          "hit": false
+        },
+        {
+          "date": "2/04",
+          "opp": "vs NOP",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/19",
+          "opp": "@ATL",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "@SAS",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "1/13",
+          "opp": "vs MIN",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "@DEN",
+          "val": 9,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "@LAL",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "1/07",
+          "opp": "@GSW",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/04",
+          "opp": "@SAC",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "vs CHA",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "12/31",
+          "opp": "vs WAS",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "12/29",
+          "opp": "@CHA",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "12/27",
+          "opp": "@CHI",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "12/26",
+          "opp": "@MEM",
+          "val": 8,
+          "hit": false
+        },
+        {
+          "date": "12/23",
+          "opp": "@IND",
+          "val": 6,
+          "hit": false
+        },
+        {
+          "date": "12/21",
+          "opp": "@MIN",
+          "val": 10,
+          "hit": false
+        },
+        {
+          "date": "12/18",
+          "opp": "vs TOR",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "12/14",
+          "opp": "@BKN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "12/11",
+          "opp": "vs BOS",
+          "val": 10,
+          "hit": false
+        }
+      ],
+      "opponent": "ORL",
+      "h2h_games": [
+        {
+          "date": "Feb 09",
+          "value": 4,
+          "minutes": 36,
+          "result": "L",
+          "hit": true,
+          "venue": "@"
+        }
+      ],
+      "h2h_avg": 4.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "pick_score": 11.0,
+      "score_factors": [],
+      "added_live": true,
+      "discovered_at": "2026-02-11T10:05:39"
+    },
+    {
+      "player": "De'Aaron Fox",
+      "team": "SAS",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 19.5,
+      "projection": 16.3,
+      "confidence": 56.144999999999996,
+      "ev": 4.8,
+      "diff": -3.2,
+      "market_odds": -129,
+      "fair_odds": -144,
+      "prob_edge": 2.8,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 19.5,
+            "odds": -100
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -132
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 19.5,
+            "odds": -101
+          },
+          "under": {
+            "line": 19.5,
+            "odds": -126
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-11T10:05:39",
+      "edge": "GOOD",
+      "l5_avg": 13.8,
+      "l10_avg": 15.5,
+      "l5_hit_rate": 100,
+      "l10_hit_rate": 90,
+      "l5_hit_count": 5,
+      "l10_hit_count": 9,
+      "l10_median": 14.5,
+      "season_avg": 19.2,
+      "season_hit_count": 23,
+      "season_total": 44,
+      "streak": 8,
+      "home_avg": 16.9,
+      "away_avg": 17.7,
+      "opp_def_rank": 10,
+      "matchup_favorability": "favorable",
+      "vs_top10_avg": 19.1,
+      "vs_bot10_avg": 16.4,
+      "insight": "Has stayed UNDER 19.5 points in 8 straight games.",
+      "insight_strength": "strong",
+      "last_10_values": [
+        8,
+        15,
+        17,
+        15,
+        14,
+        11,
+        18,
+        12,
+        31,
+        14
+      ],
+      "last_10_games": [
+        {
+          "date": "2/10",
+          "opp": "@LAL",
+          "val": 8,
+          "hit": true
+        },
+        {
+          "date": "2/07",
+          "opp": "vs DAL",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "2/05",
+          "opp": "@DAL",
+          "val": 17,
+          "hit": true
+        },
+        {
+          "date": "2/04",
+          "opp": "vs OKC",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "2/01",
+          "opp": "vs ORL",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "1/31",
+          "opp": "@CHA",
+          "val": 11,
+          "hit": true
+        },
+        {
+          "date": "1/28",
+          "opp": "@HOU",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "1/25",
+          "opp": "vs NOP",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/22",
+          "opp": "@UTA",
+          "val": 31,
+          "hit": false
+        },
+        {
+          "date": "1/20",
+          "opp": "@HOU",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "vs UTA",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "1/17",
+          "opp": "vs MIN",
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "vs MIL",
+          "val": 18,
+          "hit": true
+        },
+        {
+          "date": "1/13",
+          "opp": "@OKC",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "@MIN",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/10",
+          "opp": "@BOS",
+          "val": 21,
+          "hit": false
+        },
+        {
+          "date": "1/07",
+          "opp": "vs LAL",
+          "val": 14,
+          "hit": true
+        },
+        {
+          "date": "1/06",
+          "opp": "@MEM",
+          "val": 9,
+          "hit": true
+        },
+        {
+          "date": "1/03",
+          "opp": "vs POR",
+          "val": 19,
+          "hit": true
+        },
+        {
+          "date": "1/02",
+          "opp": "@IND",
+          "val": 24,
+          "hit": false
+        }
+      ],
+      "opponent": "GSW",
+      "h2h_games": [
+        {
+          "date": "Nov 14",
+          "value": 24,
+          "minutes": 33,
+          "result": "L",
+          "hit": false,
+          "venue": "vs"
+        },
+        {
+          "date": "Nov 12",
+          "value": 13,
+          "minutes": 36,
+          "result": "L",
+          "hit": true,
+          "venue": "vs"
+        }
+      ],
+      "h2h_avg": 18.5,
+      "h2h_record": "1/2",
+      "h2h_total_games": 2,
+      "pick_score": 51.8,
+      "score_factors": [
+        "Favorable matchup (#10 DEF)",
+        "+3.2 edge",
+        "8-game streak"
+      ],
+      "top_pick_rank": 1,
+      "added_live": true,
+      "discovered_at": "2026-02-11T10:05:39"
     }
   ],
   "top_picks": [
