@@ -980,8 +980,10 @@
             `Last updated: ${updated.toLocaleString()}`;
         }
 
+        console.log('Data loaded successfully, allProps assigned with', allProps.length, 'items');
         updateCounts();
         populateGameFilters();
+        console.log('About to call applyFilters...');
         applyFilters();
       } catch (error) {
         console.error('Error loading props:', error);
@@ -1056,6 +1058,9 @@
 
     // Apply all filters
     function applyFilters() {
+      console.log('applyFilters called');
+      console.log('allProps.length:', allProps.length);
+      console.log('currentFilters:', JSON.stringify(currentFilters));
       filteredProps = allProps.filter(prop => {
         // Search filter
         if (currentFilters.search) {
@@ -1092,6 +1097,8 @@
 
         return true;
       });
+
+      console.log('filteredProps.length after filter:', filteredProps.length);
 
       // Apply sorting
       sortProps();
