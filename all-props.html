@@ -858,6 +858,12 @@
       </div>
     </div>
 
+    <div style="margin-bottom: 16px;">
+      <a href="dashboard.html" style="display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:600; text-decoration:none;">
+        <span style="font-size:16px;">&#8592;</span> Back to Best Bets
+      </a>
+    </div>
+
     <!-- Search and Clear -->
     <div class="search-container" style="display: flex; gap: 12px; align-items: center;">
       <div style="position: relative; flex: 1; max-width: 400px;">
@@ -949,7 +955,6 @@
     </div>
 
     <div class="updated-time" id="updated-time"></div>
-    <div id="debug-info" style="background:#1a1a2e; padding:10px; margin-top:10px; border-radius:8px; font-size:12px; color:#888;"></div>
   </div>
 
   <script>
@@ -967,11 +972,8 @@
     // Load data
     async function loadAllProps() {
       try {
-        console.log('Fetching all_props.json...');
         const response = await fetch('all_props.json?v=' + Date.now());
         const data = await response.json();
-        console.log('Loaded data:', data);
-        console.log('Props count:', data.props ? data.props.length : 0);
         allProps = data.props || [];
 
         // Update timestamp
@@ -981,10 +983,8 @@
             `Last updated: ${updated.toLocaleString()}`;
         }
 
-        console.log('Data loaded successfully, allProps assigned with', allProps.length, 'items');
         updateCounts();
         populateGameFilters();
-        console.log('About to call applyFilters...');
         applyFilters();
       } catch (error) {
         console.error('Error loading props:', error);
@@ -1059,9 +1059,6 @@
 
     // Apply all filters
     function applyFilters() {
-      console.log('applyFilters called');
-      console.log('allProps.length:', allProps.length);
-      console.log('currentFilters:', JSON.stringify(currentFilters));
       filteredProps = allProps.filter(prop => {
         // Search filter
         if (currentFilters.search) {
@@ -1099,15 +1096,7 @@
         return true;
       });
 
-      console.log('filteredProps.length after filter:', filteredProps.length);
-
-      // Update visible debug info
-      const debugEl = document.getElementById('debug-info');
-      if (debugEl) {
-        debugEl.innerHTML = `DEBUG: allProps=${allProps.length}, filteredProps=${filteredProps.length}, filters=${JSON.stringify(currentFilters)}`;
-      }
-
-      // Apply sorting
+            // Apply sorting
       sortProps();
 
       // Render
