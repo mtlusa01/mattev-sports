@@ -949,6 +949,7 @@
     </div>
 
     <div class="updated-time" id="updated-time"></div>
+    <div id="debug-info" style="background:#1a1a2e; padding:10px; margin-top:10px; border-radius:8px; font-size:12px; color:#888;"></div>
   </div>
 
   <script>
@@ -1099,6 +1100,12 @@
       });
 
       console.log('filteredProps.length after filter:', filteredProps.length);
+
+      // Update visible debug info
+      const debugEl = document.getElementById('debug-info');
+      if (debugEl) {
+        debugEl.innerHTML = `DEBUG: allProps=${allProps.length}, filteredProps=${filteredProps.length}, filters=${JSON.stringify(currentFilters)}`;
+      }
 
       // Apply sorting
       sortProps();
