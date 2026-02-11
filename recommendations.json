@@ -1,156 +1,207 @@
 {
-  "date": "2026-02-10",
-  "generated_at": "2026-02-10T02:38:44",
+  "date": "2026-02-11",
+  "generated_at": "2026-02-11T04:03:50",
   "game_bets": [
     {
       "qualified": true,
-      "score": 198.8,
+      "score": 180.6,
       "reasons": [
-        "86.9% confidence",
+        "77.8% confidence",
         "High confidence"
       ],
-      "type": "total",
-      "bet_type": "TOTAL",
-      "game": "LAC @ HOU",
-      "away_team": "LAC",
-      "home_team": "HOU",
-      "pick": "OVER 209.5",
-      "confidence": 86.9,
-      "commence_time": "2026-02-11T01:10:00Z",
+      "type": "ml",
+      "bet_type": "ML",
+      "game": "WAS @ CLE",
+      "away_team": "WAS",
+      "home_team": "CLE",
+      "pick": "CLE",
+      "confidence": 77.8,
+      "commence_time": "2026-02-12T00:10:00Z",
       "rec_rank": 1
     },
     {
       "qualified": true,
-      "score": 180.2,
+      "score": 172.8,
       "reasons": [
-        "77.6% confidence",
+        "73.9% confidence",
         "High confidence"
       ],
       "type": "spread",
       "bet_type": "SPREAD",
-      "game": "DAL @ PHX",
-      "away_team": "DAL",
-      "home_team": "PHX",
-      "pick": "PHX +6.5",
-      "confidence": 77.6,
-      "commence_time": "2026-02-12T02:10:00Z",
+      "game": "WAS @ CLE",
+      "away_team": "WAS",
+      "home_team": "CLE",
+      "pick": "WAS +18.0",
+      "confidence": 73.9,
+      "commence_time": "2026-02-12T00:10:00Z",
       "rec_rank": 2
     },
     {
       "qualified": true,
-      "score": 169.4,
+      "score": 168.8,
       "reasons": [
-        "72.2% confidence",
+        "71.9% confidence",
         "High confidence"
       ],
-      "type": "total",
-      "bet_type": "TOTAL",
-      "game": "DAL @ PHX",
-      "away_team": "DAL",
-      "home_team": "PHX",
-      "pick": "OVER 217.5",
-      "confidence": 72.2,
-      "commence_time": "2026-02-12T02:10:00Z",
+      "type": "ml",
+      "bet_type": "ML",
+      "game": "CHI @ BOS",
+      "away_team": "CHI",
+      "home_team": "BOS",
+      "pick": "BOS",
+      "confidence": 71.9,
+      "commence_time": "2026-02-12T00:40:00Z",
       "rec_rank": 3
     },
     {
       "qualified": true,
-      "score": 166.4,
+      "score": 150.2,
       "reasons": [
-        "70.7% confidence",
-        "High confidence"
+        "67.6% confidence"
       ],
-      "type": "ml",
-      "bet_type": "ML",
-      "game": "LAC @ HOU",
-      "away_team": "LAC",
-      "home_team": "HOU",
-      "pick": "HOU",
-      "confidence": 70.7,
-      "commence_time": "2026-02-11T01:10:00Z",
+      "type": "spread",
+      "bet_type": "SPREAD",
+      "game": "MEM @ DEN",
+      "away_team": "MEM",
+      "home_team": "DEN",
+      "pick": "MEM +14.0",
+      "confidence": 67.6,
+      "commence_time": "2026-02-12T02:10:00Z",
       "rec_rank": 4
     },
     {
       "qualified": true,
-      "score": 150.0,
+      "score": 147.8,
       "reasons": [
-        "67.5% confidence"
+        "66.4% confidence"
       ],
-      "type": "ml",
-      "bet_type": "ML",
-      "game": "IND @ NYK",
-      "away_team": "IND",
-      "home_team": "NYK",
-      "pick": "NYK",
-      "confidence": 67.5,
-      "commence_time": "2026-02-11T00:40:00Z",
+      "type": "spread",
+      "bet_type": "SPREAD",
+      "game": "SAS @ GSW",
+      "away_team": "SAS",
+      "home_team": "GSW",
+      "pick": "GSW +6.0",
+      "confidence": 66.4,
+      "commence_time": "2026-02-12T03:00:00Z",
       "rec_rank": 5
     }
   ],
   "props": [
     {
       "qualified": true,
-      "score": 53.8375,
+      "score": 46.545,
       "reasons": [
-        "+16.6% EV",
-        "70% L10 hit rate"
+        "+13.8% EV",
+        "56.3% confidence"
       ],
       "type": "prop",
-      "player": "LeBron James",
-      "team": "LAL",
+      "player": "Isaiah Hartenstein",
+      "team": "OKC",
       "prop": "REB",
-      "direction": "UNDER",
-      "line": 5.5,
-      "projection": 5.0,
-      "diff": -0.5,
-      "confidence": 52.25,
-      "ev": 16.6,
-      "edge": 0.5,
-      "pick_score": 29.9,
+      "direction": "OVER",
+      "line": 8.5,
+      "projection": 9.6,
+      "diff": 1.1,
+      "confidence": 56.3,
+      "ev": 13.8,
+      "edge": 1.0999999999999996,
+      "pick_score": 43.0,
       "score_factors": [
-        "+16.6% EV"
+        "+13.8% EV",
+        "60% L10 hit rate"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 5.5,
-            "odds": -148
+            "line": 8.5,
+            "odds": 102
           },
           "under": {
-            "line": 5.5,
-            "odds": 112
+            "line": 8.5,
+            "odds": -136
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "On a back-to-back \u2014 rest impact may limit production.",
+      "insight": null,
       "matchup_favorability": "neutral",
-      "l10_hit_rate": 70,
+      "l10_hit_rate": 60,
       "rec_rank": 1
     },
     {
       "qualified": true,
-      "score": 53.43,
+      "score": 45.63,
       "reasons": [
-        "+16.0% EV",
+        "+12.7% EV",
         "70% L10 hit rate"
       ],
       "type": "prop",
-      "player": "Amen Thompson",
-      "team": "HOU",
-      "prop": "AST",
+      "player": "Donovan Clingan",
+      "team": "POR",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 11.5,
+      "projection": 13.1,
+      "diff": 1.6,
+      "confidence": 55.2,
+      "ev": 12.7,
+      "edge": 1.5999999999999996,
+      "pick_score": 41.8,
+      "score_factors": [
+        "+12.7% EV",
+        "70% L10 hit rate"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 11.5,
+            "odds": 110
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -146
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 11.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -130
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 11.5 rebounds in 7 of last 10 games (13.5 avg).",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 70,
+      "rec_rank": 2
+    },
+    {
+      "qualified": true,
+      "score": 43.21,
+      "reasons": [
+        "+12.0% EV",
+        "+2.2 edge"
+      ],
+      "type": "prop",
+      "player": "Lauri Markkanen",
+      "team": "UTA",
+      "prop": "REB",
       "direction": "OVER",
       "line": 5.5,
-      "projection": 6.3,
-      "diff": 0.8,
-      "confidence": 54.2,
-      "ev": 16.0,
-      "edge": 0.7999999999999998,
-      "pick_score": 33.2,
+      "projection": 7.7,
+      "diff": 2.2,
+      "confidence": 53.4,
+      "ev": 12.0,
+      "edge": 2.2,
+      "pick_score": 36.4,
       "score_factors": [
-        "+16.0% EV",
-        "70% L10 hit rate",
-        "Injury boosted"
+        "+12.0% EV",
+        "60% L10 hit rate",
+        "+2.2 edge"
       ],
       "book_odds": {
         "fanduel": {
@@ -162,164 +213,114 @@
             "line": 5.5,
             "odds": -146
           }
-        },
-        "draftkings": {
-          "over": {
-            "line": 5.5,
-            "odds": 118
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -156
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "insight": "Has gone OVER 5.5 assists in 7 of last 10 games (7.2 avg).",
-      "matchup_favorability": "unfavorable",
-      "l10_hit_rate": 70,
-      "rec_rank": 2
-    },
-    {
-      "qualified": true,
-      "score": 43.695,
-      "reasons": [
-        "+13.9% EV"
-      ],
-      "type": "prop",
-      "player": "Deandre Ayton",
-      "team": "LAL",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 8.5,
-      "projection": 9.1,
-      "diff": 0.6,
-      "confidence": 52.3,
-      "ev": 13.9,
-      "edge": 0.5999999999999996,
-      "pick_score": 25.9,
-      "score_factors": [
-        "+13.9% EV"
-      ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 8.5,
-            "odds": 118
-          },
-          "under": {
-            "line": 8.5,
-            "odds": -158
-          }
         }
       },
       "best_book": "fanduel",
-      "insight": null,
+      "insight": "Model projects 7.7 rebounds \u2014 +2.2 above line.",
       "matchup_favorability": "neutral",
-      "l10_hit_rate": 30,
+      "l10_hit_rate": 60,
       "rec_rank": 3
     },
     {
       "qualified": true,
-      "score": 34.923,
+      "score": 38.585,
       "reasons": [
-        "+7.6% EV",
-        "70% L10 hit rate",
-        "6-game streak"
+        "+10.6% EV"
       ],
       "type": "prop",
-      "player": "Josh Hart",
-      "team": "NYK",
+      "player": "Myles Turner",
+      "team": "MIL",
       "prop": "REB",
-      "direction": "UNDER",
-      "line": 8.5,
-      "projection": 7.0,
-      "diff": -1.5,
-      "confidence": 52.82,
-      "ev": 7.6,
-      "edge": 1.5,
-      "pick_score": 25.9,
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.0,
+      "diff": 0.5,
+      "confidence": 53.9,
+      "ev": 10.6,
+      "edge": 0.5,
+      "pick_score": 30.9,
       "score_factors": [
-        "+7.6% EV",
-        "6-game streak"
+        "+10.6% EV",
+        "60% L10 hit rate",
+        "3-game streak"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 8.5,
-            "odds": -122
+            "line": 5.5,
+            "odds": 104
           },
           "under": {
-            "line": 8.5,
-            "odds": -108
+            "line": 5.5,
+            "odds": -138
           }
         },
         "draftkings": {
           "over": {
-            "line": 8.5,
-            "odds": -123
+            "line": 5.5,
+            "odds": 106
           },
           "under": {
-            "line": 8.5,
-            "odds": -107
+            "line": 5.5,
+            "odds": -140
           }
         }
       },
       "best_book": "draftkings",
-      "insight": "Has stayed UNDER 8.5 rebounds in 6 straight games.",
-      "matchup_favorability": "unfavorable",
-      "l10_hit_rate": 70,
+      "insight": null,
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 60,
       "rec_rank": 4
     },
     {
       "qualified": true,
-      "score": 24.595,
+      "score": 36.675,
       "reasons": [
-        "+5.5% EV",
-        "Favorable matchup"
+        "+9.0% EV",
+        "70% L10 hit rate"
       ],
       "type": "prop",
-      "player": "Karl-Anthony Towns",
-      "team": "NYK",
-      "prop": "REB",
+      "player": "Jamal Murray",
+      "team": "DEN",
+      "prop": "AST",
       "direction": "OVER",
-      "line": 12.5,
-      "projection": 13.7,
-      "diff": 1.2,
-      "confidence": 54.3,
-      "ev": 5.5,
-      "edge": 1.1999999999999993,
-      "pick_score": 26.9,
+      "line": 7.5,
+      "projection": 8.5,
+      "diff": 1.0,
+      "confidence": 54.5,
+      "ev": 9.0,
+      "edge": 1.0,
+      "pick_score": 20.6,
       "score_factors": [
-        "+5.5% EV",
-        "Favorable matchup (#28 DEF)"
+        "+9.0% EV",
+        "70% L10 hit rate"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 13.5,
-            "odds": 112
+            "line": 7.5,
+            "odds": -100
           },
           "under": {
-            "line": 13.5,
-            "odds": -148
+            "line": 7.5,
+            "odds": -132
           }
         },
         "draftkings": {
           "over": {
-            "line": 12.5,
-            "odds": -127
+            "line": 7.5,
+            "odds": -101
           },
           "under": {
-            "line": 12.5,
-            "odds": -104
+            "line": 7.5,
+            "odds": -130
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "IND ranks #28 in rebounds defense \u2014 favorable for overs.",
-      "matchup_favorability": "favorable",
-      "l10_hit_rate": 50,
+      "insight": "Has gone OVER 7.5 assists in 7 of last 10 games (8.9 avg).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 70,
       "rec_rank": 5
     }
   ],

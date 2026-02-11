@@ -1,75 +1,104 @@
 {
-  "date": "2026-02-10",
-  "generated_at": "2026-02-10T17:54:44",
+  "date": "2026-02-11",
+  "generated_at": "2026-02-11T04:03:50",
   "picks": [
     {
-      "type": "total",
-      "game": "LAC @ HOU",
-      "away_team": "LAC",
-      "home_team": "HOU",
-      "pick": "OVER 209.5",
-      "confidence": 86.9,
-      "pick_score": 55.0,
+      "type": "prop",
+      "player": "Desmond Bane",
+      "team": "ORL",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 18.5,
+      "projection": 22.4,
+      "diff": 3.9,
+      "ev": 4.5,
+      "confidence": 54.8,
+      "pick_score": 50.5,
       "score_factors": [
-        "86.9% total conf",
-        "Very high confidence"
+        "90% L10 hit rate",
+        "+3.9 edge",
+        "3-game streak"
       ],
-      "commence_time": "2026-02-11T01:10:00Z",
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 18.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 18.5,
+            "odds": -120
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 18.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 18.5,
+            "odds": -116
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 18.5 points in 9 of last 10 games (21.7 avg).",
       "top_pick_rank": 1
     },
     {
-      "type": "ml",
-      "game": "IND @ NYK",
-      "away_team": "IND",
-      "home_team": "NYK",
-      "pick": "NYK",
-      "confidence": 67.5,
+      "type": "spread",
+      "game": "WAS @ CLE",
+      "away_team": "WAS",
+      "home_team": "CLE",
+      "pick": "WAS +18.0",
+      "confidence": 73.9,
       "pick_score": 50.0,
       "score_factors": [
-        "67.5% ML conf"
+        "73.9% spread conf",
+        "High confidence"
       ],
-      "commence_time": "2026-02-11T00:40:00Z",
+      "commence_time": "2026-02-12T00:10:00Z",
       "top_pick_rank": 2
     },
     {
       "type": "ml",
-      "game": "LAC @ HOU",
-      "away_team": "LAC",
-      "home_team": "HOU",
-      "pick": "HOU",
-      "confidence": 70.7,
+      "game": "WAS @ CLE",
+      "away_team": "WAS",
+      "home_team": "CLE",
+      "pick": "CLE",
+      "confidence": 77.8,
       "pick_score": 50.0,
       "score_factors": [
-        "70.7% ML conf"
+        "77.8% ML conf"
       ],
-      "commence_time": "2026-02-11T01:10:00Z",
+      "commence_time": "2026-02-12T00:10:00Z",
       "top_pick_rank": 3
     },
     {
-      "type": "spread",
-      "game": "DAL @ PHX",
-      "away_team": "DAL",
-      "home_team": "PHX",
-      "pick": "PHX +6.5",
-      "confidence": 77.6,
+      "type": "ml",
+      "game": "CHI @ BOS",
+      "away_team": "CHI",
+      "home_team": "BOS",
+      "pick": "BOS",
+      "confidence": 71.9,
       "pick_score": 50.0,
       "score_factors": [
-        "77.6% spread conf",
-        "High confidence"
+        "71.9% ML conf"
       ],
-      "commence_time": "2026-02-12T02:10:00Z",
+      "commence_time": "2026-02-12T00:40:00Z",
       "top_pick_rank": 4
     },
     {
-      "type": "total",
-      "game": "DAL @ PHX",
-      "away_team": "DAL",
-      "home_team": "PHX",
-      "pick": "OVER 217.5",
-      "confidence": 72.2,
-      "pick_score": 40.0,
+      "type": "spread",
+      "game": "MEM @ DEN",
+      "away_team": "MEM",
+      "home_team": "DEN",
+      "pick": "MEM +14.0",
+      "confidence": 67.6,
+      "pick_score": 50.0,
       "score_factors": [
-        "72.2% total conf"
+        "67.6% spread conf",
+        "High confidence"
       ],
       "commence_time": "2026-02-12T02:10:00Z",
       "top_pick_rank": 5
