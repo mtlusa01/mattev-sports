@@ -1,7 +1,7 @@
 {
   "date": "2026-02-10",
   "sport": "NBA",
-  "updated": "2026-02-10T21:40:20",
+  "updated": "2026-02-11T00:42:45",
   "games": [
     {
       "away_team": "IND",
@@ -16,7 +16,7 @@
       "ml_pick": "NYK",
       "ml_conf": 67.5,
       "commence_time": "2026-02-11T00:30:00Z",
-      "status": "live",
+      "status": "final",
       "market_odds": {
         "spread_home": -11.5,
         "spread_home_odds": -112,
@@ -32,8 +32,49 @@
       "spread_odds": -108,
       "total_odds": -110,
       "ml_odds": -600,
-      "away_score": 110,
-      "home_score": 110
+      "away_score": 137,
+      "home_score": 134,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 21.5,
+          "projection": 18.6,
+          "actual": 22,
+          "hit": false,
+          "confidence": 53.105,
+          "ev": 4.9
+        },
+        {
+          "player": "Mikal Bridges",
+          "team": "NYK",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.0,
+          "actual": 6,
+          "hit": false,
+          "confidence": 54.34,
+          "ev": 3.3
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 12.5,
+          "projection": 13.7,
+          "actual": 14,
+          "hit": true,
+          "confidence": 54.5,
+          "ev": 1.9
+        }
+      ]
     },
     {
       "away_team": "LAC",
@@ -48,7 +89,7 @@
       "ml_pick": "HOU",
       "ml_conf": 70.7,
       "commence_time": "2026-02-11T01:00:00Z",
-      "status": "live",
+      "status": "final",
       "market_odds": {
         "spread_home": -9.0,
         "spread_home_odds": -110,
@@ -64,8 +105,25 @@
       "spread_odds": -110,
       "total_odds": -110,
       "ml_odds": -330,
-      "away_score": 65,
-      "home_score": 70
+      "away_score": 95,
+      "home_score": 102,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Amen Thompson",
+          "team": "HOU",
+          "prop": "AST",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 1,
+          "hit": false,
+          "confidence": 54.0,
+          "ev": 9.1
+        }
+      ]
     },
     {
       "away_team": "DAL",
@@ -80,7 +138,7 @@
       "ml_pick": "PHX",
       "ml_conf": 63.9,
       "commence_time": "2026-02-11T02:00:00Z",
-      "status": "live",
+      "status": "final",
       "market_odds": {
         "spread_home": -8.0,
         "spread_home_odds": -112,
@@ -96,8 +154,25 @@
       "spread_odds": -112,
       "total_odds": -106,
       "ml_odds": -320,
-      "away_score": 18,
-      "home_score": 41
+      "away_score": 111,
+      "home_score": 120,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Naji Marshall",
+          "team": "DAL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 17.3,
+          "actual": 31,
+          "hit": true,
+          "confidence": 54.8,
+          "ev": 3.7
+        }
+      ]
     },
     {
       "away_team": "SAS",

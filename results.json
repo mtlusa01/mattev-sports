@@ -1,45 +1,228 @@
 {
-  "updated": "2026-02-10T21:40:20",
+  "updated": "2026-02-11T00:42:45",
   "allTime": {
     "props": {
-      "wins": 156,
-      "losses": 193,
+      "wins": 158,
+      "losses": 196,
       "pushes": 0,
-      "pct": 44.7,
-      "roi": -14.7
+      "pct": 44.6,
+      "roi": -14.8
     },
     "spreads": {
-      "wins": 24,
+      "wins": 27,
       "losses": 30,
       "pushes": 1,
-      "pct": 44.4,
-      "roi": -15.2
+      "pct": 47.4,
+      "roi": -9.6
     },
     "totals": {
-      "wins": 30,
-      "losses": 25,
+      "wins": 32,
+      "losses": 26,
       "pushes": 0,
-      "pct": 54.5,
-      "roi": 4.1
+      "pct": 55.2,
+      "roi": 5.3
     },
     "moneylines": {
-      "wins": 36,
-      "losses": 19,
+      "wins": 38,
+      "losses": 20,
       "pushes": 0,
       "pct": 65.5,
-      "roi": 25.0
+      "roi": 25.1
     },
     "best_bets": {
-      "wins": 35,
-      "losses": 29,
+      "wins": 40,
+      "losses": 31,
       "pushes": 0,
-      "pct": 54.7,
-      "roi": 4.4
+      "pct": 56.3,
+      "roi": 7.6
     },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 57.7
   },
   "days": [
+    {
+      "date": "2026-02-10",
+      "props": {
+        "wins": 2,
+        "losses": 3,
+        "pushes": 0,
+        "record": "2-3",
+        "pct": 40.0
+      },
+      "spreads": {
+        "wins": 3,
+        "losses": 0,
+        "pushes": 0,
+        "record": "3-0",
+        "pct": 100.0
+      },
+      "totals": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "moneylines": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "picks": [
+        {
+          "date": "2026-02-10",
+          "type": "spread",
+          "game": "IND @ NYK",
+          "pick": "IND +11.5",
+          "result": "137-134",
+          "hit": true,
+          "confidence": 56.1
+        },
+        {
+          "date": "2026-02-10",
+          "type": "total",
+          "game": "IND @ NYK",
+          "pick": "OVER 225.5",
+          "result": "137-134",
+          "hit": true,
+          "confidence": 60.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "ml",
+          "game": "IND @ NYK",
+          "pick": "NYK",
+          "result": "137-134",
+          "hit": false,
+          "confidence": 67.5,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "spread",
+          "game": "LAC @ HOU",
+          "pick": "LAC +9.0",
+          "result": "95-102",
+          "hit": true,
+          "confidence": 55.0
+        },
+        {
+          "date": "2026-02-10",
+          "type": "total",
+          "game": "LAC @ HOU",
+          "pick": "OVER 214.5",
+          "result": "95-102",
+          "hit": false,
+          "confidence": 86.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "ml",
+          "game": "LAC @ HOU",
+          "pick": "HOU",
+          "result": "95-102",
+          "hit": true,
+          "confidence": 70.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "spread",
+          "game": "DAL @ PHX",
+          "pick": "PHX -8.0",
+          "result": "111-120",
+          "hit": true,
+          "confidence": 77.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "total",
+          "game": "DAL @ PHX",
+          "pick": "OVER 227.5",
+          "result": "111-120",
+          "hit": true,
+          "confidence": 72.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "ml",
+          "game": "DAL @ PHX",
+          "pick": "PHX",
+          "result": "111-120",
+          "hit": true,
+          "confidence": 63.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-10",
+          "type": "prop",
+          "player": "Naji Marshall",
+          "team": "DAL",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 31,
+          "hit": true,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-02-10",
+          "type": "prop",
+          "player": "Amen Thompson",
+          "team": "HOU",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 1,
+          "hit": false,
+          "confidence": 54.0
+        },
+        {
+          "date": "2026-02-10",
+          "type": "prop",
+          "player": "Mikal Bridges",
+          "team": "NYK",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 6,
+          "hit": false,
+          "confidence": 54.34
+        },
+        {
+          "date": "2026-02-10",
+          "type": "prop",
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "pick": "REB OVER 12.5",
+          "line": 12.5,
+          "result": 14,
+          "hit": true,
+          "confidence": 54.5
+        },
+        {
+          "date": "2026-02-10",
+          "type": "prop",
+          "player": "Karl-Anthony Towns",
+          "team": "NYK",
+          "pick": "PTS UNDER 21.5",
+          "line": 21.5,
+          "result": 22,
+          "hit": false,
+          "confidence": 53.105
+        }
+      ],
+      "best_bets": {
+        "wins": 5,
+        "losses": 2,
+        "pushes": 0,
+        "record": "5-2",
+        "pct": 71.4
+      }
+    },
     {
       "date": "2026-02-09",
       "props": {
