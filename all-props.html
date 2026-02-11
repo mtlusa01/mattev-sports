@@ -966,7 +966,7 @@
     // Load data
     async function loadAllProps() {
       try {
-        const response = await fetch('all_props.json');
+        const response = await fetch('all_props.json?v=' + Date.now());
         const data = await response.json();
         allProps = data.props || [];
 
