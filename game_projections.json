@@ -2,7 +2,7 @@
   "date": "2026-02-11",
   "sport": "NBA",
   "locked_at": "2026-02-11T04:03:49",
-  "updated": "2026-02-11T21:02:01",
+  "updated": "2026-02-11T22:07:30",
   "games": [
     {
       "away_team": "MIL",
@@ -17,7 +17,7 @@
       "ml_pick": "ORL",
       "ml_conf": 62.3,
       "commence_time": "2026-02-12T00:00:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -0.8,
@@ -63,8 +63,8 @@
         "ev": 31.7,
         "confidence": "high"
       },
-      "away_score": 93,
-      "home_score": 91,
+      "away_score": 116,
+      "home_score": 108,
       "market_odds": {
         "spread_home": -6.5,
         "spread_home_odds": -110,
@@ -79,7 +79,10 @@
       },
       "spread_odds": -120,
       "total_odds": -112,
-      "ml_odds": -330
+      "ml_odds": -330,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "loss"
     },
     {
       "away_team": "ATL",
@@ -94,7 +97,7 @@
       "ml_pick": "CHA",
       "ml_conf": 60.3,
       "commence_time": "2026-02-12T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -3.2,
@@ -143,8 +146,37 @@
       "spread_odds": 102,
       "total_odds": -110,
       "ml_odds": -310,
-      "away_score": 77,
-      "home_score": 91
+      "away_score": 107,
+      "home_score": 110,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jalen Johnson",
+          "team": "ATL",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 10.5,
+          "projection": 10.8,
+          "actual": 13,
+          "hit": true,
+          "confidence": 52.2,
+          "ev": 3.5
+        },
+        {
+          "player": "LaMelo Ball",
+          "team": "CHA",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 22.5,
+          "projection": 19.0,
+          "actual": 24,
+          "hit": false,
+          "confidence": 54.245,
+          "ev": 3.1
+        }
+      ]
     },
     {
       "away_team": "WAS",
@@ -159,7 +191,7 @@
       "ml_pick": "CLE",
       "ml_conf": 77.8,
       "commence_time": "2026-02-12T00:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -4.8,
@@ -214,8 +246,8 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 89,
-      "home_score": 108,
+      "away_score": 113,
+      "home_score": 138,
       "market_odds": {
         "spread_home": -22.5,
         "spread_home_odds": -102,
@@ -230,7 +262,10 @@
       },
       "spread_odds": -130,
       "total_odds": -104,
-      "ml_odds": -20000
+      "ml_odds": -20000,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "win"
     },
     {
       "away_team": "NYK",
@@ -245,7 +280,7 @@
       "ml_pick": "PHI",
       "ml_conf": 55.4,
       "commence_time": "2026-02-12T00:30:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -5.8,
@@ -290,8 +325,8 @@
         "ev": 18.8,
         "confidence": "medium"
       },
-      "away_score": 75,
-      "home_score": 42,
+      "away_score": 138,
+      "home_score": 89,
       "market_odds": {
         "spread_home": 10.5,
         "spread_home_odds": -132,
@@ -306,7 +341,10 @@
       },
       "spread_odds": 100,
       "total_odds": -120,
-      "ml_odds": 330
+      "ml_odds": 330,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "loss"
     },
     {
       "away_team": "DET",
@@ -321,7 +359,7 @@
       "ml_pick": "TOR",
       "ml_conf": 49.8,
       "commence_time": "2026-02-12T00:30:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -2.4,
@@ -380,8 +418,11 @@
       "spread_odds": -108,
       "total_odds": -110,
       "ml_odds": 196,
-      "away_score": 67,
-      "home_score": 52
+      "away_score": 113,
+      "home_score": 95,
+      "spread_result": "win",
+      "total_result": "loss",
+      "ml_result": "loss"
     },
     {
       "away_team": "CHI",
@@ -396,7 +437,7 @@
       "ml_pick": "BOS",
       "ml_conf": 71.9,
       "commence_time": "2026-02-12T00:40:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -7.2,
@@ -462,8 +503,25 @@
       "spread_odds": 114,
       "total_odds": -144,
       "ml_odds": -20000,
-      "away_score": 58,
-      "home_score": 86
+      "away_score": 105,
+      "home_score": 124,
+      "spread_result": "loss",
+      "total_result": "win",
+      "ml_result": "win",
+      "graded_props": [
+        {
+          "player": "Jaylen Brown",
+          "team": "BOS",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 8.4,
+          "actual": 4,
+          "hit": false,
+          "confidence": 56.9,
+          "ev": 1.4
+        }
+      ]
     },
     {
       "away_team": "IND",
@@ -478,7 +536,7 @@
       "ml_pick": "BKN",
       "ml_conf": 61.6,
       "commence_time": "2026-02-12T00:40:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -3.2,
@@ -523,8 +581,8 @@
         "ev": 33.3,
         "confidence": "high"
       },
-      "away_score": 64,
-      "home_score": 77,
+      "away_score": 115,
+      "home_score": 110,
       "market_odds": {
         "spread_home": -10.5,
         "spread_home_odds": -136,
@@ -539,7 +597,10 @@
       },
       "spread_odds": 102,
       "total_odds": -125,
-      "ml_odds": -750
+      "ml_odds": -750,
+      "spread_result": "win",
+      "total_result": "win",
+      "ml_result": "loss"
     },
     {
       "away_team": "POR",
@@ -620,8 +681,8 @@
       "spread_odds": -122,
       "total_odds": -125,
       "ml_odds": -290,
-      "away_score": 49,
-      "home_score": 57
+      "away_score": 91,
+      "home_score": 113
     },
     {
       "away_team": "MIA",
@@ -636,7 +697,7 @@
       "ml_pick": "MIA",
       "ml_conf": 56.8,
       "commence_time": "2026-02-12T01:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -3.2,
@@ -695,7 +756,9 @@
       },
       "spread_odds": -118,
       "total_odds": -140,
-      "ml_odds": -174
+      "ml_odds": -174,
+      "away_score": 107,
+      "home_score": 95
     },
     {
       "away_team": "OKC",
@@ -710,7 +773,7 @@
       "ml_pick": "OKC",
       "ml_conf": 61.2,
       "commence_time": "2026-02-12T02:00:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -2.4,
@@ -785,7 +848,9 @@
       },
       "spread_odds": -110,
       "total_odds": -108,
-      "ml_odds": -295
+      "ml_odds": -295,
+      "away_score": 75,
+      "home_score": 52
     },
     {
       "away_team": "SAC",
@@ -800,7 +865,7 @@
       "ml_pick": "UTA",
       "ml_conf": 58.6,
       "commence_time": "2026-02-12T02:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -2.4,
@@ -875,7 +940,9 @@
       },
       "spread_odds": -106,
       "total_odds": -105,
-      "ml_odds": -215
+      "ml_odds": -215,
+      "away_score": 44,
+      "home_score": 71
     },
     {
       "away_team": "MEM",
@@ -890,7 +957,7 @@
       "ml_pick": "DEN",
       "ml_conf": 63.2,
       "commence_time": "2026-02-12T02:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-11T09:03:48Z",
       "injury_impact": {
         "home": -10.0,
@@ -965,7 +1032,9 @@
       },
       "spread_odds": -112,
       "total_odds": -110,
-      "ml_odds": -770
+      "ml_odds": -770,
+      "away_score": 47,
+      "home_score": 58
     },
     {
       "away_team": "SAS",

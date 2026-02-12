@@ -2,7 +2,7 @@
   "date": "2026-02-11",
   "sport": "NBA",
   "locked_at": "2026-02-11T04:03:40",
-  "updated": "2026-02-11T21:05:38",
+  "updated": "2026-02-11T22:07:30",
   "projections": [
     {
       "player": "Jalen Johnson",
@@ -241,7 +241,9 @@
       ],
       "injury_status": "Questionable",
       "injury_type": "Left knee (inflammation)",
-      "injury_headline": "Left knee (inflammation)"
+      "injury_headline": "Left knee (inflammation)",
+      "actual": 13,
+      "result": "WIN"
     },
     {
       "player": "Jaylen Brown",
@@ -470,7 +472,9 @@
       "score_factors": [
         "90% L10 hit rate",
         "Favorable matchup (#20 DEF)"
-      ]
+      ],
+      "actual": 4,
+      "result": "LOSS"
     },
     {
       "player": "Jamal Murray",
@@ -4340,7 +4344,9 @@
         "3-game streak"
       ],
       "added_live": true,
-      "discovered_at": "2026-02-11T06:46:27"
+      "discovered_at": "2026-02-11T06:46:27",
+      "actual": 24,
+      "result": "LOSS"
     },
     {
       "player": "Donovan Mitchell",
@@ -4586,7 +4592,6 @@
         "Favorable matchup (#29 DEF)",
         "+2.2 edge"
       ],
-      "top_pick_rank": 3,
       "added_live": true,
       "discovered_at": "2026-02-11T06:46:27"
     },
@@ -5959,7 +5964,6 @@
         "90% L10 hit rate",
         "+3.3 edge"
       ],
-      "top_pick_rank": 1,
       "added_live": true,
       "discovered_at": "2026-02-11T06:46:27"
     },
@@ -6849,7 +6853,6 @@
         "+3.2 edge",
         "8-game streak"
       ],
-      "top_pick_rank": 1,
       "added_live": true,
       "discovered_at": "2026-02-11T10:05:39"
     },
@@ -7318,7 +7321,6 @@
         "+2.4 edge",
         "3-game streak"
       ],
-      "top_pick_rank": 4,
       "added_live": true,
       "discovered_at": "2026-02-11T10:14:31"
     },
@@ -7789,7 +7791,6 @@
         "80% L10 hit rate",
         "7-game streak"
       ],
-      "top_pick_rank": 4,
       "added_live": true,
       "discovered_at": "2026-02-11T13:40:19"
     },
@@ -8717,7 +8718,6 @@
         "Favorable matchup (#28 DEF)",
         "+6.0 edge"
       ],
-      "top_pick_rank": 3,
       "added_live": true,
       "discovered_at": "2026-02-11T20:04:56"
     }
@@ -8779,7 +8779,9 @@
         "High confidence"
       ],
       "commence_time": "2026-02-12T00:10:00Z",
-      "top_pick_rank": 2
+      "top_pick_rank": 2,
+      "result": "LOSS",
+      "actual": "113-138"
     },
     {
       "type": "ml",
@@ -8793,7 +8795,9 @@
         "77.8% ML conf"
       ],
       "commence_time": "2026-02-12T00:10:00Z",
-      "top_pick_rank": 3
+      "top_pick_rank": 3,
+      "result": "WIN",
+      "actual": "113-138"
     },
     {
       "type": "ml",
@@ -8807,7 +8811,9 @@
         "71.9% ML conf"
       ],
       "commence_time": "2026-02-12T00:40:00Z",
-      "top_pick_rank": 4
+      "top_pick_rank": 4,
+      "result": "WIN",
+      "actual": "105-124"
     },
     {
       "type": "spread",
