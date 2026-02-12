@@ -1,112 +1,115 @@
 {
-  "date": "2026-02-11",
-  "generated_at": "2026-02-11T22:07:30",
+  "date": "2026-02-12",
+  "generated_at": "2026-02-12T17:18:07",
   "picks": [
     {
-      "type": "prop",
-      "player": "Desmond Bane",
-      "team": "ORL",
-      "prop": "PTS",
-      "direction": "OVER",
-      "line": 18.5,
-      "projection": 22.4,
-      "diff": 3.9,
-      "ev": 4.5,
-      "confidence": 54.8,
-      "pick_score": 50.5,
+      "type": "ml",
+      "game": "MIL @ OKC",
+      "away_team": "MIL",
+      "home_team": "OKC",
+      "pick": "OKC",
+      "confidence": 71.4,
+      "pick_score": 50.0,
       "score_factors": [
-        "90% L10 hit rate",
-        "+3.9 edge",
-        "3-game streak"
+        "71.4% ML conf"
       ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 18.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 18.5,
-            "odds": -120
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 18.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 18.5,
-            "odds": -116
-          }
-        }
-      },
-      "best_book": "fanduel",
-      "insight": "Has gone OVER 18.5 points in 9 of last 10 games (21.7 avg).",
+      "commence_time": "2026-02-13T00:40:00Z",
       "top_pick_rank": 1
     },
     {
       "type": "spread",
-      "game": "WAS @ CLE",
-      "away_team": "WAS",
-      "home_team": "CLE",
-      "pick": "WAS +18.0",
-      "confidence": 73.9,
+      "game": "POR @ UTA",
+      "away_team": "POR",
+      "home_team": "UTA",
+      "pick": "UTA +7.5",
+      "confidence": 66.9,
       "pick_score": 50.0,
       "score_factors": [
-        "73.9% spread conf",
+        "66.9% spread conf",
         "High confidence"
       ],
-      "commence_time": "2026-02-12T00:10:00Z",
-      "top_pick_rank": 2,
-      "result": "LOSS",
-      "actual": "113-138"
+      "commence_time": "2026-02-13T02:10:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "prop",
+      "player": "Myles Turner",
+      "team": "MIL",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.1,
+      "diff": 0.6,
+      "ev": 3.0,
+      "confidence": 55.3,
+      "pick_score": 45.5,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup (#24 DEF)",
+        "4-game streak"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -104
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -116
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -113
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Has gone OVER 5.5 rebounds in 7 of last 10 games (7.4 avg).",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "total",
+      "game": "MIL @ OKC",
+      "away_team": "MIL",
+      "home_team": "OKC",
+      "pick": "OVER 213.5",
+      "confidence": 63.1,
+      "pick_score": 40.0,
+      "score_factors": [
+        "63.1% total conf"
+      ],
+      "commence_time": "2026-02-13T00:40:00Z",
+      "top_pick_rank": 4
     },
     {
       "type": "ml",
-      "game": "WAS @ CLE",
-      "away_team": "WAS",
-      "home_team": "CLE",
-      "pick": "CLE",
-      "confidence": 77.8,
-      "pick_score": 50.0,
+      "game": "DAL @ LAL",
+      "away_team": "DAL",
+      "home_team": "LAL",
+      "pick": "LAL",
+      "confidence": 61.1,
+      "pick_score": 40.0,
       "score_factors": [
-        "77.8% ML conf"
+        "61.1% ML conf"
       ],
-      "commence_time": "2026-02-12T00:10:00Z",
-      "top_pick_rank": 3,
-      "result": "WIN",
-      "actual": "113-138"
-    },
-    {
-      "type": "ml",
-      "game": "CHI @ BOS",
-      "away_team": "CHI",
-      "home_team": "BOS",
-      "pick": "BOS",
-      "confidence": 71.9,
-      "pick_score": 50.0,
-      "score_factors": [
-        "71.9% ML conf"
-      ],
-      "commence_time": "2026-02-12T00:40:00Z",
-      "top_pick_rank": 4,
-      "result": "WIN",
-      "actual": "105-124"
-    },
-    {
-      "type": "spread",
-      "game": "MEM @ DEN",
-      "away_team": "MEM",
-      "home_team": "DEN",
-      "pick": "MEM +14.0",
-      "confidence": 67.6,
-      "pick_score": 50.0,
-      "score_factors": [
-        "67.6% spread conf",
-        "High confidence"
-      ],
-      "commence_time": "2026-02-12T02:10:00Z",
+      "commence_time": "2026-02-13T03:10:00Z",
       "top_pick_rank": 5
     }
   ]
