@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-12T17:18:07",
+  "updated": "2026-02-12T18:04:31",
   "allTime": {
     "props": {
       "wins": 274,
@@ -11,37 +11,33 @@
     "spreads": {
       "wins": 34,
       "losses": 37,
-      "pushes": 0,
-      "total": 71,
-      "pct": 47.9
+      "pushes": 1,
+      "pct": 47.9,
+      "roi": -8.6
     },
     "totals": {
       "wins": 40,
       "losses": 32,
       "pushes": 0,
-      "total": 72,
-      "pct": 55.6
+      "pct": 55.6,
+      "roi": 6.1
     },
     "moneylines": {
       "wins": 47,
       "losses": 25,
       "pushes": 0,
-      "total": 72,
-      "pct": 65.3
+      "pct": 65.3,
+      "roi": 24.6
     },
     "best_bets": {
-      "wins": 51,
-      "losses": 35,
+      "wins": 52,
+      "losses": 36,
       "pushes": 0,
-      "pct": 59.3,
-      "roi": 13.2
+      "pct": 59.1,
+      "roi": 12.8
     },
     "best_prop_type": "pts_rebs_asts",
-    "best_prop_pct": 56.5,
-    "wins": 395,
-    "losses": 408,
-    "total": 803,
-    "pct": 49.2
+    "best_prop_pct": 56.5
   },
   "days": [
     {
@@ -2737,6 +2733,35 @@
         },
         {
           "date": "2026-02-11",
+          "type": "spread",
+          "game": "SAS @ GSW",
+          "pick": "GSW +6.0",
+          "result": "126-113",
+          "hit": false,
+          "confidence": 66.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-11",
+          "type": "total",
+          "game": "SAS @ GSW",
+          "pick": "OVER 219.5",
+          "result": "126-113",
+          "hit": true,
+          "confidence": 64.3,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-11",
+          "type": "ml",
+          "game": "SAS @ GSW",
+          "pick": "GSW",
+          "result": "126-113",
+          "hit": false,
+          "confidence": 57.8
+        },
+        {
+          "date": "2026-02-11",
           "type": "prop",
           "player": "Kevin Porter Jr.",
           "team": "MIL",
@@ -2855,38 +2880,14 @@
           "result": 23,
           "hit": true,
           "confidence": 55.6
-        },
-        {
-          "type": "spread",
-          "game": "SAS @ GSW",
-          "pick": "GSW +6.0",
-          "result": "126-113",
-          "hit": false,
-          "confidence": 66.4
-        },
-        {
-          "type": "total",
-          "game": "SAS @ GSW",
-          "pick": "OVER 219.5",
-          "result": "126-113",
-          "hit": true,
-          "confidence": 64.3
-        },
-        {
-          "type": "ml",
-          "game": "SAS @ GSW",
-          "pick": "GSW",
-          "result": "126-113",
-          "hit": false,
-          "confidence": 57.8
         }
       ],
       "best_bets": {
-        "wins": 11,
-        "losses": 4,
+        "wins": 12,
+        "losses": 5,
         "pushes": 0,
-        "record": "11-4",
-        "pct": 73.3
+        "record": "12-5",
+        "pct": 70.6
       }
     },
     {
