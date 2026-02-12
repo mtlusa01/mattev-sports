@@ -1415,6 +1415,42 @@
       font-size: 9px; padding: 2px 6px; border-radius: 4px;
       border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600;
     }
+    /* Graded recommendation cards */
+    .rec-card.graded { opacity: 0.92; }
+    .rec-card.graded.rec-win {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg-primary) 100%);
+    }
+    .rec-card.graded.rec-win.game-rec { border-left: 3px solid var(--accent); }
+    .rec-card.graded.rec-win.prop-rec { border-left: 3px solid var(--accent); }
+    .rec-card.graded.rec-loss {
+      border-color: var(--red);
+      background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, var(--bg-primary) 100%);
+    }
+    .rec-card.graded.rec-loss.game-rec { border-left: 3px solid var(--red); }
+    .rec-card.graded.rec-loss.prop-rec { border-left: 3px solid var(--red); }
+    .rec-card.graded.rec-push {
+      border-color: var(--yellow);
+      background: linear-gradient(135deg, rgba(234,179,8,0.1) 0%, var(--bg-primary) 100%);
+    }
+    .rec-card.graded.rec-push.game-rec { border-left: 3px solid var(--yellow); }
+    .rec-card.graded.rec-push.prop-rec { border-left: 3px solid var(--yellow); }
+    .rec-result-badge {
+      position: absolute; top: 0; right: 0; padding: 3px 8px;
+      border-radius: 0 10px 0 8px; display: flex; align-items: center;
+      gap: 4px; font-weight: 700; font-size: 11px; z-index: 1;
+    }
+    .rec-result-badge.rec-win { background: var(--accent); color: #fff; }
+    .rec-result-badge.rec-loss { background: var(--red); color: #fff; }
+    .rec-result-badge.rec-push { background: var(--yellow); color: #000; }
+    .rec-final-score {
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .rec-actual {
+      font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;
+    }
+    .rec-actual strong { color: var(--text-primary); }
     .no-recs {
       text-align: center; padding: 20px; color: var(--text-secondary); font-size: 13px;
     }
@@ -2797,15 +2833,18 @@
 
     function buildGameBestBets(games, thresholds) {
       // Build best bets dynamically from game projections
+      // Include final games so recommendations persist and show graded results
       const { spread: spT, total: totT, ml: mlT } = thresholds;
       const bets = [];
       const fmtOdds = (o) => o == null ? '' : (o > 0 ? `(+${o})` : `(${o})`);
       for (const g of games) {
-        if (g.status === 'final') continue;
+        const isFinal = g.status === 'final';
         const matchup = g.away_team + ' @ ' + g.home_team;
-        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, odds: fmtOdds(g.spread_odds), confidence: g.spread_conf, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`] });
-        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, odds: fmtOdds(g.total_odds), confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
-        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, odds: fmtOdds(g.ml_odds), confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
+        const finalScore = isFinal && g.away_score != null && g.home_score != null
+          ? g.away_score + '-' + g.home_score : null;
+        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, odds: fmtOdds(g.spread_odds), confidence: g.spread_conf, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`], isFinal, result: isFinal ? (g.spread_result || null) : null, finalScore });
+        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, odds: fmtOdds(g.total_odds), confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`], isFinal, result: isFinal ? (g.total_result || null) : null, finalScore });
+        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, odds: fmtOdds(g.ml_odds), confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`], isFinal, result: isFinal ? (g.ml_result || null) : null, finalScore });
       }
       bets.sort((a, b) => (parseFloat(b.confidence) || 0) - (parseFloat(a.confidence) || 0));
       return bets.slice(0, MAX_RECOMMENDED);
@@ -2831,11 +2870,20 @@
       const gameCards = gameRecs.map((r, i) => {
         const confLvl = getConfLevel(r.confidence || 0);
         const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-        return `<div class="rec-card game-rec">
+        const res = (r.result || '').toLowerCase();
+        const isGraded = r.isFinal && res;
+        const gradedClass = isGraded ? ` graded rec-${res}` : '';
+        const resultBadge = isGraded
+          ? `<div class="rec-result-badge rec-${res}">${res === 'win' ? '&#10003; W' : res === 'loss' ? '&#10007; L' : 'P'}</div>` : '';
+        const scoreHtml = r.isFinal && r.finalScore
+          ? `<div class="rec-final-score">FINAL ${r.finalScore}</div>` : '';
+        return `<div class="rec-card game-rec${gradedClass}">
+          ${resultBadge}
           <div class="rec-rank">#${i + 1}</div>
           <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
           <div class="rec-matchup">${r.game || ''}</div>
           <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds || ''}</span></div>
+          ${scoreHtml}
           <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
           ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
         </div>`;
@@ -2873,7 +2921,19 @@
         const g = getGameForTeam(r.team);
         const matchupStr = g ? (g.away_team === r.team ? '@ ' + g.home_team : 'vs ' + g.away_team) : '';
         const reasons = (r.reasons || r.score_factors || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-        return `<div class="rec-card prop-rec">
+        // Match to projections array to get graded result
+        const matchedProj = projections.find(p => p.player === r.player && p.prop === r.prop
+          && p.direction === r.direction && p.line === r.line);
+        const propResult = matchedProj && matchedProj.result ? matchedProj.result.toLowerCase() : '';
+        const propActual = matchedProj && matchedProj.actual != null ? matchedProj.actual : null;
+        const isGraded = !!propResult;
+        const gradedClass = isGraded ? ` graded rec-${propResult}` : '';
+        const resultBadge = isGraded
+          ? `<div class="rec-result-badge rec-${propResult}">${propResult === 'win' ? '&#10003; W' : propResult === 'loss' ? '&#10007; L' : 'P'}</div>` : '';
+        const actualHtml = isGraded && propActual != null
+          ? `<div class="rec-actual">Actual: <strong>${propActual}</strong></div>` : '';
+        return `<div class="rec-card prop-rec${gradedClass}">
+          ${resultBadge}
           <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
           <div class="rec-badge prop">PROP</div>
           <div class="rec-player">${r.player}</div>
@@ -2881,6 +2941,7 @@
           <div class="rec-prop-type">${r.prop}</div>
           <div class="rec-pick ${dirClass}">${r.direction} ${r.line}</div>
           <div class="rec-proj">Proj: ${r.projection} <span class="${diffCls}">(${diffStr})</span></div>
+          ${actualHtml}
           ${r.ev ? `<div class="rec-ev">+${r.ev.toFixed(1)}% EV</div>` : ''}
           <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
           ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
