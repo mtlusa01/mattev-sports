@@ -2,7 +2,7 @@
   "date": "2026-02-12",
   "sport": "NBA",
   "locked_at": "2026-02-12T17:18:06",
-  "updated": "2026-02-12T17:20:10",
+  "updated": "2026-02-12T21:47:28",
   "games": [
     {
       "away_team": "MIL",
@@ -17,7 +17,7 @@
       "ml_pick": "OKC",
       "ml_conf": 71.4,
       "commence_time": "2026-02-13T00:40:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-12T22:18:05Z",
       "injury_impact": {
         "home": -12.4,
@@ -66,7 +66,9 @@
         "edge": 7.5,
         "ev": 29.7,
         "confidence": "high"
-      }
+      },
+      "away_score": 110,
+      "home_score": 90
     },
     {
       "away_team": "POR",
@@ -81,7 +83,7 @@
       "ml_pick": "UTA",
       "ml_conf": 52.3,
       "commence_time": "2026-02-13T02:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-02-12T22:18:05Z",
       "injury_impact": {
         "home": -8.8,
@@ -135,7 +137,9 @@
         "edge": -8.9,
         "ev": 37.5,
         "confidence": "high"
-      }
+      },
+      "away_score": 30,
+      "home_score": 31
     },
     {
       "away_team": "DAL",
