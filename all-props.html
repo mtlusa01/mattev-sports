@@ -1006,8 +1006,8 @@
         const data = await response.json();
         allProps = data.props || [];
 
-        // Filter to only today's games if we have team data
-        if (todaysTeams && todaysTeams.size > 0) {
+        // Filter to only today's games (todaysTeams is null if fetch failed)
+        if (todaysTeams !== null) {
           allProps = allProps.filter(p => todaysTeams.has(p.team));
         }
 
