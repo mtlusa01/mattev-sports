@@ -440,8 +440,7 @@
       ],
       "injury_status": "Questionable",
       "injury_type": "Left foot (soreness)",
-      "injury_headline": "Left foot (soreness)",
-      "top_pick_rank": 5
+      "injury_headline": "Left foot (soreness)"
     },
     {
       "player": "Ryan Rollins",
@@ -655,8 +654,7 @@
       ],
       "injury_status": "Questionable",
       "injury_type": "Right foot (plantar fasciitis)",
-      "injury_headline": "Right foot (plantar fasciitis)",
-      "top_pick_rank": 4
+      "injury_headline": "Right foot (plantar fasciitis)"
     },
     {
       "player": "Myles Turner",
@@ -867,7 +865,7 @@
         "Favorable matchup (#24 DEF)",
         "4-game streak"
       ],
-      "top_pick_rank": 1
+      "top_pick_rank": 3
     },
     {
       "player": "Deni Avdija",
@@ -1333,8 +1331,7 @@
         "60% L10 hit rate",
         "Favorable matchup (#30 DEF)",
         "+3.2 edge"
-      ],
-      "top_pick_rank": 3
+      ]
     },
     {
       "player": "Ace Bailey",
@@ -1799,8 +1796,7 @@
       "pick_score": 38.0,
       "score_factors": [
         "+16.7% EV"
-      ],
-      "top_pick_rank": 2
+      ]
     },
     {
       "player": "LeBron James",
@@ -2030,6 +2026,122 @@
         "+8.2% EV",
         "3-game streak"
       ]
+    }
+  ],
+  "top_picks": [
+    {
+      "type": "ml",
+      "game": "MIL @ OKC",
+      "away_team": "MIL",
+      "home_team": "OKC",
+      "pick": "OKC",
+      "confidence": 71.4,
+      "pick_score": 50.0,
+      "score_factors": [
+        "71.4% ML conf"
+      ],
+      "commence_time": "2026-02-13T00:40:00Z",
+      "top_pick_rank": 1,
+      "result": "LOSS",
+      "actual": "110-93"
+    },
+    {
+      "type": "spread",
+      "game": "POR @ UTA",
+      "away_team": "POR",
+      "home_team": "UTA",
+      "pick": "UTA +7.5",
+      "confidence": 66.9,
+      "pick_score": 50.0,
+      "score_factors": [
+        "66.9% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-02-13T02:10:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "prop",
+      "player": "Myles Turner",
+      "team": "MIL",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.1,
+      "diff": 0.6,
+      "ev": 3.0,
+      "confidence": 55.3,
+      "pick_score": 45.5,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup (#24 DEF)",
+        "4-game streak"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -104
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -116
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -113
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Has gone OVER 5.5 rebounds in 7 of last 10 games (7.4 avg).",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "total",
+      "game": "MIL @ OKC",
+      "away_team": "MIL",
+      "home_team": "OKC",
+      "pick": "OVER 213.5",
+      "confidence": 63.1,
+      "pick_score": 40.0,
+      "score_factors": [
+        "63.1% total conf"
+      ],
+      "commence_time": "2026-02-13T00:40:00Z",
+      "top_pick_rank": 4,
+      "result": "LOSS",
+      "actual": "110-93"
+    },
+    {
+      "type": "ml",
+      "game": "DAL @ LAL",
+      "away_team": "DAL",
+      "home_team": "LAL",
+      "pick": "LAL",
+      "confidence": 61.1,
+      "pick_score": 40.0,
+      "score_factors": [
+        "61.1% ML conf"
+      ],
+      "commence_time": "2026-02-13T03:10:00Z",
+      "top_pick_rank": 5
     }
   ]
 }
