@@ -960,6 +960,7 @@
   <script>
     let allProps = [];
     let filteredProps = [];
+    let todaysTeams = null; // Set of teams playing today (for date filtering)
     let currentFilters = {
       search: '',
       edge: 'All',
@@ -969,12 +970,46 @@
     };
     let currentSort = { field: 'ev', direction: 'desc' };
 
+    function getLocalDateStr() {
+      const now = new Date();
+      return now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+    }
+
+    // Load game projections to determine today's teams
+    async function loadTodaysTeams() {
+      try {
+        const resp = await fetch('game_projections.json?v=' + Date.now());
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const today = getLocalDateStr();
+        const games = data.games || [];
+        todaysTeams = new Set();
+        for (const g of games) {
+          const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+          if (gameDate === today) {
+            todaysTeams.add(g.away_team);
+            todaysTeams.add(g.home_team);
+          }
+        }
+      } catch (e) {
+        console.warn('Could not load game projections for date filtering:', e);
+      }
+    }
+
     // Load data
     async function loadAllProps() {
       try {
+        await loadTodaysTeams();
         const response = await fetch('all_props.json?v=' + Date.now());
         const data = await response.json();
         allProps = data.props || [];
+
+        // Filter to only today's games if we have team data
+        if (todaysTeams && todaysTeams.size > 0) {
+          allProps = allProps.filter(p => todaysTeams.has(p.team));
+        }
 
         // Update timestamp
         if (data.updated_at) {

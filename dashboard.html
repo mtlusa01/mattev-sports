@@ -2624,6 +2624,20 @@
     function applyFilters(data) {
       let filtered = data;
 
+      // Date filter: only show props for teams with games on the selected date
+      const activeGames = getActiveGameProjections();
+      const todaysTeams = new Set();
+      for (const g of activeGames) {
+        const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        if (gameDate === selectedDate) {
+          todaysTeams.add(g.away_team);
+          todaysTeams.add(g.home_team);
+        }
+      }
+      if (todaysTeams.size > 0) {
+        filtered = filtered.filter(p => todaysTeams.has(p.team));
+      }
+
       // Game filter
       if (currentGameFilter) {
         const parts = currentGameFilter.split('@');
