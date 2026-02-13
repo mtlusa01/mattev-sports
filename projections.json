@@ -1,8 +1,8 @@
 {
-  "date": "2026-02-12",
+  "date": "2026-02-13",
   "sport": "NBA",
   "locked_at": "2026-02-12T21:34:44",
-  "updated": "2026-02-13T01:47:56",
+  "updated": "2026-02-13T01:48:34",
   "projections": [
     {
       "player": "Ryan Rollins",
@@ -869,8 +869,7 @@
       ],
       "injury_status": "Out",
       "injury_type": "Right calf (soreness)",
-      "injury_headline": "Right calf (soreness)",
-      "top_pick_rank": 3
+      "injury_headline": "Right calf (soreness)"
     },
     {
       "player": "Deni Avdija",
@@ -1807,7 +1806,8 @@
         "+16.7% EV"
       ],
       "actual": 10,
-      "result": "LOSS"
+      "result": "LOSS",
+      "top_pick_rank": 5
     },
     {
       "player": "LeBron James",
@@ -2054,9 +2054,7 @@
         "71.4% ML conf"
       ],
       "commence_time": "2026-02-13T00:40:00Z",
-      "top_pick_rank": 1,
-      "result": "LOSS",
-      "actual": "110-93"
+      "top_pick_rank": 1
     },
     {
       "type": "spread",
@@ -2074,59 +2072,6 @@
       "top_pick_rank": 2
     },
     {
-      "type": "prop",
-      "player": "Myles Turner",
-      "team": "MIL",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 5.5,
-      "projection": 6.1,
-      "diff": 0.6,
-      "ev": 3.0,
-      "confidence": 55.3,
-      "pick_score": 45.5,
-      "score_factors": [
-        "70% L10 hit rate",
-        "Favorable matchup (#24 DEF)",
-        "4-game streak"
-      ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 5.5,
-            "odds": -122
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -104
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 5.5,
-            "odds": -116
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -113
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 5.5,
-            "odds": -110
-          },
-          "under": {
-            "line": 5.5,
-            "odds": -120
-          }
-        }
-      },
-      "best_book": "betmgm",
-      "insight": "Has gone OVER 5.5 rebounds in 7 of last 10 games (7.4 avg).",
-      "top_pick_rank": 3
-    },
-    {
       "type": "total",
       "game": "MIL @ OKC",
       "away_team": "MIL",
@@ -2138,9 +2083,7 @@
         "63.1% total conf"
       ],
       "commence_time": "2026-02-13T00:40:00Z",
-      "top_pick_rank": 4,
-      "result": "LOSS",
-      "actual": "110-93"
+      "top_pick_rank": 3
     },
     {
       "type": "ml",
@@ -2154,7 +2097,319 @@
         "61.1% ML conf"
       ],
       "commence_time": "2026-02-13T03:10:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "prop",
+      "player": "LeBron James",
+      "team": "LAL",
+      "prop": "REB",
+      "direction": "UNDER",
+      "line": 6.5,
+      "projection": 5.5,
+      "diff": -1.0,
+      "ev": 16.7,
+      "confidence": 55.099999999999994,
+      "pick_score": 38.0,
+      "score_factors": [
+        "+16.7% EV"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 6.5,
+            "odds": -136
+          },
+          "under": {
+            "line": 6.5,
+            "odds": 102
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 6.5,
+            "odds": -144
+          },
+          "under": {
+            "line": 6.5,
+            "odds": 110
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 6.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 6.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": "DAL ranks #27 in rebounds defense \u2014 tough for unders.",
       "top_pick_rank": 5
     }
-  ]
+  ],
+  "recommendations": {
+    "date": "2026-02-13",
+    "generated_at": "2026-02-13T01:48:34",
+    "game_bets": [
+      {
+        "qualified": true,
+        "score": 167.8,
+        "reasons": [
+          "71.4% confidence",
+          "High confidence"
+        ],
+        "type": "ml",
+        "bet_type": "ML",
+        "game": "MIL @ OKC",
+        "away_team": "MIL",
+        "home_team": "OKC",
+        "pick": "OKC",
+        "confidence": 71.4,
+        "commence_time": "2026-02-13T00:40:00Z",
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 148.8,
+        "reasons": [
+          "66.9% confidence"
+        ],
+        "type": "spread",
+        "bet_type": "SPREAD",
+        "game": "POR @ UTA",
+        "away_team": "POR",
+        "home_team": "UTA",
+        "pick": "UTA +7.5",
+        "confidence": 66.9,
+        "commence_time": "2026-02-13T02:10:00Z",
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 126.2,
+        "reasons": [
+          "63.1% confidence"
+        ],
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "MIL @ OKC",
+        "away_team": "MIL",
+        "home_team": "OKC",
+        "pick": "OVER 213.5",
+        "confidence": 63.1,
+        "commence_time": "2026-02-13T00:40:00Z",
+        "rec_rank": 3
+      },
+      {
+        "qualified": true,
+        "score": 122.2,
+        "reasons": [
+          "61.1% confidence"
+        ],
+        "type": "ml",
+        "bet_type": "ML",
+        "game": "DAL @ LAL",
+        "away_team": "DAL",
+        "home_team": "LAL",
+        "pick": "LAL",
+        "confidence": 61.1,
+        "commence_time": "2026-02-13T03:10:00Z",
+        "rec_rank": 4
+      }
+    ],
+    "props": [
+      {
+        "qualified": true,
+        "score": 57.515,
+        "reasons": [
+          "+16.7% EV",
+          "80% L10 hit rate"
+        ],
+        "type": "prop",
+        "player": "LeBron James",
+        "team": "LAL",
+        "prop": "REB",
+        "direction": "UNDER",
+        "line": 6.5,
+        "projection": 5.5,
+        "diff": -1.0,
+        "confidence": 55.099999999999994,
+        "ev": 16.7,
+        "edge": 1.0,
+        "pick_score": 38.0,
+        "score_factors": [
+          "+16.7% EV"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 6.5,
+              "odds": -136
+            },
+            "under": {
+              "line": 6.5,
+              "odds": 102
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 6.5,
+              "odds": -144
+            },
+            "under": {
+              "line": 6.5,
+              "odds": 110
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 6.5,
+              "odds": -118
+            },
+            "under": {
+              "line": 6.5,
+              "odds": -110
+            }
+          }
+        },
+        "best_book": "draftkings",
+        "insight": "DAL ranks #27 in rebounds defense \u2014 tough for unders.",
+        "matchup_favorability": "unfavorable",
+        "l10_hit_rate": 80,
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 27.94,
+        "reasons": [
+          "+6.3% EV",
+          "Favorable matchup"
+        ],
+        "type": "prop",
+        "player": "Kyle Kuzma",
+        "team": "MIL",
+        "prop": "REB",
+        "direction": "OVER",
+        "line": 5.5,
+        "projection": 5.8,
+        "diff": 0.3,
+        "confidence": 52.6,
+        "ev": 6.3,
+        "edge": 0.2999999999999998,
+        "pick_score": 28.4,
+        "score_factors": [
+          "+6.3% EV",
+          "60% L10 hit rate",
+          "Favorable matchup (#24 DEF)"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 5.5,
+              "odds": -108
+            },
+            "under": {
+              "line": 5.5,
+              "odds": -118
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 5.5,
+              "odds": -104
+            },
+            "under": {
+              "line": 5.5,
+              "odds": -126
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 6.5,
+              "odds": 120
+            },
+            "under": {
+              "line": 6.5,
+              "odds": -160
+            }
+          }
+        },
+        "best_book": "betmgm",
+        "insight": "OKC ranks #24 in rebounds defense \u2014 favorable for overs.",
+        "matchup_favorability": "favorable",
+        "l10_hit_rate": 60,
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 27.18675,
+        "reasons": [
+          "+5.1% EV",
+          "+2.8 edge"
+        ],
+        "type": "prop",
+        "player": "Ace Bailey",
+        "team": "UTA",
+        "prop": "PTS",
+        "direction": "UNDER",
+        "line": 17.5,
+        "projection": 14.7,
+        "diff": -2.8,
+        "confidence": 54.245,
+        "ev": 5.1,
+        "edge": 2.8000000000000007,
+        "pick_score": 22.6,
+        "score_factors": [
+          "+5.1% EV",
+          "+2.8 edge",
+          "3-game streak"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 17.5,
+              "odds": -102
+            },
+            "under": {
+              "line": 17.5,
+              "odds": -125
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 17.5,
+              "odds": -110
+            },
+            "under": {
+              "line": 17.5,
+              "odds": -116
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 17.5,
+              "odds": -118
+            },
+            "under": {
+              "line": 17.5,
+              "odds": -115
+            }
+          }
+        },
+        "best_book": "betmgm",
+        "insight": "Averaging 14.5 points over last 10 games (-3.0 below line).",
+        "matchup_favorability": "unfavorable",
+        "l10_hit_rate": 60,
+        "rec_rank": 3
+      }
+    ],
+    "game_count": 4,
+    "prop_count": 3,
+    "has_recommendations": true,
+    "message": null
+  }
 }
