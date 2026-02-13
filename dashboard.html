@@ -2007,10 +2007,12 @@
     }
 
     function updateActiveGameData() {
-      // Rebuild teamToGame for the active sport
+      // Rebuild teamToGame for the active sport, filtered to selected date
       const games = getActiveGameProjections();
       teamToGame = {};
       for (const g of games) {
+        const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        if (gameDate !== selectedDate) continue;
         teamToGame[g.away_team] = g;
         teamToGame[g.home_team] = g;
       }
@@ -2729,9 +2731,16 @@
       const bar = document.getElementById('game-filter-bar');
       if (gameProjections.length === 0) { bar.style.display = 'none'; return; }
 
+      // Filter to only games on the selected date
+      const todaysGames = gameProjections.filter(g => {
+        const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        return gameDate === selectedDate;
+      });
+      if (todaysGames.length === 0) { bar.style.display = 'none'; return; }
+
       // Sort: live first, then soon, then by commence_time
       const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
-      const sorted = [...gameProjections].sort((a, b) => {
+      const sorted = [...todaysGames].sort((a, b) => {
         const sa = getGameStatus(a), sb = getGameStatus(b);
         if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
         return (a.commence_time || '').localeCompare(b.commence_time || '');
