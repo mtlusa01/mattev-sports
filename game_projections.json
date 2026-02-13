@@ -2,7 +2,7 @@
   "date": "2026-02-12",
   "sport": "NBA",
   "locked_at": "2026-02-12T17:18:06",
-  "updated": "2026-02-12T22:12:23",
+  "updated": "2026-02-13T01:47:56",
   "games": [
     {
       "away_team": "MIL",
@@ -71,7 +71,21 @@
       "home_score": 93,
       "spread_result": "loss",
       "total_result": "loss",
-      "ml_result": "loss"
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Kyle Kuzma",
+          "team": "MIL",
+          "prop": "REB",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 4,
+          "hit": false,
+          "confidence": 52.6,
+          "ev": 6.3
+        }
+      ]
     },
     {
       "away_team": "POR",
@@ -86,7 +100,7 @@
       "ml_pick": "UTA",
       "ml_conf": 52.3,
       "commence_time": "2026-02-13T02:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-02-12T22:18:05Z",
       "injury_impact": {
         "home": -8.8,
@@ -141,8 +155,37 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 53,
-      "home_score": 53
+      "away_score": 135,
+      "home_score": 119,
+      "spread_result": "loss",
+      "total_result": "loss",
+      "ml_result": "loss",
+      "graded_props": [
+        {
+          "player": "Ace Bailey",
+          "team": "UTA",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 17.5,
+          "projection": 14.7,
+          "actual": 15,
+          "hit": true,
+          "confidence": 54.245,
+          "ev": 5.1
+        },
+        {
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 17.7,
+          "actual": 31,
+          "hit": true,
+          "confidence": 54.8,
+          "ev": 2.8
+        }
+      ]
     },
     {
       "away_team": "DAL",
@@ -157,7 +200,7 @@
       "ml_pick": "LAL",
       "ml_conf": 61.1,
       "commence_time": "2026-02-13T03:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-02-12T22:18:05Z",
       "injury_impact": {
         "home": -7.6,
@@ -212,7 +255,33 @@
         "edge": -3.4,
         "ev": 11.5,
         "confidence": "low"
-      }
+      },
+      "graded_props": [
+        {
+          "player": "LeBron James",
+          "team": "LAL",
+          "prop": "REB",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 5.5,
+          "actual": 10,
+          "hit": false,
+          "confidence": 55.099999999999994,
+          "ev": 16.7
+        },
+        {
+          "player": "LeBron James",
+          "team": "LAL",
+          "prop": "PTS",
+          "direction": "UNDER",
+          "line": 24.5,
+          "projection": 23.4,
+          "actual": 28,
+          "hit": false,
+          "confidence": 54.05499999999999,
+          "ev": 8.2
+        }
+      ]
     }
   ]
 }
