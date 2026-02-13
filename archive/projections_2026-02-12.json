@@ -17853,7 +17853,7 @@
     "total_nhl_games": 7
   },
   "results": {
-    "updated": "2026-02-12T17:18:07",
+    "updated": "2026-02-12T21:56:54",
     "allTime": {
       "props": {
         "wins": 274,
@@ -17864,36 +17864,105 @@
       },
       "spreads": {
         "wins": 34,
-        "losses": 36,
+        "losses": 38,
         "pushes": 1,
-        "pct": 48.6,
-        "roi": -7.3
+        "pct": 47.2,
+        "roi": -9.8
       },
       "totals": {
-        "wins": 39,
-        "losses": 32,
+        "wins": 40,
+        "losses": 33,
         "pushes": 0,
-        "pct": 54.9,
-        "roi": 4.9
+        "pct": 54.8,
+        "roi": 4.6
       },
       "moneylines": {
         "wins": 47,
-        "losses": 24,
+        "losses": 26,
         "pushes": 0,
-        "pct": 66.2,
-        "roi": 26.4
+        "pct": 64.4,
+        "roi": 22.9
       },
       "best_bets": {
-        "wins": 51,
-        "losses": 35,
+        "wins": 52,
+        "losses": 38,
         "pushes": 0,
-        "pct": 59.3,
-        "roi": 13.2
+        "pct": 57.8,
+        "roi": 10.3
       },
       "best_prop_type": "pts_rebs_asts",
-      "best_prop_pct": 56.5
+      "best_prop_pct": 55.5
     },
     "days": [
+      {
+        "date": "2026-02-12",
+        "props": {
+          "wins": 0,
+          "losses": 0,
+          "pushes": 0,
+          "record": "0-0",
+          "pct": 0
+        },
+        "spreads": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "record": "0-1",
+          "pct": 0.0
+        },
+        "totals": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "record": "0-1",
+          "pct": 0.0
+        },
+        "moneylines": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "record": "0-1",
+          "pct": 0.0
+        },
+        "picks": [
+          {
+            "date": "2026-02-12",
+            "type": "spread",
+            "game": "MIL @ OKC",
+            "pick": "OKC -11.5",
+            "result": "110-93",
+            "hit": false,
+            "confidence": 52.2
+          },
+          {
+            "date": "2026-02-12",
+            "type": "total",
+            "game": "MIL @ OKC",
+            "pick": "OVER 213.5",
+            "result": "110-93",
+            "hit": false,
+            "confidence": 63.1,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-12",
+            "type": "ml",
+            "game": "MIL @ OKC",
+            "pick": "OKC",
+            "result": "110-93",
+            "hit": false,
+            "confidence": 71.4,
+            "best_bet": true
+          }
+        ],
+        "best_bets": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0,
+          "record": "0-2",
+          "pct": 0.0
+        }
+      },
       {
         "date": "2026-02-11",
         "props": {
@@ -17905,24 +17974,24 @@
         },
         "spreads": {
           "wins": 7,
-          "losses": 5,
-          "pushes": 0,
-          "record": "7-5",
-          "pct": 58.3
-        },
-        "totals": {
-          "wins": 6,
           "losses": 6,
           "pushes": 0,
-          "record": "6-6",
-          "pct": 50.0
+          "record": "7-6",
+          "pct": 53.8
+        },
+        "totals": {
+          "wins": 7,
+          "losses": 6,
+          "pushes": 0,
+          "record": "7-6",
+          "pct": 53.8
         },
         "moneylines": {
           "wins": 8,
-          "losses": 4,
+          "losses": 5,
           "pushes": 0,
-          "record": "8-4",
-          "pct": 66.7
+          "record": "8-5",
+          "pct": 61.5
         },
         "picks": [
           {
@@ -20587,6 +20656,35 @@
           },
           {
             "date": "2026-02-11",
+            "type": "spread",
+            "game": "SAS @ GSW",
+            "pick": "GSW +6.0",
+            "result": "126-113",
+            "hit": false,
+            "confidence": 66.4,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-11",
+            "type": "total",
+            "game": "SAS @ GSW",
+            "pick": "OVER 219.5",
+            "result": "126-113",
+            "hit": true,
+            "confidence": 64.3,
+            "best_bet": true
+          },
+          {
+            "date": "2026-02-11",
+            "type": "ml",
+            "game": "SAS @ GSW",
+            "pick": "GSW",
+            "result": "126-113",
+            "hit": false,
+            "confidence": 57.8
+          },
+          {
+            "date": "2026-02-11",
             "type": "prop",
             "player": "Kevin Porter Jr.",
             "team": "MIL",
@@ -20708,11 +20806,11 @@
           }
         ],
         "best_bets": {
-          "wins": 11,
-          "losses": 4,
+          "wins": 12,
+          "losses": 5,
           "pushes": 0,
-          "record": "11-4",
-          "pct": 73.3
+          "record": "12-5",
+          "pct": 70.6
         }
       },
       {
@@ -26687,5 +26785,5 @@
       }
     ]
   },
-  "results_added_at": "2026-02-12T17:18:07"
+  "results_added_at": "2026-02-12T21:56:54"
 }
