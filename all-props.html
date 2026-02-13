@@ -960,7 +960,7 @@
   <script>
     let allProps = [];
     let filteredProps = [];
-    let todaysTeams = null; // Set of teams playing today (for date filtering)
+    let dataIsStale = false;
     let currentFilters = {
       search: '',
       edge: 'All',
@@ -977,38 +977,21 @@
         String(now.getDate()).padStart(2, '0');
     }
 
-    // Load game projections to determine today's teams
-    async function loadTodaysTeams() {
-      try {
-        const resp = await fetch('game_projections.json?v=' + Date.now());
-        if (!resp.ok) return;
-        const data = await resp.json();
-        const today = getLocalDateStr();
-        const games = data.games || [];
-        todaysTeams = new Set();
-        for (const g of games) {
-          const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
-          if (gameDate === today) {
-            todaysTeams.add(g.away_team);
-            todaysTeams.add(g.home_team);
-          }
-        }
-      } catch (e) {
-        console.warn('Could not load game projections for date filtering:', e);
-      }
-    }
-
     // Load data
     async function loadAllProps() {
       try {
-        await loadTodaysTeams();
         const response = await fetch('all_props.json?v=' + Date.now());
         const data = await response.json();
-        allProps = data.props || [];
+        const today = getLocalDateStr();
+        const dataDate = data._date || '';
 
-        // Filter to only today's games (todaysTeams is null if fetch failed)
-        if (todaysTeams !== null) {
-          allProps = allProps.filter(p => todaysTeams.has(p.team));
+        // Only show props if the data is from today
+        if (dataDate !== today) {
+          allProps = [];
+          dataIsStale = true;
+        } else {
+          allProps = data.props || [];
+          dataIsStale = false;
         }
 
         // Update timestamp
@@ -1174,11 +1157,15 @@
       const tbody = document.getElementById('props-tbody');
 
       if (filteredProps.length === 0) {
+        const msg = dataIsStale
+          ? 'Waiting for today\'s props data...'
+          : 'No props match your filters';
+        const icon = dataIsStale ? '&#9203;' : '&#128270;';
         tbody.innerHTML = `
           <tr><td colspan="10">
             <div class="empty-state">
-              <div class="empty-state-icon">&#128270;</div>
-              <div class="empty-state-text">No props match your filters</div>
+              <div class="empty-state-icon">${icon}</div>
+              <div class="empty-state-text">${msg}</div>
             </div>
           </td></tr>`;
         document.getElementById('props-count').textContent = '0';
