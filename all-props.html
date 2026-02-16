@@ -974,6 +974,32 @@
       try {
         const response = await fetch('all_props.json?v=' + Date.now());
         const data = await response.json();
+
+        // Check if data is from today — don't show stale props during off-days
+        const dataDate = data._date || '';
+        const now = new Date();
+        const today = now.getFullYear() + '-' +
+          String(now.getMonth() + 1).padStart(2, '0') + '-' +
+          String(now.getDate()).padStart(2, '0');
+
+        if (dataDate && dataDate !== today) {
+          document.getElementById('updated-time').textContent = 'No games scheduled today';
+          document.getElementById('props-tbody').innerHTML = `
+            <tr><td colspan="10">
+              <div class="empty-state">
+                <div class="empty-state-icon" style="font-size: 48px;">&#128197;</div>
+                <div class="empty-state-text" style="font-size: 15px; font-weight: 600;">No games scheduled today</div>
+                <div class="empty-state-text" style="margin-top: 4px;">All props will appear here when today's games are loaded.</div>
+              </div>
+            </td></tr>`;
+          // Zero out filter counts
+          ['count-strong', 'count-good', 'count-fair', 'count-pts', 'count-reb', 'count-ast', 'count-pra'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = '0';
+          });
+          return;
+        }
+
         allProps = data.props || [];
 
         // Update timestamp

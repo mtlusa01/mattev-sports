@@ -2043,7 +2043,7 @@
         statsBar.style.display = '';
       } else if (currentSport === 'nba' && !isGameView) {
         // Player props stats
-        if (projections.length === 0) { statsBar.style.display = 'none'; return; }
+        if (projections.length === 0 || projections._stale) { statsBar.style.display = 'none'; return; }
         const posEV = projections.filter(p => p.ev > 0).length;
         const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
         const avgConf = projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length;
@@ -3791,6 +3791,17 @@
       propsView.style.display = 'block';
       gameView.style.display = 'none';
 
+      // Show empty state if projections are stale (no games today)
+      if (projections._stale) {
+        propsView.innerHTML = `
+          <div class="empty-state" style="padding: 60px 20px;">
+            <div class="empty-state-icon" style="font-size: 48px;">&#128197;</div>
+            <div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No games scheduled today</div>
+            <div class="empty-state-text">NBA player prop projections will appear here when today's games are loaded.</div>
+          </div>`;
+        return;
+      }
+
       renderSelectedGameCard();
 
       const filtered = applyFilters(projections);
@@ -4729,9 +4740,27 @@
         const resp = await fetch(DATA_URL + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch');
         const data = await resp.json();
+
+        // Check if data is from today — don't show stale props during off-days
+        const dataDate = data.date || '';
+        const today = getLocalDateStr();
+        if (dataDate && dataDate !== today) {
+          projections = [];
+          projections._date = dataDate;
+          projections._stale = true;
+          topPicks = [];
+          recommendations = null;
+          document.getElementById('current-date').textContent = 'No games scheduled today';
+          document.getElementById('nav-updated-time').textContent = '';
+          updateStatsBar();
+          render();
+          return;
+        }
+
         projections = data.projections || [];
         projections.forEach((p, i) => p._idx = i);
-        projections._date = data.date || getLocalDateStr();
+        projections._date = dataDate || today;
+        projections._stale = false;
         topPicks = data.top_picks || [];
         recommendations = data.recommendations || null;
 
