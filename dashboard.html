@@ -1087,31 +1087,134 @@
       body { overflow-x: hidden; }
     }
 
-    /* ── Date Picker ── */
-    .date-picker {
-      display: flex; align-items: center; justify-content: flex-start; gap: 6px;
-      padding: 8px 0; margin-bottom: 12px;
+    /* ── Calendar Date Picker ── */
+    .calendar-wrap {
+      position: relative;
+      margin-bottom: 12px;
     }
-    .date-picker-btn {
-      width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);
-      background: var(--bg-secondary); color: var(--text-muted); font-size: 14px;
-      cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center;
+    .calendar-bar {
+      display: inline-flex; align-items: center; gap: 6px;
     }
-    .date-picker-btn:hover { border-color: var(--border-light); color: var(--text-primary); background: var(--bg-tertiary); }
-    .date-picker-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .date-picker-today {
-      padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);
-      background: var(--bg-secondary); color: var(--text-secondary); font-size: 11px; font-weight: 600;
-      cursor: pointer; transition: all 0.15s;
+    .cal-step-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; font-family: inherit; flex-shrink: 0;
     }
-    .date-picker-today:hover { border-color: var(--border-light); color: var(--text-primary); }
-    .date-picker-today:disabled { opacity: 0.4; cursor: default; }
-    .date-picker-today.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
-    .date-picker-display {
-      padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text-secondary);
-      background: transparent; border: none; border-radius: 6px;
+    .cal-step-btn:hover:not(:disabled) { border-color: var(--border-light); color: var(--text-primary); }
+    .cal-step-btn:disabled { opacity: 0.25; cursor: default; }
+    .cal-today-jump {
+      padding: 0 14px; height: 36px; border-radius: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+      text-transform: uppercase; letter-spacing: 0.04em;
     }
-    .date-picker-display .date-label { color: var(--text-muted); font-weight: 400; font-size: 10px; margin-right: 6px; }
+    .cal-today-jump:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .cal-today-jump.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
+    .calendar-trigger {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px; height: 36px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 8px; cursor: pointer; transition: all 0.15s;
+      font-family: inherit; color: var(--text-primary); font-size: 14px;
+      user-select: none;
+    }
+    .calendar-trigger:hover { border-color: var(--border-light); }
+    .calendar-trigger.open { border-color: rgba(16, 185, 129, 0.4); background: var(--bg-tertiary); }
+    .calendar-trigger .ct-icon { font-size: 15px; flex-shrink: 0; }
+    .calendar-trigger .ct-date { font-weight: 600; white-space: nowrap; }
+    .calendar-trigger .ct-arrow {
+      margin-left: 4px; font-size: 10px; color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+    .calendar-trigger.open .ct-arrow { transform: rotate(180deg); }
+
+    .calendar-dropdown {
+      position: absolute; top: calc(100% + 6px); left: 0; z-index: 50;
+      background: var(--bg-secondary); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 16px;
+      width: 310px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      opacity: 0; visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+    }
+    .calendar-dropdown.open {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+    .calendar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .calendar-title {
+      font-size: 14px; font-weight: 700; color: var(--text-primary);
+    }
+    .calendar-nav {
+      display: flex; gap: 4px;
+    }
+    .calendar-nav button {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: var(--bg-tertiary); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; font-family: inherit;
+    }
+    .calendar-nav button:hover { border-color: var(--border-light); color: var(--text-primary); }
+    .calendar-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      margin-bottom: 2px;
+    }
+    .calendar-weekday {
+      text-align: center; font-size: 10px; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.03em; padding: 4px 0;
+    }
+    .calendar-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .calendar-day {
+      position: relative;
+      width: 38px; height: 38px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      border-radius: 8px; cursor: default;
+      transition: all 0.12s; border: 1px solid transparent;
+    }
+    .calendar-day.other-month { color: rgba(113, 113, 122, 0.25); }
+    .calendar-day.has-data {
+      color: var(--text-secondary); cursor: pointer;
+    }
+    .calendar-day.has-data:hover {
+      background: var(--bg-elevated); border-color: var(--border-light);
+    }
+    .calendar-day.selected {
+      background: var(--accent-glow);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--accent-light); font-weight: 700;
+    }
+    .calendar-day.today { border-color: var(--border-light); }
+    .calendar-day.today.selected { border-color: rgba(16, 185, 129, 0.4); }
+    .calendar-day.future { color: rgba(113, 113, 122, 0.15); }
+    .calendar-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      position: absolute; bottom: 3px;
+    }
+    .calendar-dot.games { background: var(--blue); }
+    .calendar-dot.props { background: var(--purple); }
+    .calendar-dot.both { background: var(--accent); }
+    .calendar-dot.win { background: var(--accent); }
+    .calendar-dot.loss { background: var(--red); }
+    .calendar-dot.mixed { background: var(--yellow); }
+    @media (max-width: 768px) {
+      .calendar-bar { width: 100%; }
+      .calendar-trigger { flex: 1; min-width: 0; }
+      .calendar-trigger .ct-date { font-size: 13px; }
+      .calendar-dropdown { width: calc(100vw - 48px); max-width: 310px; }
+    }
 
     /* ── Bet Tracking ── */
     .track-icon { cursor: pointer; font-size: 14px; opacity: 0.35; transition: opacity 0.2s, color 0.2s; margin-left: 6px; vertical-align: middle; }
@@ -3929,6 +4032,7 @@
       // Show loading state
       if (isLoadingHistory) {
         propsView.innerHTML = datePickerHtml + `<div class="empty-state" style="padding: 60px 20px;"><div class="empty-state-icon" style="animation: pulse-live 1s infinite">&#8987;</div><div class="empty-state-title">Loading...</div><div class="empty-state-text">Fetching historical projections...</div></div>`;
+        attachCalendarHandlers();
         return;
       }
 
@@ -3940,6 +4044,7 @@
             <div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No games scheduled today</div>
             <div class="empty-state-text">NBA player prop projections will appear here when today's games are loaded.</div>
           </div>`;
+        attachCalendarHandlers();
         return;
       }
 
@@ -3947,6 +4052,7 @@
       if (isHistorical && activeProps.length === 0) {
         const { formatted } = formatDateDisplay(selectedDate);
         propsView.innerHTML = datePickerHtml + `<div class="empty-state" style="padding: 60px 20px;"><div class="empty-state-icon" style="font-size: 48px;">&#128202;</div><div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No props available for this date</div><div class="empty-state-text">No archived player prop projections were found for ${formatted}.</div></div>`;
+        attachCalendarHandlers();
         return;
       }
 
@@ -4009,6 +4115,9 @@
       }
 
       propsView.innerHTML = html;
+
+      // Attach calendar handlers
+      attachCalendarHandlers();
 
       // Attach inline filter handlers
       attachPropsFilterHandlers(propsView);
@@ -4163,6 +4272,14 @@
       return { label, formatted };
     }
 
+    // ── Calendar State ──
+    let calOpen = false;
+    let calViewYear = new Date().getFullYear();
+    let calViewMonth = new Date().getMonth();
+    const CAL_MONTH_NAMES = ['January','February','March','April','May','June',
+                             'July','August','September','October','November','December'];
+    const CAL_DAY_LABELS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+
     // Cache for historical game projections by date (NBA and NHL separate)
     const historicalGamesCache = {};
     const historicalNhlCache = {};
@@ -4307,22 +4424,231 @@
       render();
     }
 
+    function calDateKey(y, m, d) {
+      return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    }
+
+    function calHasData(dateStr) {
+      const today = getLocalDateStr();
+      if (dateStr === today) {
+        // Today always has data if we have games or props loaded
+        const hasGames = currentSport === 'nhl'
+          ? (nhlGameProjections && nhlGameProjections.length > 0)
+          : (gameProjections && gameProjections.length > 0);
+        const hasProps = currentSport === 'nba' && projections && projections.length > 0 && !projections._stale;
+        return hasGames || hasProps;
+      }
+      // Historical: check caches
+      const hasGames = currentSport === 'nhl'
+        ? (historicalNhlCache[dateStr] && historicalNhlCache[dateStr].length > 0)
+        : (historicalGamesCache[dateStr] && historicalGamesCache[dateStr].length > 0);
+      const hasProps = historicalPropsCache[dateStr] && historicalPropsCache[dateStr].length > 0;
+      return hasGames || hasProps;
+    }
+
+    function calDotHtml(dateStr) {
+      const today = getLocalDateStr();
+      // For cached historical dates, show W/L dot
+      if (dateStr !== today) {
+        const games = currentSport === 'nhl'
+          ? (historicalNhlCache[dateStr] || [])
+          : (historicalGamesCache[dateStr] || []);
+        const props = historicalPropsCache[dateStr] || [];
+        let totalW = 0, totalL = 0;
+        for (const g of games) {
+          for (const t of ['spread', 'total', 'ml']) {
+            const r = (g[t + '_result'] || '').toLowerCase();
+            if (r === 'win' || r === 'w') totalW++;
+            else if (r === 'loss' || r === 'l') totalL++;
+          }
+        }
+        for (const p of props) {
+          if (p.result === 'WIN') totalW++;
+          else if (p.result === 'LOSS') totalL++;
+        }
+        if (totalW + totalL === 0) return '';
+        let cls = 'mixed';
+        if (totalL === 0) cls = 'win';
+        else if (totalW === 0) cls = 'loss';
+        else if (totalW > totalL) cls = 'win';
+        else if (totalL > totalW) cls = 'loss';
+        return `<span class="calendar-dot ${cls}"></span>`;
+      }
+      // Today: show a neutral dot if data exists
+      if (calHasData(dateStr)) {
+        return `<span class="calendar-dot both"></span>`;
+      }
+      return '';
+    }
+
+    function calDayHtml(key, d, today, isOtherMonth) {
+      const hasData = calHasData(key);
+      const isToday = key === today;
+      const isFuture = key > today;
+
+      let cls = 'calendar-day';
+      if (isOtherMonth) cls += ' other-month';
+      if (hasData || key === today) cls += ' has-data';
+      if (key === selectedDate) cls += ' selected';
+      if (isToday) cls += ' today';
+      if (isFuture && !hasData) cls += ' future';
+
+      const dot = calDotHtml(key);
+      return `<div class="${cls}" data-date="${key}">${d}${dot}</div>`;
+    }
+
+    function renderCalendarGrid() {
+      const container = document.getElementById('calendar-dropdown');
+      if (!container) return;
+      const today = getLocalDateStr();
+
+      let html = `<div class="calendar-header">
+        <span class="calendar-title">${CAL_MONTH_NAMES[calViewMonth]} ${calViewYear}</span>
+        <div class="calendar-nav">
+          <button id="cal-nav-prev">&lsaquo;</button>
+          <button id="cal-nav-next">&rsaquo;</button>
+        </div>
+      </div>`;
+
+      html += '<div class="calendar-weekdays">';
+      CAL_DAY_LABELS.forEach(d => { html += `<div class="calendar-weekday">${d}</div>`; });
+      html += '</div>';
+
+      const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
+      const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+      const daysInPrev = new Date(calViewYear, calViewMonth, 0).getDate();
+
+      const prevM = calViewMonth === 0 ? 11 : calViewMonth - 1;
+      const prevY = calViewMonth === 0 ? calViewYear - 1 : calViewYear;
+      const nextM = calViewMonth === 11 ? 0 : calViewMonth + 1;
+      const nextY = calViewMonth === 11 ? calViewYear + 1 : calViewYear;
+
+      html += '<div class="calendar-grid">';
+
+      // Previous month trailing days
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const d = daysInPrev - i;
+        html += calDayHtml(calDateKey(prevY, prevM, d), d, today, true);
+      }
+
+      // Current month days
+      for (let d = 1; d <= daysInMonth; d++) {
+        html += calDayHtml(calDateKey(calViewYear, calViewMonth, d), d, today, false);
+      }
+
+      // Next month fill
+      const totalCells = firstDay + daysInMonth;
+      const remaining = (totalCells % 7 === 0) ? 0 : 7 - (totalCells % 7);
+      for (let d = 1; d <= remaining; d++) {
+        html += calDayHtml(calDateKey(nextY, nextM, d), d, today, true);
+      }
+
+      html += '</div>';
+      container.innerHTML = html;
+
+      // Month nav
+      document.getElementById('cal-nav-prev').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (calViewMonth === 0) { calViewMonth = 11; calViewYear--; }
+        else { calViewMonth--; }
+        renderCalendarGrid();
+      });
+      document.getElementById('cal-nav-next').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (calViewMonth === 11) { calViewMonth = 0; calViewYear++; }
+        else { calViewMonth++; }
+        renderCalendarGrid();
+      });
+
+      // Day click handlers
+      container.querySelectorAll('.calendar-day.has-data').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          calSelectDate(el.dataset.date);
+        });
+      });
+    }
+
+    function toggleCalendar(forceState) {
+      calOpen = forceState !== undefined ? forceState : !calOpen;
+      const trigger = document.getElementById('calendar-trigger');
+      const dropdown = document.getElementById('calendar-dropdown');
+      if (trigger) trigger.classList.toggle('open', calOpen);
+      if (dropdown) dropdown.classList.toggle('open', calOpen);
+      if (calOpen) renderCalendarGrid();
+    }
+
+    async function calSelectDate(dateStr) {
+      toggleCalendar(false);
+      const today = getLocalDateStr();
+      if (dateStr === selectedDate) return;
+
+      selectedDate = dateStr;
+
+      if (dateStr === today) {
+        updateActiveGameData();
+        updateTimestamp();
+        updateStatsBar();
+        render();
+        return;
+      }
+
+      isLoadingHistory = true;
+      render();
+      await loadHistoricalGames(selectedDate);
+      isLoadingHistory = false;
+      updateActiveGameData();
+      updateTimestamp();
+      updateStatsBar();
+      render();
+    }
+
     function renderDatePicker() {
-      const { label, formatted } = formatDateDisplay(selectedDate);
       const today = getLocalDateStr();
       const isToday = selectedDate === today;
+      const triggerDate = new Date(selectedDate + 'T12:00:00').toLocaleDateString('en-US', {
+        weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+      });
 
       return `
-        <div class="date-picker">
-          <button class="date-picker-btn" onclick="changeDate(-1)" title="Previous day">&larr;</button>
-          <button class="date-picker-today${isToday ? ' active' : ''}" onclick="goToToday()" ${isToday ? 'disabled' : ''}>Today</button>
-          <div class="date-picker-display">
-            ${label ? `<span class="date-label">${label}</span>` : ''}
-            <span>${formatted}</span>
+        <div class="calendar-wrap" id="calendar-wrap">
+          <div class="calendar-bar">
+            <button class="cal-step-btn" onclick="changeDate(-1)" title="Previous day">&lsaquo;</button>
+            <button class="calendar-trigger" id="calendar-trigger">
+              <span class="ct-icon">&#128197;</span>
+              <span class="ct-date" id="ct-date">${triggerDate}</span>
+              <span class="ct-arrow">&#9660;</span>
+            </button>
+            <button class="cal-step-btn" onclick="changeDate(1)" title="Next day" ${isToday ? 'disabled' : ''}>&rsaquo;</button>
+            <button class="cal-today-jump${isToday ? ' active' : ''}" onclick="goToToday()" ${isToday ? 'disabled' : ''}>Today</button>
           </div>
-          <button class="date-picker-btn" onclick="changeDate(1)" title="Next day" ${isToday ? 'disabled' : ''}>&rarr;</button>
+          <div class="calendar-dropdown" id="calendar-dropdown"></div>
         </div>`;
     }
+
+    function attachCalendarHandlers() {
+      const trigger = document.getElementById('calendar-trigger');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!calOpen) {
+          const sd = new Date(selectedDate + 'T12:00:00');
+          calViewYear = sd.getFullYear();
+          calViewMonth = sd.getMonth();
+        }
+        toggleCalendar();
+      });
+    }
+
+    // Persistent outside-click listener for closing calendar
+    document.addEventListener('click', (e) => {
+      if (!calOpen) return;
+      const wrap = document.getElementById('calendar-wrap');
+      if (wrap && !wrap.contains(e.target)) {
+        toggleCalendar(false);
+      }
+    });
 
     // ── Game Projections View ──
     function renderResultsSummary() {
@@ -4717,6 +5043,7 @@
       if (isLoadingHistory) {
         container.innerHTML = datePickerHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon" style="animation: pulse-live 1s infinite">&#8987;</div><div class="empty-state-title">Loading...</div><div class="empty-state-text">Fetching historical projections...</div></div>`;
         updatedEl.textContent = '';
+        attachCalendarHandlers();
         return;
       }
 
@@ -4744,6 +5071,7 @@
         }
         container.innerHTML = datePickerHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#128197;</div><div class="empty-state-title">No games scheduled</div><div class="empty-state-text">${emptyMsg}</div></div>`;
         updatedEl.textContent = '';
+        attachCalendarHandlers();
         return;
       }
 
@@ -4813,6 +5141,7 @@
       if (filtered.length === 0) {
         container.innerHTML = datePickerHtml + gameRecsHtml + summaryHtml + filtersHtml + `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#127936;</div><div class="empty-state-title">No matching games</div><div class="empty-state-text">Try adjusting your filters to see more games.</div></div>`;
         attachGameFilterHandlers(container);
+        attachCalendarHandlers();
         return;
       }
 
@@ -4860,6 +5189,7 @@
 
       // Attach filter + view toggle handlers
       attachGameFilterHandlers(container);
+      attachCalendarHandlers();
       container.querySelectorAll('[data-view-mode]').forEach(btn => {
         btn.addEventListener('click', () => {
           gameViewMode = btn.dataset.viewMode;
