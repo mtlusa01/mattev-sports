@@ -1984,14 +1984,22 @@
       const updatedEl = document.getElementById('game-proj-updated');
       const navUpdated = document.getElementById('nav-updated-time');
       if (currentSport === 'nhl') {
-        if (nhlGameProjections.length > 0 && nhlGameProjections._updated) {
+        // Only show timestamp if NHL games exist for the selected date
+        const nhlDateFiltered = nhlGameProjections.filter(g => {
+          const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+          return gd === selectedDate;
+        });
+        if (nhlDateFiltered.length > 0 && nhlGameProjections._updated) {
           const ts = new Date(nhlGameProjections._updated).toLocaleString('en-US', {
             month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
           });
-          updatedEl.textContent = 'Updated ' + ts + ' \u00B7 ' + nhlGameProjections.length + ' games';
+          updatedEl.textContent = 'Updated ' + ts + ' \u00B7 ' + nhlDateFiltered.length + ' games';
           navUpdated.textContent = 'Updated ' + new Date(nhlGameProjections._updated).toLocaleTimeString('en-US', {
             hour: 'numeric', minute: '2-digit'
           });
+        } else {
+          updatedEl.textContent = '';
+          navUpdated.textContent = '';
         }
       } else {
         // Restore NBA timestamp
@@ -2015,7 +2023,12 @@
 
       if (currentSport === 'nhl' || (currentSport === 'nba' && isGameView)) {
         // Game projections stats (NHL or NBA game view)
-        const games = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+        // Use date-filtered games to avoid showing stale stats on off-days
+        const allGames = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+        const games = allGames.filter(g => {
+          const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+          return gd === selectedDate;
+        });
         if (!games || games.length === 0) { statsBar.style.display = 'none'; return; }
 
         const allConfs = [];
@@ -2812,11 +2825,17 @@
     }
 
     function renderGameRecommendations() {
+      // Use date-filtered games for recommendations — don't show stale recs
+      const activeGames = getActiveGameProjections();
+      const dateGames = activeGames.filter(g => {
+        const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        return gd === selectedDate;
+      });
       let gameRecs;
       if (currentSport === 'nhl') {
-        gameRecs = buildGameBestBets(nhlGameProjections, { spread: 60, total: 60, ml: 60 });
+        gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 60, ml: 60 });
       } else {
-        gameRecs = buildGameBestBets(gameProjections, { spread: 60, total: 65, ml: 58 });
+        gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 65, ml: 58 });
       }
       const sportLabel = currentSport.toUpperCase();
       if (gameRecs.length === 0) {
@@ -4589,8 +4608,8 @@
       const summaryHtml = renderResultsSummary();
 
       // Build inline filters HTML (below recs, above cards)
-      const statusCounts = { all: activeGames.length, upcoming: 0, live: 0, final: 0 };
-      for (const g of activeGames) {
+      const statusCounts = { all: gamesToShow.length, upcoming: 0, live: 0, final: 0 };
+      for (const g of gamesToShow) {
         const s = getGameStatus(g);
         if (s === 'scheduled' || s === 'soon') statusCounts.upcoming++;
         else if (s === 'live') statusCounts.live++;
