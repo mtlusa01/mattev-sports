@@ -2227,6 +2227,15 @@
         const today = getLocalDateStr();
         const isHistorical = selectedDate !== today;
 
+        // Hide stats bar when today has no games (stale props from prior date)
+        if (!isHistorical) {
+          const todayGames = gameProjections.filter(g => {
+            const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+            return gd === today;
+          });
+          if (todayGames.length === 0) { statsBar.style.display = 'none'; return; }
+        }
+
         document.getElementById('stat-total').textContent = activeProps.length;
         document.getElementById('stat-total-label').textContent = 'Total Props';
         if (isHistorical) {
@@ -4048,16 +4057,23 @@
         return;
       }
 
-      // Show stale state only for today (no games scheduled)
-      if (!isHistorical && projections._stale) {
-        propsView.innerHTML = datePickerHtml + `
-          <div class="empty-state" style="padding: 60px 20px;">
-            <div class="empty-state-icon" style="font-size: 48px;">&#128197;</div>
-            <div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No games scheduled today</div>
-            <div class="empty-state-text">NBA player prop projections will appear here when today's games are loaded.</div>
-          </div>`;
-        attachCalendarHandlers();
-        return;
+      // Show empty state for today when no games are scheduled
+      // Check both _stale flag AND whether today has actual NBA games
+      if (!isHistorical) {
+        const todayGames = gameProjections.filter(g => {
+          const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+          return gd === today;
+        });
+        if (projections._stale || todayGames.length === 0) {
+          propsView.innerHTML = datePickerHtml + `
+            <div class="empty-state" style="padding: 60px 20px;">
+              <div class="empty-state-icon" style="font-size: 48px;">&#128197;</div>
+              <div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No games scheduled today</div>
+              <div class="empty-state-text">NBA player prop projections will appear here when today's games are loaded.</div>
+            </div>`;
+          attachCalendarHandlers();
+          return;
+        }
       }
 
       // Empty state for historical dates with no props
