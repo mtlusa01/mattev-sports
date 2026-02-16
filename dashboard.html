@@ -1982,6 +1982,17 @@
       return currentSport === 'nhl' ? nhlGameProjections : gameProjections;
     }
 
+    function getActiveProps() {
+      const today = getLocalDateStr();
+      if (selectedDate !== today) {
+        if (historicalPropsCache[selectedDate] !== undefined) {
+          return historicalPropsCache[selectedDate];
+        }
+        return [];
+      }
+      return projections;
+    }
+
     function updateActiveGameData() {
       // Rebuild teamToGame for the active sport
       const games = getActiveGameProjections();
@@ -2106,18 +2117,37 @@
         statsBar.classList.add('visible');
         statsBar.style.display = '';
       } else if (currentSport === 'nba' && !isGameView) {
-        // Player props stats
-        if (projections.length === 0 || projections._stale) { statsBar.style.display = 'none'; return; }
-        const posEV = projections.filter(p => p.ev > 0).length;
-        const bestEV = projections.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
-        const avgConf = projections.reduce((s, p) => s + (p.confidence || 0), 0) / projections.length;
+        // Player props stats — use getActiveProps() for historical support
+        const activeProps = getActiveProps();
+        if (activeProps.length === 0 || activeProps._stale) { statsBar.style.display = 'none'; return; }
 
-        document.getElementById('stat-total').textContent = projections.length;
+        // Check if props are graded (historical)
+        let totalW = 0, totalL = 0;
+        const hasGraded = activeProps.some(p => p.result === 'WIN' || p.result === 'LOSS');
+        if (hasGraded) {
+          for (const p of activeProps) {
+            if (p.result === 'WIN') totalW++;
+            else if (p.result === 'LOSS') totalL++;
+          }
+        }
+
+        document.getElementById('stat-total').textContent = activeProps.length;
         document.getElementById('stat-total-label').textContent = 'Total Props';
-        document.getElementById('stat-posev').textContent = posEV;
-        document.getElementById('stat-posev-label').textContent = 'Positive EV';
-        document.getElementById('stat-bestev').textContent = bestEV > -Infinity ? (bestEV >= 0 ? '+' : '') + bestEV.toFixed(1) + '%' : '--';
-        document.getElementById('stat-bestev-label').textContent = 'Best EV%';
+        if (hasGraded && (totalW + totalL) > 0) {
+          document.getElementById('stat-posev').textContent = totalW + '-' + totalL;
+          document.getElementById('stat-posev-label').textContent = 'Record';
+          const pct = (totalW / (totalW + totalL) * 100).toFixed(0);
+          document.getElementById('stat-bestev').textContent = pct + '%';
+          document.getElementById('stat-bestev-label').textContent = 'Win Rate';
+        } else {
+          const posEV = activeProps.filter(p => p.ev > 0).length;
+          const bestEV = activeProps.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
+          document.getElementById('stat-posev').textContent = posEV;
+          document.getElementById('stat-posev-label').textContent = 'Positive EV';
+          document.getElementById('stat-bestev').textContent = bestEV > -Infinity ? (bestEV >= 0 ? '+' : '') + bestEV.toFixed(1) + '%' : '--';
+          document.getElementById('stat-bestev-label').textContent = 'Best EV%';
+        }
+        const avgConf = activeProps.reduce((s, p) => s + (p.confidence || 0), 0) / activeProps.length;
         document.getElementById('stat-avgconf').textContent = avgConf.toFixed(1) + '%';
         statsBar.classList.add('visible');
         statsBar.style.display = '';
@@ -2223,6 +2253,36 @@
       }
 
       return Object.values(gameMap);
+    }
+
+    function transformResultsToProps(resultsData, dateStr) {
+      if (!resultsData || !resultsData.days) return [];
+      const day = resultsData.days.find(d => d.date === dateStr);
+      if (!day || !day.picks) return [];
+
+      const props = [];
+      for (const pick of day.picks) {
+        if (pick.type !== 'prop') continue;
+        // Parse pick string like "PTS OVER 25.5"
+        const match = (pick.pick || '').match(/^(\w+)\s+(OVER|UNDER)\s+([\d.]+)$/i);
+        if (!match) continue;
+        const [, propType, direction, lineStr] = match;
+        props.push({
+          player: pick.player || 'Unknown',
+          team: pick.team || '',
+          prop: propType.toUpperCase(),
+          direction: direction.toUpperCase(),
+          line: parseFloat(lineStr),
+          projection: parseFloat(lineStr),
+          confidence: pick.confidence || 0,
+          ev: 0,
+          diff: 0,
+          actual: typeof pick.result === 'number' ? pick.result : null,
+          result: pick.hit === true ? 'WIN' : pick.hit === false ? 'LOSS' : null,
+          _isHistorical: true
+        });
+      }
+      return props;
     }
 
     function mergeResultsIntoProjections(projections, resultsData, dateStr) {
@@ -3861,9 +3921,20 @@
       propsView.style.display = 'block';
       gameView.style.display = 'none';
 
-      // Show empty state if projections are stale (no games today)
-      if (projections._stale) {
-        propsView.innerHTML = `
+      const today = getLocalDateStr();
+      const isHistorical = selectedDate !== today;
+      const activeProps = getActiveProps();
+      const datePickerHtml = renderDatePicker();
+
+      // Show loading state
+      if (isLoadingHistory) {
+        propsView.innerHTML = datePickerHtml + `<div class="empty-state" style="padding: 60px 20px;"><div class="empty-state-icon" style="animation: pulse-live 1s infinite">&#8987;</div><div class="empty-state-title">Loading...</div><div class="empty-state-text">Fetching historical projections...</div></div>`;
+        return;
+      }
+
+      // Show stale state only for today (no games scheduled)
+      if (!isHistorical && projections._stale) {
+        propsView.innerHTML = datePickerHtml + `
           <div class="empty-state" style="padding: 60px 20px;">
             <div class="empty-state-icon" style="font-size: 48px;">&#128197;</div>
             <div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No games scheduled today</div>
@@ -3872,20 +3943,30 @@
         return;
       }
 
+      // Empty state for historical dates with no props
+      if (isHistorical && activeProps.length === 0) {
+        const { formatted } = formatDateDisplay(selectedDate);
+        propsView.innerHTML = datePickerHtml + `<div class="empty-state" style="padding: 60px 20px;"><div class="empty-state-icon" style="font-size: 48px;">&#128202;</div><div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No props available for this date</div><div class="empty-state-text">No archived player prop projections were found for ${formatted}.</div></div>`;
+        return;
+      }
+
       renderSelectedGameCard();
 
-      const filtered = applyFilters(projections);
+      const filtered = applyFilters(activeProps);
 
-      // Recommendations (shown first, above filters)
-      let recsHtml = currentGameFilter
-        ? renderGameSpecificProps(filtered)
-        : renderPropRecommendations();
+      // Recommendations (skip for historical dates — not relevant for graded props)
+      let recsHtml = '';
+      if (!isHistorical) {
+        recsHtml = currentGameFilter
+          ? renderGameSpecificProps(filtered)
+          : renderPropRecommendations();
+      }
 
       // Inline search + filters (always visible)
       const filtersHtml = renderPropsFilterBar();
 
       // Check if game filter points to a final game with graded props (special case)
-      if (filtered.length === 0 && currentGameFilter) {
+      if (!isHistorical && filtered.length === 0 && currentGameFilter) {
         const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
         if (selGame && getGameStatus(selGame) === 'final' && selGame.graded_props) {
           renderGradedProps(selGame, propsView);
@@ -3893,7 +3974,7 @@
         }
       }
 
-      let html = recsHtml + filtersHtml;
+      let html = datePickerHtml + recsHtml + filtersHtml;
 
       // Category tabs (always shown so user can adjust filters)
       html += renderPropCategoryTabs(filtered);
@@ -3906,7 +3987,7 @@
       const sorted = sortPropsBy(catFiltered, currentPropSort);
 
       // Advanced filters (show counts based on category-filtered set)
-      html += renderAdvancedFilters(projections.length, filtered.length);
+      html += renderAdvancedFilters(activeProps.length, filtered.length);
 
       // Props table (or empty state with filters still visible)
       expandedRowId = null;
@@ -4085,6 +4166,7 @@
     // Cache for historical game projections by date (NBA and NHL separate)
     const historicalGamesCache = {};
     const historicalNhlCache = {};
+    const historicalPropsCache = {};
     let isLoadingHistory = false;
 
     async function loadHistoricalGames(date) {
@@ -4093,7 +4175,7 @@
       if (date === today) return null; // Use current data
 
       // Check cache first (use !== undefined to allow empty arrays)
-      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined) {
+      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined && historicalPropsCache[date] !== undefined) {
         return historicalGamesCache[date];
       }
 
@@ -4127,7 +4209,14 @@
             nhlGames = data.nhl_game_projections?.games || [];
           }
 
-          if (games.length > 0 || nhlGames.length > 0) {
+          // Extract player props from archive
+          let archiveProps = [];
+          const ppData = data.player_props;
+          if (ppData && ppData.date === date && ppData.projections) {
+            archiveProps = ppData.projections;
+          }
+
+          if (games.length > 0 || nhlGames.length > 0 || archiveProps.length > 0) {
             // Load results to merge actual outcomes into projections
             if (!historicalResults) await loadHistoricalResults('nba');
             if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
@@ -4142,6 +4231,7 @@
 
             historicalGamesCache[date] = games;
             historicalNhlCache[date] = nhlGames;
+            historicalPropsCache[date] = archiveProps;
             return games;
           }
         } catch (e) {
@@ -4160,13 +4250,16 @@
         }
         const nbaGames = transformResultsToGames(historicalResults, date);
         const nhlGames = transformResultsToGames(nhlHistoricalResults, date);
+        const fallbackProps = transformResultsToProps(historicalResults, date);
         historicalGamesCache[date] = nbaGames;
         historicalNhlCache[date] = nhlGames;
+        historicalPropsCache[date] = fallbackProps;
         return nbaGames;
       } catch (e) {
         console.log(`Results fallback failed for ${date}:`, e.message);
         historicalGamesCache[date] = [];
         historicalNhlCache[date] = [];
+        historicalPropsCache[date] = [];
         return [];
       }
     }
@@ -4189,29 +4282,29 @@
         updateActiveGameData();
         updateTimestamp();
         updateStatsBar();
-        renderGameProjections();
+        render();
         return;
       }
 
       // Load historical data
       isLoadingHistory = true;
-      renderGameProjections(); // Show loading state
+      render(); // Show loading state
       await loadHistoricalGames(selectedDate);
       isLoadingHistory = false;
       updateActiveGameData();
       updateTimestamp();
       updateStatsBar();
-      renderGameProjections();
+      render();
     }
 
     async function goToToday() {
       selectedDate = getLocalDateStr();
-      // Reload current projections for both sports
-      await Promise.all([loadGameProjections(), loadNhlGameProjections()]);
+      // Reload current projections for both sports (including player props)
+      await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadProjections()]);
       updateActiveGameData();
       updateTimestamp();
       updateStatsBar();
-      renderGameProjections();
+      render();
     }
 
     function renderDatePicker() {
@@ -4251,12 +4344,10 @@
       }
 
       let propWins = 0, propLosses = 0;
-      const today = getLocalDateStr();
-      if (selectedDate === today) {
-        for (const p of projections) {
-          if (p.result === 'WIN') propWins++;
-          else if (p.result === 'LOSS') propLosses++;
-        }
+      const activeProps = getActiveProps();
+      for (const p of activeProps) {
+        if (p.result === 'WIN') propWins++;
+        else if (p.result === 'LOSS') propLosses++;
       }
 
       const totalW = gameWins + propWins;
