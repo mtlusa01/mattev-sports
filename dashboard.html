@@ -2792,6 +2792,11 @@
     function getGameStatus(g) {
       // Only trust backend status for "final" — never infer from time
       if (g.status === 'final') return 'final';
+
+      // Historical games are always final — they can't be live
+      const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+      if (gameDate && gameDate < getLocalDateStr()) return 'final';
+
       if (g.status === 'live') return 'live';
       if (!g.commence_time) return 'scheduled';
       const ct = new Date(g.commence_time);
