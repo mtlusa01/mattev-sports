@@ -2224,25 +2224,32 @@
         const activeProps = getActiveProps();
         if (activeProps.length === 0 || activeProps._stale) { statsBar.style.display = 'none'; return; }
 
-        // Check if props are graded (historical)
-        let totalW = 0, totalL = 0;
-        const hasGraded = activeProps.some(p => p.result === 'WIN' || p.result === 'LOSS');
-        if (hasGraded) {
+        const today = getLocalDateStr();
+        const isHistorical = selectedDate !== today;
+
+        document.getElementById('stat-total').textContent = activeProps.length;
+        document.getElementById('stat-total-label').textContent = 'Total Props';
+        if (isHistorical) {
+          // Historical: show W-L record from graded props
+          let totalW = 0, totalL = 0;
           for (const p of activeProps) {
             if (p.result === 'WIN') totalW++;
             else if (p.result === 'LOSS') totalL++;
           }
-        }
-
-        document.getElementById('stat-total').textContent = activeProps.length;
-        document.getElementById('stat-total-label').textContent = 'Total Props';
-        if (hasGraded && (totalW + totalL) > 0) {
-          document.getElementById('stat-posev').textContent = totalW + '-' + totalL;
-          document.getElementById('stat-posev-label').textContent = 'Record';
-          const pct = (totalW / (totalW + totalL) * 100).toFixed(0);
-          document.getElementById('stat-bestev').textContent = pct + '%';
-          document.getElementById('stat-bestev-label').textContent = 'Win Rate';
+          if (totalW + totalL > 0) {
+            document.getElementById('stat-posev').textContent = totalW + '-' + totalL;
+            document.getElementById('stat-posev-label').textContent = 'Record';
+            const pct = (totalW / (totalW + totalL) * 100).toFixed(0);
+            document.getElementById('stat-bestev').textContent = pct + '%';
+            document.getElementById('stat-bestev-label').textContent = 'Win Rate';
+          } else {
+            document.getElementById('stat-posev').textContent = '--';
+            document.getElementById('stat-posev-label').textContent = 'Record';
+            document.getElementById('stat-bestev').textContent = '--';
+            document.getElementById('stat-bestev-label').textContent = 'Win Rate';
+          }
         } else {
+          // Today: show confidence-based stats
           const posEV = activeProps.filter(p => p.ev > 0).length;
           const bestEV = activeProps.reduce((best, p) => Math.max(best, p.ev || -Infinity), -Infinity);
           document.getElementById('stat-posev').textContent = posEV;
