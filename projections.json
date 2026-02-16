@@ -1,8 +1,8 @@
 {
-  "date": "2026-02-13",
+  "date": "2026-02-16",
   "sport": "NBA",
   "locked_at": "2026-02-12T21:34:44",
-  "updated": "2026-02-13T17:54:56",
+  "updated": "2026-02-16T17:00:20",
   "projections": [
     {
       "player": "Ryan Rollins",
@@ -209,10 +209,8 @@
       "h2h_avg": 7.0,
       "h2h_record": "1/1",
       "h2h_total_games": 1,
-      "pick_score": 15.3,
-      "score_factors": [
-        "+14.6% EV"
-      ],
+      "pick_score": 7.0,
+      "score_factors": [],
       "injury_status": "Questionable",
       "injury_type": "Right foot (plantar fasciitis)",
       "injury_headline": "Right foot (plantar fasciitis)"
@@ -432,9 +430,8 @@
       "h2h_avg": 4.0,
       "h2h_record": "0/1",
       "h2h_total_games": 1,
-      "pick_score": 28.4,
+      "pick_score": 29.0,
       "score_factors": [
-        "+6.3% EV",
         "60% L10 hit rate",
         "Favorable matchup (#24 DEF)"
       ],
@@ -649,14 +646,16 @@
       "h2h_avg": 10.0,
       "h2h_record": "0/1",
       "h2h_total_games": 1,
-      "pick_score": 21.2,
+      "pick_score": 34.4,
       "score_factors": [
+        "+4.2% EV",
         "70% L10 hit rate",
         "+2.0 edge"
       ],
       "injury_status": "Questionable",
       "injury_type": "Right foot (plantar fasciitis)",
-      "injury_headline": "Right foot (plantar fasciitis)"
+      "injury_headline": "Right foot (plantar fasciitis)",
+      "top_pick_rank": 4
     },
     {
       "player": "Myles Turner",
@@ -861,15 +860,16 @@
       ],
       "opponent": "OKC",
       "h2h_total_games": 0,
-      "pick_score": 31.8,
+      "pick_score": 41.3,
       "score_factors": [
+        "+3.0% EV",
         "70% L10 hit rate",
-        "Favorable matchup (#24 DEF)",
-        "4-game streak"
+        "Favorable matchup (#24 DEF)"
       ],
       "injury_status": "Questionable",
       "injury_type": "Right calf (soreness)",
-      "injury_headline": "Right calf (soreness)"
+      "injury_headline": "Right calf (soreness)",
+      "top_pick_rank": 1
     },
     {
       "player": "Deni Avdija",
@@ -1100,9 +1100,8 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 19.5,
+      "pick_score": 25.0,
       "score_factors": [
-        "+8.6% EV",
         "Favorable matchup (#20 DEF)"
       ],
       "injury_status": "Questionable",
@@ -1330,14 +1329,15 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 32.8,
+      "pick_score": 45.4,
       "score_factors": [
+        "+2.8% EV",
         "60% L10 hit rate",
-        "Favorable matchup (#30 DEF)",
-        "+3.2 edge"
+        "Favorable matchup (#30 DEF)"
       ],
       "actual": 31,
-      "result": "WIN"
+      "result": "WIN",
+      "top_pick_rank": 5
     },
     {
       "player": "Ace Bailey",
@@ -1569,11 +1569,11 @@
           "status": "OUT"
         }
       ],
-      "pick_score": 22.6,
+      "pick_score": 25.0,
       "score_factors": [
-        "+5.1% EV",
         "+2.8 edge",
-        "3-game streak"
+        "3-game streak",
+        "Injury boosted"
       ],
       "actual": 15,
       "result": "WIN"
@@ -1801,13 +1801,10 @@
       "h2h_avg": 6.5,
       "h2h_record": "1/2",
       "h2h_total_games": 2,
-      "pick_score": 38.0,
-      "score_factors": [
-        "+16.7% EV"
-      ],
+      "pick_score": 23.0,
+      "score_factors": [],
       "actual": 10,
-      "result": "LOSS",
-      "top_pick_rank": 5
+      "result": "LOSS"
     },
     {
       "player": "LeBron James",
@@ -2032,9 +2029,8 @@
       "h2h_avg": 15.0,
       "h2h_record": "2/2",
       "h2h_total_games": 2,
-      "pick_score": 21.6,
+      "pick_score": 19.3,
       "score_factors": [
-        "+8.2% EV",
         "3-game streak"
       ],
       "actual": 28,
@@ -2042,6 +2038,59 @@
     }
   ],
   "top_picks": [
+    {
+      "type": "prop",
+      "player": "Myles Turner",
+      "team": "MIL",
+      "prop": "REB",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 6.1,
+      "diff": 0.6,
+      "ev": 3.0,
+      "confidence": 55.3,
+      "pick_score": 59.0,
+      "score_factors": [
+        "+3.0% EV",
+        "70% L10 hit rate",
+        "Favorable matchup (#24 DEF)"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 5.5,
+            "odds": -122
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -104
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 5.5,
+            "odds": -116
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -113
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 5.5,
+            "odds": -120
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Has gone OVER 5.5 rebounds in 7 of last 10 games (7.4 avg).",
+      "top_pick_rank": 1
+    },
     {
       "type": "ml",
       "game": "MIL @ OKC",
@@ -2054,9 +2103,7 @@
         "71.4% ML conf"
       ],
       "commence_time": "2026-02-13T00:40:00Z",
-      "top_pick_rank": 1,
-      "result": "LOSS",
-      "actual": "110-93"
+      "top_pick_rank": 2
     },
     {
       "type": "spread",
@@ -2071,99 +2118,108 @@
         "High confidence"
       ],
       "commence_time": "2026-02-13T02:10:00Z",
-      "top_pick_rank": 2,
-      "result": "LOSS",
-      "actual": "135-119"
-    },
-    {
-      "type": "total",
-      "game": "MIL @ OKC",
-      "away_team": "MIL",
-      "home_team": "OKC",
-      "pick": "OVER 213.5",
-      "confidence": 63.1,
-      "pick_score": 40.0,
-      "score_factors": [
-        "63.1% total conf"
-      ],
-      "commence_time": "2026-02-13T00:40:00Z",
-      "top_pick_rank": 3,
-      "result": "LOSS",
-      "actual": "110-93"
-    },
-    {
-      "type": "ml",
-      "game": "DAL @ LAL",
-      "away_team": "DAL",
-      "home_team": "LAL",
-      "pick": "LAL",
-      "confidence": 61.1,
-      "pick_score": 40.0,
-      "score_factors": [
-        "61.1% ML conf"
-      ],
-      "commence_time": "2026-02-13T03:10:00Z",
-      "top_pick_rank": 4,
-      "result": "WIN",
-      "actual": "104-124"
+      "top_pick_rank": 3
     },
     {
       "type": "prop",
-      "player": "LeBron James",
-      "team": "LAL",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 6.5,
-      "projection": 5.5,
-      "diff": -1.0,
-      "ev": 16.7,
-      "confidence": 55.099999999999994,
-      "pick_score": 38.0,
+      "player": "Ryan Rollins",
+      "team": "MIL",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 16.5,
+      "projection": 18.5,
+      "diff": 2.0,
+      "ev": 4.2,
+      "confidence": 57.3,
+      "pick_score": 49.2,
       "score_factors": [
-        "+16.7% EV"
+        "+4.2% EV",
+        "70% L10 hit rate",
+        "+2.0 edge"
       ],
       "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 6.5,
-            "odds": -136
-          },
-          "under": {
-            "line": 6.5,
-            "odds": 102
-          }
-        },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -144
+            "line": 16.5,
+            "odds": -120
           },
           "under": {
-            "line": 6.5,
-            "odds": 110
+            "line": 16.5,
+            "odds": -106
           }
         },
         "betmgm": {
           "over": {
-            "line": 6.5,
-            "odds": -118
+            "line": 16.5,
+            "odds": -125
           },
           "under": {
-            "line": 6.5,
+            "line": 16.5,
             "odds": -110
           }
         }
       },
       "best_book": "draftkings",
-      "insight": "DAL ranks #27 in rebounds defense \u2014 tough for unders.",
-      "top_pick_rank": 5,
-      "result": "LOSS",
-      "actual": 10
+      "insight": "Has gone OVER 16.5 points in 7 of last 10 games (19.5 avg).",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "prop",
+      "player": "Jrue Holiday",
+      "team": "POR",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 14.5,
+      "projection": 17.7,
+      "diff": 3.2,
+      "ev": 2.8,
+      "confidence": 54.8,
+      "pick_score": 45.4,
+      "score_factors": [
+        "+2.8% EV",
+        "60% L10 hit rate",
+        "Favorable matchup (#30 DEF)"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 15.5,
+            "odds": -104
+          },
+          "under": {
+            "line": 15.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 14.5,
+            "odds": -124
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -103
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 14.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -115
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "UTA ranks #30 in points defense \u2014 favorable for overs.",
+      "top_pick_rank": 5
     }
   ],
   "recommendations": {
-    "date": "2026-02-13",
-    "generated_at": "2026-02-13T01:48:34",
+    "date": "2026-02-16",
+    "generated_at": "2026-02-16T17:00:20",
     "game_bets": [
       {
         "qualified": true,
@@ -2250,10 +2306,8 @@
         "confidence": 55.099999999999994,
         "ev": 16.7,
         "edge": 1.0,
-        "pick_score": 38.0,
-        "score_factors": [
-          "+16.7% EV"
-        ],
+        "pick_score": 23.0,
+        "score_factors": [],
         "book_odds": {
           "fanduel": {
             "over": {
@@ -2294,6 +2348,113 @@
       },
       {
         "qualified": true,
+        "score": 45.025,
+        "reasons": [
+          "+14.6% EV"
+        ],
+        "type": "prop",
+        "player": "Ryan Rollins",
+        "team": "MIL",
+        "prop": "AST",
+        "direction": "OVER",
+        "line": 4.5,
+        "projection": 5.0,
+        "diff": 0.5,
+        "confidence": 53.5,
+        "ev": 14.6,
+        "edge": 0.5,
+        "pick_score": 7.0,
+        "score_factors": [],
+        "book_odds": {
+          "draftkings": {
+            "over": {
+              "line": 4.5,
+              "odds": 113
+            },
+            "under": {
+              "line": 4.5,
+              "odds": -149
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 4.5,
+              "odds": 115
+            },
+            "under": {
+              "line": 4.5,
+              "odds": -155
+            }
+          }
+        },
+        "best_book": "betmgm",
+        "insight": "OKC ranks #6 in assists defense \u2014 tough for overs.",
+        "matchup_favorability": "unfavorable",
+        "l10_hit_rate": 40,
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 31.525,
+        "reasons": [
+          "+8.6% EV",
+          "Favorable matchup"
+        ],
+        "type": "prop",
+        "player": "Deni Avdija",
+        "team": "POR",
+        "prop": "REB",
+        "direction": "OVER",
+        "line": 6.5,
+        "projection": 7.0,
+        "diff": 0.5,
+        "confidence": 53.5,
+        "ev": 8.6,
+        "edge": 0.5,
+        "pick_score": 25.0,
+        "score_factors": [
+          "Favorable matchup (#20 DEF)"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 6.5,
+              "odds": 102
+            },
+            "under": {
+              "line": 6.5,
+              "odds": -130
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 6.5,
+              "odds": 101
+            },
+            "under": {
+              "line": 6.5,
+              "odds": -133
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 6.5,
+              "odds": 105
+            },
+            "under": {
+              "line": 6.5,
+              "odds": -140
+            }
+          }
+        },
+        "best_book": "betmgm",
+        "insight": "UTA ranks #20 in rebounds defense \u2014 favorable for overs.",
+        "matchup_favorability": "favorable",
+        "l10_hit_rate": 50,
+        "rec_rank": 3
+      },
+      {
+        "qualified": true,
         "score": 27.94,
         "reasons": [
           "+6.3% EV",
@@ -2310,9 +2471,8 @@
         "confidence": 52.6,
         "ev": 6.3,
         "edge": 0.2999999999999998,
-        "pick_score": 28.4,
+        "pick_score": 29.0,
         "score_factors": [
-          "+6.3% EV",
           "60% L10 hit rate",
           "Favorable matchup (#24 DEF)"
         ],
@@ -2352,7 +2512,7 @@
         "insight": "OKC ranks #24 in rebounds defense \u2014 favorable for overs.",
         "matchup_favorability": "favorable",
         "l10_hit_rate": 60,
-        "rec_rank": 2
+        "rec_rank": 4
       },
       {
         "qualified": true,
@@ -2372,11 +2532,11 @@
         "confidence": 54.245,
         "ev": 5.1,
         "edge": 2.8000000000000007,
-        "pick_score": 22.6,
+        "pick_score": 25.0,
         "score_factors": [
-          "+5.1% EV",
           "+2.8 edge",
-          "3-game streak"
+          "3-game streak",
+          "Injury boosted"
         ],
         "book_odds": {
           "fanduel": {
@@ -2414,11 +2574,11 @@
         "insight": "Averaging 14.5 points over last 10 games (-3.0 below line).",
         "matchup_favorability": "unfavorable",
         "l10_hit_rate": 60,
-        "rec_rank": 3
+        "rec_rank": 5
       }
     ],
     "game_count": 4,
-    "prop_count": 3,
+    "prop_count": 5,
     "has_recommendations": true,
     "message": null
   }
