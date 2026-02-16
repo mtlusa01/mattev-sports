@@ -747,6 +747,17 @@
     function renderSelectedDay() {
       const dayView = document.getElementById('day-view');
       const day = daysByDate[selectedDate];
+      const today = todayKey();
+
+      // Don't show daily results for today — games haven't finished yet
+      if (selectedDate === today) {
+        document.getElementById('day-header').textContent = formatDateFull(selectedDate);
+        document.getElementById('results-summary').innerHTML = '';
+        document.getElementById('results-table-body').innerHTML =
+          '<tr><td colspan="6" class="no-results"><div class="nr-date">' + formatDateFull(selectedDate) + '</div>No results yet today &mdash; check back after games finish.</td></tr>';
+        document.getElementById('results-filter-row').style.display = 'none';
+        return;
+      }
 
       if (!day) {
         document.getElementById('day-header').textContent = formatDateFull(selectedDate);
@@ -856,8 +867,10 @@
         });
         sortedDates = Object.keys(daysByDate).sort(); // ascending
 
-        // Default selected date: most recent day with data, or today
-        selectedDate = sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : todayKey();
+        // Default selected date: most recent past day with data (skip today — results aren't final)
+        const today = todayKey();
+        const pastDates = sortedDates.filter(d => d < today);
+        selectedDate = pastDates.length > 0 ? pastDates[pastDates.length - 1] : (sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : today);
 
         // Set calendar view to selected date's month
         const sd = new Date(selectedDate + 'T12:00:00');
