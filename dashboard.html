@@ -4428,17 +4428,25 @@
       return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     }
 
+    function calGetResultsDay(dateStr) {
+      // Look up a date in the results.json data (pre-aggregated W/L counts)
+      const resultsData = currentSport === 'nhl' ? nhlHistoricalResults : historicalResults;
+      if (!resultsData || !resultsData.days) return null;
+      return resultsData.days.find(d => d.date === dateStr) || null;
+    }
+
     function calHasData(dateStr) {
       const today = getLocalDateStr();
       if (dateStr === today) {
-        // Today always has data if we have games or props loaded
         const hasGames = currentSport === 'nhl'
           ? (nhlGameProjections && nhlGameProjections.length > 0)
           : (gameProjections && gameProjections.length > 0);
         const hasProps = currentSport === 'nba' && projections && projections.length > 0 && !projections._stale;
         return hasGames || hasProps;
       }
-      // Historical: check caches
+      // Check results.json data first (covers all historical dates)
+      if (calGetResultsDay(dateStr)) return true;
+      // Fallback: check loaded caches
       const hasGames = currentSport === 'nhl'
         ? (historicalNhlCache[dateStr] && historicalNhlCache[dateStr].length > 0)
         : (historicalGamesCache[dateStr] && historicalGamesCache[dateStr].length > 0);
@@ -4448,25 +4456,26 @@
 
     function calDotHtml(dateStr) {
       const today = getLocalDateStr();
-      // For cached historical dates, show W/L dot
-      if (dateStr !== today) {
-        const games = currentSport === 'nhl'
-          ? (historicalNhlCache[dateStr] || [])
-          : (historicalGamesCache[dateStr] || []);
-        const props = historicalPropsCache[dateStr] || [];
+
+      // Today: show a green dot if data exists
+      if (dateStr === today) {
+        if (calHasData(dateStr)) {
+          return `<span class="calendar-dot both"></span>`;
+        }
+        return '';
+      }
+
+      // Historical: use results.json pre-aggregated W/L data if available
+      const dayData = calGetResultsDay(dateStr);
+      if (dayData) {
         let totalW = 0, totalL = 0;
-        for (const g of games) {
-          for (const t of ['spread', 'total', 'ml']) {
-            const r = (g[t + '_result'] || '').toLowerCase();
-            if (r === 'win' || r === 'w') totalW++;
-            else if (r === 'loss' || r === 'l') totalL++;
+        for (const cat of ['props', 'spreads', 'totals', 'moneylines']) {
+          if (dayData[cat]) {
+            totalW += dayData[cat].wins || 0;
+            totalL += dayData[cat].losses || 0;
           }
         }
-        for (const p of props) {
-          if (p.result === 'WIN') totalW++;
-          else if (p.result === 'LOSS') totalL++;
-        }
-        if (totalW + totalL === 0) return '';
+        if (totalW + totalL === 0) return `<span class="calendar-dot mixed"></span>`;
         let cls = 'mixed';
         if (totalL === 0) cls = 'win';
         else if (totalW === 0) cls = 'loss';
@@ -4474,11 +4483,31 @@
         else if (totalL > totalW) cls = 'loss';
         return `<span class="calendar-dot ${cls}"></span>`;
       }
-      // Today: show a neutral dot if data exists
-      if (calHasData(dateStr)) {
-        return `<span class="calendar-dot both"></span>`;
+
+      // Fallback: check loaded caches for W/L
+      const games = currentSport === 'nhl'
+        ? (historicalNhlCache[dateStr] || [])
+        : (historicalGamesCache[dateStr] || []);
+      const props = historicalPropsCache[dateStr] || [];
+      let totalW = 0, totalL = 0;
+      for (const g of games) {
+        for (const t of ['spread', 'total', 'ml']) {
+          const r = (g[t + '_result'] || '').toLowerCase();
+          if (r === 'win' || r === 'w') totalW++;
+          else if (r === 'loss' || r === 'l') totalL++;
+        }
       }
-      return '';
+      for (const p of props) {
+        if (p.result === 'WIN') totalW++;
+        else if (p.result === 'LOSS') totalL++;
+      }
+      if (totalW + totalL === 0) return '';
+      let cls = 'mixed';
+      if (totalL === 0) cls = 'win';
+      else if (totalW === 0) cls = 'loss';
+      else if (totalW > totalL) cls = 'win';
+      else if (totalL > totalW) cls = 'loss';
+      return `<span class="calendar-dot ${cls}"></span>`;
     }
 
     function calDayHtml(key, d, today, isOtherMonth) {
@@ -4569,13 +4598,27 @@
       });
     }
 
-    function toggleCalendar(forceState) {
+    async function toggleCalendar(forceState) {
       calOpen = forceState !== undefined ? forceState : !calOpen;
       const trigger = document.getElementById('calendar-trigger');
       const dropdown = document.getElementById('calendar-dropdown');
       if (trigger) trigger.classList.toggle('open', calOpen);
       if (dropdown) dropdown.classList.toggle('open', calOpen);
-      if (calOpen) renderCalendarGrid();
+      if (calOpen) {
+        // Eagerly load results data so calendar dots appear
+        const needsNba = !historicalResults;
+        const needsNhl = !nhlHistoricalResults;
+        if (needsNba || needsNhl) {
+          renderCalendarGrid(); // show grid immediately (dots will fill in)
+          const loads = [];
+          if (needsNba) loads.push(loadHistoricalResults('nba'));
+          if (needsNhl) loads.push(loadHistoricalResults('nhl'));
+          await Promise.all(loads);
+          if (calOpen) renderCalendarGrid(); // re-render with dots
+        } else {
+          renderCalendarGrid();
+        }
+      }
     }
 
     async function calSelectDate(dateStr) {
