@@ -1894,7 +1894,7 @@
     }
 
     // ── Sport Tab Switching ──
-    function switchSport(sport, updateHash) {
+    async function switchSport(sport, updateHash) {
       const overlay = document.getElementById('coming-soon-overlay');
       const sportName = document.getElementById('cs-sport-name');
       const mainEl = document.querySelector('main');
@@ -1937,6 +1937,18 @@
         } else {
           // NBA: show both tabs
           propsTab.style.display = '';
+        }
+
+        // If on a historical date, ensure data is loaded for the new sport
+        const today = getLocalDateStr();
+        if (selectedDate !== today) {
+          const cache = sport === 'nhl' ? historicalNhlCache : historicalGamesCache;
+          if (cache[selectedDate] === undefined) {
+            isLoadingHistory = true;
+            render(); // Show loading state
+            await loadHistoricalGames(selectedDate);
+            isLoadingHistory = false;
+          }
         }
 
         // Update the active game data and re-render
@@ -1983,8 +1995,27 @@
     function updateTimestamp() {
       const updatedEl = document.getElementById('game-proj-updated');
       const navUpdated = document.getElementById('nav-updated-time');
+      const today = getLocalDateStr();
+
+      // For historical dates, show date context instead of "Updated" timestamp
+      if (selectedDate !== today) {
+        const games = getActiveGameProjections().filter(g => {
+          const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+          return gd === selectedDate;
+        });
+        if (games.length > 0) {
+          const { formatted } = formatDateDisplay(selectedDate);
+          updatedEl.textContent = formatted + ' \u00B7 ' + games.length + ' games';
+          navUpdated.textContent = formatted;
+        } else {
+          updatedEl.textContent = '';
+          navUpdated.textContent = '';
+        }
+        return;
+      }
+
+      // Today: show "Updated" timestamp from current data
       if (currentSport === 'nhl') {
-        // Only show timestamp if NHL games exist for the selected date
         const nhlDateFiltered = nhlGameProjections.filter(g => {
           const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
           return gd === selectedDate;
@@ -2002,7 +2033,6 @@
           navUpdated.textContent = '';
         }
       } else {
-        // Restore NBA timestamp
         const nbaUpdated = projections._updated || gameProjections._updated;
         if (nbaUpdated) {
           navUpdated.textContent = 'Updated ' + new Date(nbaUpdated).toLocaleTimeString('en-US', {
@@ -2022,14 +2052,26 @@
       const isGameView = currentView === 'game-projections';
 
       if (currentSport === 'nhl' || (currentSport === 'nba' && isGameView)) {
-        // Game projections stats (NHL or NBA game view)
-        // Use date-filtered games to avoid showing stale stats on off-days
-        const allGames = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+        // Game projections stats — use getActiveGameProjections() for historical support
+        const allGames = getActiveGameProjections();
         const games = allGames.filter(g => {
           const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
           return gd === selectedDate;
         });
         if (!games || games.length === 0) { statsBar.style.display = 'none'; return; }
+
+        // Check if we have final games with results (historical view)
+        let totalW = 0, totalL = 0;
+        const hasFinals = games.some(g => getGameStatus(g) === 'final' && g.away_score != null);
+        if (hasFinals) {
+          for (const g of games) {
+            for (const t of ['spread', 'total', 'ml']) {
+              const r = (g[t + '_result'] || '').toLowerCase();
+              if (r === 'win' || r === 'w') totalW++;
+              else if (r === 'loss' || r === 'l') totalL++;
+            }
+          }
+        }
 
         const allConfs = [];
         let bestBets = 0;
@@ -2047,10 +2089,19 @@
 
         document.getElementById('stat-total').textContent = games.length;
         document.getElementById('stat-total-label').textContent = 'Total Games';
-        document.getElementById('stat-posev').textContent = bestBets;
-        document.getElementById('stat-posev-label').textContent = 'Best Bets';
-        document.getElementById('stat-bestev').textContent = bestConf > 0 ? bestConf.toFixed(1) + '%' : '--';
-        document.getElementById('stat-bestev-label').textContent = 'Best Conf';
+        if (hasFinals && (totalW + totalL) > 0) {
+          // Historical: show W-L record
+          document.getElementById('stat-posev').textContent = totalW + '-' + totalL;
+          document.getElementById('stat-posev-label').textContent = 'Record';
+          const pct = (totalW / (totalW + totalL) * 100).toFixed(0);
+          document.getElementById('stat-bestev').textContent = pct + '%';
+          document.getElementById('stat-bestev-label').textContent = 'Win Rate';
+        } else {
+          document.getElementById('stat-posev').textContent = bestBets;
+          document.getElementById('stat-posev-label').textContent = 'Best Bets';
+          document.getElementById('stat-bestev').textContent = bestConf > 0 ? bestConf.toFixed(1) + '%' : '--';
+          document.getElementById('stat-bestev-label').textContent = 'Best Conf';
+        }
         document.getElementById('stat-avgconf').textContent = avgConf > 0 ? avgConf.toFixed(1) + '%' : '--';
         statsBar.classList.add('visible');
         statsBar.style.display = '';
@@ -2844,7 +2895,7 @@
             <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel} Bets</span>
             <span class="rec-count">0 picks</span>
           </div>
-          <div class="no-recs">No ${sportLabel} bets meet our quality criteria today.</div>
+          <div class="no-recs">No ${sportLabel} bets meet our quality criteria${selectedDate === getLocalDateStr() ? ' today' : ''}.</div>
         </div>`;
       }
       const gameCards = gameRecs.map((r, i) => {
@@ -4123,27 +4174,43 @@
     async function changeDate(delta) {
       const current = new Date(selectedDate + 'T12:00:00');
       current.setDate(current.getDate() + delta);
-      // Use local date format, not UTC
-      selectedDate = current.getFullYear() + '-' +
+      const newDate = current.getFullYear() + '-' +
         String(current.getMonth() + 1).padStart(2, '0') + '-' +
         String(current.getDate()).padStart(2, '0');
 
-      // Load historical data if navigating to a past date
+      // Don't navigate past today
+      const today = getLocalDateStr();
+      if (newDate > today) return;
+
+      selectedDate = newDate;
+
+      if (selectedDate === today) {
+        // Going back to today — use current data
+        updateActiveGameData();
+        updateTimestamp();
+        updateStatsBar();
+        renderGameProjections();
+        return;
+      }
+
+      // Load historical data
       isLoadingHistory = true;
       renderGameProjections(); // Show loading state
       await loadHistoricalGames(selectedDate);
       isLoadingHistory = false;
+      updateActiveGameData();
+      updateTimestamp();
+      updateStatsBar();
       renderGameProjections();
     }
 
     async function goToToday() {
       selectedDate = getLocalDateStr();
-      // Reload current projections (not historical)
-      if (currentSport === 'nba') {
-        await loadGameProjections();
-      } else {
-        await loadNhlGameProjections();
-      }
+      // Reload current projections for both sports
+      await Promise.all([loadGameProjections(), loadNhlGameProjections()]);
+      updateActiveGameData();
+      updateTimestamp();
+      updateStatsBar();
       renderGameProjections();
     }
 
@@ -4160,13 +4227,18 @@
             ${label ? `<span class="date-label">${label}</span>` : ''}
             <span>${formatted}</span>
           </div>
-          <button class="date-picker-btn" onclick="changeDate(1)" title="Next day">&rarr;</button>
+          <button class="date-picker-btn" onclick="changeDate(1)" title="Next day" ${isToday ? 'disabled' : ''}>&rarr;</button>
         </div>`;
     }
 
     // ── Game Projections View ──
     function renderResultsSummary() {
-      const finals = getActiveGameProjections().filter(g => getGameStatus(g) === 'final' && g.away_score != null);
+      const activeGames = getActiveGameProjections();
+      const dateGames = activeGames.filter(g => {
+        const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        return gd === selectedDate;
+      });
+      const finals = dateGames.filter(g => getGameStatus(g) === 'final' && g.away_score != null);
       if (finals.length === 0) return '';
 
       let gameWins = 0, gameLosses = 0;
@@ -4179,9 +4251,12 @@
       }
 
       let propWins = 0, propLosses = 0;
-      for (const p of projections) {
-        if (p.result === 'WIN') propWins++;
-        else if (p.result === 'LOSS') propLosses++;
+      const today = getLocalDateStr();
+      if (selectedDate === today) {
+        for (const p of projections) {
+          if (p.result === 'WIN') propWins++;
+          else if (p.result === 'LOSS') propLosses++;
+        }
       }
 
       const totalW = gameWins + propWins;
@@ -4190,8 +4265,12 @@
       if (total === 0) return '';
       const cls = totalW > totalL ? 'winning' : totalW < totalL ? 'losing' : 'even';
 
+      // Use date-appropriate label
+      const { label } = formatDateDisplay(selectedDate);
+      const dateLabel = label || formatDateDisplay(selectedDate).formatted;
+
       let html = '<div class="results-summary-bar">';
-      html += `<div class="summary-section"><span class="summary-label">Today</span><span class="summary-record ${cls}">${totalW}-${totalL}</span></div>`;
+      html += `<div class="summary-section"><span class="summary-label">${dateLabel}</span><span class="summary-record ${cls}">${totalW}-${totalL}</span></div>`;
       if (gameWins + gameLosses > 0) {
         html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Games</span><span class="summary-record">${gameWins}-${gameLosses}</span></div>`;
       }
