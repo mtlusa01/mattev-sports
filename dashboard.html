@@ -4849,10 +4849,12 @@
       }
 
       let propWins = 0, propLosses = 0;
-      const activeProps = getActiveProps();
-      for (const p of activeProps) {
-        if (p.result === 'WIN') propWins++;
-        else if (p.result === 'LOSS') propLosses++;
+      if (currentSport === 'nba') {
+        const activeProps = getActiveProps();
+        for (const p of activeProps) {
+          if (p.result === 'WIN') propWins++;
+          else if (p.result === 'LOSS') propLosses++;
+        }
       }
 
       const totalW = gameWins + propWins;
