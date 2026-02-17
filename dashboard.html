@@ -2004,6 +2004,9 @@
       document.getElementById('mobile-nav-backdrop').classList.remove('open');
     }
 
+    // ── Shared helpers (must be declared before first use) ──
+    let isLoadingHistory = false;
+
     // ── Sport Tab Switching ──
     async function switchSport(sport, updateHash) {
       const overlay = document.getElementById('coming-soon-overlay');
@@ -3030,14 +3033,6 @@
         ? `<span style="font-weight:700">${g.away_team} ${g.away_score} - ${g.home_team} ${g.home_score}</span>`
         : `Proj: ${g.proj_score}`;
 
-      function sgcResultBadge(result) {
-        const r = (result || '').toLowerCase();
-        if (r === 'win' || r === 'w') return ' <span class="pick-result-badge win">&#10003; W</span>';
-        if (r === 'loss' || r === 'l') return ' <span class="pick-result-badge loss">&#10007; L</span>';
-        if (r === 'push' || r === 'p') return ' <span class="pick-result-badge push">P</span>';
-        return '';
-      }
-
       el.innerHTML = `
         <div class="sgc-header">
           <div class="sgc-matchup">${g.away_team} @ ${g.home_team}${sgcTime}</div>
@@ -3064,6 +3059,15 @@
           </div>
         </div>`;
       el.classList.add('visible');
+    }
+
+    // ── Result badge helper (shared by selected game card + recommendations) ──
+    function sgcResultBadge(result) {
+      const r = (result || '').toLowerCase();
+      if (r === 'win' || r === 'w') return ' <span class="pick-result-badge win">&#10003; W</span>';
+      if (r === 'loss' || r === 'l') return ' <span class="pick-result-badge loss">&#10007; L</span>';
+      if (r === 'push' || r === 'p') return ' <span class="pick-result-badge push">P</span>';
+      return '';
     }
 
     // ── Top 5 Picks ──
@@ -4391,7 +4395,6 @@
     const historicalNhlCache = {};
     const historicalNcaabCache = {};
     const historicalPropsCache = {};
-    let isLoadingHistory = false;
 
     async function loadHistoricalGames(date) {
       // If it's today, use current gameProjections
