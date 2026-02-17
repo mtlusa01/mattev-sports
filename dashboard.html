@@ -2865,10 +2865,16 @@
       return confs.some(c => getConfTier(c) === tier);
     }
 
+    function getActiveBestBets() {
+      const today = getLocalDateStr();
+      const liveBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      const histBB = historicalBestBetsCache[currentSport + ':' + selectedDate];
+      return (selectedDate !== today && histBB) ? histBB : liveBB;
+    }
+
     function gameHasBestBet(g) {
-      const bets = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
       const label = `${g.away_team} @ ${g.home_team}`;
-      return bets.some(b => b.game === label);
+      return getActiveBestBets().some(b => b.game === label);
     }
 
     function getGameMaxConf(g) {
@@ -4877,10 +4883,7 @@
       const total = tallyType('total');
 
       // Best bets: use historical cache for past dates, live data for today
-      const today = getLocalDateStr();
-      const liveBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
-      const histBB = historicalBestBetsCache[currentSport + ':' + selectedDate];
-      const sportBB = (selectedDate !== today && histBB) ? histBB : liveBB;
+      const sportBB = getActiveBestBets();
       let bbW = 0, bbL = 0, bbP = 0;
       for (const g of finals) {
         const gameLabel = `${g.away_team} @ ${g.home_team}`;
@@ -4932,9 +4935,9 @@
         if (conf < 50) return 'low-conf';
         return '';
       };
-      const sportBestBets = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      const activeBB = getActiveBestBets();
       const gameLabel = `${g.away_team} @ ${g.home_team}`;
-      const isInBestBets = (betType) => sportBestBets.some(b => b.game === gameLabel && b.type === betType);
+      const isInBestBets = (betType) => activeBB.some(b => b.game === gameLabel && b.type === betType);
       const bestBetBadge = (betType) => isInBestBets(betType) ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
       const dimClass = (conf, betType) => {
         if (currentGameConfFilter === 'all') return '';
@@ -5341,13 +5344,23 @@
         { key: 'all', label: 'All' }, { key: 'upcoming', label: 'Upcoming' },
         { key: 'live', label: 'Live' }, { key: 'final', label: 'Final' },
       ];
-      const sportBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
-      const bbCount = sportBB.length;
+      // Count games per confidence tier (from status-filtered set)
+      const statusFiltered = currentStatusFilter !== 'all'
+        ? gamesToShow.filter(g => { const s = getGameStatus(g); return currentStatusFilter === 'upcoming' ? s === 'scheduled' || s === 'soon' : s === currentStatusFilter; })
+        : gamesToShow;
+      const confCounts = { 'best-bets': 0, high: 0, medium: 0, low: 0 };
+      for (const g of statusFiltered) {
+        if (gameHasConfTier(g, 'best-bets')) confCounts['best-bets']++;
+        if (gameHasConfTier(g, 'high')) confCounts.high++;
+        if (gameHasConfTier(g, 'medium')) confCounts.medium++;
+        if (gameHasConfTier(g, 'low')) confCounts.low++;
+      }
       const confTabs = [
-        { key: 'all', label: 'All' },
-        { key: 'best-bets', label: `Best Bets (${bbCount})` },
-        { key: 'high', label: 'High' },
-        { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
+        { key: 'all', label: `All (${statusFiltered.length})` },
+        { key: 'best-bets', label: `Best Bets (${confCounts['best-bets']})` },
+        { key: 'high', label: `High (${confCounts.high})` },
+        { key: 'medium', label: `Medium (${confCounts.medium})` },
+        { key: 'low', label: `Low (${confCounts.low})` },
       ];
 
       const gameSearchIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
@@ -5392,7 +5405,7 @@
       if (gameViewMode === 'list') {
         let betRows = generateBetRows(filtered);
         if (currentGameConfFilter === 'best-bets') {
-          const bb = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+          const bb = getActiveBestBets();
           betRows = betRows.filter(r => bb.some(b => b.game === r.matchup && b.type === r.type));
         } else if (currentGameConfFilter !== 'all') {
           betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
