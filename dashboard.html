@@ -2302,19 +2302,21 @@
     const INJURIES_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/injuries.json';
     const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
+    const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
 
     // ── Historical Results ──
     let historicalResults = null;
     let nhlHistoricalResults = null;
+    let ncaabHistoricalResults = null;
 
     async function loadHistoricalResults(sport) {
-      const url = sport === 'nhl' ? NHL_RESULTS_URL : RESULTS_URL;
-      const cacheKey = sport === 'nhl' ? 'nhlHistoricalResults' : 'historicalResults';
+      const url = sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : RESULTS_URL;
       try {
         const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
         const data = await resp.json();
-        if (sport === 'nhl') nhlHistoricalResults = data;
+        if (sport === 'ncaab') ncaabHistoricalResults = data;
+        else if (sport === 'nhl') nhlHistoricalResults = data;
         else historicalResults = data;
         return data;
       } catch (err) {
@@ -4437,6 +4439,7 @@
             // Load results to merge actual outcomes into projections
             if (!historicalResults) await loadHistoricalResults('nba');
             if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
+            if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
 
             // Merge actual scores and results into projections
             if (games.length > 0 && historicalResults) {
@@ -4444,6 +4447,9 @@
             }
             if (nhlGames.length > 0 && nhlHistoricalResults) {
               nhlGames = mergeResultsIntoProjections(nhlGames, nhlHistoricalResults, date);
+            }
+            if (ncaabGames.length > 0 && ncaabHistoricalResults) {
+              ncaabGames = mergeResultsIntoProjections(ncaabGames, ncaabHistoricalResults, date);
             }
 
             historicalGamesCache[date] = games;
@@ -4466,12 +4472,16 @@
         if (!nhlHistoricalResults) {
           await loadHistoricalResults('nhl');
         }
+        if (!ncaabHistoricalResults) {
+          await loadHistoricalResults('ncaab');
+        }
         const nbaGames = transformResultsToGames(historicalResults, date);
         const nhlGames = transformResultsToGames(nhlHistoricalResults, date);
+        const ncaabGames = transformResultsToGames(ncaabHistoricalResults, date);
         const fallbackProps = transformResultsToProps(historicalResults, date);
         historicalGamesCache[date] = nbaGames;
         historicalNhlCache[date] = nhlGames;
-        historicalNcaabCache[date] = [];
+        historicalNcaabCache[date] = ncaabGames;
         historicalPropsCache[date] = fallbackProps;
         return nbaGames;
       } catch (e) {
@@ -4533,7 +4543,7 @@
 
     function calGetResultsDay(dateStr) {
       // Look up a date in the results.json data (pre-aggregated W/L counts)
-      const resultsData = currentSport === 'nhl' ? nhlHistoricalResults : currentSport === 'ncaab' ? null : historicalResults;
+      const resultsData = currentSport === 'ncaab' ? ncaabHistoricalResults : currentSport === 'nhl' ? nhlHistoricalResults : historicalResults;
       if (!resultsData || !resultsData.days) return null;
       return resultsData.days.find(d => d.date === dateStr) || null;
     }
@@ -4717,11 +4727,13 @@
         // Eagerly load results data so calendar dots appear
         const needsNba = !historicalResults;
         const needsNhl = !nhlHistoricalResults;
-        if (needsNba || needsNhl) {
+        const needsNcaab = !ncaabHistoricalResults;
+        if (needsNba || needsNhl || needsNcaab) {
           renderCalendarGrid(); // show grid immediately (dots will fill in)
           const loads = [];
           if (needsNba) loads.push(loadHistoricalResults('nba'));
           if (needsNhl) loads.push(loadHistoricalResults('nhl'));
+          if (needsNcaab) loads.push(loadHistoricalResults('ncaab'));
           await Promise.all(loads);
           if (calOpen) renderCalendarGrid(); // re-render with dots
         } else {
