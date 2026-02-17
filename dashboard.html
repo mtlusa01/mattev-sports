@@ -1293,17 +1293,21 @@
     .prop-result.loss { color: var(--red-light); }
     .prop-result.push { color: var(--yellow); }
     .results-summary-bar {
-      display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
       background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px;
-      margin-bottom: 16px; flex-wrap: wrap;
+      margin-bottom: 16px; overflow: hidden;
     }
-    .results-summary-bar .summary-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .results-summary-bar .summary-record { font-size: 16px; font-weight: 700; }
-    .results-summary-bar .summary-record.winning { color: var(--accent-light); }
-    .results-summary-bar .summary-record.losing { color: var(--red-light); }
-    .results-summary-bar .summary-record.even { color: var(--text-muted); }
-    .results-summary-bar .summary-section { display: flex; align-items: center; gap: 6px; }
-    .results-summary-bar .summary-divider { width: 1px; height: 20px; background: var(--border); }
+    .results-summary-bar .summary-cell {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 10px 8px; gap: 2px; border-right: 1px solid var(--border);
+    }
+    .results-summary-bar .summary-cell:last-child { border-right: none; }
+    .results-summary-bar .summary-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .results-summary-bar .summary-record { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .results-summary-bar .summary-pct { font-size: 11px; font-weight: 600; }
+    .results-summary-bar .summary-pct.winning { color: var(--accent-light); }
+    .results-summary-bar .summary-pct.losing { color: var(--red-light); }
+    .results-summary-bar .summary-pct.even { color: var(--text-muted); }
 
     /* ── Graded Props Table ── */
     .graded-props-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -1714,6 +1718,11 @@
       .search-filter-bar .filter-group { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
       .search-filter-bar .filter-label { white-space: nowrap; }
       .search-filter-bar .filter-pill { white-space: nowrap; flex-shrink: 0; }
+
+      /* Results summary bar compact */
+      .results-summary-bar .summary-record { font-size: 14px; }
+      .results-summary-bar .summary-label { font-size: 9px; }
+      .results-summary-bar .summary-cell { padding: 8px 4px; }
 
       /* Props table phone — even more compact */
       .props-table td:nth-child(1) { font-size: 12px; }
@@ -4839,42 +4848,53 @@
       const finals = dateGames.filter(g => getGameStatus(g) === 'final' && g.away_score != null);
       if (finals.length === 0) return '';
 
-      let gameWins = 0, gameLosses = 0;
+      // Tally W/L/P per bet type
+      function tallyType(type) {
+        let w = 0, l = 0, p = 0;
+        for (const g of finals) {
+          const r = (g[type + '_result'] || '').toLowerCase();
+          if (r === 'win' || r === 'w') w++;
+          else if (r === 'loss' || r === 'l') l++;
+          else if (r === 'push' || r === 'p') p++;
+        }
+        return { w, l, p };
+      }
+      const ml = tallyType('ml');
+      const spread = tallyType('spread');
+      const total = tallyType('total');
+
+      // Best bets: use the best_bets array to identify which bet types were best bets
+      const sportBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      let bbW = 0, bbL = 0, bbP = 0;
       for (const g of finals) {
+        const gameLabel = `${g.away_team} @ ${g.home_team}`;
         for (const t of ['spread', 'total', 'ml']) {
+          const isBB = sportBB.some(b => b.game === gameLabel && b.type === t);
+          if (!isBB) continue;
           const r = (g[t + '_result'] || '').toLowerCase();
-          if (r === 'win' || r === 'w') gameWins++;
-          else if (r === 'loss' || r === 'l') gameLosses++;
+          if (r === 'win' || r === 'w') bbW++;
+          else if (r === 'loss' || r === 'l') bbL++;
+          else if (r === 'push' || r === 'p') bbP++;
         }
       }
 
-      let propWins = 0, propLosses = 0;
-      if (currentSport === 'nba') {
-        const activeProps = getActiveProps();
-        for (const p of activeProps) {
-          if (p.result === 'WIN') propWins++;
-          else if (p.result === 'LOSS') propLosses++;
-        }
+      // Check if any results exist at all
+      const anyResults = (ml.w + ml.l + spread.w + spread.l + total.w + total.l) > 0;
+      if (!anyResults) return '';
+
+      function cellHtml(label, s) {
+        const decided = s.w + s.l;
+        const pct = decided > 0 ? (s.w / decided * 100).toFixed(1) : '0.0';
+        const pctCls = decided === 0 ? 'even' : parseFloat(pct) > 55 ? 'winning' : parseFloat(pct) < 45 ? 'losing' : 'even';
+        const record = s.p > 0 ? `${s.w}-${s.l}-${s.p}` : `${s.w}-${s.l}`;
+        return `<div class="summary-cell"><span class="summary-label">${label}</span><span class="summary-record">${record}</span><span class="summary-pct ${pctCls}">${pct}%</span></div>`;
       }
-
-      const totalW = gameWins + propWins;
-      const totalL = gameLosses + propLosses;
-      const total = totalW + totalL;
-      if (total === 0) return '';
-      const cls = totalW > totalL ? 'winning' : totalW < totalL ? 'losing' : 'even';
-
-      // Use date-appropriate label
-      const { label } = formatDateDisplay(selectedDate);
-      const dateLabel = label || formatDateDisplay(selectedDate).formatted;
 
       let html = '<div class="results-summary-bar">';
-      html += `<div class="summary-section"><span class="summary-label">${dateLabel}</span><span class="summary-record ${cls}">${totalW}-${totalL}</span></div>`;
-      if (gameWins + gameLosses > 0) {
-        html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Games</span><span class="summary-record">${gameWins}-${gameLosses}</span></div>`;
-      }
-      if (propWins + propLosses > 0) {
-        html += `<div class="summary-divider"></div><div class="summary-section"><span class="summary-label">Props</span><span class="summary-record">${propWins}-${propLosses}</span></div>`;
-      }
+      html += cellHtml('ML', ml);
+      html += cellHtml('Spreads', spread);
+      html += cellHtml('Totals', total);
+      html += cellHtml('Best Bets', { w: bbW, l: bbL, p: bbP });
       html += '</div>';
       return html;
     }
