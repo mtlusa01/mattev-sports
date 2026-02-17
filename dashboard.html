@@ -2062,6 +2062,16 @@
           }
         }
 
+        // Auto-navigate to data date if today has no games for this sport
+        // (handles post-midnight when projections are from yesterday)
+        if (selectedDate === today) {
+          const sportGames = sport === 'nhl' ? nhlGameProjections : sport === 'ncaab' ? ncaabGameProjections : gameProjections;
+          const todayGames = sportGames.filter(g => g.game_date === today);
+          if (todayGames.length === 0 && sportGames._dataDate && sportGames._dataDate !== today) {
+            selectedDate = sportGames._dataDate;
+          }
+        }
+
         // Update the active game data and re-render
         updateActiveGameData();
         updateTimestamp();
@@ -5370,6 +5380,7 @@
         const data = await resp.json();
         gameProjections = data.games || [];
         gameProjections._updated = data.updated;
+        gameProjections._dataDate = data.date || '';
 
         // Build team lookup for NBA
         if (currentSport === 'nba') {
@@ -5404,6 +5415,7 @@
         const data = await resp.json();
         nhlGameProjections = data.games || [];
         nhlGameProjections._updated = data.updated;
+        nhlGameProjections._dataDate = data.date || '';
 
         if (currentSport === 'nhl') {
           updateActiveGameData();
@@ -5425,8 +5437,19 @@
         const data = await resp.json();
         ncaabGameProjections = data.games || [];
         ncaabGameProjections._updated = data.updated;
+        ncaabGameProjections._dataDate = data.date || '';
 
         if (currentSport === 'ncaab') {
+          // Auto-navigate to the data date if today has no NCAAB games
+          // (e.g., after midnight the data still has yesterday's graded games)
+          const today = getLocalDateStr();
+          const dataDate = data.date || '';
+          if (selectedDate === today && dataDate && dataDate !== today) {
+            const todayGames = ncaabGameProjections.filter(g => g.game_date === today);
+            if (todayGames.length === 0) {
+              selectedDate = dataDate;
+            }
+          }
           updateActiveGameData();
           updateTimestamp();
           updateStatsBar();
