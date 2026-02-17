@@ -2743,6 +2743,9 @@
     let gameProjections = [];
     let nhlGameProjections = [];
     let ncaabGameProjections = [];
+    let nbaBestBets = [];
+    let nhlBestBets = [];
+    let ncaabBestBets = [];
     let topPicks = [];
     let injuriesData = { teams: {}, updated_at: '' };
     let currentView = 'game-projections';
@@ -4892,7 +4895,10 @@
         if (conf < 50) return 'low-conf';
         return '';
       };
-      const bestBetBadge = conf => conf >= 60 ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
+      const sportBestBets = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      const gameLabel = `${g.away_team} @ ${g.home_team}`;
+      const isInBestBets = (betType) => sportBestBets.some(b => b.game === gameLabel && b.type === betType);
+      const bestBetBadge = (betType) => isInBestBets(betType) ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
       const dimClass = conf => currentGameConfFilter !== 'all' && getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
 
       const status = getGameStatus(g);
@@ -5027,21 +5033,21 @@
           <div class="game-card-picks">
             <div class="game-pick-row${dimClass(g.spread_conf)}">
               <span class="game-pick-label">Spread</span>
-              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge(g.spread_conf || 0)}</span>
+              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge('spread')}</span>
               <span class="game-pick-odds">${spreadOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
               ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.total_conf)}">
               <span class="game-pick-label">Total</span>
-              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge(g.total_conf || 0)}</span>
+              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge('total')}</span>
               <span class="game-pick-odds">${totalOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
               ${gameTrackIcon('total', isTotalTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.ml_conf)}">
               <span class="game-pick-label">ML</span>
-              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge(g.ml_conf || 0)}</span>
+              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge('ml')}</span>
               <span class="game-pick-odds">${mlOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
               ${gameTrackIcon('ml', isMlTracked)}
@@ -5384,6 +5390,7 @@
         gameProjections = data.games || [];
         gameProjections._updated = data.updated;
         gameProjections._dataDate = data.date || '';
+        nbaBestBets = data.best_bets || [];
 
         // Build team lookup for NBA
         if (currentSport === 'nba') {
@@ -5419,6 +5426,7 @@
         nhlGameProjections = data.games || [];
         nhlGameProjections._updated = data.updated;
         nhlGameProjections._dataDate = data.date || '';
+        nhlBestBets = data.best_bets || [];
 
         if (currentSport === 'nhl') {
           updateActiveGameData();
@@ -5441,6 +5449,7 @@
         ncaabGameProjections = data.games || [];
         ncaabGameProjections._updated = data.updated;
         ncaabGameProjections._dataDate = data.date || '';
+        ncaabBestBets = data.best_bets || [];
 
         if (currentSport === 'ncaab') {
           // Auto-navigate to the data date if today has no NCAAB games
