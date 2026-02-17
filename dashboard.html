@@ -2055,12 +2055,16 @@
         }
 
         // Auto-navigate to data date if today has no games for this sport
-        // (handles post-midnight when projections are from yesterday)
+        // Only if data is from yesterday (post-midnight case), not stale old data
         const today = getLocalDateStr();
         const sportGames = sport === 'nhl' ? nhlGameProjections : sport === 'ncaab' ? ncaabGameProjections : gameProjections;
         const todayGames = sportGames.filter(g => g.game_date === today);
         if (todayGames.length === 0 && sportGames._dataDate && sportGames._dataDate !== today) {
-          selectedDate = sportGames._dataDate;
+          const diffMs = new Date(today + 'T12:00:00') - new Date(sportGames._dataDate + 'T12:00:00');
+          const diffDays = diffMs / 86400000;
+          if (diffDays <= 1) {
+            selectedDate = sportGames._dataDate;
+          }
         }
 
         // Update the active game data and re-render
@@ -5458,14 +5462,17 @@
         ncaabBestBets = data.best_bets || [];
 
         if (currentSport === 'ncaab') {
-          // Auto-navigate to the data date if today has no NCAAB games
-          // (e.g., after midnight the data still has yesterday's graded games)
+          // Auto-navigate to data date only if it's yesterday (post-midnight)
           const today = getLocalDateStr();
           const dataDate = data.date || '';
           if (selectedDate === today && dataDate && dataDate !== today) {
-            const todayGames = ncaabGameProjections.filter(g => g.game_date === today);
-            if (todayGames.length === 0) {
-              selectedDate = dataDate;
+            const diffMs = new Date(today + 'T12:00:00') - new Date(dataDate + 'T12:00:00');
+            const diffDays = diffMs / 86400000;
+            if (diffDays <= 1) {
+              const todayGames = ncaabGameProjections.filter(g => g.game_date === today);
+              if (todayGames.length === 0) {
+                selectedDate = dataDate;
+              }
             }
           }
           updateActiveGameData();
