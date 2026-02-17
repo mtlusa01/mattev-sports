@@ -1855,6 +1855,7 @@
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
         <button class="sport-tab" data-sport="nhl">NHL</button>
+        <button class="sport-tab" data-sport="ncaab">NCAAB</button>
         <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
       </div>
       <div class="nav-right">
@@ -2010,7 +2011,7 @@
         tab.classList.toggle('active', tab.dataset.sport === sport);
       });
 
-      const supportedSports = ['nba', 'nhl'];
+      const supportedSports = ['nba', 'nhl', 'ncaab'];
 
       if (!supportedSports.includes(sport)) {
         // Coming Soon for MLB
@@ -2028,8 +2029,8 @@
 
         // Update view tabs based on sport
         const propsTab = viewTabs.querySelector('[data-view="player-props"]');
-        if (sport === 'nhl') {
-          // NHL: only game projections, hide player props tab
+        if (sport === 'nhl' || sport === 'ncaab') {
+          // NHL/NCAAB: only game projections, hide player props tab
           propsTab.style.display = 'none';
           if (currentView === 'player-props') {
             currentView = 'game-projections';
@@ -2045,7 +2046,7 @@
         // If on a historical date, ensure data is loaded for the new sport
         const today = getLocalDateStr();
         if (selectedDate !== today) {
-          const cache = sport === 'nhl' ? historicalNhlCache : historicalGamesCache;
+          const cache = sport === 'nhl' ? historicalNhlCache : sport === 'ncaab' ? historicalNcaabCache : historicalGamesCache;
           if (cache[selectedDate] === undefined) {
             isLoadingHistory = true;
             render(); // Show loading state
@@ -2073,6 +2074,10 @@
           if (historicalNhlCache[selectedDate] !== undefined) {
             return historicalNhlCache[selectedDate];
           }
+        } else if (currentSport === 'ncaab') {
+          if (historicalNcaabCache[selectedDate] !== undefined) {
+            return historicalNcaabCache[selectedDate];
+          }
         } else {
           if (historicalGamesCache[selectedDate] !== undefined) {
             return historicalGamesCache[selectedDate];
@@ -2082,7 +2087,9 @@
         return [];
       }
       // For today, use current data
-      return currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+      if (currentSport === 'nhl') return nhlGameProjections;
+      if (currentSport === 'ncaab') return ncaabGameProjections;
+      return gameProjections;
     }
 
     function getActiveProps() {
@@ -2129,17 +2136,18 @@
       }
 
       // Today: show "Updated" timestamp from current data
-      if (currentSport === 'nhl') {
-        const nhlDateFiltered = nhlGameProjections.filter(g => {
+      if (currentSport === 'nhl' || currentSport === 'ncaab') {
+        const sportData = currentSport === 'nhl' ? nhlGameProjections : ncaabGameProjections;
+        const dateFiltered = sportData.filter(g => {
           const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
           return gd === selectedDate;
         });
-        if (nhlDateFiltered.length > 0 && nhlGameProjections._updated) {
-          const ts = new Date(nhlGameProjections._updated).toLocaleString('en-US', {
+        if (dateFiltered.length > 0 && sportData._updated) {
+          const ts = new Date(sportData._updated).toLocaleString('en-US', {
             month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
           });
-          updatedEl.textContent = 'Updated ' + ts + ' \u00B7 ' + nhlDateFiltered.length + ' games';
-          navUpdated.textContent = 'Updated ' + new Date(nhlGameProjections._updated).toLocaleTimeString('en-US', {
+          updatedEl.textContent = 'Updated ' + ts + ' \u00B7 ' + dateFiltered.length + ' games';
+          navUpdated.textContent = 'Updated ' + new Date(sportData._updated).toLocaleTimeString('en-US', {
             hour: 'numeric', minute: '2-digit'
           });
         } else {
@@ -2165,7 +2173,7 @@
       const statsBar = document.getElementById('stats-bar');
       const isGameView = currentView === 'game-projections';
 
-      if (currentSport === 'nhl' || (currentSport === 'nba' && isGameView)) {
+      if (currentSport === 'nhl' || currentSport === 'ncaab' || (currentSport === 'nba' && isGameView)) {
         // Game projections stats — use getActiveGameProjections() for historical support
         const allGames = getActiveGameProjections();
         const games = allGames.filter(g => {
@@ -2283,6 +2291,7 @@
     const DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
     const GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/game_projections.json';
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
+    const NCAAB_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_projections.json';
     const INJURIES_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/injuries.json';
     const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
@@ -2711,6 +2720,7 @@
     let projections = [];
     let gameProjections = [];
     let nhlGameProjections = [];
+    let ncaabGameProjections = [];
     let topPicks = [];
     let injuriesData = { teams: {}, updated_at: '' };
     let currentView = 'game-projections';
@@ -3067,7 +3077,7 @@
         return gd === selectedDate;
       });
       let gameRecs;
-      if (currentSport === 'nhl') {
+      if (currentSport === 'nhl' || currentSport === 'ncaab') {
         gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 60, ml: 60 });
       } else {
         gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 65, ml: 58 });
@@ -4311,6 +4321,7 @@
     // Cache for historical game projections by date (NBA and NHL separate)
     const historicalGamesCache = {};
     const historicalNhlCache = {};
+    const historicalNcaabCache = {};
     const historicalPropsCache = {};
     let isLoadingHistory = false;
 
@@ -4320,7 +4331,7 @@
       if (date === today) return null; // Use current data
 
       // Check cache first (use !== undefined to allow empty arrays)
-      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined && historicalPropsCache[date] !== undefined) {
+      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined && historicalNcaabCache[date] !== undefined && historicalPropsCache[date] !== undefined) {
         return historicalGamesCache[date];
       }
 
@@ -4342,16 +4353,21 @@
           const data = await resp.json();
           const archiveGameDate = data.game_projections?.date;
           const archiveNhlDate = data.nhl_game_projections?.date;
+          const archiveNcaabDate = data.ncaab_projections?.date;
 
           // Only use if the games inside match our requested date
           let games = [];
           let nhlGames = [];
+          let ncaabGames = [];
 
           if (archiveGameDate === date) {
             games = data.game_projections?.games || [];
           }
           if (archiveNhlDate === date) {
             nhlGames = data.nhl_game_projections?.games || [];
+          }
+          if (archiveNcaabDate === date) {
+            ncaabGames = data.ncaab_projections?.games || [];
           }
 
           // Extract player props from archive
@@ -4361,7 +4377,7 @@
             archiveProps = ppData.projections;
           }
 
-          if (games.length > 0 || nhlGames.length > 0 || archiveProps.length > 0) {
+          if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || archiveProps.length > 0) {
             // Load results to merge actual outcomes into projections
             if (!historicalResults) await loadHistoricalResults('nba');
             if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
@@ -4376,6 +4392,7 @@
 
             historicalGamesCache[date] = games;
             historicalNhlCache[date] = nhlGames;
+            historicalNcaabCache[date] = ncaabGames;
             historicalPropsCache[date] = archiveProps;
             return games;
           }
@@ -4398,12 +4415,14 @@
         const fallbackProps = transformResultsToProps(historicalResults, date);
         historicalGamesCache[date] = nbaGames;
         historicalNhlCache[date] = nhlGames;
+        historicalNcaabCache[date] = [];
         historicalPropsCache[date] = fallbackProps;
         return nbaGames;
       } catch (e) {
         console.log(`Results fallback failed for ${date}:`, e.message);
         historicalGamesCache[date] = [];
         historicalNhlCache[date] = [];
+        historicalNcaabCache[date] = [];
         historicalPropsCache[date] = [];
         return [];
       }
@@ -4458,7 +4477,7 @@
 
     function calGetResultsDay(dateStr) {
       // Look up a date in the results.json data (pre-aggregated W/L counts)
-      const resultsData = currentSport === 'nhl' ? nhlHistoricalResults : historicalResults;
+      const resultsData = currentSport === 'nhl' ? nhlHistoricalResults : currentSport === 'ncaab' ? null : historicalResults;
       if (!resultsData || !resultsData.days) return null;
       return resultsData.days.find(d => d.date === dateStr) || null;
     }
@@ -4468,6 +4487,8 @@
       if (dateStr === today) {
         const hasGames = currentSport === 'nhl'
           ? (nhlGameProjections && nhlGameProjections.length > 0)
+          : currentSport === 'ncaab'
+          ? (ncaabGameProjections && ncaabGameProjections.length > 0)
           : (gameProjections && gameProjections.length > 0);
         const hasProps = currentSport === 'nba' && projections && projections.length > 0 && !projections._stale;
         return hasGames || hasProps;
@@ -4477,6 +4498,8 @@
       // Fallback: check loaded caches
       const hasGames = currentSport === 'nhl'
         ? (historicalNhlCache[dateStr] && historicalNhlCache[dateStr].length > 0)
+        : currentSport === 'ncaab'
+        ? (historicalNcaabCache[dateStr] && historicalNcaabCache[dateStr].length > 0)
         : (historicalGamesCache[dateStr] && historicalGamesCache[dateStr].length > 0);
       const hasProps = historicalPropsCache[dateStr] && historicalPropsCache[dateStr].length > 0;
       return hasGames || hasProps;
@@ -4515,6 +4538,8 @@
       // Fallback: check loaded caches for W/L
       const games = currentSport === 'nhl'
         ? (historicalNhlCache[dateStr] || [])
+        : currentSport === 'ncaab'
+        ? (historicalNcaabCache[dateStr] || [])
         : (historicalGamesCache[dateStr] || []);
       const props = historicalPropsCache[dateStr] || [];
       let totalW = 0, totalL = 0;
@@ -5325,6 +5350,27 @@
       }
     }
 
+    async function loadNcaabGameProjections() {
+      try {
+        const resp = await fetch(NCAAB_GAME_DATA_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch NCAAB game projections');
+        const data = await resp.json();
+        ncaabGameProjections = data.games || [];
+        ncaabGameProjections._updated = data.updated;
+
+        if (currentSport === 'ncaab') {
+          updateActiveGameData();
+          updateTimestamp();
+          updateStatsBar();
+          if (currentView === 'game-projections') renderGameProjections();
+        }
+        autoGradeTrackedBets();
+        updateBetCountBadges();
+      } catch (err) {
+        console.error('Failed to load NCAAB game projections:', err);
+      }
+    }
+
     async function loadProjections() {
       try {
         const resp = await fetch(DATA_URL + '?t=' + Date.now());
@@ -5398,6 +5444,7 @@
     loadProjections();
     loadGameProjections();
     loadNhlGameProjections();
+    loadNcaabGameProjections();
     loadInjuries();
   </script>
   <!-- Track Bet Modal -->
