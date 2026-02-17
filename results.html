@@ -302,7 +302,7 @@
     .day-header { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
 
     /* Daily Summary Cards */
-    .results-summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+    .results-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
     .results-stat-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
     .results-stat-card .rsc-record { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
     .results-stat-card .rsc-pct { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
@@ -427,6 +427,7 @@
       <div class="sports-tabs" id="sports-tabs">
         <button class="sport-tab active" data-sport="nba">NBA</button>
         <button class="sport-tab" data-sport="nhl">NHL</button>
+        <button class="sport-tab" data-sport="ncaab">NCAAB</button>
         <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
       </div>
       <div class="nav-right">
@@ -522,10 +523,12 @@
   <script>
     const NBA_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
+    const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
 
     let currentSport = 'nba';
     let nbaResultsData = null;
     let nhlResultsData = null;
+    let ncaabResultsData = null;
     let resultsData = null;
     let selectedDate = null;
     let calViewYear = null;
@@ -685,8 +688,8 @@
     }
 
     function dotHtml(dayData) {
-      const totalW = dayData.props.wins + dayData.spreads.wins + dayData.totals.wins + dayData.moneylines.wins;
-      const totalL = dayData.props.losses + dayData.spreads.losses + dayData.totals.losses + dayData.moneylines.losses;
+      const totalW = (dayData.props?.wins||0) + (dayData.spreads?.wins||0) + (dayData.totals?.wins||0) + (dayData.moneylines?.wins||0);
+      const totalL = (dayData.props?.losses||0) + (dayData.spreads?.losses||0) + (dayData.totals?.losses||0) + (dayData.moneylines?.losses||0);
       if (totalW + totalL === 0) return '';
       let cls = 'mixed';
       if (totalL === 0) cls = 'win';
@@ -793,7 +796,9 @@
         </div>`;
       }
       let summaryHtml = '';
-      summaryHtml += card('Props', day.props || {});
+      if (currentSport === 'nba') {
+        summaryHtml += card('Props', day.props || {});
+      }
       summaryHtml += card('Spreads', day.spreads || {});
       summaryHtml += card('Totals', day.totals || {});
       summaryHtml += card('Moneylines', day.moneylines || {});
@@ -852,13 +857,14 @@
     // ── Init ──
     async function loadResults(sport) {
       sport = sport || currentSport;
-      const url = sport === 'nhl' ? NHL_RESULTS_URL : NBA_RESULTS_URL;
+      const url = sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : NBA_RESULTS_URL;
       try {
         const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
         resultsData = await resp.json();
         if (sport === 'nba') nbaResultsData = resultsData;
-        else nhlResultsData = resultsData;
+        else if (sport === 'nhl') nhlResultsData = resultsData;
+        else ncaabResultsData = resultsData;
 
         // Build date lookup
         daysByDate = {};
@@ -945,7 +951,8 @@
 
     // Sport tab handlers
     function switchResultsSport(sport) {
-      if (sport !== 'nba' && sport !== 'nhl') {
+      const supported = ['nba', 'nhl', 'ncaab'];
+      if (!supported.includes(sport)) {
         document.getElementById('coming-soon-sport').textContent = sport.toUpperCase();
         document.getElementById('coming-soon-overlay').style.display = 'flex';
         return;
@@ -955,15 +962,22 @@
       document.querySelectorAll('.sport-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.sport === sport);
       });
-      // Close mobile drawer
       closeMobileNav();
 
-      // Update page title
+      // Update page subtitle
+      const hasProps = sport === 'nba';
       document.querySelector('.page-subtitle').textContent =
-        `Track our ${sport.toUpperCase()} model's accuracy across ${sport === 'nhl' ? 'spreads, totals, and moneylines' : 'player props, spreads, and moneylines'}.`;
+        `Track our ${sport.toUpperCase()} model's accuracy across ${hasProps ? 'player props, spreads, and moneylines' : 'spreads, totals, and moneylines'}.`;
+
+      // Show/hide Props filter pill (only NBA has props)
+      const propsPill = document.querySelector('[data-rtype="prop"]');
+      if (propsPill) propsPill.style.display = hasProps ? '' : 'none';
+      if (!hasProps && resultsTypeFilter === 'prop') {
+        resultsTypeFilter = 'all';
+      }
 
       // Load the appropriate results
-      const cached = sport === 'nhl' ? nhlResultsData : nbaResultsData;
+      const cached = sport === 'ncaab' ? ncaabResultsData : sport === 'nhl' ? nhlResultsData : nbaResultsData;
       if (cached) {
         resultsData = cached;
         rebuildFromData();
