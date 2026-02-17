@@ -2744,6 +2744,7 @@
     let gameProjections = [];
     let nhlGameProjections = [];
     let ncaabGameProjections = [];
+    let ncaabTeamNames = {}; // abbr → full name (e.g. "BC" → "Boston College Eagles")
     let nbaBestBets = [];
     let nhlBestBets = [];
     let ncaabBestBets = [];
@@ -5317,13 +5318,18 @@
         filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter));
       }
 
-      // Apply search filter
+      // Apply search filter (NCAAB supports full team name search)
       if (currentGameSearch) {
         const q = currentGameSearch.toLowerCase();
-        filtered = filtered.filter(g =>
-          g.away_team.toLowerCase().includes(q) ||
-          g.home_team.toLowerCase().includes(q)
-        );
+        filtered = filtered.filter(g => {
+          if (g.away_team.toLowerCase().includes(q) || g.home_team.toLowerCase().includes(q)) return true;
+          if (currentSport === 'ncaab') {
+            const awayName = (ncaabTeamNames[g.away_team] || '').toLowerCase();
+            const homeName = (ncaabTeamNames[g.home_team] || '').toLowerCase();
+            if (awayName.includes(q) || homeName.includes(q)) return true;
+          }
+          return false;
+        });
       }
 
       // Game recommendations (rendered first, above filters)
@@ -5545,6 +5551,7 @@
         ncaabGameProjections._updated = data.updated;
         ncaabGameProjections._dataDate = data.date || '';
         ncaabBestBets = data.best_bets || [];
+        if (data.team_names) ncaabTeamNames = data.team_names;
 
         if (currentSport === 'ncaab') {
           // Auto-navigate to data date only if it's yesterday (post-midnight)
