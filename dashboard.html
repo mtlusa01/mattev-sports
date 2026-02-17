@@ -1518,6 +1518,13 @@
       font-size: 9px; padding: 2px 6px; border-radius: 4px;
       border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600;
     }
+    .rec-card-finished { opacity: 0.7; }
+    .rec-card-finished:hover { opacity: 0.85; }
+    .rec-record { font-size: 12px; font-weight: 600; margin-left: 8px; }
+    .rec-record-w { color: var(--accent-light); }
+    .rec-record-l { color: var(--red-light); }
+    .rec-record-p { color: var(--yellow); }
+    .rec-record-pending { color: var(--text-muted); }
     .no-recs {
       text-align: center; padding: 20px; color: var(--text-secondary); font-size: 13px;
     }
@@ -3053,35 +3060,59 @@
 
     const MAX_RECOMMENDED = 5;
 
+    // Cache best bets per sport+date so picks are persistent across re-renders
+    const dailyBestBets = {};
+
     function buildGameBestBets(games, thresholds) {
       // Build best bets dynamically from game projections
+      // NOTE: includes final games so cached picks can be graded
       const { spread: spT, total: totT, ml: mlT } = thresholds;
       const bets = [];
       const fmtOdds = (o) => o == null ? '' : (o > 0 ? `(+${o})` : `(${o})`);
       for (const g of games) {
-        if (g.status === 'final') continue;
         const matchup = g.away_team + ' @ ' + g.home_team;
-        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, odds: fmtOdds(g.spread_odds), confidence: g.spread_conf, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`] });
-        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, odds: fmtOdds(g.total_odds), confidence: g.total_conf, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
-        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, odds: fmtOdds(g.ml_odds), confidence: g.ml_conf, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
+        if (g.spread_conf >= spT) bets.push({ bet_type: 'Spread', game: matchup, pick: g.spread_pick, odds: fmtOdds(g.spread_odds), confidence: g.spread_conf, away_team: g.away_team, home_team: g.home_team, reasons: [`${g.spread_conf.toFixed(1)}% model confidence`] });
+        if (g.total_conf >= totT) bets.push({ bet_type: 'Total', game: matchup, pick: g.total_pick + ' ' + g.total_line, odds: fmtOdds(g.total_odds), confidence: g.total_conf, away_team: g.away_team, home_team: g.home_team, reasons: [`${g.total_conf.toFixed(1)}% model confidence`] });
+        if (g.ml_conf >= mlT) bets.push({ bet_type: 'ML', game: matchup, pick: g.ml_pick, odds: fmtOdds(g.ml_odds), confidence: g.ml_conf, away_team: g.away_team, home_team: g.home_team, reasons: [`${g.ml_conf.toFixed(1)}% model confidence`] });
       }
       bets.sort((a, b) => (parseFloat(b.confidence) || 0) - (parseFloat(a.confidence) || 0));
       return bets.slice(0, MAX_RECOMMENDED);
     }
 
+    function gradeBet(bet, dateGames) {
+      // Find the matching game to check result
+      const g = dateGames.find(gm => gm.away_team === bet.away_team && gm.home_team === bet.home_team);
+      if (!g) return { result: '', isFinal: false };
+      const status = getGameStatus(g);
+      if (status !== 'final') return { result: '', isFinal: false };
+      const type = (bet.bet_type || '').toLowerCase();
+      let result = '';
+      if (type === 'spread') result = g.spread_result || '';
+      else if (type === 'total') result = g.total_result || '';
+      else if (type === 'ml') result = g.ml_result || '';
+      return { result, isFinal: true };
+    }
+
     function renderGameRecommendations() {
-      // Use date-filtered games for recommendations — don't show stale recs
       const activeGames = getActiveGameProjections();
       const dateGames = activeGames.filter(g => {
         const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
         return gd === selectedDate;
       });
-      let gameRecs;
-      if (currentSport === 'nhl' || currentSport === 'ncaab') {
-        gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 60, ml: 60 });
-      } else {
-        gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 65, ml: 58 });
+
+      // Cache key: sport + date — only generate picks once per date
+      const cacheKey = currentSport + ':' + selectedDate;
+      if (!dailyBestBets[cacheKey]) {
+        let gameRecs;
+        if (currentSport === 'nhl' || currentSport === 'ncaab') {
+          gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 60, ml: 60 });
+        } else {
+          gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 65, ml: 58 });
+        }
+        dailyBestBets[cacheKey] = gameRecs;
       }
+      const gameRecs = dailyBestBets[cacheKey];
+
       const sportLabel = currentSport.toUpperCase();
       if (gameRecs.length === 0) {
         return `<div class="rec-category" style="margin-bottom:20px">
@@ -3092,22 +3123,47 @@
           <div class="no-recs">No ${sportLabel} bets meet our quality criteria${selectedDate === getLocalDateStr() ? ' today' : ''}.</div>
         </div>`;
       }
+
+      // Grade each bet and compute W/L record
+      let wins = 0, losses = 0, pushes = 0, pending = 0;
       const gameCards = gameRecs.map((r, i) => {
         const confLvl = getConfLevel(r.confidence || 0);
-        const reasons = (r.reasons || []).map(s => `<span class="rec-reason">${s}</span>`).join('');
-        return `<div class="rec-card game-rec">
+        const { result, isFinal } = gradeBet(r, dateGames);
+        const resultLower = (result || '').toLowerCase();
+        if (isFinal) {
+          if (resultLower === 'win' || resultLower === 'w') wins++;
+          else if (resultLower === 'loss' || resultLower === 'l') losses++;
+          else if (resultLower === 'push' || resultLower === 'p') pushes++;
+          else pending++;
+        } else {
+          pending++;
+        }
+        const resultBadge = isFinal ? sgcResultBadge(result) : '';
+        const finishedClass = isFinal ? ' rec-card-finished' : '';
+        return `<div class="rec-card game-rec${finishedClass}">
           <div class="rec-rank">#${i + 1}</div>
           <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
           <div class="rec-matchup">${r.game || ''}</div>
-          <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds || ''}</span></div>
+          <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds || ''}</span>${resultBadge}</div>
           <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
-          ${reasons ? `<div class="rec-reasons">${reasons}</div>` : ''}
         </div>`;
       }).join('');
+
+      // Build record summary if any games are graded
+      let recordHtml = '';
+      if (wins + losses + pushes > 0) {
+        const parts = [];
+        parts.push(`<span class="rec-record-w">${wins}W</span>`);
+        parts.push(`<span class="rec-record-l">${losses}L</span>`);
+        if (pushes > 0) parts.push(`<span class="rec-record-p">${pushes}P</span>`);
+        if (pending > 0) parts.push(`<span class="rec-record-pending">${pending} pending</span>`);
+        recordHtml = `<span class="rec-record">${parts.join(' - ')}</span>`;
+      }
+
       return `<div class="rec-category" style="margin-bottom:20px">
         <div class="rec-header">
           <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel} Bets</span>
-          <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''}</span>
+          <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''} ${recordHtml}</span>
         </div>
         <div class="rec-cards">${gameCards}</div>
       </div>`;
