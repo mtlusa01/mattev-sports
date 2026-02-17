@@ -4406,6 +4406,7 @@
     const historicalNhlCache = {};
     const historicalNcaabCache = {};
     const historicalPropsCache = {};
+    const historicalBestBetsCache = {};
 
     async function loadHistoricalGames(date) {
       // If it's today, use current gameProjections
@@ -4444,12 +4445,15 @@
 
           if (archiveGameDate === date) {
             games = data.game_projections?.games || [];
+            historicalBestBetsCache['nba:' + date] = data.game_projections?.best_bets || [];
           }
           if (archiveNhlDate === date) {
             nhlGames = data.nhl_game_projections?.games || [];
+            historicalBestBetsCache['nhl:' + date] = data.nhl_game_projections?.best_bets || [];
           }
           if (archiveNcaabDate === date) {
             ncaabGames = data.ncaab_projections?.games || [];
+            historicalBestBetsCache['ncaab:' + date] = data.ncaab_projections?.best_bets || [];
           }
 
           // Extract player props from archive
@@ -4507,6 +4511,15 @@
         historicalNhlCache[date] = nhlGames;
         historicalNcaabCache[date] = ncaabGames;
         historicalPropsCache[date] = fallbackProps;
+        // Extract best bets from results.json picks with best_bet flag
+        for (const [sport, rData] of [['nba', historicalResults], ['nhl', nhlHistoricalResults], ['ncaab', ncaabHistoricalResults]]) {
+          const key = sport + ':' + date;
+          if (historicalBestBetsCache[key] === undefined) {
+            const day = rData?.days?.find(d => d.date === date);
+            const bbPicks = (day?.picks || []).filter(p => p.best_bet);
+            historicalBestBetsCache[key] = bbPicks.map(p => ({ type: p.type, game: p.game, pick: p.pick, confidence: p.confidence || 0 }));
+          }
+        }
         return nbaGames;
       } catch (e) {
         console.log(`Results fallback failed for ${date}:`, e.message);
@@ -4863,8 +4876,11 @@
       const spread = tallyType('spread');
       const total = tallyType('total');
 
-      // Best bets: use the best_bets array to identify which bet types were best bets
-      const sportBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      // Best bets: use historical cache for past dates, live data for today
+      const today = getLocalDateStr();
+      const liveBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      const histBB = historicalBestBetsCache[currentSport + ':' + selectedDate];
+      const sportBB = (selectedDate !== today && histBB) ? histBB : liveBB;
       let bbW = 0, bbL = 0, bbP = 0;
       for (const g of finals) {
         const gameLabel = `${g.away_team} @ ${g.home_team}`;
