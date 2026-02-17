@@ -2859,8 +2859,15 @@
     }
 
     function gameHasConfTier(g, tier) {
+      if (tier === 'best-bets') return gameHasBestBet(g);
       const confs = [parseFloat(g.spread_conf) || 0, parseFloat(g.total_conf) || 0, parseFloat(g.ml_conf) || 0];
       return confs.some(c => getConfTier(c) === tier);
+    }
+
+    function gameHasBestBet(g) {
+      const bets = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      const label = `${g.away_team} @ ${g.home_team}`;
+      return bets.some(b => b.game === label);
     }
 
     function getGameMaxConf(g) {
@@ -4899,7 +4906,11 @@
       const gameLabel = `${g.away_team} @ ${g.home_team}`;
       const isInBestBets = (betType) => sportBestBets.some(b => b.game === gameLabel && b.type === betType);
       const bestBetBadge = (betType) => isInBestBets(betType) ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
-      const dimClass = conf => currentGameConfFilter !== 'all' && getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
+      const dimClass = (conf, betType) => {
+        if (currentGameConfFilter === 'all') return '';
+        if (currentGameConfFilter === 'best-bets') return isInBestBets(betType) ? '' : ' dimmed';
+        return getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
+      };
 
       const status = getGameStatus(g);
       const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
@@ -4965,7 +4976,7 @@
               </div>
             </div>
             <div class="game-card-picks">
-              <div class="game-pick-row${dimClass(g.spread_conf)}">
+              <div class="game-pick-row${dimClass(g.spread_conf, 'spread')}">
                 <span class="game-pick-label">Spread</span>
                 <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
                 <span class="game-pick-odds">${spreadOddsStr}</span>
@@ -4973,7 +4984,7 @@
                 ${renderResultBadge(g.spread_result)}
                 ${gameTrackIcon('spread', isSpreadTracked)}
               </div>
-              <div class="game-pick-row${dimClass(g.total_conf)}">
+              <div class="game-pick-row${dimClass(g.total_conf, 'total')}">
                 <span class="game-pick-label">Total</span>
                 <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
                 <span class="game-pick-odds">${totalOddsStr}</span>
@@ -4981,7 +4992,7 @@
                 ${renderResultBadge(g.total_result)}
                 ${gameTrackIcon('total', isTotalTracked)}
               </div>
-              <div class="game-pick-row${dimClass(g.ml_conf)}">
+              <div class="game-pick-row${dimClass(g.ml_conf, 'ml')}">
                 <span class="game-pick-label">ML</span>
                 <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
                 <span class="game-pick-odds">${mlOddsStr}</span>
@@ -5031,21 +5042,21 @@
           </div>
           ${liveScoresHtml}
           <div class="game-card-picks">
-            <div class="game-pick-row${dimClass(g.spread_conf)}">
+            <div class="game-pick-row${dimClass(g.spread_conf, 'spread')}">
               <span class="game-pick-label">Spread</span>
               <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge('spread')}</span>
               <span class="game-pick-odds">${spreadOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
               ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
-            <div class="game-pick-row${dimClass(g.total_conf)}">
+            <div class="game-pick-row${dimClass(g.total_conf, 'total')}">
               <span class="game-pick-label">Total</span>
               <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge('total')}</span>
               <span class="game-pick-odds">${totalOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
               ${gameTrackIcon('total', isTotalTracked)}
             </div>
-            <div class="game-pick-row${dimClass(g.ml_conf)}">
+            <div class="game-pick-row${dimClass(g.ml_conf, 'ml')}">
               <span class="game-pick-label">ML</span>
               <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge('ml')}</span>
               <span class="game-pick-odds">${mlOddsStr}</span>
@@ -5300,8 +5311,12 @@
         { key: 'all', label: 'All' }, { key: 'upcoming', label: 'Upcoming' },
         { key: 'live', label: 'Live' }, { key: 'final', label: 'Final' },
       ];
+      const sportBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+      const bbCount = sportBB.length;
       const confTabs = [
-        { key: 'all', label: 'All' }, { key: 'high', label: 'High' },
+        { key: 'all', label: 'All' },
+        { key: 'best-bets', label: `Best Bets (${bbCount})` },
+        { key: 'high', label: 'High' },
         { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
       ];
 
@@ -5346,7 +5361,10 @@
 
       if (gameViewMode === 'list') {
         let betRows = generateBetRows(filtered);
-        if (currentGameConfFilter !== 'all') {
+        if (currentGameConfFilter === 'best-bets') {
+          const bb = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : nbaBestBets;
+          betRows = betRows.filter(r => bb.some(b => b.game === r.matchup && b.type === r.type));
+        } else if (currentGameConfFilter !== 'all') {
           betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
         }
         const toggleHtml = makeToggleHtml(`${betRows.length} bet${betRows.length !== 1 ? 's' : ''}`);
