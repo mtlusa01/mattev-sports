@@ -4230,7 +4230,7 @@
       const params = new URLSearchParams(qIdx >= 0 ? hash.slice(qIdx + 1) : '');
       const parts = base.replace('#', '').split('/');
       let sport, subtab;
-      if (['nba', 'nhl'].includes(parts[0])) {
+      if (['nba', 'nhl', 'ncaab'].includes(parts[0])) {
         sport = parts[0];
         subtab = parts[1] || 'projections';
       } else {
@@ -4241,7 +4241,7 @@
       if (subtab === 'props') subtab = 'player-props';
       else subtab = 'game-projections';
       // NHL has no props
-      if (sport === 'nhl' && subtab === 'player-props') subtab = 'game-projections';
+      if ((sport === 'nhl' || sport === 'ncaab') && subtab === 'player-props') subtab = 'game-projections';
       return { sport, subtab, params };
     }
 
