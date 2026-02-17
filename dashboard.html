@@ -2036,6 +2036,7 @@
         mainEl.style.display = '';
         if (pageGradient) pageGradient.style.display = '';
         currentGameSearch = ''; // Reset search when switching sports
+        selectedDate = getLocalDateStr(); // Always start on today when switching sports
 
         // Update view tabs based on sport
         const propsTab = viewTabs.querySelector('[data-view="player-props"]');
@@ -2053,26 +2054,13 @@
           propsTab.style.display = '';
         }
 
-        // If on a historical date, ensure data is loaded for the new sport
-        const today = getLocalDateStr();
-        if (selectedDate !== today) {
-          const cache = sport === 'nhl' ? historicalNhlCache : sport === 'ncaab' ? historicalNcaabCache : historicalGamesCache;
-          if (cache[selectedDate] === undefined) {
-            isLoadingHistory = true;
-            render(); // Show loading state
-            await loadHistoricalGames(selectedDate);
-            isLoadingHistory = false;
-          }
-        }
-
         // Auto-navigate to data date if today has no games for this sport
         // (handles post-midnight when projections are from yesterday)
-        if (selectedDate === today) {
-          const sportGames = sport === 'nhl' ? nhlGameProjections : sport === 'ncaab' ? ncaabGameProjections : gameProjections;
-          const todayGames = sportGames.filter(g => g.game_date === today);
-          if (todayGames.length === 0 && sportGames._dataDate && sportGames._dataDate !== today) {
-            selectedDate = sportGames._dataDate;
-          }
+        const today = getLocalDateStr();
+        const sportGames = sport === 'nhl' ? nhlGameProjections : sport === 'ncaab' ? ncaabGameProjections : gameProjections;
+        const todayGames = sportGames.filter(g => g.game_date === today);
+        if (todayGames.length === 0 && sportGames._dataDate && sportGames._dataDate !== today) {
+          selectedDate = sportGames._dataDate;
         }
 
         // Update the active game data and re-render
@@ -4552,8 +4540,8 @@
 
     async function goToToday() {
       selectedDate = getLocalDateStr();
-      // Reload current projections for both sports (including player props)
-      await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadProjections()]);
+      // Reload current projections for all sports (including player props)
+      await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadNcaabGameProjections(), loadProjections()]);
       updateActiveGameData();
       updateTimestamp();
       updateStatsBar();
