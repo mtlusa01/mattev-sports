@@ -5393,9 +5393,43 @@
         return timeA - timeB;
       });
 
+      // Compute W-L record for the filtered picks
+      function tierRecord() {
+        const finals = filtered.filter(g => getGameStatus(g) === 'final' && g.away_score != null);
+        if (finals.length === 0) return '';
+        let w = 0, l = 0, p = 0;
+        const bb = getActiveBestBets();
+        for (const g of finals) {
+          const label = `${g.away_team} @ ${g.home_team}`;
+          for (const t of ['spread', 'total', 'ml']) {
+            const r = (g[t + '_result'] || '').toLowerCase();
+            if (!r) continue;
+            let inTier = false;
+            if (currentGameConfFilter === 'all') {
+              inTier = true;
+            } else if (currentGameConfFilter === 'best-bets') {
+              inTier = bb.some(b => b.game === label && b.type === t);
+            } else {
+              inTier = getConfTier(parseFloat(g[t + '_conf']) || 0) === currentGameConfFilter;
+            }
+            if (!inTier) continue;
+            if (r === 'win' || r === 'w') w++;
+            else if (r === 'loss' || r === 'l') l++;
+            else if (r === 'push' || r === 'p') p++;
+          }
+        }
+        const decided = w + l;
+        if (decided === 0) return '';
+        const pct = (w / decided * 100).toFixed(1);
+        const cls = parseFloat(pct) > 60 ? 'color:var(--accent-light)' : parseFloat(pct) < 50 ? 'color:var(--red-light)' : 'color:var(--text-muted)';
+        const rec = p > 0 ? `${w}-${l}-${p}` : `${w}-${l}`;
+        return ` <span style="margin-left:4px;font-weight:600;${cls}">| ${rec} (${pct}%)</span>`;
+      }
+      const recordHtml = tierRecord();
+
       const makeToggleHtml = (countText) => `
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <span style="font-size:13px;color:var(--text-muted)">${countText}</span>
+          <span style="font-size:13px;color:var(--text-muted)">${countText}${recordHtml}</span>
           <div class="view-toggle">
             <button class="view-toggle-btn${gameViewMode === 'grid' ? ' active' : ''}" data-view-mode="grid">Grid</button>
             <button class="view-toggle-btn${gameViewMode === 'list' ? ' active' : ''}" data-view-mode="list">List</button>
