@@ -1,67 +1,96 @@
 {
-  "updated": "2026-02-17T20:00:03",
+  "updated": "2026-02-17T20:15:03",
   "allTime": {
     "spreads": {
-      "wins": 14,
+      "wins": 15,
       "losses": 11,
       "pushes": 0,
-      "pct": 56.0,
-      "roi": 6.9
+      "pct": 57.7,
+      "roi": 10.1
     },
     "totals": {
-      "wins": 11,
+      "wins": 12,
       "losses": 14,
       "pushes": 0,
-      "pct": 44.0,
-      "roi": -16.0
+      "pct": 46.2,
+      "roi": -11.9
     },
     "moneylines": {
-      "wins": 19,
+      "wins": 20,
       "losses": 6,
       "pushes": 0,
-      "pct": 76.0,
-      "roi": 45.1
+      "pct": 76.9,
+      "roi": 46.9
     },
     "best_bets": {
-      "wins": 7,
+      "wins": 9,
       "losses": 1,
       "pushes": 0,
-      "pct": 87.5,
-      "roi": 67.0
+      "pct": 90.0,
+      "roi": 71.8
     }
   },
   "days": [
     {
       "date": "2026-02-17",
       "spreads": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "totals": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "best_bets": {
-        "wins": 2,
+        "wins": 4,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
+        {
+          "date": "2026-02-17",
+          "type": "spread",
+          "game": "BC @ FSU",
+          "pick": "BC +12.0",
+          "result": "72-80",
+          "hit": true,
+          "confidence": 66,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "total",
+          "game": "BC @ FSU",
+          "pick": "OVER 148.0",
+          "result": "72-80",
+          "hit": true,
+          "confidence": 60
+        },
+        {
+          "date": "2026-02-17",
+          "type": "ml",
+          "game": "BC @ FSU",
+          "pick": "FSU",
+          "result": "72-80",
+          "hit": true,
+          "confidence": 73,
+          "best_bet": true
+        },
         {
           "date": "2026-02-17",
           "type": "spread",
