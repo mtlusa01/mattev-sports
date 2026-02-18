@@ -1,33 +1,33 @@
 {
-  "updated": "2026-02-17T20:30:04",
+  "updated": "2026-02-17T20:45:03",
   "allTime": {
     "spreads": {
       "wins": 15,
-      "losses": 12,
+      "losses": 13,
       "pushes": 0,
-      "pct": 55.6,
-      "roi": 6.1
+      "pct": 53.6,
+      "roi": 2.3
     },
     "totals": {
       "wins": 12,
-      "losses": 15,
+      "losses": 16,
       "pushes": 0,
-      "pct": 44.4,
-      "roi": -15.2
+      "pct": 42.9,
+      "roi": -18.2
     },
     "moneylines": {
       "wins": 20,
-      "losses": 7,
+      "losses": 8,
       "pushes": 0,
-      "pct": 74.1,
-      "roi": 41.4
+      "pct": 71.4,
+      "roi": 36.4
     },
     "best_bets": {
-      "wins": 8,
-      "losses": 2,
+      "wins": 7,
+      "losses": 3,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 70.0,
+      "roi": 33.6
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-02-17",
       "spreads": {
         "wins": 2,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "2-2",
+        "pct": 50.0
       },
       "totals": {
         "wins": 1,
-        "losses": 2,
+        "losses": 3,
         "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
+        "record": "1-3",
+        "pct": 25.0
       },
       "moneylines": {
         "wins": 2,
-        "losses": 1,
-        "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
-      },
-      "best_bets": {
-        "wins": 3,
         "losses": 2,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "2-2",
+        "pct": 50.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 3,
+        "pushes": 0,
+        "record": "2-3",
+        "pct": 40.0
       },
       "picks": [
         {
@@ -97,8 +97,7 @@
           "pick": "GWEB +30.0",
           "result": "66-75",
           "hit": true,
-          "confidence": 69,
-          "best_bet": true
+          "confidence": 69
         },
         {
           "date": "2026-02-17",
@@ -147,6 +146,34 @@
           "hit": false,
           "confidence": 70,
           "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "spread",
+          "game": "NIU @ BUF",
+          "pick": "BUF -8.5",
+          "result": "72-70",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-02-17",
+          "type": "total",
+          "game": "NIU @ BUF",
+          "pick": "OVER 147.0",
+          "result": "72-70",
+          "hit": false,
+          "confidence": 83,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "ml",
+          "game": "NIU @ BUF",
+          "pick": "BUF",
+          "result": "72-70",
+          "hit": false,
+          "confidence": 64
         }
       ]
     },
