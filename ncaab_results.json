@@ -1,33 +1,33 @@
 {
-  "updated": "2026-02-17T20:15:03",
+  "updated": "2026-02-17T20:30:04",
   "allTime": {
     "spreads": {
       "wins": 15,
-      "losses": 11,
+      "losses": 12,
       "pushes": 0,
-      "pct": 57.7,
-      "roi": 10.1
+      "pct": 55.6,
+      "roi": 6.1
     },
     "totals": {
       "wins": 12,
-      "losses": 14,
+      "losses": 15,
       "pushes": 0,
-      "pct": 46.2,
-      "roi": -11.9
+      "pct": 44.4,
+      "roi": -15.2
     },
     "moneylines": {
       "wins": 20,
-      "losses": 6,
+      "losses": 7,
       "pushes": 0,
-      "pct": 76.9,
-      "roi": 46.9
+      "pct": 74.1,
+      "roi": 41.4
     },
     "best_bets": {
-      "wins": 9,
-      "losses": 1,
+      "wins": 8,
+      "losses": 2,
       "pushes": 0,
-      "pct": 90.0,
-      "roi": 71.8
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-02-17",
       "spreads": {
         "wins": 2,
-        "losses": 0,
+        "losses": 1,
         "pushes": 0,
-        "record": "2-0",
-        "pct": 100.0
+        "record": "2-1",
+        "pct": 66.7
       },
       "totals": {
         "wins": 1,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "1-2",
+        "pct": 33.3
       },
       "moneylines": {
         "wins": 2,
-        "losses": 0,
-        "pushes": 0,
-        "record": "2-0",
-        "pct": 100.0
-      },
-      "best_bets": {
-        "wins": 4,
         "losses": 1,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "best_bets": {
+        "wins": 3,
+        "losses": 2,
+        "pushes": 0,
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -69,8 +69,7 @@
           "pick": "BC +12.0",
           "result": "72-80",
           "hit": true,
-          "confidence": 66,
-          "best_bet": true
+          "confidence": 66
         },
         {
           "date": "2026-02-17",
@@ -108,8 +107,7 @@
           "pick": "OVER 163.0",
           "result": "66-75",
           "hit": false,
-          "confidence": 64,
-          "best_bet": true
+          "confidence": 64
         },
         {
           "date": "2026-02-17",
@@ -119,6 +117,35 @@
           "result": "66-75",
           "hit": true,
           "confidence": 87,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "spread",
+          "game": "CMU @ EMU",
+          "pick": "CMU +6.0",
+          "result": "54-66",
+          "hit": false,
+          "confidence": 85,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "total",
+          "game": "CMU @ EMU",
+          "pick": "OVER 142.0",
+          "result": "54-66",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-02-17",
+          "type": "ml",
+          "game": "CMU @ EMU",
+          "pick": "CMU",
+          "result": "54-66",
+          "hit": false,
+          "confidence": 70,
           "best_bet": true
         }
       ]
