@@ -1,73 +1,73 @@
 {
-  "updated": "2026-02-17T22:30:03",
+  "updated": "2026-02-17T22:45:03",
   "allTime": {
     "spreads": {
-      "wins": 13,
+      "wins": 14,
       "losses": 12,
       "pushes": 0,
-      "pct": 52.0,
-      "roi": -0.7
+      "pct": 53.8,
+      "roi": 2.8
     },
     "totals": {
       "wins": 12,
-      "losses": 13,
+      "losses": 14,
       "pushes": 0,
-      "pct": 48.0,
-      "roi": -8.4
+      "pct": 46.2,
+      "roi": -11.9
     },
     "moneylines": {
-      "wins": 19,
+      "wins": 20,
       "losses": 6,
       "pushes": 0,
-      "pct": 76.0,
-      "roi": 45.1
+      "pct": 76.9,
+      "roi": 46.9
     },
     "best_bets": {
-      "wins": 7,
-      "losses": 1,
+      "wins": 8,
+      "losses": 2,
       "pushes": 0,
-      "pct": 87.5,
-      "roi": 67.0
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-02-17",
       "spreads": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "totals": {
         "wins": 1,
-        "losses": 0,
+        "losses": 1,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "best_bets": {
-        "wins": 2,
-        "losses": 1,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
           "date": "2026-02-17",
           "type": "spread",
-          "game": "FRES @ WYO",
-          "pick": "FRES +9.5",
-          "result": "82-92",
+          "game": "UCLA @ MSU",
+          "pick": "UCLA +8.5",
+          "result": "59-82",
           "hit": false,
           "confidence": 60,
           "best_bet": true
@@ -75,12 +75,41 @@
         {
           "date": "2026-02-17",
           "type": "total",
-          "game": "FRES @ WYO",
+          "game": "UCLA @ MSU",
           "pick": "OVER 147.0",
+          "result": "59-82",
+          "hit": false,
+          "confidence": 40,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "ml",
+          "game": "UCLA @ MSU",
+          "pick": "MSU",
+          "result": "59-82",
+          "hit": true,
+          "confidence": 70,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "spread",
+          "game": "FRES @ WYO",
+          "pick": "FRES +14.5",
           "result": "82-92",
           "hit": true,
-          "confidence": 57,
+          "confidence": 65,
           "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "total",
+          "game": "FRES @ WYO",
+          "pick": "OVER 152.0",
+          "result": "82-92",
+          "hit": true,
+          "confidence": 40
         },
         {
           "date": "2026-02-17",
@@ -89,7 +118,7 @@
           "pick": "WYO",
           "result": "82-92",
           "hit": true,
-          "confidence": 67,
+          "confidence": 89,
           "best_bet": true
         }
       ]
