@@ -1,36 +1,99 @@
 {
-  "updated": "2026-02-16T23:20:04",
+  "updated": "2026-02-17T20:00:03",
   "allTime": {
     "spreads": {
-      "wins": 13,
+      "wins": 14,
       "losses": 11,
       "pushes": 0,
-      "pct": 54.2,
-      "roi": 3.4
+      "pct": 56.0,
+      "roi": 6.9
     },
     "totals": {
       "wins": 11,
-      "losses": 13,
+      "losses": 14,
       "pushes": 0,
-      "pct": 45.8,
-      "roi": -12.5
+      "pct": 44.0,
+      "roi": -16.0
     },
     "moneylines": {
-      "wins": 18,
+      "wins": 19,
       "losses": 6,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 76.0,
+      "roi": 45.1
     },
     "best_bets": {
-      "wins": 5,
-      "losses": 0,
+      "wins": 7,
+      "losses": 1,
       "pushes": 0,
-      "pct": 100.0,
-      "roi": 90.9
+      "pct": 87.5,
+      "roi": 67.0
     }
   },
   "days": [
+    {
+      "date": "2026-02-17",
+      "spreads": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "picks": [
+        {
+          "date": "2026-02-17",
+          "type": "spread",
+          "game": "GWEB @ CHSO",
+          "pick": "GWEB +30.0",
+          "result": "66-75",
+          "hit": true,
+          "confidence": 69,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "total",
+          "game": "GWEB @ CHSO",
+          "pick": "OVER 163.0",
+          "result": "66-75",
+          "hit": false,
+          "confidence": 64,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "ml",
+          "game": "GWEB @ CHSO",
+          "pick": "CHSO",
+          "result": "66-75",
+          "hit": true,
+          "confidence": 87,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-02-16",
       "spreads": {
