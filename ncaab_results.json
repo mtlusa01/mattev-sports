@@ -1,65 +1,65 @@
 {
-  "updated": "2026-02-18T21:00:03",
+  "updated": "2026-02-18T21:15:03",
   "allTime": {
     "spreads": {
-      "wins": 27,
-      "losses": 18,
+      "wins": 32,
+      "losses": 27,
       "pushes": 0,
-      "pct": 60.0,
-      "roi": 14.5
+      "pct": 54.2,
+      "roi": 3.5
     },
     "totals": {
-      "wins": 23,
-      "losses": 22,
+      "wins": 30,
+      "losses": 29,
       "pushes": 0,
-      "pct": 51.1,
-      "roi": -2.4
+      "pct": 50.8,
+      "roi": -2.9
     },
     "moneylines": {
-      "wins": 29,
-      "losses": 16,
+      "wins": 37,
+      "losses": 22,
       "pushes": 0,
-      "pct": 64.4,
-      "roi": 23.0
+      "pct": 62.7,
+      "roi": 19.7
     },
     "best_bets": {
-      "wins": 11,
-      "losses": 4,
+      "wins": 10,
+      "losses": 5,
       "pushes": 0,
-      "pct": 73.3,
-      "roi": 40.0
+      "pct": 66.7,
+      "roi": 27.3
     }
   },
   "days": [
     {
       "date": "2026-02-18",
       "spreads": {
-        "wins": 6,
-        "losses": 4,
+        "wins": 11,
+        "losses": 13,
         "pushes": 0,
-        "record": "6-4",
-        "pct": 60.0
+        "record": "11-13",
+        "pct": 45.8
       },
       "totals": {
-        "wins": 7,
-        "losses": 3,
+        "wins": 14,
+        "losses": 10,
         "pushes": 0,
-        "record": "7-3",
-        "pct": 70.0
+        "record": "14-10",
+        "pct": 58.3
       },
       "moneylines": {
-        "wins": 7,
-        "losses": 3,
+        "wins": 15,
+        "losses": 9,
         "pushes": 0,
-        "record": "7-3",
-        "pct": 70.0
+        "record": "15-9",
+        "pct": 62.5
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -87,8 +87,7 @@
           "pick": "WOF",
           "result": "76-82",
           "hit": true,
-          "confidence": 86,
-          "best_bet": true
+          "confidence": 86
         },
         {
           "date": "2026-02-18",
@@ -169,8 +168,7 @@
           "pick": "YSU",
           "result": "82-106",
           "hit": true,
-          "confidence": 80,
-          "best_bet": true
+          "confidence": 80
         },
         {
           "date": "2026-02-18",
@@ -229,6 +227,172 @@
         {
           "date": "2026-02-18",
           "type": "spread",
+          "game": "OU @ TENN",
+          "pick": "TENN -11.5",
+          "result": "66-89",
+          "hit": true,
+          "confidence": 58
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "OU @ TENN",
+          "pick": "OVER 149.5",
+          "result": "66-89",
+          "hit": true,
+          "confidence": 57
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "OU @ TENN",
+          "pick": "TENN",
+          "result": "66-89",
+          "hit": true,
+          "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "CLEM @ WAKE",
+          "pick": "CLEM -4.5",
+          "result": "77-85",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "CLEM @ WAKE",
+          "pick": "OVER 139.5",
+          "result": "77-85",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "CLEM @ WAKE",
+          "pick": "CLEM",
+          "result": "77-85",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "MISS @ TA&M",
+          "pick": "TA&M -9.5",
+          "result": "77-80",
+          "hit": false,
+          "confidence": 57
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "MISS @ TA&M",
+          "pick": "UNDER 154.5",
+          "result": "77-80",
+          "hit": false,
+          "confidence": 45
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "MISS @ TA&M",
+          "pick": "TA&M",
+          "result": "77-80",
+          "hit": true,
+          "confidence": 74
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "QUC @ UNA",
+          "pick": "UNA +8.5",
+          "result": "85-78",
+          "hit": true,
+          "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "QUC @ UNA",
+          "pick": "OVER 156.0",
+          "result": "85-78",
+          "hit": true,
+          "confidence": 50
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "QUC @ UNA",
+          "pick": "UNA",
+          "result": "85-78",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "JMU @ CCU",
+          "pick": "CCU +1.0",
+          "result": "67-65",
+          "hit": false,
+          "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "JMU @ CCU",
+          "pick": "OVER 141.0",
+          "result": "67-65",
+          "hit": false,
+          "confidence": 60
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "JMU @ CCU",
+          "pick": "CCU",
+          "result": "67-65",
+          "hit": false,
+          "confidence": 81
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "UNCG @ WCU",
+          "pick": "UNCG +5.5",
+          "result": "77-91",
+          "hit": false,
+          "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "UNCG @ WCU",
+          "pick": "UNDER 155.5",
+          "result": "77-91",
+          "hit": false,
+          "confidence": 46
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "UNCG @ WCU",
+          "pick": "UNCG",
+          "result": "77-91",
+          "hit": false,
+          "confidence": 64
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
           "game": "LEH @ NAVY",
           "pick": "NAVY -9.5",
           "result": "49-72",
@@ -256,12 +420,147 @@
         {
           "date": "2026-02-18",
           "type": "spread",
+          "game": "UAB @ TEM",
+          "pick": "UAB +1.0",
+          "result": "76-71",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "UAB @ TEM",
+          "pick": "OVER 143.0",
+          "result": "76-71",
+          "hit": true,
+          "confidence": 70
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "UAB @ TEM",
+          "pick": "UAB",
+          "result": "76-71",
+          "hit": true,
+          "confidence": 41
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "RICH @ DAV",
+          "pick": "RICH +5.0",
+          "result": "63-65",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "RICH @ DAV",
+          "pick": "OVER 141.5",
+          "result": "63-65",
+          "hit": false,
+          "confidence": 70
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "RICH @ DAV",
+          "pick": "DAV",
+          "result": "63-65",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "DAY @ GMU",
+          "pick": "GMU -1.5",
+          "result": "82-67",
+          "hit": false,
+          "confidence": 59
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "DAY @ GMU",
+          "pick": "OVER 137.5",
+          "result": "82-67",
+          "hit": true,
+          "confidence": 68
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "DAY @ GMU",
+          "pick": "GMU",
+          "result": "82-67",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "LAS @ DUQ",
+          "pick": "DUQ -11.0",
+          "result": "61-62",
+          "hit": false,
+          "confidence": 88
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "LAS @ DUQ",
+          "pick": "OVER 145.5",
+          "result": "61-62",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "LAS @ DUQ",
+          "pick": "DUQ",
+          "result": "61-62",
+          "hit": true,
+          "confidence": 98,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "LUC @ FOR",
+          "pick": "FOR -8.0",
+          "result": "59-62",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "LUC @ FOR",
+          "pick": "OVER 136.5",
+          "result": "59-62",
+          "hit": false,
+          "confidence": 49
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "LUC @ FOR",
+          "pick": "FOR",
+          "result": "59-62",
+          "hit": true,
+          "confidence": 86
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
           "game": "JOES @ SBU",
           "pick": "JOES +5.0",
           "result": "71-65",
           "hit": true,
-          "confidence": 84,
-          "best_bet": true
+          "confidence": 84
         },
         {
           "date": "2026-02-18",
@@ -280,6 +579,60 @@
           "result": "71-65",
           "hit": true,
           "confidence": 61
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "AMER @ BUCK",
+          "pick": "AMER -4.0",
+          "result": "75-57",
+          "hit": true,
+          "confidence": 66
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "AMER @ BUCK",
+          "pick": "OVER 140.0",
+          "result": "75-57",
+          "hit": false,
+          "confidence": 66
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "AMER @ BUCK",
+          "pick": "AMER",
+          "result": "75-57",
+          "hit": true,
+          "confidence": 66
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "BRAD @ VAL",
+          "pick": "BRAD -2.5",
+          "result": "72-79",
+          "hit": false,
+          "confidence": 69
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "BRAD @ VAL",
+          "pick": "OVER 143.0",
+          "result": "72-79",
+          "hit": true,
+          "confidence": 70
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "BRAD @ VAL",
+          "pick": "BRAD",
+          "result": "72-79",
+          "hit": false,
+          "confidence": 72
         },
         {
           "date": "2026-02-18",
@@ -306,8 +659,34 @@
           "pick": "UNI",
           "result": "81-60",
           "hit": true,
-          "confidence": 75,
-          "best_bet": true
+          "confidence": 75
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "PFW @ NKU",
+          "pick": "PFW +3.0",
+          "result": "71-87",
+          "hit": false,
+          "confidence": 51
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "PFW @ NKU",
+          "pick": "OVER 152.5",
+          "result": "71-87",
+          "hit": true,
+          "confidence": 45
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "PFW @ NKU",
+          "pick": "NKU",
+          "result": "71-87",
+          "hit": true,
+          "confidence": 59
         },
         {
           "date": "2026-02-18",
@@ -334,8 +713,7 @@
           "pick": "L-MD",
           "result": "87-77",
           "hit": false,
-          "confidence": 78,
-          "best_bet": true
+          "confidence": 78
         }
       ]
     },
