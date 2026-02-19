@@ -1,65 +1,65 @@
 {
-  "updated": "2026-02-18T21:15:03",
+  "updated": "2026-02-18T21:30:03",
   "allTime": {
     "spreads": {
-      "wins": 32,
-      "losses": 27,
-      "pushes": 0,
-      "pct": 54.2,
-      "roi": 3.5
-    },
-    "totals": {
-      "wins": 30,
+      "wins": 36,
       "losses": 29,
       "pushes": 0,
-      "pct": 50.8,
-      "roi": -2.9
+      "pct": 55.4,
+      "roi": 5.7
+    },
+    "totals": {
+      "wins": 35,
+      "losses": 30,
+      "pushes": 0,
+      "pct": 53.8,
+      "roi": 2.8
     },
     "moneylines": {
-      "wins": 37,
-      "losses": 22,
+      "wins": 40,
+      "losses": 25,
       "pushes": 0,
-      "pct": 62.7,
-      "roi": 19.7
+      "pct": 61.5,
+      "roi": 17.5
     },
     "best_bets": {
-      "wins": 10,
-      "losses": 5,
+      "wins": 11,
+      "losses": 4,
       "pushes": 0,
-      "pct": 66.7,
-      "roi": 27.3
+      "pct": 73.3,
+      "roi": 40.0
     }
   },
   "days": [
     {
       "date": "2026-02-18",
       "spreads": {
-        "wins": 11,
-        "losses": 13,
+        "wins": 15,
+        "losses": 15,
         "pushes": 0,
-        "record": "11-13",
-        "pct": 45.8
+        "record": "15-15",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 14,
-        "losses": 10,
+        "wins": 19,
+        "losses": 11,
         "pushes": 0,
-        "record": "14-10",
-        "pct": 58.3
+        "record": "19-11",
+        "pct": 63.3
       },
       "moneylines": {
-        "wins": 15,
-        "losses": 9,
+        "wins": 18,
+        "losses": 12,
         "pushes": 0,
-        "record": "15-9",
-        "pct": 62.5
+        "record": "18-12",
+        "pct": 60.0
       },
       "best_bets": {
-        "wins": 3,
-        "losses": 2,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -255,6 +255,33 @@
         {
           "date": "2026-02-18",
           "type": "spread",
+          "game": "CREI @ CONN",
+          "pick": "CREI +15.5",
+          "result": "91-84",
+          "hit": true,
+          "confidence": 61
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "CREI @ CONN",
+          "pick": "OVER 143.5",
+          "result": "91-84",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "CREI @ CONN",
+          "pick": "CONN",
+          "result": "91-84",
+          "hit": false,
+          "confidence": 86
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
           "game": "CLEM @ WAKE",
           "pick": "CLEM -4.5",
           "result": "77-85",
@@ -309,6 +336,33 @@
         {
           "date": "2026-02-18",
           "type": "spread",
+          "game": "WKU @ DEL",
+          "pick": "WKU -4.0",
+          "result": "88-87",
+          "hit": false,
+          "confidence": 57
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "WKU @ DEL",
+          "pick": "OVER 140.0",
+          "result": "88-87",
+          "hit": true,
+          "confidence": 59
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "WKU @ DEL",
+          "pick": "WKU",
+          "result": "88-87",
+          "hit": true,
+          "confidence": 73
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
           "game": "QUC @ UNA",
           "pick": "UNA +8.5",
           "result": "85-78",
@@ -333,6 +387,61 @@
           "result": "85-78",
           "hit": false,
           "confidence": 61
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "JAX @ FGCU",
+          "pick": "JAX +7.0",
+          "result": "84-86",
+          "hit": true,
+          "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "JAX @ FGCU",
+          "pick": "OVER 137.0",
+          "result": "84-86",
+          "hit": true,
+          "confidence": 70
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "JAX @ FGCU",
+          "pick": "JAX",
+          "result": "84-86",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "WGA @ EKU",
+          "pick": "WGA +7.0",
+          "result": "80-81",
+          "hit": true,
+          "confidence": 67
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "WGA @ EKU",
+          "pick": "OVER 154.5",
+          "result": "80-81",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "WGA @ EKU",
+          "pick": "EKU",
+          "result": "80-81",
+          "hit": true,
+          "confidence": 77
         },
         {
           "date": "2026-02-18",
@@ -369,8 +478,7 @@
           "pick": "UNCG +5.5",
           "result": "77-91",
           "hit": false,
-          "confidence": 88,
-          "best_bet": true
+          "confidence": 88
         },
         {
           "date": "2026-02-18",
@@ -714,6 +822,60 @@
           "result": "87-77",
           "hit": false,
           "confidence": 78
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "SIU @ DRKE",
+          "pick": "DRKE +1.5",
+          "result": "66-61",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "SIU @ DRKE",
+          "pick": "UNDER 149.5",
+          "result": "66-61",
+          "hit": true,
+          "confidence": 50
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "SIU @ DRKE",
+          "pick": "DRKE",
+          "result": "66-61",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "MTSU @ SHSU",
+          "pick": "SHSU +2.5",
+          "result": "70-78",
+          "hit": true,
+          "confidence": 53
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "MTSU @ SHSU",
+          "pick": "OVER 155.5",
+          "result": "70-78",
+          "hit": false,
+          "confidence": 59
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "MTSU @ SHSU",
+          "pick": "SHSU",
+          "result": "70-78",
+          "hit": true,
+          "confidence": 48
         }
       ]
     },
