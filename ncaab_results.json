@@ -1,33 +1,33 @@
 {
-  "updated": "2026-02-18T20:15:03",
+  "updated": "2026-02-18T20:30:03",
   "allTime": {
     "spreads": {
       "wins": 22,
-      "losses": 16,
+      "losses": 17,
       "pushes": 0,
-      "pct": 57.9,
-      "roi": 10.5
+      "pct": 56.4,
+      "roi": 7.7
     },
     "totals": {
-      "wins": 19,
+      "wins": 20,
       "losses": 19,
       "pushes": 0,
-      "pct": 50.0,
-      "roi": -4.5
+      "pct": 51.3,
+      "roi": -2.1
     },
     "moneylines": {
-      "wins": 24,
+      "wins": 25,
       "losses": 14,
       "pushes": 0,
-      "pct": 63.2,
-      "roi": 20.6
+      "pct": 64.1,
+      "roi": 22.4
     },
     "best_bets": {
-      "wins": 11,
-      "losses": 4,
+      "wins": 12,
+      "losses": 3,
       "pushes": 0,
-      "pct": 73.3,
-      "roi": 40.0
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-02-18",
       "spreads": {
         "wins": 1,
-        "losses": 2,
+        "losses": 3,
         "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
+        "record": "1-3",
+        "pct": 25.0
       },
       "totals": {
-        "wins": 3,
+        "wins": 4,
         "losses": 0,
         "pushes": 0,
-        "record": "3-0",
+        "record": "4-0",
         "pct": 100.0
       },
       "moneylines": {
-        "wins": 2,
+        "wins": 3,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "3-1",
+        "pct": 75.0
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 5,
+        "losses": 0,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -145,7 +145,34 @@
           "pick": "PSU",
           "result": "85-72",
           "hit": false,
-          "confidence": 68,
+          "confidence": 68
+        },
+        {
+          "date": "2026-02-18",
+          "type": "spread",
+          "game": "CLE @ YSU",
+          "pick": "CLE +10.5",
+          "result": "82-106",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-02-18",
+          "type": "total",
+          "game": "CLE @ YSU",
+          "pick": "OVER 157.0",
+          "result": "82-106",
+          "hit": true,
+          "confidence": 46
+        },
+        {
+          "date": "2026-02-18",
+          "type": "ml",
+          "game": "CLE @ YSU",
+          "pick": "YSU",
+          "result": "82-106",
+          "hit": true,
+          "confidence": 80,
           "best_bet": true
         }
       ]
