@@ -1,36 +1,425 @@
 {
-  "updated": "2026-02-20T16:30:17",
+  "updated": "2026-02-21T14:44:21",
   "allTime": {
     "spreads": {
-      "wins": 70,
-      "losses": 54,
+      "wins": 77,
+      "losses": 60,
       "pushes": 2,
-      "pct": 56.5,
-      "roi": 7.8
+      "pct": 56.2,
+      "roi": 7.3
     },
     "totals": {
-      "wins": 64,
-      "losses": 62,
-      "pushes": 0,
-      "pct": 50.8,
-      "roi": -3.0
+      "wins": 72,
+      "losses": 66,
+      "pushes": 1,
+      "pct": 52.2,
+      "roi": -0.4
     },
     "moneylines": {
-      "wins": 79,
-      "losses": 47,
+      "wins": 90,
+      "losses": 49,
       "pushes": 0,
-      "pct": 62.7,
-      "roi": 19.7
+      "pct": 64.7,
+      "roi": 23.6
     },
     "best_bets": {
-      "wins": 15,
+      "wins": 20,
       "losses": 5,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
+    {
+      "date": "2026-02-20",
+      "spreads": {
+        "wins": 7,
+        "losses": 6,
+        "pushes": 0,
+        "record": "7-6",
+        "pct": 53.8
+      },
+      "totals": {
+        "wins": 8,
+        "losses": 4,
+        "pushes": 1,
+        "record": "8-4-1",
+        "pct": 66.7
+      },
+      "moneylines": {
+        "wins": 11,
+        "losses": 2,
+        "pushes": 0,
+        "record": "11-2",
+        "pct": 84.6
+      },
+      "best_bets": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
+      },
+      "picks": [
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "AKR @ BALL",
+          "pick": "BALL +14.5",
+          "result": "78-65",
+          "hit": true,
+          "confidence": 78,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "AKR @ BALL",
+          "pick": "OVER 146.5",
+          "result": "78-65",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "AKR @ BALL",
+          "pick": "AKR",
+          "result": "78-65",
+          "hit": true,
+          "confidence": 65
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "MRST @ MAN",
+          "pick": "MAN +5.0",
+          "result": "84-70",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "MRST @ MAN",
+          "pick": "OVER 142.5",
+          "result": "84-70",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "MRST @ MAN",
+          "pick": "MRST",
+          "result": "84-70",
+          "hit": true,
+          "confidence": 48
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "CAN @ RID",
+          "pick": "CAN -1.0",
+          "result": "72-66",
+          "hit": true,
+          "confidence": 58
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "CAN @ RID",
+          "pick": "OVER 132.0",
+          "result": "72-66",
+          "hit": true,
+          "confidence": 76,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "CAN @ RID",
+          "pick": "CAN",
+          "result": "72-66",
+          "hit": true,
+          "confidence": 59
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "GB @ OAK",
+          "pick": "GB +6.5",
+          "result": "73-68",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "GB @ OAK",
+          "pick": "OVER 154.5",
+          "result": "73-68",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "GB @ OAK",
+          "pick": "OAK",
+          "result": "73-68",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "MILW @ DETM",
+          "pick": "DETM -1.5",
+          "result": "86-91",
+          "hit": true,
+          "confidence": 61
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "MILW @ DETM",
+          "pick": "OVER 152.5",
+          "result": "86-91",
+          "hit": true,
+          "confidence": 53
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "MILW @ DETM",
+          "pick": "DETM",
+          "result": "86-91",
+          "hit": true,
+          "confidence": 70
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "PRIN @ BRWN",
+          "pick": "BRWN -1.5",
+          "result": "71-80",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "PRIN @ BRWN",
+          "pick": "OVER 132.0",
+          "result": "71-80",
+          "hit": true,
+          "confidence": 69
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "PRIN @ BRWN",
+          "pick": "BRWN",
+          "result": "71-80",
+          "hit": true,
+          "confidence": 49
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "SHU @ FAIR",
+          "pick": "FAIR -5.0",
+          "result": "68-78",
+          "hit": true,
+          "confidence": 72
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "SHU @ FAIR",
+          "pick": "UNDER 159.0",
+          "result": "68-78",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "SHU @ FAIR",
+          "pick": "FAIR",
+          "result": "68-78",
+          "hit": true,
+          "confidence": 72
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "SPU @ IONA",
+          "pick": "SPU +1.0",
+          "result": "64-72",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "SPU @ IONA",
+          "pick": "OVER 139.5",
+          "result": "64-72",
+          "hit": false,
+          "confidence": 45
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "SPU @ IONA",
+          "pick": "IONA",
+          "result": "64-72",
+          "hit": true,
+          "confidence": 60
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "VCU @ SLU",
+          "pick": "SLU -7.5",
+          "result": "75-88",
+          "hit": true,
+          "confidence": 64
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "VCU @ SLU",
+          "pick": "UNDER 163.5",
+          "result": "75-88",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "VCU @ SLU",
+          "pick": "SLU",
+          "result": "75-88",
+          "hit": true,
+          "confidence": 84,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "NIA @ MSM",
+          "pick": "NIA +9.0",
+          "result": "63-76",
+          "hit": false,
+          "confidence": 58
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "NIA @ MSM",
+          "pick": "UNDER 139.0",
+          "result": "63-76",
+          "hit": null,
+          "confidence": 45
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "NIA @ MSM",
+          "pick": "MSM",
+          "result": "63-76",
+          "hit": true,
+          "confidence": 77,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "SIE @ MRMK",
+          "pick": "SIE +3.5",
+          "result": "72-79",
+          "hit": false,
+          "confidence": 67
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "SIE @ MRMK",
+          "pick": "OVER 133.0",
+          "result": "72-79",
+          "hit": true,
+          "confidence": 56
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "SIE @ MRMK",
+          "pick": "SIE",
+          "result": "72-79",
+          "hit": false,
+          "confidence": 43
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "IU @ PUR",
+          "pick": "IU +11.5",
+          "result": "64-93",
+          "hit": false,
+          "confidence": 59
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "IU @ PUR",
+          "pick": "OVER 148.5",
+          "result": "64-93",
+          "hit": true,
+          "confidence": 47
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "IU @ PUR",
+          "pick": "PUR",
+          "result": "64-93",
+          "hit": true,
+          "confidence": 79,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-20",
+          "type": "spread",
+          "game": "BGSU @ M-OH",
+          "pick": "BGSU +8.0",
+          "result": "77-91",
+          "hit": false,
+          "confidence": 59
+        },
+        {
+          "date": "2026-02-20",
+          "type": "total",
+          "game": "BGSU @ M-OH",
+          "pick": "UNDER 154.5",
+          "result": "77-91",
+          "hit": false,
+          "confidence": 48
+        },
+        {
+          "date": "2026-02-20",
+          "type": "ml",
+          "game": "BGSU @ M-OH",
+          "pick": "M-OH",
+          "result": "77-91",
+          "hit": true,
+          "confidence": 74
+        }
+      ]
+    },
     {
       "date": "2026-02-19",
       "spreads": {
