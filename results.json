@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-24T03:02:21",
+  "updated": "2026-02-24T12:28:32",
   "allTime": {
     "props": {
       "wins": 150,
@@ -10,10 +10,10 @@
     },
     "spreads": {
       "wins": 17,
-      "losses": 14,
+      "losses": 17,
       "pushes": 0,
-      "pct": 54.8,
-      "roi": 4.7
+      "pct": 50.0,
+      "roi": -4.5
     },
     "totals": {
       "wins": 11,
@@ -23,18 +23,18 @@
       "roi": 5.0
     },
     "moneylines": {
-      "wins": 31,
-      "losses": 15,
+      "wins": 32,
+      "losses": 17,
       "pushes": 0,
-      "pct": 67.4,
-      "roi": 28.7
+      "pct": 65.3,
+      "roi": 24.7
     },
     "best_bets": {
-      "wins": 38,
-      "losses": 21,
+      "wins": 39,
+      "losses": 25,
       "pushes": 0,
-      "pct": 64.4,
-      "roi": 23.0
+      "pct": 60.9,
+      "roi": 16.3
     },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 52.5
@@ -192,10 +192,10 @@
       },
       "spreads": {
         "wins": 0,
-        "losses": 0,
+        "losses": 3,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "0-3",
+        "pct": 0.0
       },
       "totals": {
         "wins": 0,
@@ -205,13 +205,75 @@
         "pct": 0
       },
       "moneylines": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "1-2",
+        "pct": 33.3
       },
       "picks": [
+        {
+          "date": "2026-02-23",
+          "type": "ml",
+          "game": "SAS @ DET",
+          "pick": "DET",
+          "result": "SAS vs DET",
+          "hit": false,
+          "confidence": 69.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-23",
+          "type": "ml",
+          "game": "SAC @ MEM",
+          "pick": "MEM",
+          "result": "SAC vs MEM",
+          "hit": false,
+          "confidence": 69.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-23",
+          "type": "ml",
+          "game": "UTA @ HOU",
+          "pick": "HOU",
+          "result": "UTA vs HOU",
+          "hit": true,
+          "confidence": 93.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-23",
+          "type": "spread",
+          "game": "SAS @ DET",
+          "pick": "DET -1.0",
+          "line": -1.0,
+          "result": "Won by 11",
+          "hit": false,
+          "confidence": 65.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-23",
+          "type": "spread",
+          "game": "SAC @ MEM",
+          "pick": "MEM -4.5",
+          "line": -4.5,
+          "result": "Won by 9",
+          "hit": false,
+          "confidence": 57.4
+        },
+        {
+          "date": "2026-02-23",
+          "type": "spread",
+          "game": "UTA @ HOU",
+          "pick": "UTA +14.5",
+          "line": 14.5,
+          "result": "Won by 20",
+          "hit": false,
+          "confidence": 96.3,
+          "best_bet": true
+        },
         {
           "date": "2026-02-23",
           "type": "prop",
@@ -315,11 +377,11 @@
         }
       ],
       "best_bets": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 2,
+        "losses": 5,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "2-5",
+        "pct": 28.6
       }
     },
     {
