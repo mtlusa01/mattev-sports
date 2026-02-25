@@ -1,0 +1,220 @@
+name: Daily Sports Predictions
+
+on:
+  schedule:
+    - cron: '0 15 * * *'   # 10:00 AM EST — pre-game predictions
+    - cron: '0 5 * * *'    # 12:00 AM EST — post-game grading
+  workflow_dispatch:         # manual trigger
+
+jobs:
+  # ─── Job 1: NBA game predictions + player props ───────────────────
+  predict-nba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout mattev-sports
+        uses: actions/checkout@v4
+
+      - name: Checkout nba-predictor
+        uses: actions/checkout@v4
+        with:
+          repository: mtlusa01/nba-predictor
+          token: ${{ secrets.GH_PAT }}
+          path: nba-predictor
+
+      - name: Checkout nba-props
+        uses: actions/checkout@v4
+        with:
+          repository: mtlusa01/nba-props
+          token: ${{ secrets.GH_PAT }}
+          path: nba-props
+
+      - name: Move repos to sibling directories
+        run: |
+          mv nba-predictor ../nba-predictor
+          mv nba-props ../nba-props
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install nba-predictor deps
+        run: pip install -r ../nba-predictor/requirements.txt
+
+      - name: Restore nba_data.db from cache
+        uses: actions/cache@v4
+        with:
+          path: ../nba-predictor/nba_data.db
+          key: nba-db-${{ github.run_id }}
+          restore-keys: nba-db-
+
+      - name: Run NBA daily pipeline
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        working-directory: ../nba-predictor
+        run: python daily_run.py
+
+      - name: Export results.json
+        continue-on-error: true
+        working-directory: ../nba-predictor
+        run: python export_results.py --output $GITHUB_WORKSPACE/results.json
+
+      - name: Run ESPN props fallback
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        working-directory: ../nba-props
+        run: python espn_props_fallback.py
+
+      - name: Copy NBA outputs to mattev-sports
+        run: |
+          for f in ../nba-props/projections.json; do
+            [ -f "$f" ] && cp "$f" . && echo "Copied $(basename $f)"
+          done
+          [ -f results.json ] && echo "results.json already in place"
+
+      - name: Save nba_data.db to cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: ../nba-predictor/nba_data.db
+          key: nba-db-${{ github.run_id }}
+
+      - name: Upload mattev-sports as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nba-outputs
+          path: |
+            projections.json
+            results.json
+          if-no-files-found: warn
+
+  # ─── Job 2: NCAAB game predictions ────────────────────────────────
+  predict-ncaab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout mattev-sports
+        uses: actions/checkout@v4
+
+      - name: Checkout ncaab-predictor
+        uses: actions/checkout@v4
+        with:
+          repository: mtlusa01/ncaab-predictor
+          token: ${{ secrets.GH_PAT }}
+          path: ncaab-predictor
+
+      - name: Move repo to sibling directory
+        run: mv ncaab-predictor ../ncaab-predictor
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install ncaab-predictor deps
+        run: pip install -r ../ncaab-predictor/requirements.txt
+
+      - name: Restore ncaab_data.db from cache
+        uses: actions/cache@v4
+        with:
+          path: ../ncaab-predictor/ncaab_data.db
+          key: ncaab-db-${{ github.run_id }}
+          restore-keys: ncaab-db-
+
+      - name: Fetch NCAAB data
+        working-directory: ../ncaab-predictor
+        run: python get_data.py
+
+      - name: Fetch NCAAB odds
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        working-directory: ../ncaab-predictor
+        run: python fetch_odds.py
+
+      - name: Run NCAAB predictions
+        working-directory: ../ncaab-predictor
+        run: python predict.py
+
+      - name: Export NCAAB projections
+        working-directory: ../ncaab-predictor
+        run: python export_projections.py
+
+      - name: Copy NCAAB outputs to mattev-sports
+        run: |
+          [ -f ../ncaab-predictor/ncaab_projections.json ] && cp ../ncaab-predictor/ncaab_projections.json . && echo "Copied ncaab_projections.json"
+
+      - name: Save ncaab_data.db to cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: ../ncaab-predictor/ncaab_data.db
+          key: ncaab-db-${{ github.run_id }}
+
+      - name: Upload mattev-sports as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ncaab-outputs
+          path: ncaab_projections.json
+          if-no-files-found: warn
+
+  # ─── Job 3: Publish to mattev-sports (triggers GitHub Pages) ──────
+  publish:
+    needs: [predict-nba, predict-ncaab]
+    if: always() && (needs.predict-nba.result == 'success' || needs.predict-ncaab.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout mattev-sports
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Download NBA outputs
+        if: needs.predict-nba.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: nba-outputs
+          path: nba-outputs
+        continue-on-error: true
+
+      - name: Download NCAAB outputs
+        if: needs.predict-ncaab.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: ncaab-outputs
+          path: ncaab-outputs
+        continue-on-error: true
+
+      - name: Copy JSON files into repo
+        run: |
+          copied=0
+          for f in nba-outputs/projections.json nba-outputs/results.json ncaab-outputs/ncaab_projections.json; do
+            if [ -f "$f" ]; then
+              cp "$f" .
+              echo "Copied $(basename $f)"
+              copied=$((copied + 1))
+            fi
+          done
+          echo "Copied $copied file(s)"
+
+      - name: Commit and push
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add projections.json results.json ncaab_projections.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update predictions $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
