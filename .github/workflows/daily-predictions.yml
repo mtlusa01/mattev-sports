@@ -76,9 +76,9 @@ jobs:
 
       - name: Copy NBA outputs to mattev-sports
         run: |
-          [ -f ../nba-props/projections.json ] && cp ../nba-props/projections.json . && echo "Copied projections.json"
-          [ -f game_projections.json ] && echo "game_projections.json already in place"
-          [ -f results.json ] && echo "results.json already in place"
+          [ -f ../nba-props/projections.json ] && cp ../nba-props/projections.json . && echo "Copied projections.json" || true
+          [ -f game_projections.json ] && echo "game_projections.json already in place" || true
+          [ -f results.json ] && echo "results.json already in place" || true
 
       - name: Save nba_data.db to cache
         uses: actions/cache/save@v4
@@ -152,7 +152,7 @@ jobs:
 
       - name: Copy NCAAB outputs to mattev-sports
         run: |
-          [ -f ../ncaab-predictor/ncaab_projections.json ] && cp ../ncaab-predictor/ncaab_projections.json . && echo "Copied ncaab_projections.json"
+          [ -f ../ncaab-predictor/ncaab_projections.json ] && cp ../ncaab-predictor/ncaab_projections.json . && echo "Copied ncaab_projections.json" || true
 
       - name: Save ncaab_data.db to cache
         uses: actions/cache/save@v4
@@ -229,8 +229,8 @@ jobs:
 
       - name: Copy NHL outputs to mattev-sports
         run: |
-          [ -f ../nhl-predictor/nhl_game_projections.json ] && cp ../nhl-predictor/nhl_game_projections.json . && echo "Copied nhl_game_projections.json"
-          [ -f ../nhl-predictor/nhl_results.json ] && cp ../nhl-predictor/nhl_results.json . && echo "Copied nhl_results.json"
+          [ -f ../nhl-predictor/nhl_game_projections.json ] && cp ../nhl-predictor/nhl_game_projections.json . && echo "Copied nhl_game_projections.json" || true
+          [ -f ../nhl-predictor/nhl_results.json ] && cp ../nhl-predictor/nhl_results.json . && echo "Copied nhl_results.json" || true
 
       - name: Save NHL model to cache
         uses: actions/cache/save@v4
