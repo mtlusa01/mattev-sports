@@ -1,36 +1,99 @@
 {
-  "updated": "2026-02-22T19:00:03",
+  "updated": "2026-02-24T20:00:03",
   "allTime": {
     "spreads": {
-      "wins": 155,
+      "wins": 156,
       "losses": 117,
       "pushes": 7,
-      "pct": 57.0,
-      "roi": 8.8
+      "pct": 57.1,
+      "roi": 9.1
     },
     "totals": {
       "wins": 135,
-      "losses": 143,
+      "losses": 144,
       "pushes": 1,
-      "pct": 48.6,
-      "roi": -7.3
+      "pct": 48.4,
+      "roi": -7.6
     },
     "moneylines": {
       "wins": 184,
-      "losses": 95,
+      "losses": 96,
       "pushes": 0,
-      "pct": 65.9,
-      "roi": 25.9
+      "pct": 65.7,
+      "roi": 25.5
     },
     "best_bets": {
-      "wins": 24,
-      "losses": 6,
+      "wins": 25,
+      "losses": 8,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 75.8,
+      "roi": 44.6
     }
   },
   "days": [
+    {
+      "date": "2026-02-24",
+      "spreads": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "best_bets": {
+        "wins": 1,
+        "losses": 2,
+        "pushes": 0,
+        "record": "1-2",
+        "pct": 33.3
+      },
+      "picks": [
+        {
+          "date": "2026-02-24",
+          "type": "spread",
+          "game": "SFPA @ NHVN",
+          "pick": "SFPA +6.5",
+          "result": "73-67",
+          "hit": true,
+          "confidence": 64,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-24",
+          "type": "total",
+          "game": "SFPA @ NHVN",
+          "pick": "OVER 141.5",
+          "result": "73-67",
+          "hit": false,
+          "confidence": 45,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-24",
+          "type": "ml",
+          "game": "SFPA @ NHVN",
+          "pick": "NHVN",
+          "result": "73-67",
+          "hit": false,
+          "confidence": 52,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-02-21",
       "spreads": {
