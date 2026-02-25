@@ -146,6 +146,11 @@ jobs:
         working-directory: ../ncaab-predictor
         run: python predict.py
 
+      - name: Grade yesterday's NCAAB games
+        continue-on-error: true
+        working-directory: ../ncaab-predictor
+        run: python grade_ncaab.py --dry
+
       - name: Export NCAAB projections
         working-directory: ../ncaab-predictor
         run: python export_projections.py
@@ -153,6 +158,7 @@ jobs:
       - name: Copy NCAAB outputs to mattev-sports
         run: |
           [ -f ../ncaab-predictor/ncaab_projections.json ] && cp ../ncaab-predictor/ncaab_projections.json . && echo "Copied ncaab_projections.json" || true
+          [ -f ../ncaab-predictor/ncaab_results.json ] && cp ../ncaab-predictor/ncaab_results.json . && echo "Copied ncaab_results.json" || true
 
       - name: Save ncaab_data.db to cache
         uses: actions/cache/save@v4
@@ -165,7 +171,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ncaab-outputs
-          path: ncaab_projections.json
+          path: |
+            ncaab_projections.json
+            ncaab_results.json
           if-no-files-found: warn
 
   # ─── Job 3: NHL game predictions ──────────────────────────────────
@@ -296,6 +304,7 @@ jobs:
             nba-outputs/game_projections.json \
             nba-outputs/results.json \
             ncaab-outputs/ncaab_projections.json \
+            ncaab-outputs/ncaab_results.json \
             nhl-outputs/nhl_game_projections.json \
             nhl-outputs/nhl_results.json; do
             if [ -f "$f" ]; then
@@ -311,7 +320,7 @@ jobs:
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git add projections.json game_projections.json results.json \
-                  ncaab_projections.json \
+                  ncaab_projections.json ncaab_results.json \
                   nhl_game_projections.json nhl_results.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
