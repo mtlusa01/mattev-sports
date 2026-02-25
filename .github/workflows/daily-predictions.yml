@@ -57,6 +57,11 @@ jobs:
         working-directory: ../nba-predictor
         run: python daily_run.py
 
+      - name: Export game_projections.json
+        continue-on-error: true
+        working-directory: ../nba-predictor
+        run: python export_game_projections.py --output $GITHUB_WORKSPACE/game_projections.json
+
       - name: Export results.json
         continue-on-error: true
         working-directory: ../nba-predictor
@@ -71,9 +76,8 @@ jobs:
 
       - name: Copy NBA outputs to mattev-sports
         run: |
-          for f in ../nba-props/projections.json; do
-            [ -f "$f" ] && cp "$f" . && echo "Copied $(basename $f)"
-          done
+          [ -f ../nba-props/projections.json ] && cp ../nba-props/projections.json . && echo "Copied projections.json"
+          [ -f game_projections.json ] && echo "game_projections.json already in place"
           [ -f results.json ] && echo "results.json already in place"
 
       - name: Save nba_data.db to cache
@@ -89,6 +93,7 @@ jobs:
           name: nba-outputs
           path: |
             projections.json
+            game_projections.json
             results.json
           if-no-files-found: warn
 
@@ -198,7 +203,7 @@ jobs:
       - name: Copy JSON files into repo
         run: |
           copied=0
-          for f in nba-outputs/projections.json nba-outputs/results.json ncaab-outputs/ncaab_projections.json; do
+          for f in nba-outputs/projections.json nba-outputs/game_projections.json nba-outputs/results.json ncaab-outputs/ncaab_projections.json; do
             if [ -f "$f" ]; then
               cp "$f" .
               echo "Copied $(basename $f)"
@@ -211,7 +216,7 @@ jobs:
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git add projections.json results.json ncaab_projections.json 2>/dev/null || true
+          git add projections.json game_projections.json results.json ncaab_projections.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
