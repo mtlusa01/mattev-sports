@@ -34,7 +34,14 @@ const DEFAULT_SETTINGS = {
     showHitRate: true,
     minConfidence: 55,
     minEV: 3,
-    bankroll: null
+    bankroll: null,
+    goalType: 'growth',
+    riskTolerance: 'moderate',
+    kellyFraction: 'half',
+    monthlyTarget: 500,
+    maxDrawdown: 15,
+    maxBetPct: 5,
+    sportsWeighting: { nba: 7, ncaab: 5, nhl: 3 }
 };
 
 function initAuth() {

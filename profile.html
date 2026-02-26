@@ -133,6 +133,15 @@
     .confirm-box p { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
     .confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
 
+    /* Phase 1: Investment Profile styles */
+    .form-select { width: 100%; padding: 10px 14px; background: var(--bg-primary); border: 1px solid #2a2a3a; border-radius: 8px; color: var(--text-primary); font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.2s; cursor: pointer; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+    .form-select:focus { border-color: var(--brand); }
+    .form-select option { background: var(--bg-primary); color: var(--text-primary); }
+    .section-desc { font-size: 12px; color: var(--text-muted); margin-top: -12px; margin-bottom: 16px; line-height: 1.5; }
+    .kelly-info { margin-top: 12px; padding: 12px 16px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+    .kelly-info p { margin-bottom: 6px; }
+    .kelly-info strong { color: var(--text-secondary); }
+
     @media (max-width: 768px) {
       .nav-right { display: none; }
       .sports-tabs { display: none; }
@@ -291,6 +300,102 @@
         </div>
       </div>
 
+      <!-- Investment Strategy -->
+      <div class="settings-card">
+        <h2>Investment Strategy</h2>
+        <div class="field-row">
+          <div>
+            <span class="field-label">Betting Goal</span>
+            <div class="field-hint">What are you trying to achieve?</div>
+          </div>
+          <select class="form-select" id="set-goal" style="width:220px;">
+            <option value="income">Monthly Income</option>
+            <option value="growth">Bankroll Growth</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="professional">Professional</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div>
+            <span class="field-label">Monthly Target</span>
+            <div class="field-hint">Your profit goal per month.</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span style="color:var(--text-muted);font-size:14px;">$</span>
+            <input type="text" inputmode="numeric" class="form-input short" id="set-monthly-target" value="500" style="width:90px;">
+          </div>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Risk Tolerance</span>
+          <div class="toggle-group" id="toggle-risk">
+            <button class="toggle-opt" data-val="conservative">Conservative</button>
+            <button class="toggle-opt active" data-val="moderate">Moderate</button>
+            <button class="toggle-opt" data-val="aggressive">Aggressive</button>
+          </div>
+        </div>
+        <div class="range-row">
+          <div class="range-header">
+            <span class="range-label">Max Drawdown</span>
+            <span class="range-value" id="drawdown-val">15%</span>
+          </div>
+          <input type="range" id="set-drawdown" min="10" max="50" step="5" value="15" oninput="document.getElementById('drawdown-val').textContent=this.value+'%'">
+        </div>
+        <div class="range-row">
+          <div class="range-header">
+            <span class="range-label">Max Bet Size (% of bankroll)</span>
+            <span class="range-value" id="maxbet-val">5%</span>
+          </div>
+          <input type="range" id="set-maxbet" min="1" max="10" step="0.5" value="5" oninput="document.getElementById('maxbet-val').textContent=this.value+'%'">
+        </div>
+      </div>
+
+      <!-- Bet Sizing Strategy -->
+      <div class="settings-card">
+        <h2>Bet Sizing Strategy</h2>
+        <div class="field-row">
+          <div>
+            <span class="field-label">Kelly Criterion</span>
+            <div class="field-hint">Optimal bet sizing based on edge.</div>
+          </div>
+          <div class="toggle-group" id="toggle-kelly">
+            <button class="toggle-opt" data-val="off">Off</button>
+            <button class="toggle-opt" data-val="quarter">Quarter</button>
+            <button class="toggle-opt active" data-val="half">Half</button>
+            <button class="toggle-opt" data-val="full">Full</button>
+          </div>
+        </div>
+        <div class="kelly-info">
+          <p><strong>Off:</strong> Fixed unit sizing &middot; <strong>Quarter:</strong> Conservative Kelly &middot; <strong>Half:</strong> Balanced (recommended) &middot; <strong>Full:</strong> Maximum growth, high volatility</p>
+        </div>
+      </div>
+
+      <!-- Sports Preferences -->
+      <div class="settings-card">
+        <h2>Sports Preferences</h2>
+        <p class="section-desc">Weight how much you want to see picks from each sport (0 = hide, 10 = prioritize).</p>
+        <div class="range-row">
+          <div class="range-header">
+            <span class="range-label">NBA</span>
+            <span class="range-value" id="nba-wt-val">7</span>
+          </div>
+          <input type="range" id="set-nba-wt" min="0" max="10" value="7" oninput="document.getElementById('nba-wt-val').textContent=this.value">
+        </div>
+        <div class="range-row">
+          <div class="range-header">
+            <span class="range-label">NCAAB</span>
+            <span class="range-value" id="ncaab-wt-val">5</span>
+          </div>
+          <input type="range" id="set-ncaab-wt" min="0" max="10" value="5" oninput="document.getElementById('ncaab-wt-val').textContent=this.value">
+        </div>
+        <div class="range-row">
+          <div class="range-header">
+            <span class="range-label">NHL</span>
+            <span class="range-value" id="nhl-wt-val">3</span>
+          </div>
+          <input type="range" id="set-nhl-wt" min="0" max="10" value="3" oninput="document.getElementById('nhl-wt-val').textContent=this.value">
+        </div>
+      </div>
+
       <!-- Account -->
       <div class="settings-card">
         <h2>Account</h2>
@@ -379,6 +484,29 @@
       document.getElementById('conf-val').textContent = conf + '%';
       document.getElementById('set-ev').value = ev;
       document.getElementById('ev-val').textContent = ev + '%';
+
+      // Phase 1: Investment Strategy
+      document.getElementById('set-goal').value = s.goalType || 'growth';
+      document.getElementById('set-monthly-target').value = s.monthlyTarget || 500;
+      setToggle('toggle-risk', s.riskTolerance || 'moderate');
+      const dd = s.maxDrawdown || 15;
+      document.getElementById('set-drawdown').value = dd;
+      document.getElementById('drawdown-val').textContent = dd + '%';
+      const mb = s.maxBetPct || 5;
+      document.getElementById('set-maxbet').value = mb;
+      document.getElementById('maxbet-val').textContent = mb + '%';
+
+      // Phase 1: Kelly Criterion
+      setToggle('toggle-kelly', s.kellyFraction || 'half');
+
+      // Phase 1: Sports Weighting
+      const sw = s.sportsWeighting || { nba: 7, ncaab: 5, nhl: 3 };
+      document.getElementById('set-nba-wt').value = sw.nba ?? 7;
+      document.getElementById('nba-wt-val').textContent = sw.nba ?? 7;
+      document.getElementById('set-ncaab-wt').value = sw.ncaab ?? 5;
+      document.getElementById('ncaab-wt-val').textContent = sw.ncaab ?? 5;
+      document.getElementById('set-nhl-wt').value = sw.nhl ?? 3;
+      document.getElementById('nhl-wt-val').textContent = sw.nhl ?? 3;
     }
 
     function setToggle(groupId, val) {
@@ -421,6 +549,17 @@
         showEV: true,
         showHitRate: true,
         defaultSport: 'nba',
+        goalType: document.getElementById('set-goal').value || 'growth',
+        monthlyTarget: parseInt(document.getElementById('set-monthly-target').value) || 500,
+        riskTolerance: getToggleVal('toggle-risk') || 'moderate',
+        maxDrawdown: parseInt(document.getElementById('set-drawdown').value) || 15,
+        maxBetPct: parseFloat(document.getElementById('set-maxbet').value) || 5,
+        kellyFraction: getToggleVal('toggle-kelly') || 'half',
+        sportsWeighting: {
+          nba: parseInt(document.getElementById('set-nba-wt').value) ?? 7,
+          ncaab: parseInt(document.getElementById('set-ncaab-wt').value) ?? 5,
+          nhl: parseInt(document.getElementById('set-nhl-wt').value) ?? 3,
+        },
       };
 
       await updateUserProfile({ displayName: newName });
