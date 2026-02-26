@@ -1855,6 +1855,16 @@
     .track-btn-cancel:hover { background: rgba(255,255,255,0.05); }
     .track-btn-confirm { background: #10b981; border: none; color: #fff; padding: 8px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
     .track-btn-confirm:hover { background: #059669; }
+
+    /* Kelly bet size badges */
+    .kelly-bet-badge { display: inline-flex; align-items: center; gap: 3px; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
+    .kelly-bet-badge.strong { background: rgba(16,185,129,0.18); color: #34d399; }
+    .kelly-bet-badge.good { background: rgba(59,130,246,0.18); color: #60a5fa; }
+    .kelly-bet-badge.lean { background: rgba(234,179,8,0.18); color: #fbbf24; }
+    .kelly-bet-badge.skip { background: rgba(148,163,184,0.1); color: #64748b; }
+    .rec-kelly { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11px; color: var(--text-muted); }
+    .rec-kelly-amount { font-weight: 700; color: var(--text-primary); }
+    .rec-kelly-edge { color: #34d399; }
   </style>
 </head>
 <body>
@@ -2566,6 +2576,35 @@
       return units * (100 / Math.abs(o));
     }
 
+    /** Generate Kelly bet size badge HTML for a pick row */
+    function kellyBadge(conf, odds) {
+      if (typeof KellyCalculator === 'undefined') return '';
+      const s = KellyCalculator.getSettings();
+      if (s.kellyFraction === 'off' || !s.bankroll) return '';
+      if (odds == null || conf == null || conf < 50) return '';
+      const k = KellyCalculator.calculate(conf, odds);
+      if (k.method === 'no-edge' || k.amount <= 0) return '';
+      const tier = KellyCalculator.tier(conf, k.edge);
+      if (tier === 'skip') return '';
+      return `<span class="kelly-bet-badge ${tier}" title="Kelly: $${k.amount} (${k.units}u, +${k.edge.toFixed(1)}% edge)">$${k.amount}</span>`;
+    }
+
+    /** Generate Kelly details for recommendation cards */
+    function kellyRecDetail(conf, odds) {
+      if (typeof KellyCalculator === 'undefined') return '';
+      const s = KellyCalculator.getSettings();
+      if (s.kellyFraction === 'off' || !s.bankroll) return '';
+      if (odds == null || conf == null) return '';
+      // Parse odds from formatted string like "(+150)" or "(-110)"
+      const rawOdds = typeof odds === 'string' ? parseInt(odds.replace(/[()]/g, '')) : odds;
+      if (isNaN(rawOdds)) return '';
+      const k = KellyCalculator.calculate(conf, rawOdds);
+      if (k.method === 'no-edge' || k.amount <= 0) return '';
+      const tier = KellyCalculator.tier(conf, k.edge);
+      if (tier === 'skip') return '';
+      return `<div class="rec-kelly"><span class="kelly-bet-badge ${tier}">$${k.amount}</span> <span class="rec-kelly-amount">${k.units}u</span> <span class="rec-kelly-edge">+${k.edge.toFixed(1)}% edge</span></div>`;
+    }
+
     function makeBetId(date, type, player, team, game, propType, pick, line) {
       const parts = [date, type];
       if (type === 'prop') parts.push(player, propType, pick, line);
@@ -3180,6 +3219,7 @@
           <div class="rec-matchup">${r.game || ''}</div>
           <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds || ''}</span>${resultBadge}</div>
           <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
+          ${kellyRecDetail(r.confidence, r.odds)}
         </div>`;
       }).join('');
 
@@ -5015,6 +5055,7 @@
                 <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
                 <span class="game-pick-odds">${spreadOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+                ${kellyBadge(g.spread_conf, g.spread_odds)}
                 ${renderResultBadge(g.spread_result)}
                 ${gameTrackIcon('spread', isSpreadTracked)}
               </div>
@@ -5023,6 +5064,7 @@
                 <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
                 <span class="game-pick-odds">${totalOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+                ${kellyBadge(g.total_conf, g.total_odds)}
                 ${renderResultBadge(g.total_result)}
                 ${gameTrackIcon('total', isTotalTracked)}
               </div>
@@ -5031,6 +5073,7 @@
                 <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
                 <span class="game-pick-odds">${mlOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+                ${kellyBadge(g.ml_conf, g.ml_odds)}
                 ${renderResultBadge(g.ml_result)}
                 ${gameTrackIcon('ml', isMlTracked)}
               </div>
@@ -5081,6 +5124,7 @@
               <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge('spread')}</span>
               <span class="game-pick-odds">${spreadOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+              ${kellyBadge(g.spread_conf, g.spread_odds)}
               ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.total_conf, 'total')}">
@@ -5088,6 +5132,7 @@
               <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge('total')}</span>
               <span class="game-pick-odds">${totalOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+              ${kellyBadge(g.total_conf, g.total_odds)}
               ${gameTrackIcon('total', isTotalTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.ml_conf, 'ml')}">
@@ -5095,6 +5140,7 @@
               <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge('ml')}</span>
               <span class="game-pick-odds">${mlOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+              ${kellyBadge(g.ml_conf, g.ml_odds)}
               ${gameTrackIcon('ml', isMlTracked)}
             </div>
           </div>
@@ -5701,6 +5747,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
+  <script src="js/betting/kellyCalculator.js"></script>
   <script>
     // Auth guard — redirect to landing page if not logged in
     firebase.auth().onAuthStateChanged((user) => {
