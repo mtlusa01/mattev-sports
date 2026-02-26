@@ -331,6 +331,7 @@
             <button class="toggle-opt" data-val="conservative">Conservative</button>
             <button class="toggle-opt active" data-val="moderate">Moderate</button>
             <button class="toggle-opt" data-val="aggressive">Aggressive</button>
+            <button class="toggle-opt" data-val="custom">Custom</button>
           </div>
         </div>
         <div class="range-row">
@@ -542,6 +543,18 @@
         setToggle('toggle-kelly', preset.kelly);
       });
     });
+
+    // Auto-detect Custom when sliders are manually adjusted
+    function checkRiskPreset() {
+      const dd = parseInt(document.getElementById('set-drawdown').value);
+      const mb = parseFloat(document.getElementById('set-maxbet').value);
+      for (const [key, p] of Object.entries(RISK_PRESETS)) {
+        if (p.drawdown === dd && p.maxBet === mb) { setToggle('toggle-risk', key); return; }
+      }
+      setToggle('toggle-risk', 'custom');
+    }
+    document.getElementById('set-drawdown').addEventListener('input', checkRiskPreset);
+    document.getElementById('set-maxbet').addEventListener('input', checkRiskPreset);
 
     function getToggleVal(groupId) {
       const active = document.querySelector('#' + groupId + ' .toggle-opt.active');
