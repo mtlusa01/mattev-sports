@@ -1,6 +1,6 @@
 {
-  "date": "2026-02-24",
-  "generated_at": "2026-02-24T03:02:20",
+  "date": "2026-02-25",
+  "generated_at": "2026-02-25T04:30:21",
   "game_bets": [
     {
       "qualified": true,
@@ -55,6 +55,23 @@
     },
     {
       "qualified": true,
+      "score": 183.4,
+      "reasons": [
+        "79.2% confidence",
+        "High confidence"
+      ],
+      "type": "total",
+      "bet_type": "TOTAL",
+      "game": "BOS @ PHX",
+      "away_team": "BOS",
+      "home_team": "PHX",
+      "pick": "OVER 206.5",
+      "confidence": 79.2,
+      "commence_time": null,
+      "rec_rank": 4
+    },
+    {
+      "qualified": true,
       "score": 180.0,
       "reasons": [
         "77.5% confidence",
@@ -68,275 +85,283 @@
       "pick": "OKC",
       "confidence": 77.5,
       "commence_time": "2026-02-21T01:10:00Z",
-      "rec_rank": 4
-    },
-    {
-      "qualified": true,
-      "score": 179.0,
-      "reasons": [
-        "77.0% confidence",
-        "High confidence"
-      ],
-      "type": "spread",
-      "bet_type": "SPREAD",
-      "game": "CLE @ CHA",
-      "away_team": "CLE",
-      "home_team": "CHA",
-      "pick": "CHA +6.0",
-      "confidence": 77.0,
-      "commence_time": "2026-02-21T00:10:00Z",
       "rec_rank": 5
     }
   ],
   "props": [
     {
       "qualified": true,
-      "score": 25.605,
+      "score": 47.95,
       "reasons": [
-        "70% L10 hit rate",
-        "5-game streak",
-        "57.7% confidence"
+        "+7.6% EV",
+        "75% L10 hit rate",
+        "+12.7 edge"
       ],
       "type": "prop",
-      "player": "Evan Mobley",
-      "team": "CLE",
-      "prop": "REB",
-      "direction": "OVER",
-      "line": 6.5,
-      "projection": 8.2,
-      "diff": 1.7,
-      "confidence": 57.7,
-      "ev": 3.5,
-      "edge": 1.6999999999999993,
-      "pick_score": 55.1,
+      "player": "Luka Doncic",
+      "team": "LAL",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 47.5,
+      "projection": 34.8,
+      "diff": -12.7,
+      "confidence": 75,
+      "ev": 7.6,
+      "edge": 12.700000000000003,
+      "pick_score": 35.0,
       "score_factors": [
-        "+3.5% EV",
-        "70% L10 hit rate",
-        "5-game streak"
+        "+12.7 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 6.5,
-            "odds": -146
+            "line": 47.5,
+            "odds": -118
           },
           "under": {
-            "line": 6.5,
-            "odds": 110
+            "line": 47.5,
+            "odds": -112
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -144
+            "line": 47.5,
+            "odds": -106
           },
           "under": {
-            "line": 6.5,
-            "odds": 109
+            "line": 47.5,
+            "odds": -124
           }
         },
         "betmgm": {
           "over": {
-            "line": 7.5,
-            "odds": 105
+            "line": 46.5,
+            "odds": -125
           },
           "under": {
-            "line": 7.5,
-            "odds": -140
+            "line": 46.5,
+            "odds": -105
           }
         }
       },
       "best_book": "betmgm",
-      "insight": "Has gone OVER 6.5 rebounds in 7 of last 10 games (8.5 avg).",
-      "matchup_favorability": "unfavorable",
-      "l10_hit_rate": 70,
+      "insight": "Has gone UNDER 47.5 PRA in 3/4 recent games (34.8 avg).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 75,
       "rec_rank": 1
     },
     {
       "qualified": true,
-      "score": 22.458499999999997,
+      "score": 44.25,
       "reasons": [
-        "Favorable matchup"
+        "+6.2% EV",
+        "100% L10 hit rate",
+        "+7.5 edge"
       ],
       "type": "prop",
-      "player": "LaMelo Ball",
-      "team": "CHA",
-      "prop": "AST",
-      "direction": "UNDER",
-      "line": 6.5,
-      "projection": 6.3,
-      "diff": -0.2,
-      "confidence": 53.39,
-      "ev": 4.7,
-      "edge": 0.20000000000000018,
-      "pick_score": 43.2,
+      "player": "Grayson Allen",
+      "team": "PHX",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 16.5,
+      "projection": 24.0,
+      "diff": 7.5,
+      "confidence": 75,
+      "ev": 6.2,
+      "edge": 7.5,
+      "pick_score": 55.0,
       "score_factors": [
-        "+4.7% EV",
-        "Favorable matchup (#2 DEF)"
+        "100% L10 hit rate",
+        "+7.5 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 6.5,
-            "odds": -132
+            "line": 16.5,
+            "odds": -125
           },
           "under": {
-            "line": 6.5,
-            "odds": -100
+            "line": 16.5,
+            "odds": -106
           }
         },
         "draftkings": {
           "over": {
-            "line": 7.5,
-            "odds": 113
+            "line": 16.5,
+            "odds": -124
           },
           "under": {
-            "line": 7.5,
-            "odds": -150
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 6.5,
-            "odds": -130
-          },
-          "under": {
-            "line": 6.5,
-            "odds": -105
+            "line": 16.5,
+            "odds": -103
           }
         }
       },
-      "best_book": "fanduel",
-      "insight": "HOU ranks #2 in assists defense \u2014 favorable for unders.",
-      "matchup_favorability": "favorable",
-      "l10_hit_rate": 50,
+      "best_book": "draftkings",
+      "insight": "Has gone OVER 16.5 PTS in 3/3 recent games (24.0 avg).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 100,
       "rec_rank": 2
     },
     {
       "qualified": true,
-      "score": 22.315,
+      "score": 39.63,
       "reasons": [
-        "70% L10 hit rate",
-        "4-game streak"
+        "+5.6% EV",
+        "86% L10 hit rate",
+        "+7.6 edge"
       ],
       "type": "prop",
-      "player": "Donovan Mitchell",
+      "player": "Jarrett Allen",
       "team": "CLE",
-      "prop": "PTS",
+      "prop": "PRA",
       "direction": "OVER",
-      "line": 27.5,
-      "projection": 27.7,
-      "diff": 0.2,
-      "confidence": 54.1,
-      "ev": 3.2,
-      "edge": 0.1999999999999993,
-      "pick_score": 40.2,
+      "line": 24.5,
+      "projection": 32.1,
+      "diff": 7.6,
+      "confidence": 72.2,
+      "ev": 5.6,
+      "edge": 7.600000000000001,
+      "pick_score": 49.4,
       "score_factors": [
-        "+3.2% EV",
-        "70% L10 hit rate",
-        "4-game streak"
+        "86% L10 hit rate",
+        "+7.6 edge"
       ],
       "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 27.5,
-            "odds": -102
-          },
-          "under": {
-            "line": 27.5,
-            "odds": -130
-          }
-        },
         "draftkings": {
           "over": {
-            "line": 27.5,
-            "odds": -104
+            "line": 24.5,
+            "odds": -119
           },
           "under": {
-            "line": 27.5,
-            "odds": -123
+            "line": 24.5,
+            "odds": -111
           }
         },
         "betmgm": {
           "over": {
-            "line": 25.5,
+            "line": 23.5,
             "odds": -125
           },
           "under": {
-            "line": 25.5,
+            "line": 23.5,
             "odds": -105
           }
         }
       },
-      "best_book": "fanduel",
-      "insight": "Has gone OVER 27.5 points in 7 of last 10 games (29.5 avg).",
+      "best_book": "draftkings",
+      "insight": "Has gone OVER 24.5 PRA in 6/7 recent games (32.1 avg).",
       "matchup_favorability": "neutral",
-      "l10_hit_rate": 70,
+      "l10_hit_rate": 86,
       "rec_rank": 3
     },
     {
       "qualified": true,
-      "score": 21.3085,
+      "score": 37.269999999999996,
       "reasons": [
-        "+2.8 edge"
+        "100% L10 hit rate",
+        "+4.5 edge",
+        "71.8% confidence"
       ],
       "type": "prop",
-      "player": "Andrew Nembhard",
-      "team": "IND",
-      "prop": "PTS",
+      "player": "Scoot Henderson",
+      "team": "POR",
+      "prop": "PRA",
       "direction": "UNDER",
-      "line": 19.5,
-      "projection": 16.7,
-      "diff": -2.8,
-      "confidence": 53.39,
-      "ev": 4.2,
-      "edge": 2.8000000000000007,
-      "pick_score": 33.6,
+      "line": 25.5,
+      "projection": 21.0,
+      "diff": -4.5,
+      "confidence": 71.8,
+      "ev": 4.8,
+      "edge": 4.5,
+      "pick_score": 52.3,
       "score_factors": [
-        "+4.2% EV",
-        "+2.8 edge"
+        "+4.8% EV",
+        "+4.5 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 19.5,
-            "odds": -104
+            "line": 25.5,
+            "odds": -120
           },
           "under": {
-            "line": 19.5,
-            "odds": -128
+            "line": 25.5,
+            "odds": -110
           }
         },
         "draftkings": {
           "over": {
-            "line": 19.5,
-            "odds": -111
+            "line": 25.5,
+            "odds": -123
           },
           "under": {
-            "line": 19.5,
-            "odds": -115
+            "line": 25.5,
+            "odds": -107
           }
         },
         "betmgm": {
           "over": {
-            "line": 19.5,
-            "odds": -120
+            "line": 25.5,
+            "odds": -115
           },
           "under": {
-            "line": 19.5,
-            "odds": -110
+            "line": 25.5,
+            "odds": -115
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": "Has gone UNDER 25.5 PRA in 6/6 recent games (21.0 avg).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 100,
+      "rec_rank": 4
+    },
+    {
+      "qualified": true,
+      "score": 37.269999999999996,
+      "reasons": [
+        "100% L10 hit rate",
+        "+4.5 edge",
+        "71.8% confidence"
+      ],
+      "type": "prop",
+      "player": "Luke Kennard",
+      "team": "ATL",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 5.5,
+      "projection": 10.0,
+      "diff": 4.5,
+      "confidence": 71.8,
+      "ev": 4.8,
+      "edge": 4.5,
+      "pick_score": 72.3,
+      "score_factors": [
+        "+4.8% EV",
+        "100% L10 hit rate",
+        "+4.5 edge"
+      ],
+      "book_odds": {
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 5.5,
+            "odds": 100
           }
         }
       },
       "best_book": "betmgm",
-      "insight": "Averaging 17.4 points over last 10 games (-2.1 below line).",
-      "matchup_favorability": "unfavorable",
-      "l10_hit_rate": 50,
-      "rec_rank": 4
+      "insight": "Has gone OVER 5.5 PTS in 7/7 recent games (10.0 avg).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 100,
+      "rec_rank": 5
     }
   ],
   "game_count": 5,
-  "prop_count": 4,
+  "prop_count": 5,
   "has_recommendations": true,
   "message": null
 }
