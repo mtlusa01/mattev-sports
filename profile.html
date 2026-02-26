@@ -525,6 +525,24 @@
       });
     });
 
+    // Risk tolerance presets — auto-adjust sliders when toggled
+    const RISK_PRESETS = {
+      conservative: { drawdown: 10, maxBet: 3,   kelly: 'quarter' },
+      moderate:     { drawdown: 15, maxBet: 5,   kelly: 'half' },
+      aggressive:   { drawdown: 25, maxBet: 8,   kelly: 'full' },
+    };
+    document.querySelectorAll('#toggle-risk .toggle-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = RISK_PRESETS[btn.dataset.val];
+        if (!preset) return;
+        document.getElementById('set-drawdown').value = preset.drawdown;
+        document.getElementById('drawdown-val').textContent = preset.drawdown + '%';
+        document.getElementById('set-maxbet').value = preset.maxBet;
+        document.getElementById('maxbet-val').textContent = preset.maxBet + '%';
+        setToggle('toggle-kelly', preset.kelly);
+      });
+    });
+
     function getToggleVal(groupId) {
       const active = document.querySelector('#' + groupId + ' .toggle-opt.active');
       return active ? active.dataset.val : null;
