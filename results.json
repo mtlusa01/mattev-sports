@@ -1,6 +1,13 @@
 {
-  "updated": "2026-02-27T13:33:10",
+  "updated": "2026-02-27T17:04:13",
   "allTime": {
+    "props": {
+      "wins": 29,
+      "losses": 27,
+      "pushes": 0,
+      "pct": 51.8,
+      "roi": -1.1
+    },
     "spreads": {
       "wins": 12,
       "losses": 13,
@@ -9,36 +16,138 @@
       "roi": -8.4
     },
     "totals": {
-      "wins": 15,
-      "losses": 12,
+      "wins": 0,
+      "losses": 0,
       "pushes": 0,
-      "pct": 55.6,
-      "roi": 6.1
+      "pct": 0,
+      "roi": 0
     },
     "moneylines": {
-      "wins": 89,
-      "losses": 57,
+      "wins": 35,
+      "losses": 21,
       "pushes": 0,
-      "pct": 61.0,
-      "roi": 16.4
+      "pct": 62.5,
+      "roi": 19.3
     },
     "best_bets": {
-      "wins": 34,
-      "losses": 30,
+      "wins": 43,
+      "losses": 22,
       "pushes": 0,
-      "pct": 53.1,
-      "roi": 1.4
-    }
+      "pct": 66.2,
+      "roi": 26.3
+    },
+    "best_prop_type": "pts_rebs_asts",
+    "best_prop_pct": 52.5
   },
   "days": [
     {
-      "date": "2026-02-26",
+      "date": "2026-02-27",
       "props": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
+      },
+      "spreads": {
         "wins": 0,
         "losses": 0,
         "pushes": 0,
         "record": "0-0",
         "pct": 0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "picks": [
+        {
+          "date": "2026-02-27",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "PRA OVER 24.5",
+          "line": 24.5,
+          "result": 39,
+          "hit": true,
+          "confidence": 72.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-27",
+          "type": "prop",
+          "player": "Luke Kennard",
+          "team": "ATL",
+          "pick": "PTS OVER 5.5",
+          "line": 5.5,
+          "result": 8,
+          "hit": true,
+          "confidence": 71.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-27",
+          "type": "prop",
+          "player": "Derrick White",
+          "team": "BOS",
+          "pick": "PRA UNDER 32.5",
+          "line": 32.5,
+          "result": 29,
+          "hit": true,
+          "confidence": 70.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-27",
+          "type": "prop",
+          "player": "Jericho Sims",
+          "team": "MIL",
+          "pick": "PRA OVER 11.5",
+          "line": 11.5,
+          "result": 24,
+          "hit": true,
+          "confidence": 70.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-27",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "REB OVER 8.5",
+          "line": 8.5,
+          "result": 11,
+          "hit": true,
+          "confidence": 69.3,
+          "best_bet": true
+        }
+      ],
+      "best_bets": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
+      }
+    },
+    {
+      "date": "2026-02-26",
+      "props": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
       },
       "spreads": {
         "wins": 0,
@@ -61,20 +170,13 @@
         "record": "5-5",
         "pct": 50.0
       },
-      "best_bets": {
-        "wins": 1,
-        "losses": 2,
-        "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
-      },
       "picks": [
         {
           "date": "2026-02-26",
           "type": "ml",
           "game": "CHA @ IND",
           "pick": "CHA",
-          "result": "133-109",
+          "result": "CHA vs IND",
           "hit": true,
           "confidence": 53.7
         },
@@ -83,7 +185,7 @@
           "type": "ml",
           "game": "MIA @ PHI",
           "pick": "PHI",
-          "result": "117-124",
+          "result": "MIA vs PHI",
           "hit": true,
           "confidence": 52.5
         },
@@ -92,7 +194,7 @@
           "type": "ml",
           "game": "WAS @ ATL",
           "pick": "ATL",
-          "result": "96-126",
+          "result": "WAS vs ATL",
           "hit": true,
           "confidence": 71.7,
           "best_bet": true
@@ -102,7 +204,7 @@
           "type": "ml",
           "game": "SAS @ BKN",
           "pick": "SAS",
-          "result": "126-110",
+          "result": "SAS vs BKN",
           "hit": true,
           "confidence": 59.8
         },
@@ -111,7 +213,7 @@
           "type": "ml",
           "game": "HOU @ ORL",
           "pick": "ORL",
-          "result": "113-108",
+          "result": "HOU vs ORL",
           "hit": false,
           "confidence": 51.1
         },
@@ -120,7 +222,7 @@
           "type": "ml",
           "game": "POR @ CHI",
           "pick": "CHI",
-          "result": "121-112",
+          "result": "POR vs CHI",
           "hit": false,
           "confidence": 53.5
         },
@@ -129,7 +231,7 @@
           "type": "ml",
           "game": "SAC @ DAL",
           "pick": "DAL",
-          "result": "130-121",
+          "result": "SAC vs DAL",
           "hit": false,
           "confidence": 64.9,
           "best_bet": true
@@ -139,7 +241,7 @@
           "type": "ml",
           "game": "LAL @ PHX",
           "pick": "PHX",
-          "result": "110-113",
+          "result": "LAL vs PHX",
           "hit": true,
           "confidence": 57.6
         },
@@ -148,7 +250,7 @@
           "type": "ml",
           "game": "NOP @ UTA",
           "pick": "UTA",
-          "result": "129-118",
+          "result": "NOP vs UTA",
           "hit": false,
           "confidence": 61.3,
           "best_bet": true
@@ -158,20 +260,87 @@
           "type": "ml",
           "game": "MIN @ LAC",
           "pick": "LAC",
-          "result": "94-88",
+          "result": "MIN vs LAC",
           "hit": false,
           "confidence": 52.5
+        },
+        {
+          "date": "2026-02-26",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "PRA OVER 24.5",
+          "line": 24.5,
+          "result": 39,
+          "hit": true,
+          "confidence": 72.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-26",
+          "type": "prop",
+          "player": "Luke Kennard",
+          "team": "ATL",
+          "pick": "PTS OVER 5.5",
+          "line": 5.5,
+          "result": 8,
+          "hit": true,
+          "confidence": 71.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-26",
+          "type": "prop",
+          "player": "Derrick White",
+          "team": "BOS",
+          "pick": "PRA UNDER 32.5",
+          "line": 32.5,
+          "result": 29,
+          "hit": true,
+          "confidence": 70.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-26",
+          "type": "prop",
+          "player": "Jericho Sims",
+          "team": "MIL",
+          "pick": "PRA OVER 11.5",
+          "line": 11.5,
+          "result": 24,
+          "hit": true,
+          "confidence": 70.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-26",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "REB OVER 8.5",
+          "line": 8.5,
+          "result": 11,
+          "hit": true,
+          "confidence": 69.3,
+          "best_bet": true
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 6,
+        "losses": 2,
+        "pushes": 0,
+        "record": "6-2",
+        "pct": 75.0
+      }
     },
     {
       "date": "2026-02-25",
       "props": {
-        "wins": 0,
+        "wins": 4,
         "losses": 0,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "4-0",
+        "pct": 100.0
       },
       "spreads": {
         "wins": 2,
@@ -181,11 +350,11 @@
         "pct": 50.0
       },
       "totals": {
-        "wins": 2,
+        "wins": 0,
         "losses": 0,
         "pushes": 0,
-        "record": "2-0",
-        "pct": 100.0
+        "record": "0-0",
+        "pct": 0
       },
       "moneylines": {
         "wins": 4,
@@ -194,20 +363,13 @@
         "record": "4-2",
         "pct": 66.7
       },
-      "best_bets": {
-        "wins": 5,
-        "losses": 2,
-        "pushes": 0,
-        "record": "5-2",
-        "pct": 71.4
-      },
       "picks": [
         {
           "date": "2026-02-25",
           "type": "ml",
           "game": "OKC @ DET",
           "pick": "DET",
-          "result": "116-124",
+          "result": "OKC vs DET",
           "hit": true,
           "confidence": 52.9
         },
@@ -216,7 +378,7 @@
           "type": "ml",
           "game": "SAS @ TOR",
           "pick": "TOR",
-          "result": "110-107",
+          "result": "SAS vs TOR",
           "hit": false,
           "confidence": 54.1
         },
@@ -225,7 +387,7 @@
           "type": "ml",
           "game": "GSW @ MEM",
           "pick": "MEM",
-          "result": "133-112",
+          "result": "GSW vs MEM",
           "hit": false,
           "confidence": 54.2
         },
@@ -234,7 +396,7 @@
           "type": "ml",
           "game": "SAC @ HOU",
           "pick": "HOU",
-          "result": "97-128",
+          "result": "SAC vs HOU",
           "hit": true,
           "confidence": 75.1,
           "best_bet": true
@@ -244,7 +406,7 @@
           "type": "ml",
           "game": "CLE @ MIL",
           "pick": "MIL",
-          "result": "116-118",
+          "result": "CLE vs MIL",
           "hit": true,
           "confidence": 54.0
         },
@@ -253,7 +415,7 @@
           "type": "ml",
           "game": "BOS @ DEN",
           "pick": "DEN",
-          "result": "84-103",
+          "result": "BOS vs DEN",
           "hit": true,
           "confidence": 56.9
         },
@@ -263,7 +425,7 @@
           "game": "OKC @ DET",
           "pick": "OKC +7.5",
           "line": 7.5,
-          "result": "116-124",
+          "result": "Won by 8",
           "hit": false,
           "confidence": 63.7,
           "best_bet": true
@@ -274,7 +436,7 @@
           "game": "SAS @ TOR",
           "pick": "TOR +7.5",
           "line": 7.5,
-          "result": "110-107",
+          "result": "Won by 3",
           "hit": true,
           "confidence": 74.5,
           "best_bet": true
@@ -285,7 +447,7 @@
           "game": "GSW @ MEM",
           "pick": "MEM +3.5",
           "line": 3.5,
-          "result": "133-112",
+          "result": "Won by 21",
           "hit": false,
           "confidence": 69.2,
           "best_bet": true
@@ -296,32 +458,67 @@
           "game": "CLE @ MIL",
           "pick": "MIL +8.5",
           "line": 8.5,
-          "result": "116-118",
+          "result": "Won by 2",
           "hit": true,
           "confidence": 71.3,
           "best_bet": true
         },
         {
           "date": "2026-02-25",
-          "type": "total",
-          "game": "OKC @ DET",
-          "pick": "OVER 218.5",
-          "result": "240",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "PRA OVER 24.5",
+          "line": 24.5,
+          "result": 39,
           "hit": true,
-          "confidence": 60.7,
+          "confidence": 72.2,
           "best_bet": true
         },
         {
           "date": "2026-02-25",
-          "type": "total",
-          "game": "SAS @ TOR",
-          "pick": "UNDER 230.5",
-          "result": "217",
+          "type": "prop",
+          "player": "Derrick White",
+          "team": "BOS",
+          "pick": "PRA UNDER 32.5",
+          "line": 32.5,
+          "result": 29,
           "hit": true,
-          "confidence": 69.4,
+          "confidence": 70.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-25",
+          "type": "prop",
+          "player": "Jericho Sims",
+          "team": "MIL",
+          "pick": "PRA OVER 11.5",
+          "line": 11.5,
+          "result": 24,
+          "hit": true,
+          "confidence": 70.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-25",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "REB OVER 8.5",
+          "line": 8.5,
+          "result": 11,
+          "hit": true,
+          "confidence": 69.3,
           "best_bet": true
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 7,
+        "losses": 2,
+        "pushes": 0,
+        "record": "7-2",
+        "pct": 77.8
+      }
     },
     {
       "date": "2026-02-24",
@@ -340,11 +537,11 @@
         "pct": 42.9
       },
       "totals": {
-        "wins": 6,
-        "losses": 4,
+        "wins": 0,
+        "losses": 0,
         "pushes": 0,
-        "record": "6-4",
-        "pct": 60.0
+        "record": "0-0",
+        "pct": 0
       },
       "moneylines": {
         "wins": 6,
@@ -353,20 +550,13 @@
         "record": "6-5",
         "pct": 54.5
       },
-      "best_bets": {
-        "wins": 7,
-        "losses": 8,
-        "pushes": 0,
-        "record": "7-8",
-        "pct": 46.7
-      },
       "picks": [
         {
           "date": "2026-02-24",
           "type": "ml",
           "game": "PHI @ IND",
           "pick": "IND",
-          "result": "135-114",
+          "result": "PHI vs IND",
           "hit": false,
           "confidence": 54.9
         },
@@ -375,7 +565,7 @@
           "type": "ml",
           "game": "WAS @ ATL",
           "pick": "ATL",
-          "result": "98-119",
+          "result": "WAS vs ATL",
           "hit": true,
           "confidence": 73.8,
           "best_bet": true
@@ -385,7 +575,7 @@
           "type": "ml",
           "game": "DAL @ BKN",
           "pick": "DAL",
-          "result": "123-114",
+          "result": "DAL vs BKN",
           "hit": true,
           "confidence": 51.2
         },
@@ -394,7 +584,7 @@
           "type": "ml",
           "game": "OKC @ TOR",
           "pick": "OKC",
-          "result": "116-107",
+          "result": "OKC vs TOR",
           "hit": true,
           "confidence": 56.4
         },
@@ -403,7 +593,7 @@
           "type": "ml",
           "game": "NYK @ CLE",
           "pick": "CLE",
-          "result": "94-109",
+          "result": "NYK vs CLE",
           "hit": true,
           "confidence": 63.8,
           "best_bet": true
@@ -413,7 +603,7 @@
           "type": "ml",
           "game": "CHA @ CHI",
           "pick": "CHA",
-          "result": "131-99",
+          "result": "CHA vs CHI",
           "hit": true,
           "confidence": 61.6,
           "best_bet": true
@@ -423,7 +613,7 @@
           "type": "ml",
           "game": "MIA @ MIL",
           "pick": "MIA",
-          "result": "117-128",
+          "result": "MIA vs MIL",
           "hit": false,
           "confidence": 51.1
         },
@@ -432,7 +622,7 @@
           "type": "ml",
           "game": "GSW @ NOP",
           "pick": "GSW",
-          "result": "109-113",
+          "result": "GSW vs NOP",
           "hit": false,
           "confidence": 54.0
         },
@@ -441,7 +631,7 @@
           "type": "ml",
           "game": "BOS @ PHX",
           "pick": "BOS",
-          "result": "97-81",
+          "result": "BOS vs PHX",
           "hit": true,
           "confidence": 55.5
         },
@@ -450,7 +640,7 @@
           "type": "ml",
           "game": "MIN @ POR",
           "pick": "POR",
-          "result": "124-121",
+          "result": "MIN vs POR",
           "hit": false,
           "confidence": 50.6
         },
@@ -459,7 +649,7 @@
           "type": "ml",
           "game": "ORL @ LAL",
           "pick": "LAL",
-          "result": "110-109",
+          "result": "ORL vs LAL",
           "hit": false,
           "confidence": 64.1,
           "best_bet": true
@@ -470,7 +660,7 @@
           "game": "PHI @ IND",
           "pick": "IND +10.0",
           "line": 10.0,
-          "result": "135-114",
+          "result": "Won by 21",
           "hit": false,
           "confidence": 75.2,
           "best_bet": true
@@ -481,7 +671,7 @@
           "game": "WAS @ ATL",
           "pick": "WAS +13.5",
           "line": 13.5,
-          "result": "98-119",
+          "result": "Won by 21",
           "hit": false,
           "confidence": 70.0,
           "best_bet": true
@@ -492,7 +682,7 @@
           "game": "OKC @ TOR",
           "pick": "OKC +1.0",
           "line": 1.0,
-          "result": "116-107",
+          "result": "Won by 9",
           "hit": true,
           "confidence": 58.6
         },
@@ -502,7 +692,7 @@
           "game": "CHA @ CHI",
           "pick": "CHI +8.5",
           "line": 8.5,
-          "result": "131-99",
+          "result": "Won by 32",
           "hit": false,
           "confidence": 69.1,
           "best_bet": true
@@ -513,7 +703,7 @@
           "game": "MIA @ MIL",
           "pick": "MIL +6.0",
           "line": 6.0,
-          "result": "117-128",
+          "result": "Won by 11",
           "hit": true,
           "confidence": 61.7,
           "best_bet": true
@@ -524,7 +714,7 @@
           "game": "BOS @ PHX",
           "pick": "PHX +7.0",
           "line": 7.0,
-          "result": "97-81",
+          "result": "Won by 16",
           "hit": false,
           "confidence": 59.1
         },
@@ -534,117 +724,28 @@
           "game": "MIN @ POR",
           "pick": "POR +6.5",
           "line": 6.5,
-          "result": "124-121",
+          "result": "Won by 3",
           "hit": true,
           "confidence": 62.2,
           "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "PHI @ IND",
-          "pick": "UNDER 233.5",
-          "result": "249",
-          "hit": false,
-          "confidence": 61.3,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "WAS @ ATL",
-          "pick": "UNDER 238.5",
-          "result": "217",
-          "hit": true,
-          "confidence": 56.8
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "OKC @ TOR",
-          "pick": "OVER 216.5",
-          "result": "223",
-          "hit": true,
-          "confidence": 73.2,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "NYK @ CLE",
-          "pick": "UNDER 232.5",
-          "result": "203",
-          "hit": true,
-          "confidence": 55.5
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "CHA @ CHI",
-          "pick": "UNDER 233.5",
-          "result": "230",
-          "hit": true,
-          "confidence": 59.0
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "MIA @ MIL",
-          "pick": "OVER 226.5",
-          "result": "245",
-          "hit": true,
-          "confidence": 62.9,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "GSW @ NOP",
-          "pick": "OVER 227.5",
-          "result": "222",
-          "hit": false,
-          "confidence": 69.6,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "BOS @ PHX",
-          "pick": "OVER 206.5",
-          "result": "178",
-          "hit": false,
-          "confidence": 79.2,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "MIN @ POR",
-          "pick": "UNDER 236.5",
-          "result": "245",
-          "hit": false,
-          "confidence": 60.8,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-24",
-          "type": "total",
-          "game": "ORL @ LAL",
-          "pick": "UNDER 230.5",
-          "result": "219",
-          "hit": true,
-          "confidence": 56.0
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 5,
+        "losses": 4,
+        "pushes": 0,
+        "record": "5-4",
+        "pct": 55.6
+      }
     },
     {
       "date": "2026-02-23",
       "props": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 7,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "2-7",
+        "pct": 22.2
       },
       "spreads": {
         "wins": 0,
@@ -654,11 +755,11 @@
         "pct": 0.0
       },
       "totals": {
-        "wins": 2,
-        "losses": 1,
+        "wins": 0,
+        "losses": 0,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "0-0",
+        "pct": 0
       },
       "moneylines": {
         "wins": 1,
@@ -667,20 +768,13 @@
         "record": "1-2",
         "pct": 33.3
       },
-      "best_bets": {
-        "wins": 3,
-        "losses": 5,
-        "pushes": 0,
-        "record": "3-5",
-        "pct": 37.5
-      },
       "picks": [
         {
           "date": "2026-02-23",
           "type": "ml",
           "game": "SAS @ DET",
           "pick": "DET",
-          "result": "114-103",
+          "result": "SAS vs DET",
           "hit": false,
           "confidence": 69.7,
           "best_bet": true
@@ -690,7 +784,7 @@
           "type": "ml",
           "game": "SAC @ MEM",
           "pick": "MEM",
-          "result": "123-114",
+          "result": "SAC vs MEM",
           "hit": false,
           "confidence": 69.6,
           "best_bet": true
@@ -700,7 +794,7 @@
           "type": "ml",
           "game": "UTA @ HOU",
           "pick": "HOU",
-          "result": "105-125",
+          "result": "UTA vs HOU",
           "hit": true,
           "confidence": 93.2,
           "best_bet": true
@@ -711,7 +805,7 @@
           "game": "SAS @ DET",
           "pick": "DET -1.0",
           "line": -1.0,
-          "result": "114-103",
+          "result": "Won by 11",
           "hit": false,
           "confidence": 65.7,
           "best_bet": true
@@ -722,7 +816,7 @@
           "game": "SAC @ MEM",
           "pick": "MEM -4.5",
           "line": -4.5,
-          "result": "123-114",
+          "result": "Won by 9",
           "hit": false,
           "confidence": 57.4
         },
@@ -732,51 +826,129 @@
           "game": "UTA @ HOU",
           "pick": "UTA +14.5",
           "line": 14.5,
-          "result": "105-125",
+          "result": "Won by 20",
           "hit": false,
           "confidence": 96.3,
           "best_bet": true
         },
         {
           "date": "2026-02-23",
-          "type": "total",
-          "game": "SAS @ DET",
-          "pick": "UNDER 228.5",
-          "result": "217",
+          "type": "prop",
+          "player": "Nickeil Alexander-Walker",
+          "team": "ATL",
+          "pick": "AST OVER 3.5",
+          "line": 3.5,
+          "result": 6,
           "hit": true,
-          "confidence": 65.4,
+          "confidence": 59.7,
           "best_bet": true
         },
         {
           "date": "2026-02-23",
-          "type": "total",
-          "game": "SAC @ MEM",
-          "pick": "UNDER 233.5",
-          "result": "237",
+          "type": "prop",
+          "player": "Dyson Daniels",
+          "team": "ATL",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 8,
+          "hit": true,
+          "confidence": 52.8
+        },
+        {
+          "date": "2026-02-23",
+          "type": "prop",
+          "player": "LaMelo Ball",
+          "team": "CHA",
+          "pick": "AST UNDER 6.5",
+          "line": 6.5,
+          "result": 7,
           "hit": false,
-          "confidence": 62.7,
+          "confidence": 53.39
+        },
+        {
+          "date": "2026-02-23",
+          "type": "prop",
+          "player": "Kon Knueppel",
+          "team": "CHA",
+          "pick": "REB UNDER 5.5",
+          "line": 5.5,
+          "result": 7,
+          "hit": false,
+          "confidence": 52.82
+        },
+        {
+          "date": "2026-02-23",
+          "type": "prop",
+          "player": "Evan Mobley",
+          "team": "CLE",
+          "pick": "REB OVER 6.5",
+          "line": 6.5,
+          "result": 2,
+          "hit": false,
+          "confidence": 57.7,
           "best_bet": true
         },
         {
           "date": "2026-02-23",
-          "type": "total",
-          "game": "UTA @ HOU",
-          "pick": "OVER 226.5",
-          "result": "230",
-          "hit": true,
-          "confidence": 79.3,
-          "best_bet": true
+          "type": "prop",
+          "player": "Donovan Mitchell",
+          "team": "CLE",
+          "pick": "PTS OVER 27.5",
+          "line": 27.5,
+          "result": 20,
+          "hit": false,
+          "confidence": 54.1
+        },
+        {
+          "date": "2026-02-23",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 11,
+          "hit": false,
+          "confidence": 56.6
+        },
+        {
+          "date": "2026-02-23",
+          "type": "prop",
+          "player": "Christian Braun",
+          "team": "DEN",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 54.34
+        },
+        {
+          "date": "2026-02-23",
+          "type": "prop",
+          "player": "Andrew Nembhard",
+          "team": "IND",
+          "pick": "PTS UNDER 19.5",
+          "line": 19.5,
+          "result": 22,
+          "hit": false,
+          "confidence": 53.39
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 2,
+        "losses": 5,
+        "pushes": 0,
+        "record": "2-5",
+        "pct": 28.6
+      }
     },
     {
       "date": "2026-02-22",
       "props": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 7,
         "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "2-7",
+        "pct": 22.2
       },
       "spreads": {
         "wins": 0,
@@ -799,20 +971,13 @@
         "record": "7-4",
         "pct": 63.6
       },
-      "best_bets": {
-        "wins": 3,
-        "losses": 3,
-        "pushes": 0,
-        "record": "3-3",
-        "pct": 50.0
-      },
       "picks": [
         {
           "date": "2026-02-22",
           "type": "ml",
           "game": "CLE @ OKC",
           "pick": "OKC",
-          "result": "113-121",
+          "result": "CLE vs OKC",
           "hit": true,
           "confidence": 66.2,
           "best_bet": true
@@ -822,7 +987,7 @@
           "type": "ml",
           "game": "BKN @ ATL",
           "pick": "ATL",
-          "result": "104-115",
+          "result": "BKN vs ATL",
           "hit": true,
           "confidence": 63.9,
           "best_bet": true
@@ -832,7 +997,7 @@
           "type": "ml",
           "game": "TOR @ MIL",
           "pick": "TOR",
-          "result": "122-94",
+          "result": "TOR vs MIL",
           "hit": true,
           "confidence": 55.6
         },
@@ -841,7 +1006,7 @@
           "type": "ml",
           "game": "DEN @ GSW",
           "pick": "GSW",
-          "result": "117-128",
+          "result": "DEN vs GSW",
           "hit": true,
           "confidence": 60.4,
           "best_bet": true
@@ -851,7 +1016,7 @@
           "type": "ml",
           "game": "DAL @ IND",
           "pick": "IND",
-          "result": "134-130",
+          "result": "DAL vs IND",
           "hit": false,
           "confidence": 52.3
         },
@@ -860,7 +1025,7 @@
           "type": "ml",
           "game": "CHA @ WAS",
           "pick": "CHA",
-          "result": "129-112",
+          "result": "CHA vs WAS",
           "hit": true,
           "confidence": 56.4
         },
@@ -869,7 +1034,7 @@
           "type": "ml",
           "game": "BOS @ LAL",
           "pick": "BOS",
-          "result": "111-89",
+          "result": "BOS vs LAL",
           "hit": true,
           "confidence": 58.7
         },
@@ -878,7 +1043,7 @@
           "type": "ml",
           "game": "PHI @ MIN",
           "pick": "MIN",
-          "result": "135-108",
+          "result": "PHI vs MIN",
           "hit": false,
           "confidence": 66.0,
           "best_bet": true
@@ -888,7 +1053,7 @@
           "type": "ml",
           "game": "NYK @ CHI",
           "pick": "NYK",
-          "result": "105-99",
+          "result": "NYK vs CHI",
           "hit": true,
           "confidence": 54.3
         },
@@ -897,7 +1062,7 @@
           "type": "ml",
           "game": "POR @ PHX",
           "pick": "PHX",
-          "result": "92-77",
+          "result": "POR vs PHX",
           "hit": false,
           "confidence": 65.4,
           "best_bet": true
@@ -907,12 +1072,120 @@
           "type": "ml",
           "game": "ORL @ LAC",
           "pick": "LAC",
-          "result": "111-109",
+          "result": "ORL vs LAC",
           "hit": false,
           "confidence": 60.3,
           "best_bet": true
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Nickeil Alexander-Walker",
+          "team": "ATL",
+          "pick": "AST OVER 3.5",
+          "line": 3.5,
+          "result": 6,
+          "hit": true,
+          "confidence": 59.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Dyson Daniels",
+          "team": "ATL",
+          "pick": "AST OVER 5.5",
+          "line": 5.5,
+          "result": 8,
+          "hit": true,
+          "confidence": 52.8
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "LaMelo Ball",
+          "team": "CHA",
+          "pick": "AST UNDER 6.5",
+          "line": 6.5,
+          "result": 7,
+          "hit": false,
+          "confidence": 53.39
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Kon Knueppel",
+          "team": "CHA",
+          "pick": "REB UNDER 5.5",
+          "line": 5.5,
+          "result": 7,
+          "hit": false,
+          "confidence": 52.82
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Evan Mobley",
+          "team": "CLE",
+          "pick": "REB OVER 6.5",
+          "line": 6.5,
+          "result": 2,
+          "hit": false,
+          "confidence": 57.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Donovan Mitchell",
+          "team": "CLE",
+          "pick": "PTS OVER 27.5",
+          "line": 27.5,
+          "result": 20,
+          "hit": false,
+          "confidence": 54.1
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Jarrett Allen",
+          "team": "CLE",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 11,
+          "hit": false,
+          "confidence": 56.6
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Christian Braun",
+          "team": "DEN",
+          "pick": "REB UNDER 4.5",
+          "line": 4.5,
+          "result": 5,
+          "hit": false,
+          "confidence": 54.34
+        },
+        {
+          "date": "2026-02-22",
+          "type": "prop",
+          "player": "Andrew Nembhard",
+          "team": "IND",
+          "pick": "PTS UNDER 19.5",
+          "line": 19.5,
+          "result": 22,
+          "hit": false,
+          "confidence": 53.39
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 4,
+        "losses": 4,
+        "pushes": 0,
+        "record": "4-4",
+        "pct": 50.0
+      }
     },
     {
       "date": "2026-02-21",
@@ -931,11 +1204,11 @@
         "pct": 50.0
       },
       "totals": {
-        "wins": 1,
-        "losses": 4,
+        "wins": 0,
+        "losses": 0,
         "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
+        "record": "0-0",
+        "pct": 0
       },
       "moneylines": {
         "wins": 6,
@@ -944,20 +1217,13 @@
         "record": "6-0",
         "pct": 100.0
       },
-      "best_bets": {
-        "wins": 7,
-        "losses": 6,
-        "pushes": 0,
-        "record": "7-6",
-        "pct": 53.8
-      },
       "picks": [
         {
           "date": "2026-02-21",
           "type": "ml",
           "game": "ORL @ PHX",
           "pick": "PHX",
-          "result": "110-113",
+          "result": "ORL vs PHX",
           "hit": true,
           "confidence": 61.5,
           "best_bet": true
@@ -967,7 +1233,7 @@
           "type": "ml",
           "game": "PHI @ NOP",
           "pick": "NOP",
-          "result": "111-126",
+          "result": "PHI vs NOP",
           "hit": true,
           "confidence": 51.3
         },
@@ -976,7 +1242,7 @@
           "type": "ml",
           "game": "MEM @ MIA",
           "pick": "MIA",
-          "result": "120-136",
+          "result": "MEM vs MIA",
           "hit": true,
           "confidence": 72.3,
           "best_bet": true
@@ -986,7 +1252,7 @@
           "type": "ml",
           "game": "DET @ CHI",
           "pick": "DET",
-          "result": "126-110",
+          "result": "DET vs CHI",
           "hit": true,
           "confidence": 61.6,
           "best_bet": true
@@ -996,7 +1262,7 @@
           "type": "ml",
           "game": "SAC @ SAS",
           "pick": "SAS",
-          "result": "122-139",
+          "result": "SAC vs SAS",
           "hit": true,
           "confidence": 75.7,
           "best_bet": true
@@ -1006,7 +1272,7 @@
           "type": "ml",
           "game": "HOU @ NYK",
           "pick": "NYK",
-          "result": "106-108",
+          "result": "HOU vs NYK",
           "hit": true,
           "confidence": 59.2
         },
@@ -1016,7 +1282,7 @@
           "game": "PHI @ NOP",
           "pick": "NOP +4.0",
           "line": 4.0,
-          "result": "111-126",
+          "result": "Won by 15",
           "hit": true,
           "confidence": 61.8,
           "best_bet": true
@@ -1027,7 +1293,7 @@
           "game": "MEM @ MIA",
           "pick": "MEM +11.5",
           "line": 11.5,
-          "result": "120-136",
+          "result": "Won by 16",
           "hit": false,
           "confidence": 62.2,
           "best_bet": true
@@ -1038,7 +1304,7 @@
           "game": "DET @ CHI",
           "pick": "CHI +10.5",
           "line": 10.5,
-          "result": "126-110",
+          "result": "Won by 16",
           "hit": false,
           "confidence": 74.0,
           "best_bet": true
@@ -1049,62 +1315,19 @@
           "game": "SAC @ SAS",
           "pick": "SAC +18.5",
           "line": 18.5,
-          "result": "122-139",
+          "result": "Won by 17",
           "hit": true,
           "confidence": 65.2,
           "best_bet": true
-        },
-        {
-          "date": "2026-02-21",
-          "type": "total",
-          "game": "ORL @ PHX",
-          "pick": "OVER 218.5",
-          "result": "223",
-          "hit": true,
-          "confidence": 60.4,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-21",
-          "type": "total",
-          "game": "PHI @ NOP",
-          "pick": "UNDER 235.5",
-          "result": "237",
-          "hit": false,
-          "confidence": 65.3,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-21",
-          "type": "total",
-          "game": "MEM @ MIA",
-          "pick": "UNDER 236.5",
-          "result": "256",
-          "hit": false,
-          "confidence": 67.3,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-21",
-          "type": "total",
-          "game": "DET @ CHI",
-          "pick": "UNDER 234.5",
-          "result": "236",
-          "hit": false,
-          "confidence": 73.7,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-21",
-          "type": "total",
-          "game": "SAC @ SAS",
-          "pick": "UNDER 230.5",
-          "result": "261",
-          "hit": false,
-          "confidence": 61.3,
-          "best_bet": true
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 6,
+        "losses": 2,
+        "pushes": 0,
+        "record": "6-2",
+        "pct": 75.0
+      }
     },
     {
       "date": "2026-02-20",
@@ -1123,11 +1346,11 @@
         "pct": 71.4
       },
       "totals": {
-        "wins": 4,
-        "losses": 3,
+        "wins": 0,
+        "losses": 0,
         "pushes": 0,
-        "record": "4-3",
-        "pct": 57.1
+        "record": "0-0",
+        "pct": 0
       },
       "moneylines": {
         "wins": 6,
@@ -1136,20 +1359,13 @@
         "record": "6-3",
         "pct": 66.7
       },
-      "best_bets": {
-        "wins": 8,
-        "losses": 4,
-        "pushes": 0,
-        "record": "8-4",
-        "pct": 66.7
-      },
       "picks": [
         {
           "date": "2026-02-20",
           "type": "ml",
           "game": "CLE @ CHA",
           "pick": "CHA",
-          "result": "118-113",
+          "result": "CLE vs CHA",
           "hit": false,
           "confidence": 55.0
         },
@@ -1158,7 +1374,7 @@
           "type": "ml",
           "game": "IND @ WAS",
           "pick": "WAS",
-          "result": "118-131",
+          "result": "IND vs WAS",
           "hit": true,
           "confidence": 53.3
         },
@@ -1167,7 +1383,7 @@
           "type": "ml",
           "game": "UTA @ MEM",
           "pick": "MEM",
-          "result": "114-123",
+          "result": "UTA vs MEM",
           "hit": true,
           "confidence": 69.9,
           "best_bet": true
@@ -1177,7 +1393,7 @@
           "type": "ml",
           "game": "MIA @ ATL",
           "pick": "MIA",
-          "result": "128-97",
+          "result": "MIA vs ATL",
           "hit": true,
           "confidence": 55.7
         },
@@ -1186,7 +1402,7 @@
           "type": "ml",
           "game": "DAL @ MIN",
           "pick": "MIN",
-          "result": "111-122",
+          "result": "DAL vs MIN",
           "hit": true,
           "confidence": 69.2,
           "best_bet": true
@@ -1196,7 +1412,7 @@
           "type": "ml",
           "game": "MIL @ NOP",
           "pick": "NOP",
-          "result": "139-118",
+          "result": "MIL vs NOP",
           "hit": false,
           "confidence": 53.2
         },
@@ -1205,7 +1421,7 @@
           "type": "ml",
           "game": "BKN @ OKC",
           "pick": "OKC",
-          "result": "86-105",
+          "result": "BKN vs OKC",
           "hit": true,
           "confidence": 78.1,
           "best_bet": true
@@ -1215,7 +1431,7 @@
           "type": "ml",
           "game": "LAC @ LAL",
           "pick": "LAL",
-          "result": "122-125",
+          "result": "LAC vs LAL",
           "hit": true,
           "confidence": 70.9,
           "best_bet": true
@@ -1225,7 +1441,7 @@
           "type": "ml",
           "game": "DEN @ POR",
           "pick": "POR",
-          "result": "157-103",
+          "result": "DEN vs POR",
           "hit": false,
           "confidence": 60.0,
           "best_bet": true
@@ -1236,7 +1452,7 @@
           "game": "CLE @ CHA",
           "pick": "CHA +6.0",
           "line": 6.0,
-          "result": "118-113",
+          "result": "Won by 5",
           "hit": true,
           "confidence": 74.3,
           "best_bet": true
@@ -1247,7 +1463,7 @@
           "game": "IND @ WAS",
           "pick": "WAS +1.0",
           "line": 1.0,
-          "result": "118-131",
+          "result": "Won by 13",
           "hit": true,
           "confidence": 56.1
         },
@@ -1257,7 +1473,7 @@
           "game": "UTA @ MEM",
           "pick": "MEM -2.5",
           "line": -2.5,
-          "result": "114-123",
+          "result": "Won by 9",
           "hit": true,
           "confidence": 59.9
         },
@@ -1267,7 +1483,7 @@
           "game": "MIA @ ATL",
           "pick": "ATL +4.0",
           "line": 4.0,
-          "result": "128-97",
+          "result": "Won by 31",
           "hit": false,
           "confidence": 56.0
         },
@@ -1277,7 +1493,7 @@
           "game": "DAL @ MIN",
           "pick": "DAL +13.5",
           "line": 13.5,
-          "result": "111-122",
+          "result": "Won by 11",
           "hit": true,
           "confidence": 58.5
         },
@@ -1287,7 +1503,7 @@
           "game": "MIL @ NOP",
           "pick": "MIL +4.0",
           "line": 4.0,
-          "result": "139-118",
+          "result": "Won by 21",
           "hit": true,
           "confidence": 56.0
         },
@@ -1297,529 +1513,29 @@
           "game": "DEN @ POR",
           "pick": "POR +1.5",
           "line": 1.5,
-          "result": "157-103",
+          "result": "Won by 54",
           "hit": false,
           "confidence": 64.5,
           "best_bet": true
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "CLE @ CHA",
-          "pick": "UNDER 230.5",
-          "result": "231",
-          "hit": false,
-          "confidence": 59.6
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "UTA @ MEM",
-          "pick": "OVER 236.5",
-          "result": "237",
-          "hit": true,
-          "confidence": 69.2,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "MIA @ ATL",
-          "pick": "UNDER 245.5",
-          "result": "225",
-          "hit": true,
-          "confidence": 75.4,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "DAL @ MIN",
-          "pick": "UNDER 239.5",
-          "result": "233",
-          "hit": true,
-          "confidence": 58.1
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "MIL @ NOP",
-          "pick": "OVER 224.5",
-          "result": "257",
-          "hit": true,
-          "confidence": 69.0,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "BKN @ OKC",
-          "pick": "OVER 212.5",
-          "result": "191",
-          "hit": false,
-          "confidence": 68.9,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-20",
-          "type": "total",
-          "game": "DEN @ POR",
-          "pick": "UNDER 241.5",
-          "result": "260",
-          "hit": false,
-          "confidence": 68.6,
-          "best_bet": true
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 5,
+        "losses": 2,
+        "pushes": 0,
+        "record": "5-2",
+        "pct": 71.4
+      }
     },
     {
       "date": "2026-02-19",
       "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
-        "wins": 5,
-        "losses": 5,
-        "pushes": 0,
-        "record": "5-5",
-        "pct": 50.0
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "HOU @ CHA",
-          "pick": "CHA",
-          "result": "105-101",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "BKN @ CLE",
-          "pick": "CLE",
-          "result": "84-112",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "ATL @ PHI",
-          "pick": "PHI",
-          "result": "117-107",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "IND @ WAS",
-          "pick": "WAS",
-          "result": "105-112",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "DET @ NYK",
-          "pick": "NYK",
-          "result": "126-111",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "TOR @ CHI",
-          "pick": "CHI",
-          "result": "110-101",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "PHX @ SAS",
-          "pick": "SAS",
-          "result": "94-121",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "BOS @ GSW",
-          "pick": "GSW",
-          "result": "121-110",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "ORL @ SAC",
-          "pick": "ORL",
-          "result": "131-94",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-19",
-          "type": "ml",
-          "game": "DEN @ LAC",
-          "pick": "LAC",
-          "result": "114-115",
-          "hit": true,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-12",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
-        "wins": 1,
-        "losses": 2,
-        "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-12",
-          "type": "ml",
-          "game": "MIL @ OKC",
-          "pick": "OKC",
-          "result": "110-93",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-12",
-          "type": "ml",
-          "game": "POR @ UTA",
-          "pick": "UTA",
-          "result": "135-119",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-12",
-          "type": "ml",
-          "game": "DAL @ LAL",
-          "pick": "LAL",
-          "result": "104-124",
-          "hit": true,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-11",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
-        "wins": 8,
-        "losses": 6,
-        "pushes": 0,
-        "record": "8-6",
-        "pct": 57.1
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "ATL @ CHA",
-          "pick": "CHA",
-          "result": "107-110",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "WAS @ CLE",
-          "pick": "CLE",
-          "result": "113-138",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "MIL @ ORL",
-          "pick": "ORL",
-          "result": "116-108",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "CHI @ BOS",
-          "pick": "BOS",
-          "result": "105-124",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "IND @ BKN",
-          "pick": "BKN",
-          "result": "115-110",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "NYK @ PHI",
-          "pick": "PHI",
-          "result": "138-89",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "DET @ TOR",
-          "pick": "TOR",
-          "result": "113-95",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "LAC @ HOU",
-          "pick": "HOU",
-          "result": "105-102",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "POR @ MIN",
-          "pick": "MIN",
-          "result": "109-133",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "MIA @ NOP",
-          "pick": "MIA",
-          "result": "123-111",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "OKC @ PHX",
-          "pick": "OKC",
-          "result": "136-109",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "SAC @ UTA",
-          "pick": "UTA",
-          "result": "93-121",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "MEM @ DEN",
-          "pick": "DEN",
-          "result": "116-122",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-11",
-          "type": "ml",
-          "game": "SAS @ GSW",
-          "pick": "GSW",
-          "result": "126-113",
-          "hit": false,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-10",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
         "wins": 3,
         "losses": 1,
         "pushes": 0,
         "record": "3-1",
         "pct": 75.0
       },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-10",
-          "type": "ml",
-          "game": "IND @ NYK",
-          "pick": "NYK",
-          "result": "137-134",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-10",
-          "type": "ml",
-          "game": "LAC @ HOU",
-          "pick": "HOU",
-          "result": "95-102",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-10",
-          "type": "ml",
-          "game": "DAL @ PHX",
-          "pick": "PHX",
-          "result": "111-120",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-10",
-          "type": "ml",
-          "game": "SAS @ LAL",
-          "pick": "SAS",
-          "result": "136-108",
-          "hit": true,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-09",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
       "spreads": {
         "wins": 0,
         "losses": 0,
@@ -1835,13 +1551,6 @@
         "pct": 0
       },
       "moneylines": {
-        "wins": 8,
-        "losses": 2,
-        "pushes": 0,
-        "record": "8-2",
-        "pct": 80.0
-      },
-      "best_bets": {
         "wins": 0,
         "losses": 0,
         "pushes": 0,
@@ -1850,311 +1559,67 @@
       },
       "picks": [
         {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "DET @ CHA",
-          "pick": "DET",
-          "result": "110-104",
+          "date": "2026-02-19",
+          "type": "prop",
+          "player": "Josh Giddey",
+          "team": "CHI",
+          "pick": "PTS UNDER 15.5",
+          "line": 15.5,
+          "result": 5,
           "hit": true,
-          "confidence": null
+          "confidence": 57.3
         },
         {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "CHI @ BKN",
-          "pick": "BKN",
-          "result": "115-123",
+          "date": "2026-02-19",
+          "type": "prop",
+          "player": "Josh Giddey",
+          "team": "CHI",
+          "pick": "REB UNDER 6.5",
+          "line": 6.5,
+          "result": 4,
           "hit": true,
-          "confidence": null
+          "confidence": 55.3
         },
         {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "UTA @ MIA",
-          "pick": "MIA",
-          "result": "115-111",
+          "date": "2026-02-19",
+          "type": "prop",
+          "player": "Josh Giddey",
+          "team": "CHI",
+          "pick": "AST OVER 7.5",
+          "line": 7.5,
+          "result": 5,
           "hit": false,
-          "confidence": null
+          "confidence": 49.7
         },
         {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "MIL @ ORL",
-          "pick": "ORL",
-          "result": "99-118",
+          "date": "2026-02-19",
+          "type": "prop",
+          "player": "Josh Giddey",
+          "team": "CHI",
+          "pick": "PRA UNDER 29.5",
+          "line": 29.5,
+          "result": 14,
           "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "ATL @ MIN",
-          "pick": "MIN",
-          "result": "116-138",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "SAC @ NOP",
-          "pick": "NOP",
-          "result": "94-120",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "CLE @ DEN",
-          "pick": "DEN",
-          "result": "119-117",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "MEM @ GSW",
-          "pick": "GSW",
-          "result": "113-114",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "OKC @ LAL",
-          "pick": "OKC",
-          "result": "119-110",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-09",
-          "type": "ml",
-          "game": "PHI @ POR",
-          "pick": "POR",
-          "result": "118-135",
-          "hit": true,
-          "confidence": null
+          "confidence": 61.6,
+          "best_bet": true
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      }
     },
     {
-      "date": "2026-02-08",
+      "date": "2026-02-18",
       "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
         "wins": 2,
-        "losses": 2,
-        "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-08",
-          "type": "ml",
-          "game": "NYK @ BOS",
-          "pick": "BOS",
-          "result": "111-89",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-08",
-          "type": "ml",
-          "game": "MIA @ WAS",
-          "pick": "MIA",
-          "result": "132-101",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-08",
-          "type": "ml",
-          "game": "IND @ TOR",
-          "pick": "TOR",
-          "result": "104-122",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-08",
-          "type": "ml",
-          "game": "LAC @ MIN",
-          "pick": "MIN",
-          "result": "115-96",
-          "hit": false,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-07",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
-        "wins": 7,
         "losses": 3,
         "pushes": 0,
-        "record": "7-3",
-        "pct": 70.0
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "WAS @ BKN",
-          "pick": "BKN",
-          "result": "113-127",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "HOU @ OKC",
-          "pick": "OKC",
-          "result": "112-106",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "DAL @ SAS",
-          "pick": "SAS",
-          "result": "125-138",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "UTA @ ORL",
-          "pick": "ORL",
-          "result": "117-120",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "CHA @ ATL",
-          "pick": "ATL",
-          "result": "126-119",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "DEN @ CHI",
-          "pick": "DEN",
-          "result": "136-120",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "GSW @ LAL",
-          "pick": "LAL",
-          "result": "99-105",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "PHI @ PHX",
-          "pick": "PHX",
-          "result": "109-103",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "MEM @ POR",
-          "pick": "POR",
-          "result": "115-122",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-07",
-          "type": "ml",
-          "game": "CLE @ SAC",
-          "pick": "CLE",
-          "result": "132-126",
-          "hit": true,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-06",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
+        "record": "2-3",
+        "pct": 40.0
       },
       "spreads": {
         "wins": 0,
@@ -2171,412 +1636,294 @@
         "pct": 0
       },
       "moneylines": {
-        "wins": 5,
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "picks": [
+        {
+          "date": "2026-02-18",
+          "type": "prop",
+          "player": "Kyle Kuzma",
+          "team": "MIL",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 52.6
+        },
+        {
+          "date": "2026-02-18",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 31,
+          "hit": true,
+          "confidence": 54.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-18",
+          "type": "prop",
+          "player": "Ace Bailey",
+          "team": "UTA",
+          "pick": "PTS UNDER 17.5",
+          "line": 17.5,
+          "result": 15,
+          "hit": true,
+          "confidence": 54.245
+        },
+        {
+          "date": "2026-02-18",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "REB UNDER 6.5",
+          "line": 6.5,
+          "result": 10,
+          "hit": false,
+          "confidence": 55.099999999999994
+        },
+        {
+          "date": "2026-02-18",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "PTS UNDER 24.5",
+          "line": 24.5,
+          "result": 28,
+          "hit": false,
+          "confidence": 54.05499999999999
+        }
+      ],
+      "best_bets": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      }
+    },
+    {
+      "date": "2026-02-17",
+      "props": {
+        "wins": 2,
+        "losses": 3,
+        "pushes": 0,
+        "record": "2-3",
+        "pct": 40.0
+      },
+      "spreads": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "picks": [
+        {
+          "date": "2026-02-17",
+          "type": "prop",
+          "player": "Kyle Kuzma",
+          "team": "MIL",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 52.6
+        },
+        {
+          "date": "2026-02-17",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 31,
+          "hit": true,
+          "confidence": 54.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-17",
+          "type": "prop",
+          "player": "Ace Bailey",
+          "team": "UTA",
+          "pick": "PTS UNDER 17.5",
+          "line": 17.5,
+          "result": 15,
+          "hit": true,
+          "confidence": 54.245
+        },
+        {
+          "date": "2026-02-17",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "REB UNDER 6.5",
+          "line": 6.5,
+          "result": 10,
+          "hit": false,
+          "confidence": 55.099999999999994
+        },
+        {
+          "date": "2026-02-17",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "PTS UNDER 24.5",
+          "line": 24.5,
+          "result": 28,
+          "hit": false,
+          "confidence": 54.05499999999999
+        }
+      ],
+      "best_bets": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      }
+    },
+    {
+      "date": "2026-02-16",
+      "props": {
+        "wins": 2,
+        "losses": 3,
+        "pushes": 0,
+        "record": "2-3",
+        "pct": 40.0
+      },
+      "spreads": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "picks": [
+        {
+          "date": "2026-02-16",
+          "type": "prop",
+          "player": "Kyle Kuzma",
+          "team": "MIL",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
+          "hit": false,
+          "confidence": 52.6
+        },
+        {
+          "date": "2026-02-16",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 31,
+          "hit": true,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-02-16",
+          "type": "prop",
+          "player": "Ace Bailey",
+          "team": "UTA",
+          "pick": "PTS UNDER 17.5",
+          "line": 17.5,
+          "result": 15,
+          "hit": true,
+          "confidence": 54.245
+        },
+        {
+          "date": "2026-02-16",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "REB UNDER 6.5",
+          "line": 6.5,
+          "result": 10,
+          "hit": false,
+          "confidence": 55.099999999999994,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-16",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "PTS UNDER 24.5",
+          "line": 24.5,
+          "result": 28,
+          "hit": false,
+          "confidence": 54.05499999999999
+        }
+      ],
+      "best_bets": {
+        "wins": 0,
         "losses": 1,
         "pushes": 0,
-        "record": "5-1",
-        "pct": 83.3
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-06",
-          "type": "ml",
-          "game": "MIA @ BOS",
-          "pick": "BOS",
-          "result": "96-98",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-06",
-          "type": "ml",
-          "game": "NYK @ DET",
-          "pick": "DET",
-          "result": "80-118",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-06",
-          "type": "ml",
-          "game": "IND @ MIL",
-          "pick": "MIL",
-          "result": "99-105",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-06",
-          "type": "ml",
-          "game": "NOP @ MIN",
-          "pick": "MIN",
-          "result": "119-115",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-06",
-          "type": "ml",
-          "game": "MEM @ POR",
-          "pick": "POR",
-          "result": "115-135",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-06",
-          "type": "ml",
-          "game": "LAC @ SAC",
-          "pick": "LAC",
-          "result": "114-111",
-          "hit": true,
-          "confidence": null
-        }
-      ]
+        "record": "0-1",
+        "pct": 0.0
+      }
     },
     {
-      "date": "2026-02-05",
+      "date": "2026-02-13",
       "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
-        "wins": 7,
-        "losses": 8,
-        "pushes": 0,
-        "record": "7-8",
-        "pct": 46.7
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "DEN @ NYK",
-          "pick": "NYK",
-          "result": "127-134",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "MIN @ TOR",
-          "pick": "TOR",
-          "result": "128-126",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "BOS @ HOU",
-          "pick": "HOU",
-          "result": "114-93",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "NOP @ MIL",
-          "pick": "MIL",
-          "result": "137-141",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "OKC @ SAS",
-          "pick": "OKC",
-          "result": "106-116",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "MEM @ SAC",
-          "pick": "MEM",
-          "result": "129-125",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "CLE @ LAC",
-          "pick": "LAC",
-          "result": "124-91",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "WAS @ DET",
-          "pick": "DET",
-          "result": "126-117",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "BKN @ ORL",
-          "pick": "ORL",
-          "result": "98-118",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "UTA @ ATL",
-          "pick": "ATL",
-          "result": "119-121",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "CHI @ TOR",
-          "pick": "TOR",
-          "result": "107-123",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "CHA @ HOU",
-          "pick": "HOU",
-          "result": "109-99",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "SAS @ DAL",
-          "pick": "SAS",
-          "result": "135-123",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "GSW @ PHX",
-          "pick": "PHX",
-          "result": "101-97",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-05",
-          "type": "ml",
-          "game": "PHI @ LAL",
-          "pick": "LAL",
-          "result": "115-119",
-          "hit": true,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-04",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
-        "wins": 6,
-        "losses": 4,
-        "pushes": 0,
-        "record": "6-4",
-        "pct": 60.0
-      },
-      "best_bets": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "picks": [
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "DEN @ DET",
-          "pick": "DET",
-          "result": "121-124",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "UTA @ IND",
-          "pick": "IND",
-          "result": "131-122",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "NYK @ WAS",
-          "pick": "NYK",
-          "result": "132-101",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "LAL @ BKN",
-          "pick": "LAL",
-          "result": "125-109",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "ATL @ MIA",
-          "pick": "MIA",
-          "result": "127-115",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "BOS @ DAL",
-          "pick": "BOS",
-          "result": "110-100",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "CHI @ MIL",
-          "pick": "MIL",
-          "result": "115-131",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "ORL @ OKC",
-          "pick": "OKC",
-          "result": "92-128",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "PHI @ GSW",
-          "pick": "GSW",
-          "result": "113-94",
-          "hit": false,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-04",
-          "type": "ml",
-          "game": "PHX @ POR",
-          "pick": "POR",
-          "result": "130-125",
-          "hit": false,
-          "confidence": null
-        }
-      ]
-    },
-    {
-      "date": "2026-02-03",
-      "props": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "spreads": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "totals": {
-        "wins": 0,
-        "losses": 0,
-        "pushes": 0,
-        "record": "0-0",
-        "pct": 0
-      },
-      "moneylines": {
         "wins": 2,
-        "losses": 2,
+        "losses": 3,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "2-3",
+        "pct": 40.0
       },
-      "best_bets": {
+      "spreads": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "moneylines": {
         "wins": 0,
         "losses": 0,
         "pushes": 0,
@@ -2585,42 +1932,68 @@
       },
       "picks": [
         {
-          "date": "2026-02-03",
-          "type": "ml",
-          "game": "NOP @ CHA",
-          "pick": "CHA",
-          "result": "95-102",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-03",
-          "type": "ml",
-          "game": "HOU @ IND",
-          "pick": "HOU",
-          "result": "118-114",
-          "hit": true,
-          "confidence": null
-        },
-        {
-          "date": "2026-02-03",
-          "type": "ml",
-          "game": "MIN @ MEM",
-          "pick": "MIN",
-          "result": "128-137",
+          "date": "2026-02-13",
+          "type": "prop",
+          "player": "Kyle Kuzma",
+          "team": "MIL",
+          "pick": "REB OVER 5.5",
+          "line": 5.5,
+          "result": 4,
           "hit": false,
-          "confidence": null
+          "confidence": 52.6
         },
         {
-          "date": "2026-02-03",
-          "type": "ml",
-          "game": "PHI @ LAC",
-          "pick": "LAC",
-          "result": "128-113",
+          "date": "2026-02-13",
+          "type": "prop",
+          "player": "Jrue Holiday",
+          "team": "POR",
+          "pick": "PTS OVER 14.5",
+          "line": 14.5,
+          "result": 31,
+          "hit": true,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-02-13",
+          "type": "prop",
+          "player": "Ace Bailey",
+          "team": "UTA",
+          "pick": "PTS UNDER 17.5",
+          "line": 17.5,
+          "result": 15,
+          "hit": true,
+          "confidence": 54.245
+        },
+        {
+          "date": "2026-02-13",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "REB UNDER 6.5",
+          "line": 6.5,
+          "result": 10,
           "hit": false,
-          "confidence": null
+          "confidence": 55.099999999999994
+        },
+        {
+          "date": "2026-02-13",
+          "type": "prop",
+          "player": "LeBron James",
+          "team": "LAL",
+          "pick": "PTS UNDER 24.5",
+          "line": 24.5,
+          "result": 28,
+          "hit": false,
+          "confidence": 54.05499999999999
         }
-      ]
+      ],
+      "best_bets": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      }
     }
   ]
 }
