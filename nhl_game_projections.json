@@ -1,23 +1,23 @@
 {
   "date": "2026-02-27",
   "sport": "NHL",
-  "updated": "2026-02-27T05:50:39",
+  "updated": "2026-02-27T15:32:06",
   "games": [
     {
       "away_team": "BUF",
       "home_team": "FLA",
       "game_date": "2026-02-27",
-      "proj_score": "3.7-2.9",
+      "proj_score": "3.6-2.7",
       "spread_pick": "BUF +1.5",
-      "spread_conf": 54.6,
+      "spread_conf": 53.7,
       "spread_best_book": "MGM",
       "total_line": 6.5,
-      "total_pick": "OVER",
-      "total_conf": 50.8,
+      "total_pick": "UNDER",
+      "total_conf": 51.6,
       "total_best_book": "FD",
       "ml_pick": "BUF",
-      "ml_conf": 55.9,
-      "ml_best_book": "DK",
+      "ml_conf": 57.0,
+      "ml_best_book": "FD",
       "home_win_prob": 28.1,
       "commence_time": "2026-02-28T00:00:00Z",
       "status": "scheduled",
@@ -33,19 +33,37 @@
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 100,
+            "over_odds": -104,
             "under_line": 6.5,
-            "under_odds": -122
+            "under_odds": -118
           },
           "ml": {
-            "BUF": -105,
-            "FLA": -114
+            "BUF": -104,
+            "FLA": -115
           }
         },
         "DK": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -245,
+            "away_odds": -258,
+            "home_line": -1.5,
+            "home_odds": 210
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 105,
+            "under_line": 6.5,
+            "under_odds": -125
+          },
+          "ml": {
+            "BUF": -105,
+            "FLA": -115
+          }
+        },
+        "MGM": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -250,
             "home_line": -1.5,
             "home_odds": 200
           },
@@ -56,26 +74,8 @@
             "under_odds": -120
           },
           "ml": {
-            "BUF": 105,
-            "FLA": -125
-          }
-        },
-        "MGM": {
-          "spread": {
-            "away_line": 1.5,
-            "away_odds": -235,
-            "home_line": -1.5,
-            "home_odds": 190
-          },
-          "total": {
-            "over_line": 6.0,
-            "over_odds": -125,
-            "under_line": 6.0,
-            "under_odds": 105
-          },
-          "ml": {
-            "BUF": 100,
-            "FLA": -120
+            "BUF": -105,
+            "FLA": -115
           }
         }
       },
@@ -86,18 +86,18 @@
       "away_team": "VGK",
       "home_team": "WSH",
       "game_date": "2026-02-27",
-      "proj_score": "3.2-3.4",
+      "proj_score": "2.9-3.3",
       "spread_pick": "VGK +1.5",
-      "spread_conf": 57.9,
+      "spread_conf": 56.4,
       "spread_best_book": "MGM",
       "total_line": 5.5,
       "total_pick": "OVER",
-      "total_conf": 56.4,
-      "total_best_book": "FD",
+      "total_conf": 54.2,
+      "total_best_book": "MGM",
       "ml_pick": "WSH",
-      "ml_conf": 51.5,
-      "ml_best_book": "MGM",
-      "home_win_prob": 52.3,
+      "ml_conf": 53.4,
+      "ml_best_book": "DK",
+      "home_win_prob": 57.1,
       "commence_time": "2026-02-28T00:00:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -106,19 +106,19 @@
         "FD": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -290,
+            "away_odds": -265,
             "home_line": -1.5,
-            "home_odds": 225
+            "home_odds": 210
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -120,
+            "over_odds": -124,
             "under_line": 5.5,
-            "under_odds": -102
+            "under_odds": 102
           },
           "ml": {
-            "VGK": -108,
-            "WSH": -111
+            "VGK": -102,
+            "WSH": -118
           }
         },
         "DK": {
@@ -141,20 +141,20 @@
         },
         "MGM": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 220,
-            "home_line": 1.5,
-            "home_odds": -275
+            "away_line": 1.5,
+            "away_odds": -250,
+            "home_line": -1.5,
+            "home_odds": 200
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -125,
+            "over_odds": -120,
             "under_line": 5.5,
-            "under_odds": 105
+            "under_odds": 100
           },
           "ml": {
-            "VGK": -110,
-            "WSH": -110
+            "VGK": -105,
+            "WSH": -115
           }
         }
       },
@@ -165,18 +165,18 @@
       "away_team": "MIN",
       "home_team": "UTA",
       "game_date": "2026-02-27",
-      "proj_score": "2.7-3.2",
+      "proj_score": "2.7-3.3",
       "spread_pick": "MIN +1.5",
-      "spread_conf": 56.4,
+      "spread_conf": 55.2,
       "spread_best_book": "MGM",
-      "total_line": 5.5,
-      "total_pick": "OVER",
-      "total_conf": 52.4,
-      "total_best_book": "MGM",
+      "total_line": 6.5,
+      "total_pick": "UNDER",
+      "total_conf": 53.0,
+      "total_best_book": "DK",
       "ml_pick": "UTA",
-      "ml_conf": 53.5,
-      "ml_best_book": "DK",
-      "home_win_prob": 64.3,
+      "ml_conf": 55.1,
+      "ml_best_book": "MGM",
+      "home_win_prob": 57.6,
       "commence_time": "2026-02-28T02:00:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -185,15 +185,15 @@
         "FD": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -230,
+            "away_odds": -215,
             "home_line": -1.5,
-            "home_odds": 180
+            "home_odds": 172
           },
           "total": {
-            "over_line": 5.5,
-            "over_odds": -138,
-            "under_line": 5.5,
-            "under_odds": 112
+            "over_line": 6.5,
+            "over_odds": -104,
+            "under_line": 6.5,
+            "under_odds": -118
           },
           "ml": {
             "MIN": 118,
@@ -208,32 +208,32 @@
             "home_odds": 185
           },
           "total": {
-            "over_line": 5.5,
-            "over_odds": -130,
-            "under_line": 5.5,
-            "under_odds": 110
+            "over_line": 6.5,
+            "over_odds": -105,
+            "under_line": 6.5,
+            "under_odds": -115
           },
           "ml": {
-            "MIN": 114,
-            "UTA": -135
+            "MIN": 120,
+            "UTA": -142
           }
         },
         "MGM": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -220,
+            "away_odds": -210,
             "home_line": -1.5,
-            "home_odds": 180
+            "home_odds": 170
           },
           "total": {
-            "over_line": 6.0,
-            "over_odds": -105,
-            "under_line": 6.0,
-            "under_odds": -115
+            "over_line": 6.5,
+            "over_odds": 100,
+            "under_line": 6.5,
+            "under_odds": -120
           },
           "ml": {
-            "MIN": 110,
-            "UTA": -135
+            "MIN": 115,
+            "UTA": -140
           }
         }
       },
@@ -244,18 +244,18 @@
       "away_team": "WPG",
       "home_team": "ANA",
       "game_date": "2026-02-27",
-      "proj_score": "2.1-3.8",
+      "proj_score": "2.1-3.7",
       "spread_pick": "ANA -1.5",
-      "spread_conf": 51.4,
-      "spread_best_book": "FD",
+      "spread_conf": 50.5,
+      "spread_best_book": "DK",
       "total_line": 6.5,
       "total_pick": "UNDER",
-      "total_conf": 53.8,
+      "total_conf": 54.3,
       "total_best_book": "MGM",
       "ml_pick": "ANA",
-      "ml_conf": 63.9,
+      "ml_conf": 62.7,
       "ml_best_book": "FD",
-      "home_win_prob": 84.6,
+      "home_win_prob": 86.7,
       "commence_time": "2026-02-28T03:00:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -264,19 +264,19 @@
         "FD": {
           "spread": {
             "home_line": -1.5,
-            "home_odds": 205,
+            "home_odds": 186,
             "away_line": 1.5,
-            "away_odds": -260
+            "away_odds": -240
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 110,
+            "over_odds": 108,
             "under_line": 6.5,
-            "under_odds": -134
+            "under_odds": -130
           },
           "ml": {
-            "ANA": -125,
-            "WPG": 104
+            "ANA": -128,
+            "WPG": 106
           }
         },
         "DK": {
@@ -300,9 +300,9 @@
         "MGM": {
           "spread": {
             "home_line": -1.5,
-            "home_odds": 180,
+            "home_odds": 185,
             "away_line": 1.5,
-            "away_odds": -220
+            "away_odds": -225
           },
           "total": {
             "over_line": 6.0,
@@ -311,8 +311,8 @@
             "under_odds": -102
           },
           "ml": {
-            "ANA": -135,
-            "WPG": 110
+            "ANA": -130,
+            "WPG": 105
           }
         }
       },
