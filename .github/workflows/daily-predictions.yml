@@ -66,6 +66,11 @@ jobs:
       # CI's export_results.py has an empty accuracy_log and would overwrite
       # real grading data with an empty file. Skipped intentionally.
 
+      - name: Grade yesterday's props
+        continue-on-error: true
+        working-directory: ../nba-props
+        run: python grade_props_ci.py --projections $GITHUB_WORKSPACE/projections.json --results $GITHUB_WORKSPACE/results.json
+
       - name: Run ESPN props fallback
         continue-on-error: true
         env:
