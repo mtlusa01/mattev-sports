@@ -1,8 +1,13 @@
 {
   "date": "2026-02-26",
   "sport": "NBA",
+<<<<<<< Updated upstream
   "locked_at": "2026-02-26T15:46:13",
   "updated": "2026-02-26T15:46:13",
+=======
+  "locked_at": "2026-02-24T13:44:28",
+  "updated": "2026-02-26T20:38:30",
+>>>>>>> Stashed changes
   "projections": [
     {
       "player": "Desmond Bane",
@@ -764,8 +769,82 @@
       "confidence": 71.5,
       "pick_score": 61.5,
       "score_factors": [
+<<<<<<< Updated upstream
         "+5.2% EV",
         "88% L10 hit rate"
+=======
+        "+4.8% EV",
+        "100% L10 hit rate",
+        "+4.5 edge"
+      ],
+      "book_odds": {
+        "betmgm": {
+          "over": {
+            "line": 5.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 5.5,
+            "odds": 100
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Has gone OVER 5.5 PTS in 7/7 recent games (10.0 avg).",
+      "top_pick_rank": 1
+    },
+    {
+      "type": "prop",
+      "player": "Jericho Sims",
+      "team": "MIL",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 11.5,
+      "projection": 17.5,
+      "diff": 6.0,
+      "ev": 4.9,
+      "confidence": 70.4,
+      "pick_score": 69.6,
+      "score_factors": [
+        "+4.9% EV",
+        "88% L10 hit rate",
+        "+6.0 edge"
+      ],
+      "book_odds": {
+        "betmgm": {
+          "over": {
+            "line": 11.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 11.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Has gone OVER 11.5 PRA in 7/8 recent games (17.5 avg).",
+      "top_pick_rank": 2,
+      "result": "WIN",
+      "actual": 24
+    },
+    {
+      "type": "prop",
+      "player": "Andrew Wiggins",
+      "team": "MIA",
+      "prop": "PRA",
+      "direction": "OVER",
+      "line": 22.5,
+      "projection": 29.6,
+      "diff": 7.1,
+      "ev": 5.0,
+      "confidence": 69.7,
+      "pick_score": 67.0,
+      "score_factors": [
+        "+5.0% EV",
+        "80% L10 hit rate",
+        "+7.1 edge"
+>>>>>>> Stashed changes
       ],
       "book_odds": {
         "fanduel": {
