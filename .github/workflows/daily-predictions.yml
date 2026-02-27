@@ -62,10 +62,9 @@ jobs:
         working-directory: ../nba-predictor
         run: python export_game_projections.py --output $GITHUB_WORKSPACE/game_projections.json
 
-      - name: Export results.json
-        continue-on-error: true
-        working-directory: ../nba-predictor
-        run: python export_results.py --output $GITHUB_WORKSPACE/results.json
+      # NOTE: results.json is managed by the local daily_update.py pipeline.
+      # CI's export_results.py has an empty accuracy_log and would overwrite
+      # real grading data with an empty file. Skipped intentionally.
 
       - name: Run ESPN props fallback
         continue-on-error: true
@@ -146,14 +145,14 @@ jobs:
         working-directory: ../ncaab-predictor
         run: python predict.py
 
+      - name: Export NCAAB projections
+        working-directory: ../ncaab-predictor
+        run: python export_projections.py
+
       - name: Grade yesterday's NCAAB games
         continue-on-error: true
         working-directory: ../ncaab-predictor
         run: python grade_ncaab.py --dry
-
-      - name: Export NCAAB projections
-        working-directory: ../ncaab-predictor
-        run: python export_projections.py
 
       - name: Copy NCAAB outputs to mattev-sports
         run: |
