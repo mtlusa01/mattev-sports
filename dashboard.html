@@ -3139,11 +3139,13 @@
       const time = formatGameTime(g.commence_time);
       let sgcTime = '';
       if (isFinal) sgcTime = ' <span class="final-badge">FINAL</span>';
+      else if (status === 'final') sgcTime = ' <span class="final-badge">FINAL</span>';
       else if (status === 'live') sgcTime = ' <span style="color:var(--red-light);font-size:12px;font-weight:700"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse-live 1.5s ease-in-out infinite;vertical-align:middle;margin-right:4px"></span>LIVE</span>';
       else if (time) sgcTime = ` <span style="color:var(--text-muted);font-size:13px;font-weight:400">${time}</span>`;
 
       const sgcScore = isFinal
         ? `<span style="font-weight:700">${g.away_team} ${g.away_score} - ${g.home_team} ${g.home_score}</span>`
+        : status === 'final' ? `<span style="font-weight:600;color:var(--text-secondary);">Graded</span>`
         : `Proj: ${g.proj_score}`;
 
       el.innerHTML = `
@@ -3156,19 +3158,19 @@
             <span class="sgc-pick-label">Spread</span>
             <span class="sgc-pick-value ${pickCls(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
             ${g.spread_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.spread_conf)}">${g.spread_conf}%</span>` : ''}
-            ${isFinal ? sgcResultBadge(g.spread_result) : ''}
+            ${sgcResultBadge(g.spread_result)}
           </div>
           <div class="sgc-pick">
             <span class="sgc-pick-label">Total</span>
             <span class="sgc-pick-value ${pickCls(g.total_pick, g.total_conf)}">${totalStr}</span>
             ${g.total_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.total_conf)}">${g.total_conf}%</span>` : ''}
-            ${isFinal ? sgcResultBadge(g.total_result) : ''}
+            ${sgcResultBadge(g.total_result)}
           </div>
           <div class="sgc-pick">
             <span class="sgc-pick-label">Moneyline</span>
             <span class="sgc-pick-value ${pickCls(g.ml_pick, g.ml_conf)}">${g.ml_pick || 'N/A'}</span>
             ${g.ml_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.ml_conf)}">${g.ml_conf}%</span>` : ''}
-            ${isFinal ? sgcResultBadge(g.ml_result) : ''}
+            ${sgcResultBadge(g.ml_result)}
           </div>
         </div>`;
       el.classList.add('visible');
@@ -5137,11 +5139,13 @@
           </div>`;
       }
 
-      // Non-final card layout (scheduled/live/soon)
+      // Non-final card layout (scheduled/live/soon/final-without-scores)
       const time = formatGameTime(g.commence_time);
       let timeHtml = '';
       let cardCls = '';
-      if (status === 'live') {
+      if (status === 'final') {
+        timeHtml = '<div class="game-card-time"><span class="final-badge">FINAL</span></div>';
+      } else if (status === 'live') {
         timeHtml = '<div class="game-card-time"><span class="live-badge"><span class="live-dot"></span> LIVE</span></div>';
         cardCls = ' live-card';
       } else if (status === 'soon') {
@@ -5171,7 +5175,7 @@
               <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
               ${timeHtml}
             </div>
-            <div class="game-card-score">Proj: ${g.proj_score}</div>
+            ${g.proj_score ? `<div class="game-card-score">Proj: ${g.proj_score}</div>` : ''}
           </div>
           ${liveScoresHtml}
           <div class="game-card-picks">
@@ -5181,6 +5185,7 @@
               <span class="game-pick-odds">${spreadOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
               ${kellyBadge(g.spread_conf, g.spread_odds)}
+              ${renderResultBadge(g.spread_result)}
               ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.total_conf, 'total')}">
@@ -5189,6 +5194,7 @@
               <span class="game-pick-odds">${totalOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
               ${kellyBadge(g.total_conf, g.total_odds)}
+              ${renderResultBadge(g.total_result)}
               ${gameTrackIcon('total', isTotalTracked)}
             </div>
             <div class="game-pick-row${dimClass(g.ml_conf, 'ml')}">
@@ -5197,6 +5203,7 @@
               <span class="game-pick-odds">${mlOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
               ${kellyBadge(g.ml_conf, g.ml_odds)}
+              ${renderResultBadge(g.ml_result)}
               ${gameTrackIcon('ml', isMlTracked)}
             </div>
           </div>
