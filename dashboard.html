@@ -6010,7 +6010,7 @@
     loadNcaabGameProjections();
     loadInjuries();
     loadYesterdayResults();
-    renderPortfolioSummary();
+    // renderPortfolioSummary() called after kellyCalculator.js loads (see onAuthStateChanged below)
   </script>
   <!-- Track Bet Modal -->
   <div class="track-modal-backdrop" id="track-modal-backdrop" onclick="closeTrackModal()">
@@ -6066,6 +6066,8 @@
         window.location.replace('index.html');
         return;
       }
+      // KellyCalculator and auth are now loaded — render portfolio
+      renderPortfolioSummary();
     });
   </script>
 
