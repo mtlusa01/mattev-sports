@@ -48,28 +48,51 @@
     /* ── Navigation ── */
     .top-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(10, 10, 15, 0.92); backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(24px) saturate(1.2);
       border-bottom: 1px solid var(--border);
     }
     .top-nav-inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 16px;
-      display: flex; align-items: center; justify-content: space-between; height: 56px;
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
     }
     .nav-brand a { display: flex; align-items: center; text-decoration: none; }
     .nav-brand span { font-size: 1.4rem; font-weight: 800; color: #f0f0f0; letter-spacing: -0.02em; white-space: nowrap; }
-    .nav-right { display: flex; align-items: center; gap: 6px; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
     .nav-link {
       color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500;
-      padding: 6px 12px; border-radius: 8px; transition: all 0.2s;
+      padding: 7px 14px; border-radius: 8px; transition: all 0.2s; position: relative;
     }
-    .nav-link:hover { color: var(--text-primary); background: var(--bg-tertiary); }
-    .nav-link.active { color: var(--text-primary); background: var(--bg-tertiary); }
+    .nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+    .nav-link.active { color: var(--text-primary); font-weight: 600; }
+    .nav-link.active::after {
+      content: ''; position: absolute; bottom: -14px; left: 14px; right: 14px;
+      height: 2px; background: var(--brand); border-radius: 1px;
+    }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .user-pill {
+      display: flex; align-items: center; gap: 10px;
+      padding: 5px 14px 5px 5px; background: var(--bg-tertiary); border: 1px solid var(--border);
+      border-radius: 24px; cursor: pointer; transition: border-color 0.2s;
+    }
+    .user-pill:hover { border-color: var(--border-light); }
+    .user-pill-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .user-pill-role { font-size: 9px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; }
+    .signout-btn {
+      background: none; border: 1px solid var(--border); color: var(--text-muted);
+      padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .signout-btn:hover { border-color: rgba(239,68,68,0.3); color: var(--red-light); background: rgba(239,68,68,0.06); }
 
     /* ── Page Layout ── */
-    .dash-container { max-width: 1200px; margin: 0 auto; padding: 80px 16px 40px; position: relative; z-index: 1; }
+    .dash-container { max-width: 1200px; margin: 0 auto; padding: 84px 20px 40px; position: relative; z-index: 1; }
 
-    .dash-greeting { margin-bottom: 24px; }
-    .dash-greeting h1 { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+    .dash-greeting { margin-bottom: 28px; }
+    .dash-greeting h1 {
+      font-size: 30px; font-weight: 800; margin-bottom: 4px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
     .dash-greeting p { color: var(--text-muted); font-size: 14px; }
 
     /* ── Portfolio Card ── */
@@ -147,12 +170,12 @@
     .alert-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
     .alert-text strong { color: var(--text-primary); }
 
-    /* ── User Menu ── */
-    .user-menu { position: relative; }
+    /* ── User Avatar ── */
     .user-avatar {
-      width: 32px; height: 32px; border-radius: 50%; background: var(--brand);
-      color: #fff; font-weight: 700; font-size: 14px; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), #b91c1c);
+      color: #fff; font-weight: 700; font-size: 13px; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
 
     /* ── Responsive ── */
@@ -164,6 +187,9 @@
       .dash-grid { grid-template-columns: 1fr; }
       .qa-grid { grid-template-columns: 1fr; }
       .dash-greeting h1 { font-size: 22px; }
+      .nav-links { display: none; }
+      .user-pill-name, .user-pill-role { display: none; }
+      .signout-btn { display: none; }
     }
   </style>
 </head>
@@ -177,12 +203,21 @@
           <span>Edge Factor <span style="color:#dc2626;">Elite</span></span>
         </a>
       </div>
-      <div class="nav-right">
+      <div class="nav-links">
         <a href="dashboard-home.html" class="nav-link active">Dashboard</a>
         <a href="dashboard.html" class="nav-link">Projections</a>
         <a href="results.html" class="nav-link">Results</a>
         <a href="mybets.html" class="nav-link">My Bets</a>
-        <div class="user-menu" id="auth-section"></div>
+      </div>
+      <div class="nav-right">
+        <div class="user-pill" id="user-pill">
+          <div class="user-avatar" id="user-avatar"></div>
+          <div>
+            <div class="user-pill-name" id="user-pill-name"></div>
+            <div class="user-pill-role">Free</div>
+          </div>
+        </div>
+        <button class="signout-btn" onclick="handleSignOut()">Sign Out</button>
       </div>
     </div>
   </header>
@@ -277,12 +312,12 @@
         weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
       });
 
-      // Auth section avatar
+      // Populate nav user info
       const initial = name.charAt(0).toUpperCase();
-      const authEl = document.getElementById('auth-section');
-      if (authEl) {
-        authEl.innerHTML = `<button class="user-avatar" title="${name}" onclick="handleSignOut()">${initial}</button>`;
-      }
+      const avatarEl = document.getElementById('user-avatar');
+      if (avatarEl) avatarEl.textContent = initial;
+      const nameEl = document.getElementById('user-pill-name');
+      if (nameEl) nameEl.textContent = name.split(' ')[0];
 
       renderPortfolio();
       loadPerformance();
