@@ -2395,6 +2395,11 @@
         const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
         const data = await resp.json();
+        // Only display results from Feb 27 onwards (fresh start)
+        const RESULTS_CUTOFF = '2026-02-27';
+        if (data.days) {
+          data.days = data.days.filter(day => day.date >= RESULTS_CUTOFF);
+        }
         if (sport === 'ncaab') ncaabHistoricalResults = data;
         else if (sport === 'nhl') nhlHistoricalResults = data;
         else historicalResults = data;
