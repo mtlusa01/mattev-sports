@@ -4532,7 +4532,9 @@
       })();
 
       // Try next day's archive first (common case: archive dated X contains games for X-1)
+      // Accumulate across archives — props may be in one, games in another
       const archivesToTry = [nextDay, date];
+      let foundGames = null, foundNhl = null, foundNcaab = null, foundProps = null;
       for (const archiveDate of archivesToTry) {
         try {
           const resp = await fetch(archiveBase + archiveDate + '.json?t=' + Date.now());
@@ -4543,57 +4545,56 @@
           const archiveNhlDate = data.nhl_game_projections?.date;
           const archiveNcaabDate = data.ncaab_projections?.date;
 
-          // Only use if the games inside match our requested date
-          let games = [];
-          let nhlGames = [];
-          let ncaabGames = [];
-
-          if (archiveGameDate === date) {
-            games = data.game_projections?.games || [];
+          if (archiveGameDate === date && !foundGames) {
+            foundGames = data.game_projections?.games || [];
             historicalBestBetsCache['nba:' + date] = data.game_projections?.best_bets || [];
           }
-          if (archiveNhlDate === date) {
-            nhlGames = data.nhl_game_projections?.games || [];
+          if (archiveNhlDate === date && !foundNhl) {
+            foundNhl = data.nhl_game_projections?.games || [];
             historicalBestBetsCache['nhl:' + date] = data.nhl_game_projections?.best_bets || [];
           }
-          if (archiveNcaabDate === date) {
-            ncaabGames = data.ncaab_projections?.games || [];
+          if (archiveNcaabDate === date && !foundNcaab) {
+            foundNcaab = data.ncaab_projections?.games || [];
             historicalBestBetsCache['ncaab:' + date] = data.ncaab_projections?.best_bets || [];
           }
 
           // Extract player props from archive
-          let archiveProps = [];
           const ppData = data.player_props;
-          if (ppData && ppData.date === date && ppData.projections) {
-            archiveProps = ppData.projections;
-          }
-
-          if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || archiveProps.length > 0) {
-            // Load results to merge actual outcomes into projections
-            if (!historicalResults) await loadHistoricalResults('nba');
-            if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
-            if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
-
-            // Merge actual scores and results into projections
-            if (games.length > 0 && historicalResults) {
-              games = mergeResultsIntoProjections(games, historicalResults, date);
-            }
-            if (nhlGames.length > 0 && nhlHistoricalResults) {
-              nhlGames = mergeResultsIntoProjections(nhlGames, nhlHistoricalResults, date);
-            }
-            if (ncaabGames.length > 0 && ncaabHistoricalResults) {
-              ncaabGames = mergeResultsIntoProjections(ncaabGames, ncaabHistoricalResults, date);
-            }
-
-            historicalGamesCache[date] = games;
-            historicalNhlCache[date] = nhlGames;
-            historicalNcaabCache[date] = ncaabGames;
-            historicalPropsCache[date] = archiveProps;
-            return games;
+          if (!foundProps && ppData && ppData.date === date && ppData.projections) {
+            foundProps = ppData.projections;
           }
         } catch (e) {
           console.log(`Archive fetch failed for ${archiveDate}:`, e.message);
         }
+      }
+
+      let games = foundGames || [];
+      let nhlGames = foundNhl || [];
+      let ncaabGames = foundNcaab || [];
+      let archiveProps = foundProps || [];
+
+      if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || archiveProps.length > 0) {
+        // Load results to merge actual outcomes into projections
+        if (!historicalResults) await loadHistoricalResults('nba');
+        if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
+        if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
+
+        // Merge actual scores and results into projections
+        if (games.length > 0 && historicalResults) {
+          games = mergeResultsIntoProjections(games, historicalResults, date);
+        }
+        if (nhlGames.length > 0 && nhlHistoricalResults) {
+          nhlGames = mergeResultsIntoProjections(nhlGames, nhlHistoricalResults, date);
+        }
+        if (ncaabGames.length > 0 && ncaabHistoricalResults) {
+          ncaabGames = mergeResultsIntoProjections(ncaabGames, ncaabHistoricalResults, date);
+        }
+
+        historicalGamesCache[date] = games;
+        historicalNhlCache[date] = nhlGames;
+        historicalNcaabCache[date] = ncaabGames;
+        historicalPropsCache[date] = archiveProps;
+        return games;
       }
 
       // Fallback: load from results.json
