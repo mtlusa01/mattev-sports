@@ -1,36 +1,198 @@
 {
-  "updated": "2026-02-06T02:53:43",
+  "updated": "2026-02-27T19:01:18",
   "allTime": {
     "spreads": {
-      "wins": 17,
-      "losses": 7,
+      "wins": 19,
+      "losses": 8,
       "pushes": 0,
-      "pct": 70.8,
-      "roi": 35.2
+      "pct": 70.4,
+      "roi": 34.3
     },
     "totals": {
-      "wins": 13,
-      "losses": 10,
+      "wins": 14,
+      "losses": 11,
       "pushes": 0,
-      "pct": 56.5,
-      "roi": 7.9
+      "pct": 56.0,
+      "roi": 6.9
     },
     "moneylines": {
-      "wins": 19,
-      "losses": 5,
+      "wins": 23,
+      "losses": 9,
       "pushes": 0,
-      "pct": 79.2,
-      "roi": 51.1
+      "pct": 71.9,
+      "roi": 37.2
     },
     "best_bets": {
-      "wins": 12,
-      "losses": 3,
+      "wins": 13,
+      "losses": 4,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 76.5,
+      "roi": 46.0
     }
   },
   "days": [
+    {
+      "date": "2026-02-26",
+      "props": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      },
+      "spreads": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 1,
+        "pushes": 0,
+        "record": "1-1",
+        "pct": 50.0
+      },
+      "moneylines": {
+        "wins": 4,
+        "losses": 4,
+        "pushes": 0,
+        "record": "4-4",
+        "pct": 50.0
+      },
+      "best_bets": {
+        "wins": 1,
+        "losses": 1,
+        "pushes": 0,
+        "record": "1-1",
+        "pct": 50.0
+      },
+      "picks": [
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "CBJ @ BOS",
+          "pick": "BOS",
+          "result": "2-4",
+          "hit": true,
+          "confidence": 57.0
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "NYI @ MTL",
+          "pick": "NYI",
+          "result": "4-3",
+          "hit": true,
+          "confidence": 53.8
+        },
+        {
+          "date": "2026-02-26",
+          "type": "spread",
+          "game": "NYI @ MTL",
+          "pick": "NYI +1.5",
+          "line": 1.5,
+          "result": "4-3",
+          "hit": true,
+          "confidence": 56.1
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "DET @ OTT",
+          "pick": "DET",
+          "result": "2-1",
+          "hit": true,
+          "confidence": 51.8
+        },
+        {
+          "date": "2026-02-26",
+          "type": "spread",
+          "game": "DET @ OTT",
+          "pick": "DET +1.5",
+          "line": 1.5,
+          "result": "2-1",
+          "hit": true,
+          "confidence": 57.6
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "TOR @ FLA",
+          "pick": "TOR",
+          "result": "1-5",
+          "hit": false,
+          "confidence": 59.0
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "PHI @ NYR",
+          "pick": "NYR",
+          "result": "3-2",
+          "hit": false,
+          "confidence": 56.2
+        },
+        {
+          "date": "2026-02-26",
+          "type": "total",
+          "game": "PHI @ NYR",
+          "pick": "OVER 5.5",
+          "result": "5",
+          "hit": false,
+          "confidence": 60.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "SEA @ STL",
+          "pick": "STL",
+          "result": "1-5",
+          "hit": true,
+          "confidence": 55.8
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "CHI @ NSH",
+          "pick": "CHI",
+          "result": "2-4",
+          "hit": false,
+          "confidence": 53.0
+        },
+        {
+          "date": "2026-02-26",
+          "type": "spread",
+          "game": "CHI @ NSH",
+          "pick": "CHI +1.5",
+          "line": 1.5,
+          "result": "2-4",
+          "hit": false,
+          "confidence": 56.8
+        },
+        {
+          "date": "2026-02-26",
+          "type": "total",
+          "game": "CHI @ NSH",
+          "pick": "UNDER 6.5",
+          "result": "6",
+          "hit": true,
+          "confidence": 61.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-02-26",
+          "type": "ml",
+          "game": "MIN @ COL",
+          "pick": "COL",
+          "result": "5-2",
+          "hit": false,
+          "confidence": 59.7
+        }
+      ]
+    },
     {
       "date": "2026-02-05",
       "spreads": {
@@ -256,7 +418,14 @@
           "confidence": 74.6,
           "best_bet": true
         }
-      ]
+      ],
+      "props": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      }
     },
     {
       "date": "2026-02-04",
@@ -564,7 +733,14 @@
           "confidence": 71.6,
           "best_bet": true
         }
-      ]
+      ],
+      "props": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
+      }
     },
     {
       "date": "2026-02-03",
@@ -782,6 +958,13 @@
         "pushes": 0,
         "record": "4-1",
         "pct": 80.0
+      },
+      "props": {
+        "wins": 0,
+        "losses": 0,
+        "pushes": 0,
+        "record": "0-0",
+        "pct": 0
       }
     }
   ]
