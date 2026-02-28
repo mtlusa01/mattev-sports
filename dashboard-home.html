@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Edge Factor Elite</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-tertiary: #1a1a24;
+      --bg-elevated: rgba(37, 37, 50, 0.5);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --text-primary: #f0f0f0;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --brand: #dc2626;
+      --brand-light: #ef4444;
+      --accent: #10b981;
+      --accent-light: #34d399;
+      --red: #ef4444;
+      --red-light: #f87171;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-gradient {
+      position: fixed; top: 0; left: 0; right: 0; height: 60vh;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(220, 38, 38, 0.08), transparent);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Navigation ── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(10, 10, 15, 0.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .top-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 16px;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .nav-brand a { display: flex; align-items: center; text-decoration: none; }
+    .nav-brand span { font-size: 1.4rem; font-weight: 800; color: #f0f0f0; letter-spacing: -0.02em; white-space: nowrap; }
+    .nav-right { display: flex; align-items: center; gap: 6px; }
+    .nav-link {
+      color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500;
+      padding: 6px 12px; border-radius: 8px; transition: all 0.2s;
+    }
+    .nav-link:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+    .nav-link.active { color: var(--text-primary); background: var(--bg-tertiary); }
+
+    /* ── Page Layout ── */
+    .dash-container { max-width: 1200px; margin: 0 auto; padding: 80px 16px 40px; position: relative; z-index: 1; }
+
+    .dash-greeting { margin-bottom: 24px; }
+    .dash-greeting h1 { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+    .dash-greeting p { color: var(--text-muted); font-size: 14px; }
+
+    /* ── Portfolio Card ── */
+    .portfolio-card {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0; align-items: center;
+      margin-bottom: 24px;
+    }
+    .portfolio-divider { background: var(--border); align-self: stretch; }
+    .portfolio-section { padding: 0 20px; }
+    .portfolio-section:first-child { padding-left: 4px; }
+    .portfolio-section:last-child { padding-right: 4px; }
+    .pf-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .pf-value { font-size: 28px; font-weight: 800; color: var(--text-primary); line-height: 1.1; }
+    .pf-sub { font-size: 12px; font-weight: 600; margin-top: 4px; }
+    .pf-sub.positive { color: var(--accent-light); }
+    .pf-sub.negative { color: var(--red-light); }
+    .pf-sub.neutral { color: var(--text-muted); }
+    .pf-goal-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+    .pf-goal-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+    .pf-goal-fill.on-track { background: var(--accent); }
+    .pf-goal-fill.behind { background: var(--yellow); }
+    .pf-goal-fill.over { background: var(--accent-light); }
+    .pf-capacity-row { display: flex; gap: 16px; margin-top: 6px; }
+    .pf-cap-item { display: flex; align-items: center; gap: 4px; }
+    .pf-cap-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .pf-cap-dot.available { background: var(--accent); }
+    .pf-cap-dot.pending { background: var(--yellow); }
+    .pf-cap-text { font-size: 12px; color: var(--text-secondary); }
+    .pf-cap-val { font-weight: 600; color: var(--text-primary); }
+
+    /* ── Dashboard Grid ── */
+    .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .dash-card {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    }
+    .dash-card-title {
+      font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.04em; margin-bottom: 16px;
+    }
+    .dash-card.full-width { grid-column: 1 / -1; }
+
+    /* ── Quick Actions ── */
+    .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .qa-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px; background: var(--bg-tertiary); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text-primary); text-decoration: none;
+      font-size: 14px; font-weight: 600; transition: all 0.2s;
+    }
+    .qa-btn:hover { border-color: var(--border-light); background: var(--bg-elevated); transform: translateY(-1px); }
+    .qa-icon { font-size: 20px; }
+    .qa-label span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── Performance Stats ── */
+    .perf-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .perf-row:last-child { border-bottom: none; }
+    .perf-label { font-size: 13px; color: var(--text-secondary); }
+    .perf-value { font-size: 14px; font-weight: 700; }
+    .perf-value.winning { color: var(--accent-light); }
+    .perf-value.losing { color: var(--red-light); }
+    .perf-value.neutral { color: var(--text-muted); }
+    .perf-empty { padding: 20px 0; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+    /* ── Alerts ── */
+    .alert-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .alert-item:last-child { border-bottom: none; }
+    .alert-icon { font-size: 16px; margin-top: 2px; }
+    .alert-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+    .alert-text strong { color: var(--text-primary); }
+
+    /* ── User Menu ── */
+    .user-menu { position: relative; }
+    .user-avatar {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--brand);
+      color: #fff; font-weight: 700; font-size: 14px; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .portfolio-card { grid-template-columns: 1fr; }
+      .portfolio-divider { height: 1px; width: 100%; margin: 12px 0; }
+      .portfolio-section { padding: 0; }
+      .pf-value { font-size: 24px; }
+      .dash-grid { grid-template-columns: 1fr; }
+      .qa-grid { grid-template-columns: 1fr; }
+      .dash-greeting h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-gradient"></div>
+
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-brand">
+        <a href="dashboard-home.html">
+          <span>Edge Factor <span style="color:#dc2626;">Elite</span></span>
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="dashboard-home.html" class="nav-link active">Dashboard</a>
+        <a href="dashboard.html" class="nav-link">Projections</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="mybets.html" class="nav-link">My Bets</a>
+        <div class="user-menu" id="auth-section"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dash-container">
+    <!-- Greeting -->
+    <div class="dash-greeting">
+      <h1 id="greeting-text">Loading...</h1>
+      <p id="greeting-sub"></p>
+    </div>
+
+    <!-- Portfolio Summary -->
+    <div id="portfolio-card"></div>
+
+    <!-- Dashboard Grid -->
+    <div class="dash-grid">
+      <!-- Quick Actions -->
+      <div class="dash-card">
+        <div class="dash-card-title">Quick Actions</div>
+        <div class="qa-grid">
+          <a href="dashboard.html" class="qa-btn">
+            <span class="qa-icon">&#128200;</span>
+            <div class="qa-label">Game Projections<span>Today's picks</span></div>
+          </a>
+          <a href="dashboard.html#player-props" class="qa-btn">
+            <span class="qa-icon">&#127942;</span>
+            <div class="qa-label">Player Props<span>AI-powered picks</span></div>
+          </a>
+          <a href="mybets.html" class="qa-btn">
+            <span class="qa-icon">&#128176;</span>
+            <div class="qa-label">My Bets<span>Track & grade</span></div>
+          </a>
+          <a href="results.html" class="qa-btn">
+            <span class="qa-icon">&#128202;</span>
+            <div class="qa-label">Results<span>Full history</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Performance Summary -->
+      <div class="dash-card">
+        <div class="dash-card-title">Recent Performance</div>
+        <div id="perf-summary">
+          <div class="perf-empty">Loading performance data...</div>
+        </div>
+      </div>
+
+      <!-- Today's Alerts -->
+      <div class="dash-card full-width">
+        <div class="dash-card-title">Today's Alerts</div>
+        <div id="alerts-section">
+          <div class="perf-empty">Checking for updates...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase + Auth + Kelly -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="auth.js"></script>
+  <script src="js/betting/kellyCalculator.js"></script>
+  <script>
+    const RESULTS_CUTOFF = '2026-02-27';
+
+    // ── Bet Settings (localStorage) ──
+    function getBetSettings() {
+      try { return JSON.parse(localStorage.getItem('efe_user_settings')) || {}; }
+      catch { return {}; }
+    }
+    function getTrackedBets() {
+      try { return JSON.parse(localStorage.getItem('efe_tracked_bets')) || []; }
+      catch { return []; }
+    }
+
+    // ── Auth Guard ──
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (!user) {
+        window.location.replace('index.html');
+        return;
+      }
+
+      // Greeting
+      const name = user.displayName || user.email.split('@')[0];
+      const hour = new Date().getHours();
+      const greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+      document.getElementById('greeting-text').textContent = `${greet}, ${name.split(' ')[0]}`;
+
+      const today = new Date();
+      document.getElementById('greeting-sub').textContent = today.toLocaleDateString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+      });
+
+      // Auth section avatar
+      const initial = name.charAt(0).toUpperCase();
+      const authEl = document.getElementById('auth-section');
+      if (authEl) {
+        authEl.innerHTML = `<button class="user-avatar" title="${name}" onclick="handleSignOut()">${initial}</button>`;
+      }
+
+      renderPortfolio();
+      loadPerformance();
+      loadAlerts();
+    });
+
+    // ── Portfolio Summary ──
+    function renderPortfolio() {
+      const container = document.getElementById('portfolio-card');
+      if (!container) return;
+
+      let bankroll = 0, unitSize = 10, monthlyTarget = 500;
+      if (typeof KellyCalculator !== 'undefined') {
+        const s = KellyCalculator.getSettings();
+        bankroll = s.bankroll || 0;
+        unitSize = s.unitSize || 10;
+      }
+      if (!bankroll) {
+        const ls = getBetSettings();
+        bankroll = ls.bankroll || 0;
+        unitSize = ls.unit_size || 10;
+      }
+      // Try userProfile from auth.js
+      if (!bankroll && typeof userProfile !== 'undefined' && userProfile?.settings) {
+        bankroll = userProfile.settings.bankroll || 0;
+        unitSize = userProfile.settings.unitSize || 10;
+        monthlyTarget = userProfile.settings.monthlyTarget || 500;
+      }
+
+      if (!bankroll) {
+        container.innerHTML = `<div class="portfolio-card" style="text-align:center;padding:24px;">
+          <div style="grid-column:1/-1;color:var(--text-muted);font-size:13px;">
+            Set your bankroll in <a href="mybets.html" style="color:var(--brand-light);text-decoration:none;font-weight:600;">My Bets</a> to see your portfolio summary
+          </div>
+        </div>`;
+        return;
+      }
+
+      const bets = getTrackedBets();
+      const pendingBets = bets.filter(b => !b.result && b.status !== 'graded');
+      const pendingAmount = pendingBets.reduce((sum, b) => sum + ((parseFloat(b.units) || 1) * unitSize), 0);
+      const available = Math.max(0, bankroll - pendingAmount);
+
+      const now = new Date();
+      const monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
+      const settledBets = bets.filter(b => b.result && b.date >= monthStart);
+      let monthPL = 0;
+      for (const b of settledBets) {
+        const stake = (parseFloat(b.units) || 1) * unitSize;
+        if (b.result === 'win') {
+          const odds = parseInt(b.odds) || -110;
+          monthPL += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
+        } else if (b.result === 'loss') monthPL -= stake;
+      }
+      const monthPct = bankroll > 0 ? ((monthPL / bankroll) * 100).toFixed(1) : '0.0';
+      const plClass = monthPL > 0 ? 'positive' : monthPL < 0 ? 'negative' : 'neutral';
+      const plSign = monthPL >= 0 ? '+' : '';
+
+      const goalPct = monthlyTarget > 0 ? Math.min(100, Math.max(0, (Math.max(0, monthPL) / monthlyTarget) * 100)).toFixed(0) : 0;
+      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      const daysLeft = Math.max(0, lastDay - now.getDate());
+      const goalBarClass = goalPct >= 100 ? 'over' : goalPct >= (now.getDate() / lastDay * 100) ? 'on-track' : 'behind';
+
+      container.innerHTML = `<div class="portfolio-card">
+        <div class="portfolio-section">
+          <div class="pf-label">Bankroll</div>
+          <div class="pf-value">$${bankroll.toLocaleString()}</div>
+          <div class="pf-sub ${plClass}">${plSign}$${Math.abs(monthPL).toFixed(0)} (${plSign}${monthPct}%) this month</div>
+        </div>
+        <div class="portfolio-divider"></div>
+        <div class="portfolio-section">
+          <div class="pf-label">Monthly Goal &middot; $${monthlyTarget}</div>
+          <div class="pf-value">${goalPct}%</div>
+          <div class="pf-sub neutral">${daysLeft} day${daysLeft !== 1 ? 's' : ''} left</div>
+          <div class="pf-goal-bar"><div class="pf-goal-fill ${goalBarClass}" style="width:${goalPct}%"></div></div>
+        </div>
+        <div class="portfolio-divider"></div>
+        <div class="portfolio-section">
+          <div class="pf-label">Betting Capacity</div>
+          <div class="pf-capacity-row">
+            <div class="pf-cap-item"><div class="pf-cap-dot available"></div><span class="pf-cap-text">Available: <span class="pf-cap-val">$${available.toLocaleString()}</span></span></div>
+          </div>
+          <div class="pf-capacity-row">
+            <div class="pf-cap-item"><div class="pf-cap-dot pending"></div><span class="pf-cap-text">Pending: <span class="pf-cap-val">$${pendingAmount.toFixed(0)}</span> (${pendingBets.length} bet${pendingBets.length !== 1 ? 's' : ''})</span></div>
+          </div>
+          <div class="pf-sub neutral" style="margin-top:8px">$${unitSize}/unit</div>
+        </div>
+      </div>`;
+    }
+
+    // ── Performance Summary ──
+    async function loadPerformance() {
+      const container = document.getElementById('perf-summary');
+      if (!container) return;
+
+      try {
+        const [nbaResp, ncaabResp, nhlResp] = await Promise.all([
+          fetch('results.json?t=' + Date.now()),
+          fetch('ncaab_results.json?t=' + Date.now()),
+          fetch('nhl_results.json?t=' + Date.now()),
+        ]);
+
+        const sports = [];
+        for (const [resp, label] of [[nbaResp, 'NBA'], [ncaabResp, 'NCAAB'], [nhlResp, 'NHL']]) {
+          if (!resp.ok) continue;
+          const data = await resp.json();
+          const days = (data.days || []).filter(d => d.date >= RESULTS_CUTOFF);
+          if (days.length === 0) continue;
+
+          let w = 0, l = 0;
+          for (const d of days) {
+            for (const cat of ['moneylines', 'spreads', 'totals']) {
+              w += d[cat]?.wins || 0;
+              l += d[cat]?.losses || 0;
+            }
+          }
+          sports.push({ label, wins: w, losses: l, days: days.length });
+        }
+
+        if (sports.length === 0) {
+          container.innerHTML = '<div class="perf-empty">No graded results yet. Results will appear after today\'s games finish.</div>';
+          return;
+        }
+
+        let totalW = 0, totalL = 0;
+        let html = '';
+        for (const s of sports) {
+          const t = s.wins + s.losses;
+          const pct = t > 0 ? (s.wins / t * 100).toFixed(1) : '0.0';
+          const cls = t === 0 ? 'neutral' : parseFloat(pct) > 53 ? 'winning' : parseFloat(pct) < 47 ? 'losing' : 'neutral';
+          html += `<div class="perf-row"><span class="perf-label">${s.label} (${s.days}d)</span><span class="perf-value ${cls}">${s.wins}-${s.losses} (${pct}%)</span></div>`;
+          totalW += s.wins;
+          totalL += s.losses;
+        }
+        const totalT = totalW + totalL;
+        const totalPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : '0.0';
+        const totalCls = totalT === 0 ? 'neutral' : parseFloat(totalPct) > 53 ? 'winning' : parseFloat(totalPct) < 47 ? 'losing' : 'neutral';
+        html += `<div class="perf-row" style="border-top:1px solid var(--border-light);margin-top:4px;padding-top:14px;"><span class="perf-label" style="font-weight:700;color:var(--text-primary);">Overall</span><span class="perf-value ${totalCls}">${totalW}-${totalL} (${totalPct}%)</span></div>`;
+
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="perf-empty">Unable to load performance data</div>';
+      }
+    }
+
+    // ── Today's Alerts ──
+    async function loadAlerts() {
+      const container = document.getElementById('alerts-section');
+      if (!container) return;
+
+      const alerts = [];
+      const today = new Date();
+      const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+      try {
+        // Check for today's projections
+        const gpResp = await fetch('game_projections.json?t=' + Date.now());
+        if (gpResp.ok) {
+          const gp = await gpResp.json();
+          if (gp.date === todayStr && gp.games?.length > 0) {
+            alerts.push({ icon: '&#128200;', text: `<strong>${gp.games.length} NBA game projections</strong> ready for today` });
+          }
+        }
+
+        const propsResp = await fetch('projections.json?t=' + Date.now());
+        if (propsResp.ok) {
+          const props = await propsResp.json();
+          if (props.date === todayStr && props.projections?.length > 0) {
+            alerts.push({ icon: '&#127942;', text: `<strong>${props.projections.length} player prop projections</strong> available` });
+          }
+        }
+
+        // Check pending bets
+        const bets = getTrackedBets();
+        const pending = bets.filter(b => !b.result && b.status !== 'graded');
+        if (pending.length > 0) {
+          alerts.push({ icon: '&#9200;', text: `You have <strong>${pending.length} pending bet${pending.length !== 1 ? 's' : ''}</strong> awaiting results` });
+        }
+      } catch (e) {}
+
+      if (alerts.length === 0) {
+        alerts.push({ icon: '&#9989;', text: 'All caught up! Check back when new projections are posted.' });
+      }
+
+      container.innerHTML = alerts.map(a =>
+        `<div class="alert-item"><span class="alert-icon">${a.icon}</span><span class="alert-text">${a.text}</span></div>`
+      ).join('');
+    }
+  </script>
+</body>
+</html>
