@@ -777,8 +777,12 @@
 
   // ── Section I-1: Tool Execution ─────────────────────────────────
   async function executeToolLocally(toolName, input) {
+    console.log('[EF Tool] Executing:', toolName, JSON.stringify(input));
     var uid = chatUser && chatUser.uid;
-    if (!uid) return { success: false, error: 'Not authenticated' };
+    if (!uid) {
+      console.error('[EF Tool] No authenticated user');
+      return { success: false, error: 'Not authenticated' };
+    }
     var fsDb = firebase.firestore();
 
     if (toolName === 'add_bet') {
@@ -804,10 +808,13 @@
           source: 'chat_analyst',
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
+        console.log('[EF Tool] Writing bet to Firestore:', JSON.stringify(betData));
         var betRef = await fsDb.collection('users').doc(uid).collection('bets').add(betData);
+        console.log('[EF Tool] Bet saved, id:', betRef.id);
         return { success: true, betId: betRef.id, message: 'Added bet: ' + input.pick + ' on ' + input.matchup };
       } catch (e) {
-        return { success: false, error: e.message };
+        console.error('[EF Tool] add_bet FAILED:', e.code, e.message);
+        return { success: false, error: e.code + ': ' + e.message };
       }
     }
 
@@ -819,9 +826,11 @@
           .limit(1).get();
         if (snap.empty) return { success: false, error: 'No matching bet found for ' + input.matchup + ' ' + input.pick };
         await snap.docs[0].ref.delete();
+        console.log('[EF Tool] Bet removed');
         return { success: true, message: 'Removed bet: ' + input.pick + ' on ' + input.matchup };
       } catch (e) {
-        return { success: false, error: e.message };
+        console.error('[EF Tool] remove_bet FAILED:', e.code, e.message);
+        return { success: false, error: e.code + ': ' + e.message };
       }
     }
 
@@ -840,9 +849,11 @@
             odds: d.odds, stake: d.stake, result: d.result, source: d.source
           });
         });
+        console.log('[EF Tool] get_tracked_bets returned', bets.length, 'bets');
         return { success: true, count: bets.length, bets: bets };
       } catch (e) {
-        return { success: false, error: e.message };
+        console.error('[EF Tool] get_tracked_bets FAILED:', e.code, e.message);
+        return { success: false, error: e.code + ': ' + e.message };
       }
     }
 
@@ -889,6 +900,7 @@
         toolRounds++;
         var toolUse = data.content.find(function (c) { return c.type === 'tool_use'; });
         if (!toolUse) break;
+        console.log('[EF Chat] Tool use requested:', toolUse.name, 'id:', toolUse.id);
 
         // Push assistant's tool_use response to history (not rendered)
         messages.push({ role: 'assistant', content: data.content });
@@ -896,6 +908,7 @@
 
         // Execute the tool locally
         var toolResult = await executeToolLocally(toolUse.name, toolUse.input);
+        console.log('[EF Chat] Tool result:', JSON.stringify(toolResult));
 
         // Push tool result to history (not rendered)
         var toolResultContent = [{ type: 'tool_result', tool_use_id: toolUse.id, content: JSON.stringify(toolResult) }];
