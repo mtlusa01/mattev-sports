@@ -27,6 +27,51 @@
   const MAX_FREE_MESSAGES = 20;
   const RATE_KEY_PREFIX = 'ef_chat_count_';
 
+  // Tool definitions for Claude function calling
+  var TOOLS = [
+    {
+      name: 'add_bet',
+      description: 'Add a bet to the user\'s tracked bets in Firestore. Call this when the user asks to add, lock in, or track a specific pick.',
+      input_schema: {
+        type: 'object',
+        properties: {
+          sport: { type: 'string', enum: ['NBA', 'NCAAB', 'NHL'], description: 'Sport league' },
+          type: { type: 'string', enum: ['spread', 'total', 'ml', 'prop'], description: 'Bet type' },
+          matchup: { type: 'string', description: 'Game matchup e.g. "NOP @ LAC"' },
+          pick: { type: 'string', description: 'The pick e.g. "UNDER 238.5" or "LAC -5.5"' },
+          player: { type: 'string', description: 'Player name for props, null for game bets' },
+          statType: { type: 'string', description: 'Stat type for props e.g. "Points", "PRA", null for game bets' },
+          line: { type: 'number', description: 'The line value' },
+          confidence: { type: 'number', description: 'Model confidence percentage' },
+          odds: { type: 'number', description: 'American odds e.g. -110' }
+        },
+        required: ['sport', 'type', 'matchup', 'pick', 'line', 'confidence']
+      }
+    },
+    {
+      name: 'remove_bet',
+      description: 'Remove a bet from the user\'s tracked bets. Call this when the user asks to remove or cancel a tracked bet.',
+      input_schema: {
+        type: 'object',
+        properties: {
+          matchup: { type: 'string', description: 'Game matchup to identify the bet' },
+          pick: { type: 'string', description: 'The specific pick to remove' }
+        },
+        required: ['matchup', 'pick']
+      }
+    },
+    {
+      name: 'get_tracked_bets',
+      description: 'Get the user\'s currently tracked/pending bets. Call this when the user asks about their bets, bankroll, or tracked picks.',
+      input_schema: {
+        type: 'object',
+        properties: {
+          date: { type: 'string', description: 'Optional date filter YYYY-MM-DD, defaults to today' }
+        }
+      }
+    }
+  ];
+
   // DOM refs filled by buildDOM
   let els = {};
 
@@ -338,7 +383,11 @@
       'You help users understand their betting performance, analyze today\'s model picks, and discuss strategy. ' +
       'Be concise, data-driven, and confident. Use the data provided below as your knowledge base. ' +
       'Do not make up statistics — only reference numbers from the data provided. ' +
-      'If you don\'t have data for something, say so. Today is ' + today + '.'
+      'If you don\'t have data for something, say so. Today is ' + today + '.\n\n' +
+      'You have tools to add_bet, remove_bet, and get_tracked_bets. ' +
+      'ALWAYS use the add_bet tool when the user asks to track, add, or lock in a pick — do not just say you added it, actually call the tool. ' +
+      'Use get_tracked_bets when the user asks about their current bets or tracked picks. ' +
+      'When confirming an action, reference the tool result to show it was actually saved.'
     );
 
     // User profile
@@ -572,13 +621,89 @@
     }
   }
 
-  // ── Section I: API Call ───────────────────────────────────────────
-  function sendToAPI(userMessage) {
-    if (!checkRateLimit()) {
-      return Promise.resolve('You\'ve reached your daily message limit (' + MAX_FREE_MESSAGES + '). Your limit resets tomorrow.');
+  // ── Section I-1: Tool Execution ─────────────────────────────────
+  async function executeToolLocally(toolName, input) {
+    var uid = chatUser && chatUser.uid;
+    if (!uid) return { success: false, error: 'Not authenticated' };
+    var fsDb = firebase.firestore();
+
+    if (toolName === 'add_bet') {
+      try {
+        var unitSize = (chatProfile && chatProfile.settings && chatProfile.settings.unitSize) || 10;
+        var betData = {
+          sport: input.sport || 'NBA',
+          type: input.type || 'prop',
+          matchup: input.matchup || '',
+          pick: input.pick || '',
+          player: input.player || null,
+          statType: input.statType || null,
+          line: input.line || 0,
+          confidence: input.confidence || 0,
+          odds: input.odds || -110,
+          date: new Date().toISOString().split('T')[0],
+          stake: unitSize,
+          units: 1.0,
+          result: null,
+          payout: null,
+          graded: false,
+          gradedAt: null,
+          source: 'chat_analyst',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        var betRef = await fsDb.collection('users').doc(uid).collection('bets').add(betData);
+        return { success: true, betId: betRef.id, message: 'Added bet: ' + input.pick + ' on ' + input.matchup };
+      } catch (e) {
+        return { success: false, error: e.message };
+      }
     }
 
-    return fetchAllData().then(function () {
+    if (toolName === 'remove_bet') {
+      try {
+        var snap = await fsDb.collection('users').doc(uid).collection('bets')
+          .where('matchup', '==', input.matchup)
+          .where('pick', '==', input.pick)
+          .limit(1).get();
+        if (snap.empty) return { success: false, error: 'No matching bet found for ' + input.matchup + ' ' + input.pick };
+        await snap.docs[0].ref.delete();
+        return { success: true, message: 'Removed bet: ' + input.pick + ' on ' + input.matchup };
+      } catch (e) {
+        return { success: false, error: e.message };
+      }
+    }
+
+    if (toolName === 'get_tracked_bets') {
+      try {
+        var query = fsDb.collection('users').doc(uid).collection('bets').orderBy('createdAt', 'desc');
+        var dateFilter = input.date || new Date().toISOString().split('T')[0];
+        query = query.where('date', '==', dateFilter);
+        var betsSnap = await query.get();
+        var bets = [];
+        betsSnap.forEach(function (doc) {
+          var d = doc.data();
+          bets.push({
+            id: doc.id, sport: d.sport, type: d.type, matchup: d.matchup,
+            pick: d.pick, player: d.player, line: d.line, confidence: d.confidence,
+            odds: d.odds, stake: d.stake, result: d.result, source: d.source
+          });
+        });
+        return { success: true, count: bets.length, bets: bets };
+      } catch (e) {
+        return { success: false, error: e.message };
+      }
+    }
+
+    return { success: false, error: 'Unknown tool: ' + toolName };
+  }
+
+  // ── Section I-2: API Call ─────────────────────────────────────────
+  async function sendToAPI(userMessage) {
+    if (!checkRateLimit()) {
+      return 'You\'ve reached your daily message limit (' + MAX_FREE_MESSAGES + '). Your limit resets tomorrow.';
+    }
+
+    try {
+      await fetchAllData();
+
       var apiMessages = messages.filter(function (m) {
         return m.role === 'user' || m.role === 'assistant';
       }).map(function (m) {
@@ -590,26 +715,66 @@
         max_tokens: 1024,
         system: buildSystemPrompt(),
         messages: apiMessages,
+        tools: TOOLS,
       };
 
-      return fetch(WORKER_URL, {
+      var r = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-      }).then(function (r) {
-        if (!r.ok) throw new Error('API error: ' + r.status);
-        return r.json();
-      }).then(function (data) {
-        incrementRateCount();
-        if (data.content && data.content[0] && data.content[0].text) {
-          return data.content[0].text;
-        }
-        throw new Error('Unexpected response format');
       });
-    }).catch(function (err) {
+      if (!r.ok) throw new Error('API error: ' + r.status);
+      var data = await r.json();
+      if (data.type === 'error') throw new Error(data.error && data.error.message || 'API error');
+
+      // Tool use loop (max 5 rounds to prevent runaway)
+      var toolRounds = 0;
+      while (data.stop_reason === 'tool_use' && toolRounds < 5) {
+        toolRounds++;
+        var toolUse = data.content.find(function (c) { return c.type === 'tool_use'; });
+        if (!toolUse) break;
+
+        // Push assistant's tool_use response to history (not rendered)
+        messages.push({ role: 'assistant', content: data.content });
+
+        // Execute the tool locally
+        var toolResult = await executeToolLocally(toolUse.name, toolUse.input);
+
+        // Push tool result to history (not rendered)
+        messages.push({
+          role: 'user',
+          content: [{ type: 'tool_result', tool_use_id: toolUse.id, content: JSON.stringify(toolResult) }]
+        });
+
+        // Re-call API with updated conversation
+        apiMessages = messages.filter(function (m) {
+          return m.role === 'user' || m.role === 'assistant';
+        }).map(function (m) {
+          return { role: m.role, content: m.content };
+        });
+        body.messages = apiMessages;
+
+        r = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        if (!r.ok) throw new Error('API error: ' + r.status);
+        data = await r.json();
+        if (data.type === 'error') throw new Error(data.error && data.error.message || 'API error');
+      }
+
+      incrementRateCount();
+
+      // Extract text from final response
+      var textBlock = data.content && data.content.find(function (c) { return c.type === 'text'; });
+      if (textBlock) return textBlock.text;
+      if (data.content && data.content[0] && data.content[0].text) return data.content[0].text;
+      throw new Error('Unexpected response format');
+    } catch (err) {
       console.error('EF Chat error:', err);
       return 'Sorry, I couldn\'t process that request. Please try again in a moment.';
-    });
+    }
   }
 
   // ── Section J: Markdown Renderer ──────────────────────────────────
@@ -756,7 +921,10 @@
           if (doc.exists && doc.data().messages && doc.data().messages.length) {
             messages = doc.data().messages;
             messages.forEach(function (m) {
-              appendMessage(m.role, m.content, true);
+              // Only render human-readable messages (skip tool_use/tool_result blocks)
+              if (typeof m.content === 'string') {
+                appendMessage(m.role, m.content, true);
+              }
             });
             els.suggestions.style.display = 'none';
           }
