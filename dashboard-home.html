@@ -724,6 +724,24 @@
     }
     .rec-empty a { color: var(--accent-secondary); text-decoration: none; }
     .rec-empty a:hover { color: var(--accent); }
+    .rec-rank {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+      color: var(--accent); min-width: 22px;
+    }
+    .rec-why-tip {
+      position: relative; cursor: help; font-size: 11px; font-weight: 600;
+      color: var(--accent-secondary); margin-left: 6px;
+    }
+    .rec-why-tip:hover { color: var(--accent); }
+    .rec-why-tip:hover::after {
+      content: attr(data-tip);
+      position: absolute; bottom: calc(100% + 6px); left: 0;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      font-size: 11px; font-weight: 400; color: var(--text-secondary);
+      width: 280px; white-space: normal; line-height: 1.5; z-index: 100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
     @media (max-width: 768px) {
       .rec-bet-bottom { gap: 8px; }
       .rec-conf-bar-wrap { max-width: 120px; }
@@ -1033,6 +1051,7 @@
     var nhlGameJsonData = null, ncaabGameJsonData = null;
     var currentProfile = null;
     var lastRecommendations = null;
+    var modelStats = null;
     var calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
 
     // ── Helpers ──
@@ -1087,7 +1106,6 @@
       var riskTolerance = ip.riskTolerance || s.riskTolerance || 'moderate';
       var kellyFraction = ip.kellyFraction || s.kellyFraction || 0.25;
       var maxBetPct = ip.maxBetPct || s.maxBetPct || 5;
-      var sportsWeighting = ip.sportsWeighting || s.sportsWeighting || {};
       var useKelly = ip.kellyEnabled !== false;
 
       if (!bankroll) {
@@ -1102,10 +1120,18 @@
       var confThreshold = riskTolerance === 'conservative' ? 62 : riskTolerance === 'aggressive' ? 52 : 57;
       var maxDailyPct = riskTolerance === 'conservative' ? 8 : riskTolerance === 'aggressive' ? 25 : 15;
       var maxDailyExposure = bankroll * (maxDailyPct / 100);
+      var maxPicks = riskTolerance === 'conservative' ? 3 : riskTolerance === 'aggressive' ? 7 : 5;
 
       var now = new Date();
       var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
       var candidates = [];
+
+      function getModelWinRate(sport, type) {
+        if (!modelStats) return 50;
+        if (type === 'prop') return modelStats.props ? modelStats.props.pct : 50;
+        var key = sport === 'props' ? 'nba' : sport;
+        return modelStats[key] ? modelStats[key].pct : 50;
+      }
 
       // Helper to extract game candidates from any sport's projection data
       function extractGameCandidates(data, sport) {
@@ -1113,35 +1139,37 @@
         for (var i = 0; i < data.games.length; i++) {
           var g = data.games[i];
           var matchup = (g.away_team || '') + ' @ ' + (g.home_team || '');
+          var edgeData = g.edge || {};
           var types = ['spread', 'total', 'moneyline'];
           for (var t = 0; t < types.length; t++) {
             var type = types[t];
-            var conf = 0, pick = '', line = '', odds = -110;
+            var conf = 0, pick = '', line = '', odds = -110, ev = 0;
             if (type === 'spread' && g.spread_pick) {
               conf = parseFloat(g.spread_conf) || 0; pick = g.spread_pick;
-              line = g.total_line || '';
+              line = g.total_line || ''; ev = parseFloat(edgeData.spread_ev) || 0;
             } else if (type === 'total' && g.total_pick) {
               conf = parseFloat(g.total_conf) || 0;
               pick = g.total_pick + ' ' + (g.total_line || '');
-              line = g.total_line || '';
+              line = g.total_line || ''; ev = parseFloat(edgeData.total_ev) || 0;
             } else if (type === 'moneyline' && g.ml_pick) {
               conf = parseFloat(g.ml_conf) || 0; pick = g.ml_pick + ' ML';
+              ev = Math.max(0, (conf - 50) * 0.2);
             } else continue;
             if (conf >= confThreshold) {
+              var spreadSide = g.spread_pick ? g.spread_pick.split(/\s+/)[0] : '';
               candidates.push({ sport: sport, type: type, game: matchup,
-                pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
+                pick: pick, line: line, odds: odds, confidence: conf, ev: ev,
+                player: null, prop_type: null,
+                spreadSide: spreadSide,
+                totalDir: type === 'total' ? (g.total_pick || '') : '',
+                mlSide: type === 'moneyline' ? (g.ml_pick || '') : '' });
             }
           }
         }
       }
 
-      // NBA game picks
       extractGameCandidates(gameJsonData, 'nba');
-
-      // NHL game picks
       extractGameCandidates(nhlGameJsonData, 'nhl');
-
-      // NCAAB game picks
       extractGameCandidates(ncaabGameJsonData, 'ncaab');
 
       // NBA props
@@ -1151,37 +1179,138 @@
           var conf = parseFloat(p.confidence) || 0;
           if (conf >= confThreshold) {
             var propOdds = parseFloat(p.market_odds) || -110;
-            candidates.push({ sport: 'props', type: 'prop', game: (p.player || '') + ' (' + (p.team || '') + ')',
+            var ev = parseFloat(p.ev) || 0;
+            candidates.push({ sport: 'props', type: 'prop',
+              game: (p.player || '') + ' (' + (p.team || '') + ')',
               pick: (p.direction || 'OVER') + ' ' + p.line,
-              line: p.line || '', odds: propOdds, confidence: conf,
-              player: p.player || '', prop_type: p.prop || p.market || '' });
+              line: p.line || '', odds: propOdds, confidence: conf, ev: ev,
+              player: p.player || '', prop_type: p.prop || p.market || '',
+              spreadSide: '', totalDir: '', mlSide: '' });
           }
         }
       }
 
-      // Score and sort
+      var totalCandidates = candidates.length;
+
+      // ── Deduplication ──
+      // Group by game matchup
+      var gameGroups = {};
       for (var i = 0; i < candidates.length; i++) {
         var c = candidates[i];
-        var sportKey = c.sport === 'props' ? 'nba' : c.sport;
-        var sportWeight = (sportsWeighting[sportKey] || sportsWeighting[c.sport] || 10) / 10;
-        var impliedProb = c.confidence / 100;
+        var gk = c.game;
+        if (!gameGroups[gk]) gameGroups[gk] = [];
+        gameGroups[gk].push(c);
+      }
+      var deduped = [];
+      for (var gk in gameGroups) {
+        var grp = gameGroups[gk];
+        var spreadPick = null, mlPick = null, overPick = null, underPick = null;
+        var others = [];
+        for (var i = 0; i < grp.length; i++) {
+          var c = grp[i];
+          if (c.type === 'spread') spreadPick = c;
+          else if (c.type === 'moneyline') mlPick = c;
+          else if (c.type === 'total' && c.totalDir === 'OVER') overPick = c;
+          else if (c.type === 'total' && c.totalDir === 'UNDER') underPick = c;
+          else others.push(c);
+        }
+        // Same-side spread/ML: keep higher confidence only
+        if (spreadPick && mlPick && spreadPick.spreadSide === mlPick.mlSide) {
+          if (spreadPick.confidence >= mlPick.confidence) others.push(spreadPick);
+          else others.push(mlPick);
+        } else {
+          if (spreadPick) others.push(spreadPick);
+          if (mlPick) others.push(mlPick);
+        }
+        // Conflicting totals: keep higher confidence only
+        if (overPick && underPick) {
+          others.push(overPick.confidence >= underPick.confidence ? overPick : underPick);
+        } else {
+          if (overPick) others.push(overPick);
+          if (underPick) others.push(underPick);
+        }
+        for (var i = 0; i < others.length; i++) deduped.push(others[i]);
+      }
+      candidates = deduped;
+
+      // ── Score candidates ──
+      for (var i = 0; i < candidates.length; i++) {
+        var c = candidates[i];
         var o = parseInt(c.odds) || -110;
         var decimalOdds = o > 0 ? (o / 100) + 1 : (100 / Math.abs(o)) + 1;
         var impliedVegas = 1 / decimalOdds;
-        var edgeProxy = Math.max(0, impliedProb - impliedVegas);
+        var edgeProxy = Math.max(0, (c.confidence / 100) - impliedVegas);
         c.edge = edgeProxy;
         c.decimalOdds = decimalOdds;
-        c.score = edgeProxy * impliedProb * sportWeight;
+        c.modelWinRate = getModelWinRate(c.sport, c.type);
+        var evScore = Math.max(0, c.ev);
+        c.score = (c.confidence * 0.4) + (evScore * 0.3) + (c.modelWinRate * 0.2);
       }
       candidates.sort(function(a, b) { return b.score - a.score; });
 
-      // Size bets
+      // ── Diversification walk ──
+      var selected = [];
+      var gameCount = {}, sportCount = {}, typeCount = {};
+      var hasGamePick = false;
+      var gamePicksExist = candidates.some(function(c) { return c.type !== 'prop'; });
+
+      for (var i = 0; i < candidates.length; i++) {
+        if (selected.length >= maxPicks) break;
+        var c = candidates[i];
+        var gk = c.game;
+        if (!gameCount[gk]) gameCount[gk] = 0;
+        if (!sportCount[c.sport]) sportCount[c.sport] = 0;
+        if (!typeCount[c.type]) typeCount[c.type] = 0;
+        var maxPerSport = Math.ceil(maxPicks * 0.6);
+        var maxPerType = Math.ceil(maxPicks * 0.6);
+        if (gameCount[gk] >= 2) continue;
+        if (sportCount[c.sport] >= maxPerSport) continue;
+        if (typeCount[c.type] >= maxPerType) continue;
+        selected.push(c);
+        gameCount[gk]++;
+        sportCount[c.sport]++;
+        typeCount[c.type]++;
+        if (c.type !== 'prop') hasGamePick = true;
+      }
+
+      // Ensure at least 1 game pick if games are available
+      if (!hasGamePick && gamePicksExist && selected.length > 0) {
+        for (var i = 0; i < candidates.length; i++) {
+          if (candidates[i].type !== 'prop') {
+            var worstIdx = -1, worstScore = Infinity;
+            for (var j = 0; j < selected.length; j++) {
+              if (selected[j].type === 'prop' && selected[j].score < worstScore) {
+                worstScore = selected[j].score;
+                worstIdx = j;
+              }
+            }
+            if (worstIdx >= 0) selected[worstIdx] = candidates[i];
+            break;
+          }
+        }
+      }
+
+      // ── Build "why this pick" reasons ──
+      for (var i = 0; i < selected.length; i++) {
+        var c = selected[i];
+        var sportName = c.sport === 'props' ? 'Props' : c.sport.toUpperCase();
+        var modelPct = c.modelWinRate ? c.modelWinRate.toFixed(0) : '??';
+        var parts = [];
+        if (c.confidence >= 65) parts.push('High confidence at ' + c.confidence.toFixed(0) + '%');
+        else parts.push(c.confidence.toFixed(0) + '% model confidence');
+        if (c.edge > 0) parts.push('+' + (c.edge * 100).toFixed(1) + '% edge vs Vegas');
+        if (c.ev > 0) parts.push('+' + c.ev.toFixed(1) + '% expected value');
+        parts.push(sportName + ' model is ' + modelPct + '% on the season');
+        c.reason = parts.join('. ') + '.';
+      }
+
+      // ── Size bets on selected picks ──
       var totalStake = 0;
       var picks = [];
       var maxPerBet = bankroll * (maxBetPct / 100);
 
-      for (var i = 0; i < candidates.length; i++) {
-        var c = candidates[i];
+      for (var i = 0; i < selected.length; i++) {
+        var c = selected[i];
         if (totalStake >= maxDailyExposure) break;
         var stake;
         if (useKelly && c.edge > 0 && c.decimalOdds > 1) {
@@ -1211,7 +1340,7 @@
 
       return { picks: picks, totalStake: totalStake, projReturn: projReturn,
         bankrollPct: bankroll > 0 ? (totalStake / bankroll * 100) : 0,
-        hasProfile: hasProfile, unitSize: unitSize };
+        hasProfile: hasProfile, unitSize: unitSize, totalCandidates: totalCandidates };
     }
 
     function renderRecommendations() {
@@ -1254,7 +1383,7 @@
         return;
       }
 
-      document.getElementById('rec-pick-count').textContent = result.picks.length + ' pick' + (result.picks.length !== 1 ? 's' : '');
+      document.getElementById('rec-pick-count').textContent = result.picks.length + ' best from ' + result.totalCandidates + ' analyzed';
       document.getElementById('rec-total-stake').textContent = '$' + result.totalStake.toLocaleString();
 
       var existingBets = getTrackedBets();
@@ -1272,12 +1401,16 @@
         var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
         var betId = buildRecBetId(p);
         var isLocked = existingBets.some(function(b) { return b.id === betId; });
+        var reasonEscaped = (p.reason || '').replace(/"/g, '&quot;');
 
         html += '<div class="rec-bet-card ' + confClass + '">';
-        html += '<div class="rec-bet-top"><div class="rec-bet-top-left"><span class="model-badge ' + sportBadge + '">' + sportLabel + '</span>';
+        html += '<div class="rec-bet-top"><div class="rec-bet-top-left">';
+        html += '<span class="rec-rank">#' + (i + 1) + '</span>';
+        html += '<span class="model-badge ' + sportBadge + '">' + sportLabel + '</span>';
         html += '<span class="rec-risk-dot ' + riskClass + '" title="Risk: ' + riskClass + '"></span></div>';
         html += '<div class="rec-edge">+' + (p.edge * 100).toFixed(1) + '% edge</div></div>';
-        html += '<div class="rec-bet-pick">' + matchup + '</div>';
+        html += '<div class="rec-bet-pick">' + matchup;
+        html += ' <span class="rec-why-tip" data-tip="' + reasonEscaped + '">Why?</span></div>';
         html += '<div class="rec-bet-meta">' + typeLabel + ' &middot; ' + pickLabel + ' &middot; ' + oddsStr + '</div>';
         html += '<div class="rec-bet-bottom">';
         html += '<div class="rec-conf-bar-wrap"><div class="rec-conf-label">Confidence ' + p.confidence.toFixed(0) + '%</div>';
@@ -1735,6 +1868,14 @@
       var ncaabStats = grade('ncaab', ncaabData, ['spreads', 'totals', 'moneylines']);
       var nhlStats = grade('nhl', nhlData, ['spreads', 'totals', 'moneylines']);
       var propsStats = grade('props', nbaData, ['props']);
+
+      function pct(s) { var t = s.w + s.l; return t > 0 ? parseFloat((s.w / t * 100).toFixed(1)) : 50; }
+      modelStats = {
+        nba: { w: nbaStats.w, l: nbaStats.l, pct: pct(nbaStats) },
+        ncaab: { w: ncaabStats.w, l: ncaabStats.l, pct: pct(ncaabStats) },
+        nhl: { w: nhlStats.w, l: nhlStats.l, pct: pct(nhlStats) },
+        props: { w: propsStats.w, l: propsStats.l, pct: pct(propsStats) }
+      };
 
       // Overall win rate
       var totalW = nbaStats.w + ncaabStats.w + nhlStats.w + propsStats.w;
