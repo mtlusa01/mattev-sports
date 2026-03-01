@@ -1107,94 +1107,54 @@
       var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
       var candidates = [];
 
-      // NBA game picks
-      if (gameJsonData && gameJsonData.date === todayStr && gameJsonData.games) {
-        for (var i = 0; i < gameJsonData.games.length; i++) {
-          var g = gameJsonData.games[i];
+      // Helper to extract game candidates from any sport's projection data
+      function extractGameCandidates(data, sport) {
+        if (!data || data.date !== todayStr || !data.games) return;
+        for (var i = 0; i < data.games.length; i++) {
+          var g = data.games[i];
+          var matchup = (g.away_team || '') + ' @ ' + (g.home_team || '');
           var types = ['spread', 'total', 'moneyline'];
           for (var t = 0; t < types.length; t++) {
             var type = types[t];
             var conf = 0, pick = '', line = '', odds = -110;
             if (type === 'spread' && g.spread_pick) {
-              conf = g.spread_confidence || g.confidence || 0; pick = g.spread_pick;
-              line = g.spread_line || ''; odds = g.spread_odds || -110;
+              conf = parseFloat(g.spread_conf) || 0; pick = g.spread_pick;
+              line = g.total_line || '';
             } else if (type === 'total' && g.total_pick) {
-              conf = g.total_confidence || g.confidence || 0; pick = g.total_pick;
-              line = g.total_line || ''; odds = g.total_odds || -110;
+              conf = parseFloat(g.total_conf) || 0;
+              pick = g.total_pick + ' ' + (g.total_line || '');
+              line = g.total_line || '';
             } else if (type === 'moneyline' && g.ml_pick) {
-              conf = g.ml_confidence || g.confidence || 0; pick = g.ml_pick;
-              odds = g.ml_odds || -110;
+              conf = parseFloat(g.ml_conf) || 0; pick = g.ml_pick + ' ML';
             } else continue;
             if (conf >= confThreshold) {
-              candidates.push({ sport: 'nba', type: type, game: g.game || g.matchup || '',
+              candidates.push({ sport: sport, type: type, game: matchup,
                 pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
             }
           }
         }
       }
+
+      // NBA game picks
+      extractGameCandidates(gameJsonData, 'nba');
+
+      // NHL game picks
+      extractGameCandidates(nhlGameJsonData, 'nhl');
+
+      // NCAAB game picks
+      extractGameCandidates(ncaabGameJsonData, 'ncaab');
 
       // NBA props
       if (propsJsonData && propsJsonData.date === todayStr && propsJsonData.projections) {
         for (var i = 0; i < propsJsonData.projections.length; i++) {
           var p = propsJsonData.projections[i];
-          var conf = p.confidence || p.edge || 0;
+          var conf = parseFloat(p.confidence) || 0;
           if (conf >= confThreshold) {
-            candidates.push({ sport: 'props', type: 'prop', game: p.game || p.matchup || '',
-              pick: p.pick || (p.projection > p.line ? 'Over' : 'Under') + ' ' + p.line,
-              line: p.line || '', odds: p.odds || -110, confidence: conf,
+            var propOdds = parseFloat(p.market_odds) || -110;
+            candidates.push({ sport: 'props', type: 'prop', game: (p.player || '') + ' (' + (p.team || '') + ')',
+              pick: (p.direction || 'OVER') + ' ' + p.line,
+              line: p.line || '', odds: propOdds, confidence: conf,
               player: p.player || '', prop_type: p.prop || p.market || '' });
-          }
-        }
-      }
-
-      // NHL game picks
-      if (nhlGameJsonData && nhlGameJsonData.date === todayStr && nhlGameJsonData.games) {
-        for (var i = 0; i < nhlGameJsonData.games.length; i++) {
-          var g = nhlGameJsonData.games[i];
-          var types = ['spread', 'total', 'moneyline'];
-          for (var t = 0; t < types.length; t++) {
-            var type = types[t];
-            var conf = 0, pick = '', line = '', odds = -110;
-            if (type === 'spread' && g.spread_pick) {
-              conf = g.spread_confidence || g.confidence || 0; pick = g.spread_pick;
-              line = g.spread_line || ''; odds = g.spread_odds || -110;
-            } else if (type === 'total' && g.total_pick) {
-              conf = g.total_confidence || g.confidence || 0; pick = g.total_pick;
-              line = g.total_line || ''; odds = g.total_odds || -110;
-            } else if (type === 'moneyline' && g.ml_pick) {
-              conf = g.ml_confidence || g.confidence || 0; pick = g.ml_pick;
-              odds = g.ml_odds || -110;
-            } else continue;
-            if (conf >= confThreshold) {
-              candidates.push({ sport: 'nhl', type: type, game: g.game || g.matchup || '',
-                pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
-            }
-          }
-        }
-      }
-
-      // NCAAB game picks
-      if (ncaabGameJsonData && ncaabGameJsonData.date === todayStr && ncaabGameJsonData.games) {
-        for (var i = 0; i < ncaabGameJsonData.games.length; i++) {
-          var g = ncaabGameJsonData.games[i];
-          var types = ['spread', 'total', 'moneyline'];
-          for (var t = 0; t < types.length; t++) {
-            var type = types[t];
-            var conf = 0, pick = '', line = '', odds = -110;
-            if (type === 'spread' && g.spread_pick) {
-              conf = g.spread_confidence || g.confidence || 0; pick = g.spread_pick;
-              line = g.spread_line || ''; odds = g.spread_odds || -110;
-            } else if (type === 'total' && g.total_pick) {
-              conf = g.total_confidence || g.confidence || 0; pick = g.total_pick;
-              line = g.total_line || ''; odds = g.total_odds || -110;
-            } else if (type === 'moneyline' && g.ml_pick) {
-              conf = g.ml_confidence || g.confidence || 0; pick = g.ml_pick;
-              odds = g.ml_odds || -110;
-            } else continue;
-            if (conf >= confThreshold) {
-              candidates.push({ sport: 'ncaab', type: type, game: g.game || g.matchup || '',
-                pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
-            }
           }
         }
       }
@@ -1224,19 +1184,22 @@
         var c = candidates[i];
         if (totalStake >= maxDailyExposure) break;
         var stake;
-        if (useKelly && c.edge > 0) {
-          var kellyPct = (c.edge * (c.decimalOdds - 1) - (1 - c.confidence / 100)) / (c.decimalOdds - 1);
-          kellyPct = Math.max(0, kellyPct) * kellyFraction;
+        if (useKelly && c.edge > 0 && c.decimalOdds > 1) {
+          var p = c.confidence / 100;
+          var b = c.decimalOdds - 1;
+          var kellyPct = Math.max(0, (b * p - (1 - p)) / b) * kellyFraction;
           stake = bankroll * kellyPct;
         } else {
           stake = unitSize;
         }
+        if (isNaN(stake) || stake <= 0) stake = unitSize;
         stake = Math.min(stake, maxPerBet);
         stake = Math.min(stake, maxDailyExposure - totalStake);
         if (stake < 1) continue;
         stake = Math.round(stake);
         c.stake = stake;
-        c.units = parseFloat((stake / unitSize).toFixed(2));
+        c.units = parseFloat((stake / (unitSize || 10)).toFixed(2));
+        if (isNaN(c.units)) c.units = 1;
         totalStake += stake;
         picks.push(c);
       }
@@ -1304,7 +1267,7 @@
         var sportLabel = p.sport === 'props' ? 'PROP' : p.sport.toUpperCase();
         var sportBadge = p.sport === 'props' ? 'props' : p.sport;
         var matchup = p.type === 'prop' ? (p.player + ' ' + p.prop_type) : p.game;
-        var pickLabel = p.pick + (p.line ? ' ' + p.line : '');
+        var pickLabel = p.pick;
         var typeLabel = p.type.charAt(0).toUpperCase() + p.type.slice(1);
         var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
         var betId = buildRecBetId(p);
