@@ -799,6 +799,9 @@
     if (typeof renderBettingCalendar === 'function') {
       try { renderBettingCalendar(); } catch (e) { /* silent */ }
     }
+    if (typeof buildPicks === 'function') {
+      try { buildPicks(); } catch (e) { /* silent */ }
+    }
   }
 
   async function executeToolLocally(toolName, input) {

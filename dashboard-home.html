@@ -336,6 +336,16 @@
       font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
       color: var(--text-tertiary); flex-shrink: 0;
     }
+    .pick-stake {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+      flex-shrink: 0; text-align: right; line-height: 1.4;
+    }
+    .pick-stake .stake-amt { color: var(--text-tertiary); }
+    .pick-stake .stake-pnl { font-size: 11px; }
+    .pick-stake .stake-pnl.profit { color: var(--profit); }
+    .pick-stake .stake-pnl.loss { color: var(--loss); }
+    .pick-stake .stake-pnl.pending { color: var(--warning); }
+    .pick-badge.push { background: var(--warning-soft); color: var(--warning); }
     .picks-empty { padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 13px; }
 
     /* ── Monthly Goal ── */
@@ -938,7 +948,7 @@
         <div class="section anim d4">
           <div class="section-header">
             <div class="section-title">Recent Picks</div>
-            <a href="results.html" class="section-link">Full History &rarr;</a>
+            <a href="#betting-calendar" class="section-link" onclick="event.preventDefault();document.getElementById('betting-calendar').scrollIntoView({behavior:'smooth'})">Full History &rarr;</a>
           </div>
           <div id="picks-list">
             <div class="picks-empty">Loading picks...</div>
@@ -1012,7 +1022,7 @@
     </div>
 
     <!-- Betting Calendar -->
-    <div class="cal-section anim d6">
+    <div class="cal-section anim d6" id="betting-calendar">
       <div class="section-header">
         <div class="section-title">Betting Calendar</div>
       </div>
@@ -1510,6 +1520,7 @@
         btns[idx].classList.add('locked');
         btns[idx].disabled = true;
       }
+      buildPicks();
       renderBettingCalendar();
       renderCalendarSummary();
     }
@@ -1934,10 +1945,10 @@
       if (propsJsonData && propsJsonData.date === todayStr) pickCount += (propsJsonData.projections || []).length;
       document.getElementById('stat-picks').textContent = pickCount;
 
-      // Recent picks
-      buildPicks(nbaData, ncaabData, nhlData);
-
       autoGradeHomeTrackedBets();
+
+      // Recent picks (after grading so statuses are current)
+      buildPicks();
       renderBettingCalendar();
       renderCalendarSummary();
       renderRecommendations();
@@ -1970,45 +1981,45 @@
       return { w: w, l: l };
     }
 
-    function buildPicks(nba, ncaab, nhl) {
-      var allPicks = [];
-
-      function addPicks(data, sport) {
-        if (!data || !data.days) return;
-        for (var i = 0; i < data.days.length; i++) {
-          var d = data.days[i];
-          if (d.date < CUTOFF) continue;
-          var picks = d.picks || [];
-          for (var j = 0; j < picks.length; j++) {
-            var p = Object.assign({}, picks[j], { sport: sport });
-            allPicks.push(p);
-          }
-        }
-      }
-
-      addPicks(nba, 'NBA');
-      addPicks(ncaab, 'NCAAB');
-      addPicks(nhl, 'NHL');
-
-      allPicks.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-      var top6 = allPicks.slice(0, 6);
+    function buildPicks() {
+      var bets = getTrackedBets();
+      bets.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+      var top10 = bets.slice(0, 10);
+      var unitSize = getUnitSize();
 
       var container = document.getElementById('picks-list');
-      if (top6.length === 0) {
-        container.innerHTML = '<div class="picks-empty">No graded picks yet. Results will appear after games finish.</div>';
+      if (top10.length === 0) {
+        container.innerHTML = '<div class="picks-empty">No tracked bets yet. Lock in picks from Recommended Bets or the EF Analyst chat to see them here.</div>';
         return;
       }
 
-      container.innerHTML = top6.map(function(p) {
-        var cls = p.hit === true ? 'win' : p.hit === false ? 'loss' : 'pending';
-        var badge = p.hit === true ? 'W' : p.hit === false ? 'L' : '\u2014';
-        var matchup = p.game || (p.player + ' ' + (p.prop || ''));
-        var meta = p.sport + ' \u00B7 ' + (p.pick || '') + ' \u00B7 ' + (p.date || '');
-        var edge = p.confidence ? p.confidence.toFixed(1) + '%' : '\u2014';
+      container.innerHTML = top10.map(function(b) {
+        var cls = b.status === 'win' ? 'win' : b.status === 'loss' ? 'loss' : b.status === 'push' ? 'push' : 'pending';
+        var badge = b.status === 'win' ? 'W' : b.status === 'loss' ? 'L' : b.status === 'push' ? 'P' : '\u2014';
+        var matchup = b.type === 'prop' ? (b.player || '') + ' ' + (b.prop_type || '') : (b.game || '');
+        var pickDetail = (b.pick || '');
+        if (b.line) pickDetail += ' ' + b.line;
+        if (b.odds) pickDetail += ' (' + b.odds + ')';
+        var sport = (b.sport || '').toUpperCase();
+        var typeLabel = b.type === 'prop' ? 'Prop' : b.type === 'moneyline' ? 'ML' : b.type === 'total' ? 'Total' : (b.type || 'Spread');
+        var meta = sport + ' \u00B7 ' + typeLabel + ' \u00B7 ' + (b.date || '');
+        var units = parseFloat(b.units) || 1;
+        var stake = '$' + (units * unitSize).toFixed(0);
+        var pnlHtml = '';
+        if (b.status === 'win') {
+          var prof = parseFloat(b.profit_units) || calcProfit(b.odds, units);
+          pnlHtml = '<div class="stake-pnl profit">+$' + (prof * unitSize).toFixed(0) + '</div>';
+        } else if (b.status === 'loss') {
+          pnlHtml = '<div class="stake-pnl loss">-' + stake + '</div>';
+        } else if (b.status === 'push') {
+          pnlHtml = '<div class="stake-pnl pending">$0</div>';
+        } else {
+          pnlHtml = '<div class="stake-pnl pending">pending</div>';
+        }
         return '<div class="pick-item">' +
           '<span class="pick-badge ' + cls + '">' + badge + '</span>' +
-          '<div class="pick-info"><div class="pick-matchup">' + matchup + '</div><div class="pick-meta">' + meta + '</div></div>' +
-          '<span class="pick-edge">' + edge + '</span></div>';
+          '<div class="pick-info"><div class="pick-matchup">' + matchup + '</div><div class="pick-meta">' + pickDetail + ' \u00B7 ' + meta + '</div></div>' +
+          '<div class="pick-stake"><div class="stake-amt">' + stake + '</div>' + pnlHtml + '</div></div>';
       }).join('');
     }
   </script>
