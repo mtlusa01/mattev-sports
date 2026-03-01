@@ -1,36 +1,99 @@
 {
-  "updated": "2026-03-01T09:41:07",
+  "updated": "2026-03-01T17:47:07",
   "allTime": {
     "spreads": {
-      "wins": 22,
+      "wins": 23,
       "losses": 15,
       "pushes": 0,
-      "pct": 59.5,
-      "roi": 35.2
+      "pct": 60.5,
+      "roi": 15.6
     },
     "totals": {
       "wins": 20,
-      "losses": 16,
+      "losses": 17,
       "pushes": 0,
-      "pct": 55.6,
-      "roi": 7.9
+      "pct": 54.1,
+      "roi": 3.2
     },
     "moneylines": {
-      "wins": 26,
+      "wins": 27,
       "losses": 11,
       "pushes": 0,
-      "pct": 70.3,
-      "roi": 51.1
+      "pct": 71.1,
+      "roi": 35.6
     },
     "best_bets": {
-      "wins": 13,
-      "losses": 5,
+      "wins": 15,
+      "losses": 6,
       "pushes": 0,
-      "pct": 72.2,
-      "roi": 52.7
+      "pct": 71.4,
+      "roi": 36.4
     }
   },
   "days": [
+    {
+      "date": "2026-03-01",
+      "spreads": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "picks": [
+        {
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "VGK @ PIT",
+          "pick": "PIT +1.5",
+          "result": "0-5",
+          "hit": true,
+          "confidence": 55.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "total",
+          "game": "VGK @ PIT",
+          "pick": "OVER 6.5",
+          "result": "0-5",
+          "hit": false,
+          "confidence": 50.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "VGK @ PIT",
+          "pick": "PIT",
+          "result": "0-5",
+          "hit": true,
+          "confidence": 54.3,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-02-28",
       "picks": [

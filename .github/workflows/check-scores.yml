@@ -1,0 +1,44 @@
+name: Check Scores & Grade
+
+on:
+  schedule:
+    # Every 2 hours from 10 AM to 2 AM EST (UTC: 15,17,19,21,23,01,03,05,07)
+    - cron: '0 15,17,19,21,23,1,3,5,7 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-scores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout mattev-sports
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check scores and grade
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/check_and_grade.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results.json ncaab_results.json nhl_results.json \
+                 game_projections.json nhl_game_projections.json ncaab_projections.json
+          git diff --staged --quiet || \
+            (git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)" && \
+             git pull --rebase && git push)
