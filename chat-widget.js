@@ -776,6 +776,28 @@
   }
 
   // ── Section I-1: Tool Execution ─────────────────────────────────
+  // Helpers for localStorage bet tracking (same format as dashboard.html)
+  function getTrackedBets() {
+    try { return JSON.parse(localStorage.getItem('efe_tracked_bets')) || []; }
+    catch (e) { return []; }
+  }
+  function saveTrackedBets(bets) {
+    localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+    // Trigger cloud sync if available
+    if (typeof syncBetsToCloud === 'function') syncBetsToCloud();
+  }
+  function makeChatBetId(date, type, player, game, propType, pick, line) {
+    var parts = [date, type];
+    if (type === 'prop') parts.push(player, propType, pick, line);
+    else parts.push(game, type, pick);
+    return parts.map(function (p) { return String(p || '').toLowerCase().replace(/\s+/g, '-'); }).join('_');
+  }
+  function refreshCalendar() {
+    if (typeof renderBettingCalendar === 'function') {
+      try { renderBettingCalendar(); } catch (e) { /* silent */ }
+    }
+  }
+
   async function executeToolLocally(toolName, input) {
     console.log('[EF Tool] Executing:', toolName, JSON.stringify(input));
     var uid = chatUser && chatUser.uid;
@@ -783,77 +805,113 @@
       console.error('[EF Tool] No authenticated user');
       return { success: false, error: 'Not authenticated' };
     }
-    var fsDb = firebase.firestore();
 
     if (toolName === 'add_bet') {
       try {
-        var unitSize = (chatProfile && chatProfile.settings && chatProfile.settings.unitSize) || 10;
-        var betData = {
-          sport: input.sport || 'NBA',
+        var today = new Date().toISOString().split('T')[0];
+        // Parse pick direction and stat info from the combined pick string
+        var pickDir = input.pick || '';
+        var propType = input.statType || null;
+        // Normalize pick direction for prop bets
+        if (input.type === 'prop') {
+          var upperPick = pickDir.toUpperCase();
+          if (upperPick.indexOf('OVER') !== -1) pickDir = 'OVER';
+          else if (upperPick.indexOf('UNDER') !== -1) pickDir = 'UNDER';
+          // Normalize stat type
+          if (propType) {
+            var ptMap = { points: 'PTS', rebounds: 'REB', assists: 'AST', threes: '3PT',
+              steals: 'STL', blocks: 'BLK', pra: 'PRA', pts: 'PTS', reb: 'REB', ast: 'AST' };
+            propType = ptMap[propType.toLowerCase()] || propType.toUpperCase();
+          }
+        }
+
+        var betId = makeChatBetId(today, input.type || 'prop', input.player, input.matchup, propType, pickDir, input.line);
+        // Check for duplicate
+        var existing = getTrackedBets();
+        if (existing.some(function (b) { return b.id === betId; })) {
+          return { success: false, error: 'This bet is already tracked' };
+        }
+
+        var bet = {
+          id: betId,
+          date: today,
+          sport: (input.sport || 'NBA').toUpperCase(),
           type: input.type || 'prop',
-          matchup: input.matchup || '',
-          pick: input.pick || '',
           player: input.player || null,
-          statType: input.statType || null,
-          line: input.line || 0,
-          confidence: input.confidence || 0,
+          team: null,
+          game: input.matchup || '',
+          prop_type: propType,
+          pick: pickDir,
+          line: input.line || null,
           odds: input.odds || -110,
-          date: new Date().toISOString().split('T')[0],
-          stake: unitSize,
-          units: 1.0,
-          result: null,
-          payout: null,
-          graded: false,
-          gradedAt: null,
-          source: 'chat_analyst',
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          units: 1,
+          book: null,
+          model_confidence: input.confidence || null,
+          model_ev: null,
+          status: 'pending',
+          actual: null,
+          profit_units: null,
+          placed_at: new Date().toISOString(),
+          source: 'chat_analyst'
         };
-        console.log('[EF Tool] Writing bet to Firestore:', JSON.stringify(betData));
-        var betRef = await fsDb.collection('users').doc(uid).collection('bets').add(betData);
-        console.log('[EF Tool] Bet saved, id:', betRef.id);
-        return { success: true, betId: betRef.id, message: 'Added bet: ' + input.pick + ' on ' + input.matchup };
+
+        existing.push(bet);
+        saveTrackedBets(existing);
+        refreshCalendar();
+        console.log('[EF Tool] Bet saved to localStorage, id:', betId);
+        return { success: true, betId: betId, message: 'Added bet: ' + pickDir + ' ' + (input.line || '') + ' on ' + input.matchup };
       } catch (e) {
-        console.error('[EF Tool] add_bet FAILED:', e.code, e.message);
-        return { success: false, error: e.code + ': ' + e.message };
+        console.error('[EF Tool] add_bet FAILED:', e.message);
+        return { success: false, error: e.message };
       }
     }
 
     if (toolName === 'remove_bet') {
       try {
-        var snap = await fsDb.collection('users').doc(uid).collection('bets')
-          .where('matchup', '==', input.matchup)
-          .where('pick', '==', input.pick)
-          .limit(1).get();
-        if (snap.empty) return { success: false, error: 'No matching bet found for ' + input.matchup + ' ' + input.pick };
-        await snap.docs[0].ref.delete();
-        console.log('[EF Tool] Bet removed');
-        return { success: true, message: 'Removed bet: ' + input.pick + ' on ' + input.matchup };
+        var bets = getTrackedBets();
+        var matchup = (input.matchup || '').toLowerCase();
+        var pick = (input.pick || '').toLowerCase();
+        var idx = -1;
+        for (var i = 0; i < bets.length; i++) {
+          var g = (bets[i].game || bets[i].matchup || '').toLowerCase();
+          var p = (bets[i].pick || '').toLowerCase();
+          var full = ((bets[i].player || '') + ' ' + p).toLowerCase();
+          if ((g.indexOf(matchup) !== -1 || matchup.indexOf(g) !== -1) &&
+              (p.indexOf(pick) !== -1 || pick.indexOf(p) !== -1 || full.indexOf(pick) !== -1)) {
+            idx = i;
+            break;
+          }
+        }
+        if (idx === -1) return { success: false, error: 'No matching bet found for ' + input.matchup + ' ' + input.pick };
+        var removed = bets.splice(idx, 1)[0];
+        saveTrackedBets(bets);
+        refreshCalendar();
+        console.log('[EF Tool] Bet removed:', removed.id);
+        return { success: true, message: 'Removed bet: ' + (removed.pick || input.pick) + ' on ' + (removed.game || input.matchup) };
       } catch (e) {
-        console.error('[EF Tool] remove_bet FAILED:', e.code, e.message);
-        return { success: false, error: e.code + ': ' + e.message };
+        console.error('[EF Tool] remove_bet FAILED:', e.message);
+        return { success: false, error: e.message };
       }
     }
 
     if (toolName === 'get_tracked_bets') {
       try {
-        var query = fsDb.collection('users').doc(uid).collection('bets');
+        var allBets = getTrackedBets();
         var dateFilter = input.date || new Date().toISOString().split('T')[0];
-        query = query.where('date', '==', dateFilter);
-        var betsSnap = await query.get();
-        var bets = [];
-        betsSnap.forEach(function (doc) {
-          var d = doc.data();
-          bets.push({
-            id: doc.id, sport: d.sport, type: d.type, matchup: d.matchup,
-            pick: d.pick, player: d.player, line: d.line, confidence: d.confidence,
-            odds: d.odds, stake: d.stake, result: d.result, source: d.source
-          });
+        var filtered = allBets.filter(function (b) { return b.date === dateFilter; });
+        var result = filtered.map(function (b) {
+          return {
+            id: b.id, sport: b.sport, type: b.type, game: b.game,
+            pick: b.pick, player: b.player, line: b.line,
+            confidence: b.model_confidence, odds: b.odds,
+            units: b.units, status: b.status, profit_units: b.profit_units
+          };
         });
-        console.log('[EF Tool] get_tracked_bets returned', bets.length, 'bets');
-        return { success: true, count: bets.length, bets: bets };
+        console.log('[EF Tool] get_tracked_bets returned', result.length, 'bets');
+        return { success: true, count: result.length, bets: result };
       } catch (e) {
-        console.error('[EF Tool] get_tracked_bets FAILED:', e.code, e.message);
-        return { success: false, error: e.code + ': ' + e.message };
+        console.error('[EF Tool] get_tracked_bets FAILED:', e.message);
+        return { success: false, error: e.message };
       }
     }
 
