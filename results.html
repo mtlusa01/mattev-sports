@@ -93,10 +93,21 @@
       justify-content: space-between;
     }
     .nav-brand { position: relative; z-index: 2; }
+    .nav-center { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      color: var(--text-tertiary); text-decoration: none; font-size: 13px; font-weight: 500;
+      padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; position: relative;
+    }
+    .nav-link:hover { color: var(--text-secondary); background: rgba(148,163,184,0.06); }
+    .nav-link.active { color: var(--text-primary); font-weight: 600; }
+    .nav-link.active::after {
+      content: ''; position: absolute; bottom: -13px; left: 12px; right: 12px;
+      height: 2px; background: var(--accent); border-radius: 1px;
+    }
     .sports-tabs {
-      display: flex; align-items: center; gap: 4px;
+      display: inline-flex; align-items: center; gap: 4px;
       background: var(--bg-tertiary); border-radius: 10px; padding: 4px;
-      position: absolute; left: 50%; transform: translateX(-50%); z-index: 1;
+      margin-top: 16px;
     }
     .sport-tab {
       position: relative; padding: 6px 18px; border-radius: 8px; border: none;
@@ -112,7 +123,7 @@
     .soon-badge {
       font-size: 9px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.05em; padding: 1px 5px; border-radius: 4px;
-      background: rgba(255,255,255,0.1); color: var(--text-muted);
+      background: rgba(148,163,184,0.1); color: var(--text-muted);
     }
     .sport-tab.active .soon-badge { display: none; }
     .nav-actions { position: relative; z-index: 2; }
@@ -441,26 +452,10 @@
       .nav-center { display: none; }
       .mobile-menu-btn { display: block !important; }
       .dropdown-trigger-name { display: none; }
-      /* Two-row nav: logo row + sport tabs row */
-      .top-nav { height: 90px; }
-      .top-nav-inner {
-        padding: 0 1rem;
-        flex-wrap: wrap;
-        align-content: center;
-      }
-      .sports-tabs {
-        position: static;
-        transform: none;
-        width: 100%;
-        justify-content: center;
-        gap: 2px;
-        padding: 3px;
-        margin: 0;
-        order: 3;
-      }
+      .top-nav-inner { padding: 0 1rem; }
+      .sports-tabs { gap: 2px; padding: 3px; }
       .sport-tab { padding: 4px 10px; font-size: 11px; gap: 3px; }
       .soon-badge { font-size: 7px; padding: 1px 3px; }
-      main { padding-top: 130px; }
       /* Results */
       .results-banner { grid-template-columns: repeat(2, 1fr); }
       .results-banner-stat .rbs-value { font-size: 22px; }
@@ -475,7 +470,7 @@
       main { padding-left: 12px; padding-right: 12px; }
     }
     @media (max-width: 480px) {
-      .sports-tabs { gap: 1px; padding: 2px; }
+      .sports-tabs { gap: 1px; padding: 2px; margin-top: 12px; }
       .sport-tab { padding: 4px 8px; font-size: 10px; }
       .soon-badge { font-size: 6px; padding: 0px 2px; }
       .results-banner-stat { padding: 12px 8px; }
@@ -502,11 +497,10 @@
         <div class="logo-mark">EF</div>
         <span class="logo-text">Edge Factor <span>Elite</span></span>
       </a>
-      <div class="sports-tabs" id="sports-tabs">
-        <button class="sport-tab active" data-sport="nba">NBA</button>
-        <button class="sport-tab" data-sport="nhl">NHL</button>
-        <button class="sport-tab" data-sport="ncaab">NCAAB</button>
-        <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+      <div class="nav-center">
+        <a href="dashboard-home.html" class="nav-link">Dashboard</a>
+        <a href="dashboard.html" class="nav-link">Projections</a>
+        <a href="results.html" class="nav-link active">Results</a>
       </div>
       <div class="nav-actions">
         <div class="dropdown-trigger" id="dropdown-trigger" onclick="toggleDropdown()">
@@ -537,6 +531,7 @@
   <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
   <div class="mobile-nav-drawer" id="mobile-nav-drawer">
     <div class="mobile-drawer-links">
+      <a href="dashboard-home.html"><span class="menu-icon">&#127968;</span> Dashboard</a>
       <a href="dashboard.html"><span class="menu-icon">&#128200;</span> Projections</a>
       <a href="results.html" class="active"><span class="menu-icon">&#128202;</span> Results</a>
       <a href="mybets.html"><span class="menu-icon">&#127919;</span> My Bets</a>
@@ -550,6 +545,13 @@
   <main>
     <h1 class="page-title">Prediction <span>Results</span></h1>
     <p class="page-subtitle">Track our model's accuracy across player props, spreads, and moneylines.</p>
+
+    <div class="sports-tabs" id="sports-tabs">
+      <button class="sport-tab active" data-sport="nba">NBA</button>
+      <button class="sport-tab" data-sport="nhl">NHL</button>
+      <button class="sport-tab" data-sport="ncaab">NCAAB</button>
+      <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+    </div>
 
     <!-- All-Time Stats Banner -->
     <div class="section-header">

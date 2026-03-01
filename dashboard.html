@@ -100,10 +100,20 @@
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
     .logo-text span { color: var(--accent-secondary); }
     .nav-brand { position: relative; z-index: 2; }
+    .nav-center { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      color: var(--text-tertiary); text-decoration: none; font-size: 13px; font-weight: 500;
+      padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; position: relative;
+    }
+    .nav-link:hover { color: var(--text-secondary); background: rgba(148,163,184,0.06); }
+    .nav-link.active { color: var(--text-primary); font-weight: 600; }
+    .nav-link.active::after {
+      content: ''; position: absolute; bottom: -13px; left: 12px; right: 12px;
+      height: 2px; background: var(--accent); border-radius: 1px;
+    }
     .sports-tabs {
       display: flex; align-items: center; gap: 4px;
       background: var(--bg-tertiary); border-radius: 10px; padding: 4px;
-      position: absolute; left: 50%; transform: translateX(-50%); z-index: 1;
     }
     .sport-tab {
       position: relative; padding: 6px 18px; border-radius: 8px; border: none;
@@ -238,7 +248,7 @@
       height: 50px;
       z-index: 99;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
     }
     .sub-nav-inner {
       max-width: 1200px;
@@ -246,9 +256,8 @@
       padding: 0 2rem;
       width: 100%;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
-      padding-bottom: 0;
     }
     .view-tabs {
       display: flex;
@@ -270,21 +279,6 @@
     }
     .view-tab:hover { color: var(--text-secondary); }
     .view-tab.active { color: var(--accent-secondary); border-bottom-color: var(--accent); }
-    .sub-nav-meta {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding-bottom: 12px;
-    }
-    .sub-nav-meta .live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s ease-in-out infinite;
-    }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
     /* ── Kill the gray line below sub-tabs ── */
@@ -1664,40 +1658,16 @@
       .logo-mark { width: 28px; height: 28px; font-size: 9px; }
       .logo-text { font-size: 13px; }
       .dropdown-trigger { display: none; }
+      .nav-center { display: none; }
       .mobile-menu-btn { display: block; }
-
-      /* Two-row nav: logo row + sport tabs row */
-      .top-nav { height: 90px; }
-      .top-nav-inner {
-        padding: 0 1rem;
-        flex-wrap: wrap;
-        align-content: center;
-      }
-      .sports-tabs {
-        position: static;
-        transform: none;
-        width: 100%;
-        justify-content: center;
-        gap: 2px;
-        padding: 3px;
-        margin: 0;
-        order: 3;
-      }
-      .sport-tab {
-        padding: 4px 10px;
-        font-size: 11px;
-        gap: 3px;
-      }
-      .soon-badge { font-size: 7px; padding: 1px 3px; }
-
-      .sub-nav { top: 90px; }
-      .coming-soon-overlay { top: 140px; }
-      .nav-spacer { height: 140px !important; }
+      .top-nav-inner { padding: 0 1rem; }
 
       /* Sub-nav */
-      .sub-nav-inner { padding: 0 1rem; }
+      .sub-nav-inner { padding: 0 1rem; flex-wrap: wrap; gap: 4px; }
+      .sports-tabs { gap: 2px; padding: 3px; }
+      .sport-tab { padding: 4px 10px; font-size: 11px; gap: 3px; }
+      .soon-badge { font-size: 7px; padding: 1px 3px; }
       .view-tab { padding: 10px 16px; font-size: 11px; }
-      .sub-nav-meta { display: none; }
 
       /* Stats bar */
       .stats-bar { padding: 0 16px; }
@@ -1747,9 +1717,6 @@
       .sports-tabs { gap: 1px; padding: 2px; }
       .sport-tab { padding: 4px 8px; font-size: 10px; }
       .soon-badge { font-size: 6px; padding: 0px 2px; }
-
-      /* Sub-nav tabs */
-      .view-tab { padding: 10px 16px; font-size: 11px; }
 
       /* Rec cards single column */
       .rec-cards { grid-template-columns: 1fr; }
@@ -1924,11 +1891,10 @@
         <div class="logo-mark">EF</div>
         <span class="logo-text">Edge Factor <span>Elite</span></span>
       </a>
-      <div class="sports-tabs" id="sports-tabs">
-        <button class="sport-tab active" data-sport="nba">NBA</button>
-        <button class="sport-tab" data-sport="nhl">NHL</button>
-        <button class="sport-tab" data-sport="ncaab">NCAAB</button>
-        <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+      <div class="nav-center">
+        <a href="dashboard-home.html" class="nav-link">Dashboard</a>
+        <a href="dashboard.html" class="nav-link active">Projections</a>
+        <a href="results.html" class="nav-link">Results</a>
       </div>
       <div class="nav-actions">
         <div class="dropdown-trigger" id="dropdown-trigger" onclick="toggleDropdown()">
@@ -1955,13 +1921,15 @@
   <!-- Sub Navigation -->
   <nav class="sub-nav">
     <div class="sub-nav-inner">
+      <div class="sports-tabs" id="sports-tabs">
+        <button class="sport-tab active" data-sport="nba">NBA</button>
+        <button class="sport-tab" data-sport="nhl">NHL</button>
+        <button class="sport-tab" data-sport="ncaab">NCAAB</button>
+        <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+      </div>
       <div class="view-tabs" id="view-tabs">
         <button class="view-tab active" data-view="game-projections">Game Projections</button>
         <button class="view-tab" data-view="player-props">Player Props</button>
-      </div>
-      <div class="sub-nav-meta" id="sub-nav-meta">
-        <span class="live-dot"></span>
-        <span id="nav-updated-time">Loading...</span>
       </div>
     </div>
   </nav>
@@ -1970,6 +1938,7 @@
   <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
   <div class="mobile-nav-drawer" id="mobile-nav-drawer">
     <div class="mobile-drawer-links">
+      <a href="dashboard-home.html"><span class="menu-icon">&#127968;</span> Dashboard</a>
       <a href="dashboard.html" class="active"><span class="menu-icon">&#128200;</span> Projections</a>
       <a href="results.html"><span class="menu-icon">&#128202;</span> Results</a>
       <a href="mybets.html"><span class="menu-icon">&#127919;</span> My Bets <span class="bet-count-badge" id="mobile-bet-count" style="display:none"></span></a>
@@ -2238,10 +2207,10 @@
         if (games.length > 0) {
           const { formatted } = formatDateDisplay(selectedDate);
           updatedEl.textContent = formatted + ' \u00B7 ' + games.length + ' games';
-          navUpdated.textContent = formatted;
+          if (navUpdated) navUpdated.textContent = formatted;
         } else {
           updatedEl.textContent = '';
-          navUpdated.textContent = '';
+          if (navUpdated) navUpdated.textContent = '';
         }
         return;
       }
@@ -2258,16 +2227,16 @@
             month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
           });
           updatedEl.textContent = 'Updated ' + ts + ' \u00B7 ' + dateFiltered.length + ' games';
-          navUpdated.textContent = 'Updated ' + new Date(sportData._updated).toLocaleTimeString('en-US', {
+          if (navUpdated) navUpdated.textContent = 'Updated ' + new Date(sportData._updated).toLocaleTimeString('en-US', {
             hour: 'numeric', minute: '2-digit'
           });
         } else {
           updatedEl.textContent = '';
-          navUpdated.textContent = '';
+          if (navUpdated) navUpdated.textContent = '';
         }
       } else {
         const nbaUpdated = projections._updated || gameProjections._updated;
-        if (nbaUpdated) {
+        if (nbaUpdated && navUpdated) {
           navUpdated.textContent = 'Updated ' + new Date(nbaUpdated).toLocaleTimeString('en-US', {
             hour: 'numeric', minute: '2-digit'
           });
@@ -5810,7 +5779,8 @@
           topPicks = [];
           recommendations = null;
           document.getElementById('current-date').textContent = 'No games scheduled today';
-          document.getElementById('nav-updated-time').textContent = '';
+          var _nut = document.getElementById('nav-updated-time');
+          if (_nut) _nut.textContent = '';
           updateStatsBar();
           render();
           return;
@@ -5843,7 +5813,8 @@
             const updatedTime = new Date(data.updated).toLocaleTimeString('en-US', {
               hour: 'numeric', minute: '2-digit'
             });
-            document.getElementById('nav-updated-time').textContent = 'Updated ' + updatedTime;
+            var _nut2 = document.getElementById('nav-updated-time');
+            if (_nut2) _nut2.textContent = 'Updated ' + updatedTime;
           }
         }
         if (data.locked_at) {

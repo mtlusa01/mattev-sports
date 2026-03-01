@@ -89,7 +89,7 @@
     .dropdown-trigger-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .dropdown-chevron { font-size: 10px; color: var(--text-tertiary); transition: transform 0.2s; }
     .dropdown-trigger.open .dropdown-chevron { transform: rotate(180deg); }
-    .user-dropdown-nav {
+    .user-dropdown {
       position: absolute; top: calc(100% + 8px); right: 0; width: 240px;
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius-md); padding: 8px 0;
@@ -98,27 +98,27 @@
       pointer-events: none; z-index: 1001;
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     }
-    .user-dropdown-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .dd-user { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); }
-    .dd-user-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
-    .dd-user-email {
+    .user-dropdown.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .dropdown-user { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); }
+    .dropdown-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .dropdown-email {
       font-size: 12px; color: var(--text-tertiary); white-space: nowrap;
       overflow: hidden; text-overflow: ellipsis; max-width: 208px; margin-bottom: 8px;
     }
-    .dd-tier {
+    .dropdown-tier {
       display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.05em; padding: 2px 8px; border-radius: 10px;
       background: var(--accent-soft); color: var(--accent-secondary);
     }
-    .dd-divider { height: 1px; background: var(--border-subtle); margin: 4px 0; }
-    .dd-item {
+    .dropdown-divider { height: 1px; background: var(--border-subtle); margin: 4px 0; }
+    .dropdown-item {
       display: block; width: 100%; padding: 8px 16px; font-size: 13px; font-weight: 500;
       color: var(--text-secondary); background: none; border: none;
       text-decoration: none; text-align: left; cursor: pointer;
       font-family: inherit; transition: all 0.15s;
     }
-    .dd-item:hover { color: var(--text-primary); background: rgba(148,163,184,0.06); }
-    .dd-item.danger:hover { color: var(--loss); background: var(--loss-soft); }
+    .dropdown-item:hover { color: var(--text-primary); background: rgba(148,163,184,0.06); }
+    .dropdown-item.danger:hover { color: var(--loss); background: var(--loss-soft); }
     .logo-mark {
       width: 32px; height: 32px; border-radius: 8px;
       background: linear-gradient(135deg, #6366f1, #818cf8);
@@ -255,16 +255,16 @@
           <span class="dropdown-trigger-name" id="nav-name"></span>
           <span class="dropdown-chevron">&#9662;</span>
         </div>
-        <div class="user-dropdown-nav" id="user-dropdown-nav">
-          <div class="dd-user">
-            <div class="dd-user-name" id="dd-name">User</div>
-            <div class="dd-user-email" id="dd-email">user@email.com</div>
-            <span class="dd-tier">Free</span>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="dropdown-user">
+            <div class="dropdown-name" id="dd-name">User</div>
+            <div class="dropdown-email" id="dd-email">user@email.com</div>
+            <span class="dropdown-tier">Free</span>
           </div>
-          <div class="dd-divider"></div>
-          <a href="profile.html" class="dd-item">Settings</a>
-          <div class="dd-divider"></div>
-          <button class="dd-item danger" onclick="handleSignOut()">Sign Out</button>
+          <div class="dropdown-divider"></div>
+          <a href="profile.html" class="dropdown-item">Settings</a>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item danger" onclick="handleSignOut()">Sign Out</button>
         </div>
         <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Menu">&#9776;</button>
       </div>
@@ -274,6 +274,7 @@
   <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
   <div class="mobile-nav-drawer" id="mobile-nav-drawer">
     <div class="mobile-drawer-links">
+      <a href="dashboard-home.html"><span class="menu-icon">&#127968;</span> Dashboard</a>
       <a href="dashboard.html"><span class="menu-icon">&#128200;</span> Projections</a>
       <a href="results.html"><span class="menu-icon">&#128202;</span> Results</a>
       <a href="mybets.html"><span class="menu-icon">&#127919;</span> My Bets</a>
@@ -776,13 +777,13 @@
 
     function toggleDropdown() {
       document.getElementById('dropdown-trigger').classList.toggle('open');
-      document.getElementById('user-dropdown-nav').classList.toggle('open');
+      document.getElementById('user-dropdown').classList.toggle('open');
     }
     document.addEventListener('click', function(e) {
       var navActions = document.querySelector('.nav-actions');
       if (navActions && !navActions.contains(e.target)) {
         var trigger = document.getElementById('dropdown-trigger');
-        var dd = document.getElementById('user-dropdown-nav');
+        var dd = document.getElementById('user-dropdown');
         if (trigger) trigger.classList.remove('open');
         if (dd) dd.classList.remove('open');
       }
