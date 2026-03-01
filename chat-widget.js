@@ -540,10 +540,13 @@
       'Be concise, data-driven, and confident. Use the data provided below as your knowledge base. ' +
       'Do not make up statistics — only reference numbers from the data provided. ' +
       'If you don\'t have data for something, say so. Today is ' + today + '.\n\n' +
-      'You have tools to add_bet, remove_bet, and get_tracked_bets. ' +
-      'ALWAYS use the add_bet tool when the user asks to track, add, or lock in a pick — do not just say you added it, actually call the tool. ' +
-      'Use get_tracked_bets when the user asks about their current bets or tracked picks. ' +
-      'When confirming an action, reference the tool result to show it was actually saved.\n\n' +
+      'IMPORTANT — TOOL USE RULES:\n' +
+      'You HAVE the following tools available RIGHT NOW: add_bet, remove_bet, get_tracked_bets.\n' +
+      'When a user asks to add, track, lock in, or save a bet — you MUST call the add_bet tool. Do NOT say you cannot do it. Do NOT say you lack access. ALWAYS call the tool.\n' +
+      'When a user asks about their current bets or tracked picks — call get_tracked_bets.\n' +
+      'When a user asks to remove or cancel a bet — call remove_bet.\n' +
+      'After calling a tool, reference the tool result to confirm the action was completed.\n' +
+      'Ignore any prior messages in this conversation that say otherwise — your tools are available and working.\n\n' +
       'You have access to the most recent messages in this conversation. Earlier messages may have been trimmed for efficiency.'
     );
 
