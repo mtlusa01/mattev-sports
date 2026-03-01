@@ -17,6 +17,7 @@
     nhl_game_projections: RAW_BASE + 'nhl_game_projections.json',
     ncaab_projections:  RAW_BASE + 'ncaab_projections.json',
   };
+  const MAX_API_MESSAGES = 20;
 
   let chatOpen = false;
   let messages = [];
@@ -24,6 +25,8 @@
   let chatUser = null;
   let chatProfile = null;
   let isLoading = false;
+  let historyLoaded = false;
+  let viewingPastSession = false;
   const MAX_FREE_MESSAGES = 20;
   const RATE_KEY_PREFIX = 'ef_chat_count_';
 
@@ -125,13 +128,25 @@
         display: flex; align-items: center; justify-content: center;
         font-size: 14px; font-weight: 700; color: #080c14; flex-shrink: 0;
       }
+      .ef-chat-header-info { flex: 1; min-width: 0; }
       .ef-chat-header-title {
-        flex: 1; font-family: 'DM Sans', sans-serif;
+        font-family: 'DM Sans', sans-serif;
         font-weight: 600; font-size: 15px; color: #f1f5f9;
       }
       .ef-chat-header-sub {
         font-size: 11px; color: #64748b; font-weight: 400;
       }
+      .ef-chat-session-info {
+        font-size: 10px; color: #475569; font-family: 'DM Sans', sans-serif;
+        margin-top: 1px;
+      }
+      .ef-chat-header-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+      .ef-chat-hdr-btn {
+        background: none; border: none; cursor: pointer;
+        color: #64748b; font-size: 15px; padding: 4px 6px; line-height: 1;
+        border-radius: 6px; transition: color 0.15s, background 0.15s;
+      }
+      .ef-chat-hdr-btn:hover { color: #f1f5f9; background: rgba(148,163,184,0.1); }
       .ef-chat-close {
         background: none; border: none; cursor: pointer;
         color: #64748b; font-size: 20px; padding: 4px 8px; line-height: 1;
@@ -143,12 +158,25 @@
         flex: 1; overflow-y: auto; padding: 16px;
         display: flex; flex-direction: column; gap: 12px;
         min-height: 180px; max-height: calc(70vh - 150px);
+        position: relative;
       }
       .ef-chat-messages::-webkit-scrollbar { width: 5px; }
       .ef-chat-messages::-webkit-scrollbar-track { background: transparent; }
       .ef-chat-messages::-webkit-scrollbar-thumb {
         background: rgba(148,163,184,0.15); border-radius: 10px;
       }
+
+      .ef-chat-loading {
+        display: flex; flex-direction: column; align-items: center;
+        justify-content: center; gap: 10px; padding: 40px 20px;
+        color: #64748b; font-family: 'DM Sans', sans-serif; font-size: 13px;
+      }
+      .ef-chat-loading-spinner {
+        width: 24px; height: 24px; border: 2px solid rgba(0,212,255,0.15);
+        border-top-color: #00d4ff; border-radius: 50%;
+        animation: ef-spin 0.7s linear infinite;
+      }
+      @keyframes ef-spin { to { transform: rotate(360deg); } }
 
       .ef-chat-msg {
         max-width: 85%; padding: 10px 14px; border-radius: 12px;
@@ -235,6 +263,86 @@
       .ef-chat-send:disabled { opacity: 0.4; cursor: default; }
       .ef-chat-send svg { width: 18px; height: 18px; fill: #080c14; }
 
+      /* Sessions overlay */
+      .ef-chat-sessions {
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: #0c1220; z-index: 5; border-radius: 14px;
+        display: none; flex-direction: column;
+      }
+      .ef-chat-sessions.open { display: flex; }
+      .ef-chat-sessions-header {
+        display: flex; align-items: center; gap: 10px;
+        padding: 14px 16px; border-bottom: 1px solid rgba(148,163,184,0.1);
+        background: #111827; border-radius: 14px 14px 0 0;
+      }
+      .ef-chat-sessions-back {
+        background: none; border: none; cursor: pointer;
+        color: #94a3b8; font-size: 18px; padding: 2px 6px;
+        border-radius: 6px; transition: color 0.15s;
+      }
+      .ef-chat-sessions-back:hover { color: #00d4ff; }
+      .ef-chat-sessions-title {
+        font-family: 'DM Sans', sans-serif; font-weight: 600;
+        font-size: 14px; color: #f1f5f9;
+      }
+      .ef-chat-session-list {
+        flex: 1; overflow-y: auto; padding: 12px;
+        display: flex; flex-direction: column; gap: 6px;
+      }
+      .ef-chat-session-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 14px; border-radius: 10px; cursor: pointer;
+        background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.08);
+        font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+      }
+      .ef-chat-session-item:hover {
+        background: rgba(0,212,255,0.06); border-color: rgba(0,212,255,0.15);
+      }
+      .ef-chat-session-item.active {
+        background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.25);
+      }
+      .ef-chat-session-date { font-size: 13px; color: #f1f5f9; font-weight: 500; }
+      .ef-chat-session-count { font-size: 11px; color: #64748b; }
+      .ef-chat-session-empty {
+        text-align: center; color: #475569; font-size: 13px;
+        font-family: 'DM Sans', sans-serif; padding: 40px 20px;
+      }
+
+      /* Past session banner */
+      .ef-chat-past-banner {
+        display: none; align-items: center; justify-content: space-between;
+        padding: 8px 16px; background: rgba(245,158,11,0.08);
+        border-bottom: 1px solid rgba(245,158,11,0.15);
+        font-family: 'DM Sans', sans-serif; font-size: 12px; color: #f59e0b;
+      }
+      .ef-chat-past-banner.active { display: flex; }
+      .ef-chat-past-banner button {
+        background: rgba(0,212,255,0.12); border: 1px solid rgba(0,212,255,0.2);
+        color: #00d4ff; font-size: 11px; padding: 3px 10px; border-radius: 6px;
+        cursor: pointer; font-family: 'DM Sans', sans-serif;
+      }
+      .ef-chat-past-banner button:hover { background: rgba(0,212,255,0.2); }
+
+      /* Confirm dialog */
+      .ef-chat-confirm {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background: #111827; border: 1px solid rgba(148,163,184,0.15);
+        border-radius: 12px; padding: 20px; z-index: 10;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5); text-align: center;
+        font-family: 'DM Sans', sans-serif; display: none; width: 260px;
+      }
+      .ef-chat-confirm.open { display: block; }
+      .ef-chat-confirm p { color: #e2e8f0; font-size: 14px; margin: 0 0 16px; }
+      .ef-chat-confirm-btns { display: flex; gap: 10px; justify-content: center; }
+      .ef-chat-confirm-btns button {
+        padding: 6px 18px; border-radius: 8px; font-size: 13px;
+        cursor: pointer; font-family: 'DM Sans', sans-serif; border: none;
+      }
+      .ef-chat-confirm-cancel { background: rgba(148,163,184,0.1); color: #94a3b8; }
+      .ef-chat-confirm-cancel:hover { background: rgba(148,163,184,0.2); }
+      .ef-chat-confirm-yes { background: #ef4444; color: #fff; }
+      .ef-chat-confirm-yes:hover { background: #dc2626; }
+
       @media (max-width: 600px) {
         .ef-chat-panel {
           bottom: 0; right: 0; left: 0; width: 100%;
@@ -246,6 +354,8 @@
         .ef-chat-input-row { border-radius: 0; }
         .ef-chat-messages { max-height: calc(100vh - 150px); }
         .ef-chat-fab { bottom: 16px; right: 16px; }
+        .ef-chat-sessions { border-radius: 0; }
+        .ef-chat-sessions-header { border-radius: 0; }
       }
     `;
     var style = document.createElement('style');
@@ -279,9 +389,20 @@
     panel.innerHTML =
       '<div class="ef-chat-header">' +
         '<div class="ef-chat-avatar">EF</div>' +
-        '<div><div class="ef-chat-header-title">EF Analyst</div>' +
-        '<div class="ef-chat-header-sub">AI-powered betting assistant</div></div>' +
-        '<button class="ef-chat-close">&times;</button>' +
+        '<div class="ef-chat-header-info">' +
+          '<div class="ef-chat-header-title">EF Analyst</div>' +
+          '<div class="ef-chat-header-sub">AI-powered betting assistant</div>' +
+          '<div class="ef-chat-session-info"></div>' +
+        '</div>' +
+        '<div class="ef-chat-header-actions">' +
+          '<button class="ef-chat-hdr-btn ef-chat-history-btn" title="Previous sessions">&#128339;</button>' +
+          '<button class="ef-chat-hdr-btn ef-chat-clear-btn" title="Clear chat">&#128465;</button>' +
+          '<button class="ef-chat-close" title="Close">&times;</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ef-chat-past-banner">' +
+        '<span class="ef-chat-past-label">Viewing past session</span>' +
+        '<button class="ef-chat-past-resume">Back to today</button>' +
       '</div>' +
       '<div class="ef-chat-messages"></div>' +
       '<div class="ef-chat-typing"><span></span><span></span><span></span></div>' +
@@ -293,6 +414,22 @@
       '<div class="ef-chat-input-row">' +
         '<input class="ef-chat-input" placeholder="Ask about your picks, stats, or strategy..." />' +
         '<button class="ef-chat-send" disabled><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>' +
+      '</div>' +
+      // Sessions overlay
+      '<div class="ef-chat-sessions">' +
+        '<div class="ef-chat-sessions-header">' +
+          '<button class="ef-chat-sessions-back">&larr;</button>' +
+          '<span class="ef-chat-sessions-title">Previous Sessions</span>' +
+        '</div>' +
+        '<div class="ef-chat-session-list"></div>' +
+      '</div>' +
+      // Confirm dialog
+      '<div class="ef-chat-confirm">' +
+        '<p>Clear today\'s conversation?</p>' +
+        '<div class="ef-chat-confirm-btns">' +
+          '<button class="ef-chat-confirm-cancel">Cancel</button>' +
+          '<button class="ef-chat-confirm-yes">Clear</button>' +
+        '</div>' +
       '</div>';
 
     document.body.appendChild(fab);
@@ -306,6 +443,17 @@
     els.input = panel.querySelector('.ef-chat-input');
     els.send = panel.querySelector('.ef-chat-send');
     els.close = panel.querySelector('.ef-chat-close');
+    els.sessionInfo = panel.querySelector('.ef-chat-session-info');
+    els.historyBtn = panel.querySelector('.ef-chat-history-btn');
+    els.clearBtn = panel.querySelector('.ef-chat-clear-btn');
+    els.sessions = panel.querySelector('.ef-chat-sessions');
+    els.sessionList = panel.querySelector('.ef-chat-session-list');
+    els.sessionsBack = panel.querySelector('.ef-chat-sessions-back');
+    els.pastBanner = panel.querySelector('.ef-chat-past-banner');
+    els.pastResume = panel.querySelector('.ef-chat-past-resume');
+    els.confirm = panel.querySelector('.ef-chat-confirm');
+    els.confirmCancel = panel.querySelector('.ef-chat-confirm-cancel');
+    els.confirmYes = panel.querySelector('.ef-chat-confirm-yes');
 
     // Events
     fab.addEventListener('click', togglePanel);
@@ -320,6 +468,12 @@
     panel.querySelectorAll('.ef-chat-suggestion').forEach(function (btn) {
       btn.addEventListener('click', function () { handleSuggestionClick(btn.textContent); });
     });
+    els.historyBtn.addEventListener('click', showSessions);
+    els.sessionsBack.addEventListener('click', closeSessions);
+    els.clearBtn.addEventListener('click', function () { els.confirm.classList.add('open'); });
+    els.confirmCancel.addEventListener('click', function () { els.confirm.classList.remove('open'); });
+    els.confirmYes.addEventListener('click', clearChat);
+    els.pastResume.addEventListener('click', resumeToday);
   }
 
   // ── Section D: Auth Wiring ────────────────────────────────────────
@@ -332,7 +486,6 @@
             chatUser = user;
             chatProfile = (typeof userProfile !== 'undefined' && userProfile) ? userProfile : null;
             els.fab.style.display = 'flex';
-            // If profile not ready yet, poll briefly
             if (!chatProfile) {
               var pp = setInterval(function () {
                 if (typeof userProfile !== 'undefined' && userProfile) {
@@ -342,10 +495,13 @@
               }, 200);
               setTimeout(function () { clearInterval(pp); }, 5000);
             }
+            // Preload history on auth
             loadChatHistory();
           } else {
             chatUser = null;
             chatProfile = null;
+            historyLoaded = false;
+            messages = [];
             els.fab.style.display = 'none';
             if (chatOpen) togglePanel();
           }
@@ -387,7 +543,8 @@
       'You have tools to add_bet, remove_bet, and get_tracked_bets. ' +
       'ALWAYS use the add_bet tool when the user asks to track, add, or lock in a pick — do not just say you added it, actually call the tool. ' +
       'Use get_tracked_bets when the user asks about their current bets or tracked picks. ' +
-      'When confirming an action, reference the tool result to show it was actually saved.'
+      'When confirming an action, reference the tool result to show it was actually saved.\n\n' +
+      'You have access to the most recent messages in this conversation. Earlier messages may have been trimmed for efficiency.'
     );
 
     // User profile
@@ -544,7 +701,6 @@
     if (!cachedData) return null;
     var lines = [];
 
-    // Yesterday's combined record
     var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
     var totalW = 0, totalL = 0;
     ['results', 'nhl_results', 'ncaab_results'].forEach(function (k) {
@@ -561,7 +717,6 @@
       lines.push('Yesterday: **' + totalW + '-' + totalL + '** (' + pct + '%) across all sports');
     }
 
-    // Today's pick count
     var pickCount = 0;
     if (cachedData.projections && cachedData.projections.projections)
       pickCount += cachedData.projections.projections.length;
@@ -570,7 +725,6 @@
     });
     if (pickCount > 0) lines.push('Today: **' + pickCount + ' picks** loaded across all models');
 
-    // Top model streak
     var bestModel = null, bestROI = -999;
     ['results', 'nhl_results', 'ncaab_results'].forEach(function (k) {
       var d = cachedData[k];
@@ -673,7 +827,7 @@
 
     if (toolName === 'get_tracked_bets') {
       try {
-        var query = fsDb.collection('users').doc(uid).collection('bets').orderBy('createdAt', 'desc');
+        var query = fsDb.collection('users').doc(uid).collection('bets');
         var dateFilter = input.date || new Date().toISOString().split('T')[0];
         query = query.where('date', '==', dateFilter);
         var betsSnap = await query.get();
@@ -704,9 +858,11 @@
     try {
       await fetchAllData();
 
-      var apiMessages = messages.filter(function (m) {
+      // Only send last MAX_API_MESSAGES for cost efficiency
+      var relevantMessages = messages.filter(function (m) {
         return m.role === 'user' || m.role === 'assistant';
-      }).map(function (m) {
+      });
+      var apiMessages = relevantMessages.slice(-MAX_API_MESSAGES).map(function (m) {
         return { role: m.role, content: m.content };
       });
 
@@ -727,7 +883,7 @@
       var data = await r.json();
       if (data.type === 'error') throw new Error(data.error && data.error.message || 'API error');
 
-      // Tool use loop (max 5 rounds to prevent runaway)
+      // Tool use loop (max 5 rounds)
       var toolRounds = 0;
       while (data.stop_reason === 'tool_use' && toolRounds < 5) {
         toolRounds++;
@@ -736,20 +892,21 @@
 
         // Push assistant's tool_use response to history (not rendered)
         messages.push({ role: 'assistant', content: data.content });
+        saveMessage('assistant', data.content);
 
         // Execute the tool locally
         var toolResult = await executeToolLocally(toolUse.name, toolUse.input);
 
         // Push tool result to history (not rendered)
-        messages.push({
-          role: 'user',
-          content: [{ type: 'tool_result', tool_use_id: toolUse.id, content: JSON.stringify(toolResult) }]
-        });
+        var toolResultContent = [{ type: 'tool_result', tool_use_id: toolUse.id, content: JSON.stringify(toolResult) }];
+        messages.push({ role: 'user', content: toolResultContent });
+        saveMessage('user', toolResultContent);
 
         // Re-call API with updated conversation
-        apiMessages = messages.filter(function (m) {
+        relevantMessages = messages.filter(function (m) {
           return m.role === 'user' || m.role === 'assistant';
-        }).map(function (m) {
+        });
+        apiMessages = relevantMessages.slice(-MAX_API_MESSAGES).map(function (m) {
           return { role: m.role, content: m.content };
         });
         body.messages = apiMessages;
@@ -766,7 +923,6 @@
 
       incrementRateCount();
 
-      // Extract text from final response
       var textBlock = data.content && data.content.find(function (c) { return c.type === 'text'; });
       if (textBlock) return textBlock.text;
       if (data.content && data.content[0] && data.content[0].text) return data.content[0].text;
@@ -781,16 +937,11 @@
   function renderMarkdown(text) {
     if (!text) return '';
     var html = text
-      // Escape HTML
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      // Code (before bold/italic)
       .replace(/`([^`]+)`/g, '<code>$1</code>')
-      // Bold
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      // Italic
       .replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-    // Lists — process line by line
     var lines = html.split('\n');
     var result = [];
     var inUl = false, inOl = false;
@@ -824,39 +975,67 @@
     if (chatOpen) {
       els.panel.classList.add('open');
       els.input.focus();
-      // Auto-insight on first open of the day
-      fetchAllData().then(function () {
-        var insight = computeAutoInsight();
-        if (insight) {
-          appendMessage('assistant', insight, true);
-        }
-        // Hide suggestions if there are existing messages
-        if (messages.length > 0) {
-          els.suggestions.style.display = 'none';
-        }
-      });
+      // If history wasn't loaded yet (edge case), show loading
+      if (!historyLoaded && chatUser) {
+        showLoadingState();
+        loadChatHistory().then(function () {
+          hideLoadingState();
+          triggerAutoInsight();
+        });
+      } else {
+        triggerAutoInsight();
+      }
     } else {
       els.panel.classList.remove('open');
-      saveChatHistory();
+      // Close sub-panels
+      els.sessions.classList.remove('open');
+      els.confirm.classList.remove('open');
     }
   }
 
-  function appendMessage(role, content, skipPush) {
-    var div = document.createElement('div');
-    div.className = 'ef-chat-msg ' + role;
-    if (role === 'assistant' || role === 'system') {
-      div.innerHTML = renderMarkdown(content);
-    } else {
-      div.textContent = content;
+  function triggerAutoInsight() {
+    fetchAllData().then(function () {
+      var insight = computeAutoInsight();
+      if (insight) {
+        appendMessage('assistant', insight, false, true); // save=false, skipPersist for auto-insight
+      }
+      if (messages.length > 0) {
+        els.suggestions.style.display = 'none';
+      }
+    });
+  }
+
+  function showLoadingState() {
+    els.msgArea.innerHTML = '<div class="ef-chat-loading"><div class="ef-chat-loading-spinner"></div>Loading conversation...</div>';
+  }
+
+  function hideLoadingState() {
+    var loader = els.msgArea.querySelector('.ef-chat-loading');
+    if (loader) loader.remove();
+  }
+
+  function appendMessage(role, content, skipPush, skipPersist) {
+    // Only render human-readable messages (string content)
+    if (typeof content === 'string') {
+      var div = document.createElement('div');
+      div.className = 'ef-chat-msg ' + role;
+      if (role === 'assistant' || role === 'system') {
+        div.innerHTML = renderMarkdown(content);
+      } else {
+        div.textContent = content;
+      }
+      els.msgArea.appendChild(div);
+      els.msgArea.scrollTop = els.msgArea.scrollHeight;
     }
-    els.msgArea.appendChild(div);
-    els.msgArea.scrollTop = els.msgArea.scrollHeight;
 
     if (!skipPush) {
       messages.push({ role: role, content: content });
+      if (!skipPersist) {
+        saveMessage(role, content);
+      }
+      updateSessionInfo();
     }
 
-    // Hide suggestions after first message
     els.suggestions.style.display = 'none';
   }
 
@@ -871,6 +1050,7 @@
   }
 
   function handleSend() {
+    if (viewingPastSession) return;
     var text = els.input.value.trim();
     if (!text || isLoading) return;
 
@@ -888,49 +1068,249 @@
   }
 
   function handleSuggestionClick(text) {
+    if (viewingPastSession) return;
     els.input.value = text;
     els.send.disabled = false;
     handleSend();
   }
 
-  // ── Section L: Chat History Persistence ───────────────────────────
-  function saveChatHistory() {
-    if (!chatUser || messages.length === 0) return;
-    try {
-      var today = new Date().toISOString().slice(0, 10);
-      var db = firebase.firestore();
-      db.collection('users').doc(chatUser.uid)
-        .collection('chatHistory').doc(today)
-        .set({
-          messages: messages,
-          updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .catch(function () { /* silent */ });
-    } catch (e) { /* silent */ }
+  // ── Section L: Chat Persistence ───────────────────────────────────
+  function getToday() {
+    return new Date().toISOString().slice(0, 10);
   }
 
-  function loadChatHistory() {
-    if (!chatUser) return;
+  function getChatCollection() {
+    if (!chatUser) return null;
+    return firebase.firestore().collection('users').doc(chatUser.uid).collection('chatMessages');
+  }
+
+  // Save a single message to Firestore (fire-and-forget)
+  function saveMessage(role, content) {
+    var col = getChatCollection();
+    if (!col) return;
+    col.add({
+      role: role,
+      content: content,
+      sessionDate: getToday(),
+      ts: Date.now(),
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(function () { /* silent */ });
+  }
+
+  // Load today's messages from Firestore
+  async function loadChatHistory() {
+    if (!chatUser || historyLoaded) return;
     try {
-      var today = new Date().toISOString().slice(0, 10);
-      var db = firebase.firestore();
-      db.collection('users').doc(chatUser.uid)
-        .collection('chatHistory').doc(today)
-        .get()
-        .then(function (doc) {
-          if (doc.exists && doc.data().messages && doc.data().messages.length) {
-            messages = doc.data().messages;
-            messages.forEach(function (m) {
-              // Only render human-readable messages (skip tool_use/tool_result blocks)
-              if (typeof m.content === 'string') {
-                appendMessage(m.role, m.content, true);
-              }
-            });
-            els.suggestions.style.display = 'none';
+      var col = getChatCollection();
+      if (!col) return;
+      var today = getToday();
+      var snap = await col.where('sessionDate', '==', today).get();
+
+      var docs = [];
+      snap.forEach(function (doc) {
+        var d = doc.data();
+        docs.push({ id: doc.id, role: d.role, content: d.content, ts: d.ts || 0 });
+      });
+      docs.sort(function (a, b) { return a.ts - b.ts; });
+
+      if (docs.length > 0) {
+        messages = docs.map(function (d) { return { role: d.role, content: d.content }; });
+        // Render only string-content messages
+        docs.forEach(function (d) {
+          if (typeof d.content === 'string') {
+            renderMessageBubble(d.role, d.content);
           }
-        })
-        .catch(function () { /* silent */ });
-    } catch (e) { /* silent */ }
+        });
+        els.suggestions.style.display = 'none';
+      }
+      historyLoaded = true;
+      updateSessionInfo();
+    } catch (e) {
+      console.error('EF Chat: failed to load history', e);
+      historyLoaded = true;
+    }
+  }
+
+  // Render a message bubble without pushing to messages array
+  function renderMessageBubble(role, content) {
+    if (typeof content !== 'string') return;
+    var div = document.createElement('div');
+    div.className = 'ef-chat-msg ' + role;
+    if (role === 'assistant' || role === 'system') {
+      div.innerHTML = renderMarkdown(content);
+    } else {
+      div.textContent = content;
+    }
+    els.msgArea.appendChild(div);
+    els.msgArea.scrollTop = els.msgArea.scrollHeight;
+  }
+
+  // Update session info in header
+  function updateSessionInfo() {
+    var visibleCount = messages.filter(function (m) { return typeof m.content === 'string'; }).length;
+    if (visibleCount > 0) {
+      var label = viewingPastSession ? 'Past session' : "Today's session";
+      els.sessionInfo.textContent = label + ' \u00B7 ' + visibleCount + ' message' + (visibleCount !== 1 ? 's' : '');
+    } else {
+      els.sessionInfo.textContent = '';
+    }
+  }
+
+  // ── Section L-2: Session Management ───────────────────────────────
+  async function showSessions() {
+    els.sessions.classList.add('open');
+    els.sessionList.innerHTML = '<div class="ef-chat-loading"><div class="ef-chat-loading-spinner"></div>Loading sessions...</div>';
+
+    try {
+      var col = getChatCollection();
+      if (!col) return;
+      // Get recent messages, extract unique dates
+      var snap = await col.orderBy('ts', 'desc').limit(200).get();
+      var dateCounts = {};
+      snap.forEach(function (doc) {
+        var d = doc.data();
+        if (!d.sessionDate) return;
+        // Only count visible messages
+        if (typeof d.content !== 'string') return;
+        dateCounts[d.sessionDate] = (dateCounts[d.sessionDate] || 0) + 1;
+      });
+      var dates = Object.keys(dateCounts).sort().reverse();
+
+      if (dates.length === 0) {
+        els.sessionList.innerHTML = '<div class="ef-chat-session-empty">No previous sessions found.</div>';
+        return;
+      }
+
+      var today = getToday();
+      els.sessionList.innerHTML = dates.map(function (date) {
+        var isToday = date === today;
+        var label = isToday ? 'Today (' + date + ')' : formatDateLabel(date);
+        return '<div class="ef-chat-session-item' + (isToday && !viewingPastSession ? ' active' : '') +
+          '" data-date="' + date + '">' +
+          '<span class="ef-chat-session-date">' + label + '</span>' +
+          '<span class="ef-chat-session-count">' + dateCounts[date] + ' msg' + (dateCounts[date] !== 1 ? 's' : '') + '</span>' +
+          '</div>';
+      }).join('');
+
+      // Click handlers
+      els.sessionList.querySelectorAll('.ef-chat-session-item').forEach(function (item) {
+        item.addEventListener('click', function () {
+          var date = item.getAttribute('data-date');
+          if (date === today) {
+            resumeToday();
+          } else {
+            loadPastSession(date);
+          }
+          closeSessions();
+        });
+      });
+    } catch (e) {
+      els.sessionList.innerHTML = '<div class="ef-chat-session-empty">Failed to load sessions.</div>';
+    }
+  }
+
+  function formatDateLabel(dateStr) {
+    try {
+      var parts = dateStr.split('-');
+      var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate();
+    } catch (e) { return dateStr; }
+  }
+
+  function closeSessions() {
+    els.sessions.classList.remove('open');
+  }
+
+  async function loadPastSession(date) {
+    viewingPastSession = true;
+    els.pastBanner.classList.add('active');
+    els.pastBanner.querySelector('.ef-chat-past-label').textContent = 'Viewing: ' + formatDateLabel(date);
+    els.input.disabled = true;
+    els.send.disabled = true;
+    els.input.placeholder = 'Read-only — viewing past session';
+
+    // Clear current display
+    els.msgArea.innerHTML = '';
+    showLoadingState();
+
+    try {
+      var col = getChatCollection();
+      var snap = await col.where('sessionDate', '==', date).get();
+      var docs = [];
+      snap.forEach(function (doc) {
+        var d = doc.data();
+        docs.push({ role: d.role, content: d.content, ts: d.ts || 0 });
+      });
+      docs.sort(function (a, b) { return a.ts - b.ts; });
+
+      hideLoadingState();
+      docs.forEach(function (d) {
+        if (typeof d.content === 'string') {
+          renderMessageBubble(d.role, d.content);
+        }
+      });
+      // Temporarily replace messages for display count
+      var tempMessages = docs.map(function (d) { return { role: d.role, content: d.content }; });
+      var savedMessages = messages;
+      messages = tempMessages;
+      updateSessionInfo();
+      messages = savedMessages;
+    } catch (e) {
+      hideLoadingState();
+      renderMessageBubble('system', 'Failed to load session.');
+    }
+  }
+
+  function resumeToday() {
+    viewingPastSession = false;
+    els.pastBanner.classList.remove('active');
+    els.input.disabled = false;
+    els.send.disabled = !els.input.value.trim();
+    els.input.placeholder = 'Ask about your picks, stats, or strategy...';
+    updatePlaceholder();
+
+    // Re-render today's messages
+    els.msgArea.innerHTML = '';
+    messages.forEach(function (m) {
+      if (typeof m.content === 'string') {
+        renderMessageBubble(m.role, m.content);
+      }
+    });
+    updateSessionInfo();
+
+    if (messages.length === 0) {
+      els.suggestions.style.display = 'flex';
+    }
+  }
+
+  // ── Section L-3: Clear Chat ───────────────────────────────────────
+  async function clearChat() {
+    els.confirm.classList.remove('open');
+    if (!chatUser) return;
+
+    try {
+      var col = getChatCollection();
+      var today = getToday();
+      var snap = await col.where('sessionDate', '==', today).get();
+      var batch = firebase.firestore().batch();
+      snap.forEach(function (doc) { batch.delete(doc.ref); });
+      await batch.commit();
+    } catch (e) { /* best effort */ }
+
+    // Reset local state
+    messages = [];
+    els.msgArea.innerHTML = '';
+    els.suggestions.style.display = 'flex';
+    els.input.placeholder = 'Ask about your picks, stats, or strategy...';
+    els.input.disabled = false;
+    els.send.disabled = true;
+    updateSessionInfo();
+    updatePlaceholder();
+
+    // Reset auto-insight so it can fire again
+    localStorage.removeItem('ef_chat_insight_date');
   }
 
   // ── Section M: Initialization ─────────────────────────────────────
