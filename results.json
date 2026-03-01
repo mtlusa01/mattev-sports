@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-01T17:59:36",
+  "updated": "2026-03-01T23:33:06",
   "allTime": {
     "spreads": {
-      "wins": 14,
+      "wins": 16,
       "losses": 15,
       "pushes": 0,
-      "pct": 48.3,
-      "roi": -7.8
+      "pct": 51.6,
+      "roi": -1.5
     },
     "totals": {
-      "wins": 19,
-      "losses": 14,
+      "wins": 20,
+      "losses": 15,
       "pushes": 0,
-      "pct": 57.6,
-      "roi": 9.9
+      "pct": 57.1,
+      "roi": 9.1
     },
     "moneylines": {
-      "wins": 41,
-      "losses": 22,
+      "wins": 42,
+      "losses": 23,
       "pushes": 0,
-      "pct": 65.1,
-      "roi": 24.2
+      "pct": 64.6,
+      "roi": 23.4
     },
     "best_bets": {
-      "wins": 63,
-      "losses": 37,
+      "wins": 64,
+      "losses": 36,
       "pushes": 0,
-      "pct": 63.0,
-      "roi": 20.3
+      "pct": 64.0,
+      "roi": 22.2
     },
     "props": {
       "wins": 27,
@@ -43,32 +43,32 @@
     {
       "date": "2026-03-01",
       "spreads": {
-        "wins": 2,
+        "wins": 4,
         "losses": 0,
         "pushes": 0,
-        "record": "2-0",
+        "record": "4-0",
         "pct": 100.0
       },
       "totals": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 2,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-1",
+        "record": "2-2",
         "pct": 50.0
       },
       "moneylines": {
-        "wins": 2,
-        "losses": 0,
-        "pushes": 0,
-        "record": "2-0",
-        "pct": 100.0
-      },
-      "best_bets": {
-        "wins": 4,
+        "wins": 3,
         "losses": 1,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "3-1",
+        "pct": 75.0
+      },
+      "best_bets": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -88,8 +88,7 @@
           "pick": "UNDER 227.5",
           "result": "89-114",
           "hit": true,
-          "confidence": 52.1,
-          "best_bet": true
+          "confidence": 52.1
         },
         {
           "date": "2026-03-01",
@@ -99,6 +98,35 @@
           "result": "89-114",
           "hit": true,
           "confidence": 50.4
+        },
+        {
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "CLE @ BKN",
+          "pick": "BKN +11.0",
+          "result": "106-102",
+          "hit": true,
+          "confidence": 74.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "total",
+          "game": "CLE @ BKN",
+          "pick": "OVER 222.5",
+          "result": "106-102",
+          "hit": false,
+          "confidence": 54.8
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "CLE @ BKN",
+          "pick": "CLE",
+          "result": "106-102",
+          "hit": true,
+          "confidence": 65.7,
+          "best_bet": true
         },
         {
           "date": "2026-03-01",
@@ -117,8 +145,7 @@
           "pick": "OVER 228.5",
           "result": "97-120",
           "hit": false,
-          "confidence": 53.1,
-          "best_bet": true
+          "confidence": 53.1
         },
         {
           "date": "2026-03-01",
@@ -129,6 +156,33 @@
           "hit": true,
           "confidence": 58.4,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "MIN @ DEN",
+          "pick": "MIN +2.5",
+          "result": "117-108",
+          "hit": true,
+          "confidence": 52.7
+        },
+        {
+          "date": "2026-03-01",
+          "type": "total",
+          "game": "MIN @ DEN",
+          "pick": "UNDER 237.5",
+          "result": "117-108",
+          "hit": true,
+          "confidence": 56.0
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "MIN @ DEN",
+          "pick": "DEN",
+          "result": "117-108",
+          "hit": false,
+          "confidence": 51.1
         }
       ]
     },
