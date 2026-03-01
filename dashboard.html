@@ -2588,6 +2588,59 @@
       return projections;
     }
 
+    function mergeResultsIntoProps(props, resultsData, dateStr) {
+      if (!resultsData || !resultsData.days) return props;
+
+      const day = resultsData.days.find(d => d.date === dateStr);
+      if (!day || !day.picks) return props;
+
+      // Build lookup from results: "player|prop|line" -> pick data
+      const resultsByKey = {};
+      for (const pick of day.picks) {
+        if (pick.type !== 'prop') continue;
+        const key = (pick.player || '') + '|' + (pick.prop || '') + '|' + pick.line;
+        resultsByKey[key] = pick;
+      }
+
+      // Enrich existing props with grading data
+      const matchedKeys = new Set();
+      for (const p of props) {
+        const key = (p.player || '') + '|' + (p.prop || '') + '|' + p.line;
+        const r = resultsByKey[key];
+        if (r) {
+          p.actual = typeof r.result === 'number' ? r.result : null;
+          p.result = r.hit === true ? 'WIN' : r.hit === false ? 'LOSS' : r.hit === null ? 'PUSH' : null;
+          matchedKeys.add(key);
+        }
+      }
+
+      // Add graded props from results that aren't in the archive
+      for (const [key, pick] of Object.entries(resultsByKey)) {
+        if (matchedKeys.has(key)) continue;
+        const match = (pick.pick || '').match(/^(\w+)\s+(OVER|UNDER)\s+([\d.]+)$/i);
+        if (!match) continue;
+        const [, , direction, lineStr] = match;
+        props.push({
+          player: pick.player || 'Unknown',
+          team: pick.team || '',
+          prop: (pick.prop || '').toUpperCase(),
+          direction: direction.toUpperCase(),
+          line: parseFloat(lineStr),
+          projection: parseFloat(lineStr),
+          confidence: pick.confidence || 0,
+          ev: 0,
+          diff: 0,
+          actual: typeof pick.result === 'number' ? pick.result : null,
+          result: pick.hit === true ? 'WIN' : pick.hit === false ? 'LOSS' : pick.hit === null ? 'PUSH' : null,
+          edge: pick.edge || '',
+          best_bet: pick.best_bet || false,
+          _isHistorical: true
+        });
+      }
+
+      return props;
+    }
+
     // ── Bet Tracking (localStorage) ──
     const LS_SETTINGS = 'efe_user_settings';
     const LS_BETS = 'efe_tracked_bets';
@@ -4619,6 +4672,11 @@
           ncaabGames = mergeResultsIntoProjections(ncaabGames, ncaabHistoricalResults, date);
         }
 
+        // Merge grading results into archive props (also adds graded props missing from archive)
+        if (historicalResults) {
+          archiveProps = mergeResultsIntoProps(archiveProps, historicalResults, date);
+        }
+
         historicalGamesCache[date] = games;
         historicalNhlCache[date] = nhlGames;
         historicalNcaabCache[date] = ncaabGames;
@@ -5764,6 +5822,14 @@
         projections._stale = false;
         topPicks = data.top_picks || [];
         recommendations = data.recommendations || null;
+
+        // Merge grading results into props so W/L badges render
+        if (projections.length > 0) {
+          if (!historicalResults) await loadHistoricalResults('nba');
+          if (historicalResults) {
+            mergeResultsIntoProps(projections, historicalResults, dataDate || today);
+          }
+        }
 
         if (data.date) {
           const d = new Date(data.date + 'T12:00:00');
