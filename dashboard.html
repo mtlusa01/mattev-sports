@@ -4644,6 +4644,8 @@
         // Merge grading results into archive props (also adds graded props missing from archive)
         if (historicalResults) {
           archiveProps = mergeResultsIntoProps(archiveProps, historicalResults, date);
+          // For historical dates, only show props that have been graded
+          archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
         }
 
         historicalGamesCache[date] = games;
