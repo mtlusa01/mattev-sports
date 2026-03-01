@@ -20,8 +20,10 @@
       --text-muted: #6b7280;
       --brand: #dc2626;
       --brand-light: #ef4444;
+      --brand-glow: rgba(220, 38, 38, 0.15);
       --accent: #10b981;
       --accent-light: #34d399;
+      --accent-glow: rgba(16, 185, 129, 0.15);
       --red: #ef4444;
       --red-light: #f87171;
       --yellow: #f59e0b;
@@ -44,6 +46,36 @@
       background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(220, 38, 38, 0.08), transparent);
       pointer-events: none; z-index: 0;
     }
+
+    /* ── Skeleton Loading ── */
+    @keyframes shimmer {
+      0% { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-tertiary) 25%, rgba(255,255,255,0.04) 50%, var(--bg-tertiary) 75%);
+      background-size: 800px 100%;
+      animation: shimmer 1.8s ease-in-out infinite;
+      border-radius: 6px;
+    }
+    .skeleton-text { height: 14px; width: 60%; margin: 6px 0; }
+    .skeleton-lg { height: 28px; width: 40%; margin: 8px 0; }
+    .skeleton-bar { height: 6px; width: 100%; margin-top: 10px; }
+
+    /* ── Entrance Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in {
+      opacity: 0;
+      animation: fadeUp 0.4s ease-out forwards;
+    }
+    .animate-in:nth-child(1) { animation-delay: 0.05s; }
+    .animate-in:nth-child(2) { animation-delay: 0.1s; }
+    .animate-in:nth-child(3) { animation-delay: 0.15s; }
+    .animate-in:nth-child(4) { animation-delay: 0.2s; }
+    .animate-in:nth-child(5) { animation-delay: 0.25s; }
 
     /* ── Navigation ── */
     .top-nav {
@@ -84,6 +116,32 @@
     }
     .signout-btn:hover { border-color: rgba(239,68,68,0.3); color: var(--red-light); background: rgba(239,68,68,0.06); }
 
+    /* ── Mobile Menu ── */
+    .mobile-menu-btn {
+      display: none; background: none; border: none; color: var(--text-secondary);
+      cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.2s;
+    }
+    .mobile-menu-btn:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+    .mobile-menu-btn svg { width: 22px; height: 22px; display: block; }
+    .mobile-nav {
+      display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 999;
+      background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border); padding: 8px 16px 16px;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a {
+      display: block; padding: 12px 16px; color: var(--text-secondary); text-decoration: none;
+      font-size: 15px; font-weight: 500; border-radius: 8px; transition: all 0.2s;
+    }
+    .mobile-nav a:hover, .mobile-nav a.active { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+    .mobile-nav a.active { border-left: 2px solid var(--brand); }
+    .mobile-nav-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px 0; margin-top: 8px; border-top: 1px solid var(--border);
+    }
+    .mobile-user-info { display: flex; align-items: center; gap: 10px; }
+    .mobile-user-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
     /* ── Page Layout ── */
     .dash-container { max-width: 1200px; margin: 0 auto; padding: 84px 20px 40px; position: relative; z-index: 1; }
 
@@ -97,9 +155,14 @@
 
     /* ── Portfolio Card ── */
     .portfolio-card {
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0; align-items: center;
-      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(17,17,24,0.8) 100%);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px; display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0; align-items: center;
+      margin-bottom: 24px; position: relative; overflow: hidden;
+    }
+    .portfolio-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(220,38,38,0.3), transparent);
     }
     .portfolio-divider { background: var(--border); align-self: stretch; }
     .portfolio-section { padding: 0 20px; }
@@ -112,10 +175,10 @@
     .pf-sub.negative { color: var(--red-light); }
     .pf-sub.neutral { color: var(--text-muted); }
     .pf-goal-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; margin-top: 8px; overflow: hidden; }
-    .pf-goal-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
-    .pf-goal-fill.on-track { background: var(--accent); }
-    .pf-goal-fill.behind { background: var(--yellow); }
-    .pf-goal-fill.over { background: var(--accent-light); }
+    .pf-goal-fill { height: 100%; border-radius: 3px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .pf-goal-fill.on-track { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+    .pf-goal-fill.behind { background: linear-gradient(90deg, #d97706, var(--yellow)); }
+    .pf-goal-fill.over { background: linear-gradient(90deg, var(--accent), #6ee7b7); }
     .pf-capacity-row { display: flex; gap: 16px; margin-top: 6px; }
     .pf-cap-item { display: flex; align-items: center; gap: 4px; }
     .pf-cap-dot { width: 6px; height: 6px; border-radius: 50%; }
@@ -127,34 +190,90 @@
     /* ── Dashboard Grid ── */
     .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     .dash-card {
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 14px; padding: 20px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .dash-card:hover {
+      border-color: var(--border-light);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+    .dash-card-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
     }
     .dash-card-title {
       font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;
-      letter-spacing: 0.04em; margin-bottom: 16px;
+      letter-spacing: 0.04em; margin-bottom: 0;
     }
+    .dash-card-badge {
+      font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+      text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-live { background: rgba(239,68,68,0.12); color: var(--red-light); }
+    .badge-count { background: rgba(59,130,246,0.12); color: var(--blue); }
     .dash-card.full-width { grid-column: 1 / -1; }
+
+    /* ── Today's Slate ── */
+    .slate-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; background: var(--bg-tertiary); border-radius: 10px;
+      margin-bottom: 8px; transition: background 0.2s;
+    }
+    .slate-row:last-child { margin-bottom: 0; }
+    .slate-row:hover { background: var(--bg-elevated); }
+    .slate-sport-icon {
+      width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .slate-sport-icon.nba { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); }
+    .slate-sport-icon.ncaab { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(59,130,246,0.05)); }
+    .slate-sport-icon.nhl { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); }
+    .slate-sport-icon.props { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(245,158,11,0.05)); }
+    .slate-info { flex: 1; }
+    .slate-sport { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .slate-detail { font-size: 12px; color: var(--text-muted); }
+    .slate-count {
+      font-size: 20px; font-weight: 800; color: var(--text-primary); min-width: 28px; text-align: right;
+    }
+    .slate-empty { padding: 20px 0; text-align: center; color: var(--text-muted); font-size: 13px; }
 
     /* ── Quick Actions ── */
     .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .qa-btn {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 12px;
       padding: 14px 16px; background: var(--bg-tertiary); border: 1px solid var(--border);
       border-radius: 10px; color: var(--text-primary); text-decoration: none;
       font-size: 14px; font-weight: 600; transition: all 0.2s;
     }
-    .qa-btn:hover { border-color: var(--border-light); background: var(--bg-elevated); transform: translateY(-1px); }
-    .qa-icon { font-size: 20px; }
+    .qa-btn:hover {
+      border-color: var(--border-light); background: var(--bg-elevated);
+      transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .qa-icon-wrap {
+      width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .qa-icon-wrap.red { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); }
+    .qa-icon-wrap.yellow { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(245,158,11,0.05)); }
+    .qa-icon-wrap.green { background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05)); }
+    .qa-icon-wrap.blue { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(59,130,246,0.05)); }
     .qa-label span { display: block; font-size: 11px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
 
     /* ── Performance Stats ── */
     .perf-row {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; align-items: center; gap: 12px;
       padding: 12px 0; border-bottom: 1px solid var(--border);
     }
     .perf-row:last-child { border-bottom: none; }
-    .perf-label { font-size: 13px; color: var(--text-secondary); }
-    .perf-value { font-size: 14px; font-weight: 700; }
+    .perf-label { font-size: 13px; color: var(--text-secondary); min-width: 80px; }
+    .perf-bar-wrap { flex: 1; height: 8px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; }
+    .perf-bar {
+      height: 100%; border-radius: 4px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      min-width: 2px;
+    }
+    .perf-bar.winning { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+    .perf-bar.losing { background: linear-gradient(90deg, #dc2626, var(--red-light)); }
+    .perf-bar.neutral { background: var(--text-muted); }
+    .perf-value { font-size: 13px; font-weight: 700; min-width: 90px; text-align: right; }
     .perf-value.winning { color: var(--accent-light); }
     .perf-value.losing { color: var(--red-light); }
     .perf-value.neutral { color: var(--text-muted); }
@@ -162,13 +281,24 @@
 
     /* ── Alerts ── */
     .alert-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 12px 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; margin-bottom: 8px; border-radius: 10px;
+      background: var(--bg-tertiary); border-left: 3px solid var(--border);
+      transition: background 0.2s;
     }
-    .alert-item:last-child { border-bottom: none; }
-    .alert-icon { font-size: 16px; margin-top: 2px; }
-    .alert-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+    .alert-item:last-child { margin-bottom: 0; }
+    .alert-item:hover { background: var(--bg-elevated); }
+    .alert-item.alert-info { border-left-color: var(--blue); }
+    .alert-item.alert-action { border-left-color: var(--yellow); }
+    .alert-item.alert-success { border-left-color: var(--accent); }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; flex: 1; }
     .alert-text strong { color: var(--text-primary); }
+    .alert-cta {
+      font-size: 12px; font-weight: 600; color: var(--brand-light); text-decoration: none;
+      white-space: nowrap; padding: 4px 10px; border-radius: 6px; transition: background 0.2s;
+    }
+    .alert-cta:hover { background: rgba(239,68,68,0.08); }
 
     /* ── User Avatar ── */
     .user-avatar {
@@ -190,6 +320,7 @@
       .nav-links { display: none; }
       .user-pill-name, .user-pill-role { display: none; }
       .signout-btn { display: none; }
+      .mobile-menu-btn { display: block; }
     }
   </style>
 </head>
@@ -218,58 +349,100 @@
           </div>
         </div>
         <button class="signout-btn" onclick="handleSignOut()">Sign Out</button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
 
+  <!-- Mobile Nav Drawer -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="dashboard-home.html" class="active">Dashboard</a>
+    <a href="dashboard.html">Projections</a>
+    <a href="results.html">Results</a>
+    <a href="mybets.html">My Bets</a>
+    <div class="mobile-nav-footer">
+      <div class="mobile-user-info">
+        <div class="user-avatar" id="mobile-avatar" style="width:28px;height:28px;font-size:12px;"></div>
+        <span class="mobile-user-name" id="mobile-user-name"></span>
+      </div>
+      <button class="signout-btn" onclick="handleSignOut()">Sign Out</button>
+    </div>
+  </nav>
+
   <div class="dash-container">
     <!-- Greeting -->
-    <div class="dash-greeting">
+    <div class="dash-greeting animate-in">
       <h1 id="greeting-text">Loading...</h1>
       <p id="greeting-sub"></p>
     </div>
 
     <!-- Portfolio Summary -->
-    <div id="portfolio-card"></div>
+    <div id="portfolio-card" class="animate-in"></div>
 
     <!-- Dashboard Grid -->
     <div class="dash-grid">
+      <!-- Today's Slate -->
+      <div class="dash-card animate-in">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Today's Slate</div>
+          <span class="dash-card-badge badge-count" id="slate-badge" style="display:none"></span>
+        </div>
+        <div id="slate-section">
+          <div class="skeleton skeleton-text" style="width:80%"></div>
+          <div class="skeleton skeleton-text" style="width:65%;margin-top:12px"></div>
+          <div class="skeleton skeleton-text" style="width:70%;margin-top:12px"></div>
+        </div>
+      </div>
+
       <!-- Quick Actions -->
-      <div class="dash-card">
-        <div class="dash-card-title">Quick Actions</div>
+      <div class="dash-card animate-in">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Quick Actions</div>
+        </div>
         <div class="qa-grid">
           <a href="dashboard.html" class="qa-btn">
-            <span class="qa-icon">&#128200;</span>
-            <div class="qa-label">Game Projections<span>Today's picks</span></div>
+            <div class="qa-icon-wrap red">&#128200;</div>
+            <div class="qa-label">Games<span>Projections</span></div>
           </a>
           <a href="dashboard.html#player-props" class="qa-btn">
-            <span class="qa-icon">&#127942;</span>
-            <div class="qa-label">Player Props<span>AI-powered picks</span></div>
+            <div class="qa-icon-wrap yellow">&#127942;</div>
+            <div class="qa-label">Props<span>Player picks</span></div>
           </a>
           <a href="mybets.html" class="qa-btn">
-            <span class="qa-icon">&#128176;</span>
+            <div class="qa-icon-wrap green">&#128176;</div>
             <div class="qa-label">My Bets<span>Track & grade</span></div>
           </a>
           <a href="results.html" class="qa-btn">
-            <span class="qa-icon">&#128202;</span>
+            <div class="qa-icon-wrap blue">&#128202;</div>
             <div class="qa-label">Results<span>Full history</span></div>
           </a>
         </div>
       </div>
 
       <!-- Performance Summary -->
-      <div class="dash-card">
-        <div class="dash-card-title">Recent Performance</div>
+      <div class="dash-card animate-in">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Performance</div>
+        </div>
         <div id="perf-summary">
-          <div class="perf-empty">Loading performance data...</div>
+          <div class="skeleton skeleton-text" style="width:90%"></div>
+          <div class="skeleton skeleton-text" style="width:75%;margin-top:14px"></div>
+          <div class="skeleton skeleton-text" style="width:60%;margin-top:14px"></div>
         </div>
       </div>
 
       <!-- Today's Alerts -->
-      <div class="dash-card full-width">
-        <div class="dash-card-title">Today's Alerts</div>
+      <div class="dash-card animate-in">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Alerts</div>
+        </div>
         <div id="alerts-section">
-          <div class="perf-empty">Checking for updates...</div>
+          <div class="skeleton skeleton-text" style="width:85%"></div>
+          <div class="skeleton skeleton-text" style="width:70%;margin-top:14px"></div>
         </div>
       </div>
     </div>
@@ -283,6 +456,11 @@
   <script src="js/betting/kellyCalculator.js"></script>
   <script>
     const RESULTS_CUTOFF = '2026-02-27';
+
+    // ── Mobile Menu Toggle ──
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.toggle('open');
+    });
 
     // ── Bet Settings (localStorage) ──
     function getBetSettings() {
@@ -319,7 +497,14 @@
       const nameEl = document.getElementById('user-pill-name');
       if (nameEl) nameEl.textContent = name.split(' ')[0];
 
+      // Mobile nav user info
+      const mobileAvatar = document.getElementById('mobile-avatar');
+      if (mobileAvatar) mobileAvatar.textContent = initial;
+      const mobileNameEl = document.getElementById('mobile-user-name');
+      if (mobileNameEl) mobileNameEl.textContent = name.split(' ')[0];
+
       renderPortfolio();
+      loadSlate();
       loadPerformance();
       loadAlerts();
     });
@@ -340,7 +525,6 @@
         bankroll = ls.bankroll || 0;
         unitSize = ls.unit_size || 10;
       }
-      // Try userProfile from auth.js
       if (!bankroll && typeof userProfile !== 'undefined' && userProfile?.settings) {
         bankroll = userProfile.settings.bankroll || 0;
         unitSize = userProfile.settings.unitSize || 10;
@@ -408,6 +592,98 @@
       </div>`;
     }
 
+    // ── Today's Slate ──
+    async function loadSlate() {
+      const container = document.getElementById('slate-section');
+      const badge = document.getElementById('slate-badge');
+      if (!container) return;
+
+      const today = new Date();
+      const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+      const slate = [];
+      let totalGames = 0;
+
+      try {
+        // NBA Games
+        const gpResp = await fetch('game_projections.json?t=' + Date.now());
+        if (gpResp.ok) {
+          const gp = await gpResp.json();
+          if (gp.date === todayStr && gp.games?.length > 0) {
+            const bestBets = gp.games.filter(g =>
+              (g.spread_conf && g.spread_conf >= 60) ||
+              (g.total_conf && g.total_conf >= 60) ||
+              (g.ml_conf && g.ml_conf >= 60)
+            ).length;
+            const firstGame = gp.games.find(g => g.commence_time);
+            let timeStr = '';
+            if (firstGame?.commence_time) {
+              const t = new Date(firstGame.commence_time);
+              timeStr = 'First tip ' + t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+            }
+            slate.push({ sport: 'NBA Games', icon: '&#127936;', cls: 'nba', count: gp.games.length,
+              detail: bestBets > 0 ? `${bestBets} best bet${bestBets !== 1 ? 's' : ''}` + (timeStr ? ' \u00B7 ' + timeStr : '') : timeStr || 'Projections ready' });
+            totalGames += gp.games.length;
+          }
+        }
+
+        // Player Props
+        const propsResp = await fetch('projections.json?t=' + Date.now());
+        if (propsResp.ok) {
+          const props = await propsResp.json();
+          if (props.date === todayStr && props.projections?.length > 0) {
+            const highConf = props.projections.filter(p => p.confidence >= 70).length;
+            slate.push({ sport: 'Player Props', icon: '&#127942;', cls: 'props', count: props.projections.length,
+              detail: highConf > 0 ? `${highConf} high-confidence pick${highConf !== 1 ? 's' : ''}` : 'AI-powered picks' });
+            totalGames += props.projections.length;
+          }
+        }
+
+        // NCAAB
+        const ncaabResp = await fetch('ncaab_projections.json?t=' + Date.now());
+        if (ncaabResp.ok) {
+          const ncaab = await ncaabResp.json();
+          if (ncaab.date === todayStr && ncaab.games?.length > 0) {
+            slate.push({ sport: 'NCAAB', icon: '&#127944;', cls: 'ncaab', count: ncaab.games.length,
+              detail: 'College basketball' });
+            totalGames += ncaab.games.length;
+          }
+        }
+
+        // NHL
+        const nhlResp = await fetch('nhl_projections.json?t=' + Date.now());
+        if (nhlResp.ok) {
+          const nhl = await nhlResp.json();
+          if (nhl.date === todayStr && nhl.games?.length > 0) {
+            slate.push({ sport: 'NHL', icon: '&#127954;', cls: 'nhl', count: nhl.games.length,
+              detail: 'Hockey predictions' });
+            totalGames += nhl.games.length;
+          }
+        }
+      } catch (e) {}
+
+      if (slate.length === 0) {
+        container.innerHTML = '<div class="slate-empty">No projections posted yet today. Check back soon.</div>';
+        return;
+      }
+
+      if (badge) {
+        badge.textContent = totalGames + ' total';
+        badge.style.display = '';
+      }
+
+      container.innerHTML = slate.map(s => `
+        <div class="slate-row">
+          <div class="slate-sport-icon ${s.cls}">${s.icon}</div>
+          <div class="slate-info">
+            <div class="slate-sport">${s.sport}</div>
+            <div class="slate-detail">${s.detail}</div>
+          </div>
+          <div class="slate-count">${s.count}</div>
+        </div>
+      `).join('');
+    }
+
     // ── Performance Summary ──
     async function loadPerformance() {
       const container = document.getElementById('perf-summary');
@@ -448,14 +724,22 @@
           const t = s.wins + s.losses;
           const pct = t > 0 ? (s.wins / t * 100).toFixed(1) : '0.0';
           const cls = t === 0 ? 'neutral' : parseFloat(pct) > 53 ? 'winning' : parseFloat(pct) < 47 ? 'losing' : 'neutral';
-          html += `<div class="perf-row"><span class="perf-label">${s.label} (${s.days}d)</span><span class="perf-value ${cls}">${s.wins}-${s.losses} (${pct}%)</span></div>`;
+          html += `<div class="perf-row">
+            <span class="perf-label">${s.label}</span>
+            <div class="perf-bar-wrap"><div class="perf-bar ${cls}" style="width:${Math.max(2, parseFloat(pct))}%"></div></div>
+            <span class="perf-value ${cls}">${s.wins}-${s.losses} (${pct}%)</span>
+          </div>`;
           totalW += s.wins;
           totalL += s.losses;
         }
         const totalT = totalW + totalL;
         const totalPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : '0.0';
         const totalCls = totalT === 0 ? 'neutral' : parseFloat(totalPct) > 53 ? 'winning' : parseFloat(totalPct) < 47 ? 'losing' : 'neutral';
-        html += `<div class="perf-row" style="border-top:1px solid var(--border-light);margin-top:4px;padding-top:14px;"><span class="perf-label" style="font-weight:700;color:var(--text-primary);">Overall</span><span class="perf-value ${totalCls}">${totalW}-${totalL} (${totalPct}%)</span></div>`;
+        html += `<div class="perf-row" style="border-top:1px solid var(--border-light);margin-top:4px;padding-top:14px;">
+          <span class="perf-label" style="font-weight:700;color:var(--text-primary);">Overall</span>
+          <div class="perf-bar-wrap"><div class="perf-bar ${totalCls}" style="width:${Math.max(2, parseFloat(totalPct))}%"></div></div>
+          <span class="perf-value ${totalCls}">${totalW}-${totalL} (${totalPct}%)</span>
+        </div>`;
 
         container.innerHTML = html;
       } catch (e) {
@@ -473,12 +757,13 @@
       const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
 
       try {
-        // Check for today's projections
         const gpResp = await fetch('game_projections.json?t=' + Date.now());
         if (gpResp.ok) {
           const gp = await gpResp.json();
           if (gp.date === todayStr && gp.games?.length > 0) {
-            alerts.push({ icon: '&#128200;', text: `<strong>${gp.games.length} NBA game projections</strong> ready for today` });
+            alerts.push({ type: 'info', icon: '&#128200;',
+              text: `<strong>${gp.games.length} NBA game projections</strong> ready for today`,
+              cta: 'View', href: 'dashboard.html' });
           }
         }
 
@@ -486,25 +771,33 @@
         if (propsResp.ok) {
           const props = await propsResp.json();
           if (props.date === todayStr && props.projections?.length > 0) {
-            alerts.push({ icon: '&#127942;', text: `<strong>${props.projections.length} player prop projections</strong> available` });
+            alerts.push({ type: 'info', icon: '&#127942;',
+              text: `<strong>${props.projections.length} player prop projections</strong> available`,
+              cta: 'View', href: 'dashboard.html#player-props' });
           }
         }
 
-        // Check pending bets
         const bets = getTrackedBets();
         const pending = bets.filter(b => !b.result && b.status !== 'graded');
         if (pending.length > 0) {
-          alerts.push({ icon: '&#9200;', text: `You have <strong>${pending.length} pending bet${pending.length !== 1 ? 's' : ''}</strong> awaiting results` });
+          alerts.push({ type: 'action', icon: '&#9200;',
+            text: `You have <strong>${pending.length} pending bet${pending.length !== 1 ? 's' : ''}</strong> awaiting results`,
+            cta: 'Track', href: 'mybets.html' });
         }
       } catch (e) {}
 
       if (alerts.length === 0) {
-        alerts.push({ icon: '&#9989;', text: 'All caught up! Check back when new projections are posted.' });
+        alerts.push({ type: 'success', icon: '&#9989;',
+          text: 'All caught up! Check back when new projections are posted.', cta: null });
       }
 
-      container.innerHTML = alerts.map(a =>
-        `<div class="alert-item"><span class="alert-icon">${a.icon}</span><span class="alert-text">${a.text}</span></div>`
-      ).join('');
+      container.innerHTML = alerts.map(a => `
+        <div class="alert-item alert-${a.type}">
+          <span class="alert-icon">${a.icon}</span>
+          <span class="alert-text">${a.text}</span>
+          ${a.cta ? `<a href="${a.href}" class="alert-cta">${a.cta} &rarr;</a>` : ''}
+        </div>
+      `).join('');
     }
   </script>
 </body>
