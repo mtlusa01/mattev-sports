@@ -1302,58 +1302,6 @@
       .pf-value { font-size: 24px; }
     }
 
-    .yesterday-results { margin: 0 auto 16px; max-width: 1200px; padding: 0 16px; }
-    .yesterday-results-inner {
-      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
-    }
-    .yesterday-results-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 16px; cursor: pointer; user-select: none;
-    }
-    .yesterday-results-header:hover { background: var(--bg-tertiary); }
-    .yr-title { font-size: 14px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
-    .yr-date { font-size: 12px; color: var(--text-muted); font-weight: 400; }
-    .yr-overall { font-size: 14px; font-weight: 700; }
-    .yr-overall.winning { color: var(--accent-light); }
-    .yr-overall.losing { color: var(--red-light); }
-    .yr-overall.even { color: var(--text-muted); }
-    .yr-chevron { color: var(--text-muted); font-size: 12px; transition: transform 0.2s; }
-    .yr-chevron.open { transform: rotate(180deg); }
-    .yr-body { display: none; border-top: 1px solid var(--border); }
-    .yr-body.open { display: block; }
-    .yr-sport-row {
-      display: grid; grid-template-columns: 140px 1fr; gap: 0;
-      border-bottom: 1px solid var(--border); align-items: stretch;
-    }
-    .yr-sport-row:last-child { border-bottom: none; }
-    .yr-sport-label {
-      display: flex; align-items: center; gap: 8px; padding: 10px 16px;
-      font-size: 13px; font-weight: 600; color: var(--text-secondary);
-      background: var(--bg-tertiary); border-right: 1px solid var(--border);
-    }
-    .yr-sport-cells {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-    }
-    .yr-cell {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 8px 6px; gap: 1px; border-right: 1px solid var(--border);
-    }
-    .yr-cell:last-child { border-right: none; }
-    .yr-cell-label { font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .yr-cell-record { font-size: 14px; font-weight: 700; color: var(--text-primary); }
-    .yr-cell-pct { font-size: 10px; font-weight: 600; }
-    .yr-cell-pct.winning { color: var(--accent-light); }
-    .yr-cell-pct.losing { color: var(--red-light); }
-    .yr-cell-pct.even { color: var(--text-muted); }
-    .yr-no-data { padding: 10px 16px; text-align: center; color: var(--text-muted); font-size: 12px; }
-    @media (max-width: 768px) {
-      .yesterday-results { padding: 0 8px; }
-      .yr-sport-row { grid-template-columns: 100px 1fr; }
-      .yr-sport-label { font-size: 11px; padding: 8px 10px; }
-      .yr-cell { padding: 6px 4px; }
-      .yr-cell-record { font-size: 12px; }
-    }
-
     /* ── Graded Props Table ── */
     .graded-props-wrap { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .graded-props-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; background: var(--bg-tertiary); border-bottom: 1px solid var(--border); }
@@ -1971,9 +1919,6 @@
 
   <!-- Portfolio Summary -->
   <div class="portfolio-summary" id="portfolio-summary" style="display:none;"></div>
-
-  <!-- Yesterday's Results Banner -->
-  <div class="yesterday-results" id="yesterday-results" style="display:none;"></div>
 
   <main>
     <section class="picks-section">
@@ -5832,115 +5777,6 @@
       }
     }
 
-    // ── Unified Yesterday's Results Banner ──
-    async function loadYesterdayResults() {
-      const container = document.getElementById('yesterday-results');
-      if (!container) return;
-
-      // Load all results files in parallel
-      const [nbaData, ncaabData, nhlData] = await Promise.all([
-        loadHistoricalResults('nba'),
-        loadHistoricalResults('ncaab'),
-        loadHistoricalResults('nhl'),
-      ]);
-
-      // Extract latest day from each sport
-      const sports = [];
-      if (nbaData && nbaData.days && nbaData.days.length > 0) {
-        const d = nbaData.days[0];
-        sports.push({ label: 'NBA', date: d.date, cats: d });
-        // Add props row if NBA results have prop data
-        const props = d.props;
-        if (props && (props.wins || props.losses)) {
-          sports.push({ label: 'Props', date: d.date, cats: { moneylines: props }, propsOnly: true });
-        }
-      }
-      if (ncaabData && ncaabData.days && ncaabData.days.length > 0) {
-        const d = ncaabData.days[0];
-        sports.push({ label: 'NCAAB', date: d.date, cats: d });
-      }
-      if (nhlData && nhlData.days && nhlData.days.length > 0) {
-        const d = nhlData.days[0];
-        sports.push({ label: 'NHL', date: d.date, cats: d });
-      }
-
-      if (sports.length === 0) { container.style.display = 'none'; return; }
-
-      // Calculate overall record across all sports (skip propsOnly to avoid double-counting)
-      let totalW = 0, totalL = 0;
-      for (const s of sports) {
-        if (s.propsOnly) continue;
-        for (const cat of ['moneylines', 'spreads', 'totals', 'props']) {
-          const c = s.cats[cat];
-          if (c) { totalW += (c.wins || 0); totalL += (c.losses || 0); }
-        }
-      }
-      const totalDecided = totalW + totalL;
-      const overallPct = totalDecided > 0 ? (totalW / totalDecided * 100).toFixed(1) : '0.0';
-      const overallCls = totalDecided === 0 ? 'even' : parseFloat(overallPct) > 55 ? 'winning' : parseFloat(overallPct) < 45 ? 'losing' : 'even';
-
-      // Helper for a single cell
-      function yrCell(label, cat) {
-        const w = cat ? (cat.wins || 0) : 0;
-        const l = cat ? (cat.losses || 0) : 0;
-        const p = cat ? (cat.pushes || 0) : 0;
-        const d = w + l;
-        const pct = d > 0 ? (w / d * 100).toFixed(1) : '--';
-        const cls = d === 0 ? 'even' : parseFloat(pct) > 55 ? 'winning' : parseFloat(pct) < 45 ? 'losing' : 'even';
-        const rec = p > 0 ? `${w}-${l}-${p}` : d > 0 ? `${w}-${l}` : '--';
-        return `<div class="yr-cell"><span class="yr-cell-label">${label}</span><span class="yr-cell-record">${rec}</span>${d > 0 ? `<span class="yr-cell-pct ${cls}">${pct}%</span>` : ''}</div>`;
-      }
-
-      // Build sport rows
-      let rows = '';
-      for (const s of sports) {
-        if (s.propsOnly) {
-          // Props only have W/L, show in a single merged row
-          const c = s.cats.moneylines || {};
-          const w = c.wins || 0, l = c.losses || 0, p = c.pushes || 0;
-          const d = w + l;
-          const pct = d > 0 ? (w / d * 100).toFixed(1) : '--';
-          const cls = d === 0 ? 'even' : parseFloat(pct) > 55 ? 'winning' : parseFloat(pct) < 45 ? 'losing' : 'even';
-          const rec = p > 0 ? `${w}-${l}-${p}` : `${w}-${l}`;
-          rows += `<div class="yr-sport-row">
-            <div class="yr-sport-label">${s.label}</div>
-            <div class="yr-sport-cells" style="grid-template-columns:1fr;">
-              <div class="yr-cell"><span class="yr-cell-label">Record</span><span class="yr-cell-record">${rec}</span>${d > 0 ? `<span class="yr-cell-pct ${cls}">${pct}%</span>` : ''}</div>
-            </div>
-          </div>`;
-        } else {
-          rows += `<div class="yr-sport-row">
-            <div class="yr-sport-label">${s.label}<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">${s.date}</span></div>
-            <div class="yr-sport-cells">
-              ${yrCell('ML', s.cats.moneylines)}
-              ${yrCell('Spreads', s.cats.spreads)}
-              ${yrCell('Totals', s.cats.totals)}
-              ${yrCell('Best Bets', s.cats.best_bets)}
-            </div>
-          </div>`;
-        }
-      }
-
-      container.innerHTML = `<div class="yesterday-results-inner">
-        <div class="yesterday-results-header" onclick="toggleYesterdayResults()">
-          <div class="yr-title">Recent Results</div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="yr-overall ${overallCls}">${totalW}-${totalL} (${overallPct}%)</span>
-            <span class="yr-chevron" id="yr-chevron">&#9660;</span>
-          </div>
-        </div>
-        <div class="yr-body" id="yr-body">${rows}</div>
-      </div>`;
-      container.style.display = '';
-    }
-
-    function toggleYesterdayResults() {
-      const body = document.getElementById('yr-body');
-      const chev = document.getElementById('yr-chevron');
-      if (body) body.classList.toggle('open');
-      if (chev) chev.classList.toggle('open');
-    }
-
     // ── Portfolio Summary ──
     function renderPortfolioSummary() {
       const container = document.getElementById('portfolio-summary');
@@ -6039,7 +5875,6 @@
     loadNhlGameProjections();
     loadNcaabGameProjections();
     loadInjuries();
-    loadYesterdayResults();
     // renderPortfolioSummary() called after kellyCalculator.js loads (see onAuthStateChanged below)
   </script>
   <!-- Track Bet Modal -->
