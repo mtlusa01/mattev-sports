@@ -1,6 +1,7 @@
 {
   "date": "2026-03-01",
   "sport": "NBA",
+<<<<<<< Updated upstream
   "locked_at": "2026-03-01T05:50:43",
   "updated": "2026-03-01T05:50:43",
   "projections": [
@@ -617,10 +618,102 @@
           "under": {
             "line": 6.5,
             "odds": 102
+=======
+  "locked_at": "2026-02-24T13:44:28",
+  "updated": "2026-03-01T04:58:25",
+  "projections": [
+    {
+      "player": "Luka Doncic",
+      "team": "LAL",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 47.5,
+      "projection": 34.8,
+      "confidence": 75,
+      "ev": 7.6,
+      "diff": -12.7,
+      "market_odds": -105,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 47.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 47.5,
+            "odds": -112
           }
         },
         "draftkings": {
           "over": {
+            "line": 47.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 47.5,
+            "odds": -124
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 46.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 46.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "generated_at": "2026-02-24T13:44:28",
+      "edge": "GOOD",
+      "l5_avg": 34.8,
+      "l10_avg": 34.8,
+      "l5_hit_rate": 75,
+      "l10_hit_rate": 75,
+      "l5_hit_count": 3,
+      "l10_hit_count": 3,
+      "season_avg": 34.8,
+      "insight": "Has gone UNDER 47.5 PRA in 3/4 recent games (34.8 avg).",
+      "insight_strength": "good",
+      "last_10_values": [
+        33,
+        55,
+        16,
+        35
+      ],
+      "pick_score": 35.0,
+      "score_factors": [
+        "+12.7 edge"
+      ]
+    },
+    {
+      "player": "Scoot Henderson",
+      "team": "POR",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 25.5,
+      "projection": 21.0,
+      "confidence": 71.8,
+      "ev": 4.8,
+      "diff": -4.5,
+      "market_odds": -107,
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 25.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -110
+>>>>>>> Stashed changes
+          }
+        },
+        "draftkings": {
+          "over": {
+<<<<<<< Updated upstream
             "line": 6.5,
             "odds": -115
           },
@@ -632,12 +725,36 @@
       },
       "best_book": "fanduel",
       "generated_at": "2026-03-01T05:50:43",
+=======
+            "line": 25.5,
+            "odds": -123
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -107
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 25.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -115
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "generated_at": "2026-02-24T13:44:28",
+>>>>>>> Stashed changes
       "edge": "GOOD",
-      "l5_avg": 4.0,
-      "l10_avg": 4.0,
+      "l5_avg": 20.2,
+      "l10_avg": 21.0,
       "l5_hit_rate": 100,
       "l10_hit_rate": 100,
       "l5_hit_count": 5,
+<<<<<<< Updated upstream
       "l10_hit_count": 5,
       "season_avg": 4.0,
       "insight": "Has gone UNDER 6.5 REB in 5/5 recent games (4.0 avg).",
@@ -650,10 +767,31 @@
         4
       ],
       "pick_score": 60.6
+=======
+      "l10_hit_count": 6,
+      "season_avg": 21.0,
+      "insight": "Has gone UNDER 25.5 PRA in 6/6 recent games (21.0 avg).",
+      "insight_strength": "good",
+      "last_10_values": [
+        21,
+        15,
+        20,
+        24,
+        21,
+        25
+      ],
+      "pick_score": 52.3,
+      "score_factors": [
+        "+4.8% EV",
+        "+4.5 edge"
+      ],
+      "top_pick_rank": 2
+>>>>>>> Stashed changes
     }
   ],
   "top_picks": [
     {
+<<<<<<< Updated upstream
       "type": "prop",
       "player": "Desmond Bane",
       "team": "ORL",
@@ -693,10 +831,25 @@
       },
       "best_book": "draftkings",
       "insight": "Has gone OVER 19.5 PTS in 6/7 recent games (27.9 avg).",
+=======
+      "type": "total",
+      "game": "MEM @ IND",
+      "away_team": "MEM",
+      "home_team": "IND",
+      "pick": "UNDER 238.5",
+      "confidence": 75.6,
+      "pick_score": 55.0,
+      "score_factors": [
+        "75.6% total conf",
+        "Very high confidence"
+      ],
+      "commence_time": "2026-03-01T22:10:00Z",
+>>>>>>> Stashed changes
       "top_pick_rank": 1
     },
     {
       "type": "prop",
+<<<<<<< Updated upstream
       "player": "Chet Holmgren",
       "team": "OKC",
       "prop": "PTS",
@@ -710,10 +863,26 @@
       "score_factors": [
         "+4.9% EV",
         "100% L10 hit rate"
+=======
+      "player": "Scoot Henderson",
+      "team": "POR",
+      "prop": "PRA",
+      "direction": "UNDER",
+      "line": 25.5,
+      "projection": 21.0,
+      "diff": -4.5,
+      "ev": 4.8,
+      "confidence": 71.8,
+      "pick_score": 52.3,
+      "score_factors": [
+        "+4.8% EV",
+        "+4.5 edge"
+>>>>>>> Stashed changes
       ],
       "book_odds": {
         "fanduel": {
           "over": {
+<<<<<<< Updated upstream
             "line": 18.5,
             "odds": 102
           },
@@ -804,10 +973,19 @@
           "under": {
             "line": 21.5,
             "odds": -102
+=======
+            "line": 25.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -110
+>>>>>>> Stashed changes
           }
         },
         "draftkings": {
           "over": {
+<<<<<<< Updated upstream
             "line": 21.5,
             "odds": -127
           },
@@ -861,7 +1039,294 @@
       },
       "best_book": "draftkings",
       "insight": "Has gone OVER 26.5 PTS in 7/7 recent games (30.9 avg).",
+=======
+            "line": 25.5,
+            "odds": -123
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -107
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 25.5,
+            "odds": -115
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -115
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": "Has gone UNDER 25.5 PRA in 6/6 recent games (21.0 avg).",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "spread",
+      "game": "CLE @ BKN",
+      "away_team": "CLE",
+      "home_team": "BKN",
+      "pick": "BKN +11.0",
+      "confidence": 74.9,
+      "pick_score": 50.0,
+      "score_factors": [
+        "74.9% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-03-01T20:40:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "ml",
+      "game": "CLE @ BKN",
+      "away_team": "CLE",
+      "home_team": "BKN",
+      "pick": "CLE",
+      "confidence": 65.7,
+      "pick_score": 50.0,
+      "score_factors": [
+        "65.7% ML conf"
+      ],
+      "commence_time": "2026-03-01T20:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "spread",
+      "game": "MIL @ CHI",
+      "away_team": "MIL",
+      "home_team": "CHI",
+      "pick": "CHI +3.5",
+      "confidence": 65.6,
+      "pick_score": 50.0,
+      "score_factors": [
+        "65.6% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-03-01T20:40:00Z",
+>>>>>>> Stashed changes
       "top_pick_rank": 5
     }
-  ]
+  ],
+  "recommendations": {
+    "date": "2026-03-01",
+    "generated_at": "2026-03-01T04:58:25",
+    "game_bets": [
+      {
+        "qualified": true,
+        "score": 190.6,
+        "reasons": [
+          "82.8% confidence",
+          "High confidence"
+        ],
+        "type": "spread",
+        "bet_type": "SPREAD",
+        "game": "OKC @ DAL",
+        "away_team": "OKC",
+        "home_team": "DAL",
+        "pick": "DAL +15.5",
+        "confidence": 82.8,
+        "commence_time": "2026-03-02T01:10:00Z",
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 176.2,
+        "reasons": [
+          "75.6% confidence",
+          "High confidence"
+        ],
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "MEM @ IND",
+        "away_team": "MEM",
+        "home_team": "IND",
+        "pick": "UNDER 238.5",
+        "confidence": 75.6,
+        "commence_time": "2026-03-01T22:10:00Z",
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 174.8,
+        "reasons": [
+          "74.9% confidence",
+          "High confidence"
+        ],
+        "type": "spread",
+        "bet_type": "SPREAD",
+        "game": "CLE @ BKN",
+        "away_team": "CLE",
+        "home_team": "BKN",
+        "pick": "BKN +11.0",
+        "confidence": 74.9,
+        "commence_time": "2026-03-01T20:40:00Z",
+        "rec_rank": 3
+      },
+      {
+        "qualified": true,
+        "score": 168.8,
+        "reasons": [
+          "71.9% confidence",
+          "High confidence"
+        ],
+        "type": "ml",
+        "bet_type": "ML",
+        "game": "NOP @ LAC",
+        "away_team": "NOP",
+        "home_team": "LAC",
+        "pick": "LAC",
+        "confidence": 71.9,
+        "commence_time": "2026-03-02T02:10:00Z",
+        "rec_rank": 4
+      },
+      {
+        "qualified": true,
+        "score": 168.4,
+        "reasons": [
+          "71.7% confidence",
+          "High confidence"
+        ],
+        "type": "spread",
+        "bet_type": "SPREAD",
+        "game": "DET @ ORL",
+        "away_team": "DET",
+        "home_team": "ORL",
+        "pick": "ORL +5.5",
+        "confidence": 71.7,
+        "commence_time": "2026-03-01T23:10:00Z",
+        "rec_rank": 5
+      }
+    ],
+    "props": [
+      {
+        "qualified": true,
+        "score": 47.95,
+        "reasons": [
+          "+7.6% EV",
+          "75% L10 hit rate",
+          "+12.7 edge"
+        ],
+        "type": "prop",
+        "player": "Luka Doncic",
+        "team": "LAL",
+        "prop": "PRA",
+        "direction": "UNDER",
+        "line": 47.5,
+        "projection": 34.8,
+        "diff": -12.7,
+        "confidence": 75,
+        "ev": 7.6,
+        "edge": 12.700000000000003,
+        "pick_score": 35.0,
+        "score_factors": [
+          "+12.7 edge"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 47.5,
+              "odds": -118
+            },
+            "under": {
+              "line": 47.5,
+              "odds": -112
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 47.5,
+              "odds": -106
+            },
+            "under": {
+              "line": 47.5,
+              "odds": -124
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 46.5,
+              "odds": -125
+            },
+            "under": {
+              "line": 46.5,
+              "odds": -105
+            }
+          }
+        },
+        "best_book": "betmgm",
+        "insight": "Has gone UNDER 47.5 PRA in 3/4 recent games (34.8 avg).",
+        "matchup_favorability": "neutral",
+        "l10_hit_rate": 75,
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 37.269999999999996,
+        "reasons": [
+          "100% L10 hit rate",
+          "+4.5 edge",
+          "71.8% confidence"
+        ],
+        "type": "prop",
+        "player": "Scoot Henderson",
+        "team": "POR",
+        "prop": "PRA",
+        "direction": "UNDER",
+        "line": 25.5,
+        "projection": 21.0,
+        "diff": -4.5,
+        "confidence": 71.8,
+        "ev": 4.8,
+        "edge": 4.5,
+        "pick_score": 52.3,
+        "score_factors": [
+          "+4.8% EV",
+          "+4.5 edge"
+        ],
+        "book_odds": {
+          "fanduel": {
+            "over": {
+              "line": 25.5,
+              "odds": -120
+            },
+            "under": {
+              "line": 25.5,
+              "odds": -110
+            }
+          },
+          "draftkings": {
+            "over": {
+              "line": 25.5,
+              "odds": -123
+            },
+            "under": {
+              "line": 25.5,
+              "odds": -107
+            }
+          },
+          "betmgm": {
+            "over": {
+              "line": 25.5,
+              "odds": -115
+            },
+            "under": {
+              "line": 25.5,
+              "odds": -115
+            }
+          }
+        },
+        "best_book": "draftkings",
+        "insight": "Has gone UNDER 25.5 PRA in 6/6 recent games (21.0 avg).",
+        "matchup_favorability": "neutral",
+        "l10_hit_rate": 100,
+        "rec_rank": 2
+      }
+    ],
+    "game_count": 5,
+    "prop_count": 2,
+    "has_recommendations": true,
+    "message": null
+  }
 }
