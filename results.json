@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-01T17:47:07",
+  "updated": "2026-03-01T17:59:36",
   "allTime": {
     "spreads": {
-      "wins": 13,
+      "wins": 14,
       "losses": 15,
       "pushes": 0,
-      "pct": 46.4,
-      "roi": -11.4
+      "pct": 48.3,
+      "roi": -7.8
     },
     "totals": {
       "wins": 19,
-      "losses": 13,
+      "losses": 14,
       "pushes": 0,
-      "pct": 59.4,
-      "roi": 13.4
+      "pct": 57.6,
+      "roi": 9.9
     },
     "moneylines": {
-      "wins": 40,
+      "wins": 41,
       "losses": 22,
       "pushes": 0,
-      "pct": 64.5,
-      "roi": 23.2
+      "pct": 65.1,
+      "roi": 24.2
     },
     "best_bets": {
-      "wins": 62,
-      "losses": 36,
+      "wins": 63,
+      "losses": 37,
       "pushes": 0,
-      "pct": 63.3,
-      "roi": 20.8
+      "pct": 63.0,
+      "roi": 20.3
     },
     "props": {
       "wins": 27,
@@ -43,32 +43,32 @@
     {
       "date": "2026-03-01",
       "spreads": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "totals": {
         "wins": 1,
-        "losses": 0,
+        "losses": 1,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "best_bets": {
-        "wins": 3,
-        "losses": 0,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "3-0",
-        "pct": 100.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -98,7 +98,36 @@
           "pick": "NYK",
           "result": "89-114",
           "hit": true,
-          "confidence": 50.4,
+          "confidence": 50.4
+        },
+        {
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "MIL @ CHI",
+          "pick": "CHI +3.5",
+          "result": "97-120",
+          "hit": true,
+          "confidence": 65.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "total",
+          "game": "MIL @ CHI",
+          "pick": "OVER 228.5",
+          "result": "97-120",
+          "hit": false,
+          "confidence": 53.1,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "MIL @ CHI",
+          "pick": "CHI",
+          "result": "97-120",
+          "hit": true,
+          "confidence": 58.4,
           "best_bet": true
         }
       ]
