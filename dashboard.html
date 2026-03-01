@@ -5632,6 +5632,15 @@
         gameProjections._dataDate = data.date || '';
         nbaBestBets = data.best_bets || [];
 
+        // Merge results into game projections so W/L badges render
+        if (gameProjections.length > 0) {
+          if (!historicalResults) await loadHistoricalResults('nba');
+          if (historicalResults) {
+            const gpDate = data.date || getLocalDateStr();
+            mergeResultsIntoProjections(gameProjections, historicalResults, gpDate);
+          }
+        }
+
         // Build team lookup for NBA
         if (currentSport === 'nba') {
           teamToGame = {};
@@ -5667,6 +5676,15 @@
         nhlGameProjections._updated = data.updated;
         nhlGameProjections._dataDate = data.date || '';
         nhlBestBets = data.best_bets || [];
+
+        // Merge results into NHL game projections so W/L badges render
+        if (nhlGameProjections.length > 0) {
+          if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
+          if (nhlHistoricalResults) {
+            const gpDate = data.date || getLocalDateStr();
+            mergeResultsIntoProjections(nhlGameProjections, nhlHistoricalResults, gpDate);
+          }
+        }
 
         if (currentSport === 'nhl') {
           updateActiveGameData();

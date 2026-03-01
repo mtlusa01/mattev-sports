@@ -323,12 +323,17 @@ jobs:
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git add projections.json game_projections.json results.json \
+          # NOTE: game_projections.json and results.json are managed by the
+          # local nba-props daily_update.py pipeline which produces enriched
+          # data (injury impacts, edge analysis, EV, recommendations). CI's
+          # basic export would overwrite this richer data. Skipped intentionally.
+          git add projections.json \
                   ncaab_projections.json ncaab_results.json \
                   nhl_game_projections.json nhl_results.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Auto-update predictions $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git pull --rebase --autostash origin main || true
             git push
           fi
