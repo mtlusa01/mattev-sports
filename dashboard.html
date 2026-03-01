@@ -5996,8 +5996,10 @@
       const plClass = monthPL > 0 ? 'positive' : monthPL < 0 ? 'negative' : 'neutral';
       const plSign = monthPL >= 0 ? '+' : '';
 
-      // Monthly goal
-      const monthlyTarget = 500;
+      // Monthly goal — read from user's investment profile
+      const ip = (typeof userProfile !== 'undefined' && userProfile?.investmentProfile) || {};
+      const us = (typeof userProfile !== 'undefined' && userProfile?.settings) || {};
+      const monthlyTarget = ip.monthlyTarget || us.monthlyTarget || 500;
       const goalPct = monthlyTarget > 0 ? Math.min(100, Math.max(0, (Math.max(0, monthPL) / monthlyTarget) * 100)).toFixed(0) : 0;
       const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
       const daysLeft = Math.max(0, lastDay - now.getDate());
@@ -6122,7 +6124,16 @@
           </div>
         `;
       }
-      // KellyCalculator and auth are now loaded — render portfolio
+      // Wait for auth.js to populate userProfile (it fetches from Firestore async)
+      if (!userProfile) {
+        await new Promise(resolve => {
+          const check = setInterval(() => {
+            if (userProfile) { clearInterval(check); resolve(); }
+          }, 50);
+          // Timeout after 3s — render with defaults rather than hanging
+          setTimeout(() => { clearInterval(check); resolve(); }, 3000);
+        });
+      }
       renderPortfolioSummary();
     });
   </script>

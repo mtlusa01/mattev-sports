@@ -17,8 +17,11 @@ const KellyCalculator = {
       minConfidence: 55,
     };
     // userProfile is set by auth.js onAuthStateChanged
+    // profile.html saves bankroll/unitSize/kelly settings to investmentProfile, so check both
     const s = (typeof userProfile !== 'undefined' && userProfile?.settings) || {};
-    return { ...defaults, ...s };
+    const ip = (typeof userProfile !== 'undefined' && userProfile?.investmentProfile) || {};
+    // investmentProfile takes priority over settings (newer save location)
+    return { ...defaults, ...s, ...ip };
   },
 
   /** Convert American odds to decimal */
