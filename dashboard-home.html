@@ -1202,7 +1202,7 @@
       // Greeting
       var hour = new Date().getHours();
       var greeting = hour < 12 ? 'GOOD MORNING' : hour < 18 ? 'GOOD AFTERNOON' : 'GOOD EVENING';
-      document.getElementById('greeting').textContent = greeting;
+      document.getElementById('greeting').textContent = greeting + ', ' + firstName.toUpperCase();
 
       // Date
       var now = new Date();
