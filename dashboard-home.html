@@ -431,6 +431,170 @@
       .page-title { font-size: 22px; }
       .dropdown-trigger-name { display: none; }
     }
+
+    /* ── Betting Calendar ── */
+    .cal-section { margin-top: 32px; }
+    .cal-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 24px; transition: border-color 0.25s;
+    }
+    .cal-card:hover { border-color: var(--border); }
+    .cal-nav {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+    }
+    .cal-nav-btn {
+      background: none; border: 1px solid var(--border-subtle);
+      color: var(--text-secondary); width: 32px; height: 32px;
+      border-radius: var(--radius-sm); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: all 0.2s;
+    }
+    .cal-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .cal-month-label { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px;
+    }
+    .cal-weekday {
+      text-align: center; font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--text-muted); padding: 6px 0;
+    }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-day {
+      min-height: 72px; background: var(--bg-secondary);
+      border: 2px solid transparent; border-radius: var(--radius-md);
+      padding: 6px 8px; cursor: default; transition: all 0.2s;
+      position: relative; display: flex; flex-direction: column;
+    }
+    .cal-day:hover { border-color: var(--border); background: var(--bg-card-hover); }
+    .cal-day.cal-today { border-color: var(--accent); box-shadow: 0 0 12px rgba(0,212,255,0.15); }
+    .cal-day.cal-other-month { opacity: 0.25; }
+    .cal-day.cal-selected { border-color: var(--accent); background: var(--bg-card-hover); }
+    .cal-day.cal-has-bets { cursor: pointer; }
+    .cal-day-num { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+    .cal-day.cal-today .cal-day-num { color: var(--accent); }
+    .cal-day-record {
+      font-size: 9px; font-weight: 700; padding: 2px 5px;
+      border-radius: 8px; display: inline-block; width: fit-content;
+      font-family: 'JetBrains Mono', monospace; line-height: 1;
+    }
+    .cal-day-record.win { background: var(--profit-soft); color: var(--profit); }
+    .cal-day-record.loss { background: var(--loss-soft); color: var(--loss); }
+    .cal-day-record.mixed { background: var(--warning-soft); color: var(--warning); }
+    .cal-day-record.pending { background: rgba(148,163,184,0.08); color: var(--text-muted); }
+    .cal-day-pnl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600; margin-top: auto;
+    }
+    .cal-day-pnl.profit { color: var(--profit); }
+    .cal-day-pnl.loss { color: var(--loss); }
+    .cal-day-dot {
+      position: absolute; top: 6px; right: 6px;
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+    .cal-day-dot.profit { background: var(--profit); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+    .cal-day-dot.loss { background: var(--loss); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+    .cal-day-dot.pending { background: var(--text-muted); }
+
+    .cal-detail {
+      margin-top: 16px; padding: 20px;
+      background: var(--bg-secondary); border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      animation: fadeInUp 0.3s ease-out;
+    }
+    .cal-detail-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
+    }
+    .cal-detail-date { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+    .cal-detail-close {
+      background: none; border: none; color: var(--text-muted);
+      cursor: pointer; font-size: 18px; padding: 4px 8px;
+      border-radius: var(--radius-sm); transition: all 0.2s;
+    }
+    .cal-detail-close:hover { color: var(--text-primary); background: rgba(148,163,184,0.08); }
+    .cal-detail-summary {
+      display: flex; gap: 20px; padding: 12px 16px;
+      background: var(--bg-card); border-radius: var(--radius-sm);
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .cal-detail-stat-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 2px;
+    }
+    .cal-detail-stat-value {
+      font-family: 'JetBrains Mono', monospace; font-size: 14px;
+      font-weight: 600; color: var(--text-primary);
+    }
+    .cal-bet-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+    }
+    .cal-bet-row:last-child { border-bottom: none; }
+    .cal-bet-status {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+      width: 24px; height: 24px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cal-bet-status.win { background: var(--profit-soft); color: var(--profit); }
+    .cal-bet-status.loss { background: var(--loss-soft); color: var(--loss); }
+    .cal-bet-status.push { background: var(--warning-soft); color: var(--warning); }
+    .cal-bet-status.pending { background: rgba(148,163,184,0.08); color: var(--text-muted); }
+    .cal-bet-sport {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      padding: 2px 6px; border-radius: 4px; flex-shrink: 0;
+    }
+    .cal-bet-sport.nba { background: var(--loss-soft); color: var(--loss); }
+    .cal-bet-sport.ncaab { background: rgba(59,130,246,0.12); color: #60a5fa; }
+    .cal-bet-sport.nhl { background: var(--profit-soft); color: var(--profit); }
+    .cal-bet-sport.props { background: var(--accent-soft); color: var(--accent-secondary); }
+    .cal-bet-info { flex: 1; min-width: 0; }
+    .cal-bet-matchup {
+      font-size: 12px; font-weight: 600; color: var(--text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .cal-bet-pick { font-size: 11px; color: var(--text-tertiary); }
+    .cal-bet-odds {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--text-secondary); flex-shrink: 0;
+    }
+    .cal-bet-profit {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      font-weight: 600; flex-shrink: 0; min-width: 60px; text-align: right;
+    }
+    .cal-bet-profit.profit { color: var(--profit); }
+    .cal-bet-profit.loss { color: var(--loss); }
+
+    .cal-summary {
+      margin-top: 16px; padding: 16px 20px;
+      background: var(--bg-secondary); border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .cal-summary-stat { text-align: center; }
+    .cal-summary-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 2px;
+    }
+    .cal-summary-value {
+      font-family: 'JetBrains Mono', monospace; font-size: 14px;
+      font-weight: 700; color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .cal-card { padding: 16px; }
+      .cal-day { min-height: 56px; padding: 4px 6px; }
+      .cal-day-num { font-size: 11px; }
+      .cal-day-record { display: none; }
+      .cal-day-pnl { font-size: 9px; }
+      .cal-detail-summary { gap: 12px; }
+      .cal-summary { gap: 8px; }
+      .cal-summary-value { font-size: 12px; }
+    }
+    @media (max-width: 480px) {
+      .cal-day { min-height: 44px; padding: 3px 4px; }
+      .cal-day-pnl { display: none; }
+      .cal-bet-odds { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -678,6 +842,33 @@
 
       </div>
     </div>
+
+    <!-- Betting Calendar -->
+    <div class="cal-section anim d6">
+      <div class="section-header">
+        <div class="section-title">Betting Calendar</div>
+      </div>
+      <div class="cal-card">
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="calNavMonth(-1)">&larr;</button>
+          <span class="cal-month-label" id="cal-month-label">March 2026</span>
+          <button class="cal-nav-btn" onclick="calNavMonth(1)">&rarr;</button>
+        </div>
+        <div class="cal-weekdays">
+          <div class="cal-weekday">Sun</div>
+          <div class="cal-weekday">Mon</div>
+          <div class="cal-weekday">Tue</div>
+          <div class="cal-weekday">Wed</div>
+          <div class="cal-weekday">Thu</div>
+          <div class="cal-weekday">Fri</div>
+          <div class="cal-weekday">Sat</div>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div class="cal-detail" id="cal-detail" style="display:none"></div>
+        <div id="cal-summary"></div>
+      </div>
+    </div>
+
   </main>
 
   <!-- Firebase SDK + shared auth (same as dashboard.html) -->
@@ -687,11 +878,263 @@
   <script src="auth.js"></script>
   <script>
     const CUTOFF = '2026-02-27';
+    var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null;
+    var calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
 
     // ── Helpers ──
     function getTrackedBets() {
       try { return JSON.parse(localStorage.getItem('efe_tracked_bets')) || []; }
       catch { return []; }
+    }
+
+    // ── Calendar Helpers ──
+    function getLocalDateStr(d) {
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+    function calcProfit(odds, units) {
+      var o = parseInt(odds);
+      if (isNaN(o)) return 0;
+      return o > 0 ? units * (o / 100) : units * (100 / Math.abs(o));
+    }
+    function getUnitSize() {
+      try { var s = JSON.parse(localStorage.getItem('efe_user_settings')) || {}; return s.unit_size || s.unitSize || 10; }
+      catch(e) { return 10; }
+    }
+    function getBetsByDate() {
+      var bets = getTrackedBets();
+      var byDate = {};
+      for (var i = 0; i < bets.length; i++) {
+        var b = bets[i];
+        if (!b.date) continue;
+        if (!byDate[b.date]) byDate[b.date] = { bets: [], w: 0, l: 0, p: 0, pnl: 0 };
+        byDate[b.date].bets.push(b);
+        if (b.status === 'win') { byDate[b.date].w++; byDate[b.date].pnl += parseFloat(b.profit_units) || 0; }
+        else if (b.status === 'loss') { byDate[b.date].l++; byDate[b.date].pnl += parseFloat(b.profit_units) || 0; }
+        else { byDate[b.date].p++; }
+      }
+      return byDate;
+    }
+
+    // ── Auto-Grading ──
+    function autoGradeHomeTrackedBets() {
+      var bets = getTrackedBets();
+      var changed = false;
+      var allPicks = [];
+      function collectPicks(data) {
+        if (!data || !data.days) return;
+        for (var i = 0; i < data.days.length; i++) {
+          var picks = data.days[i].picks || [];
+          for (var j = 0; j < picks.length; j++) allPicks.push(picks[j]);
+        }
+      }
+      collectPicks(nbaResultsData);
+      collectPicks(ncaabResultsData);
+      collectPicks(nhlResultsData);
+      for (var i = 0; i < bets.length; i++) {
+        var bet = bets[i];
+        if (bet.status !== 'pending') continue;
+        var matched = null;
+        if (bet.type === 'prop') {
+          for (var j = 0; j < allPicks.length; j++) {
+            var p = allPicks[j];
+            if (p.player && bet.player &&
+                p.player.toLowerCase() === bet.player.toLowerCase() &&
+                p.prop === bet.prop_type &&
+                parseFloat(p.line) === parseFloat(bet.line) &&
+                p.hit !== undefined && p.hit !== null) { matched = p; break; }
+          }
+        } else {
+          for (var j = 0; j < allPicks.length; j++) {
+            var p = allPicks[j];
+            if (p.game && bet.game && p.game === bet.game &&
+                p.type === bet.type &&
+                p.hit !== undefined && p.hit !== null) { matched = p; break; }
+          }
+        }
+        if (matched) {
+          bet.status = matched.hit === true ? 'win' : 'loss';
+          bet.actual = matched.result != null ? String(matched.result) : null;
+          var u = parseFloat(bet.units) || 1;
+          bet.profit_units = bet.status === 'win' ? calcProfit(parseInt(bet.odds) || -110, u) : -u;
+          changed = true;
+        }
+      }
+      if (changed) localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+    }
+
+    // ── Calendar Rendering ──
+    function calNavMonth(delta) {
+      calMonth += delta;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      else if (calMonth < 0) { calMonth = 11; calYear--; }
+      renderBettingCalendar();
+      renderCalendarSummary();
+    }
+    function renderBettingCalendar() {
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('cal-month-label').textContent = months[calMonth] + ' ' + calYear;
+      var firstDay = new Date(calYear, calMonth, 1).getDay();
+      var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      var daysInPrev = new Date(calYear, calMonth, 0).getDate();
+      var today = getLocalDateStr(new Date());
+      var betsByDate = getBetsByDate();
+      var unitSize = getUnitSize();
+      var html = '';
+      for (var i = firstDay - 1; i >= 0; i--) {
+        var day = daysInPrev - i;
+        var pm = calMonth === 0 ? 11 : calMonth - 1;
+        var py = calMonth === 0 ? calYear - 1 : calYear;
+        var ds = py + '-' + String(pm + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+        html += buildCalDayHtml(ds, day, today, betsByDate, unitSize, true);
+      }
+      for (var d = 1; d <= daysInMonth; d++) {
+        var ds = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        html += buildCalDayHtml(ds, d, today, betsByDate, unitSize, false);
+      }
+      var totalCells = firstDay + daysInMonth;
+      var rem = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+      for (var i = 1; i <= rem; i++) {
+        var nm = calMonth === 11 ? 0 : calMonth + 1;
+        var ny = calMonth === 11 ? calYear + 1 : calYear;
+        var ds = ny + '-' + String(nm + 1).padStart(2, '0') + '-' + String(i).padStart(2, '0');
+        html += buildCalDayHtml(ds, i, today, betsByDate, unitSize, true);
+      }
+      document.getElementById('cal-grid').innerHTML = html;
+      closeCalDetail();
+    }
+    function buildCalDayHtml(dateStr, dayNum, today, betsByDate, unitSize, isOtherMonth) {
+      var info = betsByDate[dateStr];
+      var cls = 'cal-day';
+      if (isOtherMonth) cls += ' cal-other-month';
+      if (dateStr === today) cls += ' cal-today';
+      if (info) cls += ' cal-has-bets';
+      var onclick = info ? ' onclick="openCalDay(\'' + dateStr + '\')"' : '';
+      var inner = '<span class="cal-day-num">' + dayNum + '</span>';
+      if (info) {
+        var rec = info.w + '-' + info.l;
+        var rc = 'pending';
+        if (info.w > 0 && info.l === 0) rc = 'win';
+        else if (info.l > 0 && info.w === 0) rc = 'loss';
+        else if (info.w > 0 && info.l > 0) rc = 'mixed';
+        if (info.p > 0 && info.w === 0 && info.l === 0) { rec = info.p + 'P'; rc = 'pending'; }
+        inner += '<span class="cal-day-record ' + rc + '">' + rec + '</span>';
+        var dp = info.pnl * unitSize;
+        if (info.w > 0 || info.l > 0) {
+          var pc = dp >= 0 ? 'profit' : 'loss';
+          inner += '<span class="cal-day-pnl ' + pc + '">' + (dp >= 0 ? '+' : '') + '$' + Math.abs(dp).toFixed(0) + '</span>';
+        }
+        var dc = (info.p > 0 && info.w === 0 && info.l === 0) ? 'pending' : (dp >= 0 ? 'profit' : 'loss');
+        inner += '<span class="cal-day-dot ' + dc + '"></span>';
+      }
+      return '<div class="' + cls + '" data-date="' + dateStr + '"' + onclick + '>' + inner + '</div>';
+    }
+
+    // ── Day Detail Panel ──
+    function openCalDay(dateStr) {
+      var betsByDate = getBetsByDate();
+      var info = betsByDate[dateStr];
+      if (!info) return;
+      var unitSize = getUnitSize();
+      var days = document.querySelectorAll('.cal-day');
+      for (var i = 0; i < days.length; i++) days[i].classList.remove('cal-selected');
+      var dayEl = document.querySelector('.cal-day[data-date="' + dateStr + '"]');
+      if (dayEl) dayEl.classList.add('cal-selected');
+      var dt = new Date(dateStr + 'T12:00:00');
+      var dateLabel = dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      var total = info.w + info.l + info.p;
+      var wr = (info.w + info.l) > 0 ? ((info.w / (info.w + info.l)) * 100).toFixed(0) : '0';
+      var dp = info.pnl * unitSize;
+      var pSign = dp >= 0 ? '+' : '';
+      var pCls = dp >= 0 ? 'profit' : 'loss';
+      var h = '<div class="cal-detail-header"><span class="cal-detail-date">' + dateLabel + '</span>';
+      h += '<button class="cal-detail-close" onclick="closeCalDetail()">&times;</button></div>';
+      h += '<div class="cal-detail-summary">';
+      h += '<div><div class="cal-detail-stat-label">Bets</div><div class="cal-detail-stat-value">' + total + '</div></div>';
+      h += '<div><div class="cal-detail-stat-label">Record</div><div class="cal-detail-stat-value">' + info.w + '-' + info.l + (info.p > 0 ? '-' + info.p + 'P' : '') + '</div></div>';
+      h += '<div><div class="cal-detail-stat-label">Win Rate</div><div class="cal-detail-stat-value">' + wr + '%</div></div>';
+      h += '<div><div class="cal-detail-stat-label">P&amp;L</div><div class="cal-detail-stat-value" style="color:var(--' + pCls + ')">' + pSign + '$' + Math.abs(dp).toFixed(2) + '</div></div>';
+      h += '</div>';
+      for (var i = 0; i < info.bets.length; i++) {
+        var bet = info.bets[i];
+        var sc = bet.status === 'win' ? 'win' : bet.status === 'loss' ? 'loss' : bet.status === 'push' ? 'push' : 'pending';
+        var sl = bet.status === 'win' ? 'W' : bet.status === 'loss' ? 'L' : bet.status === 'push' ? 'P' : '\u2014';
+        var sp = (bet.sport || '').toLowerCase();
+        if (bet.type === 'prop') sp = 'props';
+        var spLabel = bet.type === 'prop' ? 'PROP' : (bet.sport || '').toUpperCase();
+        var matchup = bet.game || ((bet.player || '') + ' ' + (bet.prop_type || ''));
+        var pick = bet.pick || '';
+        if (bet.model_confidence) pick += ' (' + parseFloat(bet.model_confidence).toFixed(0) + '%)';
+        var oddsStr = bet.odds ? (parseInt(bet.odds) > 0 ? '+' : '') + bet.odds : '';
+        var profDollars = (parseFloat(bet.profit_units) || 0) * unitSize;
+        var profStr = '', profCls = '';
+        if (bet.status === 'win') { profStr = '+$' + profDollars.toFixed(2); profCls = 'profit'; }
+        else if (bet.status === 'loss') { profStr = '-$' + Math.abs(profDollars).toFixed(2); profCls = 'loss'; }
+        else { profStr = '\u2014'; }
+        h += '<div class="cal-bet-row"><span class="cal-bet-status ' + sc + '">' + sl + '</span>';
+        h += '<span class="cal-bet-sport ' + sp + '">' + spLabel + '</span>';
+        h += '<div class="cal-bet-info"><div class="cal-bet-matchup">' + matchup + '</div><div class="cal-bet-pick">' + pick + '</div></div>';
+        h += '<span class="cal-bet-odds">' + oddsStr + '</span>';
+        h += '<span class="cal-bet-profit ' + profCls + '">' + profStr + '</span></div>';
+      }
+      var el = document.getElementById('cal-detail');
+      el.style.display = 'none';
+      el.innerHTML = h;
+      void el.offsetHeight;
+      el.style.display = '';
+    }
+    function closeCalDetail() {
+      var el = document.getElementById('cal-detail');
+      el.style.display = 'none';
+      el.innerHTML = '';
+      var days = document.querySelectorAll('.cal-day');
+      for (var i = 0; i < days.length; i++) days[i].classList.remove('cal-selected');
+    }
+
+    // ── Calendar Summary ──
+    function renderCalendarSummary() {
+      var bets = getTrackedBets();
+      var unitSize = getUnitSize();
+      var mp = calYear + '-' + String(calMonth + 1).padStart(2, '0');
+      var mb = bets.filter(function(b) { return b.date && b.date.startsWith(mp); });
+      if (mb.length === 0) { document.getElementById('cal-summary').innerHTML = ''; return; }
+      var w = 0, l = 0, pend = 0, tPnl = 0, dailyPnl = {};
+      for (var i = 0; i < mb.length; i++) {
+        var b = mb[i];
+        if (b.status === 'win') { w++; tPnl += (parseFloat(b.profit_units) || 0) * unitSize; }
+        else if (b.status === 'loss') { l++; tPnl += (parseFloat(b.profit_units) || 0) * unitSize; }
+        else { pend++; }
+        if (b.date && (b.status === 'win' || b.status === 'loss')) {
+          if (!dailyPnl[b.date]) dailyPnl[b.date] = 0;
+          dailyPnl[b.date] += (parseFloat(b.profit_units) || 0) * unitSize;
+        }
+      }
+      var ts = w + l;
+      var wr = ts > 0 ? ((w / ts) * 100).toFixed(1) : '0.0';
+      var stake = 0;
+      for (var i = 0; i < mb.length; i++) {
+        if (mb[i].status === 'win' || mb[i].status === 'loss') stake += (parseFloat(mb[i].units) || 1) * unitSize;
+      }
+      var roi = stake > 0 ? ((tPnl / stake) * 100).toFixed(1) : '0.0';
+      var pSign = tPnl >= 0 ? '+' : '';
+      var pCls = tPnl >= 0 ? 'profit' : 'loss';
+      var h = '<div class="cal-summary">';
+      h += '<div class="cal-summary-stat"><div class="cal-summary-label">Total Bets</div><div class="cal-summary-value">' + mb.length + '</div></div>';
+      h += '<div class="cal-summary-stat"><div class="cal-summary-label">Record</div><div class="cal-summary-value">' + w + '-' + l + (pend > 0 ? '-' + pend + 'P' : '') + '</div></div>';
+      h += '<div class="cal-summary-stat"><div class="cal-summary-label">Win Rate</div><div class="cal-summary-value">' + wr + '%</div></div>';
+      h += '<div class="cal-summary-stat"><div class="cal-summary-label">P&amp;L</div><div class="cal-summary-value" style="color:var(--' + pCls + ')">' + pSign + '$' + Math.abs(tPnl).toFixed(2) + '</div></div>';
+      h += '<div class="cal-summary-stat"><div class="cal-summary-label">ROI</div><div class="cal-summary-value">' + roi + '%</div></div>';
+      var keys = Object.keys(dailyPnl);
+      if (keys.length > 1) {
+        var bestV = -Infinity, worstV = Infinity;
+        for (var k = 0; k < keys.length; k++) {
+          if (dailyPnl[keys[k]] > bestV) bestV = dailyPnl[keys[k]];
+          if (dailyPnl[keys[k]] < worstV) worstV = dailyPnl[keys[k]];
+        }
+        h += '<div class="cal-summary-stat"><div class="cal-summary-label">Best Day</div><div class="cal-summary-value" style="color:var(--profit)">' + (bestV >= 0 ? '+' : '-') + '$' + Math.abs(bestV).toFixed(0) + '</div></div>';
+        h += '<div class="cal-summary-stat"><div class="cal-summary-label">Worst Day</div><div class="cal-summary-value" style="color:var(--loss)">' + (worstV >= 0 ? '+' : '-') + '$' + Math.abs(worstV).toFixed(0) + '</div></div>';
+      }
+      h += '</div>';
+      document.getElementById('cal-summary').innerHTML = h;
     }
 
     // ── Dropdown ──
@@ -793,15 +1236,15 @@
       var bets = getTrackedBets();
       var now = new Date();
       var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
-      var settled = bets.filter(function(b) { return b.result && b.date >= monthStart; });
+      var settled = bets.filter(function(b) { return b.status && b.status !== 'pending' && b.date >= monthStart; });
       var pl = 0;
       for (var i = 0; i < settled.length; i++) {
         var b = settled[i];
         var stake = (parseFloat(b.units) || 1) * unitSize;
-        if (b.result === 'win') {
+        if (b.status === 'win') {
           var odds = parseInt(b.odds) || -110;
           pl += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
-        } else if (b.result === 'loss') pl -= stake;
+        } else if (b.status === 'loss') pl -= stake;
       }
       var plSign = pl >= 0 ? '+' : '';
       document.getElementById('stat-pnl').textContent = plSign + '$' + Math.abs(pl).toFixed(0);
@@ -814,7 +1257,7 @@
       // Monthly Goal
       document.getElementById('goal-target').textContent = '$' + monthlyTarget;
       var realized = Math.max(0, pl);
-      var pending = bets.filter(function(b) { return !b.result && b.status !== 'graded'; })
+      var pending = bets.filter(function(b) { return b.status === 'pending'; })
         .reduce(function(sum, b) { return sum + ((parseFloat(b.units) || 1) * unitSize); }, 0);
       var remaining = Math.max(0, monthlyTarget - realized);
       var goalPct = monthlyTarget > 0 ? Math.min(100, (realized / monthlyTarget) * 100) : 0;
@@ -852,6 +1295,7 @@
       var nbaData = results[0].status === 'fulfilled' ? results[0].value : null;
       var ncaabData = results[1].status === 'fulfilled' ? results[1].value : null;
       var nhlData = results[2].status === 'fulfilled' ? results[2].value : null;
+      nbaResultsData = nbaData; ncaabResultsData = ncaabData; nhlResultsData = nhlData;
       var propsJson = results[3].status === 'fulfilled' ? results[3].value : null;
       var gameJson = results[4].status === 'fulfilled' ? results[4].value : null;
 
@@ -878,6 +1322,10 @@
 
       // Recent picks
       buildPicks(nbaData, ncaabData, nhlData);
+
+      autoGradeHomeTrackedBets();
+      renderBettingCalendar();
+      renderCalendarSummary();
     }
 
     function grade(prefix, data, cats) {
