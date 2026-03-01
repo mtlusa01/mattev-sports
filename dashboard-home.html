@@ -127,7 +127,7 @@
       height: 2px; background: var(--accent); border-radius: 1px;
     }
 
-    .nav-right { position: relative; }
+    .nav-actions { position: relative; }
     .dropdown-trigger {
       display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 5px;
       background: var(--bg-card); border: 1px solid var(--border-subtle);
@@ -462,7 +462,7 @@
         <a href="dashboard.html#props" class="nav-link">Props</a>
         <a href="results.html" class="nav-link">Results</a>
       </div>
-      <div class="nav-right">
+      <div class="nav-actions">
         <div class="dropdown-trigger" id="dropdown-trigger" onclick="window.toggleDropdown()">
           <div class="dropdown-avatar" id="nav-avatar"></div>
           <span class="dropdown-trigger-name" id="nav-name"></span>
@@ -680,24 +680,12 @@
     </div>
   </main>
 
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js';
-    import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js';
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js';
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDFpQKH7Et2RH8qScHiVRMrcnJnN7gUr6s",
-      authDomain: "edge-factor-elite.firebaseapp.com",
-      projectId: "edge-factor-elite",
-      storageBucket: "edge-factor-elite.firebasestorage.app",
-      messagingSenderId: "564892151498",
-      appId: "1:564892151498:web:c4e69c28a4d15e88b94bb3"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
+  <!-- Firebase SDK + shared auth (same as dashboard.html) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="auth.js"></script>
+  <script>
     const CUTOFF = '2026-02-27';
 
     // ── Helpers ──
@@ -711,37 +699,40 @@
       document.getElementById('dropdown-trigger').classList.toggle('open');
       document.getElementById('user-dropdown').classList.toggle('open');
     };
-    document.addEventListener('click', (e) => {
-      const navRight = document.querySelector('.nav-right');
-      if (navRight && !navRight.contains(e.target)) {
-        document.getElementById('dropdown-trigger')?.classList.remove('open');
-        document.getElementById('user-dropdown')?.classList.remove('open');
+    document.addEventListener('click', function(e) {
+      var navActions = document.querySelector('.nav-actions');
+      if (navActions && !navActions.contains(e.target)) {
+        var trigger = document.getElementById('dropdown-trigger');
+        var dd = document.getElementById('user-dropdown');
+        if (trigger) trigger.classList.remove('open');
+        if (dd) dd.classList.remove('open');
       }
     });
 
     // ── Mobile Menu ──
-    document.getElementById('mobile-btn')?.addEventListener('click', () => {
-      document.getElementById('mobile-drawer').classList.toggle('open');
-    });
+    var mobileBtn = document.getElementById('mobile-btn');
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', function() {
+        document.getElementById('mobile-drawer').classList.toggle('open');
+      });
+    }
 
-    // ── Google Sign-In ──
-    document.getElementById('google-btn').addEventListener('click', async () => {
+    // ── Google Sign-In (uses signInWithGoogle from auth.js) ──
+    document.getElementById('google-btn').addEventListener('click', async function() {
       try {
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
+        await signInWithGoogle();
       } catch (e) {
         console.error('Sign-in error:', e);
       }
     });
 
-    // ── Sign Out ──
-    document.getElementById('signout-btn').addEventListener('click', async () => {
-      try { await signOut(auth); } catch (e) { console.error(e); }
-      window.location.reload();
+    // ── Sign Out (uses handleSignOut from auth.js) ──
+    document.getElementById('signout-btn').addEventListener('click', function() {
+      handleSignOut();
     });
 
-    // ── Auth State ──
-    onAuthStateChanged(auth, async (user) => {
+    // ── Auth State (uses shared firebase instance from auth.js) ──
+    firebase.auth().onAuthStateChanged(async function(user) {
       if (!user) {
         document.getElementById('auth-gate').classList.add('visible');
         document.getElementById('main-nav').style.display = 'none';
@@ -753,91 +744,80 @@
       document.getElementById('main-nav').style.display = '';
       document.getElementById('main-content').style.display = '';
 
-      const name = user.displayName || user.email?.split('@')[0] || 'User';
-      const firstName = name.split(' ')[0];
-      const initial = firstName.charAt(0).toUpperCase();
+      var name = user.displayName || user.email.split('@')[0] || 'User';
+      var firstName = name.split(' ')[0];
+      var initial = firstName.charAt(0).toUpperCase();
 
-      // Nav
+      // Nav avatar + name
       document.getElementById('nav-avatar').textContent = initial;
       document.getElementById('nav-name').textContent = firstName;
 
-      // Dropdown
+      // Dropdown user info
       document.getElementById('dd-name').textContent = name;
       document.getElementById('dd-email').textContent = user.email || '';
 
       // Greeting
-      const hour = new Date().getHours();
-      const greeting = hour < 12 ? 'GOOD MORNING' : hour < 18 ? 'GOOD AFTERNOON' : 'GOOD EVENING';
+      var hour = new Date().getHours();
+      var greeting = hour < 12 ? 'GOOD MORNING' : hour < 18 ? 'GOOD AFTERNOON' : 'GOOD EVENING';
       document.getElementById('greeting').textContent = greeting;
 
       // Date
-      const now = new Date();
+      var now = new Date();
       document.getElementById('header-date').textContent = now.toLocaleDateString('en-US', {
         month: 'long', day: 'numeric', year: 'numeric'
       });
 
-      // Load profile + data
-      const profile = await loadProfile(user.uid);
+      // Load Firestore profile via auth.js helper, then render
+      var profile = await getUserProfile(user.uid);
       renderPortfolioStats(profile);
       await loadData();
     });
 
-    // ── Firestore Profile ──
-    async function loadProfile(uid) {
-      try {
-        const snap = await getDoc(doc(db, 'users', uid));
-        if (snap.exists()) {
-          await updateDoc(doc(db, 'users', uid), { lastLogin: serverTimestamp() });
-          return snap.data();
-        }
-      } catch (e) { console.error('Profile load error:', e); }
-      return null;
-    }
-
     // ── Portfolio Stats ──
     function renderPortfolioStats(profile) {
-      let bankroll = profile?.settings?.bankroll || 0;
-      let unitSize = profile?.settings?.unitSize || 10;
-      let monthlyTarget = profile?.settings?.monthlyTarget || 500;
+      var bankroll = (profile && profile.settings && profile.settings.bankroll) || 0;
+      var unitSize = (profile && profile.settings && profile.settings.unitSize) || 10;
+      var monthlyTarget = (profile && profile.settings && profile.settings.monthlyTarget) || 500;
 
       if (!bankroll) {
         try {
-          const ls = JSON.parse(localStorage.getItem('efe_user_settings')) || {};
+          var ls = JSON.parse(localStorage.getItem('efe_user_settings')) || {};
           bankroll = ls.bankroll || 1000;
           unitSize = ls.unit_size || ls.unitSize || 10;
-        } catch { bankroll = 1000; }
+        } catch (e) { bankroll = 1000; }
       }
 
       document.getElementById('stat-portfolio').textContent = '$' + bankroll.toLocaleString();
 
       // Monthly P&L
-      const bets = getTrackedBets();
-      const now = new Date();
-      const monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
-      const settled = bets.filter(b => b.result && b.date >= monthStart);
-      let pl = 0;
-      for (const b of settled) {
-        const stake = (parseFloat(b.units) || 1) * unitSize;
+      var bets = getTrackedBets();
+      var now = new Date();
+      var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
+      var settled = bets.filter(function(b) { return b.result && b.date >= monthStart; });
+      var pl = 0;
+      for (var i = 0; i < settled.length; i++) {
+        var b = settled[i];
+        var stake = (parseFloat(b.units) || 1) * unitSize;
         if (b.result === 'win') {
-          const odds = parseInt(b.odds) || -110;
+          var odds = parseInt(b.odds) || -110;
           pl += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
         } else if (b.result === 'loss') pl -= stake;
       }
-      const plSign = pl >= 0 ? '+' : '';
+      var plSign = pl >= 0 ? '+' : '';
       document.getElementById('stat-pnl').textContent = plSign + '$' + Math.abs(pl).toFixed(0);
-      const pnlEl = document.getElementById('stat-pnl');
-      const pnlChangeEl = document.getElementById('stat-pnl-change');
+      var pnlEl = document.getElementById('stat-pnl');
+      var pnlChangeEl = document.getElementById('stat-pnl-change');
       if (pl > 0) { pnlEl.style.color = 'var(--profit)'; pnlChangeEl.classList.add('profit'); }
       else if (pl < 0) { pnlEl.style.color = 'var(--loss)'; pnlChangeEl.classList.add('loss'); }
       pnlChangeEl.textContent = plSign + '$' + Math.abs(pl).toFixed(0) + ' this month';
 
       // Monthly Goal
       document.getElementById('goal-target').textContent = '$' + monthlyTarget;
-      const realized = Math.max(0, pl);
-      const pending = bets.filter(b => !b.result && b.status !== 'graded')
-        .reduce((sum, b) => sum + ((parseFloat(b.units) || 1) * unitSize), 0);
-      const remaining = Math.max(0, monthlyTarget - realized);
-      const goalPct = monthlyTarget > 0 ? Math.min(100, (realized / monthlyTarget) * 100) : 0;
+      var realized = Math.max(0, pl);
+      var pending = bets.filter(function(b) { return !b.result && b.status !== 'graded'; })
+        .reduce(function(sum, b) { return sum + ((parseFloat(b.units) || 1) * unitSize); }, 0);
+      var remaining = Math.max(0, monthlyTarget - realized);
+      var goalPct = monthlyTarget > 0 ? Math.min(100, (realized / monthlyTarget) * 100) : 0;
 
       document.getElementById('goal-current').textContent = '$' + realized.toFixed(0);
       document.getElementById('goal-realized').textContent = '$' + realized.toFixed(0);
@@ -845,55 +825,55 @@
       document.getElementById('goal-remaining').textContent = '$' + remaining.toFixed(0);
 
       // Ring animation
-      const circumference = 2 * Math.PI * 42;
-      const offset = circumference * (1 - goalPct / 100);
-      setTimeout(() => {
+      var circumference = 2 * Math.PI * 42;
+      var offset = circumference * (1 - goalPct / 100);
+      setTimeout(function() {
         document.getElementById('goal-ring').setAttribute('stroke-dashoffset', offset.toFixed(2));
         document.getElementById('goal-pct-text').textContent = goalPct.toFixed(0) + '%';
       }, 300);
 
       // Footer
-      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-      const daysLeft = Math.max(0, lastDay - now.getDate());
-      const monthName = now.toLocaleDateString('en-US', { month: 'long' });
+      var lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      var daysLeft = Math.max(0, lastDay - now.getDate());
+      var monthName = now.toLocaleDateString('en-US', { month: 'long' });
       document.getElementById('goal-footer').textContent = daysLeft + ' day' + (daysLeft !== 1 ? 's' : '') + ' left in ' + monthName;
     }
 
     // ── Data Loading ──
     async function loadData() {
-      const [r1, r2, r3, r4, r5] = await Promise.allSettled([
-        fetch('results.json?t=' + Date.now()).then(r => r.json()),
-        fetch('ncaab_results.json?t=' + Date.now()).then(r => r.json()),
-        fetch('nhl_results.json?t=' + Date.now()).then(r => r.json()),
-        fetch('projections.json?t=' + Date.now()).then(r => r.json()),
-        fetch('game_projections.json?t=' + Date.now()).then(r => r.json()),
+      var results = await Promise.allSettled([
+        fetch('results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('ncaab_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('nhl_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('game_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
       ]);
 
-      const nbaData = r1.status === 'fulfilled' ? r1.value : null;
-      const ncaabData = r2.status === 'fulfilled' ? r2.value : null;
-      const nhlData = r3.status === 'fulfilled' ? r3.value : null;
-      const propsJson = r4.status === 'fulfilled' ? r4.value : null;
-      const gameJson = r5.status === 'fulfilled' ? r5.value : null;
+      var nbaData = results[0].status === 'fulfilled' ? results[0].value : null;
+      var ncaabData = results[1].status === 'fulfilled' ? results[1].value : null;
+      var nhlData = results[2].status === 'fulfilled' ? results[2].value : null;
+      var propsJson = results[3].status === 'fulfilled' ? results[3].value : null;
+      var gameJson = results[4].status === 'fulfilled' ? results[4].value : null;
 
       // Grade each model
-      const nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);
-      const ncaabStats = grade('ncaab', ncaabData, ['spreads', 'totals', 'moneylines']);
-      const nhlStats = grade('nhl', nhlData, ['spreads', 'totals', 'moneylines']);
-      const propsStats = grade('props', nbaData, ['props']);
+      var nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);
+      var ncaabStats = grade('ncaab', ncaabData, ['spreads', 'totals', 'moneylines']);
+      var nhlStats = grade('nhl', nhlData, ['spreads', 'totals', 'moneylines']);
+      var propsStats = grade('props', nbaData, ['props']);
 
       // Overall win rate
-      const totalW = nbaStats.w + ncaabStats.w + nhlStats.w + propsStats.w;
-      const totalL = nbaStats.l + ncaabStats.l + nhlStats.l + propsStats.l;
-      const totalT = totalW + totalL;
-      const overallPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : '0.0';
+      var totalW = nbaStats.w + ncaabStats.w + nhlStats.w + propsStats.w;
+      var totalL = nbaStats.l + ncaabStats.l + nhlStats.l + propsStats.l;
+      var totalT = totalW + totalL;
+      var overallPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : '0.0';
       document.getElementById('stat-winrate').textContent = overallPct + '%';
 
       // Today's picks
-      const now = new Date();
-      const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
-      let pickCount = 0;
-      if (gameJson?.date === todayStr) pickCount += gameJson.games?.length || 0;
-      if (propsJson?.date === todayStr) pickCount += propsJson.projections?.length || 0;
+      var now = new Date();
+      var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+      var pickCount = 0;
+      if (gameJson && gameJson.date === todayStr) pickCount += (gameJson.games || []).length;
+      if (propsJson && propsJson.date === todayStr) pickCount += (propsJson.projections || []).length;
       document.getElementById('stat-picks').textContent = pickCount;
 
       // Recent picks
@@ -901,22 +881,22 @@
     }
 
     function grade(prefix, data, cats) {
-      let w = 0, l = 0;
-      if (data?.days) {
-        const days = data.days.filter(d => d.date >= CUTOFF);
-        for (const d of days) {
-          for (const cat of cats) {
-            w += d[cat]?.wins || 0;
-            l += d[cat]?.losses || 0;
+      var w = 0, l = 0;
+      if (data && data.days) {
+        var days = data.days.filter(function(d) { return d.date >= CUTOFF; });
+        for (var i = 0; i < days.length; i++) {
+          for (var j = 0; j < cats.length; j++) {
+            var cat = days[i][cats[j]];
+            if (cat) { w += cat.wins || 0; l += cat.losses || 0; }
           }
         }
       }
-      const total = w + l;
-      const pct = total > 0 ? (w / total * 100).toFixed(1) : '0.0';
+      var total = w + l;
+      var pct = total > 0 ? (w / total * 100).toFixed(1) : '0.0';
 
-      const rateEl = document.getElementById(prefix + '-rate');
-      const recordEl = document.getElementById(prefix + '-record');
-      const barEl = document.getElementById(prefix + '-bar');
+      var rateEl = document.getElementById(prefix + '-rate');
+      var recordEl = document.getElementById(prefix + '-record');
+      var barEl = document.getElementById(prefix + '-bar');
 
       if (rateEl) rateEl.textContent = pct + '%';
       if (recordEl) recordEl.textContent = w + '-' + l;
@@ -924,18 +904,21 @@
         barEl.style.width = Math.max(2, parseFloat(pct)) + '%';
         barEl.className = 'model-bar-fill ' + (parseFloat(pct) >= 65 ? 'excellent' : 'good');
       }
-      return { w, l };
+      return { w: w, l: l };
     }
 
     function buildPicks(nba, ncaab, nhl) {
-      const allPicks = [];
+      var allPicks = [];
 
       function addPicks(data, sport) {
-        if (!data?.days) return;
-        for (const d of data.days) {
+        if (!data || !data.days) return;
+        for (var i = 0; i < data.days.length; i++) {
+          var d = data.days[i];
           if (d.date < CUTOFF) continue;
-          for (const p of (d.picks || [])) {
-            allPicks.push({ ...p, sport });
+          var picks = d.picks || [];
+          for (var j = 0; j < picks.length; j++) {
+            var p = Object.assign({}, picks[j], { sport: sport });
+            allPicks.push(p);
           }
         }
       }
@@ -944,21 +927,21 @@
       addPicks(ncaab, 'NCAAB');
       addPicks(nhl, 'NHL');
 
-      allPicks.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-      const top6 = allPicks.slice(0, 6);
+      allPicks.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+      var top6 = allPicks.slice(0, 6);
 
-      const container = document.getElementById('picks-list');
+      var container = document.getElementById('picks-list');
       if (top6.length === 0) {
         container.innerHTML = '<div class="picks-empty">No graded picks yet. Results will appear after games finish.</div>';
         return;
       }
 
-      container.innerHTML = top6.map(p => {
-        const cls = p.hit === true ? 'win' : p.hit === false ? 'loss' : 'pending';
-        const badge = p.hit === true ? 'W' : p.hit === false ? 'L' : '\u2014';
-        const matchup = p.game || (p.player + ' ' + (p.prop || ''));
-        const meta = p.sport + ' \u00B7 ' + (p.pick || '') + ' \u00B7 ' + (p.date || '');
-        const edge = p.confidence ? p.confidence.toFixed(1) + '%' : '\u2014';
+      container.innerHTML = top6.map(function(p) {
+        var cls = p.hit === true ? 'win' : p.hit === false ? 'loss' : 'pending';
+        var badge = p.hit === true ? 'W' : p.hit === false ? 'L' : '\u2014';
+        var matchup = p.game || (p.player + ' ' + (p.prop || ''));
+        var meta = p.sport + ' \u00B7 ' + (p.pick || '') + ' \u00B7 ' + (p.date || '');
+        var edge = p.confidence ? p.confidence.toFixed(1) + '%' : '\u2014';
         return '<div class="pick-item">' +
           '<span class="pick-badge ' + cls + '">' + badge + '</span>' +
           '<div class="pick-info"><div class="pick-matchup">' + matchup + '</div><div class="pick-meta">' + meta + '</div></div>' +
