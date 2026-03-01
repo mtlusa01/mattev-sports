@@ -595,6 +595,141 @@
       .cal-day-pnl { display: none; }
       .cal-bet-odds { display: none; }
     }
+
+    /* ── Recommended Bets ── */
+    .d35 { animation-delay: 0.175s; }
+    .rec-bets-header {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .rec-badge-count {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; padding: 3px 8px; border-radius: var(--radius-sm);
+      background: var(--accent-soft); color: var(--accent-secondary);
+    }
+    .rec-badge-stake {
+      font-size: 10px; font-weight: 700; padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--profit-soft); color: var(--profit);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .rec-info-tip {
+      position: relative; cursor: help; color: var(--text-muted); font-size: 14px;
+    }
+    .rec-info-tip:hover::after {
+      content: attr(data-tip);
+      position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: var(--radius-sm);
+      font-size: 11px; color: var(--text-secondary);
+      white-space: nowrap; z-index: 100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .rec-subtitle {
+      font-size: 12px; color: var(--text-tertiary); margin: -8px 0 16px 0;
+    }
+    .rec-bet-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 16px; margin-bottom: 10px;
+      border-left: 3px solid var(--text-muted); transition: all 0.25s ease;
+    }
+    .rec-bet-card:hover {
+      border-color: var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .rec-bet-card.high-conf { border-left-color: var(--profit); }
+    .rec-bet-card.med-conf { border-left-color: var(--warning); }
+    .rec-bet-top {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
+    }
+    .rec-bet-top-left { display: flex; align-items: center; gap: 8px; }
+    .rec-bet-pick {
+      font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;
+    }
+    .rec-bet-meta {
+      font-size: 11px; color: var(--text-tertiary); margin-bottom: 10px;
+    }
+    .rec-bet-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .rec-conf-bar-wrap { flex: 1; min-width: 80px; max-width: 160px; }
+    .rec-conf-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 3px;
+    }
+    .rec-conf-bar {
+      height: 4px; background: rgba(148,163,184,0.08);
+      border-radius: 2px; overflow: hidden;
+    }
+    .rec-conf-bar-fill {
+      height: 100%; border-radius: 2px;
+      transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+    }
+    .rec-conf-bar-fill.high { background: linear-gradient(90deg, var(--profit), #4ade80); }
+    .rec-conf-bar-fill.med { background: linear-gradient(90deg, var(--warning), #fbbf24); }
+    .rec-conf-bar-fill.low { background: linear-gradient(90deg, var(--accent), #38bdf8); }
+    .rec-stake {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 700; color: var(--text-primary); text-align: right;
+    }
+    .rec-stake-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--text-muted);
+    }
+    .rec-edge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--profit); font-weight: 600;
+    }
+    .rec-risk-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .rec-risk-dot.low { background: var(--profit); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+    .rec-risk-dot.med { background: var(--warning); box-shadow: 0 0 6px rgba(245,158,11,0.4); }
+    .rec-risk-dot.high { background: var(--loss); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+    .rec-lockin-btn {
+      padding: 6px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--accent); background: transparent;
+      color: var(--accent); font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .rec-lockin-btn:hover { background: var(--accent); color: #fff; }
+    .rec-lockin-btn.locked {
+      border-color: var(--profit); background: var(--profit-soft);
+      color: var(--profit); cursor: default;
+    }
+    .rec-summary {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 16px; margin-top: 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .rec-summary-stat { text-align: center; }
+    .rec-summary-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 2px;
+    }
+    .rec-summary-value {
+      font-family: 'JetBrains Mono', monospace; font-size: 14px;
+      font-weight: 700; color: var(--text-primary);
+    }
+    .rec-bankroll-bar {
+      width: 100%; height: 4px; background: rgba(148,163,184,0.08);
+      border-radius: 2px; overflow: hidden; margin-top: 8px;
+    }
+    .rec-bankroll-bar-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--profit));
+      transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+    }
+    .rec-empty {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 32px;
+      text-align: center; color: var(--text-muted); font-size: 13px;
+    }
+    .rec-empty a { color: var(--accent-secondary); text-decoration: none; }
+    .rec-empty a:hover { color: var(--accent); }
+    @media (max-width: 768px) {
+      .rec-bet-bottom { gap: 8px; }
+      .rec-conf-bar-wrap { max-width: 120px; }
+      .rec-summary { gap: 10px; }
+      .rec-summary-value { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -766,6 +901,21 @@
           </div>
         </div>
 
+        <!-- Today's Recommended Bets -->
+        <div class="section anim d35" id="rec-bets-section" style="display:none">
+          <div class="section-header">
+            <div class="rec-bets-header">
+              <div class="section-title">Today's Recommended Bets</div>
+              <span class="rec-badge-count" id="rec-pick-count">0 picks</span>
+              <span class="rec-badge-stake" id="rec-total-stake"></span>
+              <span class="rec-info-tip" data-tip="Picks are sized using Kelly criterion based on your risk profile">&#9432;</span>
+            </div>
+          </div>
+          <div class="rec-subtitle">Personalized for your risk profile</div>
+          <div id="rec-bets-list"></div>
+          <div id="rec-bets-summary"></div>
+        </div>
+
         <!-- Recent Picks -->
         <div class="section anim d4">
           <div class="section-header">
@@ -879,6 +1029,10 @@
   <script>
     const CUTOFF = '2026-02-27';
     var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null;
+    var propsJsonData = null, gameJsonData = null;
+    var nhlGameJsonData = null, ncaabGameJsonData = null;
+    var currentProfile = null;
+    var lastRecommendations = null;
     var calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
 
     // ── Helpers ──
@@ -913,6 +1067,313 @@
         else { byDate[b.date].p++; }
       }
       return byDate;
+    }
+
+    // ── Recommended Bets ──
+    function buildRecBetId(pick) {
+      var today = new Date();
+      var ds = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+      if (pick.type === 'prop') {
+        return ds + '_prop_' + (pick.player || '').replace(/\s+/g, '_').toLowerCase() + '_' + (pick.prop_type || '');
+      }
+      return ds + '_' + (pick.type || 'spread') + '_' + (pick.game || '').replace(/\s+/g, '_').toLowerCase();
+    }
+
+    function generateRecommendations() {
+      var ip = (currentProfile && currentProfile.investmentProfile) || {};
+      var s = (currentProfile && currentProfile.settings) || {};
+      var bankroll = ip.bankroll || s.bankroll || 0;
+      var unitSize = ip.unitSize || s.unitSize || 10;
+      var riskTolerance = ip.riskTolerance || s.riskTolerance || 'moderate';
+      var kellyFraction = ip.kellyFraction || s.kellyFraction || 0.25;
+      var maxBetPct = ip.maxBetPct || s.maxBetPct || 5;
+      var sportsWeighting = ip.sportsWeighting || s.sportsWeighting || {};
+      var useKelly = ip.kellyEnabled !== false;
+
+      if (!bankroll) {
+        try {
+          var ls = JSON.parse(localStorage.getItem('efe_user_settings')) || {};
+          bankroll = ls.bankroll || 0;
+          unitSize = ls.unit_size || ls.unitSize || 10;
+        } catch (e) {}
+      }
+
+      var hasProfile = bankroll > 0;
+      var confThreshold = riskTolerance === 'conservative' ? 62 : riskTolerance === 'aggressive' ? 52 : 57;
+      var maxDailyPct = riskTolerance === 'conservative' ? 8 : riskTolerance === 'aggressive' ? 25 : 15;
+      var maxDailyExposure = bankroll * (maxDailyPct / 100);
+
+      var now = new Date();
+      var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+      var candidates = [];
+
+      // NBA game picks
+      if (gameJsonData && gameJsonData.date === todayStr && gameJsonData.games) {
+        for (var i = 0; i < gameJsonData.games.length; i++) {
+          var g = gameJsonData.games[i];
+          var types = ['spread', 'total', 'moneyline'];
+          for (var t = 0; t < types.length; t++) {
+            var type = types[t];
+            var conf = 0, pick = '', line = '', odds = -110;
+            if (type === 'spread' && g.spread_pick) {
+              conf = g.spread_confidence || g.confidence || 0; pick = g.spread_pick;
+              line = g.spread_line || ''; odds = g.spread_odds || -110;
+            } else if (type === 'total' && g.total_pick) {
+              conf = g.total_confidence || g.confidence || 0; pick = g.total_pick;
+              line = g.total_line || ''; odds = g.total_odds || -110;
+            } else if (type === 'moneyline' && g.ml_pick) {
+              conf = g.ml_confidence || g.confidence || 0; pick = g.ml_pick;
+              odds = g.ml_odds || -110;
+            } else continue;
+            if (conf >= confThreshold) {
+              candidates.push({ sport: 'nba', type: type, game: g.game || g.matchup || '',
+                pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
+            }
+          }
+        }
+      }
+
+      // NBA props
+      if (propsJsonData && propsJsonData.date === todayStr && propsJsonData.projections) {
+        for (var i = 0; i < propsJsonData.projections.length; i++) {
+          var p = propsJsonData.projections[i];
+          var conf = p.confidence || p.edge || 0;
+          if (conf >= confThreshold) {
+            candidates.push({ sport: 'props', type: 'prop', game: p.game || p.matchup || '',
+              pick: p.pick || (p.projection > p.line ? 'Over' : 'Under') + ' ' + p.line,
+              line: p.line || '', odds: p.odds || -110, confidence: conf,
+              player: p.player || '', prop_type: p.prop || p.market || '' });
+          }
+        }
+      }
+
+      // NHL game picks
+      if (nhlGameJsonData && nhlGameJsonData.date === todayStr && nhlGameJsonData.games) {
+        for (var i = 0; i < nhlGameJsonData.games.length; i++) {
+          var g = nhlGameJsonData.games[i];
+          var types = ['spread', 'total', 'moneyline'];
+          for (var t = 0; t < types.length; t++) {
+            var type = types[t];
+            var conf = 0, pick = '', line = '', odds = -110;
+            if (type === 'spread' && g.spread_pick) {
+              conf = g.spread_confidence || g.confidence || 0; pick = g.spread_pick;
+              line = g.spread_line || ''; odds = g.spread_odds || -110;
+            } else if (type === 'total' && g.total_pick) {
+              conf = g.total_confidence || g.confidence || 0; pick = g.total_pick;
+              line = g.total_line || ''; odds = g.total_odds || -110;
+            } else if (type === 'moneyline' && g.ml_pick) {
+              conf = g.ml_confidence || g.confidence || 0; pick = g.ml_pick;
+              odds = g.ml_odds || -110;
+            } else continue;
+            if (conf >= confThreshold) {
+              candidates.push({ sport: 'nhl', type: type, game: g.game || g.matchup || '',
+                pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
+            }
+          }
+        }
+      }
+
+      // NCAAB game picks
+      if (ncaabGameJsonData && ncaabGameJsonData.date === todayStr && ncaabGameJsonData.games) {
+        for (var i = 0; i < ncaabGameJsonData.games.length; i++) {
+          var g = ncaabGameJsonData.games[i];
+          var types = ['spread', 'total', 'moneyline'];
+          for (var t = 0; t < types.length; t++) {
+            var type = types[t];
+            var conf = 0, pick = '', line = '', odds = -110;
+            if (type === 'spread' && g.spread_pick) {
+              conf = g.spread_confidence || g.confidence || 0; pick = g.spread_pick;
+              line = g.spread_line || ''; odds = g.spread_odds || -110;
+            } else if (type === 'total' && g.total_pick) {
+              conf = g.total_confidence || g.confidence || 0; pick = g.total_pick;
+              line = g.total_line || ''; odds = g.total_odds || -110;
+            } else if (type === 'moneyline' && g.ml_pick) {
+              conf = g.ml_confidence || g.confidence || 0; pick = g.ml_pick;
+              odds = g.ml_odds || -110;
+            } else continue;
+            if (conf >= confThreshold) {
+              candidates.push({ sport: 'ncaab', type: type, game: g.game || g.matchup || '',
+                pick: pick, line: line, odds: odds, confidence: conf, player: null, prop_type: null });
+            }
+          }
+        }
+      }
+
+      // Score and sort
+      for (var i = 0; i < candidates.length; i++) {
+        var c = candidates[i];
+        var sportKey = c.sport === 'props' ? 'nba' : c.sport;
+        var sportWeight = (sportsWeighting[sportKey] || sportsWeighting[c.sport] || 10) / 10;
+        var impliedProb = c.confidence / 100;
+        var o = parseInt(c.odds) || -110;
+        var decimalOdds = o > 0 ? (o / 100) + 1 : (100 / Math.abs(o)) + 1;
+        var impliedVegas = 1 / decimalOdds;
+        var edgeProxy = Math.max(0, impliedProb - impliedVegas);
+        c.edge = edgeProxy;
+        c.decimalOdds = decimalOdds;
+        c.score = edgeProxy * impliedProb * sportWeight;
+      }
+      candidates.sort(function(a, b) { return b.score - a.score; });
+
+      // Size bets
+      var totalStake = 0;
+      var picks = [];
+      var maxPerBet = bankroll * (maxBetPct / 100);
+
+      for (var i = 0; i < candidates.length; i++) {
+        var c = candidates[i];
+        if (totalStake >= maxDailyExposure) break;
+        var stake;
+        if (useKelly && c.edge > 0) {
+          var kellyPct = (c.edge * (c.decimalOdds - 1) - (1 - c.confidence / 100)) / (c.decimalOdds - 1);
+          kellyPct = Math.max(0, kellyPct) * kellyFraction;
+          stake = bankroll * kellyPct;
+        } else {
+          stake = unitSize;
+        }
+        stake = Math.min(stake, maxPerBet);
+        stake = Math.min(stake, maxDailyExposure - totalStake);
+        if (stake < 1) continue;
+        stake = Math.round(stake);
+        c.stake = stake;
+        c.units = parseFloat((stake / unitSize).toFixed(2));
+        totalStake += stake;
+        picks.push(c);
+      }
+
+      var projReturn = 0;
+      for (var i = 0; i < picks.length; i++) {
+        projReturn += picks[i].stake * (picks[i].edge || 0);
+      }
+
+      return { picks: picks, totalStake: totalStake, projReturn: projReturn,
+        bankrollPct: bankroll > 0 ? (totalStake / bankroll * 100) : 0,
+        hasProfile: hasProfile, unitSize: unitSize };
+    }
+
+    function renderRecommendations() {
+      var section = document.getElementById('rec-bets-section');
+      var list = document.getElementById('rec-bets-list');
+      var summary = document.getElementById('rec-bets-summary');
+      var now = new Date();
+      var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+      var hasData = (gameJsonData && gameJsonData.date === todayStr) ||
+                    (propsJsonData && propsJsonData.date === todayStr) ||
+                    (nhlGameJsonData && nhlGameJsonData.date === todayStr) ||
+                    (ncaabGameJsonData && ncaabGameJsonData.date === todayStr);
+
+      section.style.display = '';
+
+      if (!hasData) {
+        list.innerHTML = '<div class="rec-empty">No projections available for today. Check back when models run (3:00 AM EST).</div>';
+        summary.innerHTML = '';
+        document.getElementById('rec-pick-count').textContent = '0 picks';
+        document.getElementById('rec-total-stake').textContent = '';
+        return;
+      }
+
+      var result = generateRecommendations();
+      lastRecommendations = result;
+
+      if (!result.hasProfile) {
+        list.innerHTML = '<div class="rec-empty">Set up your <a href="profile.html#investment">investment profile</a> to get personalized bet sizing and recommendations.</div>';
+        summary.innerHTML = '';
+        document.getElementById('rec-pick-count').textContent = '0 picks';
+        document.getElementById('rec-total-stake').textContent = '';
+        return;
+      }
+
+      if (result.picks.length === 0) {
+        list.innerHTML = '<div class="rec-empty">No picks meet your confidence threshold today. Check back closer to game time for updated projections.</div>';
+        summary.innerHTML = '';
+        document.getElementById('rec-pick-count').textContent = '0 picks';
+        document.getElementById('rec-total-stake').textContent = '';
+        return;
+      }
+
+      document.getElementById('rec-pick-count').textContent = result.picks.length + ' pick' + (result.picks.length !== 1 ? 's' : '');
+      document.getElementById('rec-total-stake').textContent = '$' + result.totalStake.toLocaleString();
+
+      var existingBets = getTrackedBets();
+      var html = '';
+      for (var i = 0; i < result.picks.length; i++) {
+        var p = result.picks[i];
+        var confClass = p.confidence >= 65 ? 'high-conf' : p.confidence >= 55 ? 'med-conf' : '';
+        var barClass = p.confidence >= 65 ? 'high' : p.confidence >= 55 ? 'med' : 'low';
+        var riskClass = p.edge >= 0.08 ? 'low' : p.edge >= 0.04 ? 'med' : 'high';
+        var sportLabel = p.sport === 'props' ? 'PROP' : p.sport.toUpperCase();
+        var sportBadge = p.sport === 'props' ? 'props' : p.sport;
+        var matchup = p.type === 'prop' ? (p.player + ' ' + p.prop_type) : p.game;
+        var pickLabel = p.pick + (p.line ? ' ' + p.line : '');
+        var typeLabel = p.type.charAt(0).toUpperCase() + p.type.slice(1);
+        var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
+        var betId = buildRecBetId(p);
+        var isLocked = existingBets.some(function(b) { return b.id === betId; });
+
+        html += '<div class="rec-bet-card ' + confClass + '">';
+        html += '<div class="rec-bet-top"><div class="rec-bet-top-left"><span class="model-badge ' + sportBadge + '">' + sportLabel + '</span>';
+        html += '<span class="rec-risk-dot ' + riskClass + '" title="Risk: ' + riskClass + '"></span></div>';
+        html += '<div class="rec-edge">+' + (p.edge * 100).toFixed(1) + '% edge</div></div>';
+        html += '<div class="rec-bet-pick">' + matchup + '</div>';
+        html += '<div class="rec-bet-meta">' + typeLabel + ' &middot; ' + pickLabel + ' &middot; ' + oddsStr + '</div>';
+        html += '<div class="rec-bet-bottom">';
+        html += '<div class="rec-conf-bar-wrap"><div class="rec-conf-label">Confidence ' + p.confidence.toFixed(0) + '%</div>';
+        html += '<div class="rec-conf-bar"><div class="rec-conf-bar-fill ' + barClass + '" style="width:' + Math.min(100, p.confidence) + '%"></div></div></div>';
+        html += '<div class="rec-stake"><div class="rec-stake-label">Stake</div>$' + p.stake + ' (' + p.units.toFixed(1) + 'u)</div>';
+        if (isLocked) {
+          html += '<button class="rec-lockin-btn locked" disabled>&#10003; Locked</button>';
+        } else {
+          html += '<button class="rec-lockin-btn" onclick="lockInBet(' + i + ')">Lock In</button>';
+        }
+        html += '</div></div>';
+      }
+      list.innerHTML = html;
+
+      var sh = '<div class="rec-summary">';
+      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Total Stake</div><div class="rec-summary-value">$' + result.totalStake.toLocaleString() + '</div></div>';
+      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Proj. Return</div><div class="rec-summary-value" style="color:var(--profit)">+$' + result.projReturn.toFixed(0) + '</div></div>';
+      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Bankroll Used</div><div class="rec-summary-value">' + result.bankrollPct.toFixed(1) + '%</div></div>';
+      sh += '<div style="width:100%"><div class="rec-bankroll-bar"><div class="rec-bankroll-bar-fill" style="width:' + Math.min(100, result.bankrollPct) + '%"></div></div></div>';
+      sh += '</div>';
+      summary.innerHTML = sh;
+    }
+
+    function lockInBet(idx) {
+      if (!lastRecommendations || !lastRecommendations.picks[idx]) return;
+      var p = lastRecommendations.picks[idx];
+      var now = new Date();
+      var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+      var bet = {
+        id: buildRecBetId(p),
+        date: todayStr,
+        sport: p.sport === 'props' ? 'nba' : p.sport,
+        type: p.type,
+        player: p.player || null,
+        game: p.game || '',
+        prop_type: p.prop_type || null,
+        pick: p.pick,
+        line: p.line || null,
+        odds: String(p.odds),
+        units: p.units,
+        status: 'pending',
+        source: 'recommended_bets',
+        model_confidence: p.confidence,
+        locked_at: now.toISOString()
+      };
+      var bets = getTrackedBets();
+      var exists = bets.some(function(b) { return b.id === bet.id; });
+      if (!exists) {
+        bets.push(bet);
+        localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+      }
+      var btns = document.querySelectorAll('.rec-lockin-btn');
+      if (btns[idx]) {
+        btns[idx].innerHTML = '&#10003; Locked';
+        btns[idx].classList.add('locked');
+        btns[idx].disabled = true;
+      }
+      renderBettingCalendar();
+      renderCalendarSummary();
     }
 
     // ── Auto-Grading ──
@@ -1212,15 +1673,18 @@
 
       // Load Firestore profile via auth.js helper, then render
       var profile = await getUserProfile(user.uid);
+      currentProfile = profile;
       renderPortfolioStats(profile);
       await loadData();
     });
 
     // ── Portfolio Stats ──
     function renderPortfolioStats(profile) {
-      var bankroll = (profile && profile.settings && profile.settings.bankroll) || 0;
-      var unitSize = (profile && profile.settings && profile.settings.unitSize) || 10;
-      var monthlyTarget = (profile && profile.settings && profile.settings.monthlyTarget) || 500;
+      var ip = (profile && profile.investmentProfile) || {};
+      var sp = (profile && profile.settings) || {};
+      var bankroll = ip.bankroll || sp.bankroll || 0;
+      var unitSize = ip.unitSize || sp.unitSize || 10;
+      var monthlyTarget = ip.monthlyTarget || sp.monthlyTarget || 500;
 
       if (!bankroll) {
         try {
@@ -1290,14 +1754,18 @@
         fetch('nhl_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('game_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('nhl_game_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('ncaab_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
       ]);
 
       var nbaData = results[0].status === 'fulfilled' ? results[0].value : null;
       var ncaabData = results[1].status === 'fulfilled' ? results[1].value : null;
       var nhlData = results[2].status === 'fulfilled' ? results[2].value : null;
       nbaResultsData = nbaData; ncaabResultsData = ncaabData; nhlResultsData = nhlData;
-      var propsJson = results[3].status === 'fulfilled' ? results[3].value : null;
-      var gameJson = results[4].status === 'fulfilled' ? results[4].value : null;
+      propsJsonData = results[3].status === 'fulfilled' ? results[3].value : null;
+      gameJsonData = results[4].status === 'fulfilled' ? results[4].value : null;
+      nhlGameJsonData = results[5].status === 'fulfilled' ? results[5].value : null;
+      ncaabGameJsonData = results[6].status === 'fulfilled' ? results[6].value : null;
 
       // Grade each model
       var nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);
@@ -1316,8 +1784,8 @@
       var now = new Date();
       var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
       var pickCount = 0;
-      if (gameJson && gameJson.date === todayStr) pickCount += (gameJson.games || []).length;
-      if (propsJson && propsJson.date === todayStr) pickCount += (propsJson.projections || []).length;
+      if (gameJsonData && gameJsonData.date === todayStr) pickCount += (gameJsonData.games || []).length;
+      if (propsJsonData && propsJsonData.date === todayStr) pickCount += (propsJsonData.projections || []).length;
       document.getElementById('stat-picks').textContent = pickCount;
 
       // Recent picks
@@ -1326,6 +1794,7 @@
       autoGradeHomeTrackedBets();
       renderBettingCalendar();
       renderCalendarSummary();
+      renderRecommendations();
     }
 
     function grade(prefix, data, cats) {
