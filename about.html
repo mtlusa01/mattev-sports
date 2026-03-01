@@ -9,18 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #09090b;
-      --bg-secondary: #18181b;
-      --bg-tertiary: #27272a;
+      --bg-primary: #080c14;
+      --bg-secondary: #0c1220;
+      --bg-tertiary: #111827;
       --bg-elevated: rgba(39, 39, 42, 0.5);
       --border: rgba(255, 255, 255, 0.08);
       --border-light: rgba(255, 255, 255, 0.12);
       --text-primary: #fafafa;
       --text-secondary: #a1a1aa;
       --text-muted: #71717a;
-      --brand: #dc2626;
-      --brand-light: #ef4444;
-      --accent: #dc2626;
+      --brand: #00d4ff;
+      --brand-light: #38bdf8;
+      --accent: #00d4ff;
       --accent-light: #34d399;
       --accent-glow: rgba(16, 185, 129, 0.15);
     }
@@ -37,8 +37,8 @@
 
     /* ── Top Nav (matches index.html) ── */
     .top-nav {
-      background: #0f0f0f;
-      border-bottom: 1px solid #2a2a2a;
+      background: #080c14;
+      border-bottom: 1px solid rgba(0,212,255,0.12);
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 60px;
@@ -60,23 +60,24 @@
     .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-mark {
       width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, #6366f1, #818cf8);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
       display: flex; align-items: center; justify-content: center;
       font-weight: 700; font-size: 11px; color: #fff; flex-shrink: 0;
       font-family: 'Inter', monospace;
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
     }
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
-    .logo-text span { color: #818cf8; }
+    .logo-text span { color: #00d4ff; }
     .nav-center { display: flex; align-items: center; gap: 4px; }
     .nav-link {
       color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;
       padding: 8px 14px; border-radius: 6px; transition: all 0.2s; position: relative;
     }
     .nav-link:hover { color: var(--text-secondary); background: rgba(255,255,255,0.04); }
-    .nav-link.active { color: var(--text-primary); font-weight: 600; }
+    .nav-link.active { color: var(--text-primary); font-weight: 600; text-shadow: 0 0 12px rgba(0,212,255,0.3); }
     .nav-link.active::after {
       content: ''; position: absolute; bottom: -13px; left: 12px; right: 12px;
-      height: 2px; background: #6366f1; border-radius: 1px;
+      height: 2px; background: #00d4ff; border-radius: 1px;
     }
     .nav-actions { position: relative; z-index: 2; }
     .dropdown-trigger {
@@ -85,12 +86,13 @@
       border-radius: 24px; cursor: pointer; transition: border-color 0.2s; user-select: none;
     }
     .dropdown-trigger:hover { border-color: var(--border-light); }
-    .dropdown-trigger.open { border-color: #6366f1; }
+    .dropdown-trigger.open { border-color: #00d4ff; }
     .dropdown-avatar {
       width: 30px; height: 30px; border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #a78bfa);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-weight: 700; font-size: 12px; flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
     }
     .dropdown-trigger-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .dropdown-chevron { font-size: 10px; color: var(--text-muted); transition: transform 0.2s; }
@@ -114,7 +116,7 @@
     .dropdown-tier {
       display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.05em; padding: 2px 8px; border-radius: 10px;
-      background: rgba(99,102,241,0.12); color: #818cf8;
+      background: rgba(0,212,255,0.10); color: #38bdf8;
     }
     .dropdown-divider { height: 1px; background: var(--border); margin: 4px 0; }
     .dropdown-item {
@@ -142,35 +144,35 @@
     .mobile-nav-backdrop.open { display: block; }
     .mobile-nav-drawer {
       position: fixed; top: 60px; left: 0; right: 0;
-      background: #1a1a24; z-index: 9999;
+      background: #0c1220; z-index: 9999;
       overflow: hidden; max-height: 0; transition: max-height 0.3s ease;
     }
     .mobile-nav-drawer:not(.open) { pointer-events: none; border: none !important; box-shadow: none !important; }
-    .mobile-nav-drawer.open { max-height: 500px; border-bottom: 2px solid #2a2a3a; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+    .mobile-nav-drawer.open { max-height: 500px; border-bottom: 2px solid rgba(0,212,255,0.12); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
     .mobile-drawer-links a {
       display: flex; align-items: center; gap: 12px; padding: 14px 24px;
       color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500;
-      border-bottom: 1px solid #2a2a3a; transition: all 0.15s;
+      border-bottom: 1px solid rgba(0,212,255,0.12); transition: all 0.15s;
     }
     .mobile-drawer-links a:hover, .mobile-drawer-links a.active {
-      color: #818cf8; background: rgba(99,102,241,0.08);
+      color: #38bdf8; background: rgba(0,212,255,0.08);
     }
     .mobile-drawer-links a .menu-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
     .mobile-drawer-auth { padding: 12px 24px 16px; }
     .mobile-drawer-profile { display: flex; align-items: center; gap: 12px; padding: 10px 0 14px; }
     .mobile-drawer-avatar {
-      width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #a78bfa); color: white;
+      width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #00d4ff, #38bdf8); color: white;
       font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .mobile-drawer-user-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
     .mobile-drawer-name { font-size: 15px; font-weight: 600; color: #f0f0f0; }
     .mobile-drawer-email { font-size: 12px; color: #6b7280; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .mobile-drawer-login-btn {
-      display: block; width: 100%; padding: 12px; background: #6366f1; color: white;
+      display: block; width: 100%; padding: 12px; background: #00d4ff; color: white;
       border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;
       text-align: center; text-decoration: none; transition: background 0.15s;
     }
-    .mobile-drawer-login-btn:hover { background: #4f46e5; }
+    .mobile-drawer-login-btn:hover { background: #0891b2; }
 
     /* ── Coming Soon Overlay ── */
     .coming-soon-overlay {
@@ -184,11 +186,11 @@
     .coming-soon-content p { color: #9ca3af; font-size: 1.1rem; margin-bottom: 0.5rem; }
     .coming-soon-content .coming-soon-sub { color: #6b7280; font-size: 0.9rem; margin-bottom: 2rem; }
     .btn-primary {
-      background: linear-gradient(135deg, #dc2626, #991b1b); color: white; border: none;
+      background: linear-gradient(135deg, #00d4ff, #0891b2); color: white; border: none;
       padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
       cursor: pointer; transition: all 0.2s; font-family: inherit;
     }
-    .btn-primary:hover { background: linear-gradient(135deg, #ef4444, #dc2626); transform: translateY(-1px); }
+    .btn-primary:hover { background: linear-gradient(135deg, #38bdf8, #00d4ff); transform: translateY(-1px); }
 
     /* ── Content ── */
     main {

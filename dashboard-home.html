@@ -9,13 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0b0f1a;
-      --bg-secondary: #0f1629;
-      --bg-card: #131b2e;
-      --bg-card-hover: #182038;
-      --accent: #6366f1;
-      --accent-secondary: #818cf8;
-      --accent-soft: rgba(99,102,241,0.12);
+      --bg-primary: #080c14;
+      --bg-secondary: #0c1220;
+      --bg-card: #111827;
+      --bg-card-hover: #162032;
+      --accent: #00d4ff;
+      --accent-secondary: #38bdf8;
+      --accent-soft: rgba(0,212,255,0.10);
       --profit: #22c55e;
       --profit-soft: rgba(34,197,94,0.12);
       --loss: #ef4444;
@@ -48,7 +48,7 @@
       content: '';
       position: fixed; top: -15%; left: -10%;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
       pointer-events: none; z-index: 0;
     }
     body::after {
@@ -96,8 +96,8 @@
     /* ── Navigation ── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      height: 60px; background: rgba(11,15,26,0.85);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      height: 60px; background: rgba(8,12,20,0.88);
+      backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3);
       border-bottom: 1px solid var(--border-subtle);
     }
     .nav-inner {
@@ -107,13 +107,14 @@
     .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-mark {
       width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, #6366f1, #818cf8);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
       display: flex; align-items: center; justify-content: center;
       font-weight: 700; font-size: 11px; color: #fff; flex-shrink: 0;
       font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
     }
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
-    .logo-text span { color: var(--accent-secondary); }
+    .logo-text span { color: #00d4ff; }
 
     .nav-center { display: flex; align-items: center; gap: 4px; }
     .nav-link {
@@ -121,7 +122,7 @@
       padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; position: relative;
     }
     .nav-link:hover { color: var(--text-secondary); background: rgba(148,163,184,0.06); }
-    .nav-link.active { color: var(--text-primary); font-weight: 600; }
+    .nav-link.active { color: var(--text-primary); font-weight: 600; text-shadow: 0 0 12px rgba(0,212,255,0.3); }
     .nav-link.active::after {
       content: ''; position: absolute; bottom: -13px; left: 12px; right: 12px;
       height: 2px; background: var(--accent); border-radius: 1px;
@@ -137,7 +138,8 @@
     .dropdown-trigger.open { border-color: var(--accent); }
     .dropdown-avatar {
       width: 30px; height: 30px; border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #a78bfa);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-weight: 700; font-size: 12px; flex-shrink: 0;
     }
@@ -186,7 +188,7 @@
     .mobile-btn svg { width: 22px; height: 22px; display: block; }
     .mobile-drawer {
       display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 999;
-      background: rgba(11,15,26,0.98); backdrop-filter: blur(20px);
+      background: rgba(8,12,20,0.98); backdrop-filter: blur(24px) saturate(1.3);
       border-bottom: 1px solid var(--border-subtle); padding: 8px 16px 16px;
     }
     .mobile-drawer.open { display: block; }
@@ -311,7 +313,7 @@
       transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
     }
     .model-bar-fill.excellent { background: linear-gradient(90deg, var(--profit), #4ade80); }
-    .model-bar-fill.good { background: linear-gradient(90deg, #6366f1, #818cf8); }
+    .model-bar-fill.good { background: linear-gradient(90deg, #00d4ff, #38bdf8); }
 
     /* ── Recent Picks ── */
     .pick-item {
@@ -624,7 +626,7 @@
             <svg viewBox="0 0 100 100" width="100" height="100" class="goal-svg">
               <defs>
                 <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#6366f1"/>
+                  <stop offset="0%" stop-color="#00d4ff"/>
                   <stop offset="100%" stop-color="#22c55e"/>
                 </linearGradient>
               </defs>

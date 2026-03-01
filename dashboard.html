@@ -11,15 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0b0f1a;
-      --bg-secondary: #0f1629;
-      --bg-card: #131b2e;
-      --bg-card-hover: #182038;
+      --bg-primary: #080c14;
+      --bg-secondary: #0c1220;
+      --bg-card: #111827;
+      --bg-card-hover: #162032;
       --bg-tertiary: #1a2340;
       --bg-elevated: rgba(19, 27, 46, 0.5);
-      --accent: #6366f1;
-      --accent-secondary: #818cf8;
-      --accent-soft: rgba(99,102,241,0.12);
+      --accent: #00d4ff;
+      --accent-secondary: #38bdf8;
+      --accent-soft: rgba(0,212,255,0.10);
       --profit: #22c55e;
       --profit-soft: rgba(34,197,94,0.12);
       --loss: #ef4444;
@@ -37,10 +37,10 @@
       --radius-md: 10px;
       --radius-lg: 14px;
       /* Aliases for backward compat */
-      --brand: #6366f1;
-      --brand-light: #818cf8;
-      --brand-glow: rgba(99,102,241,0.15);
-      --brand-border: rgba(99,102,241,0.3);
+      --brand: #00d4ff;
+      --brand-light: #38bdf8;
+      --brand-glow: rgba(0,212,255,0.25);
+      --brand-border: rgba(0,212,255,0.3);
       --accent-light: #22c55e;
       --accent-glow: rgba(34,197,94,0.12);
       --red: #ef4444;
@@ -65,7 +65,7 @@
       content: '';
       position: fixed; top: -15%; left: -10%;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
       pointer-events: none; z-index: 0;
     }
     body::after {
@@ -81,8 +81,8 @@
     /* ── Top Nav ── */
     .top-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      height: 60px; background: rgba(11,15,26,0.85);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      height: 60px; background: rgba(8,12,20,0.88);
+      backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3);
       border-bottom: 1px solid var(--border-subtle);
     }
     .top-nav-inner {
@@ -92,13 +92,14 @@
     .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-mark {
       width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, #6366f1, #818cf8);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
       display: flex; align-items: center; justify-content: center;
       font-weight: 700; font-size: 11px; color: #fff; flex-shrink: 0;
       font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
     }
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
-    .logo-text span { color: var(--accent-secondary); }
+    .logo-text span { color: #00d4ff; }
     .nav-brand { position: relative; z-index: 2; }
     .nav-center { display: flex; align-items: center; gap: 4px; }
     .nav-link {
@@ -106,7 +107,7 @@
       padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; position: relative;
     }
     .nav-link:hover { color: var(--text-secondary); background: rgba(148,163,184,0.06); }
-    .nav-link.active { color: var(--text-primary); font-weight: 600; }
+    .nav-link.active { color: var(--text-primary); font-weight: 600; text-shadow: 0 0 12px rgba(0,212,255,0.3); }
     .nav-link.active::after {
       content: ''; position: absolute; bottom: -13px; left: 12px; right: 12px;
       height: 2px; background: var(--accent); border-radius: 1px;
@@ -124,7 +125,7 @@
     .sport-tab:hover { color: var(--text-secondary); }
     .sport-tab.active {
       background: var(--accent); color: #fff;
-      box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+      box-shadow: 0 2px 8px rgba(0,212,255,0.3);
     }
     .soon-badge {
       font-size: 9px; font-weight: 700; text-transform: uppercase;
@@ -142,9 +143,10 @@
     .dropdown-trigger.open { border-color: var(--accent); }
     .dropdown-avatar {
       width: 30px; height: 30px; border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #a78bfa);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-weight: 700; font-size: 12px; flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0,212,255,0.2);
     }
     .dropdown-trigger-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
     .dropdown-chevron { font-size: 10px; color: var(--text-tertiary); transition: transform 0.2s; }
@@ -193,7 +195,7 @@
     .mobile-nav-backdrop.open { display: block; }
     .mobile-nav-drawer {
       position: fixed; top: 60px; left: 0; right: 0;
-      background: rgba(11,15,26,0.98); backdrop-filter: blur(20px);
+      background: rgba(8,12,20,0.98); backdrop-filter: blur(24px) saturate(1.3);
       z-index: 9999; overflow: hidden; max-height: 0;
       transition: max-height 0.3s ease;
     }
@@ -218,7 +220,7 @@
     }
     .mobile-drawer-avatar {
       width: 40px; height: 40px; border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #a78bfa);
+      background: linear-gradient(135deg, #00d4ff, #38bdf8);
       color: white; font-size: 16px; font-weight: 700;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
@@ -236,7 +238,7 @@
       font-size: 16px; font-weight: 600; cursor: pointer;
       text-align: center; text-decoration: none; transition: background 0.15s;
     }
-    .mobile-drawer-login-btn:hover { background: #4f46e5; }
+    .mobile-drawer-login-btn:hover { background: #0891b2; }
 
     /* ── Sub Nav ── */
     .sub-nav {
@@ -372,7 +374,7 @@
     }
     .coming-soon-overlay .cs-back {
       padding: 10px 24px;
-      background: linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, #0891b2 100%);
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -419,7 +421,7 @@
     .game-pill:hover { border-color: var(--border-light); color: var(--text-primary); }
     .game-pill.active { background: var(--brand-glow); border-color: var(--brand-border); color: var(--brand-light); }
     .game-pill .pill-time { font-weight: 400; color: var(--text-muted); margin-left: 4px; font-size: 11px; }
-    .game-pill.active .pill-time { color: rgba(129, 140, 248, 0.7); }
+    .game-pill.active .pill-time { color: rgba(56, 189, 248, 0.7); }
     .game-pill .pill-live { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; color: var(--red-light); font-size: 10px; font-weight: 700; letter-spacing: 0.03em; }
     .game-pill .pill-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
     .game-pill .pill-soon { color: var(--yellow); margin-left: 4px; font-size: 10px; font-weight: 600; }
@@ -614,7 +616,7 @@
     }
     .stat-badge.hit-rate { background: rgba(16, 185, 129, 0.2); color: var(--accent-light); }
     .stat-badge.streak { background: rgba(234, 179, 8, 0.15); color: var(--yellow); }
-    .stat-badge.home-away { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+    .stat-badge.home-away { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
     .stat-badge.matchup { display: inline-flex; align-items: center; gap: 3px; }
     .stat-badge.matchup.favorable { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
     .stat-badge.matchup.neutral { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); }
@@ -646,7 +648,7 @@
     .injury-stat-box { text-align: center; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 6px 12px; min-width: 60px; }
     .injury-stat-box.without { border: 1px solid rgba(16, 185, 129, 0.3); }
     .injury-stat-box.with { border: 1px solid rgba(255,255,255,0.1); }
-    .injury-stat-box.boost-box { border: 1px solid rgba(99, 102, 241, 0.3); }
+    .injury-stat-box.boost-box { border: 1px solid rgba(0, 212, 255, 0.3); }
     .injury-stat-label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.5px; }
     .injury-stat-value { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
     .injury-stat-value.pos { color: #10b981; }
@@ -655,7 +657,7 @@
     .injury-stat-arrow { color: var(--text-secondary); font-size: 1.1rem; }
     .injury-insight-text { font-size: 0.78rem; color: var(--text-secondary); margin-top: 6px; line-height: 1.4; }
     .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
-    .insight-type-badge.historical { background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+    .insight-type-badge.historical { background: rgba(0, 212, 255, 0.2); color: #38bdf8; border: 1px solid rgba(0, 212, 255, 0.3); }
 
     /* ── Game Log Chart (Outlier-style) ── */
     .gl-section {
@@ -754,7 +756,7 @@
     /* ── Top Picks Section ── */
     .top-picks-section {
       margin-bottom: 24px; padding: 20px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
       border: 1px solid var(--brand-border); border-radius: 12px;
     }
     .top-picks-header {
@@ -863,7 +865,7 @@
       background: var(--bg-tertiary); font-size: 10px; font-weight: 600;
       color: var(--text-muted); margin-left: 6px;
     }
-    .category-tab.active .tab-count { background: rgba(99, 102, 241, 0.2); color: var(--brand-light); }
+    .category-tab.active .tab-count { background: rgba(0, 212, 255, 0.2); color: var(--brand-light); }
 
     /* ── Sort Options ── */
     .sort-options {
