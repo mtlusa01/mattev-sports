@@ -1133,9 +1133,42 @@
         return modelStats[key] ? modelStats[key].pct : 50;
       }
 
+      // Extract real odds from NHL-style nested odds object
+      // g.odds = { DK: { spread: {home_odds, away_odds}, total: {over_odds, under_odds}, ml: {TEAM: odds} }, ... }
+      function extractOdds(g, type, bestBook) {
+        var oddsObj = g.odds;
+        if (!oddsObj) return null;
+        // Try best book first, then any available book
+        var books = bestBook ? [bestBook] : [];
+        for (var bk in oddsObj) { if (books.indexOf(bk) < 0) books.push(bk); }
+        for (var bi = 0; bi < books.length; bi++) {
+          var book = oddsObj[books[bi]];
+          if (!book) continue;
+          if (type === 'spread' && book.spread) {
+            // Pick side: if spread_pick starts with home_team, use home_odds
+            var pickTeam = (g.spread_pick || '').split(/\s+/)[0];
+            if (pickTeam === g.home_team) return book.spread.home_odds;
+            if (pickTeam === g.away_team) return book.spread.away_odds;
+            return book.spread.home_odds; // fallback
+          }
+          if (type === 'total' && book.total) {
+            var dir = (g.total_pick || '').toUpperCase();
+            return dir === 'OVER' ? book.total.over_odds : book.total.under_odds;
+          }
+          if (type === 'moneyline' && book.ml) {
+            var mlTeam = g.ml_pick || '';
+            if (book.ml[mlTeam] !== undefined) return book.ml[mlTeam];
+            // Try keys
+            for (var tk in book.ml) { if (tk === mlTeam) return book.ml[tk]; }
+          }
+        }
+        return null;
+      }
+
       // Helper to extract game candidates from any sport's projection data
       function extractGameCandidates(data, sport) {
         if (!data || data.date !== todayStr || !data.games) return;
+        var hasOddsData = data.games.length > 0 && !!data.games[0].odds;
         for (var i = 0; i < data.games.length; i++) {
           var g = data.games[i];
           var matchup = (g.away_team || '') + ' @ ' + (g.home_team || '');
@@ -1143,23 +1176,32 @@
           var types = ['spread', 'total', 'moneyline'];
           for (var t = 0; t < types.length; t++) {
             var type = types[t];
-            var conf = 0, pick = '', line = '', odds = -110, ev = 0;
+            var conf = 0, pick = '', line = '', odds = 0, ev = 0, hasRealOdds = false;
             if (type === 'spread' && g.spread_pick) {
               conf = parseFloat(g.spread_conf) || 0; pick = g.spread_pick;
               line = g.total_line || ''; ev = parseFloat(edgeData.spread_ev) || 0;
+              var realOdds = extractOdds(g, 'spread', g.spread_best_book);
+              if (realOdds != null) { odds = realOdds; hasRealOdds = true; }
+              else { odds = -110; } // standard juice for spreads
             } else if (type === 'total' && g.total_pick) {
               conf = parseFloat(g.total_conf) || 0;
               pick = g.total_pick + ' ' + (g.total_line || '');
               line = g.total_line || ''; ev = parseFloat(edgeData.total_ev) || 0;
+              var realOdds = extractOdds(g, 'total', g.total_best_book);
+              if (realOdds != null) { odds = realOdds; hasRealOdds = true; }
+              else { odds = -110; } // standard juice for totals
             } else if (type === 'moneyline' && g.ml_pick) {
               conf = parseFloat(g.ml_conf) || 0; pick = g.ml_pick + ' ML';
+              var realOdds = extractOdds(g, 'moneyline', g.ml_best_book);
+              if (realOdds != null) { odds = realOdds; hasRealOdds = true; }
+              else { continue; } // skip ML without real odds — -110 default is wrong
               ev = Math.max(0, (conf - 50) * 0.2);
             } else continue;
             if (conf >= confThreshold) {
               var spreadSide = g.spread_pick ? g.spread_pick.split(/\s+/)[0] : '';
               candidates.push({ sport: sport, type: type, game: matchup,
                 pick: pick, line: line, odds: odds, confidence: conf, ev: ev,
-                player: null, prop_type: null,
+                player: null, prop_type: null, hasRealOdds: hasRealOdds,
                 spreadSide: spreadSide,
                 totalDir: type === 'total' ? (g.total_pick || '') : '',
                 mlSide: type === 'moneyline' ? (g.ml_pick || '') : '' });
