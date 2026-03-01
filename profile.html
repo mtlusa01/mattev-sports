@@ -24,6 +24,7 @@
       --loss: #ef4444;
       --loss-soft: rgba(239,68,68,0.12);
       --warning: #f59e0b;
+      --warning-soft: rgba(245,158,11,0.12);
       --text-primary: #f1f5f9;
       --text-secondary: #94a3b8;
       --text-tertiary: #64748b;
@@ -55,15 +56,9 @@
       pointer-events: none; z-index: 0;
     }
 
+    /* ── Nav ── */
     .top-nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 100; display: flex; align-items: center; background: rgba(8,12,20,0.88); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); border-bottom: 1px solid var(--border-subtle); }
     .top-nav-inner { position: relative; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; }
-    .nav-brand { position: relative; z-index: 2; }
-    .sports-tabs { display: flex; align-items: center; gap: 4px; background: var(--bg-tertiary); border-radius: 10px; padding: 4px; position: absolute; left: 50%; transform: translateX(-50%); z-index: 1; }
-    .sport-tab { padding: 6px 18px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-    .sport-tab:hover { color: var(--text-secondary); }
-    .sport-tab.active { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(0,212,255,0.3); }
-    .soon-badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--text-muted); }
-    .sport-tab.active .soon-badge { display: none; }
     .nav-actions { position: relative; z-index: 2; }
     .nav-link {
       color: var(--text-tertiary); text-decoration: none; font-size: 13px; font-weight: 500;
@@ -72,7 +67,6 @@
     .nav-link:hover { color: var(--text-secondary); background: rgba(148,163,184,0.06); }
     .nav-link.active { color: var(--text-primary); font-weight: 600; text-shadow: 0 0 12px rgba(0,212,255,0.3); }
     .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
     .dropdown-trigger {
       display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 5px;
       background: var(--bg-card); border: 1px solid var(--border-subtle);
@@ -162,16 +156,37 @@
     }
     .mobile-drawer-login-btn:hover { background: #0891b2; }
 
-    /* Profile Content */
+    /* ── Profile Content ── */
     main { max-width: 640px; margin: 0 auto; padding: 90px 24px 60px; }
     .loading-state { text-align: center; padding: 60px 0; color: var(--text-muted); }
 
-    .profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; }
+    .profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
     .profile-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #00d4ff, #38bdf8); color: white; font-size: 28px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .profile-info h1 { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
     .profile-meta { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .role-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent-secondary); }
 
+    /* ── Tab Bar ── */
+    .profile-tabs {
+      display: flex; gap: 0; margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .profile-tab {
+      padding: 12px 24px; background: none; border: none;
+      color: var(--text-muted); font-size: 14px; font-weight: 600;
+      cursor: pointer; font-family: inherit; position: relative;
+      transition: color 0.2s;
+    }
+    .profile-tab:hover { color: var(--text-secondary); }
+    .profile-tab.active { color: var(--accent); }
+    .profile-tab.active::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 2px; background: var(--accent); border-radius: 1px 1px 0 0;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Settings Cards ── */
     .settings-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; }
     .settings-card h2 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
 
@@ -181,15 +196,46 @@
     .field-value { font-size: 13px; color: var(--text-muted); }
     .field-hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; max-width: 280px; line-height: 1.4; }
 
-    .form-input { width: 100%; padding: 10px 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s; }
-    .form-input:focus { border-color: var(--accent); }
+    .form-input {
+      width: 100%; padding: 10px 14px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); color: var(--text-primary); font-size: 14px;
+      font-family: inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,212,255,0.1); }
     .form-input.short { width: 120px; text-align: right; }
     .form-input:read-only { opacity: 0.5; cursor: not-allowed; }
 
-    .toggle-group { display: flex; gap: 4px; background: var(--bg-primary); border-radius: 8px; padding: 3px; }
-    .toggle-opt { padding: 6px 14px; border-radius: 6px; border: none; background: transparent; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-    .toggle-opt.active { background: var(--accent); color: white; }
+    .form-select {
+      width: 100%; padding: 10px 14px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); color: var(--text-primary); font-size: 13px;
+      font-family: inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer; -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+    }
+    .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,212,255,0.1); }
+    .form-select option { background: var(--bg-card); color: var(--text-primary); }
 
+    .toggle-group { display: flex; gap: 4px; background: var(--bg-card); border-radius: var(--radius-md); padding: 3px; }
+    .toggle-opt { padding: 6px 14px; border-radius: 8px; border: none; background: transparent; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .toggle-opt.active { background: var(--accent); color: #080c14; }
+
+    /* ── Toggle Switch ── */
+    .switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .switch .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg-tertiary); border-radius: 12px; transition: background 0.3s;
+    }
+    .switch .slider::before {
+      content: ''; position: absolute; height: 18px; width: 18px;
+      left: 3px; bottom: 3px; background: var(--text-muted);
+      border-radius: 50%; transition: transform 0.3s, background 0.3s;
+    }
+    .switch input:checked + .slider { background: var(--accent); }
+    .switch input:checked + .slider::before { transform: translateX(20px); background: #fff; }
+
+    /* ── Ranges ── */
     .range-row { margin-bottom: 16px; }
     .range-row:last-child { margin-bottom: 0; }
     .range-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
@@ -198,43 +244,53 @@
     input[type="range"] { width: 100%; -webkit-appearance: none; height: 4px; border-radius: 2px; background: var(--bg-tertiary); outline: none; }
     input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 2px solid var(--bg-primary); }
 
-    .btn-save { display: inline-flex; align-items: center; gap: 6px; padding: 10px 24px; background: linear-gradient(135deg, #00d4ff, #0891b2); color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-    .btn-save:hover { background: linear-gradient(135deg, #38bdf8, #00d4ff); transform: translateY(-1px); }
-    .btn-save:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    /* ── Buttons ── */
+    .btn-save {
+      display: inline-flex; align-items: center; gap: 6px; padding: 10px 24px;
+      background: #00d4ff; color: #080c14; border: none; border-radius: var(--radius-md);
+      font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-save:hover { box-shadow: 0 0 20px rgba(0,212,255,0.3); transform: translateY(-1px); }
+    .btn-save:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    .btn-secondary { padding: 8px 16px; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .btn-secondary { padding: 8px 16px; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-secondary); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.2s; }
     .btn-secondary:hover { border-color: var(--text-muted); color: var(--text-primary); }
-    .btn-danger { padding: 8px 16px; background: transparent; border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; color: #f87171; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .btn-danger { padding: 8px 16px; background: transparent; border: 1px solid rgba(239,68,68,0.3); border-radius: var(--radius-md); color: #f87171; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.2s; }
     .btn-danger:hover { background: rgba(220,38,38,0.1); }
+    .btn-warning { padding: 8px 16px; background: transparent; border: 1px solid rgba(245,158,11,0.3); border-radius: var(--radius-md); color: #fbbf24; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .btn-warning:hover { background: rgba(245,158,11,0.1); }
 
     .save-bar { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
     .save-msg { font-size: 13px; color: var(--accent-light); display: none; }
     .save-msg.visible { display: block; }
 
+    /* ── Danger Zone ── */
+    .danger-zone { border-color: rgba(239,68,68,0.2); }
+    .danger-zone h2 { color: #f87171; }
+
+    /* ── Modals ── */
     .confirm-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 2000; display: flex; align-items: center; justify-content: center; }
     .confirm-box { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 24px; max-width: 400px; width: 90%; }
     .confirm-box h3 { font-size: 16px; margin-bottom: 8px; }
     .confirm-box p { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
     .confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
 
-    /* Phase 1: Investment Profile styles */
-    .form-select { width: 100%; padding: 10px 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.2s; cursor: pointer; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-    .form-select:focus { border-color: var(--accent); }
-    .form-select option { background: var(--bg-primary); color: var(--text-primary); }
-    .section-desc { font-size: 12px; color: var(--text-muted); margin-top: -12px; margin-bottom: 16px; line-height: 1.5; }
-    .kelly-info { margin-top: 12px; padding: 12px 16px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+    .kelly-info { margin-top: 12px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
     .kelly-info p { margin-bottom: 6px; }
     .kelly-info strong { color: var(--text-secondary); }
+    .section-desc { font-size: 12px; color: var(--text-muted); margin-top: -12px; margin-bottom: 16px; line-height: 1.5; }
 
     @media (max-width: 768px) {
       .nav-center { display: none; }
       .dropdown-trigger-name { display: none; }
-      .sports-tabs { display: none; }
       .mobile-menu-btn { display: block; }
       .top-nav-inner { padding: 0 1rem; }
       .profile-header { flex-direction: column; text-align: center; }
       .field-row { flex-direction: column; align-items: flex-start; gap: 6px; }
       .form-input.short { width: 100%; text-align: left; }
+      .profile-tab { padding: 10px 16px; font-size: 13px; }
+      .toggle-group { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -264,7 +320,8 @@
             <span class="dropdown-tier">Free</span>
           </div>
           <div class="dropdown-divider"></div>
-          <a href="profile.html" class="dropdown-item">Settings</a>
+          <a href="profile.html#settings" class="dropdown-item">Settings</a>
+          <a href="profile.html#investment" class="dropdown-item">Investment Profile</a>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item danger" onclick="handleSignOut()">Sign Out</button>
         </div>
@@ -304,214 +361,323 @@
         </div>
       </div>
 
-      <!-- Profile Card -->
-      <div class="settings-card">
-        <h2>Profile</h2>
-        <div class="field-row">
-          <span class="field-label">Display Name</span>
-          <input type="text" class="form-input short" id="set-name" style="width:200px;text-align:left;">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Email</span>
-          <span class="field-value" id="set-email">--</span>
-        </div>
+      <!-- Tab Bar -->
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-tab="settings" onclick="switchTab('settings')">Account Settings</button>
+        <button class="profile-tab" data-tab="investment" onclick="switchTab('investment')">Investment Profile</button>
       </div>
 
-      <!-- Display Preferences -->
-      <div class="settings-card">
-        <h2>Display Preferences</h2>
-        <div class="field-row">
-          <span class="field-label">Default View</span>
-          <div class="toggle-group" id="toggle-view">
-            <button class="toggle-opt active" data-val="games">Game Projections</button>
-            <button class="toggle-opt" data-val="props">Player Props</button>
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- TAB 1: Account Settings                     -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div id="tab-settings" class="tab-panel active">
+
+        <!-- Profile -->
+        <div class="settings-card">
+          <h2>Profile</h2>
+          <div class="field-row">
+            <span class="field-label">Display Name</span>
+            <input type="text" class="form-input" id="set-name" style="width:220px;text-align:left;">
+          </div>
+          <div class="field-row">
+            <span class="field-label">Email</span>
+            <span class="field-value" id="set-email">--</span>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Timezone</span>
+              <div class="field-hint">Affects when "today's picks" refresh.</div>
+            </div>
+            <select class="form-select" id="set-timezone" style="width:220px;">
+              <option value="America/New_York">Eastern (EST/EDT)</option>
+              <option value="America/Chicago">Central (CST/CDT)</option>
+              <option value="America/Denver">Mountain (MST/MDT)</option>
+              <option value="America/Los_Angeles">Pacific (PST/PDT)</option>
+            </select>
           </div>
         </div>
-        <div class="field-row">
-          <span class="field-label">Odds Format</span>
-          <div class="toggle-group" id="toggle-odds">
-            <button class="toggle-opt active" data-val="american">American</button>
-            <button class="toggle-opt" data-val="decimal">Decimal</button>
+
+        <!-- Notification Preferences -->
+        <div class="settings-card">
+          <h2>Notification Preferences</h2>
+          <div class="field-row">
+            <div>
+              <span class="field-label">New picks posted</span>
+              <div class="field-hint">Email alert when new daily picks are available.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="set-notify-picks">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Grading results</span>
+              <div class="field-hint">Email alert when yesterday's picks are graded.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="set-notify-grading">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Daily summary</span>
+              <div class="field-hint">Receive a daily email with your portfolio summary.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="set-notify-summary">
+              <span class="slider"></span>
+            </label>
           </div>
         </div>
+
+        <!-- Display Preferences -->
+        <div class="settings-card">
+          <h2>Display Preferences</h2>
+          <div class="field-row">
+            <span class="field-label">Default Sport</span>
+            <select class="form-select" id="set-default-sport" style="width:160px;">
+              <option value="nba">NBA</option>
+              <option value="nhl">NHL</option>
+              <option value="ncaab">NCAAB</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Default View</span>
+            <div class="toggle-group" id="toggle-view">
+              <button class="toggle-opt active" data-val="games">Game Projections</button>
+              <button class="toggle-opt" data-val="props">Player Props</button>
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Show Confidence %</span>
+            <label class="switch">
+              <input type="checkbox" id="set-show-confidence" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Odds Format</span>
+            <div class="toggle-group" id="toggle-odds">
+              <button class="toggle-opt active" data-val="american">American</button>
+              <button class="toggle-opt" data-val="decimal">Decimal</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert Thresholds -->
+        <div class="settings-card">
+          <h2>Alert Thresholds</h2>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">Min Confidence</span>
+              <span class="range-value" id="conf-val">55%</span>
+            </div>
+            <input type="range" id="set-conf" min="50" max="70" value="55" oninput="document.getElementById('conf-val').textContent=this.value+'%'">
+          </div>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">Min EV</span>
+              <span class="range-value" id="ev-val">3%</span>
+            </div>
+            <input type="range" id="set-ev" min="0" max="10" value="3" step="0.5" oninput="document.getElementById('ev-val').textContent=this.value+'%'">
+          </div>
+        </div>
+
+        <!-- Bet Tracking (localStorage) -->
+        <div class="settings-card">
+          <h2>Bet Tracking</h2>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Unit Size</span>
+              <div class="field-hint">How much is 1 unit worth to you? Used to calculate dollar amounts on My Bets.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <span style="color:var(--text-muted);font-size:14px;">$</span>
+              <input type="text" inputmode="numeric" class="form-input short" id="set-tracking-unitsize" value="10" onchange="saveBetTrackingSettings()" style="width:80px;">
+            </div>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Display Mode</span>
+              <div class="field-hint">Choose how profits are shown on My Bets.</div>
+            </div>
+            <div class="toggle-group" id="toggle-display-mode">
+              <button class="toggle-opt active" data-val="units" onclick="saveBetTrackingSettings()">Units</button>
+              <button class="toggle-opt" data-val="dollars" onclick="saveBetTrackingSettings()">Dollars</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-card danger-zone">
+          <h2>Danger Zone</h2>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Password</span>
+              <div class="field-hint">Send a password reset link to your email.</div>
+            </div>
+            <button class="btn-secondary" onclick="sendPasswordReset()">Send Reset Email</button>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Reset All Data</span>
+              <div class="field-hint">Clears your tracked bet history. Cannot be undone.</div>
+            </div>
+            <button class="btn-warning" onclick="showResetConfirm()">Reset Data</button>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Delete Account</span>
+              <div class="field-hint">Permanently delete your account and all data.</div>
+            </div>
+            <button class="btn-danger" onclick="showDeleteConfirm()">Delete Account</button>
+          </div>
+        </div>
+
+        <!-- Save -->
+        <div class="save-bar">
+          <button class="btn-save" id="save-account-btn" onclick="saveAccountSettings()">Save Account Settings</button>
+          <span class="save-msg" id="save-account-msg">Settings saved.</span>
+        </div>
       </div>
 
-      <!-- Bet Settings -->
-      <div class="settings-card">
-        <h2>Bet Settings</h2>
-        <div class="field-row">
-          <span class="field-label">Default Bet Size</span>
-          <input type="text" inputmode="numeric" class="form-input short" id="set-betsize" value="10">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Unit Size</span>
-          <input type="text" inputmode="numeric" class="form-input short" id="set-unitsize" value="10">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Bankroll (optional)</span>
-          <input type="text" inputmode="numeric" class="form-input short" id="set-bankroll" placeholder="--">
-        </div>
-      </div>
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- TAB 2: Investment Profile                   -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div id="tab-investment" class="tab-panel">
 
-      <!-- Bet Tracking (localStorage) -->
-      <div class="settings-card">
-        <h2>Bet Tracking</h2>
-        <div class="field-row">
-          <div>
+        <!-- Investment Strategy -->
+        <div class="settings-card">
+          <h2>Investment Strategy</h2>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Betting Goal</span>
+              <div class="field-hint">What are you trying to achieve?</div>
+            </div>
+            <select class="form-select" id="set-goal" style="width:220px;">
+              <option value="income">Monthly Income</option>
+              <option value="growth">Bankroll Growth</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="professional">Professional</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Monthly Target</span>
+              <div class="field-hint">Your profit goal per month.</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <span style="color:var(--text-muted);font-size:14px;">$</span>
+              <input type="text" inputmode="numeric" class="form-input short" id="set-monthly-target" value="500" style="width:90px;">
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Risk Tolerance</span>
+            <div class="toggle-group" id="toggle-risk">
+              <button class="toggle-opt" data-val="conservative">Conservative</button>
+              <button class="toggle-opt active" data-val="moderate">Moderate</button>
+              <button class="toggle-opt" data-val="aggressive">Aggressive</button>
+              <button class="toggle-opt" data-val="custom">Custom</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risk Management -->
+        <div class="settings-card">
+          <h2>Risk Management</h2>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">Max Drawdown</span>
+              <span class="range-value" id="drawdown-val">15%</span>
+            </div>
+            <input type="range" id="set-drawdown" min="10" max="50" step="5" value="15" oninput="document.getElementById('drawdown-val').textContent=this.value+'%'">
+          </div>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">Max Bet Size (% of bankroll)</span>
+              <span class="range-value" id="maxbet-val">5%</span>
+            </div>
+            <input type="range" id="set-maxbet" min="1" max="10" step="0.5" value="5" oninput="document.getElementById('maxbet-val').textContent=this.value+'%'">
+          </div>
+        </div>
+
+        <!-- Bet Sizing Strategy -->
+        <div class="settings-card">
+          <h2>Bet Sizing Strategy</h2>
+          <div class="field-row">
+            <div>
+              <span class="field-label">Kelly Criterion</span>
+              <div class="field-hint">Optimal bet sizing based on edge.</div>
+            </div>
+            <div class="toggle-group" id="toggle-kelly">
+              <button class="toggle-opt" data-val="off">Off</button>
+              <button class="toggle-opt" data-val="quarter">Quarter</button>
+              <button class="toggle-opt active" data-val="half">Half</button>
+              <button class="toggle-opt" data-val="full">Full</button>
+            </div>
+          </div>
+          <div class="kelly-info">
+            <p><strong>Off:</strong> Fixed unit sizing &middot; <strong>Quarter:</strong> Conservative Kelly &middot; <strong>Half:</strong> Balanced (recommended) &middot; <strong>Full:</strong> Maximum growth, high volatility</p>
+          </div>
+          <div class="field-row" style="margin-top:16px;">
+            <span class="field-label">Bankroll</span>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <span style="color:var(--text-muted);font-size:14px;">$</span>
+              <input type="text" inputmode="numeric" class="form-input short" id="set-bankroll" placeholder="--">
+            </div>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Default Bet Size</span>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <span style="color:var(--text-muted);font-size:14px;">$</span>
+              <input type="text" inputmode="numeric" class="form-input short" id="set-betsize" value="10">
+            </div>
+          </div>
+          <div class="field-row">
             <span class="field-label">Unit Size</span>
-            <div class="field-hint">How much is 1 unit worth to you? Used to calculate dollar amounts on My Bets.</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span style="color:var(--text-muted);font-size:14px;">$</span>
-            <input type="text" inputmode="numeric" class="form-input short" id="set-tracking-unitsize" value="10" onchange="saveBetTrackingSettings()" style="width:80px;">
+            <div style="display:flex;align-items:center;gap:4px;">
+              <span style="color:var(--text-muted);font-size:14px;">$</span>
+              <input type="text" inputmode="numeric" class="form-input short" id="set-unitsize" value="10">
+            </div>
           </div>
         </div>
-        <div class="field-row">
-          <div>
-            <span class="field-label">Display Mode</span>
-            <div class="field-hint">Choose how profits are shown on My Bets.</div>
+
+        <!-- Sports Preferences -->
+        <div class="settings-card">
+          <h2>Sports Preferences</h2>
+          <p class="section-desc">Weight how much you want to see picks from each sport (0 = hide, 10 = prioritize).</p>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">NBA</span>
+              <span class="range-value" id="nba-wt-val">7</span>
+            </div>
+            <input type="range" id="set-nba-wt" min="0" max="10" value="7" oninput="document.getElementById('nba-wt-val').textContent=this.value">
           </div>
-          <div class="toggle-group" id="toggle-display-mode">
-            <button class="toggle-opt active" data-val="units" onclick="saveBetTrackingSettings()">Units</button>
-            <button class="toggle-opt" data-val="dollars" onclick="saveBetTrackingSettings()">Dollars</button>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">NCAAB</span>
+              <span class="range-value" id="ncaab-wt-val">5</span>
+            </div>
+            <input type="range" id="set-ncaab-wt" min="0" max="10" value="5" oninput="document.getElementById('ncaab-wt-val').textContent=this.value">
           </div>
+          <div class="range-row">
+            <div class="range-header">
+              <span class="range-label">NHL</span>
+              <span class="range-value" id="nhl-wt-val">3</span>
+            </div>
+            <input type="range" id="set-nhl-wt" min="0" max="10" value="3" oninput="document.getElementById('nhl-wt-val').textContent=this.value">
+          </div>
+        </div>
+
+        <!-- Save -->
+        <div class="save-bar">
+          <button class="btn-save" id="save-invest-btn" onclick="saveInvestmentProfile()">Save Investment Profile</button>
+          <span class="save-msg" id="save-invest-msg">Profile saved.</span>
         </div>
       </div>
 
-      <!-- Notification Prefs -->
-      <div class="settings-card">
-        <h2>Alert Thresholds</h2>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">Min Confidence</span>
-            <span class="range-value" id="conf-val">55%</span>
-          </div>
-          <input type="range" id="set-conf" min="50" max="70" value="55" oninput="document.getElementById('conf-val').textContent=this.value+'%'">
-        </div>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">Min EV</span>
-            <span class="range-value" id="ev-val">3%</span>
-          </div>
-          <input type="range" id="set-ev" min="0" max="10" value="3" step="0.5" oninput="document.getElementById('ev-val').textContent=this.value+'%'">
-        </div>
-      </div>
-
-      <!-- Investment Strategy -->
-      <div class="settings-card">
-        <h2>Investment Strategy</h2>
-        <div class="field-row">
-          <div>
-            <span class="field-label">Betting Goal</span>
-            <div class="field-hint">What are you trying to achieve?</div>
-          </div>
-          <select class="form-select" id="set-goal" style="width:220px;">
-            <option value="income">Monthly Income</option>
-            <option value="growth">Bankroll Growth</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="professional">Professional</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <div>
-            <span class="field-label">Monthly Target</span>
-            <div class="field-hint">Your profit goal per month.</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span style="color:var(--text-muted);font-size:14px;">$</span>
-            <input type="text" inputmode="numeric" class="form-input short" id="set-monthly-target" value="500" style="width:90px;">
-          </div>
-        </div>
-        <div class="field-row">
-          <span class="field-label">Risk Tolerance</span>
-          <div class="toggle-group" id="toggle-risk">
-            <button class="toggle-opt" data-val="conservative">Conservative</button>
-            <button class="toggle-opt active" data-val="moderate">Moderate</button>
-            <button class="toggle-opt" data-val="aggressive">Aggressive</button>
-            <button class="toggle-opt" data-val="custom">Custom</button>
-          </div>
-        </div>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">Max Drawdown</span>
-            <span class="range-value" id="drawdown-val">15%</span>
-          </div>
-          <input type="range" id="set-drawdown" min="10" max="50" step="5" value="15" oninput="document.getElementById('drawdown-val').textContent=this.value+'%'">
-        </div>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">Max Bet Size (% of bankroll)</span>
-            <span class="range-value" id="maxbet-val">5%</span>
-          </div>
-          <input type="range" id="set-maxbet" min="1" max="10" step="0.5" value="5" oninput="document.getElementById('maxbet-val').textContent=this.value+'%'">
-        </div>
-      </div>
-
-      <!-- Bet Sizing Strategy -->
-      <div class="settings-card">
-        <h2>Bet Sizing Strategy</h2>
-        <div class="field-row">
-          <div>
-            <span class="field-label">Kelly Criterion</span>
-            <div class="field-hint">Optimal bet sizing based on edge.</div>
-          </div>
-          <div class="toggle-group" id="toggle-kelly">
-            <button class="toggle-opt" data-val="off">Off</button>
-            <button class="toggle-opt" data-val="quarter">Quarter</button>
-            <button class="toggle-opt active" data-val="half">Half</button>
-            <button class="toggle-opt" data-val="full">Full</button>
-          </div>
-        </div>
-        <div class="kelly-info">
-          <p><strong>Off:</strong> Fixed unit sizing &middot; <strong>Quarter:</strong> Conservative Kelly &middot; <strong>Half:</strong> Balanced (recommended) &middot; <strong>Full:</strong> Maximum growth, high volatility</p>
-        </div>
-      </div>
-
-      <!-- Sports Preferences -->
-      <div class="settings-card">
-        <h2>Sports Preferences</h2>
-        <p class="section-desc">Weight how much you want to see picks from each sport (0 = hide, 10 = prioritize).</p>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">NBA</span>
-            <span class="range-value" id="nba-wt-val">7</span>
-          </div>
-          <input type="range" id="set-nba-wt" min="0" max="10" value="7" oninput="document.getElementById('nba-wt-val').textContent=this.value">
-        </div>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">NCAAB</span>
-            <span class="range-value" id="ncaab-wt-val">5</span>
-          </div>
-          <input type="range" id="set-ncaab-wt" min="0" max="10" value="5" oninput="document.getElementById('ncaab-wt-val').textContent=this.value">
-        </div>
-        <div class="range-row">
-          <div class="range-header">
-            <span class="range-label">NHL</span>
-            <span class="range-value" id="nhl-wt-val">3</span>
-          </div>
-          <input type="range" id="set-nhl-wt" min="0" max="10" value="3" oninput="document.getElementById('nhl-wt-val').textContent=this.value">
-        </div>
-      </div>
-
-      <!-- Account -->
-      <div class="settings-card">
-        <h2>Account</h2>
-        <div class="field-row">
-          <span class="field-label">Password</span>
-          <button class="btn-secondary" onclick="sendPasswordReset()">Send Reset Email</button>
-        </div>
-        <div class="field-row">
-          <span class="field-label">Delete Account</span>
-          <button class="btn-danger" onclick="showDeleteConfirm()">Delete Account</button>
-        </div>
-      </div>
-
-      <!-- Save -->
-      <div class="save-bar">
-        <button class="btn-save" id="save-btn" onclick="saveAll()">Save All Settings</button>
-        <span class="save-msg" id="save-msg">Settings saved.</span>
-      </div>
     </div>
   </main>
 
@@ -527,86 +693,108 @@
     </div>
   </div>
 
+  <!-- Reset Data Confirmation -->
+  <div class="confirm-modal" id="reset-modal" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+    <div class="confirm-box">
+      <h3>Reset All Data</h3>
+      <p>This will clear your entire tracked bet history. Your account settings and investment profile will be preserved. This cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn-secondary" onclick="document.getElementById('reset-modal').style.display='none'">Cancel</button>
+        <button class="btn-warning" onclick="resetAllData()">Reset Data</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
   <script>
-    let profileSettings = {};
+    // ── Tab Switching ──
+    function switchTab(tab) {
+      document.querySelectorAll('.profile-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      history.replaceState(null, '', '#' + tab);
+    }
 
-    // Require login
+    function initTabFromHash() {
+      var hash = location.hash.replace('#', '');
+      if (hash === 'investment') switchTab('investment');
+      else switchTab('settings');
+    }
+    window.addEventListener('hashchange', initTabFromHash);
+
+    // ── Auth & Profile Load ──
     auth.onAuthStateChanged(async (user) => {
-      if (!user) {
-        window.location.href = 'login.html';
-        return;
-      }
-      const profile = await getUserProfile(user.uid);
+      if (!user) { window.location.href = 'login.html'; return; }
+      var profile = await getUserProfile(user.uid);
       document.getElementById('loading-state').style.display = 'none';
       document.getElementById('profile-content').style.display = 'block';
       populateProfile(user, profile);
-      // Populate nav dropdown
+      initTabFromHash();
+      // Nav dropdown
       var navName = user.displayName || user.email.split('@')[0] || 'User';
-      var navFirstName = navName.split(' ')[0];
-      var navInitial = navFirstName.charAt(0).toUpperCase();
-      document.getElementById('nav-avatar').textContent = navInitial;
-      document.getElementById('nav-name').textContent = navFirstName;
+      var navFirst = navName.split(' ')[0];
+      var navInit = navFirst.charAt(0).toUpperCase();
+      document.getElementById('nav-avatar').textContent = navInit;
+      document.getElementById('nav-name').textContent = navFirst;
       document.getElementById('dd-name').textContent = navName;
       document.getElementById('dd-email').textContent = user.email || '';
     });
 
     function populateProfile(user, profile) {
-      const name = user.displayName || user.email.split('@')[0];
-      const initial = name.charAt(0).toUpperCase();
+      var name = user.displayName || user.email.split('@')[0];
+      var initial = name.charAt(0).toUpperCase();
       document.getElementById('profile-avatar').textContent = initial;
       document.getElementById('profile-name').textContent = name;
       document.getElementById('profile-email').textContent = user.email;
       document.getElementById('set-email').textContent = user.email;
       document.getElementById('set-name').value = name;
 
-      const role = profile?.role || 'free';
+      var role = profile?.role || 'free';
       document.getElementById('profile-role').textContent = role === 'admin' ? 'Admin' : 'Free';
 
       if (profile?.createdAt) {
-        const d = profile.createdAt.toDate ? profile.createdAt.toDate() : new Date(profile.createdAt);
+        var d = profile.createdAt.toDate ? profile.createdAt.toDate() : new Date(profile.createdAt);
         document.getElementById('profile-since').textContent = 'Member since ' + d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
       }
 
-      const s = profile?.settings || {};
-      profileSettings = { ...s };
+      var s = profile?.settings || {};
 
-      // Populate toggles
+      // ── Tab 1: Account Settings ──
+      document.getElementById('set-timezone').value = s.timezone || 'America/New_York';
+      document.getElementById('set-notify-picks').checked = !!(s.notifications?.newPicks);
+      document.getElementById('set-notify-grading').checked = !!(s.notifications?.gradingResults);
+      document.getElementById('set-notify-summary').checked = !!(s.notifications?.dailySummary);
+      document.getElementById('set-default-sport').value = s.defaultSport || 'nba';
       setToggle('toggle-view', s.defaultView || 'games');
+      document.getElementById('set-show-confidence').checked = s.showConfidence !== false;
       setToggle('toggle-odds', s.oddsFormat || 'american');
-
-      // Populate inputs
-      document.getElementById('set-betsize').value = s.betSize || 10;
-      document.getElementById('set-unitsize').value = s.unitSize || 10;
-      document.getElementById('set-bankroll').value = s.bankroll || '';
-
-      // Populate ranges
-      const conf = s.minConfidence || 55;
-      const ev = s.minEV || 3;
+      var conf = s.minConfidence || 55;
+      var ev = s.minEV || 3;
       document.getElementById('set-conf').value = conf;
       document.getElementById('conf-val').textContent = conf + '%';
       document.getElementById('set-ev').value = ev;
       document.getElementById('ev-val').textContent = ev + '%';
 
-      // Phase 1: Investment Strategy
-      document.getElementById('set-goal').value = s.goalType || 'growth';
-      document.getElementById('set-monthly-target').value = s.monthlyTarget || 500;
-      setToggle('toggle-risk', s.riskTolerance || 'moderate');
-      const dd = s.maxDrawdown || 15;
+      // ── Tab 2: Investment Profile ──
+      // Check investmentProfile field first, fall back to settings for backward compat
+      var ip = profile?.investmentProfile || {};
+      document.getElementById('set-goal').value = ip.goalType || s.goalType || 'growth';
+      document.getElementById('set-monthly-target').value = ip.monthlyTarget || s.monthlyTarget || 500;
+      setToggle('toggle-risk', ip.riskTolerance || s.riskTolerance || 'moderate');
+      var dd = ip.maxDrawdown || s.maxDrawdown || 15;
       document.getElementById('set-drawdown').value = dd;
       document.getElementById('drawdown-val').textContent = dd + '%';
-      const mb = s.maxBetPct || 5;
+      var mb = ip.maxBetPct || s.maxBetPct || 5;
       document.getElementById('set-maxbet').value = mb;
       document.getElementById('maxbet-val').textContent = mb + '%';
-
-      // Phase 1: Kelly Criterion
-      setToggle('toggle-kelly', s.kellyFraction || 'half');
-
-      // Phase 1: Sports Weighting
-      const sw = s.sportsWeighting || { nba: 7, ncaab: 5, nhl: 3 };
+      setToggle('toggle-kelly', ip.kellyFraction || s.kellyFraction || 'half');
+      document.getElementById('set-bankroll').value = ip.bankroll || s.bankroll || '';
+      document.getElementById('set-betsize').value = ip.betSize || s.betSize || 10;
+      document.getElementById('set-unitsize').value = ip.unitSize || s.unitSize || 10;
+      var sw = ip.sportsWeighting || s.sportsWeighting || { nba: 7, ncaab: 5, nhl: 3 };
       document.getElementById('set-nba-wt').value = sw.nba ?? 7;
       document.getElementById('nba-wt-val').textContent = sw.nba ?? 7;
       document.getElementById('set-ncaab-wt').value = sw.ncaab ?? 5;
@@ -615,31 +803,36 @@
       document.getElementById('nhl-wt-val').textContent = sw.nhl ?? 3;
     }
 
+    // ── Toggle Helpers ──
     function setToggle(groupId, val) {
-      document.querySelectorAll('#' + groupId + ' .toggle-opt').forEach(btn => {
+      document.querySelectorAll('#' + groupId + ' .toggle-opt').forEach(function(btn) {
         btn.classList.toggle('active', btn.dataset.val === val);
       });
     }
+    function getToggleVal(groupId) {
+      var active = document.querySelector('#' + groupId + ' .toggle-opt.active');
+      return active ? active.dataset.val : null;
+    }
 
-    // Toggle handlers
-    document.querySelectorAll('.toggle-group').forEach(group => {
-      group.querySelectorAll('.toggle-opt').forEach(btn => {
-        btn.addEventListener('click', () => {
-          group.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
+    // Toggle click handlers
+    document.querySelectorAll('.toggle-group').forEach(function(group) {
+      group.querySelectorAll('.toggle-opt').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          group.querySelectorAll('.toggle-opt').forEach(function(b) { b.classList.remove('active'); });
           btn.classList.add('active');
         });
       });
     });
 
-    // Risk tolerance presets — auto-adjust sliders when toggled
-    const RISK_PRESETS = {
-      conservative: { drawdown: 10, maxBet: 3,   kelly: 'quarter' },
-      moderate:     { drawdown: 15, maxBet: 5,   kelly: 'half' },
-      aggressive:   { drawdown: 25, maxBet: 8,   kelly: 'full' },
+    // Risk tolerance presets
+    var RISK_PRESETS = {
+      conservative: { drawdown: 10, maxBet: 3, kelly: 'quarter' },
+      moderate: { drawdown: 15, maxBet: 5, kelly: 'half' },
+      aggressive: { drawdown: 25, maxBet: 8, kelly: 'full' },
     };
-    document.querySelectorAll('#toggle-risk .toggle-opt').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const preset = RISK_PRESETS[btn.dataset.val];
+    document.querySelectorAll('#toggle-risk .toggle-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var preset = RISK_PRESETS[btn.dataset.val];
         if (!preset) return;
         document.getElementById('set-drawdown').value = preset.drawdown;
         document.getElementById('drawdown-val').textContent = preset.drawdown + '%';
@@ -651,9 +844,10 @@
 
     // Auto-detect Custom when sliders are manually adjusted
     function checkRiskPreset() {
-      const dd = parseInt(document.getElementById('set-drawdown').value);
-      const mb = parseFloat(document.getElementById('set-maxbet').value);
-      for (const [key, p] of Object.entries(RISK_PRESETS)) {
+      var dd = parseInt(document.getElementById('set-drawdown').value);
+      var mb = parseFloat(document.getElementById('set-maxbet').value);
+      for (var key in RISK_PRESETS) {
+        var p = RISK_PRESETS[key];
         if (p.drawdown === dd && p.maxBet === mb) { setToggle('toggle-risk', key); return; }
       }
       setToggle('toggle-risk', 'custom');
@@ -661,36 +855,58 @@
     document.getElementById('set-drawdown').addEventListener('input', checkRiskPreset);
     document.getElementById('set-maxbet').addEventListener('input', checkRiskPreset);
 
-    function getToggleVal(groupId) {
-      const active = document.querySelector('#' + groupId + ' .toggle-opt.active');
-      return active ? active.dataset.val : null;
-    }
+    // ── Save: Account Settings ──
+    async function saveAccountSettings() {
+      var btn = document.getElementById('save-account-btn');
+      btn.disabled = true; btn.textContent = 'Saving...';
 
-    async function saveAll() {
-      const btn = document.getElementById('save-btn');
-      btn.disabled = true;
-      btn.textContent = 'Saving...';
-
-      const newName = document.getElementById('set-name').value.trim();
-      const settings = {
+      var newName = document.getElementById('set-name').value.trim();
+      var settings = {
+        timezone: document.getElementById('set-timezone').value,
+        notifications: {
+          newPicks: document.getElementById('set-notify-picks').checked,
+          gradingResults: document.getElementById('set-notify-grading').checked,
+          dailySummary: document.getElementById('set-notify-summary').checked,
+        },
+        defaultSport: document.getElementById('set-default-sport').value,
         defaultView: getToggleVal('toggle-view'),
+        showConfidence: document.getElementById('set-show-confidence').checked,
         oddsFormat: getToggleVal('toggle-odds'),
-        betSize: parseInt(document.getElementById('set-betsize').value) || 10,
-        unitSize: parseInt(document.getElementById('set-unitsize').value) || 10,
-        bankroll: parseInt(document.getElementById('set-bankroll').value) || null,
         minConfidence: parseInt(document.getElementById('set-conf').value) || 55,
         minEV: parseFloat(document.getElementById('set-ev').value) || 3,
         darkMode: true,
-        notifications: false,
         showEV: true,
         showHitRate: true,
-        defaultSport: 'nba',
+      };
+
+      await updateUserProfile({ displayName: newName });
+      await saveUserSettings(settings);
+      saveBetTrackingSettings();
+
+      btn.disabled = false; btn.textContent = 'Save Account Settings';
+      var msg = document.getElementById('save-account-msg');
+      msg.classList.add('visible');
+      setTimeout(function() { msg.classList.remove('visible'); }, 3000);
+
+      document.getElementById('profile-name').textContent = newName;
+      document.getElementById('profile-avatar').textContent = newName.charAt(0).toUpperCase();
+    }
+
+    // ── Save: Investment Profile ──
+    async function saveInvestmentProfile() {
+      var btn = document.getElementById('save-invest-btn');
+      btn.disabled = true; btn.textContent = 'Saving...';
+
+      var investmentProfile = {
         goalType: document.getElementById('set-goal').value || 'growth',
         monthlyTarget: parseInt(document.getElementById('set-monthly-target').value) || 500,
         riskTolerance: getToggleVal('toggle-risk') || 'moderate',
         maxDrawdown: parseInt(document.getElementById('set-drawdown').value) || 15,
         maxBetPct: parseFloat(document.getElementById('set-maxbet').value) || 5,
         kellyFraction: getToggleVal('toggle-kelly') || 'half',
+        bankroll: parseInt(document.getElementById('set-bankroll').value) || null,
+        betSize: parseInt(document.getElementById('set-betsize').value) || 10,
+        unitSize: parseInt(document.getElementById('set-unitsize').value) || 10,
         sportsWeighting: {
           nba: parseInt(document.getElementById('set-nba-wt').value) ?? 7,
           ncaab: parseInt(document.getElementById('set-ncaab-wt').value) ?? 5,
@@ -698,76 +914,67 @@
         },
       };
 
-      await updateUserProfile({ displayName: newName });
-      await saveUserSettings(settings);
+      await db.collection('users').doc(currentUser.uid).update({ investmentProfile: investmentProfile });
 
-      // Sync Firestore unitSize to localStorage bet tracking settings
-      saveBetTrackingSettings();
-
-      btn.disabled = false;
-      btn.textContent = 'Save All Settings';
-      const msg = document.getElementById('save-msg');
+      btn.disabled = false; btn.textContent = 'Save Investment Profile';
+      var msg = document.getElementById('save-invest-msg');
       msg.classList.add('visible');
-      setTimeout(() => msg.classList.remove('visible'), 3000);
-
-      // Update header
-      document.getElementById('profile-name').textContent = newName;
-      document.getElementById('profile-avatar').textContent = newName.charAt(0).toUpperCase();
+      setTimeout(function() { msg.classList.remove('visible'); }, 3000);
     }
 
+    // ── Account Actions ──
     async function sendPasswordReset() {
-      const result = await resetPassword(currentUser.email);
-      if (result.success) {
-        alert('Password reset email sent to ' + currentUser.email);
-      } else {
-        alert(result.error);
-      }
+      var result = await resetPassword(currentUser.email);
+      if (result.success) alert('Password reset email sent to ' + currentUser.email);
+      else alert(result.error);
     }
 
-    function showDeleteConfirm() {
-      document.getElementById('delete-modal').style.display = 'flex';
-    }
+    function showDeleteConfirm() { document.getElementById('delete-modal').style.display = 'flex'; }
+    function showResetConfirm() { document.getElementById('reset-modal').style.display = 'flex'; }
 
     async function deleteAccount() {
       try {
         await db.collection('users').doc(currentUser.uid).delete();
         await currentUser.delete();
+        localStorage.removeItem('efe_tracked_bets');
+        localStorage.removeItem('efe_user_settings');
         window.location.href = 'index.html';
       } catch (error) {
-        if (error.code === 'auth/requires-recent-login') {
-          alert('Please sign out and sign back in, then try again.');
-        } else {
-          alert('Error: ' + error.message);
-        }
+        if (error.code === 'auth/requires-recent-login') alert('Please sign out and sign back in, then try again.');
+        else alert('Error: ' + error.message);
         document.getElementById('delete-modal').style.display = 'none';
       }
     }
 
-    // ── Bet Tracking (localStorage) ──
-    const LS_SETTINGS = 'efe_user_settings';
-    function getBetTrackingSettings() {
-      try { return JSON.parse(localStorage.getItem(LS_SETTINGS)) || {}; }
-      catch { return {}; }
+    function resetAllData() {
+      localStorage.removeItem('efe_tracked_bets');
+      localStorage.removeItem('efe_user_settings');
+      document.getElementById('reset-modal').style.display = 'none';
+      alert('All tracked bet data has been cleared.');
     }
 
+    // ── Bet Tracking (localStorage) ──
+    var LS_SETTINGS = 'efe_user_settings';
+    function getBetTrackingSettings() {
+      try { return JSON.parse(localStorage.getItem(LS_SETTINGS)) || {}; }
+      catch(e) { return {}; }
+    }
     function saveBetTrackingSettings() {
-      const unitSize = Math.max(1, parseInt(document.getElementById('set-tracking-unitsize').value) || 10);
-      const displayMode = getToggleVal('toggle-display-mode') || 'units';
-      const s = getBetTrackingSettings();
+      var unitSize = Math.max(1, parseInt(document.getElementById('set-tracking-unitsize').value) || 10);
+      var displayMode = getToggleVal('toggle-display-mode') || 'units';
+      var s = getBetTrackingSettings();
       s.unit_size = unitSize;
       s.display_mode = displayMode;
       localStorage.setItem(LS_SETTINGS, JSON.stringify(s));
     }
-
     function loadBetTrackingSettings() {
-      const s = getBetTrackingSettings();
+      var s = getBetTrackingSettings();
       document.getElementById('set-tracking-unitsize').value = s.unit_size || 10;
       setToggle('toggle-display-mode', s.display_mode || 'units');
     }
-
-    // Load on page init
     loadBetTrackingSettings();
 
+    // ── Mobile Nav ──
     function toggleMobileNav() {
       document.getElementById('mobile-nav-drawer').classList.toggle('open');
       document.getElementById('mobile-nav-backdrop').classList.toggle('open');
@@ -777,6 +984,7 @@
       document.getElementById('mobile-nav-backdrop').classList.remove('open');
     }
 
+    // ── Dropdown ──
     function toggleDropdown() {
       document.getElementById('dropdown-trigger').classList.toggle('open');
       document.getElementById('user-dropdown').classList.toggle('open');
