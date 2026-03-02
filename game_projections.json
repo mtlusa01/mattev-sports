@@ -2,7 +2,7 @@
   "date": "2026-03-01",
   "sport": "NBA",
   "locked_at": "2026-03-01T04:58:25",
-  "updated": "2026-03-01T23:33:06",
+  "updated": "2026-03-01T21:16:41",
   "games": [
     {
       "away_team": "SAS",
@@ -125,7 +125,21 @@
       "home_score": 102,
       "spread_result": "W",
       "total_result": "L",
-      "ml_result": "W"
+      "ml_result": "W",
+      "graded_props": [
+        {
+          "player": "Jaylon Tyson",
+          "team": "CLE",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 22.5,
+          "projection": 17.1,
+          "actual": 12,
+          "hit": true,
+          "confidence": 69.5,
+          "ev": 4.6
+        }
+      ]
     },
     {
       "away_team": "MIL",
@@ -194,7 +208,33 @@
       "home_score": 120,
       "spread_result": "W",
       "total_result": "L",
-      "ml_result": "W"
+      "ml_result": "W",
+      "graded_props": [
+        {
+          "player": "Josh Giddey",
+          "team": "CHI",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 30.5,
+          "projection": 21.8,
+          "actual": 44,
+          "hit": false,
+          "confidence": 72.0,
+          "ev": 5.8
+        },
+        {
+          "player": "Collin Sexton",
+          "team": "CHI",
+          "prop": "PRA",
+          "direction": "UNDER",
+          "line": 21.5,
+          "projection": 14.3,
+          "actual": 27,
+          "hit": false,
+          "confidence": 71.6,
+          "ev": 5.4
+        }
+      ]
     },
     {
       "away_team": "MIN",
@@ -267,7 +307,7 @@
       "ml_pick": "IND",
       "ml_conf": 60.4,
       "commence_time": "2026-03-01T22:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -10.2,
@@ -328,8 +368,8 @@
         "ev": 31.3,
         "confidence": "high"
       },
-      "away_score": 74,
-      "home_score": 66
+      "away_score": 125,
+      "home_score": 106
     },
     {
       "away_team": "POR",
@@ -344,7 +384,7 @@
       "ml_pick": "ATL",
       "ml_conf": 65.4,
       "commence_time": "2026-03-01T23:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -0.8,
@@ -383,8 +423,8 @@
         "ev": 18.8,
         "confidence": "medium"
       },
-      "away_score": 19,
-      "home_score": 37
+      "away_score": 101,
+      "home_score": 135
     },
     {
       "away_team": "PHI",
@@ -464,7 +504,7 @@
       "ml_pick": "ORL",
       "ml_conf": 54.6,
       "commence_time": "2026-03-01T23:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -2.8,
@@ -499,8 +539,58 @@
         "ev": 11.1,
         "confidence": "low"
       },
-      "away_score": 17,
-      "home_score": 17
+      "away_score": 106,
+      "home_score": 92,
+      "graded_props": [
+        {
+          "player": "Desmond Bane",
+          "team": "ORL",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 19.5,
+          "projection": 27.9,
+          "actual": 17,
+          "hit": false,
+          "confidence": 73.4,
+          "ev": 6.0
+        },
+        {
+          "player": "Jalen Duren",
+          "team": "DET",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 31.5,
+          "projection": 40.2,
+          "actual": 27,
+          "hit": false,
+          "confidence": 72.0,
+          "ev": 5.8
+        },
+        {
+          "player": "Desmond Bane",
+          "team": "ORL",
+          "prop": "PRA",
+          "direction": "OVER",
+          "line": 27.5,
+          "projection": 34.6,
+          "actual": 28,
+          "hit": true,
+          "confidence": 71.4,
+          "ev": 5.3
+        },
+        {
+          "player": "Jalen Duren",
+          "team": "DET",
+          "prop": "PTS",
+          "direction": "OVER",
+          "line": 18.5,
+          "projection": 25.6,
+          "actual": 16,
+          "hit": false,
+          "confidence": 69.7,
+          "ev": 5.0
+        }
+      ]
     },
     {
       "away_team": "OKC",
