@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-01T18:30:02",
+  "updated": "2026-03-01T19:15:02",
   "allTime": {
     "spreads": {
-      "wins": 188,
+      "wins": 189,
       "losses": 140,
       "pushes": 7,
-      "pct": 57.3,
-      "roi": 9.4
+      "pct": 57.4,
+      "roi": 9.7
     },
     "totals": {
-      "wins": 162,
+      "wins": 163,
       "losses": 171,
       "pushes": 2,
-      "pct": 48.6,
-      "roi": -7.1
+      "pct": 48.8,
+      "roi": -6.8
     },
     "moneylines": {
-      "wins": 219,
+      "wins": 220,
       "losses": 116,
       "pushes": 0,
-      "pct": 65.4,
-      "roi": 24.8
+      "pct": 65.5,
+      "roi": 25.0
     },
     "best_bets": {
-      "wins": 31,
-      "losses": 9,
+      "wins": 32,
+      "losses": 8,
       "pushes": 0,
-      "pct": 77.5,
-      "roi": 48.0
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-03-01",
       "spreads": {
-        "wins": 11,
+        "wins": 12,
         "losses": 9,
         "pushes": 0,
-        "record": "11-9",
-        "pct": 55.0
+        "record": "12-9",
+        "pct": 57.1
       },
       "totals": {
-        "wins": 8,
+        "wins": 9,
         "losses": 12,
         "pushes": 0,
-        "record": "8-12",
-        "pct": 40.0
+        "record": "9-12",
+        "pct": 42.9
       },
       "moneylines": {
-        "wins": 11,
+        "wins": 12,
         "losses": 9,
         "pushes": 0,
-        "record": "11-9",
-        "pct": 55.0
+        "record": "12-9",
+        "pct": 57.1
       },
       "best_bets": {
-        "wins": 3,
-        "losses": 2,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -225,8 +225,7 @@
           "pick": "UIC",
           "result": "63-79",
           "hit": false,
-          "confidence": 75,
-          "best_bet": true
+          "confidence": 75
         },
         {
           "date": "2026-03-01",
@@ -606,6 +605,34 @@
           "result": "81-67",
           "hit": true,
           "confidence": 75
+        },
+        {
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "BEL @ ILST",
+          "pick": "ILST -1.0",
+          "result": "74-81",
+          "hit": true,
+          "confidence": 73
+        },
+        {
+          "date": "2026-03-01",
+          "type": "total",
+          "game": "BEL @ ILST",
+          "pick": "OVER 150.5",
+          "result": "74-81",
+          "hit": true,
+          "confidence": 50
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "BEL @ ILST",
+          "pick": "ILST",
+          "result": "74-81",
+          "hit": true,
+          "confidence": 80,
+          "best_bet": true
         }
       ]
     },
