@@ -2433,7 +2433,7 @@
       return props;
     }
 
-    function mergeResultsIntoProjections(projections, resultsData, dateStr) {
+    function mergeResultsIntoProjections(projections, resultsData, dateStr, sport) {
       if (!resultsData || !resultsData.days || !projections || !projections.length) {
         return projections;
       }
@@ -2488,20 +2488,24 @@
       }
 
       // Client-side fallback: grade any picks that have scores but no result
-      clientSideGrade(projections);
+      clientSideGrade(projections, sport || 'nba');
 
       return projections;
     }
 
-    function clientSideGrade(games) {
+    function clientSideGrade(games, sport) {
+      sport = (sport || '').toLowerCase();
       for (const g of games) {
+        // Only grade final games — never grade live/in-progress
+        const status = getGameStatus(g);
+        if (status !== 'final') continue;
+
         const away = parseInt(g.away_score);
         const home = parseInt(g.home_score);
         if (isNaN(away) || isNaN(home)) continue;
 
         // Spread grading
         if (g.spread_pick && !g.spread_result) {
-          // Parse "TEAM +/-X" format
           const m = (g.spread_pick || '').match(/^(.+?)\s+([+-]?\d+(?:\.\d+)?)$/);
           if (m) {
             const team = m[1].trim();
@@ -2529,11 +2533,13 @@
 
         // ML grading
         if (g.ml_pick && !g.ml_result) {
-          const winner = home > away ? g.home_team : away > home ? g.away_team : null;
-          if (winner) {
-            g.ml_result = (g.ml_pick === winner) ? 'win' : 'loss';
-          } else {
+          if (home === away) {
+            // Tied final score — NHL OT/SO not reflected, don't grade
+            if (sport === 'nhl') continue;
             g.ml_result = 'push';
+          } else {
+            const winner = home > away ? g.home_team : g.away_team;
+            g.ml_result = (g.ml_pick === winner) ? 'win' : 'loss';
           }
         }
       }
@@ -4621,13 +4627,13 @@
 
         // Merge actual scores and results into projections
         if (games.length > 0 && historicalResults) {
-          games = mergeResultsIntoProjections(games, historicalResults, date);
+          games = mergeResultsIntoProjections(games, historicalResults, date, 'nba');
         }
         if (nhlGames.length > 0 && nhlHistoricalResults) {
-          nhlGames = mergeResultsIntoProjections(nhlGames, nhlHistoricalResults, date);
+          nhlGames = mergeResultsIntoProjections(nhlGames, nhlHistoricalResults, date, 'nhl');
         }
         if (ncaabGames.length > 0 && ncaabHistoricalResults) {
-          ncaabGames = mergeResultsIntoProjections(ncaabGames, ncaabHistoricalResults, date);
+          ncaabGames = mergeResultsIntoProjections(ncaabGames, ncaabHistoricalResults, date, 'ncaab');
         }
 
         // Merge grading results into archive props (also adds graded props missing from archive)
@@ -4640,13 +4646,13 @@
         // Supplement: for any games still ungraded after merge, try the archive's embedded results
         if (embeddedResults) {
           if (games.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
-            mergeResultsIntoProjections(games, embeddedResults, date);
+            mergeResultsIntoProjections(games, embeddedResults, date, 'nba');
           }
           if (nhlGames.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
-            mergeResultsIntoProjections(nhlGames, embeddedResults, date);
+            mergeResultsIntoProjections(nhlGames, embeddedResults, date, 'nhl');
           }
           if (ncaabGames.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
-            mergeResultsIntoProjections(ncaabGames, embeddedResults, date);
+            mergeResultsIntoProjections(ncaabGames, embeddedResults, date, 'ncaab');
           }
           if (archiveProps.length === 0) {
             archiveProps = mergeResultsIntoProps(archiveProps, embeddedResults, date);
@@ -4655,9 +4661,9 @@
         }
 
         // Final client-side grading pass for any remaining gaps
-        clientSideGrade(games);
-        clientSideGrade(nhlGames);
-        clientSideGrade(ncaabGames);
+        clientSideGrade(games, 'nba');
+        clientSideGrade(nhlGames, 'nhl');
+        clientSideGrade(ncaabGames, 'ncaab');
 
         historicalGamesCache[date] = games;
         historicalNhlCache[date] = nhlGames;
@@ -5677,7 +5683,7 @@
           if (!historicalResults) await loadHistoricalResults('nba');
           if (historicalResults) {
             const gpDate = data.date || getLocalDateStr();
-            mergeResultsIntoProjections(gameProjections, historicalResults, gpDate);
+            mergeResultsIntoProjections(gameProjections, historicalResults, gpDate, 'nba');
           }
         }
 
@@ -5722,7 +5728,7 @@
           if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
           if (nhlHistoricalResults) {
             const gpDate = data.date || getLocalDateStr();
-            mergeResultsIntoProjections(nhlGameProjections, nhlHistoricalResults, gpDate);
+            mergeResultsIntoProjections(nhlGameProjections, nhlHistoricalResults, gpDate, 'nhl');
           }
         }
 
@@ -5755,7 +5761,7 @@
           if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
           if (ncaabHistoricalResults) {
             const gpDate = data.date || getLocalDateStr();
-            mergeResultsIntoProjections(ncaabGameProjections, ncaabHistoricalResults, gpDate);
+            mergeResultsIntoProjections(ncaabGameProjections, ncaabHistoricalResults, gpDate, 'ncaab');
           }
         }
 
