@@ -349,6 +349,103 @@
     }
     .perf-empty a { color: var(--accent-secondary); text-decoration: none; }
 
+    /* ── Daily Briefing ── */
+    .briefing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid;
+      border-image: linear-gradient(to bottom, #00d4ff, #22c55e) 1;
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      position: relative;
+      box-shadow: 0 0 24px rgba(0,212,255,0.04);
+    }
+    .briefing-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 4px; flex-wrap: wrap; gap: 8px;
+    }
+    .briefing-title {
+      font-size: 16px; font-weight: 700; color: var(--text-primary);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .briefing-pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--profit);
+      box-shadow: 0 0 6px rgba(34,197,94,0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .briefing-refresh {
+      background: none; border: 1px solid var(--border-subtle); color: var(--text-muted);
+      width: 28px; height: 28px; border-radius: var(--radius-sm); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 14px;
+      transition: all 0.2s;
+    }
+    .briefing-refresh:hover { border-color: var(--accent); color: var(--accent); }
+    .briefing-sub {
+      font-size: 12px; color: var(--text-muted); margin-bottom: 20px;
+    }
+    .briefing-sections {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .briefing-section { }
+    .briefing-section.full-width { grid-column: 1 / -1; }
+    .briefing-section-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--text-tertiary); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .briefing-status {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700; padding: 2px 8px;
+      border-radius: 8px; margin-left: 4px;
+    }
+    .briefing-status.on-track { background: var(--profit-soft); color: var(--profit); }
+    .briefing-status.slightly-behind { background: var(--warning-soft); color: var(--warning); }
+    .briefing-status.behind { background: var(--loss-soft); color: var(--loss); }
+    .briefing-line {
+      font-size: 13px; color: var(--text-secondary); margin-bottom: 7px;
+      line-height: 1.5; display: flex; gap: 6px;
+    }
+    .briefing-line:last-child { margin-bottom: 0; }
+    .briefing-line .bl-icon { flex-shrink: 0; }
+    .briefing-highlight {
+      font-family: 'JetBrains Mono', monospace; font-weight: 600;
+      color: var(--text-primary);
+    }
+    .briefing-highlight.profit { color: var(--profit); }
+    .briefing-highlight.loss { color: var(--loss); }
+    .briefing-highlight.accent { color: var(--accent); }
+    .briefing-pills {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      padding-top: 16px; margin-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .briefing-pill {
+      font-size: 11px; padding: 4px 10px; border-radius: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border-subtle);
+      color: var(--text-secondary); display: flex; align-items: center; gap: 4px;
+    }
+    .briefing-pill .bp-label { color: var(--text-muted); }
+    .briefing-pill .bp-val {
+      font-family: 'JetBrains Mono', monospace; font-weight: 600;
+      color: var(--text-primary);
+    }
+    .briefing-pill .bp-val.profit { color: var(--profit); }
+    .briefing-pill .bp-val.loss { color: var(--loss); }
+    .briefing-ts {
+      font-size: 10px; color: var(--text-muted); margin-top: 12px; text-align: right;
+    }
+    .briefing-welcome {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.7;
+    }
+    .briefing-welcome a { color: var(--accent-secondary); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .briefing-card { padding: 18px 16px; }
+      .briefing-sections { grid-template-columns: 1fr; }
+    }
+
     /* ── Recent Picks ── */
     .pick-item {
       display: flex; align-items: center; gap: 12px;
@@ -970,6 +1067,9 @@
       </p>
     </div>
 
+    <!-- Daily Briefing -->
+    <div id="daily-briefing" class="anim d1" style="display:none"></div>
+
     <!-- Portfolio Hero -->
     <div class="hero-grid anim d2">
       <div class="stat-card">
@@ -1441,6 +1541,376 @@
       actions += '<a href="profile.html" class="action-btn"><div class="action-icon green">&#9881;</div><span class="action-text">Investment Settings</span><span class="action-arrow">&rarr;</span></a>';
 
       container.innerHTML = actions;
+    }
+
+    // ── Daily Briefing ──
+    function renderDailyBriefing(profile) {
+      var container = document.getElementById('daily-briefing');
+      if (!container) return;
+
+      // Check sessionStorage cache
+      var cacheKey = 'efe_briefing_' + getLocalDateStr(new Date());
+      var cached = sessionStorage.getItem(cacheKey);
+      if (cached && !container.dataset.forceRefresh) {
+        container.innerHTML = cached;
+        container.style.display = '';
+        return;
+      }
+      delete container.dataset.forceRefresh;
+
+      var ip = (profile && profile.investmentProfile) || {};
+      var sp = (profile && profile.settings) || {};
+      var bankroll = ip.bankroll || sp.bankroll || 0;
+      var unitSize = ip.unitSize || sp.unitSize || 10;
+      var monthlyTarget = ip.monthlyTarget || sp.monthlyTarget || 500;
+      var riskTolerance = ip.riskTolerance || sp.riskTolerance || 'moderate';
+      if (!bankroll) {
+        try {
+          var ls = JSON.parse(localStorage.getItem('efe_user_settings')) || {};
+          bankroll = ls.bankroll || 0;
+          unitSize = ls.unit_size || ls.unitSize || 10;
+        } catch (e) {}
+      }
+
+      var bets = getTrackedBets();
+      var now = new Date();
+      var dayOfMonth = now.getDate();
+      var daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      var daysRemaining = daysInMonth - dayOfMonth + 1;
+      var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
+      var today = getLocalDateStr(now);
+      var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var dayName = dayNames[now.getDay()];
+      var monthName = monthNames[now.getMonth()];
+      var dateLabel = dayName + ', ' + monthName + ' ' + dayOfMonth;
+
+      // Calculate monthly P&L
+      var monthlyPL = 0;
+      var monthBets = [];
+      var allGraded = [];
+      var pendingCount = 0, pendingAmount = 0;
+      var todayBets = [];
+      for (var i = 0; i < bets.length; i++) {
+        var b = bets[i];
+        var st = normalizeResult(b.status);
+        var units = parseFloat(b.units) || 1;
+        var stake = units * unitSize;
+
+        if (st === 'win' || st === 'loss') {
+          allGraded.push(b);
+        }
+        if (!st || st === 'pending') {
+          pendingCount++;
+          pendingAmount += stake;
+        }
+        if (b.date === today) todayBets.push(b);
+        if (b.date >= monthStart) {
+          monthBets.push(b);
+          if (st === 'win') {
+            var odds = parseInt(b.odds) || -110;
+            monthlyPL += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
+          } else if (st === 'loss') {
+            monthlyPL -= stake;
+          }
+        }
+      }
+
+      var remainingToGoal = monthlyTarget - monthlyPL;
+      var dailyTarget = daysRemaining > 0 ? remainingToGoal / daysRemaining : 0;
+      var expectedPace = (monthlyTarget / daysInMonth) * dayOfMonth;
+      var paceRatio = expectedPace > 0 ? monthlyPL / expectedPace : 1;
+
+      // Status
+      var statusLabel, statusClass;
+      if (monthlyPL >= expectedPace) { statusLabel = 'On track'; statusClass = 'on-track'; }
+      else if (paceRatio >= 0.7) { statusLabel = 'Slightly behind'; statusClass = 'slightly-behind'; }
+      else { statusLabel = 'Behind pace'; statusClass = 'behind'; }
+
+      // Sport performance
+      var sportPerf = {};
+      for (var i = 0; i < bets.length; i++) {
+        var b = bets[i];
+        var st = normalizeResult(b.status);
+        if (st !== 'win' && st !== 'loss') continue;
+        var sport = (b.type === 'prop' ? 'Props' : (b.sport || 'NBA'));
+        var betType = b.type || 'spread';
+        var key = sport + ' ' + (betType === 'moneyline' ? 'ML' : betType === 'total' ? 'totals' : betType === 'prop' ? '' : 'spreads');
+        key = key.trim();
+        if (!sportPerf[key]) sportPerf[key] = { w: 0, l: 0, pnl: 0 };
+        if (st === 'win') sportPerf[key].w++;
+        else sportPerf[key].l++;
+        var units = parseFloat(b.units) || 1;
+        var stake = units * unitSize;
+        if (st === 'win') {
+          var odds = parseInt(b.odds) || -110;
+          sportPerf[key].pnl += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
+        } else sportPerf[key].pnl -= stake;
+      }
+
+      // Find best and worst performing areas (min 3 bets)
+      var bestKey = null, bestRate = 0, worstKey = null, worstRate = 100;
+      var bestPnlKey = null, bestPnl = -Infinity;
+      var keys = Object.keys(sportPerf);
+      for (var i = 0; i < keys.length; i++) {
+        var sp2 = sportPerf[keys[i]];
+        var total = sp2.w + sp2.l;
+        if (total < 3) continue;
+        var rate = sp2.w / total * 100;
+        if (rate > bestRate) { bestRate = rate; bestKey = keys[i]; }
+        if (rate < worstRate) { worstRate = rate; worstKey = keys[i]; }
+        if (sp2.pnl > bestPnl) { bestPnl = sp2.pnl; bestPnlKey = keys[i]; }
+      }
+
+      // Confidence tier analysis
+      var tiers = { high: {w:0,l:0}, med: {w:0,l:0}, low: {w:0,l:0} };
+      for (var i = 0; i < allGraded.length; i++) {
+        var b = allGraded[i];
+        var st = normalizeResult(b.status);
+        var conf = parseFloat(b.confidence || b.model_confidence) || 50;
+        var tier = conf >= 70 ? 'high' : conf >= 55 ? 'med' : 'low';
+        if (st === 'win') tiers[tier].w++;
+        else tiers[tier].l++;
+      }
+
+      // Streak
+      var sortedGraded = allGraded.slice().sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+      var streak = 0, streakType = '';
+      if (sortedGraded.length > 0) {
+        streakType = normalizeResult(sortedGraded[0].status);
+        for (var i = 0; i < sortedGraded.length; i++) {
+          if (normalizeResult(sortedGraded[i].status) === streakType) streak++;
+          else break;
+        }
+      }
+
+      // Day of week performance
+      var dayPerf = {};
+      for (var i = 0; i < allGraded.length; i++) {
+        var b = allGraded[i];
+        if (!b.date) continue;
+        var d = new Date(b.date + 'T12:00:00');
+        var dn = dayNames[d.getDay()];
+        var wd = (d.getDay() >= 1 && d.getDay() <= 5) ? 'weekday' : 'weekend';
+        if (!dayPerf[wd]) dayPerf[wd] = { w: 0, l: 0 };
+        if (normalizeResult(b.status) === 'win') dayPerf[wd].w++;
+        else dayPerf[wd].l++;
+      }
+
+      // Weekly record
+      var weekStart = new Date(now);
+      weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+      var weekStr = getLocalDateStr(weekStart);
+      var weekW = 0, weekL = 0;
+      for (var i = 0; i < allGraded.length; i++) {
+        if (allGraded[i].date >= weekStr) {
+          if (normalizeResult(allGraded[i].status) === 'win') weekW++;
+          else weekL++;
+        }
+      }
+
+      // Overall stats
+      var totalW = 0, totalL = 0, totalStaked = 0, totalPL = 0;
+      for (var i = 0; i < allGraded.length; i++) {
+        var st = normalizeResult(allGraded[i].status);
+        var units = parseFloat(allGraded[i].units) || 1;
+        var stake = units * unitSize;
+        totalStaked += stake;
+        if (st === 'win') { totalW++; var o = parseInt(allGraded[i].odds) || -110; totalPL += o > 0 ? stake * (o/100) : stake * (100/Math.abs(o)); }
+        else { totalL++; totalPL -= stake; }
+      }
+      var totalSettled = totalW + totalL;
+      var overallRate = totalSettled > 0 ? (totalW / totalSettled * 100) : 0;
+      var roi = totalStaked > 0 ? (totalPL / totalStaked * 100) : 0;
+      var avgBet = totalSettled > 0 ? (totalStaked / totalSettled) : unitSize;
+
+      // ── Build HTML ──
+      var h = '<div class="briefing-card">';
+      h += '<div class="briefing-header">';
+      h += '<div class="briefing-title"><span class="briefing-pulse"></span> Daily Briefing &middot; ' + dateLabel + '</div>';
+      h += '<button class="briefing-refresh" onclick="refreshBriefing()" title="Refresh">&#8635;</button>';
+      h += '</div>';
+
+      // New user — no bets at all
+      if (bets.length === 0) {
+        h += '<div class="briefing-sub">Personalized strategy for your ' + (monthlyTarget > 0 ? '$' + monthlyTarget.toLocaleString() + ' monthly goal' : 'betting portfolio') + '</div>';
+        h += '<div class="briefing-welcome">';
+        if (dayOfMonth === 1) {
+          h += 'Fresh month! With ' + daysInMonth + ' days to hit <span class="briefing-highlight accent">$' + monthlyTarget.toLocaleString() + '</span>, your daily target is ~<span class="briefing-highlight">$' + Math.ceil(monthlyTarget / daysInMonth) + '/day</span>. Start strong with today\'s highest-confidence picks.';
+        } else {
+          h += 'Welcome! Your <span class="briefing-highlight accent">$' + monthlyTarget.toLocaleString() + '</span> monthly goal starts today. Lock in your first bet from <a href="dashboard.html">Today\'s Recommended Bets</a> below.';
+        }
+        h += '</div>';
+        h += '</div>';
+        container.innerHTML = h;
+        container.style.display = '';
+        sessionStorage.setItem(cacheKey, h);
+        return;
+      }
+
+      h += '<div class="briefing-sub">Personalized strategy for your $' + monthlyTarget.toLocaleString() + ' ' + monthName + ' goal</div>';
+      h += '<div class="briefing-sections">';
+
+      // ── SECTION 1: Where You Stand ──
+      h += '<div class="briefing-section">';
+      h += '<div class="briefing-section-title">Where You Stand <span class="briefing-status ' + statusClass + '">' + statusLabel + '</span></div>';
+      var plSign = monthlyPL >= 0 ? '+' : '-';
+      var plClass = monthlyPL >= 0 ? 'profit' : 'loss';
+      var goalPct = monthlyTarget > 0 ? Math.min(100, Math.max(0, monthlyPL / monthlyTarget * 100)).toFixed(0) : 0;
+      h += '<div class="briefing-line">You\'ve made <span class="briefing-highlight ' + plClass + '">' + plSign + '$' + Math.abs(monthlyPL).toFixed(0) + '</span> of your <span class="briefing-highlight">$' + monthlyTarget.toLocaleString() + '</span> ' + monthName + ' goal (' + goalPct + '%)</div>';
+
+      if (remainingToGoal > 0) {
+        h += '<div class="briefing-line">You need <span class="briefing-highlight">$' + Math.ceil(remainingToGoal) + '</span> more over the next ' + daysRemaining + ' day' + (daysRemaining !== 1 ? 's' : '') + '</div>';
+        h += '<div class="briefing-line">Daily target: ~<span class="briefing-highlight accent">$' + Math.ceil(Math.max(0, dailyTarget)) + '/day</span> to stay on pace</div>';
+      } else {
+        h += '<div class="briefing-line"><span class="briefing-highlight profit">Goal reached!</span> You\'re <span class="briefing-highlight profit">+$' + Math.abs(monthlyPL - monthlyTarget).toFixed(0) + '</span> ahead with ' + daysRemaining + ' days left</div>';
+      }
+      h += '</div>';
+
+      // ── SECTION 2: Today's Strategy ──
+      h += '<div class="briefing-section">';
+      h += '<div class="briefing-section-title">Today\'s Strategy</div>';
+
+      var maxDailyPct = ip.maxBetPct || 5;
+      var maxDailyExposure = bankroll * (maxDailyPct / 100) * 2; // double maxBetPct for daily exposure
+      var availableToday = Math.max(0, maxDailyExposure - pendingAmount);
+      var maxBets = riskTolerance === 'conservative' ? 3 : riskTolerance === 'aggressive' ? 8 : 5;
+      var minBets = riskTolerance === 'conservative' ? 1 : 2;
+      var suggestedMin = Math.max(minBets, Math.min(maxBets, Math.ceil(Math.max(0, dailyTarget) / (unitSize * 0.3))));
+      var suggestedMax = Math.min(maxBets, suggestedMin + 2);
+      if (suggestedMin > suggestedMax) suggestedMax = suggestedMin;
+
+      h += '<div class="briefing-line"><span class="bl-icon">&#128176;</span> Max exposure: <span class="briefing-highlight">$' + Math.round(maxDailyExposure) + '</span> &mdash; <span class="briefing-highlight accent">$' + Math.round(availableToday) + '</span> available after pending</div>';
+      h += '<div class="briefing-line"><span class="bl-icon">&#127919;</span> Suggested: <span class="briefing-highlight">' + suggestedMin + '-' + suggestedMax + ' bets</span> at <span class="briefing-highlight">$' + unitSize + '-$' + (unitSize * 2.5).toFixed(0) + '</span> per bet</div>';
+
+      if (bestKey && bestRate > 55) {
+        var bsp = sportPerf[bestKey];
+        h += '<div class="briefing-line"><span class="bl-icon">&#128293;</span> Focus on <span class="briefing-highlight profit">' + bestKey + '</span> &mdash; you\'re ' + bsp.w + '-' + bsp.l + ' (' + bestRate.toFixed(0) + '%) there</div>';
+      }
+      if (worstKey && worstRate < 45 && worstKey !== bestKey) {
+        var wsp = sportPerf[worstKey];
+        h += '<div class="briefing-line"><span class="bl-icon">&#9888;&#65039;</span> Careful with <span class="briefing-highlight loss">' + worstKey + '</span> &mdash; you\'re ' + wsp.w + '-' + wsp.l + ' (' + worstRate.toFixed(0) + '%)</div>';
+      }
+      h += '</div>';
+
+      // ── SECTION 3: Key Insights ──
+      h += '<div class="briefing-section full-width">';
+      h += '<div class="briefing-section-title">Key Insights</div>';
+
+      var insights = [];
+      // Streak insight
+      if (streak >= 3 && streakType === 'win') {
+        insights.push({ priority: 1, icon: '&#128293;', text: 'You\'re on a <span class="briefing-highlight profit">' + streak + '-win streak</span> &mdash; stay disciplined, don\'t increase bet sizes' });
+      } else if (streak >= 3 && streakType === 'loss') {
+        insights.push({ priority: 0, icon: '&#10052;&#65039;', text: 'Tough stretch &mdash; <span class="briefing-highlight loss">' + streak + ' losses in a row</span>. Consider sizing down to half units and sticking to 70%+ confidence picks' });
+      }
+
+      // Confidence tier insight
+      var highTotal = tiers.high.w + tiers.high.l;
+      if (highTotal >= 3) {
+        var highRate = (tiers.high.w / highTotal * 100).toFixed(0);
+        if (parseFloat(highRate) >= 65) {
+          insights.push({ priority: 2, icon: '&#128200;', text: 'Your high-confidence picks (70%+) are hitting at <span class="briefing-highlight profit">' + highRate + '%</span> &mdash; lean into these' });
+        }
+      }
+      var lowTotal = tiers.low.w + tiers.low.l;
+      if (lowTotal >= 3) {
+        var lowRate = (tiers.low.w / lowTotal * 100).toFixed(0);
+        if (parseFloat(lowRate) < 50) {
+          insights.push({ priority: 3, icon: '&#127922;', text: 'Lower confidence picks (<55%) are hitting at only <span class="briefing-highlight loss">' + lowRate + '%</span> &mdash; consider skipping these' });
+        }
+      }
+
+      // Weekday vs weekend
+      var wdPerf = dayPerf['weekday'], wePerf = dayPerf['weekend'];
+      if (wdPerf && wePerf && (wdPerf.w + wdPerf.l) >= 5 && (wePerf.w + wePerf.l) >= 3) {
+        var wdRate = (wdPerf.w / (wdPerf.w + wdPerf.l) * 100).toFixed(0);
+        var weRate = (wePerf.w / (wePerf.w + wePerf.l) * 100).toFixed(0);
+        if (Math.abs(parseFloat(wdRate) - parseFloat(weRate)) >= 10) {
+          var better = parseFloat(wdRate) > parseFloat(weRate) ? 'weekdays' : 'weekends';
+          var betterRate = parseFloat(wdRate) > parseFloat(weRate) ? wdRate : weRate;
+          var worseRate = parseFloat(wdRate) > parseFloat(weRate) ? weRate : wdRate;
+          insights.push({ priority: 4, icon: '&#128197;', text: 'You perform better on ' + better + ' (<span class="briefing-highlight profit">' + betterRate + '%</span>) vs ' + (better === 'weekdays' ? 'weekends' : 'weekdays') + ' (<span class="briefing-highlight">' + worseRate + '%</span>)' });
+        }
+      }
+
+      // Best P&L sport
+      if (bestPnlKey && bestPnl > 0) {
+        insights.push({ priority: 5, icon: '&#9889;', text: 'Most profitable area: <span class="briefing-highlight profit">' + bestPnlKey + '</span> at <span class="briefing-highlight profit">+$' + bestPnl.toFixed(0) + '</span>' });
+      }
+
+      // Goal status insight
+      if (monthlyPL >= monthlyTarget) {
+        insights.push({ priority: 0, icon: '&#127881;', text: 'Incredible month &mdash; <span class="briefing-highlight profit">$' + (monthlyPL - monthlyTarget).toFixed(0) + ' ahead of goal</span>! You could reduce risk and still finish strong' });
+      } else if (statusClass === 'behind' && totalSettled > 5) {
+        insights.push({ priority: 0, icon: '&#128161;', text: 'Behind pace &mdash; focus on <span class="briefing-highlight accent">quality over quantity</span>. Stick to your strongest 2-3 picks today' });
+      }
+
+      // All pending edge case
+      if (pendingCount > 0 && totalSettled === 0) {
+        insights.push({ priority: 0, icon: '&#9203;', text: 'You have <span class="briefing-highlight">' + pendingCount + ' pending bet' + (pendingCount !== 1 ? 's' : '') + '</span> worth <span class="briefing-highlight">$' + pendingAmount.toFixed(0) + '</span>. Results will update when games finish' });
+      }
+
+      // No bets in 2+ days
+      if (todayBets.length === 0 && bets.length > 0) {
+        var lastBetDate = '';
+        for (var i = 0; i < bets.length; i++) {
+          if (bets[i].date && bets[i].date > lastBetDate) lastBetDate = bets[i].date;
+        }
+        if (lastBetDate && lastBetDate < getLocalDateStr(new Date(now.getTime() - 2 * 86400000))) {
+          insights.push({ priority: 1, icon: '&#128276;', text: 'Haven\'t placed a bet in a couple days. <a href="dashboard.html" style="color:var(--accent-secondary)">Check today\'s picks</a> for fresh opportunities' });
+        }
+      }
+
+      // Sort: lowest priority number first, limit negative insights to 1
+      insights.sort(function(a, b) { return a.priority - b.priority; });
+
+      // Rotate which insights show (use dayOfMonth to vary)
+      var negativeShown = 0;
+      var shown = 0;
+      for (var i = 0; i < insights.length && shown < 3; i++) {
+        var ins = insights[(i + dayOfMonth) % insights.length];
+        if (!ins) continue;
+        // Limit negative
+        var isNeg = ins.text.indexOf('briefing-highlight loss') !== -1 || ins.text.indexOf('Behind') !== -1 || ins.text.indexOf('Tough') !== -1 || ins.text.indexOf('losses in a row') !== -1;
+        if (isNeg) { if (negativeShown >= 1) continue; negativeShown++; }
+        h += '<div class="briefing-line"><span class="bl-icon">' + ins.icon + '</span> ' + ins.text + '</div>';
+        shown++;
+      }
+      if (shown === 0) {
+        h += '<div class="briefing-line"><span class="bl-icon">&#128200;</span> Keep tracking bets to unlock personalized insights about your patterns</div>';
+      }
+      h += '</div>'; // end insights section
+
+      h += '</div>'; // end briefing-sections
+
+      // ── Quick Numbers pills ──
+      h += '<div class="briefing-pills">';
+      h += '<div class="briefing-pill"><span class="bp-label">Win Rate</span> <span class="bp-val' + (overallRate >= 55 ? ' profit' : overallRate < 45 ? ' loss' : '') + '">' + overallRate.toFixed(1) + '%</span></div>';
+      h += '<div class="briefing-pill"><span class="bp-label">ROI</span> <span class="bp-val' + (roi >= 0 ? ' profit' : ' loss') + '">' + (roi >= 0 ? '+' : '') + roi.toFixed(1) + '%</span></div>';
+      h += '<div class="briefing-pill"><span class="bp-label">Avg Bet</span> <span class="bp-val">$' + avgBet.toFixed(0) + '</span></div>';
+      if (bestKey) {
+        h += '<div class="briefing-pill"><span class="bp-label">Best</span> <span class="bp-val profit">' + bestKey + '</span></div>';
+      }
+      h += '<div class="briefing-pill"><span class="bp-label">This Week</span> <span class="bp-val">' + weekW + '-' + weekL + '</span></div>';
+      h += '</div>';
+
+      // Timestamp
+      var timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      h += '<div class="briefing-ts">Generated at ' + timeStr + '</div>';
+      h += '</div>'; // end briefing-card
+
+      container.innerHTML = h;
+      container.style.display = '';
+      sessionStorage.setItem(cacheKey, h);
+    }
+
+    function refreshBriefing() {
+      var container = document.getElementById('daily-briefing');
+      if (container) container.dataset.forceRefresh = '1';
+      var cacheKey = 'efe_briefing_' + getLocalDateStr(new Date());
+      sessionStorage.removeItem(cacheKey);
+      renderDailyBriefing(currentProfile);
     }
 
     // ── Recommended Bets ──
@@ -2229,6 +2699,7 @@
       var profile = await getUserProfile(user.uid);
       currentProfile = profile;
       renderPortfolioStats(profile);
+      renderDailyBriefing(profile);
       await loadData();
     });
 
@@ -2379,8 +2850,11 @@
       renderTodayAction(perf);
       renderQuickActions(perf);
 
-      // Re-render top stats with freshly graded data
-      if (currentProfile) renderPortfolioStats(currentProfile);
+      // Re-render top stats and briefing with freshly graded data
+      if (currentProfile) {
+        renderPortfolioStats(currentProfile);
+        renderDailyBriefing(currentProfile);
+      }
 
       // Recent picks (after grading so statuses are current)
       buildPicks();
