@@ -2487,7 +2487,56 @@
         }
       }
 
+      // Client-side fallback: grade any picks that have scores but no result
+      clientSideGrade(projections);
+
       return projections;
+    }
+
+    function clientSideGrade(games) {
+      for (const g of games) {
+        const away = parseInt(g.away_score);
+        const home = parseInt(g.home_score);
+        if (isNaN(away) || isNaN(home)) continue;
+
+        // Spread grading
+        if (g.spread_pick && !g.spread_result) {
+          // Parse "TEAM +/-X" format
+          const m = (g.spread_pick || '').match(/^(.+?)\s+([+-]?\d+(?:\.\d+)?)$/);
+          if (m) {
+            const team = m[1].trim();
+            const line = parseFloat(m[2]);
+            const teamScore = (team === g.home_team) ? home : away;
+            const oppScore = (team === g.home_team) ? away : home;
+            const margin = teamScore + line - oppScore;
+            g.spread_result = margin > 0 ? 'win' : margin < 0 ? 'loss' : 'push';
+          }
+        }
+
+        // Total grading
+        if (g.total_pick && g.total_line && !g.total_result) {
+          const actual = away + home;
+          const line = parseFloat(g.total_line);
+          const dir = (g.total_pick || '').toUpperCase();
+          if (!isNaN(line)) {
+            if (dir === 'OVER') {
+              g.total_result = actual > line ? 'win' : actual < line ? 'loss' : 'push';
+            } else if (dir === 'UNDER') {
+              g.total_result = actual < line ? 'win' : actual > line ? 'loss' : 'push';
+            }
+          }
+        }
+
+        // ML grading
+        if (g.ml_pick && !g.ml_result) {
+          const winner = home > away ? g.home_team : away > home ? g.away_team : null;
+          if (winner) {
+            g.ml_result = (g.ml_pick === winner) ? 'win' : 'loss';
+          } else {
+            g.ml_result = 'push';
+          }
+        }
+      }
     }
 
     function mergeResultsIntoProps(props, resultsData, dateStr) {
@@ -4604,6 +4653,11 @@
             archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
           }
         }
+
+        // Final client-side grading pass for any remaining gaps
+        clientSideGrade(games);
+        clientSideGrade(nhlGames);
+        clientSideGrade(ncaabGames);
 
         historicalGamesCache[date] = games;
         historicalNhlCache[date] = nhlGames;
