@@ -1373,13 +1373,30 @@
       extractGameCandidates(nhlGameJsonData, 'nhl');
       extractGameCandidates(ncaabGameJsonData, 'ncaab');
 
+      // Build team-to-game lookup for filtering props by game status/time
+      var teamGameInfo = {};
+      if (gameJsonData && gameJsonData.games) {
+        for (var gi = 0; gi < gameJsonData.games.length; gi++) {
+          var gg = gameJsonData.games[gi];
+          var info = { commence_time: gg.commence_time, status: (gg.status || '').toLowerCase() };
+          teamGameInfo[gg.away_team] = info;
+          teamGameInfo[gg.home_team] = info;
+        }
+      }
+
       // NBA props
       if (propsJsonData && propsJsonData.date === todayStr && propsJsonData.projections) {
         totalGamesInData += propsJsonData.projections.length;
         for (var i = 0; i < propsJsonData.projections.length; i++) {
           var p = propsJsonData.projections[i];
-          // Skip props whose game has already started
-          if (p.commence_time && new Date(p.commence_time) < now) continue;
+          // Skip props whose game has already started or finished
+          var propTeamGame = teamGameInfo[p.team];
+          if (propTeamGame) {
+            if (propTeamGame.status === 'final' || propTeamGame.status === 'live' || propTeamGame.status === 'in_progress' || propTeamGame.status === 'closed') continue;
+            if (propTeamGame.commence_time && new Date(propTeamGame.commence_time) < now) continue;
+          } else if (p.commence_time && new Date(p.commence_time) < now) {
+            continue;
+          }
           var conf = parseFloat(p.confidence) || 0;
           if (conf >= confThreshold) {
             var propOdds = parseFloat(p.market_odds) || -110;
