@@ -1,13 +1,8 @@
 {
   "date": "2026-03-02",
   "sport": "NBA",
-<<<<<<< Updated upstream
   "locked_at": "2026-03-02T03:36:12",
   "updated": "2026-03-02T03:36:12",
-=======
-  "locked_at": "2026-03-01T04:58:25",
-  "updated": "2026-03-02T01:01:48",
->>>>>>> Stashed changes
   "games": [
     {
       "away_team": "HOU",
@@ -193,334 +188,8 @@
         ]
       },
       "edge": {
-<<<<<<< Updated upstream
         "spread": -10.7,
         "total": -9.9,
-=======
-        "spread": -3.8,
-        "total": -7.9,
-        "spread_ev": 0.1685,
-        "total_ev": 0.3131,
-        "spread_prob": 0.612,
-        "total_prob": 0.688
-      },
-      "spread_rec": {
-        "pick": "IND +1.0",
-        "edge": -3.8,
-        "ev": 16.9,
-        "confidence": "medium"
-      },
-      "total_rec": {
-        "pick": "UNDER 238.5",
-        "edge": -7.9,
-        "ev": 31.3,
-        "confidence": "high"
-      },
-      "away_score": 125,
-      "home_score": 106,
-      "spread_result": "loss",
-      "total_result": "win",
-      "ml_result": "loss"
-    },
-    {
-      "away_team": "POR",
-      "home_team": "ATL",
-      "game_date": "2026-03-01",
-      "proj_score": "113.1-119.4",
-      "spread_pick": "POR +6.0",
-      "spread_conf": 50.9,
-      "total_line": 237.5,
-      "total_pick": "UNDER",
-      "total_conf": 59.8,
-      "ml_pick": "ATL",
-      "ml_conf": 65.4,
-      "commence_time": "2026-03-01T23:10:00Z",
-      "status": "final",
-      "locked_at": "2026-03-01T06:56:25Z",
-      "injury_impact": {
-        "home": -0.8,
-        "away": -5.6,
-        "total": -6.4,
-        "home_injuries": [],
-        "away_injuries": [
-          {
-            "player": "Damian Lillard",
-            "status": "Out",
-            "impact": 5.0
-          },
-          {
-            "player": "Deni Avdija",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Shaedon Sharpe",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": -0.3,
-        "total": -5.0,
-        "spread_ev": 0.0,
-        "total_ev": 0.1883,
-        "spread_prob": 0.5,
-        "total_prob": 0.622
-      },
-      "total_rec": {
-        "pick": "UNDER 237.5",
-        "edge": -5.0,
-        "ev": 18.8,
-        "confidence": "medium"
-      },
-      "away_score": 101,
-      "home_score": 135,
-      "spread_result": "loss",
-      "total_result": "win",
-      "ml_result": "win"
-    },
-    {
-      "away_team": "PHI",
-      "home_team": "BOS",
-      "game_date": "2026-03-01",
-      "proj_score": "110.6-114.4",
-      "spread_pick": "PHI +9.5",
-      "spread_conf": 59.6,
-      "total_line": 221.5,
-      "total_pick": "OVER",
-      "total_conf": 56.2,
-      "ml_pick": "BOS",
-      "ml_conf": 56.5,
-      "commence_time": "2026-03-01T23:10:00Z",
-      "status": "final",
-      "locked_at": "2026-03-01T06:56:25Z",
-      "injury_impact": {
-        "home": -6.4,
-        "away": -9.0,
-        "total": -15.4,
-        "home_injuries": [
-          {
-            "player": "Jayson Tatum",
-            "status": "Out",
-            "impact": 7.5
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Joel Embiid",
-            "status": "Out",
-            "impact": 8.0
-          },
-          {
-            "player": "Paul George",
-            "status": "Suspension",
-            "impact": 2.2
-          },
-          {
-            "player": "Johni Broome",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": 5.7,
-        "total": 3.5,
-        "spread_ev": 0.2688,
-        "total_ev": 0.1199,
-        "spread_prob": 0.665,
-        "total_prob": 0.587
-      },
-      "spread_rec": {
-        "pick": "PHI +9.5",
-        "edge": 5.7,
-        "ev": 26.9,
-        "confidence": "high"
-      },
-      "total_rec": {
-        "pick": "OVER 221.5",
-        "edge": 3.5,
-        "ev": 12.0,
-        "confidence": "low"
-      },
-      "graded_props": [
-        {
-          "player": "Tyrese Maxey",
-          "team": "PHI",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 26.5,
-          "projection": 30.9,
-          "actual": 33,
-          "hit": true,
-          "confidence": 71.6,
-          "ev": 4.7
-        }
-      ]
-    },
-    {
-      "away_team": "DET",
-      "home_team": "ORL",
-      "game_date": "2026-03-01",
-      "proj_score": "111.7-113.1",
-      "spread_pick": "ORL +5.5",
-      "spread_conf": 71.7,
-      "total_line": 221.5,
-      "total_pick": "OVER",
-      "total_conf": 60.4,
-      "ml_pick": "ORL",
-      "ml_conf": 54.6,
-      "commence_time": "2026-03-01T23:10:00Z",
-      "status": "final",
-      "locked_at": "2026-03-01T06:56:25Z",
-      "injury_impact": {
-        "home": -2.8,
-        "away": -0.4,
-        "total": -3.2,
-        "home_injuries": [
-          {
-            "player": "Franz Wagner",
-            "status": "Out",
-            "impact": 3.5
-          }
-        ],
-        "away_injuries": []
-      },
-      "edge": {
-        "spread": -6.9,
-        "total": 3.3,
-        "spread_ev": 0.3286,
-        "total_ev": 0.1106,
-        "spread_prob": 0.696,
-        "total_prob": 0.582
-      },
-      "spread_rec": {
-        "pick": "ORL +5.5",
-        "edge": -6.9,
-        "ev": 32.9,
-        "confidence": "high"
-      },
-      "total_rec": {
-        "pick": "OVER 221.5",
-        "edge": 3.3,
-        "ev": 11.1,
-        "confidence": "low"
-      },
-      "away_score": 106,
-      "home_score": 92,
-      "graded_props": [
-        {
-          "player": "Desmond Bane",
-          "team": "ORL",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 19.5,
-          "projection": 27.9,
-          "actual": 17,
-          "hit": false,
-          "confidence": 73.4,
-          "ev": 6.0
-        },
-        {
-          "player": "Jalen Duren",
-          "team": "DET",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 31.5,
-          "projection": 40.2,
-          "actual": 27,
-          "hit": false,
-          "confidence": 72.0,
-          "ev": 5.8
-        },
-        {
-          "player": "Desmond Bane",
-          "team": "ORL",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 27.5,
-          "projection": 34.6,
-          "actual": 28,
-          "hit": true,
-          "confidence": 71.4,
-          "ev": 5.3
-        },
-        {
-          "player": "Jalen Duren",
-          "team": "DET",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 18.5,
-          "projection": 25.6,
-          "actual": 16,
-          "hit": false,
-          "confidence": 69.7,
-          "ev": 5.0
-        }
-      ],
-      "spread_result": "loss",
-      "total_result": "loss",
-      "ml_result": "loss"
-    },
-    {
-      "away_team": "OKC",
-      "home_team": "DAL",
-      "game_date": "2026-03-01",
-      "proj_score": "115.3-111.1",
-      "spread_pick": "DAL +15.5",
-      "spread_conf": 82.8,
-      "total_line": 231.5,
-      "total_pick": "UNDER",
-      "total_conf": 62.8,
-      "ml_pick": "OKC",
-      "ml_conf": 63.2,
-      "commence_time": "2026-03-02T01:10:00Z",
-      "status": "final",
-      "locked_at": "2026-03-01T06:56:25Z",
-      "injury_impact": {
-        "home": -8.0,
-        "away": -5.2,
-        "total": -13.2,
-        "home_injuries": [
-          {
-            "player": "Kyrie Irving",
-            "status": "Out",
-            "impact": 5.0
-          },
-          {
-            "player": "P.J. Washington",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Marvin Bagley III",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ],
-        "away_injuries": [
-          {
-            "player": "Jalen Williams",
-            "status": "Out",
-            "impact": 3.5
-          },
-          {
-            "player": "Branden Carlson",
-            "status": "Out",
-            "impact": 1.0
-          },
-          {
-            "player": "Ajay Mitchell",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": -11.3,
-        "total": -5.1,
->>>>>>> Stashed changes
         "spread_ev": 0.3745,
         "total_ev": 0.3745,
         "spread_prob": 0.72,
@@ -533,57 +202,11 @@
         "confidence": "high"
       },
       "total_rec": {
-<<<<<<< Updated upstream
         "pick": "UNDER 243.5",
         "edge": -9.9,
         "ev": 37.5,
         "confidence": "high"
       }
-=======
-        "pick": "UNDER 231.5",
-        "edge": -5.1,
-        "ev": 19.3,
-        "confidence": "medium"
-      },
-      "graded_props": [
-        {
-          "player": "Isaiah Joe",
-          "team": "OKC",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 13.5,
-          "projection": 20.6,
-          "actual": 19,
-          "hit": true,
-          "confidence": 72.0,
-          "ev": 5.5
-        },
-        {
-          "player": "Chet Holmgren",
-          "team": "OKC",
-          "prop": "PTS",
-          "direction": "UNDER",
-          "line": 17.5,
-          "projection": 13.7,
-          "actual": 19,
-          "hit": false,
-          "confidence": 70.7,
-          "ev": 4.4
-        },
-        {
-          "player": "Cason Wallace",
-          "team": "OKC",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 2.5,
-          "projection": 5.4,
-          "actual": 8,
-          "hit": true,
-          "confidence": 69.3,
-          "ev": 4.0
-        }
-      ]
->>>>>>> Stashed changes
     },
     {
       "away_team": "LAC",
@@ -594,21 +217,12 @@
       "spread_conf": 59.9,
       "total_line": 219.5,
       "total_pick": "OVER",
-<<<<<<< Updated upstream
       "total_conf": 55.5,
       "ml_pick": "GSW",
       "ml_conf": 58.3,
       "commence_time": "2026-03-03T03:10:00Z",
       "status": "scheduled",
       "locked_at": "2026-03-02T03:36:11Z",
-=======
-      "total_conf": 57.7,
-      "ml_pick": "LAC",
-      "ml_conf": 71.9,
-      "commence_time": "2026-03-02T02:10:00Z",
-      "status": "final",
-      "locked_at": "2026-03-01T06:56:25Z",
->>>>>>> Stashed changes
       "injury_impact": {
         "home": -12.4,
         "away": -4.0,
@@ -644,74 +258,12 @@
         ]
       },
       "edge": {
-<<<<<<< Updated upstream
         "spread": -7.0,
         "total": 4.1,
         "spread_ev": 0.3334,
         "total_ev": 0.1475,
         "spread_prob": 0.698,
         "total_prob": 0.601
-=======
-        "spread": 0.5,
-        "total": 3.1,
-        "spread_ev": 0.0,
-        "total_ev": 0.1013,
-        "spread_prob": 0.5,
-        "total_prob": 0.577
-      },
-      "total_rec": {
-        "pick": "OVER 223.5",
-        "edge": 3.1,
-        "ev": 10.1,
-        "confidence": "low"
-      }
-    },
-    {
-      "away_team": "SAC",
-      "home_team": "LAL",
-      "game_date": "2026-03-01",
-      "proj_score": "112.6-118.2",
-      "spread_pick": "SAC +13.0",
-      "spread_conf": 64.5,
-      "total_line": 233.5,
-      "total_pick": "UNDER",
-      "total_conf": 56.0,
-      "ml_pick": "LAL",
-      "ml_conf": 61.2,
-      "commence_time": "2026-03-02T02:40:00Z",
-      "status": "final",
-      "locked_at": "2026-03-01T06:56:25Z",
-      "injury_impact": {
-        "home": -0.4,
-        "away": -8.8,
-        "total": -9.2,
-        "home_injuries": [],
-        "away_injuries": [
-          {
-            "player": "Domantas Sabonis",
-            "status": "Out",
-            "impact": 4.0
-          },
-          {
-            "player": "Zach LaVine",
-            "status": "Out",
-            "impact": 4.0
-          },
-          {
-            "player": "Keegan Murray",
-            "status": "Out",
-            "impact": 1.0
-          }
-        ]
-      },
-      "edge": {
-        "spread": 7.4,
-        "total": -2.7,
-        "spread_ev": 0.3525,
-        "total_ev": 0.0,
-        "spread_prob": 0.708,
-        "total_prob": 0.5
->>>>>>> Stashed changes
       },
       "spread_rec": {
         "pick": "GSW +1.0",
