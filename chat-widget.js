@@ -933,18 +933,32 @@
     try {
       await fetchAllData();
 
-      // Only send last MAX_API_MESSAGES for cost efficiency
+      // Sanitize messages: strip tool_use/tool_result from loaded history
+      // (they can't be replayed — IDs won't match and structure may be mangled by Firestore)
       var relevantMessages = messages.filter(function (m) {
-        return m.role === 'user' || m.role === 'assistant';
+        if (m.role !== 'user' && m.role !== 'assistant') return false;
+        // Keep simple string content
+        if (typeof m.content === 'string') return true;
+        // Keep array content only if it has text blocks (not just tool_use/tool_result)
+        if (Array.isArray(m.content)) {
+          var hasToolUse = m.content.some(function (c) { return c.type === 'tool_use'; });
+          var hasToolResult = m.content.some(function (c) { return c.type === 'tool_result'; });
+          if (hasToolUse || hasToolResult) return false;
+          return true;
+        }
+        return true;
       });
       var apiMessages = relevantMessages.slice(-MAX_API_MESSAGES).map(function (m) {
         return { role: m.role, content: m.content };
       });
 
+      var sysPrompt = buildSystemPrompt();
+      console.log('[EF Debug] System prompt length:', sysPrompt.length, 'chars, messages:', apiMessages.length);
+
       var body = {
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1024,
-        system: buildSystemPrompt(),
+        system: sysPrompt,
         messages: apiMessages,
         tools: TOOLS,
       };
@@ -954,11 +968,19 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      if (!r.ok) throw new Error('API error: ' + r.status);
+      if (!r.ok) {
+        var errText = await r.text();
+        console.error('[EF Debug] API HTTP error:', r.status, errText.substring(0, 500));
+        throw new Error('API error: ' + r.status + ' — ' + errText.substring(0, 200));
+      }
       var data = await r.json();
-      if (data.type === 'error') throw new Error(data.error && data.error.message || 'API error');
+      if (data.type === 'error') {
+        console.error('[EF Debug] API returned error:', JSON.stringify(data.error));
+        throw new Error(data.error && data.error.message || 'API error');
+      }
 
       // Tool use loop (max 5 rounds)
+      var currentTurnStart = messages.length; // track where this turn's tool messages start
       var toolRounds = 0;
       while (data.stop_reason === 'tool_use' && toolRounds < 5) {
         toolRounds++;
@@ -979,11 +1001,20 @@
         messages.push({ role: 'user', content: toolResultContent });
         saveMessage('user', toolResultContent);
 
-        // Re-call API with updated conversation
-        relevantMessages = messages.filter(function (m) {
-          return m.role === 'user' || m.role === 'assistant';
+        // Re-call API with updated conversation (include current tool messages, exclude old stale ones)
+        // For tool loop, we need ALL messages from the current turn, so rebuild from scratch:
+        // 1. Text-only messages from history (safe)
+        // 2. All messages from this call onwards (tool_use + tool_result pairs are complete)
+        var safeHistory = messages.filter(function (m, idx) {
+          if (idx >= currentTurnStart) return true; // current turn: keep everything
+          if (typeof m.content === 'string') return true;
+          if (Array.isArray(m.content)) {
+            var hasTools = m.content.some(function (c) { return c.type === 'tool_use' || c.type === 'tool_result'; });
+            return !hasTools;
+          }
+          return true;
         });
-        apiMessages = relevantMessages.slice(-MAX_API_MESSAGES).map(function (m) {
+        apiMessages = safeHistory.slice(-MAX_API_MESSAGES).map(function (m) {
           return { role: m.role, content: m.content };
         });
         body.messages = apiMessages;
@@ -1005,7 +1036,10 @@
       if (data.content && data.content[0] && data.content[0].text) return data.content[0].text;
       throw new Error('Unexpected response format');
     } catch (err) {
-      console.error('EF Chat error:', err);
+      console.error('[EF Chat] Error:', err.message, err);
+      if (err.message && err.message.indexOf('API error: 4') >= 0) {
+        return 'API error — the request was rejected. This usually means the conversation got too long. Try starting a new chat session (click the reset button).';
+      }
       return 'Sorry, I couldn\'t process that request. Please try again in a moment.';
     }
   }
