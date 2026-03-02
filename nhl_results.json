@@ -1,36 +1,99 @@
 {
-  "updated": "2026-03-02T03:31:01",
+  "updated": "2026-03-02T17:40:22",
   "allTime": {
     "spreads": {
       "wins": 20,
-      "losses": 9,
+      "losses": 10,
       "pushes": 0,
-      "pct": 69.0,
-      "roi": 31.7
+      "pct": 66.7,
+      "roi": 27.3
     },
     "totals": {
-      "wins": 15,
+      "wins": 16,
       "losses": 13,
       "pushes": 0,
-      "pct": 53.6,
-      "roi": 2.3
+      "pct": 55.2,
+      "roi": 5.3
     },
     "moneylines": {
-      "wins": 21,
+      "wins": 22,
       "losses": 8,
       "pushes": 0,
-      "pct": 72.4,
-      "roi": 38.2
+      "pct": 73.3,
+      "roi": 40.0
     },
     "best_bets": {
-      "wins": 15,
-      "losses": 5,
+      "wins": 17,
+      "losses": 6,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 73.9,
+      "roi": 41.1
     }
   },
   "days": [
+    {
+      "date": "2026-03-02",
+      "spreads": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "picks": [
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "DET @ NSH",
+          "pick": "NSH +1.5",
+          "result": "4-2",
+          "hit": false,
+          "confidence": 53.6,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "DET @ NSH",
+          "pick": "UNDER 6.5",
+          "result": "4-2",
+          "hit": true,
+          "confidence": 56.5,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "DET @ NSH",
+          "pick": "DET",
+          "result": "4-2",
+          "hit": true,
+          "confidence": 57.2,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-03-01",
       "spreads": {

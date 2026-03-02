@@ -1194,18 +1194,28 @@
     .game-live-score-row .leading { color: var(--accent-light); }
     .game-card-score { font-size: 13px; color: var(--text-muted); }
     .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
-    .game-pick-row { display: flex; align-items: center; gap: 8px; }
+    .game-pick-row { display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 2px 0; }
     .game-pick-row.dimmed { opacity: 0.35; }
-    .game-pick-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; min-width: 50px; }
-    .game-pick-value { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .game-pick-conf { font-size: 12px; color: var(--text-secondary); min-width: 40px; text-align: right; }
-    .game-pick-odds { font-size: 12px; color: #888; font-weight: 500; margin-left: 2px; }
-    .game-pick-row .track-icon { padding: 2px 6px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; font-size: 14px; flex-shrink: 0; }
+    .game-pick-row.is-best-bet { border-left: 2px solid var(--profit); padding-left: 8px; margin-left: -10px; }
+    .game-pick-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; width: 48px; flex-shrink: 0; }
+    .game-pick-value { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .game-pick-odds { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); font-weight: 500; width: 54px; text-align: right; flex-shrink: 0; }
+    .game-pick-conf { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; width: 36px; text-align: right; flex-shrink: 0; }
+    .game-pick-kelly { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); width: 52px; text-align: right; flex-shrink: 0; white-space: nowrap; }
+    .game-pick-kelly.strong { color: #34d399; }
+    .game-pick-kelly.good { color: #60a5fa; }
+    .game-pick-kelly.lean { color: #fbbf24; }
+    .game-pick-row .track-icon { width: 28px; text-align: center; cursor: pointer; opacity: 0.35; transition: opacity 0.2s; font-size: 14px; flex-shrink: 0; }
     .game-pick-row .track-icon:hover { opacity: 0.8; }
     .game-pick-row .track-icon.tracked { opacity: 1; color: #10b981; }
     .game-pick-value.low-conf { color: var(--text-muted); font-weight: 400; }
-    .game-pick-value.best-bet { color: var(--accent-light); }
-    .game-pick-best-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.03em; background: rgba(16, 185, 129, 0.15); color: var(--accent-light); margin-left: 6px; vertical-align: middle; }
+    .game-pick-value.best-bet { color: var(--profit); }
+    .game-pick-best-label { font-size: 9px; font-weight: 700; color: var(--profit); background: rgba(16,185,129,0.1); padding: 1px 5px; border-radius: 3px; margin-left: 4px; flex-shrink: 0; white-space: nowrap; }
+    @media (max-width: 768px) {
+      .game-pick-kelly { display: none; }
+      .game-pick-best-label { display: none; }
+      .game-pick-odds { width: 48px; }
+    }
     .game-proj-updated { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 16px; }
 
     /* ── Game Status Filter ── */
@@ -1812,11 +1822,8 @@
     .track-btn-confirm:hover { background: #059669; }
 
     /* Kelly bet size badges */
-    .kelly-bet-badge { display: inline-flex; align-items: center; gap: 3px; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
-    .kelly-bet-badge.strong { background: rgba(16,185,129,0.18); color: #34d399; }
-    .kelly-bet-badge.good { background: rgba(59,130,246,0.18); color: #60a5fa; }
-    .kelly-bet-badge.lean { background: rgba(234,179,8,0.18); color: #fbbf24; }
-    .kelly-bet-badge.skip { background: rgba(148,163,184,0.1); color: #64748b; }
+    .kelly-bet-badge { display: none; }
+    .kelly-bet-badge.strong, .kelly-bet-badge.good, .kelly-bet-badge.lean, .kelly-bet-badge.skip { display: none; }
     .rec-kelly { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11px; color: var(--text-muted); }
     .rec-kelly-amount { font-weight: 700; color: var(--text-primary); }
     .rec-kelly-edge { color: #34d399; }
@@ -2643,7 +2650,7 @@
       const fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
       const capNote = k.capped ? ` [capped from ${DF ? DF.stake(k.uncappedAmount) : ('$' + k.uncappedAmount)}]` : '';
       const title = `Kelly: ${fAmt} (${k.units}u, +${k.edge.toFixed(1)}% edge, ${k.kellyPct.toFixed(1)}% ${s.kellyFraction})${capNote}`;
-      return `<span class="kelly-bet-badge ${tier}" title="${title}">${fAmt}</span>`;
+      return `<span class="game-pick-kelly ${tier}" title="${title}">${fAmt}</span>`;
     }
 
     /** Generate Kelly details for recommendation cards */
@@ -5145,7 +5152,8 @@
       const activeBB = getActiveBestBets();
       const gameLabel = `${g.away_team} @ ${g.home_team}`;
       const isInBestBets = (betType) => activeBB.some(b => b.game === gameLabel && b.type === betType);
-      const bestBetBadge = (betType) => isInBestBets(betType) ? '<span class="game-pick-best-badge">BEST BET</span>' : '';
+      const bestBetBadge = (betType) => isInBestBets(betType) ? '<span class="game-pick-best-label">Best</span>' : '';
+      const bestBetRowClass = (betType) => isInBestBets(betType) ? ' is-best-bet' : '';
       const dimClass = (conf, betType) => {
         if (currentGameConfFilter === 'all') return '';
         if (currentGameConfFilter === 'best-bets') return isInBestBets(betType) ? '' : ' dimmed';
@@ -5216,29 +5224,32 @@
               </div>
             </div>
             <div class="game-card-picks">
-              <div class="game-pick-row${dimClass(g.spread_conf, 'spread')}">
+              <div class="game-pick-row${bestBetRowClass('spread')}${dimClass(g.spread_conf, 'spread')}">
                 <span class="game-pick-label">Spread</span>
                 <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
                 <span class="game-pick-odds">${spreadOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+                ${bestBetBadge('spread')}
                 ${kellyBadge(g.spread_conf, g.spread_odds)}
                 ${renderResultBadge(g.spread_result)}
                 ${gameTrackIcon('spread', isSpreadTracked)}
               </div>
-              <div class="game-pick-row${dimClass(g.total_conf, 'total')}">
+              <div class="game-pick-row${bestBetRowClass('total')}${dimClass(g.total_conf, 'total')}">
                 <span class="game-pick-label">Total</span>
                 <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
                 <span class="game-pick-odds">${totalOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+                ${bestBetBadge('total')}
                 ${kellyBadge(g.total_conf, g.total_odds)}
                 ${renderResultBadge(g.total_result)}
                 ${gameTrackIcon('total', isTotalTracked)}
               </div>
-              <div class="game-pick-row${dimClass(g.ml_conf, 'ml')}">
+              <div class="game-pick-row${bestBetRowClass('ml')}${dimClass(g.ml_conf, 'ml')}">
                 <span class="game-pick-label">ML</span>
                 <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
                 <span class="game-pick-odds">${mlOddsStr}</span>
                 <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+                ${bestBetBadge('ml')}
                 ${kellyBadge(g.ml_conf, g.ml_odds)}
                 ${renderResultBadge(g.ml_result)}
                 ${gameTrackIcon('ml', isMlTracked)}
@@ -5287,29 +5298,32 @@
           </div>
           ${liveScoresHtml}
           <div class="game-card-picks">
-            <div class="game-pick-row${dimClass(g.spread_conf, 'spread')}">
+            <div class="game-pick-row${bestBetRowClass('spread')}${dimClass(g.spread_conf, 'spread')}">
               <span class="game-pick-label">Spread</span>
-              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}${bestBetBadge('spread')}</span>
+              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
               <span class="game-pick-odds">${spreadOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
+              ${bestBetBadge('spread')}
               ${kellyBadge(g.spread_conf, g.spread_odds)}
               ${renderResultBadge(g.spread_result)}
               ${gameTrackIcon('spread', isSpreadTracked)}
             </div>
-            <div class="game-pick-row${dimClass(g.total_conf, 'total')}">
+            <div class="game-pick-row${bestBetRowClass('total')}${dimClass(g.total_conf, 'total')}">
               <span class="game-pick-label">Total</span>
-              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}${bestBetBadge('total')}</span>
+              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
               <span class="game-pick-odds">${totalOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
+              ${bestBetBadge('total')}
               ${kellyBadge(g.total_conf, g.total_odds)}
               ${renderResultBadge(g.total_result)}
               ${gameTrackIcon('total', isTotalTracked)}
             </div>
-            <div class="game-pick-row${dimClass(g.ml_conf, 'ml')}">
+            <div class="game-pick-row${bestBetRowClass('ml')}${dimClass(g.ml_conf, 'ml')}">
               <span class="game-pick-label">ML</span>
-              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}${bestBetBadge('ml')}</span>
+              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
               <span class="game-pick-odds">${mlOddsStr}</span>
               <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
+              ${bestBetBadge('ml')}
               ${kellyBadge(g.ml_conf, g.ml_odds)}
               ${renderResultBadge(g.ml_result)}
               ${gameTrackIcon('ml', isMlTracked)}

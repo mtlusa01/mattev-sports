@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
-"""check_and_grade.py — Fetch scores and grade all 3 sports.
+"""check_and_grade.py — Fetch scores via ESPN (free) and grade all 3 sports.
 
 Self-contained script (no cross-repo imports) designed to run in GitHub Actions
-every 2 hours. Uses Odds API for NBA/NHL scores and ESPN for NCAAB.
+every 15 minutes during game windows. Uses ESPN scoreboards exclusively —
+zero Odds API calls, saving the entire quota for odds fetching.
+
+ESPN endpoints (free, unlimited, near real-time):
+  NBA:   https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard
+  NHL:   https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard
+  NCAAB: https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard
 
 Usage:
-    ODDS_API_KEY=... python scripts/check_and_grade.py
+    python scripts/check_and_grade.py
 """
 
 import json
@@ -18,117 +24,42 @@ from datetime import datetime, timedelta
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-ODDS_API_BASE = "https://api.the-odds-api.com/v4/sports"
-ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball"
-
-# Odds API full team name -> abbreviation (NBA)
-NBA_TEAM_MAP = {
-    "Atlanta Hawks": "ATL", "Boston Celtics": "BOS", "Brooklyn Nets": "BKN",
-    "Charlotte Hornets": "CHA", "Chicago Bulls": "CHI", "Cleveland Cavaliers": "CLE",
-    "Dallas Mavericks": "DAL", "Denver Nuggets": "DEN", "Detroit Pistons": "DET",
-    "Golden State Warriors": "GSW", "Houston Rockets": "HOU", "Indiana Pacers": "IND",
-    "Los Angeles Clippers": "LAC", "Los Angeles Lakers": "LAL", "Memphis Grizzlies": "MEM",
-    "Miami Heat": "MIA", "Milwaukee Bucks": "MIL", "Minnesota Timberwolves": "MIN",
-    "New Orleans Pelicans": "NOP", "New York Knicks": "NYK", "Oklahoma City Thunder": "OKC",
-    "Orlando Magic": "ORL", "Philadelphia 76ers": "PHI", "Phoenix Suns": "PHX",
-    "Portland Trail Blazers": "POR", "Sacramento Kings": "SAC", "San Antonio Spurs": "SAS",
-    "Toronto Raptors": "TOR", "Utah Jazz": "UTA", "Washington Wizards": "WAS",
+ESPN_ENDPOINTS = {
+    "NBA": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+    "NHL": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard",
+    "NCAAB": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard",
 }
 
-# Odds API full team name -> abbreviation (NHL)
-NHL_TEAM_MAP = {
-    "Anaheim Ducks": "ANA", "Arizona Coyotes": "ARI", "Boston Bruins": "BOS",
-    "Buffalo Sabres": "BUF", "Calgary Flames": "CGY", "Carolina Hurricanes": "CAR",
-    "Chicago Blackhawks": "CHI", "Colorado Avalanche": "COL", "Columbus Blue Jackets": "CBJ",
-    "Dallas Stars": "DAL", "Detroit Red Wings": "DET", "Edmonton Oilers": "EDM",
-    "Florida Panthers": "FLA", "Los Angeles Kings": "LAK", "Minnesota Wild": "MIN",
-    "Montréal Canadiens": "MTL", "Montreal Canadiens": "MTL",
-    "Nashville Predators": "NSH", "New Jersey Devils": "NJD",
-    "New York Islanders": "NYI", "New York Rangers": "NYR",
-    "Ottawa Senators": "OTT", "Philadelphia Flyers": "PHI", "Pittsburgh Penguins": "PIT",
-    "San Jose Sharks": "SJS", "Seattle Kraken": "SEA", "St. Louis Blues": "STL",
-    "St Louis Blues": "STL", "Tampa Bay Lightning": "TBL", "Toronto Maple Leafs": "TOR",
-    "Utah Hockey Club": "UTA", "Utah Mammoth": "UTA",
-    "Vancouver Canucks": "VAN", "Vegas Golden Knights": "VGK",
-    "Washington Capitals": "WSH", "Winnipeg Jets": "WPG",
+# ESPN sometimes uses non-standard abbreviations — map to our projection format
+ESPN_ABBR_FIX = {
+    # NBA
+    "GS": "GSW", "SA": "SAS", "NY": "NYK", "NO": "NOP",
+    "UTAH": "UTA", "WSH": "WAS",
+    # NHL
+    "TB": "TBL", "SJ": "SJS", "LA": "LAK", "NJ": "NJD",
+    "MON": "MTL", "CLB": "CBJ", "NASH": "NSH",
 }
 
 
-# ── Score Fetching ───────────────────────────────────────────────
+# ── ESPN Score Fetching ──────────────────────────────────────────
 
 
-def fetch_odds_api_scores(sport_key, team_map, api_key):
-    """Fetch scores from Odds API for a given sport.
-
-    Returns dict: {"AWAY@HOME": {away_score, home_score, completed}}
-    """
-    if not api_key:
-        print(f"  [{sport_key}] No API key — skipping")
-        return {}
-
-    url = f"{ODDS_API_BASE}/{sport_key}/scores/"
-    try:
-        resp = requests.get(url, params={"apiKey": api_key, "daysFrom": 2}, timeout=15)
-        remaining = resp.headers.get("x-requests-remaining", "?")
-        print(f"  [{sport_key}] API {resp.status_code} (requests remaining: {remaining})")
-        if resp.status_code != 200:
-            print(f"  [{sport_key}] API error: {resp.text[:200]}")
-            return {}
-
-        scores = {}
-        for ev in resp.json():
-            away_full = ev.get("away_team", "")
-            home_full = ev.get("home_team", "")
-            away_abbr = team_map.get(away_full)
-            home_abbr = team_map.get(home_full)
-            if not away_abbr or not home_abbr:
-                continue
-
-            score_list = ev.get("scores") or []
-            score_map = {}
-            for s in score_list:
-                if s and s.get("score"):
-                    score_map[s["name"]] = int(s["score"])
-
-            away_score = score_map.get(away_full)
-            home_score = score_map.get(home_full)
-            if away_score is None or home_score is None:
-                continue
-
-            key = f"{away_abbr}@{home_abbr}"
-            scores[key] = {
-                "away_score": away_score,
-                "home_score": home_score,
-                "completed": ev.get("completed", False),
-            }
-
-        print(f"  [{sport_key}] Got scores for {len(scores)} games")
-        return scores
-
-    except Exception as e:
-        print(f"  [{sport_key}] Score fetch error: {e}")
-        return {}
-
-
-def fetch_nba_scores(api_key):
-    return fetch_odds_api_scores("basketball_nba", NBA_TEAM_MAP, api_key)
-
-
-def fetch_nhl_scores(api_key):
-    return fetch_odds_api_scores("icehockey_nhl", NHL_TEAM_MAP, api_key)
-
-
-def fetch_ncaab_scores(date_str):
-    """Fetch NCAAB scores from ESPN (free, no API key needed).
+def fetch_espn_scores(sport, date_str=None):
+    """Fetch scores from ESPN scoreboard for any sport.
 
     Args:
-        date_str: Date in 'YYYY-MM-DD' format
+        sport: "NBA", "NHL", or "NCAAB"
+        date_str: Optional date in 'YYYY-MM-DD' format (defaults to today)
 
     Returns dict: {"AWAY@HOME": {away_score, home_score, completed}}
     """
-    date_fmt = date_str.replace("-", "")
-    url = f"{ESPN_BASE}/scoreboard"
-    params = {"dates": date_fmt, "limit": 300, "groups": 50}
+    url = ESPN_ENDPOINTS[sport]
+    params = {}
+    if date_str:
+        params["dates"] = date_str.replace("-", "")
+    if sport == "NCAAB":
+        params["limit"] = 300
+        params["groups"] = 50
 
     try:
         resp = requests.get(url, params=params, timeout=30)
@@ -156,24 +87,58 @@ def fetch_ncaab_scores(date_str):
 
             home_abbr = home_comp.get("team", {}).get("abbreviation", "")
             away_abbr = away_comp.get("team", {}).get("abbreviation", "")
+
+            # Normalize ESPN abbreviations to our format
+            home_abbr = ESPN_ABBR_FIX.get(home_abbr, home_abbr)
+            away_abbr = ESPN_ABBR_FIX.get(away_abbr, away_abbr)
+
             home_score = int(home_comp.get("score", 0) or 0)
             away_score = int(away_comp.get("score", 0) or 0)
 
-            key = f"{away_abbr}@{home_abbr}"
             completed = status_type == "STATUS_FINAL"
+            in_progress = status_type == "STATUS_IN_PROGRESS"
 
+            key = f"{away_abbr}@{home_abbr}"
             scores[key] = {
                 "away_score": away_score,
                 "home_score": home_score,
                 "completed": completed,
+                "in_progress": in_progress,
             }
 
-        print(f"  [NCAAB] ESPN {date_str}: {len(scores)} games")
+        label = f"{sport} {date_str}" if date_str else sport
+        print(f"  [{label}] ESPN: {len(scores)} games")
         return scores
 
     except Exception as e:
-        print(f"  [NCAAB] ESPN fetch error for {date_str}: {e}")
+        label = f"{sport} {date_str}" if date_str else sport
+        print(f"  [{label}] ESPN fetch error: {e}")
         return {}
+
+
+# ── Smart Checking ───────────────────────────────────────────────
+
+
+def has_ungraded_games(proj_path):
+    """Check if a projection file has any ungraded (non-final) games.
+
+    Returns (has_ungraded: bool, total_games: int, ungraded_count: int)
+    """
+    if not os.path.exists(proj_path):
+        return False, 0, 0
+
+    try:
+        with open(proj_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        games = data.get("games", [])
+        if not games:
+            return False, 0, 0
+
+        ungraded = sum(1 for g in games if g.get("status") not in ("final", "closed"))
+        return ungraded > 0, len(games), ungraded
+
+    except Exception:
+        return True, 0, 0  # err on the side of checking
 
 
 # ── Grading Functions ────────────────────────────────────────────
@@ -303,24 +268,25 @@ def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=Fal
         results_filename: Results JSON filename in repo root
         scores: Dict of {"AWAY@HOME": {away_score, home_score, completed}}
         is_nba: If True, use NBA-specific results merge (preserve props)
+
+    Returns (changed: bool, summary: str)
     """
     proj_path = os.path.join(REPO_ROOT, proj_filename)
     results_path = os.path.join(REPO_ROOT, results_filename)
 
     proj_data = load_json(proj_path)
     if not proj_data or not proj_data.get("games"):
-        print(f"  [{sport_label}] No projection file or no games — skipping")
-        return False
+        return False, f"{sport_label}: no projection file"
 
     games = proj_data["games"]
     game_date = proj_data.get("date", datetime.now().strftime("%Y-%m-%d"))
 
     if not scores:
-        print(f"  [{sport_label}] No scores available — skipping")
-        return False
+        return False, f"{sport_label}: no ESPN scores available"
 
     changed = False
-    graded_count = 0
+    graded_games = []
+    live_updates = 0
 
     for g in games:
         key = f"{g['away_team']}@{g['home_team']}"
@@ -349,9 +315,8 @@ def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=Fal
             g["total_result"] = grade_total(g, away_score, home_score)
             g["ml_result"] = grade_ml(g, away_score, home_score)
 
-            print(f"  [{sport_label}] {key}: {away_score}-{home_score} | "
-                  f"Spread:{g['spread_result']} Total:{g['total_result']} ML:{g['ml_result']}")
-            graded_count += 1
+            matchup = f"{g['away_team']} {away_score} - {g['home_team']} {home_score}"
+            graded_games.append(matchup)
             changed = True
 
         else:
@@ -362,10 +327,8 @@ def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=Fal
                     g["away_score"] = away_score
                     g["home_score"] = home_score
                     g["status"] = "live"
+                    live_updates += 1
                     changed = True
-
-    if graded_count > 0:
-        print(f"  [{sport_label}] Graded {graded_count} games")
 
     if changed:
         proj_data["updated"] = datetime.now().isoformat(timespec="seconds")
@@ -376,12 +339,28 @@ def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=Fal
         else:
             update_results(sport_label, proj_data, results_path)
 
-    live_count = sum(1 for g in games if g.get("status") == "live")
+    # Build summary
     final_count = sum(1 for g in games if g.get("status") == "final")
+    live_count = sum(1 for g in games if g.get("status") == "live")
     sched_count = sum(1 for g in games if g.get("status") not in ("live", "final"))
-    print(f"  [{sport_label}] Status: {sched_count} scheduled, {live_count} live, {final_count} final")
 
-    return changed
+    parts = []
+    if graded_games:
+        parts.append(f"{len(graded_games)} graded ({', '.join(graded_games)})")
+    if live_updates:
+        parts.append(f"{live_updates} live score updates")
+    if not parts:
+        if final_count == len(games):
+            parts.append("all games already graded")
+        elif sched_count == len(games):
+            parts.append("all games still scheduled")
+        else:
+            parts.append(f"{live_count} live, {sched_count} scheduled — no score changes")
+
+    summary = f"{sport_label}: {'; '.join(parts)} [{final_count}F/{live_count}L/{sched_count}S]"
+    print(f"  {summary}")
+
+    return changed, summary
 
 
 def update_results(sport_label, proj_data, results_path):
@@ -474,7 +453,6 @@ def update_results(sport_label, proj_data, results_path):
     results["updated"] = datetime.now().isoformat(timespec="seconds")
 
     save_json(results_path, results)
-    print(f"  [{sport_label}] Results: Spread {sw}-{sl}, Total {tw}-{tl}, ML {mw}-{ml_l}, Best Bets {bw}-{bl}")
 
 
 def update_nba_results(proj_data, results_path):
@@ -605,51 +583,106 @@ def update_nba_results(proj_data, results_path):
 
     save_json(results_path, results)
 
-    sw, sl = all_time["spreads"]["wins"], all_time["spreads"]["losses"]
-    tw, tl = all_time["totals"]["wins"], all_time["totals"]["losses"]
-    mw, ml_l = all_time["moneylines"]["wins"], all_time["moneylines"]["losses"]
-    print(f"  [NBA] Results updated (game picks merged, props preserved)")
-
 
 # ── Entry Point ──────────────────────────────────────────────────
 
 
+SPORT_CONFIG = [
+    {
+        "label": "NBA",
+        "proj_file": "game_projections.json",
+        "results_file": "results.json",
+        "is_nba": True,
+    },
+    {
+        "label": "NHL",
+        "proj_file": "nhl_game_projections.json",
+        "results_file": "nhl_results.json",
+        "is_nba": False,
+    },
+    {
+        "label": "NCAAB",
+        "proj_file": "ncaab_projections.json",
+        "results_file": "ncaab_results.json",
+        "is_nba": False,
+    },
+]
+
+
 def main():
     print(f"\n{'=' * 60}")
-    print(f"  Score Check & Auto-Grade — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"  Score Check & Auto-Grade — {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}")
+    print(f"  Source: ESPN (free, 0 Odds API calls)")
     print(f"{'=' * 60}\n")
-
-    api_key = os.environ.get("ODDS_API_KEY", "")
-    if not api_key:
-        print("  WARNING: No ODDS_API_KEY set — NBA/NHL scores will be skipped")
-
-    # Fetch scores (2 Odds API calls + free ESPN)
-    print("Fetching scores...")
-    nba_scores = fetch_nba_scores(api_key)
-    nhl_scores = fetch_nhl_scores(api_key)
 
     today = datetime.now().strftime("%Y-%m-%d")
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-    ncaab_scores = {}
-    ncaab_scores.update(fetch_ncaab_scores(yesterday))
-    ncaab_scores.update(fetch_ncaab_scores(today))
 
-    # Grade each sport
+    # ── Phase 1: Check which sports need grading ──
+    print("Checking for ungraded games...")
+    sports_to_check = []
+    for cfg in SPORT_CONFIG:
+        proj_path = os.path.join(REPO_ROOT, cfg["proj_file"])
+        has_ungraded, total, ungraded = has_ungraded_games(proj_path)
+        if has_ungraded:
+            sports_to_check.append(cfg)
+            print(f"  {cfg['label']}: {ungraded}/{total} ungraded — will check")
+        else:
+            if total == 0:
+                print(f"  {cfg['label']}: no games today — skipping")
+            else:
+                print(f"  {cfg['label']}: all {total} games graded — skipping")
+
+    if not sports_to_check:
+        print(f"\n{'=' * 60}")
+        print(f"  SUMMARY: All games graded across all sports. Nothing to do.")
+        print(f"{'=' * 60}")
+        return 0
+
+    # ── Phase 2: Fetch scores from ESPN (only for sports that need it) ──
+    print(f"\nFetching ESPN scores for {len(sports_to_check)} sport(s)...")
+    score_map = {}
+    for cfg in sports_to_check:
+        sport = cfg["label"]
+        scores = {}
+        if sport == "NCAAB":
+            # NCAAB games can span yesterday (late games) and today
+            scores.update(fetch_espn_scores("NCAAB", yesterday))
+            scores.update(fetch_espn_scores("NCAAB", today))
+        else:
+            # NBA/NHL — today's scoreboard includes games that started today
+            scores.update(fetch_espn_scores(sport, today))
+            # Also check yesterday for late-night games not yet graded
+            scores.update(fetch_espn_scores(sport, yesterday))
+        score_map[sport] = scores
+
+    # ── Phase 3: Grade ──
     print("\nGrading...")
     any_changes = False
-    any_changes |= grade_sport("NBA", "game_projections.json", "results.json",
-                               nba_scores, is_nba=True)
-    any_changes |= grade_sport("NHL", "nhl_game_projections.json", "nhl_results.json",
-                               nhl_scores)
-    any_changes |= grade_sport("NCAAB", "ncaab_projections.json", "ncaab_results.json",
-                               ncaab_scores)
+    summaries = []
+    for cfg in sports_to_check:
+        sport = cfg["label"]
+        changed, summary = grade_sport(
+            sport, cfg["proj_file"], cfg["results_file"],
+            score_map.get(sport, {}), is_nba=cfg["is_nba"]
+        )
+        any_changes |= changed
+        summaries.append(summary)
 
-    if any_changes:
-        print(f"\nDone — files updated.")
-    else:
-        print(f"\nDone — no changes.")
+    # Add skipped sports to summary
+    checked_labels = {cfg["label"] for cfg in sports_to_check}
+    for cfg in SPORT_CONFIG:
+        if cfg["label"] not in checked_labels:
+            summaries.append(f"{cfg['label']}: skipped (all graded)")
 
-    return 0 if any_changes else 0
+    # ── Summary ──
+    print(f"\n{'=' * 60}")
+    print(f"  SUMMARY {'(files updated)' if any_changes else '(no changes)'}")
+    for s in summaries:
+        print(f"    {s}")
+    print(f"{'=' * 60}")
+
+    return 0
 
 
 if __name__ == "__main__":
