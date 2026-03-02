@@ -692,6 +692,11 @@
     .rec-risk-dot.low { background: var(--profit); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
     .rec-risk-dot.med { background: var(--warning); box-shadow: 0 0 6px rgba(245,158,11,0.4); }
     .rec-risk-dot.high { background: var(--loss); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+    .rec-time-badge {
+      font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .rec-time-badge.soon { background: var(--warning-soft); color: var(--warning); }
     .rec-lockin-btn {
       padding: 6px 14px; border-radius: var(--radius-sm);
       border: 1px solid var(--accent); background: transparent;
@@ -758,6 +763,99 @@
       .rec-summary { gap: 10px; }
       .rec-summary-value { font-size: 12px; }
     }
+
+    /* ── Bet Modal ── */
+    .bet-modal-backdrop {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); z-index: 99999;
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeIn 0.15s ease-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .bet-modal {
+      background: #111827; border: 1px solid rgba(148,163,184,0.12);
+      border-top: 3px solid var(--accent); border-radius: var(--radius-lg);
+      max-width: 340px; width: 90%; padding: 24px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+      animation: fadeInUp 0.2s ease-out;
+    }
+    .bet-modal-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .bet-modal-pick { font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px; }
+    .bet-modal-field { margin-bottom: 12px; }
+    .bet-modal-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 4px;
+    }
+    .bet-modal-input {
+      width: 100%; padding: 8px 10px; background: #0c1220;
+      border: 1px solid rgba(148,163,184,0.12); border-radius: var(--radius-sm);
+      color: var(--text-primary); font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    .bet-modal-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,212,255,0.15); }
+    .bet-modal-input.stake-input { font-size: 18px; font-weight: 600; }
+    .bet-modal-select {
+      width: 100%; padding: 8px 10px; background: #0c1220;
+      border: 1px solid rgba(148,163,184,0.12); border-radius: var(--radius-sm);
+      color: var(--text-primary); font-family: inherit; font-size: 13px;
+      outline: none; cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .bet-modal-select:focus { border-color: var(--accent); }
+    .bet-modal-hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .bet-modal-textarea {
+      width: 100%; padding: 8px 10px; background: #0c1220;
+      border: 1px solid rgba(148,163,184,0.12); border-radius: var(--radius-sm);
+      color: var(--text-primary); font-family: inherit; font-size: 13px;
+      outline: none; resize: vertical; min-height: 40px; transition: border-color 0.2s;
+    }
+    .bet-modal-textarea:focus { border-color: var(--accent); }
+    .bet-modal-row { display: flex; gap: 10px; }
+    .bet-modal-row .bet-modal-field { flex: 1; }
+    .bet-modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .bet-modal-confirm {
+      flex: 1; padding: 10px 0; border-radius: var(--radius-sm); border: none;
+      background: #06b6d4; color: #fff; font-family: inherit;
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .bet-modal-confirm:hover { background: #08c9e8; }
+    .bet-modal-cancel {
+      flex: 1; padding: 10px 0; border-radius: var(--radius-sm);
+      border: 1px solid rgba(148,163,184,0.15); background: transparent;
+      color: var(--text-secondary); font-family: inherit;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .bet-modal-cancel:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+    /* ── Delete / Edit buttons ── */
+    .pick-item { position: relative; }
+    .pick-delete {
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 20px; height: 20px; border-radius: 4px; border: none;
+      background: none; color: var(--text-muted); font-size: 16px; line-height: 1;
+      cursor: pointer; opacity: 0; transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pick-item:hover .pick-delete { opacity: 1; }
+    .pick-delete:hover { color: var(--loss); background: var(--loss-soft); }
+
+    .cal-bet-row { position: relative; }
+    .cal-bet-actions {
+      display: flex; gap: 4px; flex-shrink: 0; opacity: 0; transition: opacity 0.15s;
+    }
+    .cal-bet-row:hover .cal-bet-actions { opacity: 1; }
+    .cal-bet-edit, .cal-bet-delete {
+      width: 22px; height: 22px; border-radius: 4px; border: none;
+      background: none; color: var(--text-muted); font-size: 14px; line-height: 1;
+      cursor: pointer; transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cal-bet-edit:hover { color: var(--accent); background: var(--accent-soft); }
+    .cal-bet-delete:hover { color: var(--loss); background: var(--loss-soft); }
+
+    .rec-lockin-btn.locked { cursor: pointer; }
+    .rec-lockin-btn.locked:hover { background: var(--loss-soft); border-color: var(--loss); color: var(--loss); }
   </style>
 </head>
 <body>
@@ -1049,6 +1147,50 @@
 
   </main>
 
+  <!-- Bet Modal -->
+  <div class="bet-modal-backdrop" id="bet-modal-backdrop" style="display:none" onclick="closeBetModal(event)">
+    <div class="bet-modal" onclick="event.stopPropagation()">
+      <div class="bet-modal-title" id="bet-modal-title">Confirm Bet</div>
+      <div class="bet-modal-pick" id="bet-modal-pick"></div>
+      <div class="bet-modal-row">
+        <div class="bet-modal-field">
+          <div class="bet-modal-label">Stake ($)</div>
+          <input type="text" class="bet-modal-input stake-input" id="bet-modal-stake" inputmode="decimal">
+          <div class="bet-modal-hint" id="bet-modal-kelly-hint"></div>
+        </div>
+        <div class="bet-modal-field">
+          <div class="bet-modal-label">Units</div>
+          <input type="text" class="bet-modal-input" id="bet-modal-units" inputmode="decimal">
+        </div>
+      </div>
+      <div class="bet-modal-field">
+        <div class="bet-modal-label">Odds</div>
+        <input type="text" class="bet-modal-input" id="bet-modal-odds" inputmode="numeric">
+      </div>
+      <div class="bet-modal-field">
+        <div class="bet-modal-label">Book</div>
+        <select class="bet-modal-select" id="bet-modal-book">
+          <option value="">Select book...</option>
+          <option value="DraftKings">DraftKings</option>
+          <option value="FanDuel">FanDuel</option>
+          <option value="BetMGM">BetMGM</option>
+          <option value="Caesars">Caesars</option>
+          <option value="bet365">bet365</option>
+          <option value="PointsBet">PointsBet</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="bet-modal-field">
+        <div class="bet-modal-label">Notes (optional)</div>
+        <textarea class="bet-modal-textarea" id="bet-modal-notes" rows="2" placeholder="Any notes..."></textarea>
+      </div>
+      <div class="bet-modal-actions">
+        <button class="bet-modal-confirm" id="bet-modal-confirm-btn">Confirm Bet</button>
+        <button class="bet-modal-cancel" onclick="closeBetModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Firebase SDK + shared auth (same as dashboard.html) -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
@@ -1135,6 +1277,7 @@
       var now = new Date();
       var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
       var candidates = [];
+      var totalGamesInData = 0;
 
       function getModelWinRate(sport, type) {
         if (!modelStats) return 50;
@@ -1178,9 +1321,14 @@
       // Helper to extract game candidates from any sport's projection data
       function extractGameCandidates(data, sport) {
         if (!data || data.date !== todayStr || !data.games) return;
+        totalGamesInData += data.games.length;
         var hasOddsData = data.games.length > 0 && !!data.games[0].odds;
         for (var i = 0; i < data.games.length; i++) {
           var g = data.games[i];
+          // Skip games that have started or finished
+          var gStatus = (g.status || '').toLowerCase();
+          if (gStatus === 'final' || gStatus === 'live' || gStatus === 'in_progress') continue;
+          if (g.commence_time && new Date(g.commence_time) < now) continue;
           var matchup = (g.away_team || '') + ' @ ' + (g.home_team || '');
           var edgeData = g.edge || {};
           var types = ['spread', 'total', 'moneyline'];
@@ -1212,6 +1360,7 @@
               candidates.push({ sport: sport, type: type, game: matchup,
                 pick: pick, line: line, odds: odds, confidence: conf, ev: ev,
                 player: null, prop_type: null, hasRealOdds: hasRealOdds,
+                commenceTime: g.commence_time || null,
                 spreadSide: spreadSide,
                 totalDir: type === 'total' ? (g.total_pick || '') : '',
                 mlSide: type === 'moneyline' ? (g.ml_pick || '') : '' });
@@ -1226,8 +1375,11 @@
 
       // NBA props
       if (propsJsonData && propsJsonData.date === todayStr && propsJsonData.projections) {
+        totalGamesInData += propsJsonData.projections.length;
         for (var i = 0; i < propsJsonData.projections.length; i++) {
           var p = propsJsonData.projections[i];
+          // Skip props whose game has already started
+          if (p.commence_time && new Date(p.commence_time) < now) continue;
           var conf = parseFloat(p.confidence) || 0;
           if (conf >= confThreshold) {
             var propOdds = parseFloat(p.market_odds) || -110;
@@ -1237,6 +1389,7 @@
               pick: (p.direction || 'OVER') + ' ' + p.line,
               line: p.line || '', odds: propOdds, confidence: conf, ev: ev,
               player: p.player || '', prop_type: p.prop || p.market || '',
+              commenceTime: p.commence_time || null,
               spreadSide: '', totalDir: '', mlSide: '' });
           }
         }
@@ -1392,7 +1545,8 @@
 
       return { picks: picks, totalStake: totalStake, projReturn: projReturn,
         bankrollPct: bankroll > 0 ? (totalStake / bankroll * 100) : 0,
-        hasProfile: hasProfile, unitSize: unitSize, totalCandidates: totalCandidates };
+        hasProfile: hasProfile, unitSize: unitSize, totalCandidates: totalCandidates,
+        allGamesStarted: totalGamesInData > 0 && candidates.length === 0 };
     }
 
     function renderRecommendations() {
@@ -1428,7 +1582,10 @@
       }
 
       if (result.picks.length === 0) {
-        list.innerHTML = '<div class="rec-empty">No picks meet your confidence threshold today. Check back closer to game time for updated projections.</div>';
+        var msg = result.allGamesStarted
+          ? 'All of today\'s games have started or finished. Check back tomorrow for new recommendations.'
+          : 'No picks meet your confidence threshold today. Check back closer to game time for updated projections.';
+        list.innerHTML = '<div class="rec-empty">' + msg + '</div>';
         summary.innerHTML = '';
         document.getElementById('rec-pick-count').textContent = '0 picks';
         document.getElementById('rec-total-stake').textContent = '';
@@ -1454,12 +1611,18 @@
         var betId = buildRecBetId(p);
         var isLocked = existingBets.some(function(b) { return b.id === betId; });
         var reasonEscaped = (p.reason || '').replace(/"/g, '&quot;');
+        var timeBadge = '';
+        if (p.commenceTime) {
+          var minsUntil = (new Date(p.commenceTime) - now) / 60000;
+          if (minsUntil <= 30 && minsUntil > 0) timeBadge = '<span class="rec-time-badge soon">Starting soon</span>';
+        }
 
         html += '<div class="rec-bet-card ' + confClass + '">';
         html += '<div class="rec-bet-top"><div class="rec-bet-top-left">';
         html += '<span class="rec-rank">#' + (i + 1) + '</span>';
         html += '<span class="model-badge ' + sportBadge + '">' + sportLabel + '</span>';
-        html += '<span class="rec-risk-dot ' + riskClass + '" title="Risk: ' + riskClass + '"></span></div>';
+        html += '<span class="rec-risk-dot ' + riskClass + '" title="Risk: ' + riskClass + '"></span>';
+        html += timeBadge + '</div>';
         html += '<div class="rec-edge">+' + (p.edge * 100).toFixed(1) + '% edge</div></div>';
         html += '<div class="rec-bet-pick">' + matchup;
         html += ' <span class="rec-why-tip" data-tip="' + reasonEscaped + '">Why?</span></div>';
@@ -1469,7 +1632,7 @@
         html += '<div class="rec-conf-bar"><div class="rec-conf-bar-fill ' + barClass + '" style="width:' + Math.min(100, p.confidence) + '%"></div></div></div>';
         html += '<div class="rec-stake"><div class="rec-stake-label">Stake</div>$' + p.stake + ' (' + p.units.toFixed(1) + 'u)</div>';
         if (isLocked) {
-          html += '<button class="rec-lockin-btn locked" disabled>&#10003; Locked</button>';
+          html += '<button class="rec-lockin-btn locked" onclick="unlockBet(' + i + ',\'' + betId + '\')">&#10003; Locked</button>';
         } else {
           html += '<button class="rec-lockin-btn" onclick="lockInBet(' + i + ')">Lock In</button>';
         }
@@ -1489,40 +1652,52 @@
     function lockInBet(idx) {
       if (!lastRecommendations || !lastRecommendations.picks[idx]) return;
       var p = lastRecommendations.picks[idx];
-      var now = new Date();
-      var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
-      var bet = {
-        id: buildRecBetId(p),
-        date: todayStr,
-        sport: p.sport === 'props' ? 'nba' : p.sport,
-        type: p.type,
-        player: p.player || null,
-        game: p.game || '',
-        prop_type: p.prop_type || null,
-        pick: p.pick,
-        line: p.line || null,
+      var unitSize = getUnitSize();
+      var matchup = p.type === 'prop' ? (p.player + ' ' + p.prop_type) : p.game;
+      var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
+      showBetModal({
+        title: 'Confirm Bet \u2014 ' + matchup,
+        pickDesc: p.pick + ' (' + oddsStr + ')',
+        suggestedStake: p.stake,
+        suggestedUnits: p.units.toFixed(2),
         odds: String(p.odds),
-        units: p.units,
-        status: 'pending',
-        source: 'recommended_bets',
-        model_confidence: p.confidence,
-        locked_at: now.toISOString()
-      };
-      var bets = getTrackedBets();
-      var exists = bets.some(function(b) { return b.id === bet.id; });
-      if (!exists) {
-        bets.push(bet);
-        localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
-      }
-      var btns = document.querySelectorAll('.rec-lockin-btn');
-      if (btns[idx]) {
-        btns[idx].innerHTML = '&#10003; Locked';
-        btns[idx].classList.add('locked');
-        btns[idx].disabled = true;
-      }
-      buildPicks();
-      renderBettingCalendar();
-      renderCalendarSummary();
+        book: '',
+        notes: '',
+        kellyHint: 'Suggested: $' + p.stake + ' (Half Kelly)',
+        isEdit: false
+      }, function(result) {
+        var now = new Date();
+        var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+        var bet = {
+          id: buildRecBetId(p),
+          date: todayStr,
+          sport: p.sport === 'props' ? 'nba' : p.sport,
+          type: p.type,
+          player: p.player || null,
+          game: p.game || '',
+          prop_type: p.prop_type || null,
+          pick: p.pick,
+          line: p.line || null,
+          odds: result.odds || String(p.odds),
+          units: result.units,
+          book: result.book || '',
+          notes: result.notes || '',
+          status: 'pending',
+          source: 'recommended_bets',
+          model_confidence: p.confidence,
+          locked_at: now.toISOString()
+        };
+        var bets = getTrackedBets();
+        var exists = bets.some(function(b) { return b.id === bet.id; });
+        if (!exists) {
+          bets.push(bet);
+          localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+        }
+        buildPicks();
+        renderBettingCalendar();
+        renderCalendarSummary();
+        renderRecommendations();
+      });
     }
 
     // ── Auto-Grading ──
@@ -1680,11 +1855,18 @@
         if (bet.status === 'win') { profStr = '+$' + profDollars.toFixed(2); profCls = 'profit'; }
         else if (bet.status === 'loss') { profStr = '-$' + Math.abs(profDollars).toFixed(2); profCls = 'loss'; }
         else { profStr = '\u2014'; }
+        var betActions = '';
+        if (bet.id) {
+          betActions = '<span class="cal-bet-actions">' +
+            '<button class="cal-bet-edit" onclick="event.stopPropagation();editBet(\'' + bet.id.replace(/'/g, "\\'") + '\')" title="Edit">&#9998;</button>' +
+            '<button class="cal-bet-delete" onclick="event.stopPropagation();deleteBet(\'' + bet.id.replace(/'/g, "\\'") + '\')" title="Remove">&times;</button>' +
+            '</span>';
+        }
         h += '<div class="cal-bet-row"><span class="cal-bet-status ' + sc + '">' + sl + '</span>';
         h += '<span class="cal-bet-sport ' + sp + '">' + spLabel + '</span>';
         h += '<div class="cal-bet-info"><div class="cal-bet-matchup">' + matchup + '</div><div class="cal-bet-pick">' + pick + '</div></div>';
         h += '<span class="cal-bet-odds">' + oddsStr + '</span>';
-        h += '<span class="cal-bet-profit ' + profCls + '">' + profStr + '</span></div>';
+        h += '<span class="cal-bet-profit ' + profCls + '">' + profStr + '</span>' + betActions + '</div>';
       }
       var el = document.getElementById('cal-detail');
       el.style.display = 'none';
@@ -1981,6 +2163,126 @@
       return { w: w, l: l };
     }
 
+    // ── Bet Modal ──
+    var _betModalCallback = null;
+    function showBetModal(opts, onConfirm) {
+      var backdrop = document.getElementById('bet-modal-backdrop');
+      document.getElementById('bet-modal-title').textContent = opts.title || 'Confirm Bet';
+      document.getElementById('bet-modal-pick').textContent = opts.pickDesc || '';
+      var stakeEl = document.getElementById('bet-modal-stake');
+      var unitsEl = document.getElementById('bet-modal-units');
+      var oddsEl = document.getElementById('bet-modal-odds');
+      var bookEl = document.getElementById('bet-modal-book');
+      var notesEl = document.getElementById('bet-modal-notes');
+      var hintEl = document.getElementById('bet-modal-kelly-hint');
+      var confirmBtn = document.getElementById('bet-modal-confirm-btn');
+      stakeEl.value = opts.suggestedStake || '';
+      unitsEl.value = opts.suggestedUnits || '';
+      oddsEl.value = opts.odds || '';
+      bookEl.value = opts.book || '';
+      notesEl.value = opts.notes || '';
+      hintEl.textContent = opts.kellyHint || '';
+      confirmBtn.textContent = opts.isEdit ? 'Save Changes' : 'Confirm Bet';
+      var unitSize = getUnitSize();
+      stakeEl.oninput = function() {
+        var v = parseFloat(stakeEl.value);
+        if (!isNaN(v) && unitSize > 0) unitsEl.value = (v / unitSize).toFixed(2);
+      };
+      unitsEl.oninput = function() {
+        var v = parseFloat(unitsEl.value);
+        if (!isNaN(v)) stakeEl.value = (v * unitSize).toFixed(0);
+      };
+      _betModalCallback = onConfirm;
+      confirmBtn.onclick = function() {
+        var result = {
+          stake: parseFloat(stakeEl.value) || 0,
+          units: parseFloat(unitsEl.value) || 1,
+          odds: oddsEl.value.trim(),
+          book: bookEl.value,
+          notes: notesEl.value.trim()
+        };
+        backdrop.style.display = 'none';
+        _betModalCallback = null;
+        onConfirm(result);
+      };
+      backdrop.style.display = '';
+      stakeEl.focus();
+      stakeEl.select();
+    }
+    function closeBetModal(e) {
+      if (e && e.target !== document.getElementById('bet-modal-backdrop')) return;
+      document.getElementById('bet-modal-backdrop').style.display = 'none';
+      _betModalCallback = null;
+    }
+
+    // ── Delete / Edit helpers ──
+    function deleteBet(betId) {
+      var bets = getTrackedBets();
+      var bet = bets.find(function(b) { return b.id === betId; });
+      if (!bet) return;
+      var label = bet.game || ((bet.player || '') + ' ' + (bet.prop_type || ''));
+      if (!confirm('Remove ' + label + '?')) return;
+      removeBetById(betId);
+    }
+    function removeBetById(betId) {
+      var bets = getTrackedBets();
+      bets = bets.filter(function(b) { return b.id !== betId; });
+      localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+      buildPicks();
+      renderBettingCalendar();
+      renderCalendarSummary();
+      // Re-open calendar day if detail panel is visible
+      var detailEl = document.getElementById('cal-detail');
+      if (detailEl && detailEl.style.display !== 'none') {
+        var selDay = document.querySelector('.cal-day.cal-selected');
+        if (selDay) {
+          var ds = selDay.getAttribute('data-date');
+          var byDate = getBetsByDate();
+          if (byDate[ds]) openCalDay(ds);
+          else closeCalDetail();
+        }
+      }
+      renderRecommendations();
+    }
+    function editBet(betId) {
+      var bets = getTrackedBets();
+      var bet = bets.find(function(b) { return b.id === betId; });
+      if (!bet) return;
+      var unitSize = getUnitSize();
+      var label = bet.game || ((bet.player || '') + ' ' + (bet.prop_type || ''));
+      var units = parseFloat(bet.units) || 1;
+      showBetModal({
+        title: 'Edit Bet \u2014 ' + label,
+        pickDesc: bet.pick || '',
+        suggestedStake: (units * unitSize).toFixed(0),
+        suggestedUnits: units.toFixed(2),
+        odds: bet.odds || '',
+        book: bet.book || '',
+        notes: bet.notes || '',
+        kellyHint: '',
+        isEdit: true
+      }, function(result) {
+        bet.units = result.units;
+        bet.odds = result.odds;
+        bet.book = result.book;
+        bet.notes = result.notes;
+        localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+        buildPicks();
+        renderBettingCalendar();
+        renderCalendarSummary();
+        // Re-open calendar day if detail panel is visible
+        var detailEl = document.getElementById('cal-detail');
+        if (detailEl && detailEl.style.display !== 'none') {
+          var selDay = document.querySelector('.cal-day.cal-selected');
+          if (selDay) openCalDay(selDay.getAttribute('data-date'));
+        }
+      });
+    }
+    function unlockBet(idx, betId) {
+      if (!confirm('Remove this bet?')) return;
+      removeBetById(betId);
+    }
+
     function buildPicks() {
       var bets = getTrackedBets();
       bets.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
@@ -2016,10 +2318,11 @@
         } else {
           pnlHtml = '<div class="stake-pnl pending">pending</div>';
         }
+        var delBtn = b.id ? '<button class="pick-delete" onclick="event.stopPropagation();deleteBet(\'' + b.id.replace(/'/g, "\\'") + '\')" title="Remove bet">&times;</button>' : '';
         return '<div class="pick-item">' +
           '<span class="pick-badge ' + cls + '">' + badge + '</span>' +
           '<div class="pick-info"><div class="pick-matchup">' + matchup + '</div><div class="pick-meta">' + pickDetail + ' \u00B7 ' + meta + '</div></div>' +
-          '<div class="pick-stake"><div class="stake-amt">' + stake + '</div>' + pnlHtml + '</div></div>';
+          '<div class="pick-stake"><div class="stake-amt">' + stake + '</div>' + pnlHtml + '</div>' + delBtn + '</div>';
       }).join('');
     }
   </script>
