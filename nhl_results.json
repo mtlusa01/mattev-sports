@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-01T23:33:06",
+  "updated": "2026-03-01T21:05:32",
   "allTime": {
     "spreads": {
-      "wins": 23,
-      "losses": 15,
+      "wins": 19,
+      "losses": 9,
       "pushes": 0,
-      "pct": 60.5,
-      "roi": 15.6
+      "pct": 67.9,
+      "roi": 29.5
     },
     "totals": {
-      "wins": 20,
-      "losses": 17,
+      "wins": 14,
+      "losses": 13,
       "pushes": 0,
-      "pct": 54.1,
-      "roi": 3.2
+      "pct": 51.9,
+      "roi": -1.0
     },
     "moneylines": {
-      "wins": 27,
-      "losses": 11,
+      "wins": 21,
+      "losses": 7,
       "pushes": 0,
-      "pct": 71.1,
-      "roi": 35.6
+      "pct": 75.0,
+      "roi": 43.2
     },
     "best_bets": {
       "wins": 15,
-      "losses": 6,
+      "losses": 5,
       "pushes": 0,
-      "pct": 71.4,
-      "roi": 36.4
+      "pct": 75.0,
+      "roi": 43.2
     }
   },
   "days": [
     {
       "date": "2026-03-01",
       "spreads": {
-        "wins": 1,
-        "losses": 0,
+        "wins": 2,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
+        "record": "2-2",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 0,
-        "losses": 1,
+        "wins": 1,
+        "losses": 3,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-3",
+        "pct": 25.0
       },
       "moneylines": {
-        "wins": 1,
-        "losses": 0,
+        "wins": 2,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
+        "record": "2-2",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 2,
-        "losses": 1,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -69,7 +69,7 @@
           "pick": "PIT +1.5",
           "result": "0-5",
           "hit": true,
-          "confidence": 55.8,
+          "confidence": 57.9,
           "best_bet": true
         },
         {
@@ -79,8 +79,7 @@
           "pick": "OVER 6.5",
           "result": "0-5",
           "hit": false,
-          "confidence": 50.9,
-          "best_bet": true
+          "confidence": 52.4
         },
         {
           "date": "2026-03-01",
@@ -89,420 +88,94 @@
           "pick": "PIT",
           "result": "0-5",
           "hit": true,
-          "confidence": 54.3,
-          "best_bet": true
-        }
-      ]
-    },
-    {
-      "date": "2026-02-28",
-      "picks": [
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "PIT @ NYR",
-          "pick": "PIT -1.5",
-          "line": 1.5,
-          "result": "2-3",
-          "hit": false,
-          "confidence": 51.3
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "PIT @ NYR",
-          "pick": "UNDER 5.5",
-          "result": "2-3",
-          "hit": true,
-          "confidence": 53.9
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "PIT @ NYR",
-          "pick": "PIT",
-          "result": "2-3",
-          "hit": false,
-          "confidence": 63.8,
-          "best_bet": true
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "BOS @ PHI",
-          "pick": "BOS +1.5",
-          "line": 1.5,
-          "result": "1-3",
-          "hit": false,
-          "confidence": 55.8
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "BOS @ PHI",
-          "pick": "OVER 5.5",
-          "result": "1-3",
-          "hit": false,
-          "confidence": 52.9
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "BOS @ PHI",
-          "pick": "BOS",
-          "result": "1-3",
-          "hit": false,
-          "confidence": 54.2,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "EDM @ SJS",
-          "pick": "SJS +1.5",
-          "line": 1.5,
-          "result": "4-5",
-          "hit": true,
-          "confidence": 58.0
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "EDM @ SJS",
-          "pick": "OVER 6.5",
-          "result": "4-5",
-          "hit": true,
-          "confidence": 52.1
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "EDM @ SJS",
-          "pick": "SJS",
-          "result": "4-5",
-          "hit": true,
-          "confidence": 51.3,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "NJD @ STL",
-          "pick": "STL +1.5",
-          "line": 1.5,
-          "result": "3-1",
-          "hit": false,
-          "confidence": 56.8
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "NJD @ STL",
-          "pick": "OVER 5.5",
-          "result": "3-1",
-          "hit": false,
-          "confidence": 52.8
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "NJD @ STL",
-          "pick": "NJD",
-          "result": "3-1",
-          "hit": true,
-          "confidence": 53.0,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "NYI @ CBJ",
-          "pick": "NYI +1.5",
-          "line": 1.5,
-          "result": "4-3",
-          "hit": true,
-          "confidence": 56.4
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "NYI @ CBJ",
-          "pick": "UNDER 6.5",
-          "result": "4-3",
-          "hit": false,
-          "confidence": 52.6
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "NYI @ CBJ",
-          "pick": "CBJ",
-          "result": "4-3",
-          "hit": false,
-          "confidence": 53.5,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "CHI @ COL",
-          "pick": "CHI +1.5",
-          "line": 1.5,
-          "result": "1-3",
-          "hit": false,
-          "confidence": 52.3
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "CHI @ COL",
-          "pick": "OVER 6.5",
-          "result": "1-3",
-          "hit": false,
-          "confidence": 51.5
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "CHI @ COL",
-          "pick": "COL",
-          "result": "1-3",
-          "hit": true,
-          "confidence": 59.0,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "OTT @ TOR",
-          "pick": "TOR +1.5",
-          "line": 1.5,
-          "result": "5-2",
-          "hit": false,
-          "confidence": 59.0
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "OTT @ TOR",
-          "pick": "OVER 5.5",
-          "result": "5-2",
-          "hit": true,
-          "confidence": 59.0
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "OTT @ TOR",
-          "pick": "OTT",
-          "result": "5-2",
-          "hit": true,
-          "confidence": 50.0,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "WSH @ MTL",
-          "pick": "WSH +1.5",
-          "line": 1.5,
-          "result": "2-6",
-          "hit": false,
           "confidence": 51.4
         },
         {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "WSH @ MTL",
-          "pick": "OVER 5.5",
-          "result": "2-6",
-          "hit": true,
-          "confidence": 52
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "CHI @ UTA",
+          "pick": "UTA -1.5",
+          "result": "4-0",
+          "hit": false,
+          "confidence": 51.6
         },
         {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "WSH @ MTL",
-          "pick": "WSH",
-          "result": "2-6",
+          "date": "2026-03-01",
+          "type": "total",
+          "game": "CHI @ UTA",
+          "pick": "OVER 6.5",
+          "result": "4-0",
           "hit": false,
-          "confidence": 60.1,
+          "confidence": 51.1
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "CHI @ UTA",
+          "pick": "UTA",
+          "result": "4-0",
+          "hit": false,
+          "confidence": 59.9,
           "best_bet": true
         },
         {
-          "date": "2026-02-28",
+          "date": "2026-03-01",
           "type": "spread",
-          "game": "BUF @ TBL",
-          "pick": "BUF +1.5",
-          "line": 1.5,
-          "result": "6-2",
+          "game": "WPG @ SJS",
+          "pick": "SJS +1.5",
+          "result": "1-2",
           "hit": true,
-          "confidence": 53.4
+          "confidence": 55.1
         },
         {
-          "date": "2026-02-28",
+          "date": "2026-03-01",
           "type": "total",
-          "game": "BUF @ TBL",
-          "pick": "OVER 6.5",
-          "result": "6-2",
+          "game": "WPG @ SJS",
+          "pick": "UNDER 6.5",
+          "result": "1-2",
           "hit": true,
+          "confidence": 57.0,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "ml",
+          "game": "WPG @ SJS",
+          "pick": "SJS",
+          "result": "1-2",
+          "hit": true,
+          "confidence": 55.2,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-01",
+          "type": "spread",
+          "game": "STL @ MIN",
+          "pick": "MIN -1.5",
+          "result": "3-1",
+          "hit": false,
           "confidence": 51.0
         },
         {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "BUF @ TBL",
-          "pick": "TBL",
-          "result": "6-2",
-          "hit": false,
-          "confidence": 57.4,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "DET @ CAR",
-          "pick": "CAR -1.5",
-          "line": 1.5,
-          "result": "2-5",
-          "hit": true,
-          "confidence": 50.4
-        },
-        {
-          "date": "2026-02-28",
+          "date": "2026-03-01",
           "type": "total",
-          "game": "DET @ CAR",
-          "pick": "UNDER 6.5",
-          "result": "2-5",
+          "game": "STL @ MIN",
+          "pick": "OVER 5.5",
+          "result": "3-1",
           "hit": false,
-          "confidence": 52.0
+          "confidence": 51.1
         },
         {
-          "date": "2026-02-28",
+          "date": "2026-03-01",
           "type": "ml",
-          "game": "DET @ CAR",
-          "pick": "CAR",
-          "result": "2-5",
-          "hit": true,
-          "confidence": 61.4,
+          "game": "STL @ MIN",
+          "pick": "MIN",
+          "result": "3-1",
+          "hit": false,
+          "confidence": 60.6,
           "best_bet": true
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "CGY @ LAK",
-          "pick": "CGY +1.5",
-          "line": 1.5,
-          "result": "0-2",
-          "hit": false,
-          "confidence": 57.1
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "CGY @ LAK",
-          "pick": "UNDER 5.5",
-          "result": "0-2",
-          "hit": true,
-          "confidence": 55.3
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "CGY @ LAK",
-          "pick": "CGY",
-          "result": "0-2",
-          "hit": false,
-          "confidence": 52.6,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "NSH @ DAL",
-          "pick": "NSH +1.5",
-          "line": 1.5,
-          "result": "2-3",
-          "hit": true,
-          "confidence": 51.8
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "NSH @ DAL",
-          "pick": "OVER 5.5",
-          "result": "2-3",
-          "hit": false,
-          "confidence": 53.2
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "NSH @ DAL",
-          "pick": "DAL",
-          "result": "2-3",
-          "hit": true,
-          "confidence": 59.6,
-          "best_bet": false
-        },
-        {
-          "date": "2026-02-28",
-          "type": "spread",
-          "game": "VAN @ SEA",
-          "pick": "VAN +1.5",
-          "line": 1.5,
-          "result": "1-5",
-          "hit": false,
-          "confidence": 55.3
-        },
-        {
-          "date": "2026-02-28",
-          "type": "total",
-          "game": "VAN @ SEA",
-          "pick": "OVER 5.5",
-          "result": "1-5",
-          "hit": true,
-          "confidence": 56.6
-        },
-        {
-          "date": "2026-02-28",
-          "type": "ml",
-          "game": "VAN @ SEA",
-          "pick": "SEA",
-          "result": "1-5",
-          "hit": true,
-          "confidence": 54.9,
-          "best_bet": false
         }
-      ],
-      "spreads": {
-        "wins": 5,
-        "losses": 8,
-        "pushes": 0,
-        "record": "5-8",
-        "pct": 38.5
-      },
-      "totals": {
-        "wins": 7,
-        "losses": 6,
-        "pushes": 0,
-        "record": "7-6",
-        "pct": 53.8
-      },
-      "moneylines": {
-        "wins": 7,
-        "losses": 6,
-        "pushes": 0,
-        "record": "7-6",
-        "pct": 53.8
-      },
-      "best_bets": {
-        "wins": 1,
-        "losses": 2,
-        "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
-      }
+      ]
     },
     {
       "date": "2026-02-05",
