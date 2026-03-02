@@ -529,8 +529,22 @@
   }
 
   // ── Section F: System Prompt Builder ──────────────────────────────
+  function getLocalDate(offsetDays) {
+    // Use user's local timezone (defaults to America/New_York)
+    try {
+      var tz = (chatProfile && chatProfile.settings && chatProfile.settings.timezone) || 'America/New_York';
+      var d = new Date();
+      if (offsetDays) d.setDate(d.getDate() + offsetDays);
+      return d.toLocaleDateString('en-CA', { timeZone: tz });
+    } catch (e) {
+      var d = new Date();
+      if (offsetDays) d.setDate(d.getDate() + offsetDays);
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+  }
+
   function buildSystemPrompt() {
-    var today = new Date().toISOString().slice(0, 10);
+    var today = getLocalDate();
     var parts = [];
 
     // Identity
@@ -592,7 +606,7 @@
     // Yesterday's record
     var nbaRes = cachedData.results;
     if (nbaRes && nbaRes.days && nbaRes.days.length) {
-      var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+      var yesterday = getLocalDate(-1);
       var yd = nbaRes.days.find(function (d) { return d.date === yesterday; });
       if (yd) {
         var ydParts = [];
@@ -673,20 +687,38 @@
       }
     }
 
-    // Tracked bets
+    // Tracked bets — include actual bet details so bot knows what user bet on
     try {
       var raw = localStorage.getItem('efe_tracked_bets');
       if (raw) {
         var bets = JSON.parse(raw);
         if (Array.isArray(bets) && bets.length) {
-          var pending = bets.filter(function (b) { return b.result === 'pending' || !b.result; });
-          var wins = bets.filter(function (b) { return b.result === 'win'; });
-          var losses = bets.filter(function (b) { return b.result === 'loss'; });
-          parts.push(
-            '\n## User\'s Tracked Bets\nTotal: ' + bets.length +
-            ' | Pending: ' + pending.length +
-            ' | Won: ' + wins.length + ' | Lost: ' + losses.length
-          );
+          var todaysBets = bets.filter(function (b) { return b.date === today; });
+          var olderBets = bets.filter(function (b) { return b.date !== today; });
+
+          var betLines = [];
+          if (todaysBets.length > 0) {
+            betLines.push('Today\'s bets (' + todaysBets.length + '):');
+            todaysBets.forEach(function (b) {
+              var desc = (b.game || b.matchup || b.player || '???');
+              var pick = b.pick || (b.prop_type ? b.prop_type + ' ' + (b.direction || '') + ' ' + (b.line || '') : '');
+              var stake = b.stake ? '$' + b.stake : (b.units ? b.units + 'u' : '');
+              var odds = b.odds ? '(' + (b.odds > 0 ? '+' : '') + b.odds + ')' : '';
+              var status = b.result || b.status || 'pending';
+              betLines.push('- ' + desc + ' | ' + pick + ' ' + odds + ' ' + stake + ' | ' + status);
+            });
+          } else {
+            betLines.push('No tracked bets for today.');
+          }
+
+          if (olderBets.length > 0) {
+            var ow = olderBets.filter(function (b) { return b.result === 'win'; }).length;
+            var ol = olderBets.filter(function (b) { return b.result === 'loss'; }).length;
+            var op = olderBets.filter(function (b) { return !b.result || b.result === 'pending'; }).length;
+            betLines.push('Older bets: ' + olderBets.length + ' total (' + ow + 'W-' + ol + 'L, ' + op + ' pending)');
+          }
+
+          parts.push('\n## User\'s Tracked Bets\n' + betLines.join('\n'));
         }
       }
     } catch (e) { /* ignore */ }
@@ -696,7 +728,7 @@
 
   // ── Section G: Auto-Insight ───────────────────────────────────────
   function computeAutoInsight() {
-    var today = new Date().toISOString().slice(0, 10);
+    var today = getLocalDate();
     var key = 'ef_chat_insight_date';
     if (localStorage.getItem(key) === today) return null;
     localStorage.setItem(key, today);
@@ -704,7 +736,7 @@
     if (!cachedData) return null;
     var lines = [];
 
-    var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    var yesterday = getLocalDate(-1);
     var totalW = 0, totalL = 0;
     ['results', 'nhl_results', 'ncaab_results'].forEach(function (k) {
       var d = cachedData[k];
@@ -747,7 +779,7 @@
 
   // ── Section H: Rate Limiting ──────────────────────────────────────
   function getRateKey() {
-    return RATE_KEY_PREFIX + new Date().toISOString().slice(0, 10);
+    return RATE_KEY_PREFIX + getLocalDate();
   }
 
   function checkRateLimit() {
@@ -1187,7 +1219,7 @@
 
   // ── Section L: Chat Persistence ───────────────────────────────────
   function getToday() {
-    return new Date().toISOString().slice(0, 10);
+    return getLocalDate();
   }
 
   function getChatCollection() {
