@@ -2970,20 +2970,35 @@
     }
 
     function getGameStatus(g) {
-      // Only trust backend status for "final" — never infer from time
-      if (g.status === 'final') return 'final';
+      // Explicit final from backend
+      if (g.status === 'final' || g.status === 'closed') return 'final';
 
-      // Historical games are always final — they can't be live
+      // Historical games are always final
       const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
       if (gameDate && gameDate < getLocalDateStr()) return 'final';
 
-      if (g.status === 'live') return 'live';
+      // Check for real scores (non-zero)
+      const aw = parseInt(g.away_score) || 0;
+      const hm = parseInt(g.home_score) || 0;
+      const hasScores = aw > 0 || hm > 0;
+
+      // Trust "live" only if there are actual scores
+      if (g.status === 'live' && hasScores) return 'live';
+
+      // Time-based inference from commence_time
       if (!g.commence_time) return 'scheduled';
       const ct = new Date(g.commence_time);
       if (isNaN(ct)) return 'scheduled';
       const hoursSinceStart = (Date.now() - ct) / 3600000;
-      if (hoursSinceStart > 0) return 'live';
-      if (-hoursSinceStart <= 1) return 'soon';
+
+      // Game hasn't started yet
+      if (hoursSinceStart <= 0) {
+        if (-hoursSinceStart <= 1) return 'soon';
+        return 'scheduled';
+      }
+
+      // Game time has passed — if scores exist it's live, otherwise still upcoming
+      if (hasScores) return 'live';
       return 'scheduled';
     }
 
