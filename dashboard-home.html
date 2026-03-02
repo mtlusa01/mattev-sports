@@ -1942,13 +1942,41 @@
     }
 
     // ── Recommended Bets ──
+    // Must match dashboard.html makeBetId format exactly:
+    // parts.map(p => String(p||'').toLowerCase().replace(/\s+/g,'-')).join('_')
+    function makeBetId(date, type, player, team, game, propType, pick, line) {
+      var parts = [date, type];
+      if (type === 'prop') parts.push(player, propType, pick, line);
+      else parts.push(game, type, pick);
+      return parts.map(function(p) { return String(p || '').toLowerCase().replace(/\s+/g, '-'); }).join('_');
+    }
     function buildRecBetId(pick) {
-      var today = new Date();
-      var ds = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+      var ds = getLocalDateStr(new Date());
       if (pick.type === 'prop') {
-        return ds + '_prop_' + (pick.player || '').replace(/\s+/g, '_').toLowerCase() + '_' + (pick.prop_type || '');
+        return makeBetId(ds, 'prop', pick.player, null, null, pick.prop_type, pick.pick, pick.line);
       }
-      return ds + '_' + (pick.type || 'spread') + '_' + (pick.game || '').replace(/\s+/g, '_').toLowerCase();
+      return makeBetId(ds, pick.type || 'spread', null, null, pick.game, null, pick.pick, pick.line);
+    }
+    // Fuzzy fallback: match on date + game + pick text when ID doesn't match
+    function isRecBetTracked(pick, existingBets) {
+      var betId = buildRecBetId(pick);
+      // Exact ID match (covers bets tracked from either dashboard)
+      if (existingBets.some(function(b) { return b.id === betId; })) return true;
+      // Fuzzy match: same date + similar game + same pick
+      var ds = getLocalDateStr(new Date());
+      var pickLower = (pick.pick || '').toLowerCase().replace(/\s+/g, '');
+      var gameLower = (pick.game || '').toLowerCase().replace(/\s+/g, '');
+      return existingBets.some(function(b) {
+        if (b.date !== ds) return false;
+        var bPick = (b.pick || '').toLowerCase().replace(/\s+/g, '');
+        var bGame = (b.game || '').toLowerCase().replace(/\s+/g, '');
+        if (pick.type === 'prop') {
+          var bPlayer = (b.player || '').toLowerCase().replace(/\s+/g, '');
+          var pPlayer = (pick.player || '').toLowerCase().replace(/\s+/g, '');
+          return bPlayer === pPlayer && bPick === pickLower;
+        }
+        return bGame === gameLower && bPick === pickLower;
+      });
     }
 
     function generateRecommendations() {
@@ -2332,7 +2360,7 @@
         var typeLabel = p.type.charAt(0).toUpperCase() + p.type.slice(1);
         var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
         var betId = buildRecBetId(p);
-        var isLocked = existingBets.some(function(b) { return b.id === betId; });
+        var isLocked = isRecBetTracked(p, existingBets);
         if (isLocked) lockedCount++;
         var reasonEscaped = (p.reason || '').replace(/"/g, '&quot;');
         var timeBadge = '';
@@ -2421,7 +2449,7 @@
           locked_at: now.toISOString()
         };
         var bets = getTrackedBets();
-        var exists = bets.some(function(b) { return b.id === bet.id; });
+        var exists = isRecBetTracked(p, bets);
         if (!exists) {
           bets.push(bet);
           BetStorage.saveBets(bets);
@@ -2464,8 +2492,7 @@
       var existingBets = getTrackedBets();
       var locked = 0;
       for (var i = 0; i < lastRecommendations.picks.length; i++) {
-        var betId = buildRecBetId(lastRecommendations.picks[i]);
-        if (existingBets.some(function(b) { return b.id === betId; })) locked++;
+        if (isRecBetTracked(lastRecommendations.picks[i], existingBets)) locked++;
       }
       var text = lastRecommendations.picks.length + ' best from ' + lastRecommendations.totalCandidates + ' analyzed';
       if (locked > 0) text += ' \u00B7 ' + locked + ' locked';
@@ -3126,7 +3153,30 @@
     }
     function unlockBet(idx, betId) {
       if (!confirm('Remove this tracked bet?')) return;
-      removeBetById(betId);
+      // Try exact ID first
+      var bets = getTrackedBets();
+      if (bets.some(function(b) { return b.id === betId; })) {
+        removeBetById(betId);
+        return;
+      }
+      // Fuzzy match: find the stored bet by game + pick
+      var p = lastRecommendations && lastRecommendations.picks[idx];
+      if (!p) return;
+      var ds = getLocalDateStr(new Date());
+      var pickLower = (p.pick || '').toLowerCase().replace(/\s+/g, '');
+      var gameLower = (p.game || '').toLowerCase().replace(/\s+/g, '');
+      var match = bets.find(function(b) {
+        if (b.date !== ds) return false;
+        var bPick = (b.pick || '').toLowerCase().replace(/\s+/g, '');
+        var bGame = (b.game || '').toLowerCase().replace(/\s+/g, '');
+        if (p.type === 'prop') {
+          var bPlayer = (b.player || '').toLowerCase().replace(/\s+/g, '');
+          var pPlayer = (p.player || '').toLowerCase().replace(/\s+/g, '');
+          return bPlayer === pPlayer && bPick === pickLower;
+        }
+        return bGame === gameLower && bPick === pickLower;
+      });
+      if (match) removeBetById(match.id);
     }
 
     function buildPicks() {
