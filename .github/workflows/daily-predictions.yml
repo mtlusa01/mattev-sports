@@ -154,6 +154,11 @@ jobs:
         working-directory: ../ncaab-predictor
         run: python export_projections.py
 
+      - name: Seed results from mattev-sports before grading
+        run: |
+          # Copy existing results so grading accumulates rather than starting fresh
+          [ -f ncaab_results.json ] && cp ncaab_results.json ../ncaab-predictor/ncaab_results.json && echo "Seeded ncaab_results.json" || true
+
       - name: Grade yesterday's NCAAB games
         continue-on-error: true
         working-directory: ../ncaab-predictor
