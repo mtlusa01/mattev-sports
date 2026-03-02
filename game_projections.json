@@ -2,7 +2,7 @@
   "date": "2026-03-01",
   "sport": "NBA",
   "locked_at": "2026-03-01T04:58:25",
-  "updated": "2026-03-01T21:16:41",
+  "updated": "2026-03-02T03:31:01",
   "games": [
     {
       "away_team": "SAS",
@@ -369,7 +369,10 @@
         "confidence": "high"
       },
       "away_score": 125,
-      "home_score": 106
+      "home_score": 106,
+      "spread_result": "L",
+      "total_result": "W",
+      "ml_result": "L"
     },
     {
       "away_team": "POR",
@@ -424,7 +427,10 @@
         "confidence": "medium"
       },
       "away_score": 101,
-      "home_score": 135
+      "home_score": 135,
+      "spread_result": "L",
+      "total_result": "W",
+      "ml_result": "W"
     },
     {
       "away_team": "PHI",
@@ -439,7 +445,7 @@
       "ml_pick": "BOS",
       "ml_conf": 56.5,
       "commence_time": "2026-03-01T23:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -6.4,
@@ -489,7 +495,9 @@
         "edge": 3.5,
         "ev": 12.0,
         "confidence": "low"
-      }
+      },
+      "away_score": 98,
+      "home_score": 105
     },
     {
       "away_team": "DET",
@@ -590,7 +598,10 @@
           "confidence": 69.7,
           "ev": 5.0
         }
-      ]
+      ],
+      "spread_result": "L",
+      "total_result": "L",
+      "ml_result": "L"
     },
     {
       "away_team": "OKC",
@@ -605,7 +616,7 @@
       "ml_pick": "OKC",
       "ml_conf": 63.2,
       "commence_time": "2026-03-02T01:10:00Z",
-      "status": "scheduled",
+      "status": "final",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -8.0,
@@ -665,7 +676,12 @@
         "edge": -5.1,
         "ev": 19.3,
         "confidence": "medium"
-      }
+      },
+      "away_score": 100,
+      "home_score": 87,
+      "spread_result": "W",
+      "total_result": "W",
+      "ml_result": "W"
     },
     {
       "away_team": "NOP",
@@ -680,7 +696,7 @@
       "ml_pick": "LAC",
       "ml_conf": 71.9,
       "commence_time": "2026-03-02T02:10:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -4.8,
@@ -734,7 +750,9 @@
         "edge": 3.1,
         "ev": 10.1,
         "confidence": "low"
-      }
+      },
+      "away_score": 77,
+      "home_score": 79
     },
     {
       "away_team": "SAC",
@@ -749,7 +767,7 @@
       "ml_pick": "LAL",
       "ml_conf": 61.2,
       "commence_time": "2026-03-02T02:40:00Z",
-      "status": "scheduled",
+      "status": "live",
       "locked_at": "2026-03-01T06:56:25Z",
       "injury_impact": {
         "home": -0.4,
@@ -787,7 +805,9 @@
         "edge": 7.4,
         "ev": 35.2,
         "confidence": "high"
-      }
+      },
+      "away_score": 38,
+      "home_score": 57
     }
   ]
 }
