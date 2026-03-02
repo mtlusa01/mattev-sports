@@ -771,13 +771,20 @@
     .rec-bet-card {
       background: var(--bg-card); border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg); padding: 16px; margin-bottom: 10px;
-      border-left: 3px solid var(--text-muted); transition: all 0.25s ease;
+      border-left: 3px solid var(--text-muted); transition: all 0.3s ease;
     }
     .rec-bet-card:hover {
       border-color: var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     }
     .rec-bet-card.high-conf { border-left-color: var(--profit); }
     .rec-bet-card.med-conf { border-left-color: var(--warning); }
+    .rec-bet-card.is-locked {
+      border-left-color: var(--profit); background: rgba(34, 197, 94, 0.05);
+    }
+    .rec-bet-card.is-locked:hover { border-color: var(--profit); }
+    .rec-locked-check {
+      color: var(--profit); font-weight: 700; font-size: 13px; margin-left: 2px;
+    }
     .rec-bet-top {
       display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
     }
@@ -836,8 +843,8 @@
     }
     .rec-lockin-btn:hover { background: var(--accent); color: #fff; }
     .rec-lockin-btn.locked {
-      border-color: var(--profit); background: var(--profit-soft);
-      color: var(--profit); cursor: default;
+      border-color: var(--profit); background: var(--profit);
+      color: #fff; cursor: pointer; font-weight: 700;
     }
     .rec-summary {
       background: var(--bg-card); border: 1px solid var(--border-subtle);
@@ -989,8 +996,7 @@
     .cal-bet-edit:hover { color: var(--accent); background: var(--accent-soft); }
     .cal-bet-delete:hover { color: var(--loss); background: var(--loss-soft); }
 
-    .rec-lockin-btn.locked { cursor: pointer; }
-    .rec-lockin-btn.locked:hover { background: var(--loss-soft); border-color: var(--loss); color: var(--loss); }
+    .rec-lockin-btn.locked:hover { background: var(--loss); border-color: var(--loss); color: #fff; }
   </style>
 </head>
 <body>
@@ -2311,10 +2317,8 @@
         return;
       }
 
-      document.getElementById('rec-pick-count').textContent = result.picks.length + ' best from ' + result.totalCandidates + ' analyzed';
-      document.getElementById('rec-total-stake').textContent = formatDollars(result.totalStake);
-
       var existingBets = getTrackedBets();
+      var lockedCount = 0;
       var html = '';
       for (var i = 0; i < result.picks.length; i++) {
         var p = result.picks[i];
@@ -2329,6 +2333,7 @@
         var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
         var betId = buildRecBetId(p);
         var isLocked = existingBets.some(function(b) { return b.id === betId; });
+        if (isLocked) lockedCount++;
         var reasonEscaped = (p.reason || '').replace(/"/g, '&quot;');
         var timeBadge = '';
         if (p.commenceTime) {
@@ -2336,28 +2341,37 @@
           if (minsUntil <= 30 && minsUntil > 0) timeBadge = '<span class="rec-time-badge soon">Starting soon</span>';
         }
 
-        html += '<div class="rec-bet-card ' + confClass + '">';
+        var cardClasses = 'rec-bet-card' + (isLocked ? ' is-locked' : (confClass ? ' ' + confClass : ''));
+        html += '<div class="' + cardClasses + '" id="rec-card-' + i + '">';
         html += '<div class="rec-bet-top"><div class="rec-bet-top-left">';
         html += '<span class="rec-rank">#' + (i + 1) + '</span>';
+        if (isLocked) html += '<span class="rec-locked-check">&#10003;</span>';
         html += '<span class="model-badge ' + sportBadge + '">' + sportLabel + '</span>';
         html += '<span class="rec-risk-dot ' + riskClass + '" title="Risk: ' + riskClass + '"></span>';
         html += timeBadge + '</div>';
         html += '<div class="rec-edge">+' + (p.edge * 100).toFixed(1) + '% edge</div></div>';
         html += '<div class="rec-bet-pick">' + matchup;
-        html += ' <span class="rec-why-tip" data-tip="' + reasonEscaped + '">Why?</span></div>';
+        if (!isLocked) html += ' <span class="rec-why-tip" data-tip="' + reasonEscaped + '">Why?</span>';
+        html += '</div>';
         html += '<div class="rec-bet-meta">' + typeLabel + ' &middot; ' + pickLabel + ' &middot; ' + oddsStr + '</div>';
         html += '<div class="rec-bet-bottom">';
         html += '<div class="rec-conf-bar-wrap"><div class="rec-conf-label">Confidence ' + p.confidence.toFixed(0) + '%</div>';
         html += '<div class="rec-conf-bar"><div class="rec-conf-bar-fill ' + barClass + '" style="width:' + Math.min(100, p.confidence) + '%"></div></div></div>';
-        html += '<div class="rec-stake"><div class="rec-stake-label">Stake</div>$' + p.stake + ' (' + p.units.toFixed(1) + 'u)</div>';
+        var stakeDisplay = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.stake(p.stake) : ('$' + p.stake + ' (' + p.units.toFixed(1) + 'u)');
+        html += '<div class="rec-stake"><div class="rec-stake-label">Stake</div>' + stakeDisplay + '</div>';
         if (isLocked) {
-          html += '<button class="rec-lockin-btn locked" onclick="unlockBet(' + i + ',\'' + betId + '\')">&#10003; Locked</button>';
+          html += '<button class="rec-lockin-btn locked" onclick="unlockBet(' + i + ',\'' + betId + '\')" title="Click to remove">&#10003; Locked</button>';
         } else {
           html += '<button class="rec-lockin-btn" onclick="lockInBet(' + i + ')">Lock In</button>';
         }
         html += '</div></div>';
       }
       list.innerHTML = html;
+
+      var headerText = result.picks.length + ' best from ' + result.totalCandidates + ' analyzed';
+      if (lockedCount > 0) headerText += ' \u00B7 ' + lockedCount + ' locked';
+      document.getElementById('rec-pick-count').textContent = headerText;
+      document.getElementById('rec-total-stake').textContent = formatDollars(result.totalStake);
 
       var sh = '<div class="rec-summary">';
       sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Total Stake</div><div class="rec-summary-value">' + formatDollars(result.totalStake) + '</div></div>';
@@ -2415,8 +2429,47 @@
         buildPicks();
         renderBettingCalendar();
         renderCalendarSummary();
-        renderRecommendations();
+        // Animate the card transition instead of full re-render
+        var card = document.getElementById('rec-card-' + idx);
+        if (card) {
+          card.classList.remove('high-conf', 'med-conf');
+          card.classList.add('is-locked');
+          // Add checkmark next to rank
+          var rank = card.querySelector('.rec-rank');
+          if (rank && !rank.nextElementSibling?.classList.contains('rec-locked-check')) {
+            rank.insertAdjacentHTML('afterend', '<span class="rec-locked-check">&#10003;</span>');
+          }
+          // Update button
+          var btn = card.querySelector('.rec-lockin-btn');
+          if (btn) {
+            var betId = buildRecBetId(p);
+            btn.className = 'rec-lockin-btn locked';
+            btn.innerHTML = '&#10003; Locked';
+            btn.title = 'Click to remove';
+            btn.onclick = function() { unlockBet(idx, betId); };
+          }
+          // Hide Why? tip
+          var tip = card.querySelector('.rec-why-tip');
+          if (tip) tip.style.display = 'none';
+          // Update header locked count
+          updateRecHeaderCount();
+        } else {
+          renderRecommendations();
+        }
       });
+    }
+
+    function updateRecHeaderCount() {
+      if (!lastRecommendations || !lastRecommendations.picks.length) return;
+      var existingBets = getTrackedBets();
+      var locked = 0;
+      for (var i = 0; i < lastRecommendations.picks.length; i++) {
+        var betId = buildRecBetId(lastRecommendations.picks[i]);
+        if (existingBets.some(function(b) { return b.id === betId; })) locked++;
+      }
+      var text = lastRecommendations.picks.length + ' best from ' + lastRecommendations.totalCandidates + ' analyzed';
+      if (locked > 0) text += ' \u00B7 ' + locked + ' locked';
+      document.getElementById('rec-pick-count').textContent = text;
     }
 
     // ── Auto-Grading ──
@@ -3072,7 +3125,7 @@
       });
     }
     function unlockBet(idx, betId) {
-      if (!confirm('Remove this bet?')) return;
+      if (!confirm('Remove this tracked bet?')) return;
       removeBetById(betId);
     }
 
