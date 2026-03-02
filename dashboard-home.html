@@ -1306,6 +1306,20 @@
     // ── Helpers ──
     function getTrackedBets() { return BetStorage.getBets(); }
 
+    /** Format a dollar amount: >= $100 rounds to whole dollars, < $100 shows 2 decimals */
+    function formatDollars(amount) {
+      var rounded = Math.round(amount * 100) / 100;
+      if (Math.abs(rounded) >= 100) return '$' + Math.round(rounded).toLocaleString();
+      return '$' + Math.abs(rounded).toFixed(2);
+    }
+    /** Format with sign prefix: +$500 or -$42.50 */
+    function formatSignedDollars(amount) {
+      var rounded = Math.round(amount * 100) / 100;
+      var abs = Math.abs(rounded);
+      var val = abs >= 100 ? Math.round(abs).toLocaleString() : abs.toFixed(2);
+      return (rounded >= 0 ? '+$' : '-$') + val;
+    }
+
     // ── Calendar Helpers ──
     function getLocalDateStr(d) {
       return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -1495,7 +1509,7 @@
             '<div><div class="model-stat-label">ROI</div><div class="model-stat-value">' + (parseFloat(roi) >= 0 ? '+' : '') + roi + '%</div></div>' +
           '</div>' +
           '<div class="model-bar"><div class="model-bar-fill ' + barClass + '" style="width:' + Math.max(2, rate) + '%"></div></div>' +
-          '<div class="model-pnl ' + pnlClass + '">' + pnlSign + '$' + Math.abs(d.pnl).toFixed(0) + '</div>' +
+          '<div class="model-pnl ' + pnlClass + '">' + formatSignedDollars(d.pnl) + '</div>' +
         '</div>';
       }
       grid.innerHTML = html;
@@ -1519,7 +1533,7 @@
         '<div class="today-stat"><div class="today-stat-label">Bets Today</div><div class="today-stat-value">' + perf.todayBets.length + '</div></div>' +
         '<div class="today-stat"><div class="today-stat-label">Graded</div><div class="today-stat-value">' + perf.todayGraded + '</div></div>' +
         '<div class="today-stat"><div class="today-stat-label">Pending</div><div class="today-stat-value">' + perf.todayPending + '</div></div>' +
-        '<div class="today-stat"><div class="today-stat-label">P&amp;L</div><div class="today-stat-value ' + pnlClass + '">' + pnlSign + '$' + Math.abs(perf.todayPnl).toFixed(0) + '</div></div>' +
+        '<div class="today-stat"><div class="today-stat-label">P&amp;L</div><div class="today-stat-value ' + pnlClass + '">' + formatSignedDollars(perf.todayPnl) + '</div></div>' +
       '</div></div>';
     }
 
@@ -1731,12 +1745,12 @@
 
       // New user — no bets at all
       if (bets.length === 0) {
-        h += '<div class="briefing-sub">Personalized strategy for your ' + (monthlyTarget > 0 ? '$' + monthlyTarget.toLocaleString() + ' monthly goal' : 'betting portfolio') + '</div>';
+        h += '<div class="briefing-sub">Personalized strategy for your ' + (monthlyTarget > 0 ? formatDollars(monthlyTarget) + ' monthly goal' : 'betting portfolio') + '</div>';
         h += '<div class="briefing-welcome">';
         if (dayOfMonth === 1) {
-          h += 'Fresh month! With ' + daysInMonth + ' days to hit <span class="briefing-highlight accent">$' + monthlyTarget.toLocaleString() + '</span>, your daily target is ~<span class="briefing-highlight">$' + Math.ceil(monthlyTarget / daysInMonth) + '/day</span>. Start strong with today\'s highest-confidence picks.';
+          h += 'Fresh month! With ' + daysInMonth + ' days to hit <span class="briefing-highlight accent">' + formatDollars(monthlyTarget) + '</span>, your daily target is ~<span class="briefing-highlight">' + formatDollars(Math.ceil(monthlyTarget / daysInMonth)) + '/day</span>. Start strong with today\'s highest-confidence picks.';
         } else {
-          h += 'Welcome! Your <span class="briefing-highlight accent">$' + monthlyTarget.toLocaleString() + '</span> monthly goal starts today. Lock in your first bet from <a href="dashboard.html">Today\'s Recommended Bets</a> below.';
+          h += 'Welcome! Your <span class="briefing-highlight accent">' + formatDollars(monthlyTarget) + '</span> monthly goal starts today. Lock in your first bet from <a href="dashboard.html">Today\'s Recommended Bets</a> below.';
         }
         h += '</div>';
         h += '</div>';
@@ -1746,22 +1760,21 @@
         return;
       }
 
-      h += '<div class="briefing-sub">Personalized strategy for your $' + monthlyTarget.toLocaleString() + ' ' + monthName + ' goal</div>';
+      h += '<div class="briefing-sub">Personalized strategy for your ' + formatDollars(monthlyTarget) + ' ' + monthName + ' goal</div>';
       h += '<div class="briefing-sections">';
 
       // ── SECTION 1: Where You Stand ──
       h += '<div class="briefing-section">';
       h += '<div class="briefing-section-title">Where You Stand <span class="briefing-status ' + statusClass + '">' + statusLabel + '</span></div>';
-      var plSign = monthlyPL >= 0 ? '+' : '-';
       var plClass = monthlyPL >= 0 ? 'profit' : 'loss';
       var goalPct = monthlyTarget > 0 ? Math.min(100, Math.max(0, monthlyPL / monthlyTarget * 100)).toFixed(0) : 0;
-      h += '<div class="briefing-line">You\'ve made <span class="briefing-highlight ' + plClass + '">' + plSign + '$' + Math.abs(monthlyPL).toFixed(0) + '</span> of your <span class="briefing-highlight">$' + monthlyTarget.toLocaleString() + '</span> ' + monthName + ' goal (' + goalPct + '%)</div>';
+      h += '<div class="briefing-line">You\'ve made <span class="briefing-highlight ' + plClass + '">' + formatSignedDollars(monthlyPL) + '</span> of your <span class="briefing-highlight">' + formatDollars(monthlyTarget) + '</span> ' + monthName + ' goal (' + goalPct + '%)</div>';
 
       if (remainingToGoal > 0) {
-        h += '<div class="briefing-line">You need <span class="briefing-highlight">$' + Math.ceil(remainingToGoal) + '</span> more over the next ' + daysRemaining + ' day' + (daysRemaining !== 1 ? 's' : '') + '</div>';
-        h += '<div class="briefing-line">Daily target: ~<span class="briefing-highlight accent">$' + Math.ceil(Math.max(0, dailyTarget)) + '/day</span> to stay on pace</div>';
+        h += '<div class="briefing-line">You need <span class="briefing-highlight">' + formatDollars(Math.ceil(remainingToGoal)) + '</span> more over the next ' + daysRemaining + ' day' + (daysRemaining !== 1 ? 's' : '') + '</div>';
+        h += '<div class="briefing-line">Daily target: ~<span class="briefing-highlight accent">' + formatDollars(Math.ceil(Math.max(0, dailyTarget))) + '/day</span> to stay on pace</div>';
       } else {
-        h += '<div class="briefing-line"><span class="briefing-highlight profit">Goal reached!</span> You\'re <span class="briefing-highlight profit">+$' + Math.abs(monthlyPL - monthlyTarget).toFixed(0) + '</span> ahead with ' + daysRemaining + ' days left</div>';
+        h += '<div class="briefing-line"><span class="briefing-highlight profit">Goal reached!</span> You\'re <span class="briefing-highlight profit">' + formatSignedDollars(Math.abs(monthlyPL - monthlyTarget)) + '</span> ahead with ' + daysRemaining + ' days left</div>';
       }
       h += '</div>';
 
@@ -1778,8 +1791,8 @@
       var suggestedMax = Math.min(maxBets, suggestedMin + 2);
       if (suggestedMin > suggestedMax) suggestedMax = suggestedMin;
 
-      h += '<div class="briefing-line"><span class="bl-icon">&#128176;</span> Max exposure: <span class="briefing-highlight">$' + Math.round(maxDailyExposure) + '</span> &mdash; <span class="briefing-highlight accent">$' + Math.round(availableToday) + '</span> available after pending</div>';
-      h += '<div class="briefing-line"><span class="bl-icon">&#127919;</span> Suggested: <span class="briefing-highlight">' + suggestedMin + '-' + suggestedMax + ' bets</span> at <span class="briefing-highlight">$' + unitSize + '-$' + (unitSize * 2.5).toFixed(0) + '</span> per bet</div>';
+      h += '<div class="briefing-line"><span class="bl-icon">&#128176;</span> Max exposure: <span class="briefing-highlight">' + formatDollars(maxDailyExposure) + '</span> &mdash; <span class="briefing-highlight accent">' + formatDollars(availableToday) + '</span> available after pending</div>';
+      h += '<div class="briefing-line"><span class="bl-icon">&#127919;</span> Suggested: <span class="briefing-highlight">' + suggestedMin + '-' + suggestedMax + ' bets</span> at <span class="briefing-highlight">' + formatDollars(unitSize) + '-' + formatDollars(Math.round(unitSize * 2.5)) + '</span> per bet</div>';
 
       if (bestKey && bestRate > 55) {
         var bsp = sportPerf[bestKey];
@@ -1834,19 +1847,19 @@
 
       // Best P&L sport
       if (bestPnlKey && bestPnl > 0) {
-        insights.push({ priority: 5, icon: '&#9889;', text: 'Most profitable area: <span class="briefing-highlight profit">' + bestPnlKey + '</span> at <span class="briefing-highlight profit">+$' + bestPnl.toFixed(0) + '</span>' });
+        insights.push({ priority: 5, icon: '&#9889;', text: 'Most profitable area: <span class="briefing-highlight profit">' + bestPnlKey + '</span> at <span class="briefing-highlight profit">' + formatSignedDollars(bestPnl) + '</span>' });
       }
 
       // Goal status insight
       if (monthlyPL >= monthlyTarget) {
-        insights.push({ priority: 0, icon: '&#127881;', text: 'Incredible month &mdash; <span class="briefing-highlight profit">$' + (monthlyPL - monthlyTarget).toFixed(0) + ' ahead of goal</span>! You could reduce risk and still finish strong' });
+        insights.push({ priority: 0, icon: '&#127881;', text: 'Incredible month &mdash; <span class="briefing-highlight profit">' + formatDollars(Math.round(monthlyPL - monthlyTarget)) + ' ahead of goal</span>! You could reduce risk and still finish strong' });
       } else if (statusClass === 'behind' && totalSettled > 5) {
         insights.push({ priority: 0, icon: '&#128161;', text: 'Behind pace &mdash; focus on <span class="briefing-highlight accent">quality over quantity</span>. Stick to your strongest 2-3 picks today' });
       }
 
       // All pending edge case
       if (pendingCount > 0 && totalSettled === 0) {
-        insights.push({ priority: 0, icon: '&#9203;', text: 'You have <span class="briefing-highlight">' + pendingCount + ' pending bet' + (pendingCount !== 1 ? 's' : '') + '</span> worth <span class="briefing-highlight">$' + pendingAmount.toFixed(0) + '</span>. Results will update when games finish' });
+        insights.push({ priority: 0, icon: '&#9203;', text: 'You have <span class="briefing-highlight">' + pendingCount + ' pending bet' + (pendingCount !== 1 ? 's' : '') + '</span> worth <span class="briefing-highlight">' + formatDollars(pendingAmount) + '</span>. Results will update when games finish' });
       }
 
       // No bets in 2+ days
@@ -1886,7 +1899,7 @@
       h += '<div class="briefing-pills">';
       h += '<div class="briefing-pill"><span class="bp-label">Win Rate</span> <span class="bp-val' + (overallRate >= 55 ? ' profit' : overallRate < 45 ? ' loss' : '') + '">' + overallRate.toFixed(1) + '%</span></div>';
       h += '<div class="briefing-pill"><span class="bp-label">ROI</span> <span class="bp-val' + (roi >= 0 ? ' profit' : ' loss') + '">' + (roi >= 0 ? '+' : '') + roi.toFixed(1) + '%</span></div>';
-      h += '<div class="briefing-pill"><span class="bp-label">Avg Bet</span> <span class="bp-val">$' + avgBet.toFixed(0) + '</span></div>';
+      h += '<div class="briefing-pill"><span class="bp-label">Avg Bet</span> <span class="bp-val">' + formatDollars(avgBet) + '</span></div>';
       if (bestKey) {
         h += '<div class="briefing-pill"><span class="bp-label">Best</span> <span class="bp-val profit">' + bestKey + '</span></div>';
       }
@@ -2281,7 +2294,7 @@
       }
 
       document.getElementById('rec-pick-count').textContent = result.picks.length + ' best from ' + result.totalCandidates + ' analyzed';
-      document.getElementById('rec-total-stake').textContent = '$' + result.totalStake.toLocaleString();
+      document.getElementById('rec-total-stake').textContent = formatDollars(result.totalStake);
 
       var existingBets = getTrackedBets();
       var html = '';
@@ -2329,8 +2342,8 @@
       list.innerHTML = html;
 
       var sh = '<div class="rec-summary">';
-      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Total Stake</div><div class="rec-summary-value">$' + result.totalStake.toLocaleString() + '</div></div>';
-      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Proj. Return</div><div class="rec-summary-value" style="color:var(--profit)">+$' + result.projReturn.toFixed(0) + '</div></div>';
+      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Total Stake</div><div class="rec-summary-value">' + formatDollars(result.totalStake) + '</div></div>';
+      sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Proj. Return</div><div class="rec-summary-value" style="color:var(--profit)">' + formatSignedDollars(result.projReturn) + '</div></div>';
       sh += '<div class="rec-summary-stat"><div class="rec-summary-label">Bankroll Used</div><div class="rec-summary-value">' + result.bankrollPct.toFixed(1) + '%</div></div>';
       sh += '<div style="width:100%"><div class="rec-bankroll-bar"><div class="rec-bankroll-bar-fill" style="width:' + Math.min(100, result.bankrollPct) + '%"></div></div></div>';
       sh += '</div>';
@@ -2494,7 +2507,7 @@
         var dp = info.pnl * unitSize;
         if (info.w > 0 || info.l > 0) {
           var pc = dp >= 0 ? 'profit' : 'loss';
-          inner += '<span class="cal-day-pnl ' + pc + '">' + (dp >= 0 ? '+' : '') + '$' + Math.abs(dp).toFixed(0) + '</span>';
+          inner += '<span class="cal-day-pnl ' + pc + '">' + formatSignedDollars(dp) + '</span>';
         }
         var dc = (info.p > 0 && info.w === 0 && info.l === 0) ? 'pending' : (dp >= 0 ? 'profit' : 'loss');
         inner += '<span class="cal-day-dot ' + dc + '"></span>';
@@ -2525,7 +2538,7 @@
       h += '<div><div class="cal-detail-stat-label">Bets</div><div class="cal-detail-stat-value">' + total + '</div></div>';
       h += '<div><div class="cal-detail-stat-label">Record</div><div class="cal-detail-stat-value">' + info.w + '-' + info.l + (info.p > 0 ? '-' + info.p + 'P' : '') + '</div></div>';
       h += '<div><div class="cal-detail-stat-label">Win Rate</div><div class="cal-detail-stat-value">' + wr + '%</div></div>';
-      h += '<div><div class="cal-detail-stat-label">P&amp;L</div><div class="cal-detail-stat-value" style="color:var(--' + pCls + ')">' + pSign + '$' + Math.abs(dp).toFixed(2) + '</div></div>';
+      h += '<div><div class="cal-detail-stat-label">P&amp;L</div><div class="cal-detail-stat-value" style="color:var(--' + pCls + ')">' + formatSignedDollars(dp) + '</div></div>';
       h += '</div>';
       for (var i = 0; i < info.bets.length; i++) {
         var bet = info.bets[i];
@@ -2541,8 +2554,8 @@
         var oddsStr = bet.odds ? (parseInt(bet.odds) > 0 ? '+' : '') + bet.odds : '';
         var profDollars = (parseFloat(bet.profit_units) || 0) * unitSize;
         var profStr = '', profCls = '';
-        if (bet.status === 'win') { profStr = '+$' + profDollars.toFixed(2); profCls = 'profit'; }
-        else if (bet.status === 'loss') { profStr = '-$' + Math.abs(profDollars).toFixed(2); profCls = 'loss'; }
+        if (bet.status === 'win') { profStr = formatSignedDollars(profDollars); profCls = 'profit'; }
+        else if (bet.status === 'loss') { profStr = formatSignedDollars(profDollars); profCls = 'loss'; }
         else { profStr = '\u2014'; }
         var betActions = '';
         if (bet.id) {
@@ -2604,7 +2617,7 @@
       h += '<div class="cal-summary-stat"><div class="cal-summary-label">Total Bets</div><div class="cal-summary-value">' + mb.length + '</div></div>';
       h += '<div class="cal-summary-stat"><div class="cal-summary-label">Record</div><div class="cal-summary-value">' + w + '-' + l + (pend > 0 ? '-' + pend + 'P' : '') + '</div></div>';
       h += '<div class="cal-summary-stat"><div class="cal-summary-label">Win Rate</div><div class="cal-summary-value">' + wr + '%</div></div>';
-      h += '<div class="cal-summary-stat"><div class="cal-summary-label">P&amp;L</div><div class="cal-summary-value" style="color:var(--' + pCls + ')">' + pSign + '$' + Math.abs(tPnl).toFixed(2) + '</div></div>';
+      h += '<div class="cal-summary-stat"><div class="cal-summary-label">P&amp;L</div><div class="cal-summary-value" style="color:var(--' + pCls + ')">' + formatSignedDollars(tPnl) + '</div></div>';
       h += '<div class="cal-summary-stat"><div class="cal-summary-label">ROI</div><div class="cal-summary-value">' + roi + '%</div></div>';
       var keys = Object.keys(dailyPnl);
       if (keys.length > 1) {
@@ -2613,8 +2626,8 @@
           if (dailyPnl[keys[k]] > bestV) bestV = dailyPnl[keys[k]];
           if (dailyPnl[keys[k]] < worstV) worstV = dailyPnl[keys[k]];
         }
-        h += '<div class="cal-summary-stat"><div class="cal-summary-label">Best Day</div><div class="cal-summary-value" style="color:var(--profit)">' + (bestV >= 0 ? '+' : '-') + '$' + Math.abs(bestV).toFixed(0) + '</div></div>';
-        h += '<div class="cal-summary-stat"><div class="cal-summary-label">Worst Day</div><div class="cal-summary-value" style="color:var(--loss)">' + (worstV >= 0 ? '+' : '-') + '$' + Math.abs(worstV).toFixed(0) + '</div></div>';
+        h += '<div class="cal-summary-stat"><div class="cal-summary-label">Best Day</div><div class="cal-summary-value" style="color:var(--profit)">' + formatSignedDollars(bestV) + '</div></div>';
+        h += '<div class="cal-summary-stat"><div class="cal-summary-label">Worst Day</div><div class="cal-summary-value" style="color:var(--loss)">' + formatSignedDollars(worstV) + '</div></div>';
       }
       h += '</div>';
       document.getElementById('cal-summary').innerHTML = h;
@@ -2744,20 +2757,19 @@
 
       // Portfolio Value = bankroll + realized P&L
       var portfolioVal = bankroll + pl;
-      document.getElementById('stat-portfolio').textContent = '$' + portfolioVal.toLocaleString();
+      document.getElementById('stat-portfolio').textContent = formatDollars(portfolioVal);
       var portChangeEl = document.getElementById('stat-portfolio-change');
-      if (pl > 0) portChangeEl.innerHTML = '<span style="color:var(--profit)">' + (pl >= 0 ? '+' : '') + '$' + Math.abs(pl).toFixed(0) + '</span> from $' + bankroll.toLocaleString() + ' bankroll';
-      else if (pl < 0) portChangeEl.innerHTML = '<span style="color:var(--loss)">-$' + Math.abs(pl).toFixed(0) + '</span> from $' + bankroll.toLocaleString() + ' bankroll';
-      else portChangeEl.textContent = '$' + bankroll.toLocaleString() + ' bankroll';
+      if (pl > 0) portChangeEl.innerHTML = '<span style="color:var(--profit)">' + formatSignedDollars(pl) + '</span> from ' + formatDollars(bankroll) + ' bankroll';
+      else if (pl < 0) portChangeEl.innerHTML = '<span style="color:var(--loss)">' + formatSignedDollars(pl) + '</span> from ' + formatDollars(bankroll) + ' bankroll';
+      else portChangeEl.textContent = formatDollars(bankroll) + ' bankroll';
 
       // Monthly P&L stat
-      var plSign = pl >= 0 ? '+' : '';
-      document.getElementById('stat-pnl').textContent = plSign + '$' + Math.abs(pl).toFixed(0);
+      document.getElementById('stat-pnl').textContent = formatSignedDollars(pl);
       var pnlEl = document.getElementById('stat-pnl');
       var pnlChangeEl = document.getElementById('stat-pnl-change');
       if (pl > 0) { pnlEl.style.color = 'var(--profit)'; pnlChangeEl.classList.add('profit'); }
       else if (pl < 0) { pnlEl.style.color = 'var(--loss)'; pnlChangeEl.classList.add('loss'); }
-      pnlChangeEl.textContent = plSign + '$' + Math.abs(pl).toFixed(0) + ' this month';
+      pnlChangeEl.textContent = formatSignedDollars(pl) + ' this month';
 
       // User's personal win rate
       var perf = getUserPerformance();
@@ -2786,17 +2798,17 @@
       renderQuickActions(perf);
 
       // Monthly Goal
-      document.getElementById('goal-target').textContent = '$' + monthlyTarget;
+      document.getElementById('goal-target').textContent = formatDollars(monthlyTarget);
       var realized = Math.max(0, pl);
       var pending = bets.filter(function(b) { var s = normalizeResult(b.status); return !s || s === 'pending'; })
         .reduce(function(sum, b) { return sum + ((parseFloat(b.units) || 1) * unitSize); }, 0);
       var remaining = Math.max(0, monthlyTarget - realized);
       var goalPct = monthlyTarget > 0 ? Math.min(100, (realized / monthlyTarget) * 100) : 0;
 
-      document.getElementById('goal-current').textContent = '$' + realized.toFixed(0);
-      document.getElementById('goal-realized').textContent = '$' + realized.toFixed(0);
-      document.getElementById('goal-pending').textContent = '$' + pending.toFixed(0);
-      document.getElementById('goal-remaining').textContent = '$' + remaining.toFixed(0);
+      document.getElementById('goal-current').textContent = formatDollars(realized);
+      document.getElementById('goal-realized').textContent = formatDollars(realized);
+      document.getElementById('goal-pending').textContent = formatDollars(pending);
+      document.getElementById('goal-remaining').textContent = formatDollars(remaining);
 
       // Ring animation
       var circumference = 2 * Math.PI * 42;
@@ -3041,11 +3053,11 @@
         var typeLabel = b.type === 'prop' ? 'Prop' : b.type === 'moneyline' ? 'ML' : b.type === 'total' ? 'Total' : (b.type || 'Spread');
         var meta = sport + ' \u00B7 ' + typeLabel + ' \u00B7 ' + (b.date || '');
         var units = parseFloat(b.units) || 1;
-        var stake = '$' + (units * unitSize).toFixed(0);
+        var stake = formatDollars(units * unitSize);
         var pnlHtml = '';
         if (st === 'win') {
           var prof = parseFloat(b.profit_units) || calcProfit(b.odds, units);
-          pnlHtml = '<div class="stake-pnl profit">+$' + (prof * unitSize).toFixed(0) + '</div>';
+          pnlHtml = '<div class="stake-pnl profit">' + formatSignedDollars(prof * unitSize) + '</div>';
         } else if (st === 'loss') {
           pnlHtml = '<div class="stake-pnl loss">-' + stake + '</div>';
         } else if (st === 'push') {
