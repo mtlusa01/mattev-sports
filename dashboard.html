@@ -1800,6 +1800,10 @@
     .track-field input, .track-field select { width: 100%; min-width: 0; box-sizing: border-box; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; color: var(--text-primary); padding: 8px 10px; font-size: 14px; outline: none; transition: border-color 0.2s; }
     .track-field input:focus, .track-field select:focus { border-color: var(--accent); }
     .track-field select option { background: #1e1e2e; color: var(--text-primary); }
+    .track-input-toggle { display: flex; gap: 0; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
+    .track-input-toggle button { flex: 1; padding: 6px 0; border: none; background: transparent; color: var(--text-muted); font-family: inherit; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; cursor: pointer; transition: all 0.15s; }
+    .track-input-toggle button.active { background: rgba(6,182,212,0.15); color: var(--accent); }
+    .track-field input.calc-field { opacity: 0.5; background: rgba(255,255,255,0.03); }
     .track-modal-payout { font-size: 14px; color: #10b981; font-weight: 600; margin-bottom: 20px; }
     .track-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
     .track-btn-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-secondary); padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
@@ -2669,17 +2673,58 @@
     }
 
     let pendingBet = null;
+    let _trackInputMode = localStorage.getItem('efe_bet_input_mode') || 'dollars';
+
+    function setTrackInputMode(mode) {
+      _trackInputMode = mode;
+      localStorage.setItem('efe_bet_input_mode', mode);
+      const stakeEl = document.getElementById('track-stake');
+      const unitsEl = document.getElementById('track-units');
+      document.getElementById('track-mode-dollars').className = mode === 'dollars' ? 'active' : '';
+      document.getElementById('track-mode-units').className = mode === 'units' ? 'active' : '';
+      if (mode === 'dollars') {
+        stakeEl.readOnly = false;
+        stakeEl.classList.remove('calc-field');
+        unitsEl.readOnly = true;
+        unitsEl.classList.add('calc-field');
+      } else {
+        unitsEl.readOnly = false;
+        unitsEl.classList.remove('calc-field');
+        stakeEl.readOnly = true;
+        stakeEl.classList.add('calc-field');
+      }
+      (mode === 'dollars' ? stakeEl : unitsEl).focus();
+    }
+
+    function onTrackStakeInput() {
+      if (_trackInputMode !== 'dollars') return;
+      const v = parseFloat(document.getElementById('track-stake').value);
+      const unitSize = getUnitSize();
+      if (!isNaN(v) && unitSize > 0) document.getElementById('track-units').value = (v / unitSize).toFixed(2);
+      updateTrackPayout();
+    }
+
+    function onTrackUnitsInput() {
+      if (_trackInputMode !== 'units') return;
+      const v = parseFloat(document.getElementById('track-units').value);
+      const unitSize = getUnitSize();
+      if (!isNaN(v)) document.getElementById('track-stake').value = Math.round(v * unitSize);
+      updateTrackPayout();
+    }
 
     function openTrackModal(betData) {
       pendingBet = betData;
       document.getElementById('track-pick-desc').textContent = betData.pickDesc;
       document.getElementById('track-pick-meta').innerHTML = betData.metaHtml;
       document.getElementById('track-odds').value = betData.defaultOdds || -110;
+      const unitSize = getUnitSize();
       document.getElementById('track-units').value = '1';
+      document.getElementById('track-stake').value = unitSize;
       updateTrackPayout();
       document.getElementById('track-modal-backdrop').classList.add('visible');
       document.getElementById('track-modal').classList.add('visible');
       document.body.style.overflow = 'hidden';
+      setTrackInputMode(_trackInputMode);
     }
 
     function closeTrackModal() {
@@ -2695,7 +2740,7 @@
       const profit = calcProfit(odds, units);
       const unitSize = getUnitSize();
       const el = document.getElementById('track-payout');
-      el.textContent = 'Potential Win: +' + profit.toFixed(2) + ' units ($' + (profit * unitSize).toFixed(2) + ')';
+      el.textContent = 'Potential Win: +' + profit.toFixed(2) + ' units ($' + Math.round(profit * unitSize) + ')';
     }
 
     function confirmTrackBet() {
@@ -5983,22 +6028,25 @@
       <div class="track-modal-title">TRACK THIS BET</div>
       <div class="track-modal-pick" id="track-pick-desc"></div>
       <div class="track-modal-meta" id="track-pick-meta"></div>
+      <div class="track-input-toggle" id="track-input-toggle">
+        <button type="button" id="track-mode-dollars" onclick="setTrackInputMode('dollars')">$ Dollars</button>
+        <button type="button" id="track-mode-units" onclick="setTrackInputMode('units')">Units</button>
+      </div>
       <div class="track-modal-fields">
         <div class="track-field">
-          <label>Odds You Got</label>
-          <input type="text" inputmode="numeric" id="track-odds" value="-110" oninput="updateTrackPayout()">
+          <label>Stake ($)</label>
+          <input type="text" inputmode="decimal" id="track-stake" oninput="onTrackStakeInput()">
         </div>
         <div class="track-field">
           <label>Units</label>
-          <select id="track-units" onchange="updateTrackPayout()">
-            <option value="0.5">0.5</option>
-            <option value="1" selected>1</option>
-            <option value="1.5">1.5</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="5">5</option>
-          </select>
+          <input type="text" inputmode="decimal" id="track-units" value="1" oninput="onTrackUnitsInput()">
         </div>
+        <div class="track-field">
+          <label>Odds</label>
+          <input type="text" inputmode="numeric" id="track-odds" value="-110" oninput="updateTrackPayout()">
+        </div>
+      </div>
+      <div class="track-modal-fields">
         <div class="track-field">
           <label>Book</label>
           <select id="track-book">
