@@ -300,6 +300,62 @@ jobs:
           path: nhl-outputs
         continue-on-error: true
 
+      - name: Archive yesterday's projections before overwrite
+        run: |
+          python3 -c "
+          import json, os
+          from datetime import datetime, timezone
+
+          today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          archive_path = f'archive/projections_{today}.json'
+
+          if os.path.exists(archive_path):
+              print(f'{archive_path} already exists — skipping')
+              exit(0)
+
+          os.makedirs('archive', exist_ok=True)
+
+          # Bundle current projections (yesterday's games) into archive
+          archive = {'date': today, 'archived_at': datetime.now(timezone.utc).isoformat()}
+          files = {
+              'game_projections': 'game_projections.json',
+              'nhl_game_projections': 'nhl_game_projections.json',
+              'ncaab_projections': 'ncaab_projections.json',
+              'player_props': None,  # extracted from projections.json
+              'all_props': None,
+              'results': 'results.json',
+          }
+          for key, fname in files.items():
+              if fname and os.path.exists(fname):
+                  try:
+                      archive[key] = json.load(open(fname))
+                  except Exception:
+                      pass
+
+          # Extract props from projections.json
+          if os.path.exists('projections.json'):
+              try:
+                  pdata = json.load(open('projections.json'))
+                  archive['player_props'] = pdata.get('projections', [])
+                  archive['all_props'] = pdata.get('top_picks', [])
+              except Exception:
+                  pass
+
+          archive.setdefault('player_props', [])
+          archive.setdefault('all_props', [])
+          archive['summary'] = {
+              'total_props': len(archive.get('player_props', [])),
+              'total_all_props': len(archive.get('all_props', [])),
+              'total_games': len(archive.get('game_projections', {}).get('games', [])),
+              'total_nhl_games': len(archive.get('nhl_game_projections', {}).get('games', [])),
+              'total_ncaab_games': len(archive.get('ncaab_projections', {}).get('games', [])),
+          }
+
+          with open(archive_path, 'w') as f:
+              json.dump(archive, f, indent=2)
+          print(f'Created {archive_path}: {archive[\"summary\"]}')
+          "
+
       - name: Copy JSON files into repo
         run: |
           copied=0
@@ -329,7 +385,8 @@ jobs:
           # basic export would overwrite this richer data. Skipped intentionally.
           git add projections.json \
                   ncaab_projections.json ncaab_results.json \
-                  nhl_game_projections.json nhl_results.json 2>/dev/null || true
+                  nhl_game_projections.json nhl_results.json \
+                  archive/ 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
