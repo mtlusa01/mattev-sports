@@ -2699,6 +2699,15 @@
       renderPortfolioStats(profile);
       renderDailyBriefing(profile);
       await loadData();
+
+      // Safety net: re-grade after pullFromCloud may have merged cloud bets
+      // (pullFromCloud runs via auth.js initAuth, may complete after loadData)
+      if (typeof BetStorage !== 'undefined') {
+        autoGradeHomeTrackedBets();
+        buildPicks();
+        renderBettingCalendar();
+        renderCalendarSummary();
+      }
     });
 
     // ── Portfolio Stats ──

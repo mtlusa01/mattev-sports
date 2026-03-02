@@ -136,18 +136,52 @@ const BetStorage = {
     }
   },
 
-  /** Merge two bet arrays by ID (second array wins on conflict) */
-  _mergeBets: function(primary, secondary) {
-    var map = new Map();
+  /** Merge two bet arrays — preserves the most complete version of each bet.
+   *  Never overwrites a graded bet with an ungraded one. */
+  _mergeBets: function(localBets, cloudBets) {
+    var merged = new Map();
     var i;
-    for (i = 0; i < primary.length; i++) {
-      if (primary[i].id) map.set(primary[i].id, primary[i]);
+
+    // Add all local bets first
+    for (i = 0; i < localBets.length; i++) {
+      var key = localBets[i].id || (localBets[i].date + '|' + localBets[i].game + '|' + localBets[i].pick);
+      if (key) merged.set(key, localBets[i]);
     }
-    for (i = 0; i < secondary.length; i++) {
-      if (secondary[i].id) map.set(secondary[i].id, secondary[i]);
+
+    // Merge cloud bets — but preserve local grading data
+    for (i = 0; i < cloudBets.length; i++) {
+      var b = cloudBets[i];
+      var key = b.id || (b.date + '|' + b.game + '|' + b.pick);
+      if (!key) continue;
+      var existing = merged.get(key);
+
+      if (!existing) {
+        merged.set(key, b);
+      } else {
+        // Merge: cloud fields as base, local fields on top (local wins)
+        var mergedBet = {};
+        var k;
+        for (k in b) { if (b.hasOwnProperty(k)) mergedBet[k] = b[k]; }
+        for (k in existing) { if (existing.hasOwnProperty(k)) mergedBet[k] = existing[k]; }
+
+        // Explicitly preserve grading — never overwrite graded with ungraded
+        if (existing.status && existing.status !== 'pending' && (!b.status || b.status === 'pending')) {
+          mergedBet.status = existing.status;
+          mergedBet.profit_units = existing.profit_units;
+          mergedBet.actual = existing.actual;
+        }
+        if (existing.pnl !== undefined && b.pnl === undefined) {
+          mergedBet.pnl = existing.pnl;
+        }
+
+        merged.set(key, mergedBet);
+      }
     }
-    // Include bets without IDs from both
-    var noId = primary.concat(secondary).filter(function(b) { return !b.id; });
-    return Array.from(map.values()).concat(noId);
+
+    // Include bets without any key from both arrays
+    var noKey = localBets.concat(cloudBets).filter(function(bet) {
+      return !bet.id && !bet.date && !bet.game && !bet.pick;
+    });
+    return Array.from(merged.values()).concat(noKey);
   }
 };
