@@ -51,14 +51,12 @@ jobs:
           restore-keys: nba-db-
 
       - name: Run NBA daily pipeline
-        continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../nba-predictor
         run: python daily_run.py
 
       - name: Export game_projections.json
-        continue-on-error: true
         working-directory: ../nba-predictor
         run: python export_game_projections.py --output $GITHUB_WORKSPACE/game_projections.json
 
@@ -220,7 +218,6 @@ jobs:
           restore-keys: nhl-model-
 
       - name: Train NHL model if needed
-        continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../nhl-predictor
@@ -233,7 +230,6 @@ jobs:
           fi
 
       - name: Run NHL predictions
-        continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../nhl-predictor
@@ -379,6 +375,44 @@ jobs:
             fi
           done
           echo "Copied $copied file(s)"
+
+      - name: Verify projection files
+        run: |
+          python3 -c "
+          import json, sys
+          from datetime import datetime, timezone
+
+          today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          errors = []
+
+          checks = [
+              ('ncaab_projections.json', 'NCAAB', 2),
+              ('nhl_game_projections.json', 'NHL', 1),
+          ]
+
+          for fname, sport, min_games in checks:
+              try:
+                  data = json.load(open(fname))
+                  games = data.get('games', [])
+                  fdate = data.get('date', '')
+                  if fdate != today:
+                      errors.append(f'{sport}: date is {fdate}, expected {today}')
+                  elif len(games) < min_games:
+                      errors.append(f'{sport}: only {len(games)} games (expected >= {min_games})')
+                  else:
+                      print(f'{sport}: OK — {len(games)} games for {fdate}')
+              except FileNotFoundError:
+                  print(f'{sport}: {fname} not found — skipping (may not have run)')
+              except Exception as e:
+                  errors.append(f'{sport}: invalid JSON — {e}')
+
+          if errors:
+              print('ERRORS:')
+              for e in errors:
+                  print(f'  {e}')
+              sys.exit(1)
+          print('All projection files valid.')
+          "
 
       - name: Commit and push
         run: |

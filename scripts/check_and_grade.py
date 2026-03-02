@@ -255,8 +255,22 @@ def load_json(path):
 
 
 def save_json(path, data):
+    # Safety guard: never reduce game count in projection files
+    if "games" in data and os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            old_count = len(existing.get("games", []))
+            new_count = len(data.get("games", []))
+            if new_count < old_count:
+                print(f"  WARNING: Refusing to save {os.path.basename(path)} — "
+                      f"would reduce games from {old_count} to {new_count}")
+                return False
+        except Exception:
+            pass  # can't read existing file, proceed with save
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+    return True
 
 
 def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=False):
