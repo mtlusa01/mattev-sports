@@ -4519,12 +4519,15 @@
       // Accumulate across archives — props may be in one, games in another
       const archivesToTry = [nextDay, date];
       let foundGames = null, foundNhl = null, foundNcaab = null, foundProps = null;
+      let embeddedResults = null;
       for (const archiveDate of archivesToTry) {
         try {
           const resp = await fetch(archiveBase + archiveDate + '.json?t=' + Date.now());
           if (!resp.ok) continue;
 
           const data = await resp.json();
+          // Capture embedded results for supplemental merge
+          if (!embeddedResults && data.results && data.results.days) embeddedResults = data.results;
           const archiveGameDate = data.game_projections?.date;
           const archiveNhlDate = data.nhl_game_projections?.date;
           const archiveNcaabDate = data.ncaab_projections?.date;
@@ -4559,9 +4562,13 @@
 
       if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || archiveProps.length > 0) {
         // Load results to merge actual outcomes into projections
+        // Re-fetch if cached version doesn't have the requested date (results may have been updated)
         if (!historicalResults) await loadHistoricalResults('nba');
+        else if (games.length > 0 && !historicalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nba');
         if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
+        else if (nhlGames.length > 0 && !nhlHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nhl');
         if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
+        else if (ncaabGames.length > 0 && !ncaabHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('ncaab');
 
         // Merge actual scores and results into projections
         if (games.length > 0 && historicalResults) {
@@ -4579,6 +4586,23 @@
           archiveProps = mergeResultsIntoProps(archiveProps, historicalResults, date);
           // For historical dates, only show props that have been graded
           archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
+        }
+
+        // Supplement: for any games still ungraded after merge, try the archive's embedded results
+        if (embeddedResults) {
+          if (games.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
+            mergeResultsIntoProjections(games, embeddedResults, date);
+          }
+          if (nhlGames.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
+            mergeResultsIntoProjections(nhlGames, embeddedResults, date);
+          }
+          if (ncaabGames.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
+            mergeResultsIntoProjections(ncaabGames, embeddedResults, date);
+          }
+          if (archiveProps.length === 0) {
+            archiveProps = mergeResultsIntoProps(archiveProps, embeddedResults, date);
+            archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
+          }
         }
 
         historicalGamesCache[date] = games;
@@ -5671,6 +5695,15 @@
         ncaabGameProjections._dataDate = data.date || '';
         ncaabBestBets = data.best_bets || [];
         if (data.team_names) ncaabTeamNames = data.team_names;
+
+        // Merge results into NCAAB game projections so W/L badges render
+        if (ncaabGameProjections.length > 0) {
+          if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
+          if (ncaabHistoricalResults) {
+            const gpDate = data.date || getLocalDateStr();
+            mergeResultsIntoProjections(ncaabGameProjections, ncaabHistoricalResults, gpDate);
+          }
+        }
 
         if (currentSport === 'ncaab') {
           // Auto-navigate to data date only if it's yesterday (post-midnight)
