@@ -1796,11 +1796,13 @@
       var maxBets = riskTolerance === 'conservative' ? 3 : riskTolerance === 'aggressive' ? 8 : 5;
       var minBets = riskTolerance === 'conservative' ? 1 : 2;
       var suggestedMin = Math.max(minBets, Math.min(maxBets, Math.ceil(Math.max(0, dailyTarget) / (unitSize * 0.3))));
-      var suggestedMax = Math.min(maxBets, suggestedMin + 2);
+      var suggestedMax = Math.max(suggestedMin + 2, Math.min(maxBets, suggestedMin + 2));
+      if (suggestedMax > maxBets) suggestedMax = maxBets;
       if (suggestedMin > suggestedMax) suggestedMax = suggestedMin;
+      var suggestedLabel = suggestedMin === suggestedMax ? suggestedMin + ' bets' : suggestedMin + '-' + suggestedMax + ' bets';
 
       h += '<div class="briefing-line"><span class="bl-icon">&#128176;</span> Max exposure: <span class="briefing-highlight">' + formatDollars(maxDailyExposure) + '</span> &mdash; <span class="briefing-highlight accent">' + formatDollars(availableToday) + '</span> available after pending</div>';
-      h += '<div class="briefing-line"><span class="bl-icon">&#127919;</span> Suggested: <span class="briefing-highlight">' + suggestedMin + '-' + suggestedMax + ' bets</span> at <span class="briefing-highlight">' + formatDollars(unitSize) + '-' + formatDollars(Math.round(unitSize * 2.5)) + '</span> per bet</div>';
+      h += '<div class="briefing-line"><span class="bl-icon">&#127919;</span> Suggested: <span class="briefing-highlight">' + suggestedLabel + '</span> at <span class="briefing-highlight">' + formatDollars(unitSize) + '-' + formatDollars(Math.round(unitSize * 2.5)) + '</span> per bet</div>';
 
       if (bestKey && bestRate > 55) {
         var bsp = sportPerf[bestKey];
