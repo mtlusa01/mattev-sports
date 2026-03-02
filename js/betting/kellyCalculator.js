@@ -65,7 +65,10 @@ const KellyCalculator = {
     let betPct = kellyPct * frac;
 
     // Cap at maxBetPct
-    betPct = Math.min(betPct, s.maxBetPct / 100);
+    const uncappedPct = betPct;
+    const capPct = s.maxBetPct / 100;
+    const capped = betPct > capPct;
+    betPct = Math.min(betPct, capPct);
 
     // Calculate dollar amount
     let amount = Math.round(s.bankroll * betPct);
@@ -78,12 +81,20 @@ const KellyCalculator = {
     const toWin = amount * b;
     const ev = (ourProb * toWin) - ((1 - ourProb) * amount);
 
+    // Uncapped Kelly amount (what you'd bet without the maxBetPct limit)
+    let uncappedAmount = Math.round(s.bankroll * uncappedPct);
+    uncappedAmount = Math.max(uncappedAmount, 5);
+    uncappedAmount = Math.ceil(uncappedAmount / 5) * 5;
+
     return {
       amount,
       units,
       method: s.kellyFraction,
       edge: edge * 100,
       ev: parseFloat(ev.toFixed(2)),
+      capped,
+      uncappedAmount,
+      kellyPct: uncappedPct * 100,
     };
   },
 

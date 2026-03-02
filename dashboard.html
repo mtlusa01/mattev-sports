@@ -1816,6 +1816,7 @@
     .rec-kelly { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 11px; color: var(--text-muted); }
     .rec-kelly-amount { font-weight: 700; color: var(--text-primary); }
     .rec-kelly-edge { color: #34d399; }
+    .rec-kelly-cap { color: #94a3b8; font-size: 10px; }
   </style>
 </head>
 <body>
@@ -2681,7 +2682,9 @@
       if (k.method === 'no-edge' || k.amount <= 0) return '';
       const tier = KellyCalculator.tier(conf, k.edge);
       if (tier === 'skip') return '';
-      return `<span class="kelly-bet-badge ${tier}" title="Kelly: $${k.amount} (${k.units}u, +${k.edge.toFixed(1)}% edge)">$${k.amount}</span>`;
+      const capNote = k.capped ? ` [capped from $${k.uncappedAmount}]` : '';
+      const title = `Kelly: $${k.amount} (${k.units}u, +${k.edge.toFixed(1)}% edge, ${k.kellyPct.toFixed(1)}% ${s.kellyFraction})${capNote}`;
+      return `<span class="kelly-bet-badge ${tier}" title="${title}">$${k.amount}</span>`;
     }
 
     /** Generate Kelly details for recommendation cards */
@@ -2697,7 +2700,8 @@
       if (k.method === 'no-edge' || k.amount <= 0) return '';
       const tier = KellyCalculator.tier(conf, k.edge);
       if (tier === 'skip') return '';
-      return `<div class="rec-kelly"><span class="kelly-bet-badge ${tier}">$${k.amount}</span> <span class="rec-kelly-amount">${k.units}u</span> <span class="rec-kelly-edge">+${k.edge.toFixed(1)}% edge</span></div>`;
+      const capLabel = k.capped ? ' <span class="rec-kelly-cap">(max)</span>' : '';
+      return `<div class="rec-kelly"><span class="kelly-bet-badge ${tier}">$${k.amount}</span>${capLabel} <span class="rec-kelly-amount">${k.units}u</span> <span class="rec-kelly-edge">+${k.edge.toFixed(1)}% edge</span></div>`;
     }
 
     function makeBetId(date, type, player, team, game, propType, pick, line) {
@@ -6113,6 +6117,18 @@
         });
       }
       renderPortfolioSummary();
+      // Kelly diagnostic — check browser console to verify settings
+      if (typeof KellyCalculator !== 'undefined') {
+        const ks = KellyCalculator.getSettings();
+        console.log('[Kelly Settings]', { kellyFraction: ks.kellyFraction, bankroll: ks.bankroll, unitSize: ks.unitSize, maxBetPct: ks.maxBetPct, riskTolerance: ks.riskTolerance });
+        const cap = ks.bankroll * (ks.maxBetPct / 100);
+        console.log('[Kelly Cap]', `maxBetPct=${ks.maxBetPct}% of $${ks.bankroll} = $${cap} cap. Any ${ks.kellyFraction} Kelly above ${ks.maxBetPct}% gets capped to $${cap}`);
+        // Example calculations
+        [60, 70, 75, 85].forEach(c => {
+          const k = KellyCalculator.calculate(c, -110);
+          console.log(`[Kelly] ${c}% conf @ -110: $${k.amount} (${k.units}u, ${k.kellyPct.toFixed(1)}% kelly, edge=${k.edge.toFixed(1)}%${k.capped ? ' CAPPED from $' + k.uncappedAmount : ''})`);
+        });
+      }
     });
   </script>
   <script src="chat-widget.js"></script>
