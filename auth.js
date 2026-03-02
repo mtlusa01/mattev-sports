@@ -50,6 +50,7 @@ function initAuth() {
 
         if (user) {
             userProfile = await getUserProfile(user.uid);
+            if (typeof DisplayFormatter !== 'undefined') DisplayFormatter.init();
             if (typeof BetStorage !== 'undefined') await BetStorage.pullFromCloud();
             db.collection('users').doc(user.uid).update({
                 lastLogin: firebase.firestore.FieldValue.serverTimestamp()
@@ -57,6 +58,7 @@ function initAuth() {
             updateNavForLoggedIn(user, userProfile);
         } else {
             userProfile = null;
+            if (typeof DisplayFormatter !== 'undefined') DisplayFormatter.init();
             updateNavForLoggedOut();
         }
     });

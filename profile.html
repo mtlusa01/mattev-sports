@@ -501,11 +501,12 @@
           <div class="field-row">
             <div>
               <span class="field-label">Display Mode</span>
-              <div class="field-hint">Choose how profits are shown on My Bets.</div>
+              <div class="field-hint">Choose how monetary values are shown across the site.</div>
             </div>
             <div class="toggle-group" id="toggle-display-mode">
-              <button class="toggle-opt active" data-val="units" onclick="saveBetTrackingSettings()">Units</button>
               <button class="toggle-opt" data-val="dollars" onclick="saveBetTrackingSettings()">Dollars</button>
+              <button class="toggle-opt" data-val="units" onclick="saveBetTrackingSettings()">Units</button>
+              <button class="toggle-opt" data-val="both" onclick="saveBetTrackingSettings()">Both</button>
             </div>
           </div>
         </div>
@@ -710,6 +711,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
   <script src="js/betting/bet-storage.js"></script>
+  <script src="js/display-utils.js"></script>
   <script>
     // ── Tab Switching ──
     function switchTab(tab) {
@@ -908,6 +910,7 @@
         bankroll: parseInt(document.getElementById('set-bankroll').value) || null,
         betSize: parseInt(document.getElementById('set-betsize').value) || 10,
         unitSize: parseInt(document.getElementById('set-unitsize').value) || 10,
+        displayMode: getToggleVal('toggle-display-mode') || 'dollars',
         sportsWeighting: {
           nba: parseInt(document.getElementById('set-nba-wt').value) ?? 7,
           ncaab: parseInt(document.getElementById('set-ncaab-wt').value) ?? 5,
@@ -964,16 +967,25 @@
     }
     function saveBetTrackingSettings() {
       var unitSize = Math.max(1, parseInt(document.getElementById('set-tracking-unitsize').value) || 10);
-      var displayMode = getToggleVal('toggle-display-mode') || 'units';
+      var displayMode = getToggleVal('toggle-display-mode') || 'dollars';
       var s = getBetTrackingSettings();
       s.unit_size = unitSize;
       s.display_mode = displayMode;
       localStorage.setItem(LS_SETTINGS, JSON.stringify(s));
+      if (typeof DisplayFormatter !== 'undefined') {
+        DisplayFormatter.mode = displayMode;
+        DisplayFormatter.unitSize = unitSize;
+      }
+      if (currentUser) {
+        db.collection('users').doc(currentUser.uid).update({
+          'investmentProfile.displayMode': displayMode
+        }).catch(function() {});
+      }
     }
     function loadBetTrackingSettings() {
       var s = getBetTrackingSettings();
       document.getElementById('set-tracking-unitsize').value = s.unit_size || 10;
-      setToggle('toggle-display-mode', s.display_mode || 'units');
+      setToggle('toggle-display-mode', s.display_mode || 'dollars');
     }
     loadBetTrackingSettings();
 

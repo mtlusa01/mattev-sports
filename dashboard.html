@@ -2639,9 +2639,11 @@
       if (k.method === 'no-edge' || k.amount <= 0) return '';
       const tier = KellyCalculator.tier(conf, k.edge);
       if (tier === 'skip') return '';
-      const capNote = k.capped ? ` [capped from $${k.uncappedAmount}]` : '';
-      const title = `Kelly: $${k.amount} (${k.units}u, +${k.edge.toFixed(1)}% edge, ${k.kellyPct.toFixed(1)}% ${s.kellyFraction})${capNote}`;
-      return `<span class="kelly-bet-badge ${tier}" title="${title}">$${k.amount}</span>`;
+      const DF = typeof DisplayFormatter !== 'undefined' ? DisplayFormatter : null;
+      const fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
+      const capNote = k.capped ? ` [capped from ${DF ? DF.stake(k.uncappedAmount) : ('$' + k.uncappedAmount)}]` : '';
+      const title = `Kelly: ${fAmt} (${k.units}u, +${k.edge.toFixed(1)}% edge, ${k.kellyPct.toFixed(1)}% ${s.kellyFraction})${capNote}`;
+      return `<span class="kelly-bet-badge ${tier}" title="${title}">${fAmt}</span>`;
     }
 
     /** Generate Kelly details for recommendation cards */
@@ -2658,7 +2660,8 @@
       const tier = KellyCalculator.tier(conf, k.edge);
       if (tier === 'skip') return '';
       const capLabel = k.capped ? ' <span class="rec-kelly-cap">(max)</span>' : '';
-      return `<div class="rec-kelly"><span class="kelly-bet-badge ${tier}">$${k.amount}</span>${capLabel} <span class="rec-kelly-amount">${k.units}u</span> <span class="rec-kelly-edge">+${k.edge.toFixed(1)}% edge</span></div>`;
+      const fAmt = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.stake(k.amount) : ('$' + k.amount);
+      return `<div class="rec-kelly"><span class="kelly-bet-badge ${tier}">${fAmt}</span>${capLabel} <span class="rec-kelly-edge">+${k.edge.toFixed(1)}% edge</span></div>`;
     }
 
     function makeBetId(date, type, player, team, game, propType, pick, line) {
@@ -2740,7 +2743,8 @@
       const profit = calcProfit(odds, units);
       const unitSize = getUnitSize();
       const el = document.getElementById('track-payout');
-      el.textContent = 'Potential Win: +' + profit.toFixed(2) + ' units ($' + Math.round(profit * unitSize) + ')';
+      const fProfit = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.pnl(profit * unitSize) : ('+$' + Math.round(profit * unitSize));
+      el.textContent = 'Potential Win: +' + profit.toFixed(2) + ' units (' + fProfit + ')';
     }
 
     function confirmTrackBet() {
@@ -5763,7 +5767,22 @@
           if (bsp && bsp.spread && g.spread_odds == null) {
             // Pick the side we recommended
             const pickIsHome = g.spread_pick && g.spread_pick.includes(g.home_team);
-            g.spread_odds = pickIsHome ? bsp.spread.home_odds : bsp.spread.away_odds;
+            const pickLine = parseFloat((g.spread_pick || '').split(/\s+/).pop()) || 0;
+            const bookLine = pickIsHome ? bsp.spread.home_line : bsp.spread.away_line;
+            // Verify book's line direction matches our pick (e.g. both +1.5 or both -1.5)
+            if (bookLine != null && pickLine !== 0 && ((bookLine > 0) !== (pickLine > 0))) {
+              // Line direction mismatch — try other books
+              for (const fallBk of Object.keys(g.odds)) {
+                const fb = g.odds[fallBk];
+                if (!fb || !fb.spread) continue;
+                const fbLine = pickIsHome ? fb.spread.home_line : fb.spread.away_line;
+                if (fbLine != null && pickLine !== 0 && ((fbLine > 0) !== (pickLine > 0))) continue;
+                g.spread_odds = pickIsHome ? fb.spread.home_odds : fb.spread.away_odds;
+                break;
+              }
+            } else {
+              g.spread_odds = pickIsHome ? bsp.spread.home_odds : bsp.spread.away_odds;
+            }
           }
           if (btp && btp.total && g.total_odds == null) {
             g.total_odds = g.total_pick === 'OVER' ? btp.total.over_odds : btp.total.under_odds;
@@ -5987,15 +6006,22 @@
       const goalBarClass = goalPct >= 100 ? 'over' : goalPct >= (now.getDate() / lastDay * 100) ? 'on-track' : 'behind';
 
       container.style.display = 'block';
+      const DF = typeof DisplayFormatter !== 'undefined' ? DisplayFormatter : null;
+      const fBankroll = DF ? DF.money(bankroll, {alwaysDollars: true}) : ('$' + bankroll.toLocaleString());
+      const fMonthPL = DF ? DF.pnl(monthPL) : (plSign + '$' + Math.abs(monthPL).toFixed(0));
+      const fGoalAmt = DF ? DF.money(monthlyTarget, {alwaysDollars: true}) : ('$' + monthlyTarget);
+      const fAvailable = DF ? DF.money(available, {alwaysDollars: true}) : ('$' + available.toLocaleString());
+      const fPending = DF ? DF.stake(pendingAmount) : ('$' + pendingAmount.toFixed(0));
+
       container.innerHTML = `<div class="portfolio-card">
         <div class="portfolio-section">
           <div class="pf-label">Bankroll</div>
-          <div class="pf-value">$${bankroll.toLocaleString()}</div>
-          <div class="pf-sub ${plClass}">${plSign}$${Math.abs(monthPL).toFixed(0)} (${plSign}${monthPct}%) this month</div>
+          <div class="pf-value">${fBankroll}</div>
+          <div class="pf-sub ${plClass}">${fMonthPL} (${plSign}${monthPct}%) this month</div>
         </div>
         <div class="portfolio-divider"></div>
         <div class="portfolio-section">
-          <div class="pf-label">Monthly Goal &middot; $${monthlyTarget}</div>
+          <div class="pf-label">Monthly Goal &middot; ${fGoalAmt}</div>
           <div class="pf-value">${goalPct}%</div>
           <div class="pf-sub neutral">${daysLeft} day${daysLeft !== 1 ? 's' : ''} left</div>
           <div class="pf-goal-bar"><div class="pf-goal-fill ${goalBarClass}" style="width:${goalPct}%"></div></div>
@@ -6004,10 +6030,10 @@
         <div class="portfolio-section">
           <div class="pf-label">Betting Capacity</div>
           <div class="pf-capacity-row">
-            <div class="pf-cap-item"><div class="pf-cap-dot available"></div><span class="pf-cap-text">Available: <span class="pf-cap-val">$${available.toLocaleString()}</span></span></div>
+            <div class="pf-cap-item"><div class="pf-cap-dot available"></div><span class="pf-cap-text">Available: <span class="pf-cap-val">${fAvailable}</span></span></div>
           </div>
           <div class="pf-capacity-row">
-            <div class="pf-cap-item"><div class="pf-cap-dot pending"></div><span class="pf-cap-text">Pending: <span class="pf-cap-val">$${pendingAmount.toFixed(0)}</span> (${pendingBets.length} bet${pendingBets.length !== 1 ? 's' : ''})</span></div>
+            <div class="pf-cap-item"><div class="pf-cap-dot pending"></div><span class="pf-cap-text">Pending: <span class="pf-cap-val">${fPending}</span> (${pendingBets.length} bet${pendingBets.length !== 1 ? 's' : ''})</span></div>
           </div>
           <div class="pf-sub neutral" style="margin-top:8px">$${unitSize}/unit</div>
         </div>
@@ -6072,6 +6098,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
   <script src="js/betting/bet-storage.js"></script>
+  <script src="js/display-utils.js"></script>
   <script src="js/betting/kellyCalculator.js"></script>
   <script>
     // Auth guard — redirect to landing page if not logged in

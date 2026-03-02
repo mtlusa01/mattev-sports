@@ -1,81 +1,81 @@
 {
   "date": "2026-03-02",
   "sport": "NHL",
-  "updated": "2026-03-02T19:37:45",
+  "updated": "2026-03-02T14:55:46",
   "games": [
     {
       "away_team": "DET",
       "home_team": "NSH",
       "game_date": "2026-03-02",
-      "proj_score": "3.2-2.4",
-      "spread_pick": "DET +1.5",
-      "spread_conf": 54.4,
-      "spread_best_book": "DK",
+      "proj_score": "3.2-2.3",
+      "spread_pick": "NSH +1.5",
+      "spread_conf": 53.6,
+      "spread_best_book": "FD",
       "total_line": 6.5,
       "total_pick": "UNDER",
-      "total_conf": 55.2,
+      "total_conf": 56.5,
       "total_best_book": "MGM",
       "ml_pick": "DET",
-      "ml_conf": 56.2,
-      "ml_best_book": "FD",
-      "home_win_prob": 32.5,
+      "ml_conf": 57.2,
+      "ml_best_book": "DK",
+      "home_win_prob": 30.9,
       "commence_time": "2026-03-02T19:00:00Z",
       "status": "live",
       "away_score": 1,
-      "home_score": 0,
+      "home_score": 1,
       "odds": {
         "FD": {
           "spread": {
-            "away_line": 1.5,
-            "away_odds": -290,
-            "home_line": -1.5,
-            "home_odds": 225
+            "away_line": -1.5,
+            "away_odds": 230,
+            "home_line": 1.5,
+            "home_odds": -320
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 106,
+            "over_odds": -106,
             "under_line": 6.5,
-            "under_odds": -130
+            "under_odds": -122
           },
           "ml": {
-            "DET": -110,
-            "NSH": -110
+            "DET": -128,
+            "NSH": 100
           }
         },
         "DK": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 225,
-            "home_line": 1.5,
-            "home_odds": -278
+            "away_line": 1.5,
+            "away_odds": -345,
+            "home_line": -1.5,
+            "home_odds": 250
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 105,
+            "over_odds": -110,
             "under_line": 6.5,
-            "under_odds": -125
+            "under_odds": -120
           },
           "ml": {
-            "DET": -112,
-            "NSH": -108
+            "DET": -115,
+            "NSH": -115
           }
         },
         "MGM": {
           "spread": {
-            "away_line": 1.5,
-            "away_odds": -275,
-            "home_line": -1.5,
-            "home_odds": 220
+            "away_line": -1.5,
+            "away_odds": 230,
+            "home_line": 1.5,
+            "home_odds": -325
           },
           "total": {
-            "over_line": 6.0,
-            "over_odds": -125,
-            "under_line": 6.0,
-            "under_odds": 105
+            "over_line": 6.5,
+            "over_odds": -120,
+            "under_line": 6.5,
+            "under_odds": -110
           },
           "ml": {
-            "DET": -110,
-            "NSH": -110
+            "DET": -118,
+            "NSH": -105
           }
         }
       },
@@ -86,18 +86,18 @@
       "away_team": "CBJ",
       "home_team": "NYR",
       "game_date": "2026-03-02",
-      "proj_score": "3.4-2.7",
-      "spread_pick": "NYR +1.5",
-      "spread_conf": 55.0,
-      "spread_best_book": "MGM",
+      "proj_score": "3.6-2.3",
+      "spread_pick": "CBJ -1.5",
+      "spread_conf": 51.5,
+      "spread_best_book": "DK",
       "total_line": 6.5,
       "total_pick": "UNDER",
-      "total_conf": 52.6,
+      "total_conf": 53.4,
       "total_best_book": "MGM",
       "ml_pick": "CBJ",
-      "ml_conf": 55.3,
+      "ml_conf": 60.0,
       "ml_best_book": "DK",
-      "home_win_prob": 26.9,
+      "home_win_prob": 19.0,
       "commence_time": "2026-03-03T00:00:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -106,27 +106,27 @@
         "FD": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 194,
+            "away_odds": 190,
             "home_line": 1.5,
-            "home_odds": -250
+            "home_odds": -245
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 114,
+            "over_odds": 112,
             "under_line": 6.5,
-            "under_odds": -140
+            "under_odds": -138
           },
           "ml": {
-            "CBJ": -126,
-            "NYR": 105
+            "CBJ": -122,
+            "NYR": 102
           }
         },
         "DK": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 190,
+            "away_odds": 200,
             "home_line": 1.5,
-            "home_odds": -230
+            "home_odds": -245
           },
           "total": {
             "over_line": 6.5,
@@ -135,16 +135,16 @@
             "under_odds": -130
           },
           "ml": {
-            "CBJ": -125,
-            "NYR": 105
+            "CBJ": -120,
+            "NYR": 100
           }
         },
         "MGM": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 185,
+            "away_odds": 195,
             "home_line": 1.5,
-            "home_odds": -225
+            "home_odds": -235
           },
           "total": {
             "over_line": 6.0,
@@ -153,8 +153,8 @@
             "under_odds": -102
           },
           "ml": {
-            "CBJ": -125,
-            "NYR": 105
+            "CBJ": -120,
+            "NYR": 100
           }
         }
       },
@@ -165,18 +165,18 @@
       "away_team": "PHI",
       "home_team": "TOR",
       "game_date": "2026-03-02",
-      "proj_score": "3.2-3.1",
+      "proj_score": "3.0-3.4",
       "spread_pick": "PHI +1.5",
-      "spread_conf": 58.6,
-      "spread_best_book": "FD",
+      "spread_conf": 56.8,
+      "spread_best_book": "MGM",
       "total_line": 6.5,
       "total_pick": "UNDER",
-      "total_conf": 51.5,
+      "total_conf": 51.0,
       "total_best_book": "MGM",
-      "ml_pick": "PHI",
-      "ml_conf": 50.5,
+      "ml_pick": "TOR",
+      "ml_conf": 52.9,
       "ml_best_book": "FD",
-      "home_win_prob": 38.0,
+      "home_win_prob": 43.0,
       "commence_time": "2026-03-03T00:30:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -185,19 +185,19 @@
         "FD": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -225,
+            "away_odds": -230,
             "home_line": -1.5,
-            "home_odds": 180
+            "home_odds": 184
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 104,
+            "over_odds": 112,
             "under_line": 6.5,
-            "under_odds": -128
+            "under_odds": -138
           },
           "ml": {
-            "PHI": 110,
-            "TOR": -132
+            "PHI": 106,
+            "TOR": -128
           }
         },
         "DK": {
@@ -209,13 +209,13 @@
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 105,
+            "over_odds": 110,
             "under_line": 6.5,
-            "under_odds": -125
+            "under_odds": -130
           },
           "ml": {
-            "PHI": 105,
-            "TOR": -125
+            "PHI": 110,
+            "TOR": -130
           }
         },
         "MGM": {
@@ -227,13 +227,13 @@
           },
           "total": {
             "over_line": 6.0,
-            "over_odds": -125,
+            "over_odds": -118,
             "under_line": 6.0,
-            "under_odds": 105
+            "under_odds": -102
           },
           "ml": {
             "PHI": 105,
-            "TOR": -125
+            "TOR": -130
           }
         }
       },
@@ -244,18 +244,18 @@
       "away_team": "DAL",
       "home_team": "VAN",
       "game_date": "2026-03-02",
-      "proj_score": "3.5-2.5",
+      "proj_score": "3.3-2.7",
       "spread_pick": "VAN +1.5",
-      "spread_conf": 53.0,
+      "spread_conf": 55.3,
       "spread_best_book": "MGM",
       "total_line": 5.5,
       "total_pick": "OVER",
-      "total_conf": 53.5,
+      "total_conf": 52.7,
       "total_best_book": "MGM",
       "ml_pick": "DAL",
-      "ml_conf": 58.0,
+      "ml_conf": 55.0,
       "ml_best_book": "MGM",
-      "home_win_prob": 19.0,
+      "home_win_prob": 26.5,
       "commence_time": "2026-03-03T03:00:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -264,9 +264,9 @@
         "FD": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 134,
+            "away_odds": 130,
             "home_line": 1.5,
-            "home_odds": -164
+            "home_odds": -162
           },
           "total": {
             "over_line": 5.5,
@@ -275,8 +275,8 @@
             "under_odds": 106
           },
           "ml": {
-            "DAL": -192,
-            "VAN": 158
+            "DAL": -196,
+            "VAN": 162
           }
         },
         "DK": {
@@ -323,18 +323,18 @@
       "away_team": "CAR",
       "home_team": "SEA",
       "game_date": "2026-03-02",
-      "proj_score": "3.1-2.4",
+      "proj_score": "3.6-2.4",
       "spread_pick": "SEA +1.5",
-      "spread_conf": 54.9,
-      "spread_best_book": "FD",
+      "spread_conf": 52.0,
+      "spread_best_book": "MGM",
       "total_line": 5.5,
-      "total_pick": "UNDER",
-      "total_conf": 50.1,
-      "total_best_book": "DK",
+      "total_pick": "OVER",
+      "total_conf": 53.2,
+      "total_best_book": "MGM",
       "ml_pick": "CAR",
-      "ml_conf": 55.4,
+      "ml_conf": 59.3,
       "ml_best_book": "FD",
-      "home_win_prob": 28.7,
+      "home_win_prob": 23.3,
       "commence_time": "2026-03-03T03:00:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -343,15 +343,15 @@
         "FD": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 128,
+            "away_odds": 136,
             "home_line": 1.5,
-            "home_odds": -158
+            "home_odds": -170
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -130,
+            "over_odds": -132,
             "under_line": 5.5,
-            "under_odds": 106
+            "under_odds": 108
           },
           "ml": {
             "CAR": -184,
@@ -379,9 +379,9 @@
         "MGM": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 135,
+            "away_odds": 125,
             "home_line": 1.5,
-            "home_odds": -160
+            "home_odds": -155
           },
           "total": {
             "over_line": 6.0,
@@ -390,8 +390,8 @@
             "under_odds": -115
           },
           "ml": {
-            "CAR": -185,
-            "SEA": 150
+            "CAR": -190,
+            "SEA": 155
           }
         }
       },
@@ -402,18 +402,18 @@
       "away_team": "COL",
       "home_team": "LAK",
       "game_date": "2026-03-02",
-      "proj_score": "3.9-1.9",
+      "proj_score": "3.5-2.2",
       "spread_pick": "COL -1.5",
-      "spread_conf": 52.9,
-      "spread_best_book": "FD",
+      "spread_conf": 51.0,
+      "spread_best_book": "DK",
       "total_line": 5.5,
       "total_pick": "OVER",
-      "total_conf": 52.2,
+      "total_conf": 51.5,
       "total_best_book": "MGM",
       "ml_pick": "COL",
-      "ml_conf": 65.8,
-      "ml_best_book": "MGM",
-      "home_win_prob": 13.5,
+      "ml_conf": 60.7,
+      "ml_best_book": "DK",
+      "home_win_prob": 22.8,
       "commence_time": "2026-03-03T03:30:00Z",
       "status": "scheduled",
       "away_score": null,
@@ -422,18 +422,18 @@
         "FD": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 146,
+            "away_odds": 142,
             "home_line": 1.5,
-            "home_odds": -180
+            "home_odds": -178
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -138,
+            "over_odds": -134,
             "under_line": 5.5,
-            "under_odds": 112
+            "under_odds": 110
           },
           "ml": {
-            "COL": -172,
+            "COL": -176,
             "LAK": 142
           }
         },
@@ -451,16 +451,16 @@
             "under_odds": 110
           },
           "ml": {
-            "COL": -166,
-            "LAK": 140
+            "COL": -170,
+            "LAK": 142
           }
         },
         "MGM": {
           "spread": {
             "away_line": -1.5,
-            "away_odds": 145,
+            "away_odds": 140,
             "home_line": 1.5,
-            "home_odds": -175
+            "home_odds": -170
           },
           "total": {
             "over_line": 6.0,
@@ -469,8 +469,8 @@
             "under_odds": -110
           },
           "ml": {
-            "COL": -165,
-            "LAK": 135
+            "COL": -170,
+            "LAK": 140
           }
         }
       },

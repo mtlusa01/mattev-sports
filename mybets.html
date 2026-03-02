@@ -11,6 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
   <script src="js/betting/bet-storage.js"></script>
+  <script src="js/display-utils.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -538,8 +539,9 @@
     <div class="top-bar">
       <div class="stats-row" id="stats-row"></div>
       <div class="display-toggle">
-        <button id="toggle-units" class="active" onclick="setDisplayMode('units')">Units</button>
         <button id="toggle-dollars" onclick="setDisplayMode('dollars')">Dollars</button>
+        <button id="toggle-units" onclick="setDisplayMode('units')">Units</button>
+        <button id="toggle-both" onclick="setDisplayMode('both')">Both</button>
       </div>
     </div>
 
@@ -765,9 +767,16 @@
       displayMode = mode;
       document.getElementById('toggle-units').classList.toggle('active', mode === 'units');
       document.getElementById('toggle-dollars').classList.toggle('active', mode === 'dollars');
+      document.getElementById('toggle-both').classList.toggle('active', mode === 'both');
+      if (typeof DisplayFormatter !== 'undefined') DisplayFormatter.mode = mode;
       const settings = getBetSettings();
       settings.display_mode = mode;
       saveBetSettings(settings);
+      if (typeof currentUser !== 'undefined' && currentUser) {
+        db.collection('users').doc(currentUser.uid).update({
+          'investmentProfile.displayMode': mode
+        }).catch(function() {});
+      }
       renderStats();
       renderBets();
       renderMonthSummary();
@@ -892,9 +901,14 @@
       const profitClass = totalUnits > 0 ? 'positive' : totalUnits < 0 ? 'negative' : 'neutral';
       const profitSign = totalUnits >= 0 ? '+' : '';
 
-      const profitDisplay = displayMode === 'units'
-        ? `${profitSign}${totalUnits.toFixed(2)}u`
-        : `${profitSign}$${totalDollars.toFixed(2)}`;
+      var profitDisplay;
+      if (typeof DisplayFormatter !== 'undefined') {
+        profitDisplay = DisplayFormatter.pnl(totalDollars);
+      } else if (displayMode === 'units') {
+        profitDisplay = profitSign + totalUnits.toFixed(2) + 'u';
+      } else {
+        profitDisplay = profitSign + '$' + totalDollars.toFixed(2);
+      }
 
       document.getElementById('stats-row').innerHTML = `
         <div class="stat-pill">
@@ -1023,9 +1037,14 @@
       const profitClass = profit > 0 ? 'positive' : profit < 0 ? 'negative' : '';
       const profitSign = profit >= 0 ? '+' : '';
 
-      const profitDisplay = displayMode === 'units'
-        ? `${profitSign}${profit.toFixed(2)}u`
-        : `${profitSign}$${(profit * unitSize).toFixed(2)}`;
+      var profitDisplay;
+      if (typeof DisplayFormatter !== 'undefined') {
+        profitDisplay = DisplayFormatter.pnl(profit * unitSize);
+      } else if (displayMode === 'units') {
+        profitDisplay = profitSign + profit.toFixed(2) + 'u';
+      } else {
+        profitDisplay = profitSign + '$' + (profit * unitSize).toFixed(2);
+      }
 
       const monthShort = MONTH_NAMES[calViewMonth].slice(0, 3);
 
@@ -1099,10 +1118,12 @@
         let profitStr = '--';
         let profitClass = 'neutral';
         if (b.profit_units != null) {
-          if (displayMode === 'units') {
+          const dollars = b.profit_units * unitSize;
+          if (typeof DisplayFormatter !== 'undefined') {
+            profitStr = DisplayFormatter.pnl(dollars);
+          } else if (displayMode === 'units') {
             profitStr = (b.profit_units >= 0 ? '+' : '') + b.profit_units.toFixed(2) + 'u';
           } else {
-            const dollars = b.profit_units * unitSize;
             profitStr = (dollars >= 0 ? '+' : '') + '$' + dollars.toFixed(2);
           }
           profitClass = b.profit_units > 0 ? 'positive' : b.profit_units < 0 ? 'negative' : 'neutral';
@@ -1230,9 +1251,10 @@
     function loadSettings() {
       const settings = getBetSettings();
       document.getElementById('unit-size').value = settings.unit_size || 10;
-      displayMode = settings.display_mode || 'units';
+      displayMode = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.mode : (settings.display_mode || 'dollars');
       document.getElementById('toggle-units').classList.toggle('active', displayMode === 'units');
       document.getElementById('toggle-dollars').classList.toggle('active', displayMode === 'dollars');
+      document.getElementById('toggle-both').classList.toggle('active', displayMode === 'both');
     }
 
     async function loadCloudSettings() {

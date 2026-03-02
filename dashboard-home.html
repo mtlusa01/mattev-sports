@@ -1301,6 +1301,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
   <script src="js/betting/bet-storage.js"></script>
+  <script src="js/display-utils.js"></script>
   <script>
     const CUTOFF = '2026-02-27';
     var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null;
@@ -1314,14 +1315,16 @@
     // ── Helpers ──
     function getTrackedBets() { return BetStorage.getBets(); }
 
-    /** Format a dollar amount: >= $100 rounds to whole dollars, < $100 shows 2 decimals */
+    /** Format a dollar amount — delegates to DisplayFormatter when available */
     function formatDollars(amount) {
+      if (typeof DisplayFormatter !== 'undefined') return DisplayFormatter.money(amount);
       var rounded = Math.round(amount * 100) / 100;
       if (Math.abs(rounded) >= 100) return '$' + Math.round(rounded).toLocaleString();
       return '$' + Math.abs(rounded).toFixed(2);
     }
-    /** Format with sign prefix: +$500 or -$42.50 */
+    /** Format with sign prefix — delegates to DisplayFormatter when available */
     function formatSignedDollars(amount) {
+      if (typeof DisplayFormatter !== 'undefined') return DisplayFormatter.pnl(amount);
       var rounded = Math.round(amount * 100) / 100;
       var abs = Math.abs(rounded);
       var val = abs >= 100 ? Math.round(abs).toLocaleString() : abs.toFixed(2);
@@ -1569,7 +1572,7 @@
       if (!container) return;
 
       // Check sessionStorage cache
-      var cacheKey = 'efe_briefing_' + getLocalDateStr(new Date());
+      var cacheKey = 'efe_briefing_' + getLocalDateStr(new Date()) + '_' + ((typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.mode : 'dollars');
       var cached = sessionStorage.getItem(cacheKey);
       if (cached && !container.dataset.forceRefresh) {
         container.innerHTML = cached;
@@ -1927,7 +1930,7 @@
     function refreshBriefing() {
       var container = document.getElementById('daily-briefing');
       if (container) container.dataset.forceRefresh = '1';
-      var cacheKey = 'efe_briefing_' + getLocalDateStr(new Date());
+      var cacheKey = 'efe_briefing_' + getLocalDateStr(new Date()) + '_' + ((typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.mode : 'dollars');
       sessionStorage.removeItem(cacheKey);
       renderDailyBriefing(currentProfile);
     }
@@ -1992,7 +1995,14 @@
           if (type === 'spread' && book.spread) {
             // Pick side: if spread_pick starts with home_team, use home_odds
             var pickTeam = (g.spread_pick || '').split(/\s+/)[0];
-            if (pickTeam === g.home_team) return book.spread.home_odds;
+            var pickLine = parseFloat((g.spread_pick || '').split(/\s+/).pop()) || 0;
+            var isHome = pickTeam === g.home_team;
+            var bookLine = isHome ? book.spread.home_line : book.spread.away_line;
+            // Verify book's line direction matches our pick
+            if (bookLine != null && pickLine !== 0 && ((bookLine > 0) !== (pickLine > 0))) {
+              continue; // try next book
+            }
+            if (isHome) return book.spread.home_odds;
             if (pickTeam === g.away_team) return book.spread.away_odds;
             return book.spread.home_odds; // fallback
           }
@@ -2372,7 +2382,7 @@
         odds: String(p.odds),
         book: '',
         notes: '',
-        kellyHint: 'Suggested: $' + p.stake + ' (Half Kelly)',
+        kellyHint: 'Suggested: ' + ((typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.stake(p.stake) : ('$' + p.stake)) + ' (Half Kelly)',
         isEdit: false
       }, function(result) {
         var now = new Date();
@@ -2515,7 +2525,8 @@
         var dp = info.pnl * unitSize;
         if (info.w > 0 || info.l > 0) {
           var pc = dp >= 0 ? 'profit' : 'loss';
-          inner += '<span class="cal-day-pnl ' + pc + '">' + formatSignedDollars(dp) + '</span>';
+          var cpnl = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.compactPnl(dp) : {text: formatSignedDollars(dp), title: ''};
+          inner += '<span class="cal-day-pnl ' + pc + '" title="' + cpnl.title + '">' + cpnl.text + '</span>';
         }
         var dc = (info.p > 0 && info.w === 0 && info.l === 0) ? 'pending' : (dp >= 0 ? 'profit' : 'loss');
         inner += '<span class="cal-day-dot ' + dc + '"></span>';
@@ -2765,11 +2776,12 @@
 
       // Portfolio Value = bankroll + realized P&L
       var portfolioVal = bankroll + pl;
-      document.getElementById('stat-portfolio').textContent = formatDollars(portfolioVal);
+      document.getElementById('stat-portfolio').textContent = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.money(portfolioVal, {alwaysDollars: true}) : formatDollars(portfolioVal);
       var portChangeEl = document.getElementById('stat-portfolio-change');
-      if (pl > 0) portChangeEl.innerHTML = '<span style="color:var(--profit)">' + formatSignedDollars(pl) + '</span> from ' + formatDollars(bankroll) + ' bankroll';
-      else if (pl < 0) portChangeEl.innerHTML = '<span style="color:var(--loss)">' + formatSignedDollars(pl) + '</span> from ' + formatDollars(bankroll) + ' bankroll';
-      else portChangeEl.textContent = formatDollars(bankroll) + ' bankroll';
+      var fmtBankroll = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.money(bankroll, {alwaysDollars: true}) : formatDollars(bankroll);
+      if (pl > 0) portChangeEl.innerHTML = '<span style="color:var(--profit)">' + formatSignedDollars(pl) + '</span> from ' + fmtBankroll + ' bankroll';
+      else if (pl < 0) portChangeEl.innerHTML = '<span style="color:var(--loss)">' + formatSignedDollars(pl) + '</span> from ' + fmtBankroll + ' bankroll';
+      else portChangeEl.textContent = fmtBankroll + ' bankroll';
 
       // Monthly P&L stat
       document.getElementById('stat-pnl').textContent = formatSignedDollars(pl);
@@ -3094,7 +3106,7 @@
           var prof = parseFloat(b.profit_units) || calcProfit(b.odds, units);
           pnlHtml = '<div class="stake-pnl profit">' + formatSignedDollars(prof * unitSize) + '</div>';
         } else if (st === 'loss') {
-          pnlHtml = '<div class="stake-pnl loss">-' + stake + '</div>';
+          pnlHtml = '<div class="stake-pnl loss">' + formatSignedDollars(-(units * unitSize)) + '</div>';
         } else if (st === 'push') {
           pnlHtml = '<div class="stake-pnl pending">$0</div>';
         } else {
