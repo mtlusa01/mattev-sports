@@ -50,6 +50,7 @@ function initAuth() {
 
         if (user) {
             userProfile = await getUserProfile(user.uid);
+            if (typeof BetStorage !== 'undefined') await BetStorage.pullFromCloud();
             db.collection('users').doc(user.uid).update({
                 lastLogin: firebase.firestore.FieldValue.serverTimestamp()
             }).catch(() => {});

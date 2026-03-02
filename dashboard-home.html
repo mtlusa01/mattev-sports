@@ -1292,6 +1292,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
+  <script src="js/betting/bet-storage.js"></script>
   <script>
     const CUTOFF = '2026-02-27';
     var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null;
@@ -1303,10 +1304,7 @@
     var calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
 
     // ── Helpers ──
-    function getTrackedBets() {
-      try { return JSON.parse(localStorage.getItem('efe_tracked_bets')) || []; }
-      catch { return []; }
-    }
+    function getTrackedBets() { return BetStorage.getBets(); }
 
     // ── Calendar Helpers ──
     function getLocalDateStr(d) {
@@ -2381,7 +2379,7 @@
         var exists = bets.some(function(b) { return b.id === bet.id; });
         if (!exists) {
           bets.push(bet);
-          localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+          BetStorage.saveBets(bets);
         }
         buildPicks();
         renderBettingCalendar();
@@ -2434,7 +2432,7 @@
           changed = true;
         }
       }
-      if (changed) localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+      if (changed) BetStorage.saveBets(bets);
     }
 
     // ── Calendar Rendering ──
@@ -2954,7 +2952,7 @@
     function removeBetById(betId) {
       var bets = getTrackedBets();
       bets = bets.filter(function(b) { return b.id !== betId; });
-      localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+      BetStorage.saveBets(bets);
       buildPicks();
       renderBettingCalendar();
       renderCalendarSummary();
@@ -2993,7 +2991,7 @@
         bet.odds = result.odds;
         bet.book = result.book;
         bet.notes = result.notes;
-        localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
+        BetStorage.saveBets(bets);
         buildPicks();
         renderBettingCalendar();
         renderCalendarSummary();

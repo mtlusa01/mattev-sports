@@ -10,6 +10,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="auth.js"></script>
+  <script src="js/betting/bet-storage.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -667,8 +668,6 @@
     let resultsData = null;
     let nhlResultsData = null;
     currentUser = null;
-    let isSyncing = false;
-    let syncDebounceTimer = null;
 
     // ── Helpers ──
     function getBetSettings() {
@@ -676,16 +675,8 @@
       catch { return {}; }
     }
     function saveBetSettings(s) { localStorage.setItem(LS_SETTINGS, JSON.stringify(s)); }
-    function getTrackedBets() {
-      try { return JSON.parse(localStorage.getItem(LS_BETS)) || []; }
-      catch { return []; }
-    }
-    function saveTrackedBets(bets, skipSync = false) {
-      localStorage.setItem(LS_BETS, JSON.stringify(bets));
-      if (!skipSync && currentUser) {
-        debouncedSyncToCloud();
-      }
-    }
+    function getTrackedBets() { return BetStorage.getBets(); }
+    function saveTrackedBets(bets, skipSync) { BetStorage.saveBets(bets, { skipSync: !!skipSync }); }
     function getUnitSize() { return getBetSettings().unit_size || 10; }
 
     // ══════════════════════════════════════════
@@ -711,175 +702,33 @@
       }
     }
 
-    function debouncedSyncToCloud() {
-      if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
-      syncDebounceTimer = setTimeout(() => syncBetsToCloud(), 1000);
-    }
-
     async function syncBetsToCloud() {
-      if (!currentUser || isSyncing) return;
-      isSyncing = true;
+      if (!currentUser) return;
       updateSyncStatus('syncing', 'Syncing...');
-
       try {
-        const localBets = getTrackedBets();
-
-        // Ensure all bets have IDs
-        for (const bet of localBets) {
-          if (!bet.id) {
-            bet.id = 'bet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-          }
-        }
-
-        // Store bets as a field in the user document (not subcollection)
-        // This works with existing Firestore security rules
-        await db.collection('users').doc(currentUser.uid).update({
-          trackedBets: localBets,
-          lastBetSync: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        localStorage.setItem(LS_LAST_SYNC, new Date().toISOString());
+        await BetStorage._syncToCloud();
         updateSyncStatus('synced', 'Synced');
-        console.log('Synced', localBets.length, 'bets to cloud');
-
-      } catch (error) {
-        console.error('Cloud sync failed:', error);
-        // If update fails (field doesn't exist), try set with merge
-        try {
-          await db.collection('users').doc(currentUser.uid).set({
-            trackedBets: getTrackedBets(),
-            lastBetSync: firebase.firestore.FieldValue.serverTimestamp()
-          }, { merge: true });
-          updateSyncStatus('synced', 'Synced');
-        } catch (retryError) {
-          console.error('Retry failed:', retryError);
-          updateSyncStatus('error', 'Sync failed');
-        }
-      } finally {
-        isSyncing = false;
+      } catch (e) {
+        updateSyncStatus('error', 'Sync failed');
       }
     }
 
     async function syncBetsFromCloud() {
-      if (!currentUser) {
-        debugLog('syncBetsFromCloud: No current user');
-        return;
-      }
-      debugLog('syncBetsFromCloud: Starting for user ' + currentUser.uid);
-      debugLog('User email: ' + currentUser.email);
+      if (!currentUser) return;
       updateSyncStatus('syncing', 'Loading...');
-
       try {
-        // Read bets from user document field
-        debugLog('Fetching user document...');
-        const userDoc = await db.collection('users').doc(currentUser.uid).get();
-        debugLog('User document exists: ' + userDoc.exists);
-
-        if (!userDoc.exists) {
-          console.log('No user document found');
-          updateSyncStatus('synced', 'Synced');
-          return;
-        }
-
-        const userData = userDoc.data();
-        let cloudBets = userData.trackedBets || [];
-
-        // Migration: Check for old subcollection structure and migrate if found
-        try {
-          const oldBetsRef = db.collection('users').doc(currentUser.uid).collection('bets');
-          const oldSnapshot = await oldBetsRef.get();
-          if (!oldSnapshot.empty) {
-            console.log('Migrating', oldSnapshot.size, 'bets from old subcollection...');
-            const oldBets = [];
-            oldSnapshot.forEach(doc => oldBets.push(doc.data()));
-
-            // Merge old subcollection bets with document field bets
-            cloudBets = mergeBets(cloudBets, oldBets);
-
-            // Save merged to document field
-            await db.collection('users').doc(currentUser.uid).update({
-              trackedBets: cloudBets
-            });
-
-            // Delete old subcollection documents
-            const batch = db.batch();
-            oldSnapshot.forEach(doc => batch.delete(doc.ref));
-            await batch.commit();
-            console.log('Migration complete');
-          }
-        } catch (migrationErr) {
-          // Subcollection access failed, likely permission denied - that's OK
-          console.log('No old bets to migrate (or no permission)');
-        }
-
-        const localBets = getTrackedBets();
-
-        // Merge cloud and local bets
-        const mergedBets = mergeBets(localBets, cloudBets);
-
-        // Save merged bets locally (skip sync to avoid loop)
-        saveTrackedBets(mergedBets, true);
-
-        console.log(`Synced: ${cloudBets.length} cloud + ${localBets.length} local = ${mergedBets.length} merged`);
+        await BetStorage.pullFromCloud();
         updateSyncStatus('synced', 'Synced');
-
-        // Re-render with synced data
         renderStats();
         renderBets();
         renderCalendar();
-
-      } catch (error) {
-        debugLog('ERROR: ' + (error.code || 'unknown'), true);
-        debugLog('Message: ' + (error.message || 'no message'), true);
-        console.error('Failed to sync from cloud:', error);
-
-        // Show error but still render local bets
-        updateSyncStatus('error', (error.code || 'error').replace('firestore/', ''));
-
-        // Render local bets anyway
+      } catch (e) {
+        console.error('Pull failed:', e);
+        updateSyncStatus('error', 'Sync failed');
         renderStats();
         renderBets();
         renderCalendar();
       }
-    }
-
-    function mergeBets(localBets, cloudBets) {
-      const betMap = new Map();
-
-      // Create unique key for each bet
-      function getBetKey(bet) {
-        if (bet.id) return bet.id;
-        // Fallback key for bets without ID
-        return `${bet.game || ''}_${bet.pick || ''}_${bet.date || ''}_${bet.type || ''}`;
-      }
-
-      // Add cloud bets first
-      for (const bet of cloudBets) {
-        const key = getBetKey(bet);
-        betMap.set(key, bet);
-      }
-
-      // Add/update with local bets (local takes precedence if newer or has updates)
-      for (const bet of localBets) {
-        const key = getBetKey(bet);
-        const existing = betMap.get(key);
-
-        if (!existing) {
-          betMap.set(key, bet);
-        } else {
-          // Compare timestamps - prefer newer
-          const localTime = bet.placed_at ? new Date(bet.placed_at).getTime() : 0;
-          const cloudTime = existing.placed_at ? new Date(existing.placed_at).getTime() : 0;
-
-          // If local is newer or has graded status, prefer local
-          if (localTime > cloudTime ||
-              (bet.status !== 'pending' && existing.status === 'pending')) {
-            betMap.set(key, bet);
-          }
-        }
-      }
-
-      return Array.from(betMap.values());
     }
 
     function showLoginPrompt(show) {

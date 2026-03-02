@@ -689,37 +689,34 @@
 
     // Tracked bets — include actual bet details so bot knows what user bet on
     try {
-      var raw = localStorage.getItem('efe_tracked_bets');
-      if (raw) {
-        var bets = JSON.parse(raw);
-        if (Array.isArray(bets) && bets.length) {
-          var todaysBets = bets.filter(function (b) { return b.date === today; });
-          var olderBets = bets.filter(function (b) { return b.date !== today; });
+      var bets = (typeof BetStorage !== 'undefined') ? BetStorage.getBets() : JSON.parse(localStorage.getItem('efe_tracked_bets') || '[]');
+      if (Array.isArray(bets) && bets.length) {
+        var todaysBets = bets.filter(function (b) { return b.date === today; });
+        var olderBets = bets.filter(function (b) { return b.date !== today; });
 
-          var betLines = [];
-          if (todaysBets.length > 0) {
-            betLines.push('Today\'s bets (' + todaysBets.length + '):');
-            todaysBets.forEach(function (b) {
-              var desc = (b.game || b.matchup || b.player || '???');
-              var pick = b.pick || (b.prop_type ? b.prop_type + ' ' + (b.direction || '') + ' ' + (b.line || '') : '');
-              var stake = b.stake ? '$' + b.stake : (b.units ? b.units + 'u' : '');
-              var odds = b.odds ? '(' + (b.odds > 0 ? '+' : '') + b.odds + ')' : '';
-              var status = b.result || b.status || 'pending';
-              betLines.push('- ' + desc + ' | ' + pick + ' ' + odds + ' ' + stake + ' | ' + status);
-            });
-          } else {
-            betLines.push('No tracked bets for today.');
-          }
-
-          if (olderBets.length > 0) {
-            var ow = olderBets.filter(function (b) { return b.result === 'win'; }).length;
-            var ol = olderBets.filter(function (b) { return b.result === 'loss'; }).length;
-            var op = olderBets.filter(function (b) { return !b.result || b.result === 'pending'; }).length;
-            betLines.push('Older bets: ' + olderBets.length + ' total (' + ow + 'W-' + ol + 'L, ' + op + ' pending)');
-          }
-
-          parts.push('\n## User\'s Tracked Bets\n' + betLines.join('\n'));
+        var betLines = [];
+        if (todaysBets.length > 0) {
+          betLines.push('Today\'s bets (' + todaysBets.length + '):');
+          todaysBets.forEach(function (b) {
+            var desc = (b.game || b.matchup || b.player || '???');
+            var pick = b.pick || (b.prop_type ? b.prop_type + ' ' + (b.direction || '') + ' ' + (b.line || '') : '');
+            var stake = b.stake ? '$' + b.stake : (b.units ? b.units + 'u' : '');
+            var odds = b.odds ? '(' + (b.odds > 0 ? '+' : '') + b.odds + ')' : '';
+            var status = b.result || b.status || 'pending';
+            betLines.push('- ' + desc + ' | ' + pick + ' ' + odds + ' ' + stake + ' | ' + status);
+          });
+        } else {
+          betLines.push('No tracked bets for today.');
         }
+
+        if (olderBets.length > 0) {
+          var ow = olderBets.filter(function (b) { return b.result === 'win'; }).length;
+          var ol = olderBets.filter(function (b) { return b.result === 'loss'; }).length;
+          var op = olderBets.filter(function (b) { return !b.result || b.result === 'pending'; }).length;
+          betLines.push('Older bets: ' + olderBets.length + ' total (' + ow + 'W-' + ol + 'L, ' + op + ' pending)');
+        }
+
+        parts.push('\n## User\'s Tracked Bets\n' + betLines.join('\n'));
       }
     } catch (e) { /* ignore */ }
 
@@ -813,13 +810,11 @@
   // ── Section I-1: Tool Execution ─────────────────────────────────
   // Helpers for localStorage bet tracking (same format as dashboard.html)
   function getTrackedBets() {
-    try { return JSON.parse(localStorage.getItem('efe_tracked_bets')) || []; }
-    catch (e) { return []; }
+    return (typeof BetStorage !== 'undefined') ? BetStorage.getBets() : (JSON.parse(localStorage.getItem('efe_tracked_bets')) || []);
   }
   function saveTrackedBets(bets) {
-    localStorage.setItem('efe_tracked_bets', JSON.stringify(bets));
-    // Trigger cloud sync if available
-    if (typeof syncBetsToCloud === 'function') syncBetsToCloud();
+    if (typeof BetStorage !== 'undefined') { BetStorage.saveBets(bets); }
+    else { localStorage.setItem('efe_tracked_bets', JSON.stringify(bets)); }
   }
   function makeChatBetId(date, type, player, game, propType, pick, line) {
     var parts = [date, type];
