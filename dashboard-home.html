@@ -1225,6 +1225,14 @@
       try { var s = JSON.parse(localStorage.getItem('efe_user_settings')) || {}; return s.unit_size || s.unitSize || 10; }
       catch(e) { return 10; }
     }
+    function normalizeResult(raw) {
+      if (!raw) return null;
+      var r = raw.toLowerCase().trim();
+      if (r === 'w' || r === 'win' || r === 'won') return 'win';
+      if (r === 'l' || r === 'loss' || r === 'lost') return 'loss';
+      if (r === 'push' || r === 'p' || r === 'draw') return 'push';
+      return r;
+    }
     function getBetsByDate() {
       var bets = getTrackedBets();
       var byDate = {};
@@ -1233,8 +1241,9 @@
         if (!b.date) continue;
         if (!byDate[b.date]) byDate[b.date] = { bets: [], w: 0, l: 0, p: 0, pnl: 0 };
         byDate[b.date].bets.push(b);
-        if (b.status === 'win') { byDate[b.date].w++; byDate[b.date].pnl += parseFloat(b.profit_units) || 0; }
-        else if (b.status === 'loss') { byDate[b.date].l++; byDate[b.date].pnl += parseFloat(b.profit_units) || 0; }
+        var st = normalizeResult(b.status);
+        if (st === 'win') { byDate[b.date].w++; byDate[b.date].pnl += parseFloat(b.profit_units) || 0; }
+        else if (st === 'loss') { byDate[b.date].l++; byDate[b.date].pnl += parseFloat(b.profit_units) || 0; }
         else { byDate[b.date].p++; }
       }
       return byDate;
@@ -1858,8 +1867,9 @@
       h += '</div>';
       for (var i = 0; i < info.bets.length; i++) {
         var bet = info.bets[i];
-        var sc = bet.status === 'win' ? 'win' : bet.status === 'loss' ? 'loss' : bet.status === 'push' ? 'push' : 'pending';
-        var sl = bet.status === 'win' ? 'W' : bet.status === 'loss' ? 'L' : bet.status === 'push' ? 'P' : '\u2014';
+        var bst = normalizeResult(bet.status);
+        var sc = bst === 'win' ? 'win' : bst === 'loss' ? 'loss' : bst === 'push' ? 'push' : 'pending';
+        var sl = bst === 'win' ? 'W' : bst === 'loss' ? 'L' : bst === 'push' ? 'P' : '\u2014';
         var sp = (bet.sport || '').toLowerCase();
         if (bet.type === 'prop') sp = 'props';
         var spLabel = bet.type === 'prop' ? 'PROP' : (bet.sport || '').toUpperCase();
@@ -1909,10 +1919,11 @@
       var w = 0, l = 0, pend = 0, tPnl = 0, dailyPnl = {};
       for (var i = 0; i < mb.length; i++) {
         var b = mb[i];
-        if (b.status === 'win') { w++; tPnl += (parseFloat(b.profit_units) || 0) * unitSize; }
-        else if (b.status === 'loss') { l++; tPnl += (parseFloat(b.profit_units) || 0) * unitSize; }
+        var st = normalizeResult(b.status);
+        if (st === 'win') { w++; tPnl += (parseFloat(b.profit_units) || 0) * unitSize; }
+        else if (st === 'loss') { l++; tPnl += (parseFloat(b.profit_units) || 0) * unitSize; }
         else { pend++; }
-        if (b.date && (b.status === 'win' || b.status === 'loss')) {
+        if (b.date && (st === 'win' || st === 'loss')) {
           if (!dailyPnl[b.date]) dailyPnl[b.date] = 0;
           dailyPnl[b.date] += (parseFloat(b.profit_units) || 0) * unitSize;
         }
@@ -1921,7 +1932,8 @@
       var wr = ts > 0 ? ((w / ts) * 100).toFixed(1) : '0.0';
       var stake = 0;
       for (var i = 0; i < mb.length; i++) {
-        if (mb[i].status === 'win' || mb[i].status === 'loss') stake += (parseFloat(mb[i].units) || 1) * unitSize;
+        var bst = normalizeResult(mb[i].status);
+        if (bst === 'win' || bst === 'loss') stake += (parseFloat(mb[i].units) || 1) * unitSize;
       }
       var roi = stake > 0 ? ((tPnl / stake) * 100).toFixed(1) : '0.0';
       var pSign = tPnl >= 0 ? '+' : '';
@@ -2037,26 +2049,27 @@
       if (!bankroll) {
         try {
           var ls = JSON.parse(localStorage.getItem('efe_user_settings')) || {};
-          bankroll = ls.bankroll || 1000;
+          bankroll = ls.bankroll || 0;
           unitSize = ls.unit_size || ls.unitSize || 10;
-        } catch (e) { bankroll = 1000; }
+        } catch (e) { bankroll = 0; }
       }
 
       document.getElementById('stat-portfolio').textContent = '$' + bankroll.toLocaleString();
 
-      // Monthly P&L
+      // Monthly P&L (normalize status to handle 'W'/'L' variants)
       var bets = getTrackedBets();
       var now = new Date();
       var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
-      var settled = bets.filter(function(b) { return b.status && b.status !== 'pending' && b.date >= monthStart; });
+      var settled = bets.filter(function(b) { var s = normalizeResult(b.status); return s && s !== 'pending' && b.date >= monthStart; });
       var pl = 0;
       for (var i = 0; i < settled.length; i++) {
         var b = settled[i];
         var stake = (parseFloat(b.units) || 1) * unitSize;
-        if (b.status === 'win') {
+        var st = normalizeResult(b.status);
+        if (st === 'win') {
           var odds = parseInt(b.odds) || -110;
           pl += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
-        } else if (b.status === 'loss') pl -= stake;
+        } else if (st === 'loss') pl -= stake;
       }
       var plSign = pl >= 0 ? '+' : '';
       document.getElementById('stat-pnl').textContent = plSign + '$' + Math.abs(pl).toFixed(0);
@@ -2069,7 +2082,7 @@
       // Monthly Goal
       document.getElementById('goal-target').textContent = '$' + monthlyTarget;
       var realized = Math.max(0, pl);
-      var pending = bets.filter(function(b) { return b.status === 'pending'; })
+      var pending = bets.filter(function(b) { var s = normalizeResult(b.status); return !s || s === 'pending'; })
         .reduce(function(sum, b) { return sum + ((parseFloat(b.units) || 1) * unitSize); }, 0);
       var remaining = Math.max(0, monthlyTarget - realized);
       var goalPct = monthlyTarget > 0 ? Math.min(100, (realized / monthlyTarget) * 100) : 0;
@@ -2313,8 +2326,9 @@
       }
 
       container.innerHTML = top10.map(function(b) {
-        var cls = b.status === 'win' ? 'win' : b.status === 'loss' ? 'loss' : b.status === 'push' ? 'push' : 'pending';
-        var badge = b.status === 'win' ? 'W' : b.status === 'loss' ? 'L' : b.status === 'push' ? 'P' : '\u2014';
+        var st = normalizeResult(b.status);
+        var cls = st === 'win' ? 'win' : st === 'loss' ? 'loss' : st === 'push' ? 'push' : 'pending';
+        var badge = st === 'win' ? 'W' : st === 'loss' ? 'L' : st === 'push' ? 'P' : '\u2014';
         var matchup = b.type === 'prop' ? (b.player || '') + ' ' + (b.prop_type || '') : (b.game || '');
         var pickDetail = (b.pick || '');
         if (b.line) pickDetail += ' ' + b.line;
@@ -2325,12 +2339,12 @@
         var units = parseFloat(b.units) || 1;
         var stake = '$' + (units * unitSize).toFixed(0);
         var pnlHtml = '';
-        if (b.status === 'win') {
+        if (st === 'win') {
           var prof = parseFloat(b.profit_units) || calcProfit(b.odds, units);
           pnlHtml = '<div class="stake-pnl profit">+$' + (prof * unitSize).toFixed(0) + '</div>';
-        } else if (b.status === 'loss') {
+        } else if (st === 'loss') {
           pnlHtml = '<div class="stake-pnl loss">-' + stake + '</div>';
-        } else if (b.status === 'push') {
+        } else if (st === 'push') {
           pnlHtml = '<div class="stake-pnl pending">$0</div>';
         } else {
           pnlHtml = '<div class="stake-pnl pending">pending</div>';

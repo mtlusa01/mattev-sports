@@ -2830,30 +2830,41 @@
       });
     }
 
+    // Normalize grading result to consistent status values
+    function normalizeResult(raw) {
+      if (!raw) return null;
+      const r = raw.toLowerCase().trim();
+      if (r === 'w' || r === 'win' || r === 'won') return 'win';
+      if (r === 'l' || r === 'loss' || r === 'lost') return 'loss';
+      if (r === 'push' || r === 'p' || r === 'draw') return 'push';
+      return r;
+    }
+
     function autoGradeTrackedBets() {
       const bets = getTrackedBets();
       if (!bets.length) return;
       let changed = false;
       for (const bet of bets) {
-        if (bet.status !== 'pending') continue;
+        if (bet.status && bet.status !== 'pending') continue;
         if (bet.type === 'prop') {
           const p = projections.find(pr => pr.player === bet.player && pr.prop === bet.prop_type
             && pr.direction === bet.pick && pr.line === bet.line);
           if (p && p.result) {
-            bet.status = p.result.toLowerCase();
+            bet.status = normalizeResult(p.result);
             bet.actual = p.actual;
             bet.profit_units = bet.status === 'win' ? calcProfit(bet.odds, bet.units)
               : bet.status === 'loss' ? -bet.units : 0;
             changed = true;
           }
         } else {
-          const gamesArr = bet.sport === 'NHL' ? nhlGameProjections : gameProjections;
+          const gamesArr = bet.sport === 'NHL' ? nhlGameProjections
+            : bet.sport === 'NCAAB' ? ncaabGameProjections : gameProjections;
           const parts = bet.game.split(' @ ');
           const g = gamesArr.find(gm => gm.away_team === parts[0] && gm.home_team === parts[1]);
           if (g) {
             const resultKey = bet.type + '_result';
             if (g[resultKey]) {
-              bet.status = g[resultKey].toLowerCase();
+              bet.status = normalizeResult(g[resultKey]);
               bet.profit_units = bet.status === 'win' ? calcProfit(bet.odds, bet.units)
                 : bet.status === 'loss' ? -bet.units : 0;
               changed = true;
@@ -5922,7 +5933,7 @@
       if (!bankroll) {
         const ls = getBetSettings();
         bankroll = ls.bankroll || 0;
-        unitSize = ls.unit_size || 10;
+        unitSize = ls.unit_size || ls.unitSize || 10;
       }
 
       // No bankroll configured — show setup prompt
@@ -5934,9 +5945,10 @@
         return;
       }
 
-      // Calculate pending bets
+      // Calculate pending bets (normalize status to handle 'W'/'L' variants)
       const bets = getTrackedBets();
-      const pendingBets = bets.filter(b => !b.result && b.status !== 'graded');
+      const nr = typeof normalizeResult === 'function' ? normalizeResult : function(s) { return s; };
+      const pendingBets = bets.filter(b => { const s = nr(b.status); return !s || s === 'pending'; });
       const pendingAmount = pendingBets.reduce((sum, b) => {
         const u = parseFloat(b.units) || 1;
         return sum + (u * unitSize);
@@ -5946,15 +5958,16 @@
       // Monthly P/L from results
       const now = new Date();
       const monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
-      const settledBets = bets.filter(b => b.result && b.date >= monthStart);
+      const settledBets = bets.filter(b => { const s = nr(b.status); return s && s !== 'pending' && b.date >= monthStart; });
       let monthPL = 0;
       for (const b of settledBets) {
         const u = parseFloat(b.units) || 1;
         const stake = u * unitSize;
-        if (b.result === 'win') {
+        const st = nr(b.status);
+        if (st === 'win') {
           const odds = parseInt(b.odds) || -110;
           monthPL += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
-        } else if (b.result === 'loss') {
+        } else if (st === 'loss') {
           monthPL -= stake;
         }
       }
