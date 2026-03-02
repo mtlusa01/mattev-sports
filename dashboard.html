@@ -5738,6 +5738,28 @@
         nhlGameProjections._dataDate = data.date || '';
         nhlBestBets = data.best_bets || [];
 
+        // Extract flat odds fields from nested odds object for rendering
+        for (const g of nhlGameProjections) {
+          if (!g.odds) continue;
+          const bestSpBook = g.spread_best_book || Object.keys(g.odds)[0];
+          const bestTotBook = g.total_best_book || Object.keys(g.odds)[0];
+          const bestMlBook = g.ml_best_book || Object.keys(g.odds)[0];
+          const bsp = g.odds[bestSpBook];
+          const btp = g.odds[bestTotBook];
+          const bmp = g.odds[bestMlBook];
+          if (bsp && bsp.spread && g.spread_odds == null) {
+            // Pick the side we recommended
+            const pickIsHome = g.spread_pick && g.spread_pick.includes(g.home_team);
+            g.spread_odds = pickIsHome ? bsp.spread.home_odds : bsp.spread.away_odds;
+          }
+          if (btp && btp.total && g.total_odds == null) {
+            g.total_odds = g.total_pick === 'OVER' ? btp.total.over_odds : btp.total.under_odds;
+          }
+          if (bmp && bmp.ml && g.ml_odds == null) {
+            g.ml_odds = bmp.ml[g.ml_pick] || null;
+          }
+        }
+
         // Merge results into NHL game projections so W/L badges render
         if (nhlGameProjections.length > 0) {
           if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
