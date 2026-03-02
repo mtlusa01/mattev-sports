@@ -1,36 +1,128 @@
 {
-  "updated": "2026-03-01T22:15:02",
+  "updated": "2026-03-02T23:31:27",
   "allTime": {
     "spreads": {
       "wins": 192,
-      "losses": 139,
+      "losses": 141,
       "pushes": 7,
-      "pct": 58.0,
-      "roi": 10.7
+      "pct": 57.7,
+      "roi": 10.1
     },
     "totals": {
-      "wins": 166,
+      "wins": 168,
       "losses": 170,
       "pushes": 2,
-      "pct": 49.4,
-      "roi": -5.7
+      "pct": 49.7,
+      "roi": -5.1
     },
     "moneylines": {
-      "wins": 217,
-      "losses": 121,
+      "wins": 218,
+      "losses": 122,
       "pushes": 0,
-      "pct": 64.2,
-      "roi": 22.6
+      "pct": 64.1,
+      "roi": 22.4
     },
     "best_bets": {
-      "wins": 31,
-      "losses": 9,
+      "wins": 33,
+      "losses": 12,
       "pushes": 0,
-      "pct": 77.5,
-      "roi": 48.0
+      "pct": 73.3,
+      "roi": 40.0
     }
   },
   "days": [
+    {
+      "date": "2026-03-02",
+      "spreads": {
+        "wins": 0,
+        "losses": 2,
+        "pushes": 0,
+        "record": "0-2",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 2,
+        "losses": 0,
+        "pushes": 0,
+        "record": "2-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 1,
+        "pushes": 0,
+        "record": "1-1",
+        "pct": 50.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 3,
+        "pushes": 0,
+        "record": "2-3",
+        "pct": 40.0
+      },
+      "picks": [
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "COFC @ UNCW",
+          "pick": "UNCW -4.0",
+          "result": "79-76",
+          "hit": false,
+          "confidence": 61,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "COFC @ UNCW",
+          "pick": "OVER 145.0",
+          "result": "79-76",
+          "hit": true,
+          "confidence": 49,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "COFC @ UNCW",
+          "pick": "UNCW",
+          "result": "79-76",
+          "hit": false,
+          "confidence": 74,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "WICH @ UTSA",
+          "pick": "UTSA +15.5",
+          "result": "84-67",
+          "hit": false,
+          "confidence": 84,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "WICH @ UTSA",
+          "pick": "UNDER 152.0",
+          "result": "84-67",
+          "hit": true,
+          "confidence": 55,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "WICH @ UTSA",
+          "pick": "WICH",
+          "result": "84-67",
+          "hit": true,
+          "confidence": 47
+        }
+      ]
+    },
     {
       "date": "2026-03-01",
       "spreads": {
