@@ -314,6 +314,40 @@
     }
     .model-bar-fill.excellent { background: linear-gradient(90deg, var(--profit), #4ade80); }
     .model-bar-fill.good { background: linear-gradient(90deg, #00d4ff, #38bdf8); }
+    .model-bar-fill.amber { background: linear-gradient(90deg, var(--warning), #fbbf24); }
+    .model-bar-fill.bad { background: linear-gradient(90deg, var(--loss), #f87171); }
+    .model-pnl { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; margin-top: 10px; }
+    .model-pnl.profit { color: var(--profit); }
+    .model-pnl.loss { color: var(--loss); }
+    .model-pnl.neutral { color: var(--text-muted); }
+    .streak-badge {
+      font-size: 12px; font-weight: 700; padding: 3px 10px;
+      border-radius: var(--radius-sm); font-family: 'JetBrains Mono', monospace;
+    }
+    .streak-badge.hot { background: var(--profit-soft); color: var(--profit); }
+    .streak-badge.cold { background: var(--loss-soft); color: var(--loss); }
+    .streak-best { font-size: 11px; color: var(--text-muted); margin-left: 8px; }
+    .today-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 18px;
+      border-left: 3px solid var(--accent); display: flex;
+      align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .today-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+    .today-stat { text-align: center; }
+    .today-stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; }
+    .today-stat-value { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .today-stat-value.profit { color: var(--profit); }
+    .today-stat-value.loss { color: var(--loss); }
+    .today-empty { color: var(--text-muted); font-size: 13px; }
+    .today-empty a { color: var(--accent-secondary); text-decoration: none; }
+    .perf-empty {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 32px;
+      text-align: center; color: var(--text-muted); font-size: 13px;
+      grid-column: 1 / -1;
+    }
+    .perf-empty a { color: var(--accent-secondary); text-decoration: none; }
 
     /* ── Recent Picks ── */
     .pick-item {
@@ -942,7 +976,7 @@
         <div class="stat-icon indigo">&#128176;</div>
         <div class="stat-label">Portfolio Value</div>
         <div class="stat-value" id="stat-portfolio">&#8212;</div>
-        <div class="stat-change">from invested capital</div>
+        <div class="stat-change" id="stat-portfolio-change">from invested capital</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon green">&#128200;</div>
@@ -952,15 +986,15 @@
       </div>
       <div class="stat-card">
         <div class="stat-icon indigo">&#127919;</div>
-        <div class="stat-label">Win Rate</div>
+        <div class="stat-label">Your Win Rate</div>
         <div class="stat-value" id="stat-winrate">&#8212;</div>
-        <div class="stat-change">across all models</div>
+        <div class="stat-change" id="stat-winrate-change">your tracked bets</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon blue">&#128203;</div>
-        <div class="stat-label">Today's Picks</div>
-        <div class="stat-value" id="stat-picks">&#8212;</div>
-        <div class="stat-change">predictions locked</div>
+        <div class="stat-label">Active Bets</div>
+        <div class="stat-value" id="stat-active">&#8212;</div>
+        <div class="stat-change" id="stat-active-change">pending results</div>
       </div>
     </div>
 
@@ -969,62 +1003,24 @@
       <!-- Left Column -->
       <div class="content-left">
 
-        <!-- Model Performance -->
+        <!-- Today's Action -->
+        <div class="section anim d3" id="today-action-section" style="display:none">
+          <div class="section-header">
+            <div class="section-title">Today's Action</div>
+          </div>
+          <div id="today-action-card"></div>
+        </div>
+
+        <!-- Your Performance -->
         <div class="section anim d3">
           <div class="section-header">
-            <div class="section-title">Model Performance</div>
-            <a href="results.html" class="section-link">View All Results &rarr;</a>
+            <div class="rec-bets-header">
+              <div class="section-title">Your Performance</div>
+              <span id="streak-badge"></span>
+            </div>
+            <a href="results.html" class="section-link">Model Results &rarr;</a>
           </div>
-          <div class="models-grid">
-            <a href="dashboard.html" class="model-card nba">
-              <div class="model-top">
-                <span class="model-badge nba">NBA</span>
-                <div class="model-status"><div class="model-dot"></div> Live</div>
-              </div>
-              <div class="model-name">NBA Games Model</div>
-              <div class="model-stats">
-                <div><div class="model-stat-label">Win Rate</div><div class="model-stat-value" id="nba-rate">0.0%</div></div>
-                <div><div class="model-stat-label">Record</div><div class="model-stat-value" id="nba-record">0-0</div></div>
-              </div>
-              <div class="model-bar"><div class="model-bar-fill good" id="nba-bar" style="width:0%"></div></div>
-            </a>
-            <a href="dashboard.html" class="model-card ncaab">
-              <div class="model-top">
-                <span class="model-badge ncaab">NCAAB</span>
-                <div class="model-status"><div class="model-dot"></div> Live</div>
-              </div>
-              <div class="model-name">NCAAB Games Model</div>
-              <div class="model-stats">
-                <div><div class="model-stat-label">Win Rate</div><div class="model-stat-value" id="ncaab-rate">0.0%</div></div>
-                <div><div class="model-stat-label">Record</div><div class="model-stat-value" id="ncaab-record">0-0</div></div>
-              </div>
-              <div class="model-bar"><div class="model-bar-fill good" id="ncaab-bar" style="width:0%"></div></div>
-            </a>
-            <a href="dashboard.html" class="model-card nhl">
-              <div class="model-top">
-                <span class="model-badge nhl">NHL</span>
-                <div class="model-status"><div class="model-dot"></div> Live</div>
-              </div>
-              <div class="model-name">NHL Games Model</div>
-              <div class="model-stats">
-                <div><div class="model-stat-label">Win Rate</div><div class="model-stat-value" id="nhl-rate">0.0%</div></div>
-                <div><div class="model-stat-label">Record</div><div class="model-stat-value" id="nhl-record">0-0</div></div>
-              </div>
-              <div class="model-bar"><div class="model-bar-fill good" id="nhl-bar" style="width:0%"></div></div>
-            </a>
-            <a href="dashboard.html#props" class="model-card props">
-              <div class="model-top">
-                <span class="model-badge props">PROPS</span>
-                <div class="model-status"><div class="model-dot"></div> Live</div>
-              </div>
-              <div class="model-name">Player Props Engine</div>
-              <div class="model-stats">
-                <div><div class="model-stat-label">Win Rate</div><div class="model-stat-value" id="props-rate">0.0%</div></div>
-                <div><div class="model-stat-label">Record</div><div class="model-stat-value" id="props-record">0-0</div></div>
-              </div>
-              <div class="model-bar"><div class="model-bar-fill good" id="props-bar" style="width:0%"></div></div>
-            </a>
-          </div>
+          <div id="user-perf-grid" class="models-grid"></div>
         </div>
 
         <!-- Today's Recommended Bets -->
@@ -1087,7 +1083,7 @@
         </div>
 
         <!-- Quick Actions -->
-        <div class="actions-card anim d4">
+        <div class="actions-card anim d4" id="quick-actions">
           <a href="dashboard.html" class="action-btn">
             <div class="action-icon indigo">&#128202;</div>
             <span class="action-text">View Today's Picks</span>
@@ -1247,6 +1243,204 @@
         else { byDate[b.date].p++; }
       }
       return byDate;
+    }
+
+    // ── User Performance ──
+    function getUserPerformance() {
+      var bets = getTrackedBets();
+      var now = new Date();
+      var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
+      var today = getLocalDateStr(now);
+      var unitSize = getUnitSize();
+
+      // All-time and monthly totals
+      var allWins = 0, allLosses = 0, allPending = 0;
+      var sports = {};
+      var todayBets = [];
+
+      for (var i = 0; i < bets.length; i++) {
+        var b = bets[i];
+        var st = normalizeResult(b.status);
+        var sport = (b.type === 'prop' ? 'PROPS' : (b.sport || 'NBA')).toUpperCase();
+        if (!sports[sport]) sports[sport] = { wins: 0, losses: 0, pending: 0, pnl: 0, staked: 0 };
+
+        var units = parseFloat(b.units) || 1;
+        var stake = units * unitSize;
+
+        if (st === 'win') {
+          allWins++;
+          sports[sport].wins++;
+          var odds = parseInt(b.odds) || -110;
+          var profit = odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
+          sports[sport].pnl += profit;
+          sports[sport].staked += stake;
+        } else if (st === 'loss') {
+          allLosses++;
+          sports[sport].losses++;
+          sports[sport].pnl -= stake;
+          sports[sport].staked += stake;
+        } else {
+          allPending++;
+          sports[sport].pending++;
+        }
+
+        if (b.date === today) todayBets.push(b);
+      }
+
+      // Streak calculation — sort graded bets by date desc then by index
+      var graded = [];
+      for (var i = 0; i < bets.length; i++) {
+        var st = normalizeResult(bets[i].status);
+        if (st === 'win' || st === 'loss') graded.push({ date: bets[i].date || '', idx: i, status: st });
+      }
+      graded.sort(function(a, b) { return b.date === a.date ? b.idx - a.idx : b.date.localeCompare(a.date); });
+
+      var streak = 0, streakType = '';
+      if (graded.length > 0) {
+        streakType = graded[0].status;
+        for (var i = 0; i < graded.length; i++) {
+          if (graded[i].status === streakType) streak++;
+          else break;
+        }
+      }
+
+      // Best streak all-time
+      var bestStreak = 0, curRun = 0;
+      for (var i = 0; i < graded.length; i++) {
+        if (graded[i].status === 'win') { curRun++; if (curRun > bestStreak) bestStreak = curRun; }
+        else curRun = 0;
+      }
+
+      // Today's stats
+      var todayGraded = 0, todayPending = 0, todayPnl = 0;
+      for (var i = 0; i < todayBets.length; i++) {
+        var st = normalizeResult(todayBets[i].status);
+        if (st === 'win' || st === 'loss') {
+          todayGraded++;
+          var units = parseFloat(todayBets[i].units) || 1;
+          var stake = units * unitSize;
+          if (st === 'win') {
+            var odds = parseInt(todayBets[i].odds) || -110;
+            todayPnl += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
+          } else todayPnl -= stake;
+        } else todayPending++;
+      }
+
+      return {
+        sports: sports,
+        allWins: allWins,
+        allLosses: allLosses,
+        allPending: allPending,
+        streak: streak,
+        streakType: streakType,
+        bestStreak: bestStreak,
+        todayBets: todayBets,
+        todayGraded: todayGraded,
+        todayPending: todayPending,
+        todayPnl: todayPnl
+      };
+    }
+
+    function renderUserPerformance(perf, unitSize) {
+      var grid = document.getElementById('user-perf-grid');
+      var streakEl = document.getElementById('streak-badge');
+
+      // Streak badge
+      if (perf.streak > 0) {
+        var icon = perf.streakType === 'win' ? '\uD83D\uDD25' : '\u2744\uFE0F';
+        var label = perf.streakType === 'win' ? 'W' : 'L';
+        var cls = perf.streakType === 'win' ? 'hot' : 'cold';
+        var best = perf.bestStreak > 0 ? '<span class="streak-best">Best: W' + perf.bestStreak + '</span>' : '';
+        streakEl.innerHTML = '<span class="streak-badge ' + cls + '">' + icon + ' ' + label + perf.streak + '</span>' + best;
+      }
+
+      // Sport cards
+      var sportKeys = Object.keys(perf.sports);
+      // Filter to sports with at least 1 bet
+      var activeSports = sportKeys.filter(function(s) {
+        var d = perf.sports[s];
+        return d.wins + d.losses + d.pending > 0;
+      });
+
+      if (activeSports.length === 0) {
+        grid.innerHTML = '<div class="perf-empty">Start tracking bets to see your performance breakdown.<br>Lock in picks from <a href="dashboard.html">Today\'s Projections</a> to get started.</div>';
+        return;
+      }
+
+      // Sort by total bets desc
+      activeSports.sort(function(a, b) {
+        var ta = perf.sports[a].wins + perf.sports[a].losses + perf.sports[a].pending;
+        var tb = perf.sports[b].wins + perf.sports[b].losses + perf.sports[b].pending;
+        return tb - ta;
+      });
+
+      var sportClasses = { NBA: 'nba', NCAAB: 'ncaab', NHL: 'nhl', PROPS: 'props' };
+      var html = '';
+      for (var i = 0; i < activeSports.length; i++) {
+        var key = activeSports[i];
+        var d = perf.sports[key];
+        var total = d.wins + d.losses;
+        var rate = total > 0 ? (d.wins / total * 100) : 0;
+        var record = d.wins + '-' + d.losses;
+        if (d.pending > 0) record += ' (' + d.pending + ' pending)';
+        var roi = d.staked > 0 ? (d.pnl / d.staked * 100).toFixed(1) : '0.0';
+        var pnlSign = d.pnl >= 0 ? '+' : '';
+        var pnlClass = d.pnl > 0 ? 'profit' : d.pnl < 0 ? 'loss' : 'neutral';
+        var barClass = rate >= 55 ? 'excellent' : rate >= 50 ? 'good' : rate >= 45 ? 'amber' : 'bad';
+        var sc = sportClasses[key] || 'nba';
+
+        html += '<div class="model-card ' + sc + '">' +
+          '<div class="model-top"><span class="model-badge ' + sc + '">' + key + '</span></div>' +
+          '<div class="model-name">' + record + '</div>' +
+          '<div class="model-stats">' +
+            '<div><div class="model-stat-label">Win Rate</div><div class="model-stat-value">' + rate.toFixed(1) + '%</div></div>' +
+            '<div><div class="model-stat-label">ROI</div><div class="model-stat-value">' + (parseFloat(roi) >= 0 ? '+' : '') + roi + '%</div></div>' +
+          '</div>' +
+          '<div class="model-bar"><div class="model-bar-fill ' + barClass + '" style="width:' + Math.max(2, rate) + '%"></div></div>' +
+          '<div class="model-pnl ' + pnlClass + '">' + pnlSign + '$' + Math.abs(d.pnl).toFixed(0) + '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    function renderTodayAction(perf) {
+      var section = document.getElementById('today-action-section');
+      var container = document.getElementById('today-action-card');
+
+      if (perf.todayBets.length === 0) {
+        section.style.display = '';
+        container.innerHTML = '<div class="today-card"><div class="today-empty">No bets placed yet today. <a href="dashboard.html">Check Today\'s Projections</a> for recommended plays.</div></div>';
+        return;
+      }
+
+      section.style.display = '';
+      var pnlSign = perf.todayPnl >= 0 ? '+' : '';
+      var pnlClass = perf.todayPnl > 0 ? 'profit' : perf.todayPnl < 0 ? 'loss' : '';
+
+      container.innerHTML = '<div class="today-card"><div class="today-stats">' +
+        '<div class="today-stat"><div class="today-stat-label">Bets Today</div><div class="today-stat-value">' + perf.todayBets.length + '</div></div>' +
+        '<div class="today-stat"><div class="today-stat-label">Graded</div><div class="today-stat-value">' + perf.todayGraded + '</div></div>' +
+        '<div class="today-stat"><div class="today-stat-label">Pending</div><div class="today-stat-value">' + perf.todayPending + '</div></div>' +
+        '<div class="today-stat"><div class="today-stat-label">P&amp;L</div><div class="today-stat-value ' + pnlClass + '">' + pnlSign + '$' + Math.abs(perf.todayPnl).toFixed(0) + '</div></div>' +
+      '</div></div>';
+    }
+
+    function renderQuickActions(perf) {
+      var container = document.getElementById('quick-actions');
+      var actions = '';
+
+      if (perf.todayBets.length === 0) {
+        actions += '<a href="dashboard.html" class="action-btn"><div class="action-icon indigo">&#128202;</div><span class="action-text">View Today\'s Picks</span><span class="action-arrow">&rarr;</span></a>';
+      } else if (perf.todayPending > 0) {
+        actions += '<a href="dashboard.html" class="action-btn"><div class="action-icon orange">&#9203;</div><span class="action-text">Check Pending Results (' + perf.todayPending + ')</span><span class="action-arrow">&rarr;</span></a>';
+      } else {
+        actions += '<a href="results.html" class="action-btn"><div class="action-icon green">&#9989;</div><span class="action-text">Review Today\'s Results</span><span class="action-arrow">&rarr;</span></a>';
+      }
+
+      actions += '<a href="dashboard.html#props" class="action-btn"><div class="action-icon orange">&#127942;</div><span class="action-text">Player Props</span><span class="action-arrow">&rarr;</span></a>';
+      actions += '<a href="profile.html" class="action-btn"><div class="action-icon green">&#9881;</div><span class="action-text">Investment Settings</span><span class="action-arrow">&rarr;</span></a>';
+
+      container.innerHTML = actions;
     }
 
     // ── Recommended Bets ──
@@ -2054,8 +2248,6 @@
         } catch (e) { bankroll = 0; }
       }
 
-      document.getElementById('stat-portfolio').textContent = '$' + bankroll.toLocaleString();
-
       // Monthly P&L (normalize status to handle 'W'/'L' variants)
       var bets = getTrackedBets();
       var now = new Date();
@@ -2071,6 +2263,16 @@
           pl += odds > 0 ? stake * (odds / 100) : stake * (100 / Math.abs(odds));
         } else if (st === 'loss') pl -= stake;
       }
+
+      // Portfolio Value = bankroll + realized P&L
+      var portfolioVal = bankroll + pl;
+      document.getElementById('stat-portfolio').textContent = '$' + portfolioVal.toLocaleString();
+      var portChangeEl = document.getElementById('stat-portfolio-change');
+      if (pl > 0) portChangeEl.innerHTML = '<span style="color:var(--profit)">' + (pl >= 0 ? '+' : '') + '$' + Math.abs(pl).toFixed(0) + '</span> from $' + bankroll.toLocaleString() + ' bankroll';
+      else if (pl < 0) portChangeEl.innerHTML = '<span style="color:var(--loss)">-$' + Math.abs(pl).toFixed(0) + '</span> from $' + bankroll.toLocaleString() + ' bankroll';
+      else portChangeEl.textContent = '$' + bankroll.toLocaleString() + ' bankroll';
+
+      // Monthly P&L stat
       var plSign = pl >= 0 ? '+' : '';
       document.getElementById('stat-pnl').textContent = plSign + '$' + Math.abs(pl).toFixed(0);
       var pnlEl = document.getElementById('stat-pnl');
@@ -2078,6 +2280,32 @@
       if (pl > 0) { pnlEl.style.color = 'var(--profit)'; pnlChangeEl.classList.add('profit'); }
       else if (pl < 0) { pnlEl.style.color = 'var(--loss)'; pnlChangeEl.classList.add('loss'); }
       pnlChangeEl.textContent = plSign + '$' + Math.abs(pl).toFixed(0) + ' this month';
+
+      // User's personal win rate
+      var perf = getUserPerformance();
+      var totalSettled = perf.allWins + perf.allLosses;
+      var userWinRate = totalSettled > 0 ? (perf.allWins / totalSettled * 100).toFixed(1) : '0.0';
+      document.getElementById('stat-winrate').textContent = userWinRate + '%';
+      var wrEl = document.getElementById('stat-winrate');
+      var wrChange = document.getElementById('stat-winrate-change');
+      if (totalSettled > 0) {
+        wrChange.textContent = perf.allWins + '-' + perf.allLosses + ' record';
+        if (parseFloat(userWinRate) >= 55) wrEl.style.color = 'var(--profit)';
+        else if (parseFloat(userWinRate) < 45) wrEl.style.color = 'var(--loss)';
+      } else {
+        wrChange.textContent = 'no graded bets yet';
+      }
+
+      // Active bets
+      document.getElementById('stat-active').textContent = perf.allPending;
+      var activeChange = document.getElementById('stat-active-change');
+      if (perf.allPending > 0) activeChange.textContent = perf.allPending + ' bet' + (perf.allPending !== 1 ? 's' : '') + ' awaiting results';
+      else activeChange.textContent = 'all bets graded';
+
+      // Render performance cards + today's action
+      renderUserPerformance(perf, unitSize);
+      renderTodayAction(perf);
+      renderQuickActions(perf);
 
       // Monthly Goal
       document.getElementById('goal-target').textContent = '$' + monthlyTarget;
@@ -2128,7 +2356,7 @@
       nhlGameJsonData = results[5].status === 'fulfilled' ? results[5].value : null;
       ncaabGameJsonData = results[6].status === 'fulfilled' ? results[6].value : null;
 
-      // Grade each model
+      // Grade each model (still needed for recommendations)
       var nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);
       var ncaabStats = grade('ncaab', ncaabData, ['spreads', 'totals', 'moneylines']);
       var nhlStats = grade('nhl', nhlData, ['spreads', 'totals', 'moneylines']);
@@ -2142,22 +2370,17 @@
         props: { w: propsStats.w, l: propsStats.l, pct: pct(propsStats) }
       };
 
-      // Overall win rate
-      var totalW = nbaStats.w + ncaabStats.w + nhlStats.w + propsStats.w;
-      var totalL = nbaStats.l + ncaabStats.l + nhlStats.l + propsStats.l;
-      var totalT = totalW + totalL;
-      var overallPct = totalT > 0 ? (totalW / totalT * 100).toFixed(1) : '0.0';
-      document.getElementById('stat-winrate').textContent = overallPct + '%';
-
-      // Today's picks
-      var now = new Date();
-      var todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
-      var pickCount = 0;
-      if (gameJsonData && gameJsonData.date === todayStr) pickCount += (gameJsonData.games || []).length;
-      if (propsJsonData && propsJsonData.date === todayStr) pickCount += (propsJsonData.projections || []).length;
-      document.getElementById('stat-picks').textContent = pickCount;
-
       autoGradeHomeTrackedBets();
+
+      // Refresh user performance after grading (may have updated bet statuses)
+      var perf = getUserPerformance();
+      var unitSize = getUnitSize();
+      renderUserPerformance(perf, unitSize);
+      renderTodayAction(perf);
+      renderQuickActions(perf);
+
+      // Re-render top stats with freshly graded data
+      if (currentProfile) renderPortfolioStats(currentProfile);
 
       // Recent picks (after grading so statuses are current)
       buildPicks();
