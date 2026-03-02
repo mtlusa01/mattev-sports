@@ -1793,12 +1793,10 @@
       var maxDailyPct = ip.maxBetPct || 5;
       var maxDailyExposure = bankroll * (maxDailyPct / 100) * 2; // double maxBetPct for daily exposure
       var availableToday = Math.max(0, maxDailyExposure - pendingAmount);
-      var maxBets = riskTolerance === 'conservative' ? 3 : riskTolerance === 'aggressive' ? 8 : 5;
-      var minBets = riskTolerance === 'conservative' ? 1 : 2;
-      var suggestedMin = Math.max(minBets, Math.min(maxBets, Math.ceil(Math.max(0, dailyTarget) / (unitSize * 0.3))));
-      var suggestedMax = Math.max(suggestedMin + 2, Math.min(maxBets, suggestedMin + 2));
-      if (suggestedMax > maxBets) suggestedMax = maxBets;
-      if (suggestedMin > suggestedMax) suggestedMax = suggestedMin;
+      var capBets = riskTolerance === 'conservative' ? 5 : riskTolerance === 'aggressive' ? 10 : 8;
+      var suggestedMin = Math.max(2, Math.ceil(Math.max(0, dailyTarget) / (unitSize * 0.3)));
+      var suggestedMax = Math.min(capBets, Math.ceil(Math.max(0, dailyTarget) / (unitSize * 0.1)));
+      if (suggestedMax <= suggestedMin) suggestedMax = suggestedMin + 2;
       var suggestedLabel = suggestedMin === suggestedMax ? suggestedMin + ' bets' : suggestedMin + '-' + suggestedMax + ' bets';
 
       h += '<div class="briefing-line"><span class="bl-icon">&#128176;</span> Max exposure: <span class="briefing-highlight">' + formatDollars(maxDailyExposure) + '</span> &mdash; <span class="briefing-highlight accent">' + formatDollars(availableToday) + '</span> available after pending</div>';
