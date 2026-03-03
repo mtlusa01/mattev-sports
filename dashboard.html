@@ -1041,6 +1041,123 @@
       body { overflow-x: hidden; }
     }
 
+    /* ── Player Projections Table ── */
+    .proj-search-bar {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px; padding: 8px 12px;
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+    }
+    .proj-search-bar input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: var(--text-primary); font-size: 14px;
+    }
+    .proj-search-bar input::placeholder { color: var(--text-muted); }
+    .proj-game-pills {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+    }
+    .proj-game-pills button {
+      padding: 5px 12px; border-radius: 16px; font-size: 12px; font-weight: 500;
+      border: 1px solid var(--border); background: var(--card-bg);
+      color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+    }
+    .proj-game-pills button:hover { border-color: var(--accent); color: var(--accent); }
+    .proj-game-pills button.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+    .proj-table-wrapper {
+      overflow-x: auto; border-radius: 8px; border: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+    .proj-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+      min-width: 800px;
+    }
+    .proj-table thead { position: sticky; top: 0; z-index: 2; }
+    .proj-table th {
+      background: var(--card-bg); padding: 10px 8px; text-align: right;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;
+      border-bottom: 2px solid var(--border); white-space: nowrap;
+      user-select: none; transition: color 0.15s;
+    }
+    .proj-table th:hover { color: var(--accent); }
+    .proj-table th.sort-active { color: var(--accent); }
+    .proj-table th:first-child, .proj-table th:nth-child(2) { text-align: left; }
+    .proj-table td {
+      padding: 9px 8px; text-align: right; border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .proj-table td:first-child, .proj-table td:nth-child(2) { text-align: left; }
+    .proj-table td:first-child {
+      font-weight: 600; color: var(--text-primary);
+      position: sticky; left: 0; z-index: 1; background: var(--bg);
+    }
+    .proj-table td:nth-child(2) {
+      position: sticky; left: 120px; z-index: 1; background: var(--bg);
+      color: var(--text-secondary); font-size: 12px;
+    }
+    .proj-table th:first-child {
+      position: sticky; left: 0; z-index: 3; background: var(--card-bg);
+    }
+    .proj-table th:nth-child(2) {
+      position: sticky; left: 120px; z-index: 3; background: var(--card-bg);
+    }
+    .proj-table tbody tr { cursor: pointer; transition: background 0.12s; }
+    .proj-table tbody tr:hover { background: rgba(99,102,241,0.06); }
+    .stat-above { color: #22c55e; }
+    .stat-below { color: #ef4444; }
+    .player-detail-panel {
+      padding: 16px; background: var(--card-bg); border-bottom: 2px solid var(--accent);
+    }
+    .player-detail-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .detail-section h4 {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text-muted); margin: 0 0 10px 0;
+    }
+    .ci-bar-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px;
+    }
+    .ci-bar-label { width: 36px; text-align: right; color: var(--text-muted); font-weight: 600; }
+    .ci-bar-track {
+      flex: 1; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px;
+      position: relative; min-width: 100px;
+    }
+    .ci-bar-fill {
+      position: absolute; top: 0; height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, #6366f1, #818cf8); opacity: 0.7;
+    }
+    .ci-bar-marker {
+      position: absolute; top: -3px; width: 3px; height: 14px;
+      background: #fff; border-radius: 2px;
+    }
+    .ci-bar-vals { font-size: 11px; color: var(--text-muted); min-width: 80px; text-align: right; }
+    .detail-context-item {
+      display: flex; justify-content: space-between; padding: 5px 0;
+      font-size: 12px; border-bottom: 1px solid var(--border);
+    }
+    .detail-context-item span:first-child { color: var(--text-muted); }
+    .detail-context-item span:last-child { font-weight: 600; color: var(--text-primary); }
+    .b2b-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+    }
+    .b2b-yes { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .b2b-no { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .proj-stale-notice {
+      background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3);
+      color: #eab308; padding: 8px 14px; border-radius: 8px;
+      font-size: 12px; margin-bottom: 12px; text-align: center;
+    }
+    @media (max-width: 768px) {
+      .proj-table { min-width: 600px; }
+      .proj-table td:first-child { min-width: 100px; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+      .proj-table td:nth-child(2) { left: 100px; }
+      .proj-table th:nth-child(2) { left: 100px; }
+      .player-detail-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Calendar Date Picker ── */
     .calendar-wrap {
       position: relative;
@@ -1912,6 +2029,7 @@
       <div class="view-tabs" id="view-tabs">
         <button class="view-tab active" data-view="game-projections">Game Projections</button>
         <button class="view-tab" data-view="player-props">Player Props</button>
+        <button class="view-tab" data-view="player-projections">Player Projections</button>
       </div>
     </div>
   </nav>
@@ -1958,7 +2076,7 @@
       </div>
       <div class="stat">
         <div class="stat-value" id="stat-avgconf">--</div>
-        <div class="stat-label">Avg Confidence</div>
+        <div class="stat-label" id="stat-avgconf-label">Avg Confidence</div>
       </div>
     </div>
   </div>
@@ -2011,6 +2129,8 @@
         <div id="game-cards-container"></div>
         <div class="game-proj-updated" id="game-proj-updated"></div>
       </div>
+
+      <div id="player-projections-view" style="display:none;"></div>
     </section>
 
   </main>
@@ -2087,18 +2207,31 @@
 
         // Update view tabs based on sport
         const propsTab = viewTabs.querySelector('[data-view="player-props"]');
+        const projTab = viewTabs.querySelector('[data-view="player-projections"]');
         if (sport === 'ncaab' || sport === 'mlb') {
-          // NCAAB/MLB: only game projections, hide player props tab
+          // NCAAB/MLB: only game projections, hide player props and projections tabs
           propsTab.style.display = 'none';
-          if (currentView === 'player-props') {
+          projTab.style.display = 'none';
+          if (currentView === 'player-props' || currentView === 'player-projections') {
+            currentView = 'game-projections';
+            document.querySelectorAll('#view-tabs .view-tab').forEach(t => {
+              t.classList.toggle('active', t.dataset.view === 'game-projections');
+            });
+          }
+        } else if (sport === 'nhl') {
+          // NHL: show props, hide player projections (NBA only)
+          propsTab.style.display = '';
+          projTab.style.display = 'none';
+          if (currentView === 'player-projections') {
             currentView = 'game-projections';
             document.querySelectorAll('#view-tabs .view-tab').forEach(t => {
               t.classList.toggle('active', t.dataset.view === 'game-projections');
             });
           }
         } else {
-          // NBA/NHL: show both tabs
+          // NBA: show all tabs
           propsTab.style.display = '';
+          projTab.style.display = '';
         }
 
         // Auto-navigate to data date if today has no games for this sport
@@ -2238,6 +2371,30 @@
       const statsBar = document.getElementById('stats-bar');
       const isGameView = currentView === 'game-projections';
 
+      if (currentView === 'player-projections') {
+        // Player projections stats
+        if (!playerProjectionsData) { statsBar.style.display = 'none'; return; }
+        const allPlayers = [];
+        for (const g of playerProjectionsData.games) {
+          for (const p of g.players) allPlayers.push(p);
+        }
+        const totalGames = playerProjectionsData.games.length;
+        const avgMin = allPlayers.length > 0 ? (allPlayers.reduce((s,p) => s + (p.proj_min || 0), 0) / allPlayers.length) : 0;
+        const topDfs = allPlayers.length > 0 ? Math.max(...allPlayers.map(p => p.dfs || 0)) : 0;
+
+        document.getElementById('stat-total').textContent = allPlayers.length;
+        document.getElementById('stat-total-label').textContent = 'Players';
+        document.getElementById('stat-posev').textContent = totalGames;
+        document.getElementById('stat-posev-label').textContent = 'Games';
+        document.getElementById('stat-bestev').textContent = avgMin > 0 ? avgMin.toFixed(1) : '--';
+        document.getElementById('stat-bestev-label').textContent = 'Avg MIN';
+        document.getElementById('stat-avgconf').textContent = topDfs > 0 ? topDfs.toFixed(1) : '--';
+        document.getElementById('stat-avgconf-label').textContent = 'Top DFS';
+        statsBar.classList.add('visible');
+        statsBar.style.display = '';
+        return;
+      }
+
       if (currentSport === 'ncaab' || currentSport === 'mlb' || ((currentSport === 'nba' || currentSport === 'nhl') && isGameView)) {
         // Game projections stats — use getActiveGameProjections() for historical support
         const allGames = getActiveGameProjections();
@@ -2292,6 +2449,7 @@
           document.getElementById('stat-bestev-label').textContent = 'Best Conf';
         }
         document.getElementById('stat-avgconf').textContent = avgConf > 0 ? avgConf.toFixed(1) + '%' : '--';
+        document.getElementById('stat-avgconf-label').textContent = 'Avg Confidence';
         statsBar.classList.add('visible');
         statsBar.style.display = '';
       } else if ((currentSport === 'nba' || currentSport === 'nhl') && !isGameView) {
@@ -2344,6 +2502,7 @@
         }
         const avgConf = activeProps.reduce((s, p) => s + (p.confidence || 0), 0) / activeProps.length;
         document.getElementById('stat-avgconf').textContent = avgConf.toFixed(1) + '%';
+        document.getElementById('stat-avgconf-label').textContent = 'Avg Confidence';
         statsBar.classList.add('visible');
         statsBar.style.display = '';
       } else {
@@ -2368,6 +2527,7 @@
     const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
     const NHL_PLAYER_PROPS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_player_props.json';
     const NHL_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_results.json';
+    const NBA_PLAYER_PROJ_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nba_player_projections.json';
 
     // ── Historical Results ──
     let historicalResults = null;
@@ -2978,6 +3138,14 @@
     let betsSortDir = 'desc';  // 'asc' or 'desc'
     let currentGameSearch = '';
     let selectedDate = getLocalDateStr(); // YYYY-MM-DD in local timezone
+
+    // ── Player Projections State ──
+    let playerProjectionsData = null;
+    let projSortCol = 'pts';
+    let projSortAsc = false;
+    let projSearchText = '';
+    let projGameFilter = null;
+    let projExpandedId = null;
 
     const PROP_CATEGORIES = [
       { key: 'all', label: 'ALL' },
@@ -4383,6 +4551,233 @@
       });
     }
 
+    // ── Player Projections ──
+    function renderPlayerProjections() {
+      const container = document.getElementById('player-projections-view');
+
+      // Fetch data if not cached
+      if (!playerProjectionsData) {
+        container.innerHTML = '<div class="empty-state" style="padding:60px 20px"><div class="empty-state-icon" style="animation:pulse-live 1s infinite">&#8987;</div><div class="empty-state-title">Loading...</div><div class="empty-state-text">Fetching player projections...</div></div>';
+        fetch(NBA_PLAYER_PROJ_URL + '?t=' + Date.now())
+          .then(r => r.json())
+          .then(data => { playerProjectionsData = data; updateStatsBar(); renderPlayerProjections(); })
+          .catch(() => { container.innerHTML = '<div class="empty-state" style="padding:60px 20px"><div class="empty-state-icon">&#9888;</div><div class="empty-state-title">Failed to load</div><div class="empty-state-text">Could not fetch player projections. Try refreshing.</div></div>'; });
+        return;
+      }
+
+      const data = playerProjectionsData;
+
+      // Stale notice
+      let staleHtml = '';
+      if (data.date) {
+        const today = getLocalDateStr();
+        if (data.date !== today) {
+          staleHtml = '<div class="proj-stale-notice">Projections from ' + data.date + ' (not yet updated for today)</div>';
+        }
+      }
+
+      // Flatten players
+      let allPlayers = [];
+      for (const g of data.games) {
+        const matchup = g.away_team + '@' + g.home_team;
+        for (const p of g.players) {
+          allPlayers.push({ ...p, matchup, _id: p.player_id || p.player });
+        }
+      }
+
+      // Collect matchups for pills
+      const matchups = [...new Set(data.games.map(g => g.away_team + '@' + g.home_team))];
+
+      // Filter by search
+      if (projSearchText) {
+        const q = projSearchText.toLowerCase();
+        allPlayers = allPlayers.filter(p => p.player.toLowerCase().includes(q) || p.team.toLowerCase().includes(q));
+      }
+
+      // Filter by game
+      if (projGameFilter) {
+        allPlayers = allPlayers.filter(p => p.matchup === projGameFilter);
+      }
+
+      // Sort
+      allPlayers.sort((a, b) => {
+        let va = a[projSortCol], vb = b[projSortCol];
+        if (projSortCol === 'player') { va = (va || '').toLowerCase(); vb = (vb || '').toLowerCase(); }
+        if (projSortCol === 'team' || projSortCol === 'opponent') { va = va || ''; vb = vb || ''; }
+        if (va == null) va = -Infinity;
+        if (vb == null) vb = -Infinity;
+        if (va < vb) return projSortAsc ? -1 : 1;
+        if (va > vb) return projSortAsc ? 1 : -1;
+        return 0;
+      });
+
+      // Column definitions
+      const cols = [
+        { key: 'player', label: 'Player' },
+        { key: 'team', label: 'Team' },
+        { key: 'opponent', label: 'vs' },
+        { key: 'proj_min', label: 'MIN' },
+        { key: 'pts', label: 'PTS' },
+        { key: 'reb', label: 'REB' },
+        { key: 'ast', label: 'AST' },
+        { key: 'fg3m', label: '3PM' },
+        { key: 'stl', label: 'STL' },
+        { key: 'blk', label: 'BLK' },
+        { key: 'tov', label: 'TO' },
+        { key: 'pra', label: 'PRA' },
+        { key: 'dfs', label: 'DFS' }
+      ];
+
+      // Helper: stat color class based on CI position
+      function statClass(p, key) {
+        if (!p.ci || !p.ci[key]) return '';
+        const [lo, hi] = p.ci[key];
+        const range = hi - lo;
+        if (range <= 0) return '';
+        const val = p[key];
+        const pct = (val - lo) / range;
+        if (pct >= 0.7) return 'stat-above';
+        if (pct <= 0.3) return 'stat-below';
+        return '';
+      }
+
+      // Search bar
+      let html = staleHtml;
+      html += '<div class="proj-search-bar"><span>&#128269;</span><input type="text" id="proj-search-input" placeholder="Search player or team..." value="' + (projSearchText || '').replace(/"/g, '&quot;') + '"></div>';
+
+      // Game pills
+      html += '<div class="proj-game-pills">';
+      html += '<button class="' + (!projGameFilter ? 'active' : '') + '" onclick="projGameFilter=null;renderPlayerProjections()">All Games</button>';
+      for (const m of matchups) {
+        html += '<button class="' + (projGameFilter === m ? 'active' : '') + '" onclick="projGameFilter=\'' + m + '\';renderPlayerProjections()">' + m + '</button>';
+      }
+      html += '</div>';
+
+      // Table
+      html += '<div class="proj-table-wrapper"><table class="proj-table"><thead><tr>';
+      for (const c of cols) {
+        const isActive = projSortCol === c.key;
+        const arrow = isActive ? (projSortAsc ? ' &#9650;' : ' &#9660;') : '';
+        html += '<th class="' + (isActive ? 'sort-active' : '') + '" onclick="toggleProjSort(\'' + c.key + '\')">' + c.label + arrow + '</th>';
+      }
+      html += '</tr></thead><tbody>';
+
+      if (allPlayers.length === 0) {
+        html += '<tr><td colspan="' + cols.length + '" style="text-align:center;padding:30px;color:var(--text-muted)">No players found</td></tr>';
+      }
+
+      for (const p of allPlayers) {
+        const isExpanded = projExpandedId === p._id;
+        // Main row
+        html += '<tr onclick="toggleProjExpand(\'' + String(p._id).replace(/'/g, "\\'") + '\')" style="' + (isExpanded ? 'background:rgba(99,102,241,0.08)' : '') + '">';
+        for (const c of cols) {
+          const val = p[c.key];
+          let cls = '';
+          if (['pts','reb','ast','fg3m','stl','blk','tov'].includes(c.key)) cls = statClass(p, c.key);
+          if (c.key === 'player') {
+            html += '<td>' + val + (p.b2b ? ' <span style="color:#ef4444;font-size:10px" title="Back-to-back">B2B</span>' : '') + '</td>';
+          } else if (c.key === 'team' || c.key === 'opponent') {
+            html += '<td>' + (val || '') + '</td>';
+          } else {
+            html += '<td class="' + cls + '">' + (val != null ? val.toFixed(1) : '--') + '</td>';
+          }
+        }
+        html += '</tr>';
+
+        // Expanded detail row
+        if (isExpanded) {
+          html += '<tr><td colspan="' + cols.length + '" style="padding:0"><div class="player-detail-panel"><div class="player-detail-grid">';
+
+          // Left: CI bars
+          html += '<div class="detail-section"><h4>Projected Stats (Confidence Intervals)</h4>';
+          const ciStats = ['pts','reb','ast','fg3m','stl','blk','tov'];
+          for (const sk of ciStats) {
+            const ci = p.ci && p.ci[sk] ? p.ci[sk] : null;
+            const val = p[sk] || 0;
+            if (!ci) {
+              html += '<div class="ci-bar-row"><span class="ci-bar-label">' + sk.toUpperCase() + '</span><span>' + val.toFixed(1) + '</span></div>';
+              continue;
+            }
+            const [lo, hi] = ci;
+            const maxVal = Math.max(hi, 1);
+            const leftPct = (lo / maxVal * 100).toFixed(1);
+            const widthPct = ((hi - lo) / maxVal * 100).toFixed(1);
+            const markerPct = (val / maxVal * 100).toFixed(1);
+            html += '<div class="ci-bar-row">';
+            html += '<span class="ci-bar-label">' + sk.toUpperCase() + '</span>';
+            html += '<div class="ci-bar-track">';
+            html += '<div class="ci-bar-fill" style="left:' + leftPct + '%;width:' + widthPct + '%"></div>';
+            html += '<div class="ci-bar-marker" style="left:' + markerPct + '%"></div>';
+            html += '</div>';
+            html += '<span class="ci-bar-vals">' + lo.toFixed(1) + ' - <b>' + val.toFixed(1) + '</b> - ' + hi.toFixed(1) + '</span>';
+            html += '</div>';
+          }
+          html += '</div>';
+
+          // Right: Game context
+          html += '<div class="detail-section"><h4>Game Context</h4>';
+          html += '<div class="detail-context-item"><span>Matchup</span><span>' + p.matchup + '</span></div>';
+          html += '<div class="detail-context-item"><span>Location</span><span>' + (p.is_home ? 'Home' : 'Away') + '</span></div>';
+          html += '<div class="detail-context-item"><span>Proj. Minutes</span><span>' + (p.proj_min || 0).toFixed(1) + '</span></div>';
+          html += '<div class="detail-context-item"><span>Back-to-Back</span><span><span class="b2b-badge ' + (p.b2b ? 'b2b-yes' : 'b2b-no') + '">' + (p.b2b ? 'Yes' : 'No') + '</span></span></div>';
+          const stability = p.minutes_stability != null ? (p.minutes_stability * 100).toFixed(0) + '%' : '--';
+          html += '<div class="detail-context-item"><span>MIN Stability</span><span>' + stability + '</span></div>';
+          html += '<div class="detail-context-item"><span>Games Played</span><span>' + (p.games_played != null ? p.games_played : '--') + '</span></div>';
+
+          // Combo stats
+          html += '<div style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border)">';
+          html += '<div class="detail-context-item"><span>PRA</span><span>' + (p.pra || 0).toFixed(1) + '</span></div>';
+          html += '<div class="detail-context-item"><span>PR</span><span>' + (p.pr || 0).toFixed(1) + '</span></div>';
+          html += '<div class="detail-context-item"><span>PA</span><span>' + (p.pa || 0).toFixed(1) + '</span></div>';
+          html += '<div class="detail-context-item"><span>DFS Score</span><span style="color:var(--accent);font-weight:700">' + (p.dfs || 0).toFixed(1) + '</span></div>';
+          html += '</div>';
+
+          html += '</div>'; // detail-section
+          html += '</div></div></td></tr>'; // grid, panel, td, tr
+        }
+      }
+
+      html += '</tbody></table></div>';
+
+      // Updated timestamp
+      if (data.updated) {
+        html += '<div class="game-proj-updated" style="margin-top:12px">Updated ' + new Date(data.updated).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + '</div>';
+      }
+
+      container.innerHTML = html;
+
+      // Attach search handler
+      const searchInput = document.getElementById('proj-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          projSearchText = this.value;
+          renderPlayerProjections();
+        });
+        // Re-focus after re-render
+        if (projSearchText) {
+          searchInput.focus();
+          searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+        }
+      }
+    }
+
+    function toggleProjSort(col) {
+      if (projSortCol === col) {
+        projSortAsc = !projSortAsc;
+      } else {
+        projSortCol = col;
+        projSortAsc = (col === 'player' || col === 'team' || col === 'opponent');
+      }
+      renderPlayerProjections();
+    }
+
+    function toggleProjExpand(id) {
+      // Coerce to match: ids may be numbers from data but strings from onclick
+      const normalId = isNaN(id) ? id : Number(id);
+      projExpandedId = projExpandedId === normalId ? null : normalId;
+      renderPlayerProjections();
+    }
+
     // ── Main Render ──
     function render() {
       const propsView = document.getElementById('player-props-view');
@@ -4396,6 +4791,18 @@
       filterRow.style.display = 'none';
       gameFilterBar.style.display = 'none';
       searchWrap.style.display = 'none';
+
+      const playerProjView = document.getElementById('player-projections-view');
+
+      if (currentView === 'player-projections') {
+        propsView.style.display = 'none';
+        gameView.style.display = 'none';
+        playerProjView.style.display = 'block';
+        selectedCard.classList.remove('visible');
+        renderPlayerProjections();
+        return;
+      }
+      playerProjView.style.display = 'none';
 
       if (currentView === 'game-projections') {
         propsView.style.display = 'none';
@@ -4570,7 +4977,9 @@
     // ── Hash Encoding ──
     // Format: #sport/subtab?params  e.g. #nba/projections, #nhl/projections, #nba/props?status=live
     function updateLocationHash() {
-      const subtab = currentView === 'player-props' ? 'props' : 'projections';
+      const subtab = currentView === 'player-props' ? 'props'
+                   : currentView === 'player-projections' ? 'player-projections'
+                   : 'projections';
       let hash = `#${currentSport}/${subtab}`;
       const params = [];
       if (currentStatusFilter !== 'all') params.push('status=' + currentStatusFilter);
@@ -4595,9 +5004,10 @@
         subtab = parts[0] || 'projections';
       }
       if (subtab === 'props') subtab = 'player-props';
+      else if (subtab === 'player-projections') subtab = 'player-projections';
       else subtab = 'game-projections';
-      // NCAAB/MLB have no props
-      if ((sport === 'ncaab' || sport === 'mlb') && subtab === 'player-props') subtab = 'game-projections';
+      // NCAAB/MLB have no props or player projections
+      if ((sport === 'ncaab' || sport === 'mlb') && subtab !== 'game-projections') subtab = 'game-projections';
       return { sport, subtab, params };
     }
 
