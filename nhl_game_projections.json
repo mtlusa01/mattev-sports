@@ -1,53 +1,114 @@
 {
-  "date": "2026-03-02",
+  "date": "2026-03-03",
   "sport": "NHL",
-  "updated": "2026-03-03T07:08:26",
+  "updated": "2026-03-03T12:51:18",
   "games": [
     {
-      "away_team": "DET",
-      "home_team": "NSH",
-      "game_date": "2026-03-02",
-      "proj_score": "3.1-2.4",
-      "spread_pick": "NSH +1.5",
-      "spread_conf": 54.3,
+      "away_team": "PIT",
+      "home_team": "BOS",
+      "game_date": "2026-03-03",
+      "proj_score": "1.6-2.3",
+      "spread_pick": "PIT +1.5",
+      "spread_conf": 55.3,
       "spread_best_book": "MGM",
       "total_line": 6.5,
       "total_pick": "UNDER",
-      "total_conf": 56.0,
-      "total_best_book": "MGM",
-      "ml_pick": "DET",
-      "ml_conf": 56.2,
-      "ml_best_book": "FD",
-      "home_win_prob": 33.0,
-      "commence_time": "2026-03-02T19:00:00Z",
-      "status": "final",
-      "away_score": 4,
-      "home_score": 2,
+      "total_conf": 65.6,
+      "total_best_book": "FD",
+      "ml_pick": "BOS",
+      "ml_conf": 54.9,
+      "ml_best_book": "MGM",
+      "home_win_prob": 73.5,
+      "commence_time": "2026-03-04T00:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
       "odds": {
-        "FD": {
+        "DK": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 210,
-            "home_line": 1.5,
-            "home_odds": -265
+            "home_line": -1.5,
+            "home_odds": 205,
+            "away_line": 1.5,
+            "away_odds": -250
           },
           "total": {
             "over_line": 6.5,
-            "over_odds": 106,
+            "over_odds": 100,
             "under_line": 6.5,
-            "under_odds": -130
+            "under_odds": -120
           },
           "ml": {
-            "DET": -114,
-            "NSH": -105
+            "BOS": -120,
+            "PIT": 100
           }
         },
+        "FD": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 198,
+            "away_line": 1.5,
+            "away_odds": -250
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -105,
+            "under_line": 6.5,
+            "under_odds": -115
+          },
+          "ml": {
+            "BOS": -120,
+            "PIT": 100
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 195,
+            "away_line": 1.5,
+            "away_odds": -235
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -105,
+            "under_line": 6.5,
+            "under_odds": -115
+          },
+          "ml": {
+            "BOS": -118,
+            "PIT": -102
+          }
+        }
+      },
+      "home_goalie": "Jeremy Swayman",
+      "away_goalie": "Stuart Skinner"
+    },
+    {
+      "away_team": "VGK",
+      "home_team": "BUF",
+      "game_date": "2026-03-03",
+      "proj_score": "3.4-3.2",
+      "spread_pick": "VGK +1.5",
+      "spread_conf": 57.9,
+      "spread_best_book": "MGM",
+      "total_line": 6.5,
+      "total_pick": "OVER",
+      "total_conf": 50.4,
+      "total_best_book": "FD",
+      "ml_pick": "VGK",
+      "ml_conf": 51.5,
+      "ml_best_book": "DK",
+      "home_win_prob": 56.8,
+      "commence_time": "2026-03-04T00:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {
         "DK": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 230,
-            "home_line": 1.5,
-            "home_odds": -285
+            "home_line": -1.5,
+            "home_odds": 185,
+            "away_line": 1.5,
+            "away_odds": -225
           },
           "total": {
             "over_line": 6.5,
@@ -56,144 +117,16 @@
             "under_odds": -125
           },
           "ml": {
-            "DET": -118,
-            "NSH": -102
+            "BUF": -148,
+            "VGK": 124
           }
         },
-        "MGM": {
-          "spread": {
-            "away_line": 1.5,
-            "away_odds": -275,
-            "home_line": -1.5,
-            "home_odds": 220
-          },
-          "total": {
-            "over_line": 6.0,
-            "over_odds": -125,
-            "under_line": 6.0,
-            "under_odds": 105
-          },
-          "ml": {
-            "DET": -115,
-            "NSH": -105
-          }
-        }
-      },
-      "home_goalie": "Juuse Saros",
-      "away_goalie": "John Gibson",
-      "spread_result": "L",
-      "total_result": "W",
-      "ml_result": "W"
-    },
-    {
-      "away_team": "CBJ",
-      "home_team": "NYR",
-      "game_date": "2026-03-02",
-      "proj_score": "3.3-2.8",
-      "spread_pick": "NYR +1.5",
-      "spread_conf": 55.7,
-      "spread_best_book": "MGM",
-      "total_line": 5.5,
-      "total_pick": "OVER",
-      "total_conf": 53.5,
-      "total_best_book": "DK",
-      "ml_pick": "CBJ",
-      "ml_conf": 54.4,
-      "ml_best_book": "FD",
-      "home_win_prob": 26.3,
-      "commence_time": "2026-03-03T00:00:00Z",
-      "status": "final",
-      "away_score": 5,
-      "home_score": 4,
-      "odds": {
         "FD": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 198,
-            "home_line": 1.5,
-            "home_odds": -250
-          },
-          "total": {
-            "over_line": 5.5,
-            "over_odds": -140,
-            "under_line": 5.5,
-            "under_odds": 114
-          },
-          "ml": {
-            "CBJ": -125,
-            "NYR": 104
-          }
-        },
-        "DK": {
-          "spread": {
-            "away_line": -1.5,
-            "away_odds": 190,
-            "home_line": 1.5,
-            "home_odds": -230
-          },
-          "total": {
-            "over_line": 6.5,
-            "over_odds": 110,
-            "under_line": 6.5,
-            "under_odds": -130
-          },
-          "ml": {
-            "CBJ": -125,
-            "NYR": 105
-          }
-        },
-        "MGM": {
-          "spread": {
-            "away_line": -1.5,
-            "away_odds": 185,
-            "home_line": 1.5,
-            "home_odds": -225
-          },
-          "total": {
-            "over_line": 6.0,
-            "over_odds": -118,
-            "under_line": 6.0,
-            "under_odds": -102
-          },
-          "ml": {
-            "CBJ": -130,
-            "NYR": 105
-          }
-        }
-      },
-      "home_goalie": "Igor Shesterkin",
-      "away_goalie": "Jet Greaves",
-      "spread_result": "W",
-      "total_result": "W",
-      "ml_result": "W"
-    },
-    {
-      "away_team": "PHI",
-      "home_team": "TOR",
-      "game_date": "2026-03-02",
-      "proj_score": "3.1-3.1",
-      "spread_pick": "PHI +1.5",
-      "spread_conf": 59.0,
-      "spread_best_book": "MGM",
-      "total_line": 6.5,
-      "total_pick": "UNDER",
-      "total_conf": 51.3,
-      "total_best_book": "MGM",
-      "ml_pick": "PHI",
-      "ml_conf": 50.0,
-      "ml_best_book": "DK",
-      "home_win_prob": 38.3,
-      "commence_time": "2026-03-03T00:30:00Z",
-      "status": "final",
-      "away_score": 3,
-      "home_score": 2,
-      "odds": {
-        "FD": {
-          "spread": {
-            "away_line": 1.5,
-            "away_odds": -225,
             "home_line": -1.5,
-            "home_odds": 180
+            "home_odds": 176,
+            "away_line": 1.5,
+            "away_odds": -225
           },
           "total": {
             "over_line": 6.5,
@@ -202,16 +135,156 @@
             "under_odds": -132
           },
           "ml": {
-            "PHI": 112,
-            "TOR": -134
+            "BUF": -140,
+            "VGK": 116
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 165,
+            "away_line": 1.5,
+            "away_odds": -200
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 100,
+            "under_line": 6.5,
+            "under_odds": -120
+          },
+          "ml": {
+            "BUF": -145,
+            "VGK": 118
+          }
+        }
+      },
+      "home_goalie": "Alex Lyon",
+      "away_goalie": "Akira Schmid"
+    },
+    {
+      "away_team": "FLA",
+      "home_team": "NJD",
+      "game_date": "2026-03-03",
+      "proj_score": "2.2-2.9",
+      "spread_pick": "FLA +1.5",
+      "spread_conf": 55.0,
+      "spread_best_book": "DK",
+      "total_line": 5.5,
+      "total_pick": "UNDER",
+      "total_conf": 52.2,
+      "total_best_book": "DK",
+      "ml_pick": "NJD",
+      "ml_conf": 55.4,
+      "ml_best_book": "FD",
+      "home_win_prob": 72.0,
+      "commence_time": "2026-03-04T00:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {
+        "DK": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -285,
+            "home_line": -1.5,
+            "home_odds": 230
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -120,
+            "under_line": 5.5,
+            "under_odds": 100
+          },
+          "ml": {
+            "FLA": -110,
+            "NJD": -110
+          }
+        },
+        "FD": {
+          "spread": {
+            "away_line": -1.5,
+            "away_odds": 210,
+            "home_line": 1.5,
+            "home_odds": -265
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -118,
+            "under_line": 5.5,
+            "under_odds": -104
+          },
+          "ml": {
+            "FLA": -113,
+            "NJD": -106
+          }
+        },
+        "MGM": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -285,
+            "home_line": -1.5,
+            "home_odds": 210
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -120,
+            "under_line": 5.5,
+            "under_odds": 100
+          },
+          "ml": {
+            "FLA": -110,
+            "NJD": -110
+          }
+        }
+      },
+      "home_goalie": "Jacob Markstrom",
+      "away_goalie": "Sergei Bobrovsky"
+    },
+    {
+      "away_team": "UTA",
+      "home_team": "WSH",
+      "game_date": "2026-03-03",
+      "proj_score": "2.4-2.9",
+      "spread_pick": "UTA +1.5",
+      "spread_conf": 56.2,
+      "spread_best_book": "MGM",
+      "total_line": 6.5,
+      "total_pick": "UNDER",
+      "total_conf": 57.1,
+      "total_best_book": "MGM",
+      "ml_pick": "WSH",
+      "ml_conf": 53.7,
+      "ml_best_book": "FD",
+      "home_win_prob": 64.1,
+      "commence_time": "2026-03-04T00:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -245,
+            "home_line": -1.5,
+            "home_odds": 194
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 106,
+            "under_line": 6.5,
+            "under_odds": -130
+          },
+          "ml": {
+            "UTA": 104,
+            "WSH": -125
           }
         },
         "DK": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -230,
+            "away_odds": -250,
             "home_line": -1.5,
-            "home_odds": 190
+            "home_odds": 205
           },
           "total": {
             "over_line": 6.5,
@@ -220,226 +293,393 @@
             "under_odds": -125
           },
           "ml": {
-            "PHI": 114,
-            "TOR": -135
+            "UTA": 105,
+            "WSH": -125
           }
         },
         "MGM": {
           "spread": {
             "away_line": 1.5,
-            "away_odds": -210,
+            "away_odds": -235,
+            "home_line": -1.5,
+            "home_odds": 190
+          },
+          "total": {
+            "over_line": 6.0,
+            "over_odds": -120,
+            "under_line": 6.0,
+            "under_odds": 100
+          },
+          "ml": {
+            "UTA": 105,
+            "WSH": -125
+          }
+        }
+      },
+      "home_goalie": "Logan Thompson",
+      "away_goalie": "Karel Vejmelka"
+    },
+    {
+      "away_team": "NSH",
+      "home_team": "CBJ",
+      "game_date": "2026-03-03",
+      "proj_score": "2.6-3.7",
+      "spread_pick": "NSH +1.5",
+      "spread_conf": 52.3,
+      "spread_best_book": "MGM",
+      "total_line": 6.5,
+      "total_pick": "UNDER",
+      "total_conf": 51.3,
+      "total_best_book": "DK",
+      "ml_pick": "CBJ",
+      "ml_conf": 58.9,
+      "ml_best_book": "FD",
+      "home_win_prob": 77.2,
+      "commence_time": "2026-03-04T00:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 186,
+            "away_line": 1.5,
+            "away_odds": -235
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 100,
+            "under_line": 6.5,
+            "under_odds": -122
+          },
+          "ml": {
+            "CBJ": -130,
+            "NSH": 108
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 190,
+            "away_line": 1.5,
+            "away_odds": -230
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 100,
+            "under_line": 6.5,
+            "under_odds": -120
+          },
+          "ml": {
+            "CBJ": -130,
+            "NSH": 110
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": -1.5,
+            "home_odds": 170,
+            "away_line": 1.5,
+            "away_odds": -210
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 100,
+            "under_line": 6.5,
+            "under_odds": -120
+          },
+          "ml": {
+            "CBJ": -135,
+            "NSH": 110
+          }
+        }
+      },
+      "home_goalie": "Jet Greaves",
+      "away_goalie": "Juuse Saros"
+    },
+    {
+      "away_team": "CHI",
+      "home_team": "WPG",
+      "game_date": "2026-03-03",
+      "proj_score": "2.7-4.0",
+      "spread_pick": "WPG -1.5",
+      "spread_conf": 51.7,
+      "spread_best_book": "DK",
+      "total_line": 5.5,
+      "total_pick": "OVER",
+      "total_conf": 57.2,
+      "total_best_book": "FD",
+      "ml_pick": "WPG",
+      "ml_conf": 59.8,
+      "ml_best_book": "MGM",
+      "home_win_prob": 77.5,
+      "commence_time": "2026-03-04T01:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {
+        "DK": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -205,
             "home_line": -1.5,
             "home_odds": 170
           },
           "total": {
-            "over_line": 6.0,
-            "over_odds": -125,
-            "under_line": 6.0,
-            "under_odds": 105
+            "over_line": 5.5,
+            "over_odds": -120,
+            "under_line": 5.5,
+            "under_odds": 100
           },
           "ml": {
-            "PHI": 110,
-            "TOR": -135
+            "CHI": 136,
+            "WPG": -162
+          }
+        },
+        "FD": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -188,
+            "home_line": -1.5,
+            "home_odds": 152
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -118,
+            "under_line": 5.5,
+            "under_odds": -104
+          },
+          "ml": {
+            "CHI": 134,
+            "WPG": -162
+          }
+        },
+        "MGM": {
+          "spread": {
+            "away_line": 1.5,
+            "away_odds": -185,
+            "home_line": -1.5,
+            "home_odds": 150
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -120,
+            "under_line": 5.5,
+            "under_odds": 100
+          },
+          "ml": {
+            "CHI": 135,
+            "WPG": -160
           }
         }
       },
-      "home_goalie": "Joseph Woll",
-      "away_goalie": "Dan Vladar",
-      "spread_result": "W",
-      "total_result": "W",
-      "ml_result": "W"
+      "home_goalie": "Connor Hellebuyck",
+      "away_goalie": "Spencer Knight"
     },
     {
       "away_team": "DAL",
-      "home_team": "VAN",
-      "game_date": "2026-03-02",
-      "proj_score": "3.6-2.5",
-      "spread_pick": "VAN +1.5",
-      "spread_conf": 52.3,
+      "home_team": "CGY",
+      "game_date": "2026-03-03",
+      "proj_score": "2.6-2.6",
+      "spread_pick": "CGY +1.5",
+      "spread_conf": 58.9,
       "spread_best_book": "MGM",
       "total_line": 5.5,
-      "total_pick": "OVER",
-      "total_conf": 53.4,
-      "total_best_book": "MGM",
+      "total_pick": "UNDER",
+      "total_conf": 52.0,
+      "total_best_book": "DK",
       "ml_pick": "DAL",
-      "ml_conf": 58.9,
-      "ml_best_book": "MGM",
-      "home_win_prob": 17.0,
-      "commence_time": "2026-03-03T03:00:00Z",
-      "status": "final",
-      "away_score": 6,
-      "home_score": 1,
+      "ml_conf": 50.1,
+      "ml_best_book": "DK",
+      "home_win_prob": 65.9,
+      "commence_time": "2026-03-04T02:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
       "odds": {
-        "FD": {
-          "spread": {
-            "away_line": -1.5,
-            "away_odds": 134,
-            "home_line": 1.5,
-            "home_odds": -164
-          },
-          "total": {
-            "over_line": 5.5,
-            "over_odds": -128,
-            "under_line": 5.5,
-            "under_odds": 104
-          },
-          "ml": {
-            "DAL": -192,
-            "VAN": 158
-          }
-        },
         "DK": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 136,
             "home_line": 1.5,
-            "home_odds": -162
+            "home_odds": -258,
+            "away_line": -1.5,
+            "away_odds": 210
           },
           "total": {
             "over_line": 5.5,
-            "over_odds": -130,
+            "over_odds": -125,
             "under_line": 5.5,
-            "under_odds": 110
+            "under_odds": 105
           },
           "ml": {
-            "DAL": -192,
-            "VAN": 160
+            "CGY": 105,
+            "DAL": -125
+          }
+        },
+        "FD": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -235,
+            "away_line": -1.5,
+            "away_odds": 186
+          },
+          "total": {
+            "over_line": 5.5,
+            "over_odds": -120,
+            "under_line": 5.5,
+            "under_odds": -102
+          },
+          "ml": {
+            "CGY": 105,
+            "DAL": -126
           }
         },
         "MGM": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 125,
             "home_line": 1.5,
-            "home_odds": -155
+            "home_odds": -225,
+            "away_line": -1.5,
+            "away_odds": 185
           },
           "total": {
             "over_line": 6.0,
-            "over_odds": -105,
+            "over_odds": 100,
             "under_line": 6.0,
-            "under_odds": -115
+            "under_odds": -120
           },
           "ml": {
-            "DAL": -190,
-            "VAN": 155
+            "CGY": 105,
+            "DAL": -130
           }
         }
       },
-      "home_goalie": "Kevin Lankinen",
-      "away_goalie": "Jake Oettinger",
-      "spread_result": "L",
-      "total_result": "W",
-      "ml_result": "W"
+      "home_goalie": "Dustin Wolf",
+      "away_goalie": "Jake Oettinger"
     },
     {
-      "away_team": "CAR",
-      "home_team": "SEA",
-      "game_date": "2026-03-02",
-      "proj_score": "3.1-2.4",
-      "spread_pick": "SEA +1.5",
-      "spread_conf": 55.0,
-      "spread_best_book": "MGM",
-      "total_line": 5.5,
+      "away_team": "OTT",
+      "home_team": "EDM",
+      "game_date": "2026-03-03",
+      "proj_score": "3.3-3.3",
+      "spread_pick": "OTT +1.5",
+      "spread_conf": 59.0,
+      "spread_best_book": "DK",
+      "total_line": 6.5,
       "total_pick": "OVER",
-      "total_conf": 50.2,
-      "total_best_book": "MGM",
-      "ml_pick": "CAR",
-      "ml_conf": 55.4,
-      "ml_best_book": "MGM",
-      "home_win_prob": 26.4,
-      "commence_time": "2026-03-03T03:00:00Z",
-      "status": "final",
-      "away_score": 1,
-      "home_score": 2,
+      "total_conf": 50.7,
+      "total_best_book": "FD",
+      "ml_pick": "OTT",
+      "ml_conf": 50.0,
+      "ml_best_book": "DK",
+      "home_win_prob": 57.3,
+      "commence_time": "2026-03-04T02:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
       "odds": {
         "FD": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 134,
-            "home_line": 1.5,
-            "home_odds": -164
+            "home_line": -1.5,
+            "home_odds": 186,
+            "away_line": 1.5,
+            "away_odds": -235
           },
           "total": {
-            "over_line": 5.5,
-            "over_odds": -140,
-            "under_line": 5.5,
-            "under_odds": 112
+            "over_line": 6.5,
+            "over_odds": -118,
+            "under_line": 6.5,
+            "under_odds": -104
           },
           "ml": {
-            "CAR": -192,
-            "SEA": 158
+            "EDM": -130,
+            "OTT": 108
           }
         },
         "DK": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 140,
-            "home_line": 1.5,
-            "home_odds": -166
+            "home_line": -1.5,
+            "home_odds": 180,
+            "away_line": 1.5,
+            "away_odds": -218
           },
           "total": {
-            "over_line": 5.5,
-            "over_odds": -130,
-            "under_line": 5.5,
-            "under_odds": 110
+            "over_line": 6.5,
+            "over_odds": -120,
+            "under_line": 6.5,
+            "under_odds": 100
           },
           "ml": {
-            "CAR": -192,
-            "SEA": 160
+            "EDM": -130,
+            "OTT": 110
           }
         },
         "MGM": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 125,
-            "home_line": 1.5,
-            "home_odds": -155
+            "home_line": -1.5,
+            "home_odds": 180,
+            "away_line": 1.5,
+            "away_odds": -220
           },
           "total": {
-            "over_line": 6.0,
-            "over_odds": -105,
-            "under_line": 6.0,
-            "under_odds": -115
+            "over_line": 6.5,
+            "over_odds": -120,
+            "under_line": 6.5,
+            "under_odds": 100
           },
           "ml": {
-            "CAR": -190,
-            "SEA": 155
+            "EDM": -130,
+            "OTT": 105
           }
         }
       },
-      "home_goalie": "Joey Daccord",
-      "away_goalie": "Brandon Bussi",
-      "spread_result": "W",
-      "total_result": "L",
-      "ml_result": "L"
+      "home_goalie": "Tristan Jarry",
+      "away_goalie": "Linus Ullmark"
     },
     {
-      "away_team": "COL",
-      "home_team": "LAK",
-      "game_date": "2026-03-02",
-      "proj_score": "4.0-1.9",
-      "spread_pick": "COL -1.5",
-      "spread_conf": 53.3,
+      "away_team": "TBL",
+      "home_team": "MIN",
+      "game_date": "2026-03-03",
+      "proj_score": "3.2-2.7",
+      "spread_pick": "MIN +1.5",
+      "spread_conf": 56.2,
       "spread_best_book": "FD",
       "total_line": 6.5,
       "total_pick": "UNDER",
-      "total_conf": 53.7,
-      "total_best_book": "DK",
-      "ml_pick": "COL",
-      "ml_conf": 66.4,
-      "ml_best_book": "FD",
-      "home_win_prob": 12.7,
-      "commence_time": "2026-03-03T03:30:00Z",
-      "status": "final",
-      "away_score": 4,
-      "home_score": 2,
+      "total_conf": 54.0,
+      "total_best_book": "MGM",
+      "ml_pick": "TBL",
+      "ml_conf": 53.7,
+      "ml_best_book": "DK",
+      "home_win_prob": 50.9,
+      "commence_time": "2026-03-04T02:30:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
       "odds": {
+        "DK": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -238,
+            "away_line": -1.5,
+            "away_odds": 195
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": 110,
+            "under_line": 6.5,
+            "under_odds": -130
+          },
+          "ml": {
+            "MIN": 110,
+            "TBL": -130
+          }
+        },
         "FD": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 148,
             "home_line": 1.5,
-            "home_odds": -184
+            "home_odds": -220,
+            "away_line": -1.5,
+            "away_odds": 176
           },
           "total": {
             "over_line": 6.5,
@@ -448,52 +688,134 @@
             "under_odds": -134
           },
           "ml": {
-            "COL": -176,
-            "LAK": 142
-          }
-        },
-        "DK": {
-          "spread": {
-            "away_line": -1.5,
-            "away_odds": 145,
-            "home_line": 1.5,
-            "home_odds": -175
-          },
-          "total": {
-            "over_line": 5.5,
-            "over_odds": -135,
-            "under_line": 5.5,
-            "under_odds": 114
-          },
-          "ml": {
-            "COL": -180,
-            "LAK": 150
+            "MIN": 110,
+            "TBL": -132
           }
         },
         "MGM": {
           "spread": {
-            "away_line": -1.5,
-            "away_odds": 135,
             "home_line": 1.5,
-            "home_odds": -160
+            "home_odds": -220,
+            "away_line": -1.5,
+            "away_odds": 180
           },
           "total": {
             "over_line": 6.0,
-            "over_odds": -115,
+            "over_odds": -120,
             "under_line": 6.0,
-            "under_odds": -105
+            "under_odds": 100
           },
           "ml": {
-            "COL": -180,
-            "LAK": 145
+            "MIN": 110,
+            "TBL": -135
           }
         }
       },
-      "home_goalie": "Darcy Kuemper",
-      "away_goalie": "Scott Wedgewood",
-      "spread_result": "W",
-      "total_result": "W",
-      "ml_result": "W"
+      "home_goalie": "Filip Gustavsson",
+      "away_goalie": "Andrei Vasilevskiy"
+    },
+    {
+      "away_team": "COL",
+      "home_team": "ANA",
+      "game_date": "2026-03-03",
+      "proj_score": "3.7-3.2",
+      "spread_pick": "ANA +1.5",
+      "spread_conf": 56.4,
+      "spread_best_book": "DK",
+      "total_line": 6.5,
+      "total_pick": "OVER",
+      "total_conf": 52.4,
+      "total_best_book": "FD",
+      "ml_pick": "COL",
+      "ml_conf": 53.5,
+      "ml_best_book": "DK",
+      "home_win_prob": 63.4,
+      "commence_time": "2026-03-04T03:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {
+        "FD": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -188,
+            "away_line": -1.5,
+            "away_odds": 148
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -118,
+            "under_line": 6.5,
+            "under_odds": -104
+          },
+          "ml": {
+            "ANA": 132,
+            "COL": -160
+          }
+        },
+        "DK": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -180,
+            "away_line": -1.5,
+            "away_odds": 150
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -125,
+            "under_line": 6.5,
+            "under_odds": 105
+          },
+          "ml": {
+            "ANA": 130,
+            "COL": -155
+          }
+        },
+        "MGM": {
+          "spread": {
+            "home_line": 1.5,
+            "home_odds": -185,
+            "away_line": -1.5,
+            "away_odds": 150
+          },
+          "total": {
+            "over_line": 6.5,
+            "over_odds": -130,
+            "under_line": 6.5,
+            "under_odds": 105
+          },
+          "ml": {
+            "ANA": 125,
+            "COL": -155
+          }
+        }
+      },
+      "home_goalie": "Lukas Dostal",
+      "away_goalie": "Scott Wedgewood"
+    },
+    {
+      "away_team": "MTL",
+      "home_team": "SJS",
+      "game_date": "2026-03-03",
+      "proj_score": "3.4-2.6",
+      "spread_pick": "MTL +1.5",
+      "spread_conf": 54.3,
+      "spread_best_book": null,
+      "total_line": 5.5,
+      "total_pick": "OVER",
+      "total_conf": 52,
+      "total_best_book": null,
+      "ml_pick": "MTL",
+      "ml_conf": 56.2,
+      "ml_best_book": null,
+      "home_win_prob": 39.8,
+      "commence_time": "2026-03-04T03:00:00Z",
+      "status": "scheduled",
+      "away_score": null,
+      "home_score": null,
+      "odds": {},
+      "home_goalie": "Yaroslav Askarov",
+      "away_goalie": "Jakub Dobes"
     }
   ]
 }
