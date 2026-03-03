@@ -299,6 +299,10 @@ def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=Fal
     if not scores:
         return False, f"{sport_label}: no ESPN scores available"
 
+    # IMPORTANT: This loop only updates score/status/result fields.
+    # It NEVER modifies prediction values (spread_pick, spread_conf,
+    # total_pick, total_line, ml_pick, ml_conf, proj_* fields, etc.)
+    # so locked projections stay intact through grading.
     changed = False
     graded_games = []
     live_updates = 0

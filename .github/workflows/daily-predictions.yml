@@ -436,26 +436,70 @@ jobs:
           print(f'Created {archive_path}: {archive[\"summary\"]}')
           "
 
-      - name: Copy JSON files into repo
+      - name: Copy files with projection lock check
         run: |
-          copied=0
-          for f in \
-            nba-outputs/projections.json \
-            nba-outputs/game_projections.json \
-            nba-outputs/results.json \
-            ncaab-outputs/ncaab_projections.json \
-            ncaab-outputs/ncaab_results.json \
-            nhl-outputs/nhl_game_projections.json \
-            nhl-outputs/nhl_results.json \
-            mlb-outputs/mlb_game_projections.json \
-            mlb-outputs/mlb_results.json; do
-            if [ -f "$f" ]; then
-              cp "$f" .
-              echo "Copied $(basename $f)"
-              copied=$((copied + 1))
-            fi
-          done
-          echo "Copied $copied file(s)"
+          python3 << 'LOCK_CHECK'
+          import json, os, shutil
+
+          # Projection files: lock if same date + has games already published
+          PROJ_FILES = {
+              "nba-outputs/game_projections.json": "game_projections.json",
+              "ncaab-outputs/ncaab_projections.json": "ncaab_projections.json",
+              "nhl-outputs/nhl_game_projections.json": "nhl_game_projections.json",
+              "mlb-outputs/mlb_game_projections.json": "mlb_game_projections.json",
+          }
+
+          # Results + props: always copy (they accumulate grading data)
+          ALWAYS_COPY = [
+              "nba-outputs/projections.json",
+              "nba-outputs/results.json",
+              "ncaab-outputs/ncaab_results.json",
+              "nhl-outputs/nhl_results.json",
+              "mlb-outputs/mlb_results.json",
+          ]
+
+          copied = 0
+          locked = 0
+
+          for src, dst in PROJ_FILES.items():
+              if not os.path.exists(src):
+                  continue
+              try:
+                  new_data = json.load(open(src))
+                  new_date = new_data.get("date", "")
+                  new_count = len(new_data.get("predictions", new_data.get("games", [])))
+              except Exception:
+                  continue
+
+              # Lock check: if existing file has same date AND games, skip
+              if os.path.exists(dst):
+                  try:
+                      old_data = json.load(open(dst))
+                      old_date = old_data.get("date", "")
+                      old_count = len(old_data.get("predictions", old_data.get("games", [])))
+                      if old_date == new_date and old_count > 0:
+                          print(f"LOCKED {dst}: {old_date} already has {old_count} games — skipping overwrite")
+                          locked += 1
+                          continue
+                      else:
+                          print(f"UPDATE {dst}: {old_date} ({old_count} games) -> {new_date} ({new_count} games)")
+                  except Exception:
+                      pass
+
+              shutil.copy2(src, dst)
+              print(f"COPIED {dst} ({new_count} games for {new_date})")
+              copied += 1
+
+          for src in ALWAYS_COPY:
+              if not os.path.exists(src):
+                  continue
+              dst = os.path.basename(src)
+              shutil.copy2(src, dst)
+              print(f"COPIED {dst}")
+              copied += 1
+
+          print(f"\nSummary: {copied} file(s) copied, {locked} projection(s) locked (preserved)")
+          LOCK_CHECK
 
       - name: Verify projection files
         run: |
