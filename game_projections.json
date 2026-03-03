@@ -2,7 +2,7 @@
   "date": "2026-03-02",
   "sport": "NBA",
   "locked_at": "2026-03-02T03:36:12",
-  "updated": "2026-03-03T05:05:20",
+  "updated": "2026-03-03T06:02:18",
   "games": [
     {
       "away_team": "HOU",
@@ -236,7 +236,7 @@
       "ml_pick": "GSW",
       "ml_conf": 58.3,
       "commence_time": "2026-03-03T03:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-03-02T03:36:11Z",
       "injury_impact": {
         "home": -12.4,
@@ -292,8 +292,11 @@
         "ev": 14.8,
         "confidence": "medium"
       },
-      "away_score": 88,
-      "home_score": 81
+      "away_score": 114,
+      "home_score": 101,
+      "spread_result": "L",
+      "total_result": "L",
+      "ml_result": "L"
     }
   ]
 }
