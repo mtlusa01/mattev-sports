@@ -1,142 +1,196 @@
 {
-  "updated": "2026-03-02T21:30:02",
+  "updated": "2026-03-02T21:38:57",
   "allTime": {
     "spreads": {
-      "wins": 196,
+      "wins": 197,
       "losses": 142,
       "pushes": 7,
-      "pct": 58.0,
-      "roi": 10.7
+      "pct": 58.1,
+      "roi": 10.9
     },
     "totals": {
       "wins": 172,
-      "losses": 171,
+      "losses": 172,
       "pushes": 2,
-      "pct": 50.1,
-      "roi": -4.3
+      "pct": 50.0,
+      "roi": -4.5
     },
     "moneylines": {
-      "wins": 221,
+      "wins": 222,
       "losses": 124,
       "pushes": 0,
-      "pct": 64.1,
-      "roi": 22.3
+      "pct": 64.2,
+      "roi": 22.5
     },
     "best_bets": {
-      "wins": 33,
-      "losses": 12,
+      "wins": 34,
+      "losses": 11,
       "pushes": 0,
-      "pct": 73.3,
-      "roi": 40.0
+      "pct": 75.6,
+      "roi": 44.2
     }
   },
   "days": [
     {
       "date": "2026-03-02",
       "spreads": {
-        "wins": 4,
+        "wins": 5,
         "losses": 3,
         "pushes": 0,
-        "record": "4-3",
-        "pct": 57.1
+        "record": "5-3",
+        "pct": 62.5
       },
       "totals": {
         "wins": 6,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "6-1",
-        "pct": 85.7
+        "record": "6-2",
+        "pct": 75.0
       },
       "moneylines": {
-        "wins": 4,
+        "wins": 5,
         "losses": 3,
         "pushes": 0,
-        "record": "4-3",
-        "pct": 57.1
+        "record": "5-3",
+        "pct": 62.5
       },
       "best_bets": {
-        "wins": 2,
-        "losses": 3,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
           "date": "2026-03-02",
           "type": "spread",
           "game": "NORF @ MORG",
-          "pick": "NORF -3.0",
+          "pick": "MORG +2.5",
           "result": "84-90",
           "hit": false,
-          "confidence": 69,
-          "best_bet": true
-        },
-        {
-          "date": "2026-03-02",
-          "type": "total",
-          "game": "NORF @ MORG",
-          "pick": "UNDER 156.0",
-          "result": "84-90",
-          "hit": false,
-          "confidence": 58
-        },
-        {
-          "date": "2026-03-02",
-          "type": "ml",
-          "game": "NORF @ MORG",
-          "pick": "NORF",
-          "result": "84-90",
-          "hit": false,
-          "confidence": 76,
-          "best_bet": true
-        },
-        {
-          "date": "2026-03-02",
-          "type": "spread",
-          "game": "DUKE @ NCSU",
-          "pick": "DUKE -9.5",
-          "result": "93-64",
-          "hit": true,
-          "confidence": 69
-        },
-        {
-          "date": "2026-03-02",
-          "type": "total",
-          "game": "DUKE @ NCSU",
-          "pick": "OVER 150.5",
-          "result": "93-64",
-          "hit": true,
-          "confidence": 50
-        },
-        {
-          "date": "2026-03-02",
-          "type": "ml",
-          "game": "DUKE @ NCSU",
-          "pick": "DUKE",
-          "result": "93-64",
-          "hit": true,
-          "confidence": 88,
-          "best_bet": true
-        },
-        {
-          "date": "2026-03-02",
-          "type": "spread",
-          "game": "COPP @ HOW",
-          "pick": "COPP +16.5",
-          "result": "70-90",
-          "hit": false,
-          "confidence": 70,
-          "best_bet": true
-        },
-        {
-          "date": "2026-03-02",
-          "type": "total",
-          "game": "COPP @ HOW",
-          "pick": "OVER 146.0",
-          "result": "70-90",
-          "hit": true,
           "confidence": 55
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "NORF @ MORG",
+          "pick": "UNDER 155.0",
+          "result": "84-90",
+          "hit": false,
+          "confidence": 66,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "NORF @ MORG",
+          "pick": "MORG",
+          "result": "84-90",
+          "hit": false,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "DUKE @ NCSU",
+          "pick": "NCSU +9.5",
+          "result": "93-64",
+          "hit": true,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "DUKE @ NCSU",
+          "pick": "OVER 149.5",
+          "result": "93-64",
+          "hit": true,
+          "confidence": 59
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "DUKE @ NCSU",
+          "pick": "NCSU",
+          "result": "93-64",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "NCCU @ UMES",
+          "pick": "UMES -1.0",
+          "result": "77-73",
+          "hit": true,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "NCCU @ UMES",
+          "pick": "OVER 133.5",
+          "result": "77-73",
+          "hit": true,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "NCCU @ UMES",
+          "pick": "UMES",
+          "result": "77-73",
+          "hit": true,
+          "confidence": 65,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "IUIN @ CLE",
+          "pick": "IUIN +1.5",
+          "result": "93-101",
+          "hit": true,
+          "confidence": 78,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "IUIN @ CLE",
+          "pick": "UNDER 169.5",
+          "result": "93-101",
+          "hit": true,
+          "confidence": 66,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "IUIN @ CLE",
+          "pick": "CLE",
+          "result": "93-101",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "COPP @ HOW",
+          "pick": "COPP +4.5",
+          "result": "70-90",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "COPP @ HOW",
+          "pick": "OVER 140.5",
+          "result": "70-90",
+          "hit": true,
+          "confidence": 48
         },
         {
           "date": "2026-03-02",
@@ -145,53 +199,25 @@
           "pick": "HOW",
           "result": "70-90",
           "hit": true,
-          "confidence": 91,
-          "best_bet": true
+          "confidence": 64
         },
         {
           "date": "2026-03-02",
           "type": "spread",
-          "game": "NCCU @ UMES",
-          "pick": "UMES +5.5",
-          "result": "77-73",
-          "hit": true,
-          "confidence": 55
-        },
-        {
-          "date": "2026-03-02",
-          "type": "total",
-          "game": "NCCU @ UMES",
-          "pick": "OVER 145.5",
-          "result": "77-73",
+          "game": "SCST @ DSU",
+          "pick": "SCST +1.0",
+          "result": "61-59",
           "hit": true,
           "confidence": 52
         },
         {
           "date": "2026-03-02",
-          "type": "ml",
-          "game": "NCCU @ UMES",
-          "pick": "NCCU",
-          "result": "77-73",
-          "hit": true,
-          "confidence": 68
-        },
-        {
-          "date": "2026-03-02",
-          "type": "spread",
-          "game": "SCST @ DSU",
-          "pick": "SCST +4.5",
-          "result": "61-59",
-          "hit": true,
-          "confidence": 54
-        },
-        {
-          "date": "2026-03-02",
           "type": "total",
           "game": "SCST @ DSU",
-          "pick": "UNDER 140.0",
+          "pick": "UNDER 130.5",
           "result": "61-59",
           "hit": true,
-          "confidence": 47
+          "confidence": 59
         },
         {
           "date": "2026-03-02",
@@ -200,61 +226,62 @@
           "pick": "DSU",
           "result": "61-59",
           "hit": false,
-          "confidence": 66
+          "confidence": 63
         },
         {
           "date": "2026-03-02",
           "type": "spread",
-          "game": "IUIN @ CLE",
-          "pick": "CLE +2.5",
-          "result": "93-101",
+          "game": "NWST @ RGV",
+          "pick": "RGV -10.0",
+          "result": "62-74",
           "hit": true,
-          "confidence": 53
+          "confidence": 61
         },
         {
           "date": "2026-03-02",
           "type": "total",
-          "game": "IUIN @ CLE",
-          "pick": "OVER 161.5",
-          "result": "93-101",
+          "game": "NWST @ RGV",
+          "pick": "OVER 137.5",
+          "result": "62-74",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "NWST @ RGV",
+          "pick": "RGV",
+          "result": "62-74",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "SFA @ UIW",
+          "pick": "UIW +8.0",
+          "result": "76-68",
+          "hit": false,
+          "confidence": 77,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "SFA @ UIW",
+          "pick": "OVER 146.0",
+          "result": "76-68",
           "hit": true,
           "confidence": 56
         },
         {
           "date": "2026-03-02",
           "type": "ml",
-          "game": "IUIN @ CLE",
-          "pick": "IUIN",
-          "result": "93-101",
-          "hit": false,
-          "confidence": 54
-        },
-        {
-          "date": "2026-03-02",
-          "type": "spread",
           "game": "SFA @ UIW",
-          "pick": "UIW +7.0",
-          "result": "76-68",
-          "hit": false,
-          "confidence": 61
-        },
-        {
-          "date": "2026-03-02",
-          "type": "total",
-          "game": "SFA @ UIW",
-          "pick": "OVER 143.0",
+          "pick": "UIW",
           "result": "76-68",
           "hit": true,
-          "confidence": 46
-        },
-        {
-          "date": "2026-03-02",
-          "type": "ml",
-          "game": "SFA @ UIW",
-          "pick": "SFA",
-          "result": "76-68",
-          "hit": true,
-          "confidence": 60
+          "confidence": 63
         }
       ]
     },
