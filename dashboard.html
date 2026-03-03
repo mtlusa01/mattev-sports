@@ -1177,44 +1177,81 @@
     .bet-count-badge { background: var(--accent); color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: 4px; }
 
     /* ── Game Cards ── */
-    .game-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
-    .game-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; transition: all 0.2s; }
+    .game-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 1199px) { .game-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 767px) { .game-cards-grid { grid-template-columns: 1fr; } }
+    .game-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 20px; transition: all 0.2s;
+    }
     .game-card:hover { border-color: var(--border); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
-    .game-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .game-card-matchup { font-size: 18px; font-weight: 700; color: var(--text-primary); }
-    .game-card-time { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .game-card-time .live-badge { display: inline-flex; align-items: center; gap: 4px; color: var(--red-light); font-weight: 700; font-size: 11px; }
-    .game-card-time .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
-    .game-card-time .soon-badge { color: var(--yellow); font-weight: 600; }
     .game-card.live-card { border-color: rgba(239, 68, 68, 0.25); }
-    .game-live-scores { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
-    .game-live-score-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
-    .game-live-score-row .team-name { color: var(--text-primary); min-width: 40px; }
-    .game-live-score-row .live-score { color: var(--red-light); font-size: 18px; font-weight: 700; min-width: 40px; animation: pulse-live 2s ease-in-out infinite; }
-    .game-live-score-row .leading { color: var(--accent-light); }
-    .game-card-score { font-size: 13px; color: var(--text-muted); }
+
+    /* Header: two-line layout */
+    .game-card-header { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .game-card-header-top { display: flex; justify-content: space-between; align-items: center; }
+    .game-card-header-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+    .game-card-matchup { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+    .game-card-status { font-size: 12px; color: var(--text-muted); flex-shrink: 0; }
+    .game-card-status .live-badge { display: inline-flex; align-items: center; gap: 4px; color: var(--red-light); font-weight: 700; font-size: 11px; }
+    .game-card-status .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse-live 1.5s ease-in-out infinite; }
+    .game-card-status .soon-badge { color: var(--yellow); font-weight: 600; }
+    .game-card-status .final-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 4px;
+      background: var(--bg-tertiary); color: var(--text-muted);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    }
+    .game-card-score-inline { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+    .game-card-score-inline .leading { color: var(--red-light); font-weight: 700; }
+    .game-card-score-inline .winner-team { color: var(--accent-light); font-weight: 700; }
+    .game-card-proj { font-size: 13px; color: var(--text-muted); }
+
+    /* Bet rows */
     .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
     .game-pick-row { display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 2px 0; }
     .game-pick-row.dimmed { opacity: 0.35; }
     .game-pick-row.is-best-bet { border-left: 2px solid var(--profit); padding-left: 8px; margin-left: -10px; }
-    .game-pick-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; width: 48px; flex-shrink: 0; }
-    .game-pick-value { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-    .game-pick-odds { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); font-weight: 500; width: 54px; text-align: right; flex-shrink: 0; }
-    .game-pick-conf { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; width: 36px; text-align: right; flex-shrink: 0; }
-    .game-pick-kelly { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); width: 52px; text-align: right; flex-shrink: 0; white-space: nowrap; }
-    .game-pick-kelly.strong { color: #34d399; }
-    .game-pick-kelly.good { color: #60a5fa; }
-    .game-pick-kelly.lean { color: #fbbf24; }
-    .game-pick-row .track-icon { width: 28px; text-align: center; cursor: pointer; opacity: 0.35; transition: opacity 0.2s; font-size: 14px; flex-shrink: 0; }
+    .bet-type { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; width: 48px; flex-shrink: 0; }
+    .bet-pick { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; min-width: 80px; overflow: hidden; text-overflow: ellipsis; }
+    .bet-pick.low-conf { color: var(--text-muted); font-weight: 400; }
+    .bet-pick.best-bet { color: var(--profit); }
+    .bet-odds { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); font-weight: 500; width: 56px; text-align: right; flex-shrink: 0; }
+    .bet-conf { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; width: 40px; text-align: right; flex-shrink: 0; }
+    .bet-kelly { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); width: 48px; text-align: right; flex-shrink: 0; white-space: nowrap; }
+    .bet-kelly.strong { color: #34d399; }
+    .bet-kelly.good { color: #60a5fa; }
+    .bet-kelly.lean { color: #fbbf24; }
+    .best-bet-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--profit); flex-shrink: 0; display: none; }
+    .game-pick-row.is-best-bet .best-bet-dot { display: block; }
+    .game-pick-row .track-icon { width: 36px; text-align: center; cursor: pointer; opacity: 0.35; transition: opacity 0.2s; font-size: 16px; flex-shrink: 0; }
     .game-pick-row .track-icon:hover { opacity: 0.8; }
     .game-pick-row .track-icon.tracked { opacity: 1; color: #10b981; }
-    .game-pick-value.low-conf { color: var(--text-muted); font-weight: 400; }
-    .game-pick-value.best-bet { color: var(--profit); }
-    .game-pick-best-label { font-size: 9px; font-weight: 700; color: var(--profit); background: rgba(16,185,129,0.1); padding: 1px 5px; border-radius: 3px; margin-left: 4px; flex-shrink: 0; white-space: nowrap; }
-    @media (max-width: 768px) {
-      .game-pick-kelly { display: none; }
-      .game-pick-best-label { display: none; }
-      .game-pick-odds { width: 48px; }
+
+    /* Result symbols (inline in bet-pick) */
+    .result-sym { font-weight: 700; margin-left: 4px; }
+    .result-sym.win { color: var(--accent-light); }
+    .result-sym.loss { color: var(--red-light); }
+    .result-sym.push { color: var(--yellow); }
+
+    /* Mobile expand detail */
+    .bet-expand-detail {
+      display: none; font-size: 11px; color: var(--text-muted);
+      padding: 4px 0 4px 56px; gap: 8px;
+    }
+    .game-pick-row.expanded + .bet-expand-detail { display: flex; }
+
+    @media (max-width: 767px) {
+      .bet-kelly { display: none; }
+      .best-bet-dot { display: none; }
+      .bet-type { width: 36px; }
+      .bet-odds { width: 48px; }
+      .game-pick-row { cursor: pointer; }
+      .game-card-matchup { font-size: 16px; }
+      .game-card { padding: 16px; }
     }
     .game-proj-updated { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 16px; }
 
@@ -1230,20 +1267,6 @@
     /* ── Final Game Card ── */
     .game-card.final-card { border-color: rgba(113, 113, 122, 0.25); opacity: 0.92; }
     .game-card.final-card:hover { border-color: rgba(113, 113, 122, 0.4); }
-    .final-badge {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      background: var(--bg-tertiary); color: var(--text-muted);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
-    }
-    .game-final-scores { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
-    .game-final-score-row {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 14px; font-weight: 600;
-    }
-    .game-final-score-row .team-name { color: var(--text-primary); min-width: 40px; }
-    .game-final-score-row .actual-score { color: var(--text-primary); font-size: 18px; font-weight: 700; min-width: 40px; }
-    .game-final-score-row .proj-score-label { color: var(--text-muted); font-size: 12px; font-weight: 400; }
-    .game-final-score-row .winner-team { color: var(--accent-light); }
     .pick-result-badge {
       display: inline-flex; align-items: center; gap: 3px;
       padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
@@ -1643,9 +1666,6 @@
       .filter-pill { padding: 4px 10px; font-size: 11px; }
 
       /* Game cards */
-      .game-cards-grid { grid-template-columns: 1fr; }
-      .game-card { padding: 16px; }
-      .game-card-matchup { font-size: 16px; }
       .sgc-picks { gap: 16px; }
 
       /* Rec cards */
@@ -1685,9 +1705,10 @@
       /* Game card tighter */
       .game-card { padding: 14px; }
       .game-card-matchup { font-size: 15px; }
-      .game-pick-label { font-size: 10px; min-width: 55px; }
-      .game-pick-value { font-size: 12px; }
-      .game-pick-conf { font-size: 11px; }
+      .bet-type { font-size: 10px; }
+      .bet-pick { font-size: 12px; }
+      .bet-conf { font-size: 11px; }
+      .bet-odds { font-size: 10px; }
 
       /* Filter bar stack */
       .search-filter-bar { flex-direction: column; align-items: stretch; gap: 8px; }
@@ -2650,7 +2671,7 @@
       const fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
       const capNote = k.capped ? ` [capped from ${DF ? DF.stake(k.uncappedAmount) : ('$' + k.uncappedAmount)}]` : '';
       const title = `Kelly: ${fAmt} (${k.units}u, +${k.edge.toFixed(1)}% edge, ${k.kellyPct.toFixed(1)}% ${s.kellyFraction})${capNote}`;
-      return `<span class="game-pick-kelly ${tier}" title="${title}">${fAmt}</span>`;
+      return `<span class="bet-kelly ${tier}" title="${title}">${fAmt}</span>`;
     }
 
     /** Generate Kelly details for recommendation cards */
@@ -5140,196 +5161,166 @@
       return '';
     }
 
+    function renderCardResultSym(result) {
+      var r = (result || '').toLowerCase();
+      if (r === 'win' || r === 'w') return ' <span class="result-sym win">\u2713</span>';
+      if (r === 'loss' || r === 'l') return ' <span class="result-sym loss">\u2717</span>';
+      if (r === 'push' || r === 'p') return ' <span class="result-sym push">P</span>';
+      return '';
+    }
+
     function renderGameCard(g) {
       // 3-tier confidence colors: green (>60), yellow (50-59), red (<50)
-      const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
-      const pickClass = (pick, conf) => {
+      var confColor = function(c) { return c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)'; };
+      var pickClass = function(pick, conf) {
         if (!pick || pick === 'N/A') return 'low-conf';
         if (conf >= 60) return 'best-bet';
         if (conf < 50) return 'low-conf';
         return '';
       };
-      const activeBB = getActiveBestBets();
-      const gameLabel = `${g.away_team} @ ${g.home_team}`;
-      const isInBestBets = (betType) => activeBB.some(b => b.game === gameLabel && b.type === betType);
-      const bestBetBadge = (betType) => isInBestBets(betType) ? '<span class="game-pick-best-label">Best</span>' : '';
-      const bestBetRowClass = (betType) => isInBestBets(betType) ? ' is-best-bet' : '';
-      const dimClass = (conf, betType) => {
+      var activeBB = getActiveBestBets();
+      var gameLabel = g.away_team + ' @ ' + g.home_team;
+      var isInBestBets = function(betType) { return activeBB.some(function(b) { return b.game === gameLabel && b.type === betType; }); };
+      var bestBetRowClass = function(betType) { return isInBestBets(betType) ? ' is-best-bet' : ''; };
+      var dimClass = function(conf, betType) {
         if (currentGameConfFilter === 'all') return '';
         if (currentGameConfFilter === 'best-bets') return isInBestBets(betType) ? '' : ' dimmed';
         return getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
       };
 
-      const status = getGameStatus(g);
-      const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
+      var status = getGameStatus(g);
+      var isFinal = status === 'final' && g.away_score != null && g.home_score != null;
 
-      const spreadStr = g.spread_pick || 'N/A';
-      const spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
-      const totalStr = g.total_pick && g.total_line != null
+      var spreadStr = g.spread_pick || 'N/A';
+      var spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
+      var totalStr = g.total_pick && g.total_line != null
         ? (g.total_pick + ' ' + g.total_line) : 'N/A';
-      const totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
-      const mlStr = g.ml_pick || 'N/A';
-      const mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
+      var totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
+      var mlStr = g.ml_pick || 'N/A';
+      var mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
 
       // Format odds for display
-      const fmtOdds = (odds) => {
+      var fmtOdds = function(odds) {
         if (odds == null) return '';
-        return odds > 0 ? `(+${odds})` : `(${odds})`;
+        return odds > 0 ? '(+' + odds + ')' : '(' + odds + ')';
       };
-      const spreadOddsStr = fmtOdds(g.spread_odds);
-      const totalOddsStr = fmtOdds(g.total_odds);
-      const mlOddsStr = fmtOdds(g.ml_odds);
+      var spreadOddsStr = fmtOdds(g.spread_odds);
+      var totalOddsStr = fmtOdds(g.total_odds);
+      var mlOddsStr = fmtOdds(g.ml_odds);
 
       // Track icons for game bets (use local date to match trackGameClick)
-      const gDate = getLocalDateStr();
-      const gGame = g.away_team + ' @ ' + g.home_team;
-      const escAway = g.away_team.replace(/'/g, "\\'");
-      const escHome = g.home_team.replace(/'/g, "\\'");
-      const spreadBetId = makeBetId(gDate, 'spread', null, null, gGame, null, g.spread_pick, null);
-      const totalBetId = makeBetId(gDate, 'total', null, null, gGame, null, (g.total_pick||'') + ' ' + (g.total_line||''), g.total_line);
-      const mlBetId = makeBetId(gDate, 'ml', null, null, gGame, null, g.ml_pick, null);
-      const isSpreadTracked = isBetTracked(spreadBetId);
-      const isTotalTracked = isBetTracked(totalBetId);
-      const isMlTracked = isBetTracked(mlBetId);
-      const gameTrackIcon = (type, tracked) => `<span class="track-icon ${tracked ? 'tracked' : ''}" onclick="event.stopPropagation();trackGameClick('${escAway}','${escHome}','${type}')" title="${tracked ? 'Tracked' : 'Track this bet'}">${tracked ? '&#10003;' : '&#9733;'}</span>`;
+      var gDate = getLocalDateStr();
+      var gGame = g.away_team + ' @ ' + g.home_team;
+      var escAway = g.away_team.replace(/'/g, "\\'");
+      var escHome = g.home_team.replace(/'/g, "\\'");
+      var spreadBetId = makeBetId(gDate, 'spread', null, null, gGame, null, g.spread_pick, null);
+      var totalBetId = makeBetId(gDate, 'total', null, null, gGame, null, (g.total_pick||'') + ' ' + (g.total_line||''), g.total_line);
+      var mlBetId = makeBetId(gDate, 'ml', null, null, gGame, null, g.ml_pick, null);
+      var isSpreadTracked = isBetTracked(spreadBetId);
+      var isTotalTracked = isBetTracked(totalBetId);
+      var isMlTracked = isBetTracked(mlBetId);
 
-      // Final card layout
+      var gameTrackIcon = function(type, tracked) {
+        return '<span class="track-icon ' + (tracked ? 'tracked' : '') + '" onclick="event.stopPropagation();trackGameClick(\'' + escAway + '\',\'' + escHome + '\',\'' + type + '\')" title="' + (tracked ? 'Tracked' : 'Track this bet') + '">' + (tracked ? '\u2605' : '\u2606') + '</span>';
+      };
+
+      // Kelly expand detail for mobile
+      var kellyExpandData = function(conf, odds) {
+        if (typeof KellyCalculator === 'undefined') return '';
+        var s = KellyCalculator.getSettings();
+        if (s.kellyFraction === 'off' || !s.bankroll) return '';
+        if (odds == null || conf == null || conf < 50) return '';
+        var k = KellyCalculator.calculate(conf, odds);
+        if (k.method === 'no-edge' || k.amount <= 0) return '';
+        var tier = KellyCalculator.tier(conf, k.edge);
+        if (tier === 'skip') return '';
+        var DF = typeof DisplayFormatter !== 'undefined' ? DisplayFormatter : null;
+        var fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
+        return 'Kelly: ' + fAmt + ' &middot; Edge: +' + k.edge.toFixed(1) + '%';
+      };
+
+      // Unified bet row renderer
+      var renderBetRow = function(label, pickStr, oddsStr, confStr, conf, result, tracked, trackType, odds) {
+        var betType = label.toLowerCase();
+        var rowCls = 'game-pick-row' + bestBetRowClass(betType) + dimClass(conf, betType);
+        var pCls = pickClass(betType === 'total' ? g.total_pick : (betType === 'ml' ? g.ml_pick : g.spread_pick), conf);
+        var resultSym = renderCardResultSym(result);
+        var kellyHtml = kellyBadge(conf, odds);
+        var expandContent = kellyExpandData(conf, odds);
+        var expandHtml = expandContent ? '<div class="bet-expand-detail">' + expandContent + '</div>' : '';
+        var row = '<div class="' + rowCls + '"' + (expandContent ? ' onclick="this.classList.toggle(\'expanded\')"' : '') + '>'
+          + '<span class="bet-type">' + label + '</span>'
+          + '<span class="bet-pick ' + pCls + '">' + pickStr + resultSym + '</span>'
+          + '<span class="bet-odds">' + oddsStr + '</span>'
+          + '<span class="bet-conf" style="color:' + confColor(conf || 0) + '">' + confStr + '</span>'
+          + kellyHtml
+          + '<span class="best-bet-dot"></span>'
+          + gameTrackIcon(trackType, tracked)
+          + '</div>'
+          + expandHtml;
+        return row;
+      };
+
+      // ── Build header ──
+      var cardCls = '';
+      var statusHtml = '';
+      var scoreInlineHtml = '';
+
       if (isFinal) {
-        const projParts = (g.proj_score || '').split('-');
-        const projAway = projParts[0] || '?';
-        const projHome = projParts[1] || '?';
-        const awayWon = g.away_score > g.home_score;
-        const awayClass = awayWon ? ' winner-team' : '';
-        const homeClass = !awayWon ? ' winner-team' : '';
-
-        return `
-          <div class="game-card final-card">
-            <div class="game-card-header">
-              <div>
-                <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
-                <div class="game-card-time"><span class="final-badge">FINAL</span></div>
-              </div>
-              <div class="game-card-score">Proj: ${g.proj_score}</div>
-            </div>
-            <div class="game-final-scores">
-              <div class="game-final-score-row">
-                <span class="team-name${awayClass}">${g.away_team}</span>
-                <span class="actual-score${awayClass}">${g.away_score}</span>
-                <span class="proj-score-label">Proj: ${projAway}</span>
-              </div>
-              <div class="game-final-score-row">
-                <span class="team-name${homeClass}">${g.home_team}</span>
-                <span class="actual-score${homeClass}">${g.home_score}</span>
-                <span class="proj-score-label">Proj: ${projHome}</span>
-              </div>
-            </div>
-            <div class="game-card-picks">
-              <div class="game-pick-row${bestBetRowClass('spread')}${dimClass(g.spread_conf, 'spread')}">
-                <span class="game-pick-label">Spread</span>
-                <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
-                <span class="game-pick-odds">${spreadOddsStr}</span>
-                <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
-                ${bestBetBadge('spread')}
-                ${kellyBadge(g.spread_conf, g.spread_odds)}
-                ${renderResultBadge(g.spread_result)}
-                ${gameTrackIcon('spread', isSpreadTracked)}
-              </div>
-              <div class="game-pick-row${bestBetRowClass('total')}${dimClass(g.total_conf, 'total')}">
-                <span class="game-pick-label">Total</span>
-                <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
-                <span class="game-pick-odds">${totalOddsStr}</span>
-                <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
-                ${bestBetBadge('total')}
-                ${kellyBadge(g.total_conf, g.total_odds)}
-                ${renderResultBadge(g.total_result)}
-                ${gameTrackIcon('total', isTotalTracked)}
-              </div>
-              <div class="game-pick-row${bestBetRowClass('ml')}${dimClass(g.ml_conf, 'ml')}">
-                <span class="game-pick-label">ML</span>
-                <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
-                <span class="game-pick-odds">${mlOddsStr}</span>
-                <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
-                ${bestBetBadge('ml')}
-                ${kellyBadge(g.ml_conf, g.ml_odds)}
-                ${renderResultBadge(g.ml_result)}
-                ${gameTrackIcon('ml', isMlTracked)}
-              </div>
-            </div>
-          </div>`;
-      }
-
-      // Non-final card layout (scheduled/live/soon/final-without-scores)
-      const time = formatGameTime(g.commence_time);
-      let timeHtml = '';
-      let cardCls = '';
-      if (status === 'final') {
-        timeHtml = '<div class="game-card-time"><span class="final-badge">FINAL</span></div>';
+        cardCls = ' final-card';
+        statusHtml = '<span class="final-badge">FINAL</span>';
+        var awayWon = g.away_score > g.home_score;
+        var awayCls = awayWon ? ' winner-team' : '';
+        var homeCls = !awayWon ? ' winner-team' : '';
+        scoreInlineHtml = '<span class="game-card-score-inline">'
+          + '<span class="' + awayCls.trim() + '">' + g.away_team + ' ' + g.away_score + '</span>'
+          + ' - '
+          + '<span class="' + homeCls.trim() + '">' + g.home_team + ' ' + g.home_score + '</span>'
+          + '</span>';
       } else if (status === 'live') {
-        timeHtml = '<div class="game-card-time"><span class="live-badge"><span class="live-dot"></span> LIVE</span></div>';
         cardCls = ' live-card';
+        statusHtml = '<span class="live-badge"><span class="live-dot"></span> LIVE</span>';
+        if (g.away_score != null && g.home_score != null) {
+          var awayLead = g.away_score > g.home_score ? ' leading' : '';
+          var homeLead = g.home_score > g.away_score ? ' leading' : '';
+          scoreInlineHtml = '<span class="game-card-score-inline">'
+            + '<span class="' + awayLead.trim() + '">' + g.away_team + ' ' + g.away_score + '</span>'
+            + ' - '
+            + '<span class="' + homeLead.trim() + '">' + g.home_team + ' ' + g.home_score + '</span>'
+            + '</span>';
+        }
       } else if (status === 'soon') {
-        timeHtml = time ? `<div class="game-card-time"><span class="soon-badge">${time} - Starting Soon</span></div>` : '';
-      } else if (time) {
-        timeHtml = `<div class="game-card-time">${time}</div>`;
+        var time = formatGameTime(g.commence_time);
+        statusHtml = time ? '<span class="soon-badge">' + time + ' - Soon</span>' : '';
+      } else if (status === 'final') {
+        // Final without scores
+        statusHtml = '<span class="final-badge">FINAL</span>';
+      } else {
+        var time2 = formatGameTime(g.commence_time);
+        statusHtml = time2 || '';
       }
 
-      // Live scores section
-      const hasLiveScores = status === 'live' && g.away_score != null && g.home_score != null;
-      const liveScoresHtml = hasLiveScores ? `
-        <div class="game-live-scores">
-          <div class="game-live-score-row">
-            <span class="team-name">${g.away_team}</span>
-            <span class="live-score${g.away_score > g.home_score ? ' leading' : ''}">${g.away_score}</span>
-          </div>
-          <div class="game-live-score-row">
-            <span class="team-name">${g.home_team}</span>
-            <span class="live-score${g.home_score > g.away_score ? ' leading' : ''}">${g.home_score}</span>
-          </div>
-        </div>` : '';
+      var projHtml = g.proj_score ? '<span class="game-card-proj">Proj: ' + g.proj_score + '</span>' : '';
 
-      return `
-        <div class="game-card${cardCls}">
-          <div class="game-card-header">
-            <div>
-              <div class="game-card-matchup">${g.away_team} @ ${g.home_team}</div>
-              ${timeHtml}
-            </div>
-            ${g.proj_score ? `<div class="game-card-score">Proj: ${g.proj_score}</div>` : ''}
-          </div>
-          ${liveScoresHtml}
-          <div class="game-card-picks">
-            <div class="game-pick-row${bestBetRowClass('spread')}${dimClass(g.spread_conf, 'spread')}">
-              <span class="game-pick-label">Spread</span>
-              <span class="game-pick-value ${pickClass(g.spread_pick, g.spread_conf)}">${spreadStr}</span>
-              <span class="game-pick-odds">${spreadOddsStr}</span>
-              <span class="game-pick-conf" style="color:${confColor(g.spread_conf || 0)}">${spreadConfStr}</span>
-              ${bestBetBadge('spread')}
-              ${kellyBadge(g.spread_conf, g.spread_odds)}
-              ${renderResultBadge(g.spread_result)}
-              ${gameTrackIcon('spread', isSpreadTracked)}
-            </div>
-            <div class="game-pick-row${bestBetRowClass('total')}${dimClass(g.total_conf, 'total')}">
-              <span class="game-pick-label">Total</span>
-              <span class="game-pick-value ${pickClass(g.total_pick, g.total_conf)}">${totalStr}</span>
-              <span class="game-pick-odds">${totalOddsStr}</span>
-              <span class="game-pick-conf" style="color:${confColor(g.total_conf || 0)}">${totalConfStr}</span>
-              ${bestBetBadge('total')}
-              ${kellyBadge(g.total_conf, g.total_odds)}
-              ${renderResultBadge(g.total_result)}
-              ${gameTrackIcon('total', isTotalTracked)}
-            </div>
-            <div class="game-pick-row${bestBetRowClass('ml')}${dimClass(g.ml_conf, 'ml')}">
-              <span class="game-pick-label">ML</span>
-              <span class="game-pick-value ${pickClass(g.ml_pick, g.ml_conf)}">${mlStr}</span>
-              <span class="game-pick-odds">${mlOddsStr}</span>
-              <span class="game-pick-conf" style="color:${confColor(g.ml_conf || 0)}">${mlConfStr}</span>
-              ${bestBetBadge('ml')}
-              ${kellyBadge(g.ml_conf, g.ml_odds)}
-              ${renderResultBadge(g.ml_result)}
-              ${gameTrackIcon('ml', isMlTracked)}
-            </div>
-          </div>
-        </div>`;
+      // ── Assemble card ──
+      var html = '<div class="game-card' + cardCls + '">'
+        + '<div class="game-card-header">'
+        +   '<div class="game-card-header-top">'
+        +     '<span class="game-card-matchup">' + g.away_team + ' @ ' + g.home_team + '</span>'
+        +     '<span class="game-card-status">' + statusHtml + '</span>'
+        +   '</div>'
+        +   '<div class="game-card-header-bottom">'
+        +     scoreInlineHtml
+        +     projHtml
+        +   '</div>'
+        + '</div>'
+        + '<div class="game-card-picks">'
+        + renderBetRow('Spread', spreadStr, spreadOddsStr, spreadConfStr, g.spread_conf, g.spread_result, isSpreadTracked, 'spread', g.spread_odds)
+        + renderBetRow('Total', totalStr, totalOddsStr, totalConfStr, g.total_conf, g.total_result, isTotalTracked, 'total', g.total_odds)
+        + renderBetRow('ML', mlStr, mlOddsStr, mlConfStr, g.ml_conf, g.ml_result, isMlTracked, 'ml', g.ml_odds)
+        + '</div>'
+        + '</div>';
+      return html;
     }
 
     // renderGameFilters() removed — filters now rendered inline in renderGameProjections()
