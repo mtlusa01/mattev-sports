@@ -1211,25 +1211,27 @@
     .game-card-proj { font-size: 13px; color: var(--text-muted); }
 
     /* Bet rows */
-    .game-card-picks { display: flex; flex-direction: column; gap: 10px; }
-    .game-pick-row { display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 2px 0; }
+    .game-card-picks { display: flex; flex-direction: column; gap: 0; }
+    .game-pick-row { display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 4px 6px; cursor: pointer; border-radius: 4px; transition: background 0.15s; }
+    .game-pick-row:hover { background: rgba(255,255,255,0.04); }
+    .game-pick-row:active { background: rgba(255,255,255,0.07); }
     .game-pick-row.dimmed { opacity: 0.35; }
     .game-pick-row.is-best-bet { border-left: 2px solid var(--profit); padding-left: 8px; margin-left: -10px; }
     .bet-type { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; width: 48px; flex-shrink: 0; }
     .bet-pick { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; min-width: 80px; overflow: hidden; text-overflow: ellipsis; }
     .bet-pick.low-conf { color: var(--text-muted); font-weight: 400; }
     .bet-pick.best-bet { color: var(--profit); }
-    .bet-odds { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); font-weight: 500; width: 56px; text-align: right; flex-shrink: 0; }
-    .bet-conf { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; width: 40px; text-align: right; flex-shrink: 0; }
-    .bet-kelly { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); width: 48px; text-align: right; flex-shrink: 0; white-space: nowrap; }
-    .bet-kelly.strong { color: #34d399; }
-    .bet-kelly.good { color: #60a5fa; }
-    .bet-kelly.lean { color: #fbbf24; }
-    .best-bet-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--profit); flex-shrink: 0; display: none; }
-    .game-pick-row.is-best-bet .best-bet-dot { display: block; }
-    .game-pick-row .track-icon { width: 36px; text-align: center; cursor: pointer; opacity: 0.35; transition: opacity 0.2s; font-size: 16px; flex-shrink: 0; }
-    .game-pick-row .track-icon:hover { opacity: 0.8; }
-    .game-pick-row .track-icon.tracked { opacity: 1; color: #10b981; }
+    .bet-conf { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; width: 32px; text-align: right; flex-shrink: 0; }
+
+    /* Tracked dot (inline after pick text) */
+    .tracked-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; margin-left: 5px; vertical-align: middle; }
+
+    /* Confidence bar (inline) */
+    .conf-bar { display: inline-block; width: 60px; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; flex-shrink: 0; vertical-align: middle; overflow: hidden; }
+    .conf-bar-fill { display: block; height: 100%; border-radius: 2px; }
+    .conf-bar-fill.conf-high { background: var(--accent-light); }
+    .conf-bar-fill.conf-mid { background: var(--yellow); }
+    .conf-bar-fill.conf-low { background: var(--red-light); }
 
     /* Result symbols (inline in bet-pick) */
     .result-sym { font-weight: 700; margin-left: 4px; }
@@ -1237,19 +1239,24 @@
     .result-sym.loss { color: var(--red-light); }
     .result-sym.push { color: var(--yellow); }
 
-    /* Mobile expand detail */
-    .bet-expand-detail {
-      display: none; font-size: 11px; color: var(--text-muted);
-      padding: 4px 0 4px 56px; gap: 8px;
-    }
-    .game-pick-row.expanded + .bet-expand-detail { display: flex; }
+    /* Expandable detail panel */
+    .bet-detail { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+    .bet-detail.open { max-height: 120px; }
+    .bet-detail-inner { display: flex; align-items: center; gap: 12px; padding: 6px 6px 8px 56px; font-size: 11px; color: var(--text-muted); flex-wrap: wrap; }
+    .bet-detail-item { display: flex; align-items: center; gap: 4px; }
+    .detail-label { font-weight: 400; }
+    .detail-value { font-weight: 600; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
+    .best-bet-tag { font-size: 9px; font-weight: 700; color: var(--profit); border: 1px solid var(--profit); border-radius: 3px; padding: 1px 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .lock-in-btn { font-size: 11px; font-weight: 600; color: #fff; background: #10b981; border: none; border-radius: 4px; padding: 4px 12px; cursor: pointer; transition: background 0.15s; margin-left: auto; }
+    .lock-in-btn:hover { background: #059669; }
+    .lock-in-btn.locked { background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.12); cursor: default; }
 
     @media (max-width: 767px) {
-      .bet-kelly { display: none; }
-      .best-bet-dot { display: none; }
       .bet-type { width: 36px; }
-      .bet-odds { width: 48px; }
-      .game-pick-row { cursor: pointer; }
+      .conf-bar { width: 40px; }
+      .bet-detail.open { max-height: 140px; }
+      .bet-detail-inner { padding: 6px 4px 8px 44px; gap: 8px; }
+      .lock-in-btn { width: 100%; margin-top: 4px; }
       .game-card-matchup { font-size: 16px; }
       .game-card { padding: 16px; }
     }
@@ -1705,10 +1712,12 @@
       /* Game card tighter */
       .game-card { padding: 14px; }
       .game-card-matchup { font-size: 15px; }
-      .bet-type { font-size: 10px; }
+      .bet-type { font-size: 9px; width: 32px; }
       .bet-pick { font-size: 12px; }
       .bet-conf { font-size: 11px; }
-      .bet-odds { font-size: 10px; }
+      .conf-bar { width: 32px; }
+      .bet-detail.open { max-height: 160px; }
+      .bet-detail-inner { padding: 6px 4px 8px 40px; gap: 6px; font-size: 10px; }
 
       /* Filter bar stack */
       .search-filter-bar { flex-direction: column; align-items: stretch; gap: 8px; }
@@ -5169,6 +5178,21 @@
       return '';
     }
 
+    function toggleBetDetail(el) {
+      var card = el.closest('.game-card-picks');
+      var detail = el.nextElementSibling;
+      if (!detail || !detail.classList.contains('bet-detail')) return;
+      card.querySelectorAll('.bet-detail.open').forEach(function(d) {
+        if (d !== detail) d.classList.remove('open');
+      });
+      detail.classList.toggle('open');
+    }
+
+    function lockInBet(event, away, home, betType) {
+      event.stopPropagation();
+      trackGameClick(away, home, betType);
+    }
+
     function renderGameCard(g) {
       // 3-tier confidence colors: green (>60), yellow (50-59), red (<50)
       var confColor = function(c) { return c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)'; };
@@ -5220,23 +5244,49 @@
       var isTotalTracked = isBetTracked(totalBetId);
       var isMlTracked = isBetTracked(mlBetId);
 
-      var gameTrackIcon = function(type, tracked) {
-        return '<span class="track-icon ' + (tracked ? 'tracked' : '') + '" onclick="event.stopPropagation();trackGameClick(\'' + escAway + '\',\'' + escHome + '\',\'' + type + '\')" title="' + (tracked ? 'Tracked' : 'Track this bet') + '">' + (tracked ? '\u2605' : '\u2606') + '</span>';
+      // Confidence bar helper
+      var confBar = function(conf) {
+        var c = conf || 0;
+        var tier = c >= 60 ? 'conf-high' : c >= 50 ? 'conf-mid' : 'conf-low';
+        var pct = Math.min(Math.max(c, 0), 100);
+        return '<span class="conf-bar"><span class="conf-bar-fill ' + tier + '" style="width:' + pct + '%"></span></span>';
       };
 
-      // Kelly expand detail for mobile
-      var kellyExpandData = function(conf, odds) {
-        if (typeof KellyCalculator === 'undefined') return '';
-        var s = KellyCalculator.getSettings();
-        if (s.kellyFraction === 'off' || !s.bankroll) return '';
-        if (odds == null || conf == null || conf < 50) return '';
-        var k = KellyCalculator.calculate(conf, odds);
-        if (k.method === 'no-edge' || k.amount <= 0) return '';
-        var tier = KellyCalculator.tier(conf, k.edge);
-        if (tier === 'skip') return '';
-        var DF = typeof DisplayFormatter !== 'undefined' ? DisplayFormatter : null;
-        var fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
-        return 'Kelly: ' + fAmt + ' &middot; Edge: +' + k.edge.toFixed(1) + '%';
+      // Build expandable detail panel
+      var buildDetailPanel = function(label, conf, odds, tracked, betType) {
+        var items = '';
+        // Odds
+        if (odds != null) {
+          var oddsDisplay = odds > 0 ? '+' + odds : '' + odds;
+          items += '<span class="bet-detail-item"><span class="detail-label">Odds</span> <span class="detail-value">' + oddsDisplay + '</span></span>';
+        }
+        // Edge + Stake from Kelly
+        if (typeof KellyCalculator !== 'undefined' && odds != null && conf != null && conf >= 50) {
+          var s = KellyCalculator.getSettings();
+          if (s.kellyFraction !== 'off' && s.bankroll) {
+            var k = KellyCalculator.calculate(conf, odds);
+            if (k.method !== 'no-edge' && k.amount > 0) {
+              var tier = KellyCalculator.tier(conf, k.edge);
+              if (tier !== 'skip') {
+                var DF = typeof DisplayFormatter !== 'undefined' ? DisplayFormatter : null;
+                var fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
+                items += '<span class="bet-detail-item"><span class="detail-label">Edge</span> <span class="detail-value">+' + k.edge.toFixed(1) + '%</span></span>';
+                items += '<span class="bet-detail-item"><span class="detail-label">Stake</span> <span class="detail-value">' + fAmt + '</span></span>';
+              }
+            }
+          }
+        }
+        // Best bet tag
+        if (isInBestBets(betType)) {
+          items += '<span class="best-bet-tag">Best Bet</span>';
+        }
+        // Lock In / Locked button
+        if (tracked) {
+          items += '<button class="lock-in-btn locked" disabled>Locked</button>';
+        } else {
+          items += '<button class="lock-in-btn" onclick="lockInBet(event,\'' + escAway + '\',\'' + escHome + '\',\'' + betType + '\')">Lock In</button>';
+        }
+        return '<div class="bet-detail"><div class="bet-detail-inner">' + items + '</div></div>';
       };
 
       // Unified bet row renderer
@@ -5245,19 +5295,14 @@
         var rowCls = 'game-pick-row' + bestBetRowClass(betType) + dimClass(conf, betType);
         var pCls = pickClass(betType === 'total' ? g.total_pick : (betType === 'ml' ? g.ml_pick : g.spread_pick), conf);
         var resultSym = renderCardResultSym(result);
-        var kellyHtml = kellyBadge(conf, odds);
-        var expandContent = kellyExpandData(conf, odds);
-        var expandHtml = expandContent ? '<div class="bet-expand-detail">' + expandContent + '</div>' : '';
-        var row = '<div class="' + rowCls + '"' + (expandContent ? ' onclick="this.classList.toggle(\'expanded\')"' : '') + '>'
+        var trackedDot = tracked ? '<span class="tracked-dot"></span>' : '';
+        var row = '<div class="' + rowCls + '" onclick="toggleBetDetail(this)">'
           + '<span class="bet-type">' + label + '</span>'
-          + '<span class="bet-pick ' + pCls + '">' + pickStr + resultSym + '</span>'
-          + '<span class="bet-odds">' + oddsStr + '</span>'
+          + '<span class="bet-pick ' + pCls + '">' + pickStr + resultSym + trackedDot + '</span>'
+          + confBar(conf)
           + '<span class="bet-conf" style="color:' + confColor(conf || 0) + '">' + confStr + '</span>'
-          + kellyHtml
-          + '<span class="best-bet-dot"></span>'
-          + gameTrackIcon(trackType, tracked)
           + '</div>'
-          + expandHtml;
+          + buildDetailPanel(label, conf, odds, tracked, betType);
         return row;
       };
 
