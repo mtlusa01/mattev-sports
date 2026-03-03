@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-02T21:15:02",
+  "updated": "2026-03-02T21:30:02",
   "allTime": {
     "spreads": {
-      "wins": 194,
-      "losses": 141,
+      "wins": 196,
+      "losses": 142,
       "pushes": 7,
-      "pct": 57.9,
-      "roi": 10.6
+      "pct": 58.0,
+      "roi": 10.7
     },
     "totals": {
-      "wins": 169,
+      "wins": 172,
       "losses": 171,
       "pushes": 2,
-      "pct": 49.7,
-      "roi": -5.1
+      "pct": 50.1,
+      "roi": -4.3
     },
     "moneylines": {
-      "wins": 219,
-      "losses": 123,
+      "wins": 221,
+      "losses": 124,
       "pushes": 0,
-      "pct": 64.0,
-      "roi": 22.2
+      "pct": 64.1,
+      "roi": 22.3
     },
     "best_bets": {
       "wins": 33,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-02",
       "spreads": {
-        "wins": 2,
-        "losses": 2,
+        "wins": 4,
+        "losses": 3,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "4-3",
+        "pct": 57.1
       },
       "totals": {
-        "wins": 3,
+        "wins": 6,
         "losses": 1,
         "pushes": 0,
-        "record": "3-1",
-        "pct": 75.0
+        "record": "6-1",
+        "pct": 85.7
       },
       "moneylines": {
-        "wins": 2,
-        "losses": 2,
+        "wins": 4,
+        "losses": 3,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "4-3",
+        "pct": 57.1
       },
       "best_bets": {
         "wins": 2,
@@ -151,6 +151,60 @@
         {
           "date": "2026-03-02",
           "type": "spread",
+          "game": "NCCU @ UMES",
+          "pick": "UMES +5.5",
+          "result": "77-73",
+          "hit": true,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "NCCU @ UMES",
+          "pick": "OVER 145.5",
+          "result": "77-73",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "NCCU @ UMES",
+          "pick": "NCCU",
+          "result": "77-73",
+          "hit": true,
+          "confidence": 68
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "SCST @ DSU",
+          "pick": "SCST +4.5",
+          "result": "61-59",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "SCST @ DSU",
+          "pick": "UNDER 140.0",
+          "result": "61-59",
+          "hit": true,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "SCST @ DSU",
+          "pick": "DSU",
+          "result": "61-59",
+          "hit": false,
+          "confidence": 66
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
           "game": "IUIN @ CLE",
           "pick": "CLE +2.5",
           "result": "93-101",
@@ -174,6 +228,33 @@
           "result": "93-101",
           "hit": false,
           "confidence": 54
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "SFA @ UIW",
+          "pick": "UIW +7.0",
+          "result": "76-68",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "SFA @ UIW",
+          "pick": "OVER 143.0",
+          "result": "76-68",
+          "hit": true,
+          "confidence": 46
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "SFA @ UIW",
+          "pick": "SFA",
+          "result": "76-68",
+          "hit": true,
+          "confidence": 60
         }
       ]
     },
