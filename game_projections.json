@@ -2,7 +2,7 @@
   "date": "2026-03-02",
   "sport": "NBA",
   "locked_at": "2026-03-02T03:36:12",
-  "updated": "2026-03-03T03:41:13",
+  "updated": "2026-03-03T05:05:20",
   "games": [
     {
       "away_team": "HOU",
@@ -156,7 +156,7 @@
       "ml_pick": "UTA",
       "ml_conf": 51.4,
       "commence_time": "2026-03-03T02:10:00Z",
-      "status": "live",
+      "status": "final",
       "locked_at": "2026-03-02T03:36:11Z",
       "injury_impact": {
         "home": -9.6,
@@ -217,8 +217,11 @@
         "ev": 37.5,
         "confidence": "high"
       },
-      "away_score": 90,
-      "home_score": 89
+      "away_score": 128,
+      "home_score": 125,
+      "spread_result": "W",
+      "total_result": "L",
+      "ml_result": "L"
     },
     {
       "away_team": "LAC",
@@ -289,8 +292,8 @@
         "ev": 14.8,
         "confidence": "medium"
       },
-      "away_score": 19,
-      "home_score": 31
+      "away_score": 88,
+      "home_score": 81
     }
   ]
 }
