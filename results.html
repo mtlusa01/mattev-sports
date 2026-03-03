@@ -553,7 +553,7 @@
       <button class="sport-tab active" data-sport="nba">NBA</button>
       <button class="sport-tab" data-sport="nhl">NHL</button>
       <button class="sport-tab" data-sport="ncaab">NCAAB</button>
-      <button class="sport-tab" data-sport="mlb">MLB <span class="soon-badge">Soon</span></button>
+      <button class="sport-tab" data-sport="mlb">MLB</button>
     </div>
 
     <!-- All-Time Stats Banner -->
@@ -623,11 +623,13 @@
     const NBA_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
     const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
+    const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
 
     let currentSport = 'nba';
     let nbaResultsData = null;
     let nhlResultsData = null;
     let ncaabResultsData = null;
+    let mlbResultsData = null;
     let resultsData = null;
     let selectedDate = null;
     let calViewYear = null;
@@ -956,14 +958,15 @@
     // ── Init ──
     async function loadResults(sport) {
       sport = sport || currentSport;
-      const url = sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : NBA_RESULTS_URL;
+      const url = sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : sport === 'mlb' ? MLB_RESULTS_URL : NBA_RESULTS_URL;
       try {
         const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
         resultsData = await resp.json();
         if (sport === 'nba') nbaResultsData = resultsData;
         else if (sport === 'nhl') nhlResultsData = resultsData;
-        else ncaabResultsData = resultsData;
+        else if (sport === 'ncaab') ncaabResultsData = resultsData;
+        else mlbResultsData = resultsData;
 
         // Build date lookup
         daysByDate = {};
@@ -1050,7 +1053,7 @@
 
     // Sport tab handlers
     function switchResultsSport(sport) {
-      const supported = ['nba', 'nhl', 'ncaab'];
+      const supported = ['nba', 'nhl', 'ncaab', 'mlb'];
       if (!supported.includes(sport)) {
         document.getElementById('coming-soon-sport').textContent = sport.toUpperCase();
         document.getElementById('coming-soon-overlay').style.display = 'flex';
@@ -1076,7 +1079,7 @@
       }
 
       // Load the appropriate results
-      const cached = sport === 'ncaab' ? ncaabResultsData : sport === 'nhl' ? nhlResultsData : nbaResultsData;
+      const cached = sport === 'ncaab' ? ncaabResultsData : sport === 'nhl' ? nhlResultsData : sport === 'mlb' ? mlbResultsData : nbaResultsData;
       if (cached) {
         resultsData = cached;
         rebuildFromData();

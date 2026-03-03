@@ -261,10 +261,79 @@ jobs:
             nhl_results.json
           if-no-files-found: warn
 
-  # ─── Job 4: Publish to mattev-sports (triggers GitHub Pages) ──────
+  # ─── Job 4: MLB game predictions ──────────────────────────────────
+  predict-mlb:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout mattev-sports
+        uses: actions/checkout@v4
+
+      - name: Checkout mlb-predictor
+        uses: actions/checkout@v4
+        with:
+          repository: mtlusa01/mlb-predictor
+          token: ${{ secrets.GH_PAT }}
+          path: mlb-predictor
+
+      - name: Move repo to sibling directory
+        run: mv mlb-predictor ../mlb-predictor
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install mlb-predictor deps
+        run: pip install -r ../mlb-predictor/requirements.txt
+
+      - name: Seed results from mattev-sports
+        run: |
+          [ -f mlb_results.json ] && cp mlb_results.json ../mlb-predictor/mlb_results.json && echo "Seeded mlb_results.json" || true
+
+      - name: Fetch MLB data
+        working-directory: ../mlb-predictor
+        run: python get_data.py
+
+      - name: Fetch MLB odds
+        continue-on-error: true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        working-directory: ../mlb-predictor
+        run: python fetch_odds.py
+
+      - name: Grade yesterday's MLB games
+        continue-on-error: true
+        working-directory: ../mlb-predictor
+        run: python grade_mlb.py
+
+      - name: Run MLB predictions
+        working-directory: ../mlb-predictor
+        run: python mlb_model.py --today
+
+      - name: Export MLB projections
+        working-directory: ../mlb-predictor
+        run: python export_projections.py
+
+      - name: Copy MLB outputs to mattev-sports
+        run: |
+          [ -f ../mlb-predictor/mlb_game_projections.json ] && cp ../mlb-predictor/mlb_game_projections.json . && echo "Copied mlb_game_projections.json" || true
+          [ -f ../mlb-predictor/mlb_results.json ] && cp ../mlb-predictor/mlb_results.json . && echo "Copied mlb_results.json" || true
+
+      - name: Upload mattev-sports as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlb-outputs
+          path: |
+            mlb_game_projections.json
+            mlb_results.json
+          if-no-files-found: warn
+
+  # ─── Job 5: Publish to mattev-sports (triggers GitHub Pages) ──────
   publish:
-    needs: [predict-nba, predict-ncaab, predict-nhl]
-    if: always() && (needs.predict-nba.result == 'success' || needs.predict-ncaab.result == 'success' || needs.predict-nhl.result == 'success')
+    needs: [predict-nba, predict-ncaab, predict-nhl, predict-mlb]
+    if: always() && (needs.predict-nba.result == 'success' || needs.predict-ncaab.result == 'success' || needs.predict-nhl.result == 'success' || needs.predict-mlb.result == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -301,6 +370,14 @@ jobs:
           path: nhl-outputs
         continue-on-error: true
 
+      - name: Download MLB outputs
+        if: needs.predict-mlb.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: mlb-outputs
+          path: mlb-outputs
+        continue-on-error: true
+
       - name: Archive yesterday's projections before overwrite
         run: |
           python3 -c "
@@ -322,6 +399,7 @@ jobs:
               'game_projections': 'game_projections.json',
               'nhl_game_projections': 'nhl_game_projections.json',
               'ncaab_projections': 'ncaab_projections.json',
+              'mlb_game_projections': 'mlb_game_projections.json',
               'player_props': None,  # extracted from projections.json
               'all_props': None,
               'results': 'results.json',
@@ -350,6 +428,7 @@ jobs:
               'total_games': len(archive.get('game_projections', {}).get('games', [])),
               'total_nhl_games': len(archive.get('nhl_game_projections', {}).get('games', [])),
               'total_ncaab_games': len(archive.get('ncaab_projections', {}).get('games', [])),
+              'total_mlb_games': len(archive.get('mlb_game_projections', {}).get('games', [])),
           }
 
           with open(archive_path, 'w') as f:
@@ -367,7 +446,9 @@ jobs:
             ncaab-outputs/ncaab_projections.json \
             ncaab-outputs/ncaab_results.json \
             nhl-outputs/nhl_game_projections.json \
-            nhl-outputs/nhl_results.json; do
+            nhl-outputs/nhl_results.json \
+            mlb-outputs/mlb_game_projections.json \
+            mlb-outputs/mlb_results.json; do
             if [ -f "$f" ]; then
               cp "$f" .
               echo "Copied $(basename $f)"
@@ -388,6 +469,7 @@ jobs:
           checks = [
               ('ncaab_projections.json', 'NCAAB', 2),
               ('nhl_game_projections.json', 'NHL', 1),
+              ('mlb_game_projections.json', 'MLB', 0),  # 0 min — may be offseason
           ]
 
           for fname, sport, min_games in checks:
@@ -425,6 +507,7 @@ jobs:
           git add projections.json \
                   ncaab_projections.json ncaab_results.json \
                   nhl_game_projections.json nhl_results.json \
+                  mlb_game_projections.json mlb_results.json \
                   archive/ 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"

@@ -37,8 +37,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results.json ncaab_results.json nhl_results.json \
-                 game_projections.json nhl_game_projections.json ncaab_projections.json
+          git add results.json ncaab_results.json nhl_results.json mlb_results.json \
+                 game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json
           git diff --staged --quiet || {
             git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
             # Rebase with -X theirs keeps CI's data files on conflict

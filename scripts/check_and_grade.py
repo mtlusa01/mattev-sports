@@ -28,6 +28,7 @@ ESPN_ENDPOINTS = {
     "NBA": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
     "NHL": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard",
     "NCAAB": "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard",
+    "MLB": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
 }
 
 # ESPN sometimes uses non-standard abbreviations — map to our projection format
@@ -618,6 +619,12 @@ SPORT_CONFIG = [
         "label": "NCAAB",
         "proj_file": "ncaab_projections.json",
         "results_file": "ncaab_results.json",
+        "is_nba": False,
+    },
+    {
+        "label": "MLB",
+        "proj_file": "mlb_game_projections.json",
+        "results_file": "mlb_results.json",
         "is_nba": False,
     },
 ]

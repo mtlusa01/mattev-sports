@@ -285,6 +285,7 @@
     .model-card.nba:hover { border-top-color: var(--loss); }
     .model-card.ncaab:hover { border-top-color: #3b82f6; }
     .model-card.nhl:hover { border-top-color: var(--profit); }
+    .model-card.mlb:hover { border-top-color: #f59e0b; }
     .model-card.props:hover { border-top-color: var(--accent); }
     .model-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .model-badge {
@@ -294,6 +295,7 @@
     .model-badge.nba { background: var(--loss-soft); color: var(--loss); }
     .model-badge.ncaab { background: rgba(59,130,246,0.12); color: #60a5fa; }
     .model-badge.nhl { background: var(--profit-soft); color: var(--profit); }
+    .model-badge.mlb { background: rgba(245,158,11,0.12); color: #f59e0b; }
     .model-badge.props { background: var(--accent-soft); color: var(--accent-secondary); }
     .model-status {
       display: flex; align-items: center; gap: 5px;
@@ -687,6 +689,7 @@
     .cal-bet-sport.nba { background: var(--loss-soft); color: var(--loss); }
     .cal-bet-sport.ncaab { background: rgba(59,130,246,0.12); color: #60a5fa; }
     .cal-bet-sport.nhl { background: var(--profit-soft); color: var(--profit); }
+    .cal-bet-sport.mlb { background: rgba(245,158,11,0.12); color: #f59e0b; }
     .cal-bet-sport.props { background: var(--accent-soft); color: var(--accent-secondary); }
     .cal-bet-info { flex: 1; min-width: 0; }
     .cal-bet-matchup {
@@ -1503,7 +1506,7 @@
         return tb - ta;
       });
 
-      var sportClasses = { NBA: 'nba', NCAAB: 'ncaab', NHL: 'nhl', PROPS: 'props' };
+      var sportClasses = { NBA: 'nba', NCAAB: 'ncaab', NHL: 'nhl', MLB: 'mlb', PROPS: 'props' };
       var html = '';
       for (var i = 0; i < activeSports.length; i++) {
         var key = activeSports[i];
