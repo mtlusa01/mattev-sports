@@ -2087,8 +2087,8 @@
 
         // Update view tabs based on sport
         const propsTab = viewTabs.querySelector('[data-view="player-props"]');
-        if (sport === 'nhl' || sport === 'ncaab' || sport === 'mlb') {
-          // NHL/NCAAB: only game projections, hide player props tab
+        if (sport === 'ncaab' || sport === 'mlb') {
+          // NCAAB/MLB: only game projections, hide player props tab
           propsTab.style.display = 'none';
           if (currentView === 'player-props') {
             currentView = 'game-projections';
@@ -2097,7 +2097,7 @@
             });
           }
         } else {
-          // NBA: show both tabs
+          // NBA/NHL: show both tabs
           propsTab.style.display = '';
         }
 
@@ -2164,6 +2164,7 @@
         }
         return [];
       }
+      if (currentSport === 'nhl') return nhlProjections;
       return projections;
     }
 
@@ -2237,7 +2238,7 @@
       const statsBar = document.getElementById('stats-bar');
       const isGameView = currentView === 'game-projections';
 
-      if (currentSport === 'nhl' || currentSport === 'ncaab' || currentSport === 'mlb' || (currentSport === 'nba' && isGameView)) {
+      if (currentSport === 'ncaab' || currentSport === 'mlb' || ((currentSport === 'nba' || currentSport === 'nhl') && isGameView)) {
         // Game projections stats — use getActiveGameProjections() for historical support
         const allGames = getActiveGameProjections();
         const games = allGames.filter(g => {
@@ -2293,7 +2294,7 @@
         document.getElementById('stat-avgconf').textContent = avgConf > 0 ? avgConf.toFixed(1) + '%' : '--';
         statsBar.classList.add('visible');
         statsBar.style.display = '';
-      } else if (currentSport === 'nba' && !isGameView) {
+      } else if ((currentSport === 'nba' || currentSport === 'nhl') && !isGameView) {
         // Player props stats — use getActiveProps() for historical support
         const activeProps = getActiveProps();
         if (activeProps.length === 0 || activeProps._stale) { statsBar.style.display = 'none'; return; }
@@ -2303,7 +2304,8 @@
 
         // Hide stats bar when today has no games (stale props from prior date)
         if (!isHistorical) {
-          const todayGames = gameProjections.filter(g => {
+          const sportGames = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+          const todayGames = sportGames.filter(g => {
             const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
             return gd === today;
           });
@@ -2364,6 +2366,8 @@
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
     const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
     const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
+    const NHL_PLAYER_PROPS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_player_props.json';
+    const NHL_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_results.json';
 
     // ── Historical Results ──
     let historicalResults = null;
@@ -2945,6 +2949,7 @@
     }
 
     let projections = [];
+    let nhlProjections = [];
     let gameProjections = [];
     let nhlGameProjections = [];
     let ncaabGameProjections = [];
@@ -2980,6 +2985,14 @@
       { key: 'REB', label: 'REBOUNDS' },
       { key: 'AST', label: 'ASSISTS' },
       { key: 'PRA', label: 'PRA' }
+    ];
+    const NHL_PROP_CATEGORIES = [
+      { key: 'all', label: 'ALL' },
+      { key: 'shots', label: 'SHOTS' },
+      { key: 'goals', label: 'GOALS' },
+      { key: 'assists', label: 'ASSISTS' },
+      { key: 'points', label: 'POINTS' },
+      { key: 'saves', label: 'SAVES' }
     ];
     let currentPropCategory = 'all';
     let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
@@ -3442,11 +3455,19 @@
     }
 
     function renderPropRecommendations() {
-      const recs = recommendations;
-      const propRecs = ((recs && recs.props) || [])
-        .filter(r => r.edge === 'STRONG' || r.edge === 'GOOD')
-        .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
-        .slice(0, MAX_RECOMMENDED);
+      let propRecs;
+      if (currentSport === 'nhl') {
+        propRecs = [...nhlProjections]
+          .filter(r => (r.edge === 'STRONG' || r.edge === 'GOOD') && !r.result)
+          .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
+          .slice(0, MAX_RECOMMENDED);
+      } else {
+        const recs = recommendations;
+        propRecs = ((recs && recs.props) || [])
+          .filter(r => r.edge === 'STRONG' || r.edge === 'GOOD')
+          .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
+          .slice(0, MAX_RECOMMENDED);
+      }
       if (propRecs.length === 0) {
         return `<div class="rec-category">
           <div class="rec-header">
@@ -3469,7 +3490,7 @@
           <div class="rec-rank">#${r.rec_rank || (i + 1)}</div>
           <div class="rec-badge prop">PROP</div>
           <div class="rec-player">${r.player}</div>
-          <div class="rec-team"><span class="team-dot" style="background:${TEAM_COLORS[r.team] || 'var(--text-muted)'}"></span>${r.team} ${matchupStr}</div>
+          <div class="rec-team"><span class="team-dot" style="background:${getTeamColor(r.team)}"></span>${r.team} ${matchupStr}</div>
           <div class="rec-prop-type">${r.prop}</div>
           <div class="rec-pick ${dirClass}">${r.direction} ${r.line}</div>
           <div class="rec-proj">Proj: ${r.projection} <span class="${diffCls}">(${diffStr})</span></div>
@@ -3511,7 +3532,7 @@
         const diff = p.diff != null ? p.diff : ((p.projection || 0) - (p.line || 0));
         const diffStr = diff >= 0 ? '+' + diff.toFixed(1) : diff.toFixed(1);
         const diffCls = diff >= 0 ? 'pos' : 'neg';
-        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
+        const teamColor = getTeamColor(p.team);
         return `<div class="game-prop-card">
           <div class="gpc-rank">#${i + 1}</div>
           <div class="gpc-player">${p.player}</div>
@@ -3535,13 +3556,14 @@
 
     // ── Category Tabs ──
     function renderPropCategoryTabs(filtered) {
+      const cats = currentSport === 'nhl' ? NHL_PROP_CATEGORIES : PROP_CATEGORIES;
       const counts = { all: filtered.length };
-      for (const cat of PROP_CATEGORIES) {
+      for (const cat of cats) {
         if (cat.key !== 'all') counts[cat.key] = filtered.filter(p => p.prop === cat.key).length;
       }
       return `
         <div class="prop-category-tabs">
-          ${PROP_CATEGORIES.map(cat => {
+          ${cats.map(cat => {
             const active = currentPropCategory === cat.key ? ' active' : '';
             return `<button class="category-tab${active}" data-prop-cat="${cat.key}">${cat.label}<span class="tab-count">${counts[cat.key] || 0}</span></button>`;
           }).join('')}
@@ -3960,7 +3982,7 @@
         const evStr = p.ev != null ? (p.ev >= 0 ? '+' : '') + p.ev.toFixed(1) + '%' : '--';
         const evCls = p.ev > 0 ? 'positive' : 'negative';
         const confStr = p.confidence != null ? p.confidence.toFixed(1) + '%' : '--';
-        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
+        const teamColor = getTeamColor(p.team);
         const g = getGameForTeam(p.team);
         const matchupStr = g ? (g.away_team === p.team ? `@ ${g.home_team}` : `vs ${g.away_team}`) : '';
         const edgeBadge = p.edge === 'STRONG' ? '<span class="edge-badge strong">STRONG</span>'
@@ -4203,7 +4225,7 @@
           : '<span class="pick-result-badge loss">&#10007;</span>';
         const dirClass = p.direction === 'OVER' ? 'over' : 'under';
         const actualCls = p.hit ? 'hit' : 'miss';
-        const teamColor = TEAM_COLORS[p.team] || 'var(--text-muted)';
+        const teamColor = getTeamColor(p.team);
         return `<tr>
           <td><span class="gp-player">${p.player}</span><span class="gp-team"><span class="team-dot" style="background:${teamColor}"></span>${p.team}</span></td>
           <td style="font-weight:500">${propLabel}</td>
@@ -4256,8 +4278,8 @@
         html += `<button class="filter-pill${active}" data-inline-dir="${tab.key}">${tab.label}</button>`;
       }
       html += '</div>';
-      // Source (only show if there are any live-discovered props)
-      const hasNewProps = projections.some(p => p.added_live === true);
+      // Source (only show if there are any live-discovered props — NBA only)
+      const hasNewProps = currentSport === 'nba' && projections.some(p => p.added_live === true);
       if (hasNewProps) {
         const srcTabs = [
           { key: 'all', label: 'All' }, { key: 'original', label: 'Original' }, { key: 'new', label: 'New' },
@@ -4272,9 +4294,10 @@
       html += '</div>';
 
       // Game pills
-      if (gameProjections.length > 0) {
+      const propsGameList = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+      if (propsGameList.length > 0) {
         const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
-        const sorted = [...gameProjections].sort((a, b) => {
+        const sorted = [...propsGameList].sort((a, b) => {
           const sa = getGameStatus(a), sb = getGameStatus(b);
           if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
           return (a.commence_time || '').localeCompare(b.commence_time || '');
@@ -4298,12 +4321,14 @@
         html += '</div>';
       }
 
-      // View All Props link
-      html += `<div style="text-align:right; margin-top:12px;">
-        <a href="all-props.html" class="view-all-props-link" style="display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:600; text-decoration:none;">
-          View All 71 Props <span style="font-size:16px;">&#8594;</span>
-        </a>
-      </div>`;
+      // View All Props link (NBA only)
+      if (currentSport === 'nba') {
+        html += `<div style="text-align:right; margin-top:12px;">
+          <a href="all-props.html" class="view-all-props-link" style="display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:600; text-decoration:none;">
+            View All 71 Props <span style="font-size:16px;">&#8594;</span>
+          </a>
+        </div>`;
+      }
 
       return html;
     }
@@ -4398,16 +4423,19 @@
       // Show empty state for today when no games are scheduled
       // Check both _stale flag AND whether today has actual NBA games
       if (!isHistorical) {
-        const todayGames = gameProjections.filter(g => {
+        const sportGames = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+        const todayGames = sportGames.filter(g => {
           const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
           return gd === today;
         });
-        if (projections._stale || todayGames.length === 0) {
+        const sportProps = getActiveProps();
+        if (sportProps._stale || todayGames.length === 0) {
+          const sportName = currentSport.toUpperCase();
           propsView.innerHTML = datePickerHtml + `
             <div class="empty-state" style="padding: 60px 20px;">
               <div class="empty-state-icon" style="font-size: 48px;">&#128197;</div>
               <div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No games scheduled today</div>
-              <div class="empty-state-text">NBA player prop projections will appear here when today's games are loaded.</div>
+              <div class="empty-state-text">${sportName} player prop projections will appear here when today's games are loaded.</div>
             </div>`;
           attachCalendarHandlers();
           return;
@@ -4568,8 +4596,8 @@
       }
       if (subtab === 'props') subtab = 'player-props';
       else subtab = 'game-projections';
-      // NHL has no props
-      if ((sport === 'nhl' || sport === 'ncaab' || sport === 'mlb') && subtab === 'player-props') subtab = 'game-projections';
+      // NCAAB/MLB have no props
+      if ((sport === 'ncaab' || sport === 'mlb') && subtab === 'player-props') subtab = 'game-projections';
       return { sport, subtab, params };
     }
 
@@ -4883,7 +4911,7 @@
     async function goToToday() {
       selectedDate = getLocalDateStr();
       // Reload current projections for all sports (including player props)
-      await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadNcaabGameProjections(), loadMlbGameProjections(), loadProjections()]);
+      await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadNcaabGameProjections(), loadMlbGameProjections(), loadProjections(), loadNhlProjections()]);
       updateActiveGameData();
       updateTimestamp();
       updateStatsBar();
@@ -6144,6 +6172,57 @@
       }
     }
 
+    async function loadNhlProjections() {
+      try {
+        const resp = await fetch(NHL_PLAYER_PROPS_URL + '?t=' + Date.now());
+        if (!resp.ok) throw new Error('Failed to fetch NHL props');
+        const data = await resp.json();
+
+        const dataDate = data.date || '';
+        const today = getLocalDateStr();
+        if (dataDate && dataDate !== today) {
+          nhlProjections = [];
+          nhlProjections._date = dataDate;
+          nhlProjections._stale = true;
+        } else {
+          nhlProjections = data.projections || [];
+          nhlProjections.forEach((p, i) => p._idx = i);
+          nhlProjections._date = dataDate || today;
+          nhlProjections._stale = false;
+        }
+
+        // Merge grading results so W/L badges render
+        if (nhlProjections.length > 0) {
+          try {
+            const rResp = await fetch(NHL_PROPS_RESULTS_URL + '?t=' + Date.now());
+            if (rResp.ok) {
+              const rData = await rResp.json();
+              const days = rData.days || [];
+              const dayMatch = days.find(d => d.date === (dataDate || today));
+              if (dayMatch && dayMatch.picks) {
+                for (const pick of dayMatch.picks) {
+                  const match = nhlProjections.find(p =>
+                    p.player === pick.player && p.prop === pick.prop && p.direction === pick.direction
+                  );
+                  if (match && pick.result) {
+                    match.result = pick.result;
+                    match.actual = pick.actual;
+                  }
+                }
+              }
+            }
+          } catch (e) { /* results not available yet */ }
+        }
+
+        if (currentSport === 'nhl' && currentView === 'player-props') {
+          updateStatsBar();
+          render();
+        }
+      } catch (err) {
+        console.error('Failed to load NHL projections:', err);
+      }
+    }
+
     async function loadInjuries() {
       try {
         const resp = await fetch(INJURIES_URL + '?t=' + Date.now());
@@ -6258,6 +6337,7 @@
 
     // ── Init ──
     loadProjections();
+    loadNhlProjections();
     loadGameProjections();
     loadNhlGameProjections();
     loadNcaabGameProjections();

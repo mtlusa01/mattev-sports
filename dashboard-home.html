@@ -1316,6 +1316,7 @@
     var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null;
     var propsJsonData = null, gameJsonData = null;
     var nhlGameJsonData = null, ncaabGameJsonData = null;
+    var nhlPropsJsonData = null;
     var currentProfile = null;
     var lastRecommendations = null;
     var modelStats = null;
@@ -2151,6 +2152,26 @@
         }
       }
 
+      // NHL player props
+      if (nhlPropsJsonData && nhlPropsJsonData.projections) {
+        var nhlProps = nhlPropsJsonData.projections;
+        for (var np = 0; np < nhlProps.length; np++) {
+          var p = nhlProps[np];
+          if (!p.player || !p.prop) continue;
+          var conf = parseFloat(p.confidence) || 0;
+          var ev = parseFloat(p.ev) || 0;
+          if (conf < 52 || ev <= 0) continue;
+          var propOdds = p.market_odds || p.odds || -110;
+          candidates.push({ sport: 'nhl-props', type: 'prop',
+            game: (p.player || '') + ' (' + (p.team || '') + ')',
+            pick: (p.direction || 'OVER') + ' ' + p.line,
+            line: p.line || '', odds: propOdds, confidence: conf, ev: ev,
+            player: p.player || '', prop_type: p.prop || '',
+            commenceTime: p.commence_time || null,
+            spreadSide: '', totalDir: '', mlSide: '' });
+        }
+      }
+
       var totalCandidates = candidates.length;
 
       // ── Deduplication ──
@@ -2356,8 +2377,8 @@
         var confClass = p.confidence >= 65 ? 'high-conf' : p.confidence >= 55 ? 'med-conf' : '';
         var barClass = p.confidence >= 65 ? 'high' : p.confidence >= 55 ? 'med' : 'low';
         var riskClass = p.edge >= 0.08 ? 'low' : p.edge >= 0.04 ? 'med' : 'high';
-        var sportLabel = p.sport === 'props' ? 'PROP' : p.sport.toUpperCase();
-        var sportBadge = p.sport === 'props' ? 'props' : p.sport;
+        var sportLabel = (p.sport === 'props' || p.sport === 'nhl-props') ? 'PROP' : p.sport.toUpperCase();
+        var sportBadge = p.sport === 'props' ? 'props' : p.sport === 'nhl-props' ? 'nhl' : p.sport;
         var matchup = p.type === 'prop' ? (p.player + ' ' + p.prop_type) : p.game;
         var pickLabel = p.pick;
         var typeLabel = p.type.charAt(0).toUpperCase() + p.type.slice(1);
@@ -2938,6 +2959,7 @@
         fetch('game_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('nhl_game_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('ncaab_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('nhl_player_props.json?t=' + Date.now()).then(function(r) { return r.json(); }),
       ]);
 
       var nbaData = results[0].status === 'fulfilled' ? results[0].value : null;
@@ -2948,6 +2970,7 @@
       gameJsonData = results[4].status === 'fulfilled' ? results[4].value : null;
       nhlGameJsonData = results[5].status === 'fulfilled' ? results[5].value : null;
       ncaabGameJsonData = results[6].status === 'fulfilled' ? results[6].value : null;
+      nhlPropsJsonData = results[7].status === 'fulfilled' ? results[7].value : null;
 
       // Grade each model (still needed for recommendations)
       var nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);

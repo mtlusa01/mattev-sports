@@ -624,12 +624,14 @@
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
     const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
     const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
+    const NHL_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_results.json';
 
     let currentSport = 'nba';
     let nbaResultsData = null;
     let nhlResultsData = null;
     let ncaabResultsData = null;
     let mlbResultsData = null;
+    let nhlPropsResultsData = null;
     let resultsData = null;
     let selectedDate = null;
     let calViewYear = null;
@@ -897,7 +899,7 @@
         </div>`;
       }
       let summaryHtml = '';
-      if (currentSport === 'nba') {
+      if (currentSport === 'nba' || currentSport === 'nhl') {
         summaryHtml += card('Props', day.props || {});
       }
       summaryHtml += card('Spreads', day.spreads || {});
@@ -974,6 +976,52 @@
           daysByDate[day.date] = day;
         });
         sortedDates = Object.keys(daysByDate).sort(); // ascending
+
+        // Load and merge NHL props results
+        if (sport === 'nhl') {
+          try {
+            const propsResp = await fetch(NHL_PROPS_RESULTS_URL + '?t=' + Date.now());
+            if (propsResp.ok) {
+              nhlPropsResultsData = await propsResp.json();
+              if (nhlPropsResultsData && nhlPropsResultsData.days) {
+                for (const propsDay of nhlPropsResultsData.days) {
+                  const date = propsDay.date;
+                  if (!daysByDate[date]) {
+                    daysByDate[date] = { date: date, picks: [], spreads: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, totals: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, moneylines: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, best_bets: {wins:0,losses:0,pushes:0,record:'0-0',pct:0} };
+                  }
+                  const propPicks = (propsDay.picks || []).map(function(p) {
+                    return {
+                      date: date, type: 'prop', player: p.player || '', team: p.prop || '',
+                      game: (p.player || '') + ' \u2014 ' + (p.prop || ''),
+                      pick: (p.direction || 'OVER') + ' ' + (p.line || ''),
+                      result: p.actual != null ? String(p.actual) : '',
+                      hit: p.result === 'WIN' ? true : p.result === 'LOSS' ? false : null,
+                      confidence: p.confidence || 0,
+                    };
+                  });
+                  daysByDate[date].picks = (daysByDate[date].picks || []).concat(propPicks);
+                  daysByDate[date].props = {
+                    wins: propsDay.wins || 0, losses: propsDay.losses || 0, pushes: propsDay.pushes || 0,
+                    record: (propsDay.wins || 0) + '-' + (propsDay.losses || 0),
+                    pct: propsDay.pct || 0,
+                  };
+                }
+                sortedDates = Object.keys(daysByDate).sort();
+                // Merge props allTime into results
+                if (nhlPropsResultsData.all_time) {
+                  resultsData.allTime = resultsData.allTime || {};
+                  resultsData.allTime.props = {
+                    wins: nhlPropsResultsData.all_time.wins || 0,
+                    losses: nhlPropsResultsData.all_time.losses || 0,
+                    pushes: nhlPropsResultsData.all_time.pushes || 0,
+                    pct: nhlPropsResultsData.all_time.pct || 0,
+                    roi: 0,
+                  };
+                }
+              }
+            }
+          } catch (e) { /* no NHL props results yet */ }
+        }
 
         // Default selected date: most recent past day with data (skip today — results aren't final)
         const today = todayKey();
@@ -1067,7 +1115,7 @@
       closeMobileNav();
 
       // Update page subtitle
-      const hasProps = sport === 'nba';
+      const hasProps = sport === 'nba' || sport === 'nhl';
       document.querySelector('.page-subtitle').textContent =
         `Track our ${sport.toUpperCase()} model's accuracy across ${hasProps ? 'player props, spreads, and moneylines' : 'spreads, totals, and moneylines'}.`;
 
@@ -1092,6 +1140,44 @@
       daysByDate = {};
       (resultsData.days || []).forEach(day => { daysByDate[day.date] = day; });
       sortedDates = Object.keys(daysByDate).sort();
+
+      // Merge NHL props if cached
+      if (currentSport === 'nhl' && nhlPropsResultsData && nhlPropsResultsData.days) {
+        for (const propsDay of nhlPropsResultsData.days) {
+          const date = propsDay.date;
+          if (!daysByDate[date]) {
+            daysByDate[date] = { date: date, picks: [], spreads: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, totals: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, moneylines: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, best_bets: {wins:0,losses:0,pushes:0,record:'0-0',pct:0} };
+          }
+          const propPicks = (propsDay.picks || []).map(function(p) {
+            return {
+              date: date, type: 'prop', player: p.player || '', team: p.prop || '',
+              game: (p.player || '') + ' \u2014 ' + (p.prop || ''),
+              pick: (p.direction || 'OVER') + ' ' + (p.line || ''),
+              result: p.actual != null ? String(p.actual) : '',
+              hit: p.result === 'WIN' ? true : p.result === 'LOSS' ? false : null,
+              confidence: p.confidence || 0,
+            };
+          });
+          daysByDate[date].picks = (daysByDate[date].picks || []).concat(propPicks);
+          daysByDate[date].props = {
+            wins: propsDay.wins || 0, losses: propsDay.losses || 0, pushes: propsDay.pushes || 0,
+            record: (propsDay.wins || 0) + '-' + (propsDay.losses || 0),
+            pct: propsDay.pct || 0,
+          };
+        }
+        sortedDates = Object.keys(daysByDate).sort();
+        if (nhlPropsResultsData.all_time) {
+          resultsData.allTime = resultsData.allTime || {};
+          resultsData.allTime.props = {
+            wins: nhlPropsResultsData.all_time.wins || 0,
+            losses: nhlPropsResultsData.all_time.losses || 0,
+            pushes: nhlPropsResultsData.all_time.pushes || 0,
+            pct: nhlPropsResultsData.all_time.pct || 0,
+            roi: 0,
+          };
+        }
+      }
+
       selectedDate = sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : todayKey();
       const sd = new Date(selectedDate + 'T12:00:00');
       calViewYear = sd.getFullYear();

@@ -31,6 +31,8 @@ ESPN_ENDPOINTS = {
     "MLB": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
 }
 
+ESPN_NHL_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary"
+
 # ESPN sometimes uses non-standard abbreviations — map to our projection format
 ESPN_ABBR_FIX = {
     # NBA
@@ -603,6 +605,226 @@ def update_nba_results(proj_data, results_path):
     save_json(results_path, results)
 
 
+def grade_nhl_props():
+    """Grade NHL player props against actual box score stats."""
+    props_path = os.path.join(REPO_ROOT, "nhl_player_props.json")
+    results_path = os.path.join(REPO_ROOT, "nhl_props_results.json")
+
+    if not os.path.exists(props_path):
+        print("  NHL Props: no nhl_player_props.json found")
+        return False
+
+    with open(props_path, "r", encoding="utf-8") as f:
+        props_data = json.load(f)
+
+    props = props_data.get("projections", [])
+    if not props:
+        print("  NHL Props: no projections to grade")
+        return False
+
+    ungraded = [p for p in props if not p.get("result")]
+    if not ungraded:
+        print("  NHL Props: all props already graded")
+        return False
+
+    print(f"  NHL Props: {len(ungraded)} ungraded props")
+
+    game_ids = set()
+    for p in ungraded:
+        gid = p.get("game_id")
+        if gid:
+            game_ids.add(str(gid))
+
+    if not game_ids:
+        print("  NHL Props: no game IDs found in props")
+        return False
+
+    box_scores = {}
+    for gid in game_ids:
+        try:
+            url = f"{ESPN_NHL_SUMMARY}?event={gid}"
+            resp = requests.get(url, timeout=15)
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+
+            status = data.get("header", {}).get("competitions", [{}])[0].get("status", {}).get("type", {}).get("name", "")
+            if status != "STATUS_FINAL":
+                continue
+
+            stats = {}
+            for team_data in data.get("boxscore", {}).get("players", []):
+                for stat_section in team_data.get("statistics", []):
+                    labels = stat_section.get("labels", [])
+                    for athlete_data in stat_section.get("athletes", []):
+                        player = athlete_data.get("athlete", {})
+                        name = player.get("displayName", "")
+                        if not name:
+                            continue
+                        stat_values = athlete_data.get("stats", [])
+                        player_stats = {}
+                        for i, key in enumerate(labels):
+                            if i < len(stat_values):
+                                try:
+                                    val = stat_values[i]
+                                    if "/" in str(val):
+                                        parts = str(val).split("/")
+                                        player_stats[key] = float(parts[0])
+                                    else:
+                                        player_stats[key] = float(val)
+                                except (ValueError, IndexError):
+                                    player_stats[key] = val
+                        if name not in stats:
+                            stats[name] = {}
+                        stats[name].update(player_stats)
+
+            if stats:
+                box_scores[gid] = stats
+                print(f"    Game {gid}: {len(stats)} players")
+        except Exception as e:
+            print(f"    Game {gid} error: {e}")
+
+    if not box_scores:
+        print("  NHL Props: no finished games with box scores")
+        return False
+
+    graded = 0
+    wins = 0
+    losses = 0
+
+    STAT_MAP = {
+        "shots": ["SOG", "S", "Shots"],
+        "goals": ["G", "Goals"],
+        "assists": ["A", "Assists"],
+        "points": ["PTS", "P", "Points"],
+        "saves": ["SV", "SA", "Saves"],
+    }
+
+    for p in props:
+        if p.get("result"):
+            continue
+        gid = str(p.get("game_id", ""))
+        if gid not in box_scores:
+            continue
+        player_name = p.get("player", "")
+        prop_type = p.get("prop", "").lower()
+        line = p.get("line")
+        direction = p.get("direction", "OVER").upper()
+        if line is None:
+            continue
+
+        actual_stats = None
+        for name, s in box_scores[gid].items():
+            if name.lower() == player_name.lower():
+                actual_stats = s
+                break
+            if (name.split()[-1].lower() == player_name.split()[-1].lower() and
+                name.split()[0][0].lower() == player_name.split()[0][0].lower()):
+                actual_stats = s
+                break
+
+        if actual_stats is None:
+            continue
+
+        actual_value = None
+        for key in STAT_MAP.get(prop_type, [prop_type]):
+            if key in actual_stats:
+                actual_value = actual_stats[key]
+                break
+        if actual_value is None:
+            continue
+        actual_value = float(actual_value)
+
+        if direction == "OVER":
+            result = "WIN" if actual_value > line else ("PUSH" if actual_value == line else "LOSS")
+        else:
+            result = "WIN" if actual_value < line else ("PUSH" if actual_value == line else "LOSS")
+
+        p["result"] = result
+        p["actual"] = actual_value
+        graded += 1
+        if result == "WIN":
+            wins += 1
+        elif result == "LOSS":
+            losses += 1
+
+    if graded == 0:
+        print("  NHL Props: no props could be graded")
+        return False
+
+    print(f"  NHL Props: graded {graded} props ({wins}W-{losses}L)")
+    save_json(props_path, props_data)
+    _update_nhl_props_results(props, props_data.get("date", datetime.now().strftime("%Y-%m-%d")), results_path)
+    return True
+
+
+def _update_nhl_props_results(props, game_date, results_path):
+    """Update nhl_props_results.json with grading results."""
+    results = load_json(results_path) or {
+        "sport": "NHL", "type": "player_props",
+        "days": [], "all_time": {"wins": 0, "losses": 0, "pushes": 0},
+    }
+
+    graded = [p for p in props if p.get("result")]
+    if not graded:
+        return
+
+    wins = sum(1 for p in graded if p["result"] == "WIN")
+    losses = sum(1 for p in graded if p["result"] == "LOSS")
+    pushes = sum(1 for p in graded if p["result"] == "PUSH")
+
+    by_type = {}
+    for p in graded:
+        pt = p.get("prop", "?")
+        if pt not in by_type:
+            by_type[pt] = {"wins": 0, "losses": 0, "pushes": 0}
+        if p["result"] == "WIN": by_type[pt]["wins"] += 1
+        elif p["result"] == "LOSS": by_type[pt]["losses"] += 1
+        else: by_type[pt]["pushes"] += 1
+
+    by_tier = {}
+    for p in graded:
+        tier = p.get("edge", "FAIR") or "FAIR"
+        if tier not in by_tier:
+            by_tier[tier] = {"wins": 0, "losses": 0, "pushes": 0}
+        if p["result"] == "WIN": by_tier[tier]["wins"] += 1
+        elif p["result"] == "LOSS": by_tier[tier]["losses"] += 1
+        else: by_tier[tier]["pushes"] += 1
+
+    day_record = {
+        "date": game_date, "wins": wins, "losses": losses, "pushes": pushes,
+        "total": len(graded),
+        "pct": round(wins / (wins + losses) * 100, 1) if (wins + losses) > 0 else 0,
+        "by_type": by_type, "by_tier": by_tier,
+        "picks": [{"player": p.get("player"), "prop": p.get("prop"),
+                    "direction": p.get("direction"), "line": p.get("line"),
+                    "actual": p.get("actual"), "result": p.get("result"),
+                    "confidence": p.get("confidence"), "ev": p.get("ev"),
+                    "edge": p.get("edge")} for p in graded],
+    }
+
+    found = False
+    for i, d in enumerate(results["days"]):
+        if d.get("date") == game_date:
+            results["days"][i] = day_record
+            found = True
+            break
+    if not found:
+        results["days"].append(day_record)
+
+    all_w = sum(d.get("wins", 0) for d in results["days"])
+    all_l = sum(d.get("losses", 0) for d in results["days"])
+    all_p = sum(d.get("pushes", 0) for d in results["days"])
+    results["all_time"]["wins"] = all_w
+    results["all_time"]["losses"] = all_l
+    results["all_time"]["pushes"] = all_p
+    results["all_time"]["pct"] = round(all_w / (all_w + all_l) * 100, 1) if (all_w + all_l) > 0 else 0
+
+    results["updated"] = datetime.now().isoformat(timespec="seconds")
+    save_json(results_path, results)
+    print(f"  Updated nhl_props_results.json")
+
+
 # ── Entry Point ──────────────────────────────────────────────────
 
 
@@ -693,6 +915,11 @@ def main():
         )
         any_changes |= changed
         summaries.append(summary)
+
+    # ── Phase 4: Grade NHL player props ──
+    print("\nGrading NHL player props...")
+    nhl_props_changed = grade_nhl_props()
+    any_changes |= nhl_props_changed
 
     # Add skipped sports to summary
     checked_labels = {cfg["label"] for cfg in sports_to_check}
