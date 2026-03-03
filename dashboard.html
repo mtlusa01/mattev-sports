@@ -1271,6 +1271,10 @@
       text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
     }
 
+    /* Bet type filter — row highlighting */
+    .game-pick-row.type-highlighted { background: rgba(0, 212, 255, 0.03); }
+    .game-pick-row.type-dimmed { opacity: 0.25; pointer-events: none; }
+
     /* ── Final Game Card ── */
     .game-card.final-card { border-color: rgba(113, 113, 122, 0.25); opacity: 0.92; }
     .game-card.final-card:hover { border-color: rgba(113, 113, 122, 0.4); }
@@ -2243,11 +2247,12 @@
         if (!games || games.length === 0) { statsBar.style.display = 'none'; return; }
 
         // Check if we have final games with results (historical view)
+        const statsTypes = currentBetTypeFilter !== 'all' ? [currentBetTypeFilter] : ['spread', 'total', 'ml'];
         let totalW = 0, totalL = 0;
         const hasFinals = games.some(g => getGameStatus(g) === 'final' && g.away_score != null);
         if (hasFinals) {
           for (const g of games) {
-            for (const t of ['spread', 'total', 'ml']) {
+            for (const t of statsTypes) {
               const r = (g[t + '_result'] || '').toLowerCase();
               if (r === 'win' || r === 'w') totalW++;
               else if (r === 'loss' || r === 'l') totalL++;
@@ -2257,8 +2262,9 @@
 
         const allConfs = [];
         let bestBets = 0;
+        const confKeys = statsTypes.map(t => t + '_conf');
         for (const g of games) {
-          for (const key of ['spread_conf', 'total_conf', 'ml_conf']) {
+          for (const key of confKeys) {
             const c = g[key];
             if (c != null) {
               allConfs.push(c);
@@ -2958,6 +2964,7 @@
     let currentGameFilter = null; // null = all, or "AWAY@HOME" key
     let currentStatusFilter = 'all'; // all, upcoming, live, final
     let currentGameConfFilter = 'all'; // all, high, medium, low
+    let currentBetTypeFilter = 'all'; // all, spread, total, ml
     let currentSearch = '';
     let teamToGame = {};  // team abbr -> game object
     let expandedRowId = null;  // currently expanded row
@@ -3075,9 +3082,10 @@
       return 'low';
     }
 
-    function gameHasConfTier(g, tier) {
-      if (tier === 'best-bets') return gameHasBestBet(g);
-      const confs = [parseFloat(g.spread_conf) || 0, parseFloat(g.total_conf) || 0, parseFloat(g.ml_conf) || 0];
+    function gameHasConfTier(g, tier, betTypeFilter) {
+      if (tier === 'best-bets') return gameHasBestBet(g, betTypeFilter);
+      const types = betTypeFilter && betTypeFilter !== 'all' ? [betTypeFilter] : ['spread', 'total', 'ml'];
+      const confs = types.map(t => parseFloat(g[t + '_conf']) || 0);
       return confs.some(c => getConfTier(c) === tier);
     }
 
@@ -3088,9 +3096,13 @@
       return (selectedDate !== today && histBB) ? histBB : liveBB;
     }
 
-    function gameHasBestBet(g) {
+    function gameHasBestBet(g, betTypeFilter) {
       const label = `${g.away_team} @ ${g.home_team}`;
-      return getActiveBestBets().some(b => b.game === label);
+      const bets = getActiveBestBets();
+      if (betTypeFilter && betTypeFilter !== 'all') {
+        return bets.some(b => b.game === label && (b.type || (b.bet_type || '').toLowerCase()) === betTypeFilter);
+      }
+      return bets.some(b => b.game === label);
     }
 
     function getGameMaxConf(g) {
@@ -3362,16 +3374,24 @@
         }
         dailyBestBets[cacheKey] = gameRecs;
       }
-      const gameRecs = dailyBestBets[cacheKey];
+      let gameRecs = dailyBestBets[cacheKey];
+
+      // Filter by bet type if active
+      if (currentBetTypeFilter !== 'all') {
+        gameRecs = gameRecs.filter(r => (r.bet_type || '').toLowerCase() === currentBetTypeFilter);
+      }
 
       const sportLabel = currentSport.toUpperCase();
+      const typeLabel = currentBetTypeFilter !== 'all'
+        ? (' ' + (currentBetTypeFilter === 'ml' ? 'ML' : currentBetTypeFilter.charAt(0).toUpperCase() + currentBetTypeFilter.slice(1)))
+        : '';
       if (gameRecs.length === 0) {
         return `<div class="rec-category" style="margin-bottom:20px">
           <div class="rec-header">
-            <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel} Bets</span>
+            <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel}${typeLabel} Bets</span>
             <span class="rec-count">0 picks</span>
           </div>
-          <div class="no-recs">No ${sportLabel} bets meet our quality criteria${selectedDate === getLocalDateStr() ? ' today' : ''}.</div>
+          <div class="no-recs">No ${sportLabel}${typeLabel} bets meet our quality criteria${selectedDate === getLocalDateStr() ? ' today' : ''}.</div>
         </div>`;
       }
 
@@ -3414,7 +3434,7 @@
 
       return `<div class="rec-category" style="margin-bottom:20px">
         <div class="rec-header">
-          <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel} Bets</span>
+          <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel}${typeLabel} Bets</span>
           <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''} ${recordHtml}</span>
         </div>
         <div class="rec-cards">${gameCards}</div>
@@ -4524,10 +4544,10 @@
     function updateLocationHash() {
       const subtab = currentView === 'player-props' ? 'props' : 'projections';
       let hash = `#${currentSport}/${subtab}`;
-      // Preserve status filter param
-      if (currentStatusFilter !== 'all') {
-        hash += '?status=' + currentStatusFilter;
-      }
+      const params = [];
+      if (currentStatusFilter !== 'all') params.push('status=' + currentStatusFilter);
+      if (currentBetTypeFilter !== 'all') params.push('type=' + currentBetTypeFilter);
+      if (params.length) hash += '?' + params.join('&');
       history.replaceState(null, '', hash);
     }
 
@@ -4578,6 +4598,11 @@
       if (status && ['upcoming', 'live', 'final'].includes(status)) {
         currentStatusFilter = status;
       }
+      // Restore bet type filter
+      const btype = params.get('type');
+      if (btype && ['spread', 'total', 'ml'].includes(btype)) {
+        currentBetTypeFilter = btype;
+      }
       // Restore sport (will also set view)
       if (sport !== 'nba') {
         switchSport(sport, false);
@@ -4589,9 +4614,15 @@
     })();
     // Handle back/forward navigation
     window.addEventListener('hashchange', () => {
-      const { sport, subtab } = parseHash();
+      const { sport, subtab, params } = parseHash();
       if (sport !== currentSport) switchSport(sport, false);
       if (subtab !== currentView) switchView(subtab, false);
+      const btype = params.get('type');
+      const newType = btype && ['spread', 'total', 'ml'].includes(btype) ? btype : 'all';
+      if (newType !== currentBetTypeFilter) {
+        currentBetTypeFilter = newType;
+        renderGameProjections();
+      }
     });
 
     // Confidence, direction, and search are now handled inline via attachPropsFilterHandlers()
@@ -5250,9 +5281,19 @@
       var isInBestBets = function(betType) { return activeBB.some(function(b) { return b.game === gameLabel && b.type === betType; }); };
       var bestBetRowClass = function(betType) { return isInBestBets(betType) ? ' is-best-bet' : ''; };
       var dimClass = function(conf, betType) {
-        if (currentGameConfFilter === 'all') return '';
-        if (currentGameConfFilter === 'best-bets') return isInBestBets(betType) ? '' : ' dimmed';
-        return getConfTier(conf || 0) !== currentGameConfFilter ? ' dimmed' : '';
+        var cls = '';
+        // Bet type filter: highlight matching, dim others
+        if (currentBetTypeFilter !== 'all') {
+          if (betType === currentBetTypeFilter) cls += ' type-highlighted';
+          else cls += ' type-dimmed';
+        }
+        // Confidence filter (only applies to non-type-dimmed rows)
+        if (cls.indexOf('type-dimmed') === -1) {
+          if (currentGameConfFilter === 'all') { /* no dim */ }
+          else if (currentGameConfFilter === 'best-bets') { if (!isInBestBets(betType)) cls += ' dimmed'; }
+          else { if (getConfTier(conf || 0) !== currentGameConfFilter) cls += ' dimmed'; }
+        }
+        return cls;
       };
 
       var status = getGameStatus(g);
@@ -5563,6 +5604,16 @@
           renderGameProjections();
         });
       });
+      container.querySelectorAll('[data-bettype-filter]').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentBetTypeFilter = pill.dataset.bettypeFilter;
+          container.querySelectorAll('[data-bettype-filter]').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          updateLocationHash();
+          updateStatsBar();
+          renderGameProjections();
+        });
+      });
     }
 
     function renderGameProjections() {
@@ -5623,9 +5674,9 @@
         });
       }
 
-      // Apply confidence filter
+      // Apply confidence filter (respects bet type filter)
       if (currentGameConfFilter !== 'all') {
-        filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter));
+        filtered = filtered.filter(g => gameHasConfTier(g, currentGameConfFilter, currentBetTypeFilter));
       }
 
       // Apply search filter (NCAAB supports full team name search)
@@ -5664,15 +5715,25 @@
       const statusFiltered = currentStatusFilter !== 'all'
         ? gamesToShow.filter(g => { const s = getGameStatus(g); return currentStatusFilter === 'upcoming' ? s === 'scheduled' || s === 'soon' : s === currentStatusFilter; })
         : gamesToShow;
+      // Count games per confidence tier, filtered by bet type if active
       const confCounts = { 'best-bets': 0, high: 0, medium: 0, low: 0 };
+      let allCountForConf = 0;
       for (const g of statusFiltered) {
-        if (gameHasConfTier(g, 'best-bets')) confCounts['best-bets']++;
-        if (gameHasConfTier(g, 'high')) confCounts.high++;
-        if (gameHasConfTier(g, 'medium')) confCounts.medium++;
-        if (gameHasConfTier(g, 'low')) confCounts.low++;
+        const typesToCheck = currentBetTypeFilter !== 'all' ? [currentBetTypeFilter] : ['spread', 'total', 'ml'];
+        let hasAny = false;
+        for (const t of typesToCheck) {
+          const c = g[t + '_conf'];
+          if (c != null) { hasAny = true; break; }
+        }
+        if (!hasAny) continue;
+        allCountForConf++;
+        if (gameHasConfTier(g, 'best-bets', currentBetTypeFilter)) confCounts['best-bets']++;
+        if (gameHasConfTier(g, 'high', currentBetTypeFilter)) confCounts.high++;
+        if (gameHasConfTier(g, 'medium', currentBetTypeFilter)) confCounts.medium++;
+        if (gameHasConfTier(g, 'low', currentBetTypeFilter)) confCounts.low++;
       }
       const confTabs = [
-        { key: 'all', label: `All (${statusFiltered.length})` },
+        { key: 'all', label: `All (${currentBetTypeFilter !== 'all' ? allCountForConf : statusFiltered.length})` },
         { key: 'best-bets', label: `Best Bets (${confCounts['best-bets']})` },
         { key: 'high', label: `High (${confCounts.high})` },
         { key: 'medium', label: `Medium (${confCounts.medium})` },
@@ -5686,6 +5747,18 @@
       for (const tab of statusTabs) {
         const active = currentStatusFilter === tab.key ? ' active' : '';
         filtersHtml += `<button class="filter-pill${active}" data-status-filter="${tab.key}">${tab.label} (${statusCounts[tab.key]})</button>`;
+      }
+      filtersHtml += '</div>';
+      filtersHtml += '<div class="filter-group"><span class="filter-label">Bet Type</span>';
+      const betTypeTabs = [
+        { key: 'all', label: 'All' },
+        { key: 'spread', label: 'Spreads' },
+        { key: 'total', label: 'Totals' },
+        { key: 'ml', label: 'Moneylines' },
+      ];
+      for (const tab of betTypeTabs) {
+        const active = currentBetTypeFilter === tab.key ? ' active' : '';
+        filtersHtml += `<button class="filter-pill${active}" data-bettype-filter="${tab.key}">${tab.label}</button>`;
       }
       filtersHtml += '</div>';
       filtersHtml += '<div class="filter-group"><span class="filter-label">Confidence</span>';
@@ -5715,9 +5788,10 @@
         if (finals.length === 0) return '';
         let w = 0, l = 0, p = 0;
         const bb = getActiveBestBets();
+        const typesToCount = currentBetTypeFilter !== 'all' ? [currentBetTypeFilter] : ['spread', 'total', 'ml'];
         for (const g of finals) {
           const label = `${g.away_team} @ ${g.home_team}`;
-          for (const t of ['spread', 'total', 'ml']) {
+          for (const t of typesToCount) {
             const r = (g[t + '_result'] || '').toLowerCase();
             if (!r) continue;
             let inTier = false;
@@ -5754,6 +5828,11 @@
 
       if (gameViewMode === 'list') {
         let betRows = generateBetRows(filtered);
+        // Filter by bet type
+        if (currentBetTypeFilter !== 'all') {
+          betRows = betRows.filter(r => r.type === currentBetTypeFilter);
+        }
+        // Filter by confidence
         if (currentGameConfFilter === 'best-bets') {
           const bb = getActiveBestBets();
           betRows = betRows.filter(r => bb.some(b => b.game === r.matchup && b.type === r.type));
