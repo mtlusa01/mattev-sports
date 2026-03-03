@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-02T21:55:34",
+  "updated": "2026-03-03T03:41:13",
   "allTime": {
     "spreads": {
-      "wins": 20,
+      "wins": 22,
       "losses": 10,
       "pushes": 0,
-      "pct": 66.7,
-      "roi": 27.3
+      "pct": 68.8,
+      "roi": 31.3
     },
     "totals": {
-      "wins": 16,
+      "wins": 18,
       "losses": 13,
       "pushes": 0,
-      "pct": 55.2,
-      "roi": 5.3
+      "pct": 58.1,
+      "roi": 10.9
     },
     "moneylines": {
-      "wins": 22,
+      "wins": 24,
       "losses": 8,
       "pushes": 0,
-      "pct": 73.3,
-      "roi": 40.0
+      "pct": 75.0,
+      "roi": 43.2
     },
     "best_bets": {
-      "wins": 17,
-      "losses": 6,
+      "wins": 20,
+      "losses": 5,
       "pushes": 0,
-      "pct": 73.9,
-      "roi": 41.1
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-03-02",
       "spreads": {
-        "wins": 0,
-        "losses": 1,
-        "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
-      },
-      "totals": {
-        "wins": 1,
-        "losses": 0,
-        "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
-      },
-      "moneylines": {
-        "wins": 1,
-        "losses": 0,
-        "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
-      },
-      "best_bets": {
         "wins": 2,
         "losses": 1,
         "pushes": 0,
         "record": "2-1",
         "pct": 66.7
+      },
+      "totals": {
+        "wins": 3,
+        "losses": 0,
+        "pushes": 0,
+        "record": "3-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 3,
+        "losses": 0,
+        "pushes": 0,
+        "record": "3-0",
+        "pct": 100.0
+      },
+      "best_bets": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -69,8 +69,7 @@
           "pick": "NSH +1.5",
           "result": "4-2",
           "hit": false,
-          "confidence": 54.3,
-          "best_bet": true
+          "confidence": 54.3
         },
         {
           "date": "2026-03-02",
@@ -91,6 +90,63 @@
           "hit": true,
           "confidence": 56.2,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "CBJ @ NYR",
+          "pick": "NYR +1.5",
+          "result": "5-4",
+          "hit": true,
+          "confidence": 55.7,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "CBJ @ NYR",
+          "pick": "OVER 5.5",
+          "result": "5-4",
+          "hit": true,
+          "confidence": 53.5
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "CBJ @ NYR",
+          "pick": "CBJ",
+          "result": "5-4",
+          "hit": true,
+          "confidence": 54.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "PHI @ TOR",
+          "pick": "PHI +1.5",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 59.0,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "PHI @ TOR",
+          "pick": "UNDER 6.5",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 51.3
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "PHI @ TOR",
+          "pick": "PHI",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 50.0
         }
       ]
     },

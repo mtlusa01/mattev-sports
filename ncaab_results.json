@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-02T21:55:34",
+  "updated": "2026-03-03T03:41:13",
   "allTime": {
     "spreads": {
-      "wins": 195,
-      "losses": 144,
+      "wins": 198,
+      "losses": 146,
       "pushes": 8,
-      "pct": 57.5,
-      "roi": 9.8
+      "pct": 57.6,
+      "roi": 9.9
     },
     "totals": {
-      "wins": 171,
-      "losses": 174,
+      "wins": 172,
+      "losses": 178,
       "pushes": 2,
-      "pct": 49.6,
-      "roi": -5.4
+      "pct": 49.1,
+      "roi": -6.2
     },
     "moneylines": {
-      "wins": 222,
-      "losses": 125,
+      "wins": 224,
+      "losses": 128,
       "pushes": 0,
-      "pct": 64.0,
-      "roi": 22.1
+      "pct": 63.6,
+      "roi": 21.5
     },
     "best_bets": {
-      "wins": 31,
-      "losses": 13,
+      "wins": 33,
+      "losses": 11,
       "pushes": 1,
-      "pct": 70.5,
-      "roi": 34.5
+      "pct": 75.0,
+      "roi": 43.2
     }
   },
   "days": [
     {
       "date": "2026-03-02",
       "spreads": {
-        "wins": 3,
-        "losses": 5,
+        "wins": 6,
+        "losses": 7,
         "pushes": 1,
-        "record": "3-5-1",
-        "pct": 37.5
+        "record": "6-7-1",
+        "pct": 46.2
       },
       "totals": {
-        "wins": 5,
-        "losses": 4,
+        "wins": 6,
+        "losses": 8,
         "pushes": 0,
-        "record": "5-4",
-        "pct": 55.6
+        "record": "6-8",
+        "pct": 42.9
       },
       "moneylines": {
-        "wins": 5,
-        "losses": 4,
+        "wins": 7,
+        "losses": 7,
         "pushes": 0,
-        "record": "5-4",
-        "pct": 55.6
+        "record": "7-7",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 0,
-        "losses": 4,
+        "wins": 2,
+        "losses": 2,
         "pushes": 1,
-        "record": "0-4-1",
-        "pct": 0.0
+        "record": "2-2-1",
+        "pct": 50.0
       },
       "picks": [
         {
@@ -78,8 +78,7 @@
           "pick": "UNDER 155.0",
           "result": "84-90",
           "hit": false,
-          "confidence": 66,
-          "best_bet": true
+          "confidence": 66
         },
         {
           "date": "2026-03-02",
@@ -161,8 +160,7 @@
           "pick": "UNDER 169.5",
           "result": "93-101",
           "hit": false,
-          "confidence": 66,
-          "best_bet": true
+          "confidence": 66
         },
         {
           "date": "2026-03-02",
@@ -226,6 +224,34 @@
           "result": "61-59",
           "hit": false,
           "confidence": 63
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "MCN @ NICH",
+          "pick": "NICH +11.0",
+          "result": "75-65",
+          "hit": true,
+          "confidence": 85,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "MCN @ NICH",
+          "pick": "OVER 145.0",
+          "result": "75-65",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "MCN @ NICH",
+          "pick": "NICH",
+          "result": "75-65",
+          "hit": false,
+          "confidence": 64
         },
         {
           "date": "2026-03-02",
@@ -309,6 +335,115 @@
           "result": "57-85",
           "hit": true,
           "confidence": 64
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "MTST @ NAU",
+          "pick": "NAU +5.5",
+          "result": "76-65",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "MTST @ NAU",
+          "pick": "OVER 143.5",
+          "result": "76-65",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "MTST @ NAU",
+          "pick": "NAU",
+          "result": "76-65",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "ETAM @ AMCC",
+          "pick": "ETAM +8.0",
+          "result": "71-84",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "ETAM @ AMCC",
+          "pick": "OVER 137.5",
+          "result": "71-84",
+          "hit": true,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "ETAM @ AMCC",
+          "pick": "AMCC",
+          "result": "71-84",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "SELA @ UNO",
+          "pick": "SELA +7.0",
+          "result": "82-78",
+          "hit": true,
+          "confidence": 69,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "SELA @ UNO",
+          "pick": "UNDER 144.5",
+          "result": "82-78",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "SELA @ UNO",
+          "pick": "UNO",
+          "result": "82-78",
+          "hit": false,
+          "confidence": 64
+        },
+        {
+          "date": "2026-03-02",
+          "type": "spread",
+          "game": "LAM @ HCU",
+          "pick": "HCU +1.0",
+          "result": "53-75",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-02",
+          "type": "total",
+          "game": "LAM @ HCU",
+          "pick": "OVER 133.0",
+          "result": "53-75",
+          "hit": false,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-02",
+          "type": "ml",
+          "game": "LAM @ HCU",
+          "pick": "HCU",
+          "result": "53-75",
+          "hit": true,
+          "confidence": 61
         }
       ]
     },
