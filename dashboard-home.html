@@ -1383,6 +1383,7 @@
   <script>
     const CUTOFF = '2026-02-27';
     var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null, mlbResultsData = null;
+    var nbaPropsResultsData = null, nhlPropsResultsData = null;
     var propsJsonData = null, gameJsonData = null;
     var nhlGameJsonData = null, ncaabGameJsonData = null;
     var nhlPropsJsonData = null;
@@ -2621,10 +2622,25 @@
           for (var j = 0; j < picks.length; j++) allPicks.push(picks[j]);
         }
       }
+      function collectPropPicks(data) {
+        if (!data || !data.days) return;
+        for (var i = 0; i < data.days.length; i++) {
+          var picks = data.days[i].picks || [];
+          for (var j = 0; j < picks.length; j++) {
+            var p = picks[j];
+            if (p.result !== undefined && p.hit === undefined) {
+              p.hit = p.result === 'WIN' ? true : p.result === 'LOSS' ? false : null;
+            }
+            allPicks.push(p);
+          }
+        }
+      }
       collectPicks(nbaResultsData);
       collectPicks(ncaabResultsData);
       collectPicks(nhlResultsData);
       collectPicks(mlbResultsData);
+      collectPropPicks(nbaPropsResultsData);
+      collectPropPicks(nhlPropsResultsData);
       for (var i = 0; i < bets.length; i++) {
         var bet = bets[i];
         if (bet.status !== 'pending') continue;
@@ -3172,6 +3188,8 @@
         fetch('ncaab_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('nhl_player_props.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('mlb_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('all_props_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('nhl_props_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
       ]);
 
       var nbaData = results[0].status === 'fulfilled' ? results[0].value : null;
@@ -3184,6 +3202,8 @@
       ncaabGameJsonData = results[6].status === 'fulfilled' ? results[6].value : null;
       nhlPropsJsonData = results[7].status === 'fulfilled' ? results[7].value : null;
       mlbResultsData = results[8].status === 'fulfilled' ? results[8].value : null;
+      nbaPropsResultsData = results[9].status === 'fulfilled' ? results[9].value : null;
+      nhlPropsResultsData = results[10].status === 'fulfilled' ? results[10].value : null;
 
       // Grade each model (still needed for recommendations)
       var nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);

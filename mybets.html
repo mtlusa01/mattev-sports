@@ -706,6 +706,8 @@
     const MLB_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_game_projections.json';
     const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
     const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
+    const NBA_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/all_props_results.json';
+    const NHL_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_results.json';
     const MONTH_NAMES = ['January','February','March','April','May','June',
                          'July','August','September','October','November','December'];
 
@@ -739,6 +741,8 @@
     let nhlResultsData = null;
     let ncaabResultsData = null;
     let mlbResultsData = null;
+    let nbaPropsResultsData = null;
+    let nhlPropsResultsData = null;
     currentUser = null;
 
     // ── Helpers ──
@@ -1467,7 +1471,7 @@
     // ── Auto-Grading ──
     async function loadGameData() {
       try {
-        const [nbaResp, nhlResp, ncaabResp, mlbResp, resultsResp, nhlResultsResp, ncaabResultsResp, mlbResultsResp] = await Promise.all([
+        const [nbaResp, nhlResp, ncaabResp, mlbResp, resultsResp, nhlResultsResp, ncaabResultsResp, mlbResultsResp, nbaPropsResp, nhlPropsResp] = await Promise.all([
           fetch(GAME_DATA_URL + '?t=' + Date.now()),
           fetch(NHL_GAME_DATA_URL + '?t=' + Date.now()),
           fetch(NCAAB_GAME_DATA_URL + '?t=' + Date.now()),
@@ -1475,7 +1479,9 @@
           fetch(RESULTS_URL + '?t=' + Date.now()),
           fetch(NHL_RESULTS_URL + '?t=' + Date.now()),
           fetch(NCAAB_RESULTS_URL + '?t=' + Date.now()),
-          fetch(MLB_RESULTS_URL + '?t=' + Date.now())
+          fetch(MLB_RESULTS_URL + '?t=' + Date.now()),
+          fetch(NBA_PROPS_RESULTS_URL + '?t=' + Date.now()),
+          fetch(NHL_PROPS_RESULTS_URL + '?t=' + Date.now())
         ]);
 
         if (nbaResp.ok) gameProjections = (await nbaResp.json()).games || [];
@@ -1486,6 +1492,8 @@
         if (nhlResultsResp.ok) nhlResultsData = await nhlResultsResp.json();
         if (ncaabResultsResp.ok) ncaabResultsData = await ncaabResultsResp.json();
         if (mlbResultsResp.ok) mlbResultsData = await mlbResultsResp.json();
+        if (nbaPropsResp.ok) nbaPropsResultsData = await nbaPropsResp.json();
+        if (nhlPropsResp.ok) nhlPropsResultsData = await nhlPropsResp.json();
       } catch (err) {
         console.error('Failed to load game data:', err);
       }
@@ -1587,13 +1595,27 @@
     }
 
     function gradePropBet(bet) {
-      // Collect all picks from all results files
+      // Collect all picks from game results files (use hit field)
       const allResults = [resultsData, nhlResultsData, ncaabResultsData, mlbResultsData];
       const allPicks = [];
       for (const data of allResults) {
         if (!data || !data.days) continue;
         for (const day of data.days) {
           if (day.picks) allPicks.push(...day.picks);
+        }
+      }
+      // Also collect from prop results files (use result field → convert to hit)
+      const propResults = [nbaPropsResultsData, nhlPropsResultsData];
+      for (const data of propResults) {
+        if (!data || !data.days) continue;
+        for (const day of data.days) {
+          for (const p of (day.picks || [])) {
+            const copy = Object.assign({}, p);
+            if (copy.result !== undefined && copy.hit === undefined) {
+              copy.hit = copy.result === 'WIN' ? true : copy.result === 'LOSS' ? false : null;
+            }
+            allPicks.push(copy);
+          }
         }
       }
 
@@ -1604,7 +1626,7 @@
             p.prop === bet.prop_type &&
             parseFloat(p.line) === parseFloat(bet.line) &&
             p.hit !== undefined && p.hit !== null) {
-          return { hit: p.hit, result: p.result };
+          return { hit: p.hit, result: p.actual != null ? p.actual : p.result };
         }
       }
       return null;
