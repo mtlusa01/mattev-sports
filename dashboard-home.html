@@ -1382,7 +1382,7 @@
   <script src="js/display-utils.js"></script>
   <script>
     const CUTOFF = '2026-02-27';
-    var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null;
+    var nbaResultsData = null, ncaabResultsData = null, nhlResultsData = null, mlbResultsData = null;
     var propsJsonData = null, gameJsonData = null;
     var nhlGameJsonData = null, ncaabGameJsonData = null;
     var nhlPropsJsonData = null;
@@ -2624,6 +2624,7 @@
       collectPicks(nbaResultsData);
       collectPicks(ncaabResultsData);
       collectPicks(nhlResultsData);
+      collectPicks(mlbResultsData);
       for (var i = 0; i < bets.length; i++) {
         var bet = bets[i];
         if (bet.status !== 'pending') continue;
@@ -3170,6 +3171,7 @@
         fetch('nhl_game_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('ncaab_projections.json?t=' + Date.now()).then(function(r) { return r.json(); }),
         fetch('nhl_player_props.json?t=' + Date.now()).then(function(r) { return r.json(); }),
+        fetch('mlb_results.json?t=' + Date.now()).then(function(r) { return r.json(); }),
       ]);
 
       var nbaData = results[0].status === 'fulfilled' ? results[0].value : null;
@@ -3181,6 +3183,7 @@
       nhlGameJsonData = results[5].status === 'fulfilled' ? results[5].value : null;
       ncaabGameJsonData = results[6].status === 'fulfilled' ? results[6].value : null;
       nhlPropsJsonData = results[7].status === 'fulfilled' ? results[7].value : null;
+      mlbResultsData = results[8].status === 'fulfilled' ? results[8].value : null;
 
       // Grade each model (still needed for recommendations)
       var nbaStats = grade('nba', nbaData, ['spreads', 'totals', 'moneylines']);

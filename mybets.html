@@ -702,6 +702,10 @@
     const NHL_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_game_projections.json';
     const RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/results.json';
     const NHL_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_results.json';
+    const NCAAB_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_projections.json';
+    const MLB_GAME_DATA_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_game_projections.json';
+    const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
+    const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
     const MONTH_NAMES = ['January','February','March','April','May','June',
                          'July','August','September','October','November','December'];
 
@@ -729,8 +733,12 @@
     let calViewYear = new Date().getFullYear();
     let gameProjections = [];
     let nhlGameProjections = [];
+    let ncaabGameProjections = [];
+    let mlbGameProjections = [];
     let resultsData = null;
     let nhlResultsData = null;
+    let ncaabResultsData = null;
+    let mlbResultsData = null;
     currentUser = null;
 
     // ── Helpers ──
@@ -1459,24 +1467,38 @@
     // ── Auto-Grading ──
     async function loadGameData() {
       try {
-        const [nbaResp, nhlResp, resultsResp, nhlResultsResp] = await Promise.all([
+        const [nbaResp, nhlResp, ncaabResp, mlbResp, resultsResp, nhlResultsResp, ncaabResultsResp, mlbResultsResp] = await Promise.all([
           fetch(GAME_DATA_URL + '?t=' + Date.now()),
           fetch(NHL_GAME_DATA_URL + '?t=' + Date.now()),
+          fetch(NCAAB_GAME_DATA_URL + '?t=' + Date.now()),
+          fetch(MLB_GAME_DATA_URL + '?t=' + Date.now()),
           fetch(RESULTS_URL + '?t=' + Date.now()),
-          fetch(NHL_RESULTS_URL + '?t=' + Date.now())
+          fetch(NHL_RESULTS_URL + '?t=' + Date.now()),
+          fetch(NCAAB_RESULTS_URL + '?t=' + Date.now()),
+          fetch(MLB_RESULTS_URL + '?t=' + Date.now())
         ]);
 
         if (nbaResp.ok) gameProjections = (await nbaResp.json()).games || [];
         if (nhlResp.ok) nhlGameProjections = (await nhlResp.json()).games || [];
+        if (ncaabResp.ok) ncaabGameProjections = (await ncaabResp.json()).games || [];
+        if (mlbResp.ok) mlbGameProjections = (await mlbResp.json()).games || [];
         if (resultsResp.ok) resultsData = await resultsResp.json();
         if (nhlResultsResp.ok) nhlResultsData = await nhlResultsResp.json();
+        if (ncaabResultsResp.ok) ncaabResultsData = await ncaabResultsResp.json();
+        if (mlbResultsResp.ok) mlbResultsData = await mlbResultsResp.json();
       } catch (err) {
         console.error('Failed to load game data:', err);
       }
     }
 
     function findGameResult(bet) {
-      const games = bet.sport === 'NHL' ? nhlGameProjections : gameProjections;
+      let games, results;
+      switch (bet.sport) {
+        case 'NHL': games = nhlGameProjections; results = nhlResultsData; break;
+        case 'NCAAB': games = ncaabGameProjections; results = ncaabResultsData; break;
+        case 'MLB': games = mlbGameProjections; results = mlbResultsData; break;
+        default: games = gameProjections; results = resultsData; break;
+      }
       const gameParts = (bet.game || '').split(' @ ');
       if (gameParts.length !== 2) return null;
       const [away, home] = gameParts;
@@ -1494,7 +1516,6 @@
         }
       }
 
-      const results = bet.sport === 'NHL' ? nhlResultsData : resultsData;
       if (!results || !results.days) return null;
 
       const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
@@ -1565,6 +1586,30 @@
       return null;
     }
 
+    function gradePropBet(bet) {
+      // Collect all picks from all results files
+      const allResults = [resultsData, nhlResultsData, ncaabResultsData, mlbResultsData];
+      const allPicks = [];
+      for (const data of allResults) {
+        if (!data || !data.days) continue;
+        for (const day of data.days) {
+          if (day.picks) allPicks.push(...day.picks);
+        }
+      }
+
+      // Match prop bet against graded picks
+      for (const p of allPicks) {
+        if (p.player && bet.player &&
+            p.player.toLowerCase() === bet.player.toLowerCase() &&
+            p.prop === bet.prop_type &&
+            parseFloat(p.line) === parseFloat(bet.line) &&
+            p.hit !== undefined && p.hit !== null) {
+          return { hit: p.hit, result: p.result };
+        }
+      }
+      return null;
+    }
+
     async function autoGradeBets() {
       const statusEl = document.getElementById('grading-status');
       statusEl.textContent = 'Checking...';
@@ -1578,7 +1623,19 @@
 
       for (const bet of bets) {
         if (bet.status !== 'pending') continue;
-        if (bet.type === 'prop') continue;
+
+        if (bet.type === 'prop') {
+          const propResult = gradePropBet(bet);
+          if (propResult) {
+            bet.status = propResult.hit ? 'win' : 'loss';
+            bet.actual = propResult.result != null ? String(propResult.result) : null;
+            const u = parseFloat(bet.units) || 1;
+            bet.profit_units = bet.status === 'win' ? calcProfit(parseInt(bet.odds) || -110, u) : -u;
+            changed = true;
+            gradedCount++;
+          }
+          continue;
+        }
 
         const gameResult = findGameResult(bet);
         if (!gameResult) continue;
