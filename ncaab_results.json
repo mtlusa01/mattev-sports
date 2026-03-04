@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-03T21:00:02",
+  "updated": "2026-03-03T21:15:02",
   "allTime": {
     "spreads": {
-      "wins": 206,
-      "losses": 154,
+      "wins": 211,
+      "losses": 161,
       "pushes": 10,
-      "pct": 57.2,
-      "roi": 9.2
+      "pct": 56.7,
+      "roi": 8.3
     },
     "totals": {
-      "wins": 179,
-      "losses": 188,
+      "wins": 182,
+      "losses": 197,
       "pushes": 3,
-      "pct": 48.8,
-      "roi": -6.9
+      "pct": 48.0,
+      "roi": -8.3
     },
     "moneylines": {
-      "wins": 239,
-      "losses": 131,
+      "wins": 248,
+      "losses": 134,
       "pushes": 0,
-      "pct": 64.6,
-      "roi": 23.3
+      "pct": 64.9,
+      "roi": 23.9
     },
     "best_bets": {
-      "wins": 39,
-      "losses": 11,
+      "wins": 40,
+      "losses": 10,
       "pushes": 0,
-      "pct": 78.0,
-      "roi": 48.9
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-03-03",
       "spreads": {
-        "wins": 6,
-        "losses": 6,
+        "wins": 11,
+        "losses": 13,
         "pushes": 2,
-        "record": "6-6-2",
-        "pct": 50.0
+        "record": "11-13-2",
+        "pct": 45.8
       },
       "totals": {
-        "wins": 4,
-        "losses": 10,
+        "wins": 7,
+        "losses": 19,
         "pushes": 0,
-        "record": "4-10",
-        "pct": 28.6
+        "record": "7-19",
+        "pct": 26.9
       },
       "moneylines": {
-        "wins": 10,
-        "losses": 4,
+        "wins": 19,
+        "losses": 7,
         "pushes": 0,
-        "record": "10-4",
-        "pct": 71.4
+        "record": "19-7",
+        "pct": 73.1
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 5,
+        "losses": 0,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -115,8 +115,7 @@
           "pick": "UNH",
           "result": "83-88",
           "hit": true,
-          "confidence": 72,
-          "best_bet": true
+          "confidence": 72
         },
         {
           "date": "2026-03-03",
@@ -202,6 +201,33 @@
         {
           "date": "2026-03-03",
           "type": "spread",
+          "game": "ALA @ UGA",
+          "pick": "ALA +3.5",
+          "result": "88-98",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "ALA @ UGA",
+          "pick": "OVER 171.0",
+          "result": "88-98",
+          "hit": true,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "ALA @ UGA",
+          "pick": "UGA",
+          "result": "88-98",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
           "game": "TOW @ STBK",
           "pick": "STBK +7.5",
           "result": "69-57",
@@ -252,6 +278,33 @@
           "result": "67-72",
           "hit": true,
           "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "MIZ @ OU",
+          "pick": "MIZ +6.0",
+          "result": "64-80",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "MIZ @ OU",
+          "pick": "OVER 160.5",
+          "result": "64-80",
+          "hit": false,
+          "confidence": 64
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "MIZ @ OU",
+          "pick": "OU",
+          "result": "64-80",
+          "hit": true,
+          "confidence": 69
         },
         {
           "date": "2026-03-03",
@@ -311,6 +364,33 @@
         {
           "date": "2026-03-03",
           "type": "spread",
+          "game": "NCAT @ CAM",
+          "pick": "NCAT +6.5",
+          "result": "72-90",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "NCAT @ CAM",
+          "pick": "OVER 158.5",
+          "result": "72-90",
+          "hit": true,
+          "confidence": 64
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "NCAT @ CAM",
+          "pick": "CAM",
+          "result": "72-90",
+          "hit": true,
+          "confidence": 67
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
           "game": "UNCW @ ELON",
           "pick": "ELON +3.5",
           "result": "76-57",
@@ -334,6 +414,33 @@
           "result": "76-57",
           "hit": true,
           "confidence": 59
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "UALB @ UVM",
+          "pick": "UVM +1.5",
+          "result": "56-69",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "UALB @ UVM",
+          "pick": "OVER 142.5",
+          "result": "56-69",
+          "hit": false,
+          "confidence": 46
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "UALB @ UVM",
+          "pick": "UALB",
+          "result": "56-69",
+          "hit": false,
+          "confidence": 55
         },
         {
           "date": "2026-03-03",
@@ -365,6 +472,33 @@
         {
           "date": "2026-03-03",
           "type": "spread",
+          "game": "OHIO @ MASS",
+          "pick": "OHIO +3.0",
+          "result": "82-94",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "OHIO @ MASS",
+          "pick": "OVER 159.0",
+          "result": "82-94",
+          "hit": true,
+          "confidence": 67
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "OHIO @ MASS",
+          "pick": "MASS",
+          "result": "82-94",
+          "hit": true,
+          "confidence": 64
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
           "game": "TOL @ M-OH",
           "pick": "TOL +16.0",
           "result": "72-74",
@@ -388,6 +522,197 @@
           "result": "72-74",
           "hit": true,
           "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "CLEM @ UNC",
+          "pick": "CLEM +2.5",
+          "result": "63-67",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "CLEM @ UNC",
+          "pick": "OVER 150.5",
+          "result": "63-67",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "CLEM @ UNC",
+          "pick": "UNC",
+          "result": "63-67",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "WAKE @ UVA",
+          "pick": "WAKE +14.0",
+          "result": "70-75",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "WAKE @ UVA",
+          "pick": "OVER 150.5",
+          "result": "70-75",
+          "hit": false,
+          "confidence": 48
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "WAKE @ UVA",
+          "pick": "UVA",
+          "result": "70-75",
+          "hit": true,
+          "confidence": 84,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "GTWN @ SJU",
+          "pick": "GTWN +15.0",
+          "result": "69-72",
+          "hit": true,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "GTWN @ SJU",
+          "pick": "OVER 145.5",
+          "result": "69-72",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "GTWN @ SJU",
+          "pick": "SJU",
+          "result": "69-72",
+          "hit": true,
+          "confidence": 82
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "HALL @ XAV",
+          "pick": "XAV +0.5",
+          "result": "77-68",
+          "hit": false,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "HALL @ XAV",
+          "pick": "OVER 150.5",
+          "result": "77-68",
+          "hit": false,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "HALL @ XAV",
+          "pick": "XAV",
+          "result": "77-68",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "TCU @ TTU",
+          "pick": "TCU +8.5",
+          "result": "73-65",
+          "hit": true,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "TCU @ TTU",
+          "pick": "OVER 149.0",
+          "result": "73-65",
+          "hit": false,
+          "confidence": 50
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "TCU @ TTU",
+          "pick": "TTU",
+          "result": "73-65",
+          "hit": false,
+          "confidence": 76
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "DAY @ RICH",
+          "pick": "RICH +3.0",
+          "result": "65-60",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "DAY @ RICH",
+          "pick": "OVER 150.0",
+          "result": "65-60",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "DAY @ RICH",
+          "pick": "DAY",
+          "result": "65-60",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "GMU @ VCU",
+          "pick": "GMU +12.0",
+          "result": "65-70",
+          "hit": true,
+          "confidence": 69
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "GMU @ VCU",
+          "pick": "OVER 150.0",
+          "result": "65-70",
+          "hit": false,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "GMU @ VCU",
+          "pick": "VCU",
+          "result": "65-70",
+          "hit": true,
+          "confidence": 89,
           "best_bet": true
         },
         {
@@ -442,8 +767,7 @@
           "pick": "LAF",
           "result": "82-77",
           "hit": false,
-          "confidence": 79,
-          "best_bet": true
+          "confidence": 79
         }
       ]
     },
