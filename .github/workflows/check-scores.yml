@@ -2,10 +2,10 @@ name: Check Scores & Grade
 
 on:
   schedule:
-    # Every 15 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
+    # Every 5 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
     # Covers NCAAB daytime games through late NBA/NHL games
-    - cron: '*/15 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
-    - cron: '*/15 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
+    - cron: '*/5 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
+    - cron: '*/5 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
   workflow_dispatch:
 
 jobs:
@@ -38,7 +38,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add results.json ncaab_results.json nhl_results.json mlb_results.json \
-                 game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json
+                 game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
+                 nhl_player_props.json nhl_props_results.json projections.json
           git diff --staged --quiet || {
             git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
             # Rebase with -X theirs keeps CI's data files on conflict
