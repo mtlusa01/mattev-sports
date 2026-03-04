@@ -3462,10 +3462,10 @@
       const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
       const pickCls = (pick, conf) => (!pick || pick === 'NO PLAY') ? 'no-play' : conf >= 60 ? 'best-bet' : '';
 
-      const spreadStr = g.spread_pick || 'N/A';
+      const spreadStr = g.spread_pick || '\u2014';
       const totalStr = g.total_pick && g.total_line != null
         ? (g.total_pick === 'NO PLAY' ? 'NO PLAY' : g.total_pick + ' ' + g.total_line)
-        : 'N/A';
+        : '\u2014';
 
       const status = getGameStatus(g);
       const isFinal = status === 'final' && g.away_score != null && g.home_score != null;
@@ -3501,7 +3501,7 @@
           </div>
           <div class="sgc-pick">
             <span class="sgc-pick-label">Moneyline</span>
-            <span class="sgc-pick-value ${pickCls(g.ml_pick, g.ml_conf)}">${g.ml_pick || 'N/A'}</span>
+            <span class="sgc-pick-value ${pickCls(g.ml_pick, g.ml_conf)}">${g.ml_pick || '\u2014'}</span>
             ${g.ml_conf != null ? `<span class="sgc-pick-conf" style="color:${confColor(g.ml_conf)}">${g.ml_conf}%</span>` : ''}
             ${sgcResultBadge(g.ml_result)}
           </div>
@@ -5739,7 +5739,7 @@
       // 3-tier confidence colors: green (>60), yellow (50-59), red (<50)
       var confColor = function(c) { return c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)'; };
       var pickClass = function(pick, conf) {
-        if (!pick || pick === 'N/A') return 'low-conf';
+        if (!pick || pick === 'N/A' || pick === '\u2014') return 'low-conf';
         if (conf >= 60) return 'best-bet';
         if (conf < 50) return 'low-conf';
         return '';
@@ -5770,12 +5770,12 @@
       var status = getGameStatus(g);
       var isFinal = status === 'final' && g.away_score != null && g.home_score != null;
 
-      var spreadStr = g.spread_pick || 'N/A';
+      var spreadStr = g.spread_pick || '\u2014';
       var spreadConfStr = g.spread_conf != null ? g.spread_conf + '%' : '';
       var totalStr = g.total_pick && g.total_line != null
-        ? (g.total_pick + ' ' + g.total_line) : 'N/A';
+        ? (g.total_pick + ' ' + g.total_line) : '\u2014';
       var totalConfStr = g.total_conf != null ? g.total_conf + '%' : '';
-      var mlStr = g.ml_pick || 'N/A';
+      var mlStr = g.ml_pick || '\u2014';
       var mlConfStr = g.ml_conf != null ? g.ml_conf + '%' : '';
 
       // Format odds for display
@@ -5978,7 +5978,7 @@
         }
 
         // Spread row
-        if (g.spread_pick && g.spread_pick !== 'N/A') {
+        if (g.spread_pick && g.spread_pick !== 'N/A' && g.spread_pick !== '\u2014') {
           rows.push({
             type: 'spread', matchup, time, status, away, home,
             conf: g.spread_conf || 0,
@@ -5990,7 +5990,7 @@
           });
         }
         // Total row
-        if (g.total_pick && g.total_pick !== 'N/A') {
+        if (g.total_pick && g.total_pick !== 'N/A' && g.total_pick !== '\u2014') {
           rows.push({
             type: 'total', matchup, time, status, away, home,
             conf: g.total_conf || 0,
@@ -6002,7 +6002,7 @@
           });
         }
         // ML row
-        if (g.ml_pick && g.ml_pick !== 'N/A') {
+        if (g.ml_pick && g.ml_pick !== 'N/A' && g.ml_pick !== '\u2014') {
           rows.push({
             type: 'ml', matchup, time, status, away, home,
             conf: g.ml_conf || 0,
