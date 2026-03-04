@@ -2,7 +2,7 @@
   "date": "2026-03-04",
   "sport": "NBA",
   "locked_at": "2026-03-01T15:16:24",
-  "updated": "2026-03-04T08:54:44",
+  "updated": "2026-03-04T04:35:09",
   "projections": [],
   "top_picks": [
     {
@@ -11,42 +11,14 @@
       "away_team": "OKC",
       "home_team": "NYK",
       "pick": "NYK +4.5",
-      "confidence": 76.0,
+      "confidence": 67.8,
       "pick_score": 50.0,
       "score_factors": [
-        "76.0% spread conf",
+        "67.8% spread conf",
         "High confidence"
       ],
       "commence_time": "2026-03-05T00:10:00Z",
       "top_pick_rank": 1
-    },
-    {
-      "type": "ml",
-      "game": "OKC @ NYK",
-      "away_team": "OKC",
-      "home_team": "NYK",
-      "pick": "NYK",
-      "confidence": 65.0,
-      "pick_score": 50.0,
-      "score_factors": [
-        "65.0% ML conf"
-      ],
-      "commence_time": "2026-03-05T00:10:00Z",
-      "top_pick_rank": 2
-    },
-    {
-      "type": "ml",
-      "game": "CHA @ BOS",
-      "away_team": "CHA",
-      "home_team": "BOS",
-      "pick": "BOS",
-      "confidence": 66.0,
-      "pick_score": 50.0,
-      "score_factors": [
-        "66.0% ML conf"
-      ],
-      "commence_time": "2026-03-05T00:40:00Z",
-      "top_pick_rank": 3
     },
     {
       "type": "ml",
@@ -60,7 +32,7 @@
         "65.1% ML conf"
       ],
       "commence_time": "2026-03-05T00:40:00Z",
-      "top_pick_rank": 4
+      "top_pick_rank": 2
     },
     {
       "type": "spread",
@@ -68,58 +40,55 @@
       "away_team": "POR",
       "home_team": "MEM",
       "pick": "MEM +7.5",
-      "confidence": 69.7,
+      "confidence": 72.1,
       "pick_score": 50.0,
       "score_factors": [
-        "69.7% spread conf",
+        "72.1% spread conf",
         "High confidence"
       ],
       "commence_time": "2026-03-05T01:10:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "spread",
+      "game": "IND @ LAC",
+      "away_team": "IND",
+      "home_team": "LAC",
+      "pick": "IND +12.5",
+      "confidence": 70.1,
+      "pick_score": 50.0,
+      "score_factors": [
+        "70.1% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-03-05T03:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "total",
+      "game": "UTA @ PHI",
+      "away_team": "UTA",
+      "home_team": "PHI",
+      "pick": "UNDER 239.5",
+      "confidence": 62.2,
+      "pick_score": 40.0,
+      "score_factors": [
+        "62.2% total conf"
+      ],
+      "commence_time": "2026-03-05T00:40:00Z",
       "top_pick_rank": 5
     }
   ],
   "recommendations": {
     "date": "2026-03-04",
-    "generated_at": "2026-03-04T08:54:44",
+    "generated_at": "2026-03-04T04:35:09",
     "game_bets": [
       {
         "qualified": true,
-        "score": 177.0,
+        "score": 169.2,
         "reasons": [
-          "76.0% confidence",
+          "72.1% confidence",
           "High confidence"
-        ],
-        "type": "spread",
-        "bet_type": "SPREAD",
-        "game": "OKC @ NYK",
-        "away_team": "OKC",
-        "home_team": "NYK",
-        "pick": "NYK +4.5",
-        "confidence": 76.0,
-        "commence_time": "2026-03-05T00:10:00Z",
-        "rec_rank": 1
-      },
-      {
-        "qualified": true,
-        "score": 154.8,
-        "reasons": [
-          "69.9% confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "IND @ LAC",
-        "away_team": "IND",
-        "home_team": "LAC",
-        "pick": "LAC",
-        "confidence": 69.9,
-        "commence_time": "2026-03-05T03:40:00Z",
-        "rec_rank": 2
-      },
-      {
-        "qualified": true,
-        "score": 154.4,
-        "reasons": [
-          "69.7% confidence"
         ],
         "type": "spread",
         "bet_type": "SPREAD",
@@ -127,40 +96,73 @@
         "away_team": "POR",
         "home_team": "MEM",
         "pick": "MEM +7.5",
-        "confidence": 69.7,
+        "confidence": 72.1,
         "commence_time": "2026-03-05T01:10:00Z",
+        "rec_rank": 1
+      },
+      {
+        "qualified": true,
+        "score": 165.2,
+        "reasons": [
+          "70.1% confidence",
+          "High confidence"
+        ],
+        "type": "spread",
+        "bet_type": "SPREAD",
+        "game": "IND @ LAC",
+        "away_team": "IND",
+        "home_team": "LAC",
+        "pick": "IND +12.5",
+        "confidence": 70.1,
+        "commence_time": "2026-03-05T03:40:00Z",
+        "rec_rank": 2
+      },
+      {
+        "qualified": true,
+        "score": 150.6,
+        "reasons": [
+          "67.8% confidence"
+        ],
+        "type": "spread",
+        "bet_type": "SPREAD",
+        "game": "OKC @ NYK",
+        "away_team": "OKC",
+        "home_team": "NYK",
+        "pick": "NYK +4.5",
+        "confidence": 67.8,
+        "commence_time": "2026-03-05T00:10:00Z",
         "rec_rank": 3
       },
       {
         "qualified": true,
-        "score": 151.4,
+        "score": 145.2,
         "reasons": [
-          "68.2% confidence"
+          "65.1% confidence"
         ],
-        "type": "spread",
-        "bet_type": "SPREAD",
-        "game": "ATL @ MIL",
-        "away_team": "ATL",
-        "home_team": "MIL",
-        "pick": "ATL +1.0",
-        "confidence": 68.2,
-        "commence_time": "2026-03-05T02:40:00Z",
+        "type": "ml",
+        "bet_type": "ML",
+        "game": "UTA @ PHI",
+        "away_team": "UTA",
+        "home_team": "PHI",
+        "pick": "PHI",
+        "confidence": 65.1,
+        "commence_time": "2026-03-05T00:40:00Z",
         "rec_rank": 4
       },
       {
         "qualified": true,
-        "score": 147.4,
+        "score": 126.2,
         "reasons": [
-          "66.2% confidence"
+          "63.1% confidence"
         ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "ATL @ MIL",
-        "away_team": "ATL",
-        "home_team": "MIL",
-        "pick": "ATL",
-        "confidence": 66.2,
-        "commence_time": "2026-03-05T02:40:00Z",
+        "type": "total",
+        "bet_type": "TOTAL",
+        "game": "POR @ MEM",
+        "away_team": "POR",
+        "home_team": "MEM",
+        "pick": "UNDER 237.5",
+        "confidence": 63.1,
+        "commence_time": "2026-03-05T01:10:00Z",
         "rec_rank": 5
       }
     ],
