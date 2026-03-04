@@ -975,7 +975,7 @@
     },
     {
       "date": "2026-02-12",
-      "graded_at": "2026-02-13T07:44:35",
+      "graded_at": "2026-02-20T16:54:58",
       "total_props_graded": 38,
       "overall": {
         "wins": 15,
@@ -1179,23 +1179,14 @@
         }
       },
       "by_was_filtered": {
-        "best_bets": {
-          "wins": 2,
-          "losses": 3,
-          "pushes": 0,
-          "total": 5,
-          "record": "2-3-0",
-          "win_pct": 40.0,
-          "avg_projection_error": 4.96
-        },
         "other_props": {
-          "wins": 13,
-          "losses": 20,
+          "wins": 15,
+          "losses": 23,
           "pushes": 0,
-          "total": 33,
-          "record": "13-20-0",
-          "win_pct": 39.4,
-          "avg_projection_error": 4.77
+          "total": 38,
+          "record": "15-23-0",
+          "win_pct": 39.5,
+          "avg_projection_error": 4.79
         }
       },
       "by_matchup_favorability": {
@@ -1442,63 +1433,433 @@
           "error": 20.1
         }
       ]
+    },
+    {
+      "date": "2026-02-19",
+      "graded_at": "2026-03-02T01:06:37",
+      "total_props_graded": 17,
+      "overall": {
+        "wins": 5,
+        "losses": 12,
+        "pushes": 0,
+        "total": 17,
+        "record": "5-12-0",
+        "win_pct": 29.4,
+        "avg_projection_error": 5.92
+      },
+      "by_stat_type": {
+        "PTS": {
+          "wins": 2,
+          "losses": 3,
+          "pushes": 0,
+          "total": 5,
+          "record": "2-3-0",
+          "win_pct": 40.0,
+          "avg_projection_error": 7.88
+        },
+        "REB": {
+          "wins": 2,
+          "losses": 2,
+          "pushes": 0,
+          "total": 4,
+          "record": "2-2-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 2.25
+        },
+        "AST": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "total": 4,
+          "record": "0-4-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 2.9
+        },
+        "PRA": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0,
+          "total": 4,
+          "record": "1-3-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 10.15
+        }
+      },
+      "by_confidence_bucket": {
+        "50-52": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0,
+          "total": 2,
+          "record": "0-2-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 8.25
+        },
+        "52-55": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "total": 4,
+          "record": "0-4-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 7.8
+        },
+        "55-60": {
+          "wins": 3,
+          "losses": 2,
+          "pushes": 0,
+          "total": 5,
+          "record": "3-2-0",
+          "win_pct": 60.0,
+          "avg_projection_error": 4.88
+        },
+        "60-65": {
+          "wins": 2,
+          "losses": 1,
+          "pushes": 0,
+          "total": 3,
+          "record": "2-1-0",
+          "win_pct": 66.7,
+          "avg_projection_error": 4.1
+        }
+      },
+      "by_direction": {
+        "OVER": {
+          "wins": 1,
+          "losses": 7,
+          "pushes": 0,
+          "total": 8,
+          "record": "1-7-0",
+          "win_pct": 12.5,
+          "avg_projection_error": 4.53
+        },
+        "UNDER": {
+          "wins": 4,
+          "losses": 5,
+          "pushes": 0,
+          "total": 9,
+          "record": "4-5-0",
+          "win_pct": 44.4,
+          "avg_projection_error": 7.16
+        }
+      },
+      "by_edge_category": {
+        "STRONG": {
+          "wins": 4,
+          "losses": 2,
+          "pushes": 0,
+          "total": 6,
+          "record": "4-2-0",
+          "win_pct": 66.7,
+          "avg_projection_error": 5.0
+        },
+        "GOOD": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0,
+          "total": 3,
+          "record": "1-2-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 4.27
+        },
+        "FAIR": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0,
+          "total": 2,
+          "record": "0-2-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 8.85
+        },
+        "AVOID": {
+          "wins": 0,
+          "losses": 6,
+          "pushes": 0,
+          "total": 6,
+          "record": "0-6-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 6.68
+        }
+      },
+      "by_h2h_status": {
+        "no_h2h": {
+          "wins": 3,
+          "losses": 1,
+          "pushes": 0,
+          "total": 4,
+          "record": "3-1-0",
+          "win_pct": 75.0,
+          "avg_projection_error": 6.25
+        }
+      },
+      "by_edge_size": {
+        "0-1": {
+          "wins": 2,
+          "losses": 6,
+          "pushes": 0,
+          "total": 8,
+          "record": "2-6-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 5.21
+        },
+        "1-2": {
+          "wins": 2,
+          "losses": 4,
+          "pushes": 0,
+          "total": 6,
+          "record": "2-4-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 6.27
+        },
+        "2-3": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "total": 1,
+          "record": "0-1-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 4.7
+        },
+        "3+": {
+          "wins": 1,
+          "losses": 1,
+          "pushes": 0,
+          "total": 2,
+          "record": "1-1-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 8.3
+        }
+      },
+      "by_was_filtered": {
+        "other_props": {
+          "wins": 5,
+          "losses": 12,
+          "pushes": 0,
+          "total": 17,
+          "record": "5-12-0",
+          "win_pct": 29.4,
+          "avg_projection_error": 5.92
+        }
+      },
+      "by_matchup_favorability": {
+        "favorable": {
+          "wins": 3,
+          "losses": 5,
+          "pushes": 0,
+          "total": 8,
+          "record": "3-5-0",
+          "win_pct": 37.5,
+          "avg_projection_error": 5.44
+        },
+        "neutral": {
+          "wins": 1,
+          "losses": 1,
+          "pushes": 0,
+          "total": 2,
+          "record": "1-1-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 1.4
+        },
+        "unfavorable": {
+          "wins": 1,
+          "losses": 6,
+          "pushes": 0,
+          "total": 7,
+          "record": "1-6-0",
+          "win_pct": 14.3,
+          "avg_projection_error": 7.76
+        }
+      },
+      "by_l10_hit_rate": {
+        "below_avg (30-50%)": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0,
+          "total": 4,
+          "record": "1-3-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 3.53
+        },
+        "above_avg (50-70%)": {
+          "wins": 3,
+          "losses": 7,
+          "pushes": 0,
+          "total": 10,
+          "record": "3-7-0",
+          "win_pct": 30.0,
+          "avg_projection_error": 6.8
+        },
+        "hot (70%+)": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0,
+          "total": 3,
+          "record": "1-2-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 6.17
+        }
+      },
+      "top_performers": [
+        {
+          "player": "Josh Giddey",
+          "record": "3-1",
+          "win_pct": 75.0,
+          "total": 4
+        },
+        {
+          "player": "Immanuel Quickley",
+          "record": "1-2",
+          "win_pct": 33.3,
+          "total": 3
+        },
+        {
+          "player": "Scottie Barnes",
+          "record": "1-3",
+          "win_pct": 25.0,
+          "total": 4
+        },
+        {
+          "player": "Brandon Ingram",
+          "record": "0-4",
+          "win_pct": 0.0,
+          "total": 4
+        },
+        {
+          "player": "Matas Buzelis",
+          "record": "0-2",
+          "win_pct": 0.0,
+          "total": 2
+        }
+      ],
+      "worst_performers": [
+        {
+          "player": "Brandon Ingram",
+          "record": "0-4",
+          "win_pct": 0.0,
+          "total": 4
+        },
+        {
+          "player": "Matas Buzelis",
+          "record": "0-2",
+          "win_pct": 0.0,
+          "total": 2
+        },
+        {
+          "player": "Scottie Barnes",
+          "record": "1-3",
+          "win_pct": 25.0,
+          "total": 4
+        },
+        {
+          "player": "Immanuel Quickley",
+          "record": "1-2",
+          "win_pct": 33.3,
+          "total": 3
+        },
+        {
+          "player": "Josh Giddey",
+          "record": "3-1",
+          "win_pct": 75.0,
+          "total": 4
+        }
+      ],
+      "best_projections": [
+        {
+          "player": "Scottie Barnes",
+          "prop": "REB",
+          "projection": 9.3,
+          "actual": 9,
+          "error": 0.3000000000000007
+        },
+        {
+          "player": "Matas Buzelis",
+          "prop": "REB",
+          "projection": 4.7,
+          "actual": 6,
+          "error": 1.2999999999999998
+        },
+        {
+          "player": "Josh Giddey",
+          "prop": "REB",
+          "projection": 5.5,
+          "actual": 4,
+          "error": 1.5
+        },
+        {
+          "player": "Scottie Barnes",
+          "prop": "AST",
+          "projection": 6.5,
+          "actual": 5,
+          "error": 1.5
+        },
+        {
+          "player": "Immanuel Quickley",
+          "prop": "PTS",
+          "projection": 16.0,
+          "actual": 14,
+          "error": 2.0
+        }
+      ],
+      "worst_projections": [
+        {
+          "player": "Josh Giddey",
+          "prop": "PTS",
+          "projection": 15.1,
+          "actual": 5,
+          "error": 10.1
+        },
+        {
+          "player": "Josh Giddey",
+          "prop": "PRA",
+          "projection": 24.7,
+          "actual": 14,
+          "error": 10.7
+        },
+        {
+          "player": "Matas Buzelis",
+          "prop": "PTS",
+          "projection": 14.8,
+          "actual": 4,
+          "error": 10.8
+        },
+        {
+          "player": "Brandon Ingram",
+          "prop": "PTS",
+          "projection": 19.2,
+          "actual": 31,
+          "error": 11.8
+        },
+        {
+          "player": "Brandon Ingram",
+          "prop": "PRA",
+          "projection": 28.6,
+          "actual": 45,
+          "error": 16.4
+        }
+      ]
     }
   ],
   "cumulative": {
-    "total_days": 3,
-    "total_props_graded": 278,
+    "total_days": 4,
+    "total_props_graded": 295,
     "overall": {
-      "wins": 139,
-      "losses": 139,
+      "wins": 144,
+      "losses": 151,
       "pushes": 0,
-      "total": 278,
-      "win_pct": 50.0,
-      "record": "139-139-0"
+      "total": 295,
+      "win_pct": 48.8,
+      "record": "144-151-0"
     },
     "by_stat_type": {
       "PTS": {
-        "wins": 32,
-        "losses": 33,
+        "wins": 34,
+        "losses": 36,
         "pushes": 0,
-        "total": 65,
-        "win_pct": 49.2,
-        "record": "32-33-0"
+        "total": 70,
+        "win_pct": 48.6,
+        "record": "34-36-0"
       },
       "REB": {
-        "wins": 46,
-        "losses": 35,
-        "pushes": 0,
-        "total": 81,
-        "win_pct": 56.8,
-        "record": "46-35-0"
-      },
-      "AST": {
-        "wins": 32,
-        "losses": 31,
-        "pushes": 0,
-        "total": 63,
-        "win_pct": 50.8,
-        "record": "32-31-0"
-      },
-      "PRA": {
-        "wins": 29,
-        "losses": 40,
-        "pushes": 0,
-        "total": 69,
-        "win_pct": 42.0,
-        "record": "29-40-0"
-      }
-    },
-    "by_confidence_bucket": {
-      "50-52": {
-        "wins": 37,
-        "losses": 30,
-        "pushes": 0,
-        "total": 67,
-        "win_pct": 55.2,
-        "record": "37-30-0"
-      },
-      "52-55": {
         "wins": 48,
         "losses": 37,
         "pushes": 0,
@@ -1506,65 +1867,107 @@
         "win_pct": 56.5,
         "record": "48-37-0"
       },
-      "55-60": {
-        "wins": 16,
-        "losses": 21,
+      "AST": {
+        "wins": 32,
+        "losses": 35,
         "pushes": 0,
-        "total": 37,
-        "win_pct": 43.2,
-        "record": "16-21-0"
+        "total": 67,
+        "win_pct": 47.8,
+        "record": "32-35-0"
+      },
+      "PRA": {
+        "wins": 30,
+        "losses": 43,
+        "pushes": 0,
+        "total": 73,
+        "win_pct": 41.1,
+        "record": "30-43-0"
+      }
+    },
+    "by_confidence_bucket": {
+      "50-52": {
+        "wins": 37,
+        "losses": 32,
+        "pushes": 0,
+        "total": 69,
+        "win_pct": 53.6,
+        "record": "37-32-0"
+      },
+      "52-55": {
+        "wins": 48,
+        "losses": 41,
+        "pushes": 0,
+        "total": 89,
+        "win_pct": 53.9,
+        "record": "48-41-0"
+      },
+      "55-60": {
+        "wins": 19,
+        "losses": 23,
+        "pushes": 0,
+        "total": 42,
+        "win_pct": 45.2,
+        "record": "19-23-0"
+      },
+      "60-65": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "total": 3,
+        "win_pct": 66.7,
+        "record": "2-1-0"
       }
     },
     "by_edge_category": {
       "STRONG": {
-        "wins": 9,
-        "losses": 22,
+        "wins": 13,
+        "losses": 24,
         "pushes": 0,
-        "total": 31,
-        "win_pct": 29.0,
-        "record": "9-22-0"
+        "total": 37,
+        "win_pct": 35.1,
+        "record": "13-24-0"
       },
       "GOOD": {
-        "wins": 12,
-        "losses": 12,
+        "wins": 13,
+        "losses": 14,
         "pushes": 0,
-        "total": 24,
-        "win_pct": 50.0,
-        "record": "12-12-0"
+        "total": 27,
+        "win_pct": 48.1,
+        "record": "13-14-0"
       },
       "FAIR": {
         "wins": 18,
-        "losses": 10,
+        "losses": 12,
         "pushes": 0,
-        "total": 28,
-        "win_pct": 64.3,
-        "record": "18-10-0"
+        "total": 30,
+        "win_pct": 60.0,
+        "record": "18-12-0"
       },
       "AVOID": {
         "wins": 100,
-        "losses": 95,
+        "losses": 101,
         "pushes": 0,
-        "total": 195,
-        "win_pct": 51.3,
-        "record": "100-95-0"
+        "total": 201,
+        "win_pct": 49.8,
+        "record": "100-101-0"
       }
     },
     "by_was_filtered": {
       "other_props": {
-        "wins": 127,
-        "losses": 121,
+        "wins": 134,
+        "losses": 136,
         "pushes": 0,
-        "total": 248,
-        "win_pct": 51.2,
-        "record": "127-121-0"
+        "total": 270,
+        "win_pct": 49.6,
+        "record": "134-136-0"
       },
       "best_bets": {
-        "wins": 12,
-        "losses": 18,
+        "wins": 10,
+        "losses": 15,
         "pushes": 0,
-        "total": 30,
+        "total": 25,
         "win_pct": 40.0,
-        "record": "12-18-0"
+        "record": "10-15-0"
       }
     }
   }
