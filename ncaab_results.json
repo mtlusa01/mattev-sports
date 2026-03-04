@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-03T20:30:02",
+  "updated": "2026-03-03T20:45:02",
   "allTime": {
     "spreads": {
       "wins": 203,
       "losses": 151,
-      "pushes": 8,
+      "pushes": 9,
       "pct": 57.3,
       "roi": 9.5
     },
     "totals": {
       "wins": 177,
-      "losses": 182,
+      "losses": 183,
       "pushes": 3,
-      "pct": 49.3,
-      "roi": -5.9
+      "pct": 49.2,
+      "roi": -6.1
     },
     "moneylines": {
-      "wins": 234,
+      "wins": 235,
       "losses": 128,
       "pushes": 0,
-      "pct": 64.6,
-      "roi": 23.4
+      "pct": 64.7,
+      "roi": 23.6
     },
     "best_bets": {
       "wins": 39,
@@ -36,23 +36,23 @@
       "spreads": {
         "wins": 3,
         "losses": 3,
-        "pushes": 0,
-        "record": "3-3",
+        "pushes": 1,
+        "record": "3-3-1",
         "pct": 50.0
       },
       "totals": {
         "wins": 2,
-        "losses": 4,
+        "losses": 5,
         "pushes": 0,
-        "record": "2-4",
-        "pct": 33.3
+        "record": "2-5",
+        "pct": 28.6
       },
       "moneylines": {
-        "wins": 5,
+        "wins": 6,
         "losses": 1,
         "pushes": 0,
-        "record": "5-1",
-        "pct": 83.3
+        "record": "6-1",
+        "pct": 85.7
       },
       "best_bets": {
         "wins": 4,
@@ -228,6 +228,33 @@
           "hit": true,
           "confidence": 71,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "EMU @ BUF",
+          "pick": "EMU +5.0",
+          "result": "67-72",
+          "hit": null,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "EMU @ BUF",
+          "pick": "OVER 150.5",
+          "result": "67-72",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "EMU @ BUF",
+          "pick": "BUF",
+          "result": "67-72",
+          "hit": true,
+          "confidence": 56
         }
       ]
     },
