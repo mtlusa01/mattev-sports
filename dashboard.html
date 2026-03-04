@@ -1332,13 +1332,14 @@
     .game-pick-row { display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 4px 6px; cursor: pointer; border-radius: 4px; transition: background 0.15s; }
     .game-pick-row:hover { background: rgba(255,255,255,0.04); }
     .game-pick-row:active { background: rgba(255,255,255,0.07); }
-    .game-pick-row.dimmed { opacity: 0.35; }
+    .game-pick-row.dimmed { display: none; }
     .game-pick-row.is-best-bet { border-left: 2px solid var(--profit); padding-left: 8px; margin-left: -10px; }
     .bet-type { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; width: 48px; flex-shrink: 0; }
     .bet-pick { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; min-width: 80px; overflow: hidden; text-overflow: ellipsis; }
     .bet-pick.low-conf { color: var(--text-muted); font-weight: 400; }
     .bet-pick.best-bet { color: var(--profit); }
     .bet-conf { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; width: 32px; text-align: right; flex-shrink: 0; }
+    .bet-model { font-size: 10px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; flex-shrink: 0; text-align: right; min-width: 40px; }
 
     /* Tracked dot (inline after pick text) */
     .tracked-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; margin-left: 5px; vertical-align: middle; }
@@ -3293,10 +3294,16 @@
     function gameHasBestBet(g, betTypeFilter) {
       const label = `${g.away_team} @ ${g.home_team}`;
       const bets = getActiveBestBets();
-      if (betTypeFilter && betTypeFilter !== 'all') {
-        return bets.some(b => b.game === label && (b.type || (b.bet_type || '').toLowerCase()) === betTypeFilter);
+      if (bets.length > 0) {
+        if (betTypeFilter && betTypeFilter !== 'all') {
+          return bets.some(b => b.game === label && (b.type || (b.bet_type || '').toLowerCase()) === betTypeFilter);
+        }
+        return bets.some(b => b.game === label);
       }
-      return bets.some(b => b.game === label);
+      // Fallback: use per-game best_bet field when best_bets array is empty
+      if (!g.best_bet) return false;
+      if (betTypeFilter && betTypeFilter !== 'all') return g.best_bet === betTypeFilter;
+      return true;
     }
 
     function getGameMaxConf(g) {
@@ -4432,11 +4439,19 @@
     }
 
     // ── Props inline filter bar ──
-    function renderPropsFilterBar() {
+    function renderPropsFilterBar(allProps) {
       const searchIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+      const propConfCounts = { high: 0, medium: 0, low: 0 };
+      const propsArr = allProps || [];
+      for (const p of propsArr) {
+        const tier = getPropConfTier(parseFloat(p.confidence) || 0);
+        if (propConfCounts[tier] !== undefined) propConfCounts[tier]++;
+      }
       const confTabs = [
-        { key: 'all', label: 'All' }, { key: 'high', label: 'High' },
-        { key: 'medium', label: 'Medium' }, { key: 'low', label: 'Low' },
+        { key: 'all', label: `All (${propsArr.length})` },
+        { key: 'high', label: `High (${propConfCounts.high})` },
+        { key: 'medium', label: `Medium (${propConfCounts.medium})` },
+        { key: 'low', label: `Low (${propConfCounts.low})` },
       ];
       const dirTabs = [
         { key: 'all', label: 'All' }, { key: 'over', label: 'Overs' }, { key: 'under', label: 'Unders' },
@@ -4883,7 +4898,7 @@
       }
 
       // Inline search + filters (always visible)
-      const filtersHtml = renderPropsFilterBar();
+      const filtersHtml = renderPropsFilterBar(activeProps);
 
       // Check if game filter points to a final game with graded props (special case)
       if (!isHistorical && filtered.length === 0 && currentGameFilter) {
@@ -5657,7 +5672,9 @@
       for (const g of finals) {
         const gameLabel = `${g.away_team} @ ${g.home_team}`;
         for (const t of ['spread', 'total', 'ml']) {
-          const isBB = sportBB.some(b => b.game === gameLabel && b.type === t);
+          const isBB = sportBB.length > 0
+            ? sportBB.some(b => b.game === gameLabel && b.type === t)
+            : (g.best_bet === t);
           if (!isBB) continue;
           const r = (g[t + '_result'] || '').toLowerCase();
           if (r === 'win' || r === 'w') bbW++;
@@ -5729,7 +5746,10 @@
       };
       var activeBB = getActiveBestBets();
       var gameLabel = g.away_team + ' @ ' + g.home_team;
-      var isInBestBets = function(betType) { return activeBB.some(function(b) { return b.game === gameLabel && b.type === betType; }); };
+      var isInBestBets = function(betType) {
+        if (activeBB.length > 0) return activeBB.some(function(b) { return b.game === gameLabel && b.type === betType; });
+        return g.best_bet ? g.best_bet === betType : false;
+      };
       var bestBetRowClass = function(betType) { return isInBestBets(betType) ? ' is-best-bet' : ''; };
       var dimClass = function(conf, betType) {
         var cls = '';
@@ -5824,16 +5844,38 @@
         return '<div class="bet-detail"><div class="bet-detail-inner">' + items + '</div></div>';
       };
 
+      // Compute model projection strings per bet type
+      var modelSpread = '', modelTotal = '', modelMl = '';
+      if (g.proj_score) {
+        var projParts = g.proj_score.split('-');
+        var projAway = parseFloat(projParts[0]) || 0;
+        var projHome = parseFloat(projParts[1]) || 0;
+        var projMargin = projHome - projAway;
+        if (projMargin === 0) modelSpread = 'PK';
+        else if (projMargin > 0) modelSpread = '-' + projMargin.toFixed(1);
+        else modelSpread = '+' + Math.abs(projMargin).toFixed(1);
+        modelTotal = (projAway + projHome).toFixed(1);
+      }
+      if (g.home_win_prob != null) {
+        if (g.ml_pick === g.home_team) modelMl = g.home_win_prob.toFixed(1) + '%';
+        else if (g.away_win_prob != null) modelMl = g.away_win_prob.toFixed(1) + '%';
+        else modelMl = (100 - g.home_win_prob).toFixed(1) + '%';
+      } else if (g.proj_score) {
+        modelMl = g.proj_score;
+      }
+
       // Unified bet row renderer
-      var renderBetRow = function(label, pickStr, oddsStr, confStr, conf, result, tracked, trackType, odds) {
+      var renderBetRow = function(label, pickStr, oddsStr, confStr, conf, result, tracked, trackType, odds, modelStr) {
         var betType = label.toLowerCase();
         var rowCls = 'game-pick-row' + bestBetRowClass(betType) + dimClass(conf, betType);
         var pCls = pickClass(betType === 'total' ? g.total_pick : (betType === 'ml' ? g.ml_pick : g.spread_pick), conf);
         var resultSym = renderCardResultSym(result);
         var trackedDot = tracked ? '<span class="tracked-dot"></span>' : '';
+        var modelHtml = modelStr ? '<span class="bet-model">' + modelStr + '</span>' : '';
         var row = '<div class="' + rowCls + '" onclick="toggleBetDetail(this)">'
           + '<span class="bet-type">' + label + '</span>'
           + '<span class="bet-pick ' + pCls + '">' + pickStr + resultSym + trackedDot + '</span>'
+          + modelHtml
           + confBar(conf)
           + '<span class="bet-conf" style="color:' + confColor(conf || 0) + '">' + confStr + '</span>'
           + '</div>'
@@ -5895,9 +5937,9 @@
         +   '</div>'
         + '</div>'
         + '<div class="game-card-picks">'
-        + renderBetRow('Spread', spreadStr, spreadOddsStr, spreadConfStr, g.spread_conf, g.spread_result, isSpreadTracked, 'spread', g.spread_odds)
-        + renderBetRow('Total', totalStr, totalOddsStr, totalConfStr, g.total_conf, g.total_result, isTotalTracked, 'total', g.total_odds)
-        + renderBetRow('ML', mlStr, mlOddsStr, mlConfStr, g.ml_conf, g.ml_result, isMlTracked, 'ml', g.ml_odds)
+        + renderBetRow('Spread', spreadStr, spreadOddsStr, spreadConfStr, g.spread_conf, g.spread_result, isSpreadTracked, 'spread', g.spread_odds, modelSpread)
+        + renderBetRow('Total', totalStr, totalOddsStr, totalConfStr, g.total_conf, g.total_result, isTotalTracked, 'total', g.total_odds, modelTotal)
+        + renderBetRow('ML', mlStr, mlOddsStr, mlConfStr, g.ml_conf, g.ml_result, isMlTracked, 'ml', g.ml_odds, modelMl)
         + '</div>'
         + '</div>';
       return html;
@@ -5915,6 +5957,26 @@
         const away = g.away_team;
         const home = g.home_team;
 
+        // Compute model values
+        let mSpread = '--', mTotal = '--', mMl = '--';
+        if (g.proj_score) {
+          const pp = g.proj_score.split('-');
+          const pA = parseFloat(pp[0]) || 0;
+          const pH = parseFloat(pp[1]) || 0;
+          const margin = pH - pA;
+          if (margin === 0) mSpread = 'PK';
+          else if (margin > 0) mSpread = '-' + margin.toFixed(1);
+          else mSpread = '+' + Math.abs(margin).toFixed(1);
+          mTotal = (pA + pH).toFixed(1);
+        }
+        if (g.home_win_prob != null) {
+          if (g.ml_pick === home) mMl = g.home_win_prob.toFixed(1) + '%';
+          else if (g.away_win_prob != null) mMl = g.away_win_prob.toFixed(1) + '%';
+          else mMl = (100 - g.home_win_prob).toFixed(1) + '%';
+        } else if (g.proj_score) {
+          mMl = g.proj_score;
+        }
+
         // Spread row
         if (g.spread_pick && g.spread_pick !== 'N/A') {
           rows.push({
@@ -5922,8 +5984,9 @@
             conf: g.spread_conf || 0,
             pick: g.spread_pick,
             vegas: g.spread_pick ? g.spread_pick.split(' ').pop() : '--',
-            model: g.proj_score || '--',
-            result: g.spread_result || null
+            model: mSpread,
+            result: g.spread_result || null,
+            gameBestBet: g.best_bet || null
           });
         }
         // Total row
@@ -5933,12 +5996,9 @@
             conf: g.total_conf || 0,
             pick: g.total_pick + ' ' + (g.total_line || ''),
             vegas: g.total_line != null ? '' + g.total_line : '--',
-            model: g.proj_score ? (() => {
-              const parts = g.proj_score.split('-');
-              const total = (parseFloat(parts[0]) || 0) + (parseFloat(parts[1]) || 0);
-              return total.toFixed(1);
-            })() : '--',
-            result: g.total_result || null
+            model: mTotal,
+            result: g.total_result || null,
+            gameBestBet: g.best_bet || null
           });
         }
         // ML row
@@ -5948,8 +6008,9 @@
             conf: g.ml_conf || 0,
             pick: g.ml_pick,
             vegas: '--',
-            model: g.proj_score || '--',
-            result: g.ml_result || null
+            model: mMl,
+            result: g.ml_result || null,
+            gameBestBet: g.best_bet || null
           });
         }
       }
@@ -6249,7 +6310,7 @@
             if (currentGameConfFilter === 'all') {
               inTier = true;
             } else if (currentGameConfFilter === 'best-bets') {
-              inTier = bb.some(b => b.game === label && b.type === t);
+              inTier = bb.length > 0 ? bb.some(b => b.game === label && b.type === t) : (g.best_bet === t);
             } else {
               inTier = getConfTier(parseFloat(g[t + '_conf']) || 0) === currentGameConfFilter;
             }
@@ -6286,7 +6347,10 @@
         // Filter by confidence
         if (currentGameConfFilter === 'best-bets') {
           const bb = getActiveBestBets();
-          betRows = betRows.filter(r => bb.some(b => b.game === r.matchup && b.type === r.type));
+          betRows = betRows.filter(r => {
+            if (bb.length > 0) return bb.some(b => b.game === r.matchup && b.type === r.type);
+            return r.gameBestBet === r.type;
+          });
         } else if (currentGameConfFilter !== 'all') {
           betRows = betRows.filter(r => getConfTier(r.conf) === currentGameConfFilter);
         }

@@ -407,28 +407,43 @@ def update_results(sport_label, proj_data, results_path):
         matchup = f"{g['away_team']} @ {g['home_team']}"
         result_str = f"{g['away_score']}-{g['home_score']}"
 
+        proj_score = g.get("proj_score")
+
         if g.get("spread_result") in ("W", "L", "P"):
-            picks.append({
+            pick_entry = {
                 "date": game_date, "type": "spread", "game": matchup,
                 "pick": g.get("spread_pick", ""), "result": result_str,
                 "hit": _hit_from_result(g["spread_result"]),
                 "confidence": g.get("spread_conf", 0),
-            })
+            }
+            if proj_score:
+                pick_entry["proj_score"] = proj_score
+            picks.append(pick_entry)
         if g.get("total_result") in ("W", "L", "P"):
             pick_label = f"{g.get('total_pick', '')} {g.get('total_line', '')}"
-            picks.append({
+            pick_entry = {
                 "date": game_date, "type": "total", "game": matchup,
                 "pick": pick_label, "result": result_str,
                 "hit": _hit_from_result(g["total_result"]),
                 "confidence": g.get("total_conf", 0),
-            })
+            }
+            if proj_score:
+                pick_entry["proj_score"] = proj_score
+            picks.append(pick_entry)
         if g.get("ml_result") in ("W", "L"):
-            picks.append({
+            pick_entry = {
                 "date": game_date, "type": "ml", "game": matchup,
                 "pick": g.get("ml_pick", ""), "result": result_str,
                 "hit": _hit_from_result(g["ml_result"]),
                 "confidence": g.get("ml_conf", 0),
-            })
+            }
+            if proj_score:
+                pick_entry["proj_score"] = proj_score
+            if g.get("home_win_prob") is not None:
+                pick_entry["home_win_prob"] = g["home_win_prob"]
+            if g.get("away_win_prob") is not None:
+                pick_entry["away_win_prob"] = g["away_win_prob"]
+            picks.append(pick_entry)
 
     if not picks:
         return
@@ -500,28 +515,43 @@ def update_nba_results(proj_data, results_path):
         matchup = f"{g['away_team']} @ {g['home_team']}"
         result_str = f"{g['away_score']}-{g['home_score']}"
 
+        proj_score = g.get("proj_score")
+
         if g.get("spread_result") in ("W", "L", "P"):
-            game_picks.append({
+            pick_entry = {
                 "date": game_date, "type": "spread", "game": matchup,
                 "pick": g.get("spread_pick", ""), "result": result_str,
                 "hit": _hit_from_result(g["spread_result"]),
                 "confidence": g.get("spread_conf", 0),
-            })
+            }
+            if proj_score:
+                pick_entry["proj_score"] = proj_score
+            game_picks.append(pick_entry)
         if g.get("total_result") in ("W", "L", "P"):
             pick_label = f"{g.get('total_pick', '')} {g.get('total_line', '')}"
-            game_picks.append({
+            pick_entry = {
                 "date": game_date, "type": "total", "game": matchup,
                 "pick": pick_label, "result": result_str,
                 "hit": _hit_from_result(g["total_result"]),
                 "confidence": g.get("total_conf", 0),
-            })
+            }
+            if proj_score:
+                pick_entry["proj_score"] = proj_score
+            game_picks.append(pick_entry)
         if g.get("ml_result") in ("W", "L"):
-            game_picks.append({
+            pick_entry = {
                 "date": game_date, "type": "ml", "game": matchup,
                 "pick": g.get("ml_pick", ""), "result": result_str,
                 "hit": _hit_from_result(g["ml_result"]),
                 "confidence": g.get("ml_conf", 0),
-            })
+            }
+            if proj_score:
+                pick_entry["proj_score"] = proj_score
+            if g.get("home_win_prob") is not None:
+                pick_entry["home_win_prob"] = g["home_win_prob"]
+            if g.get("away_win_prob") is not None:
+                pick_entry["away_win_prob"] = g["away_win_prob"]
+            game_picks.append(pick_entry)
 
     if not game_picks:
         return
@@ -938,6 +968,7 @@ def _update_nhl_props_results(props, game_date, results_path):
         "by_type": by_type, "by_tier": by_tier,
         "picks": [{"player": p.get("player"), "prop": p.get("prop"),
                     "direction": p.get("direction"), "line": p.get("line"),
+                    "projection": p.get("projection"),
                     "actual": p.get("actual"), "result": p.get("result"),
                     "confidence": p.get("confidence"), "ev": p.get("ev"),
                     "edge": p.get("edge")} for p in graded],
@@ -1182,6 +1213,12 @@ def _update_nba_props_results(props, game_date, results_path):
             "win_pct": round(wins / (wins + losses) * 100, 1) if (wins + losses) > 0 else 0,
         },
         "by_stat_type": by_type,
+        "picks": [{"player": p.get("player"), "prop": p.get("prop"),
+                    "team": p.get("team"), "direction": p.get("direction"),
+                    "line": p.get("line"), "projection": p.get("projection"),
+                    "actual": p.get("actual"), "result": p.get("result"),
+                    "confidence": p.get("confidence"), "ev": p.get("ev"),
+                    "edge": p.get("edge")} for p in graded],
     }
 
     found = False
