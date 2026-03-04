@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-03T21:45:02",
+  "updated": "2026-03-03T22:00:03",
   "allTime": {
     "spreads": {
       "wins": 213,
-      "losses": 163,
+      "losses": 165,
       "pushes": 10,
-      "pct": 56.6,
-      "roi": 8.1
+      "pct": 56.3,
+      "roi": 7.6
     },
     "totals": {
-      "wins": 186,
-      "losses": 197,
+      "wins": 187,
+      "losses": 198,
       "pushes": 3,
       "pct": 48.6,
       "roi": -7.3
     },
     "moneylines": {
-      "wins": 250,
+      "wins": 252,
       "losses": 136,
       "pushes": 0,
-      "pct": 64.8,
-      "roi": 23.6
+      "pct": 64.9,
+      "roi": 24.0
     },
     "best_bets": {
       "wins": 40,
@@ -35,24 +35,24 @@
       "date": "2026-03-03",
       "spreads": {
         "wins": 13,
-        "losses": 15,
+        "losses": 17,
         "pushes": 2,
-        "record": "13-15-2",
-        "pct": 46.4
+        "record": "13-17-2",
+        "pct": 43.3
       },
       "totals": {
-        "wins": 11,
-        "losses": 19,
+        "wins": 12,
+        "losses": 20,
         "pushes": 0,
-        "record": "11-19",
-        "pct": 36.7
+        "record": "12-20",
+        "pct": 37.5
       },
       "moneylines": {
-        "wins": 21,
+        "wins": 23,
         "losses": 9,
         "pushes": 0,
-        "record": "21-9",
-        "pct": 70.0
+        "record": "23-9",
+        "pct": 71.9
       },
       "best_bets": {
         "wins": 5,
@@ -385,8 +385,7 @@
           "pick": "HOF",
           "result": "51-62",
           "hit": true,
-          "confidence": 82,
-          "best_bet": true
+          "confidence": 82
         },
         {
           "date": "2026-03-03",
@@ -876,6 +875,61 @@
           "result": "82-77",
           "hit": false,
           "confidence": 79
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "MSST @ FLA",
+          "pick": "MSST +22.0",
+          "result": "74-108",
+          "hit": false,
+          "confidence": 70
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "MSST @ FLA",
+          "pick": "OVER 157.0",
+          "result": "74-108",
+          "hit": true,
+          "confidence": 60
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "MSST @ FLA",
+          "pick": "FLA",
+          "result": "74-108",
+          "hit": true,
+          "confidence": 93,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "PFW @ GB",
+          "pick": "PFW +2.5",
+          "result": "56-64",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "PFW @ GB",
+          "pick": "OVER 153.0",
+          "result": "56-64",
+          "hit": false,
+          "confidence": 50
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "PFW @ GB",
+          "pick": "GB",
+          "result": "56-64",
+          "hit": true,
+          "confidence": 59
         }
       ]
     },
