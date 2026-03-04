@@ -2,6 +2,69 @@
   "sport": "MLB",
   "days": [
     {
+      "date": "2026-03-04",
+      "spreads": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "picks": [
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "HOU @ BAL",
+          "pick": "HOU +1.5",
+          "result": "4-2",
+          "hit": true,
+          "confidence": 52.0,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "HOU @ BAL",
+          "pick": "UNDER 8.5",
+          "result": "4-2",
+          "hit": true,
+          "confidence": 54.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "HOU @ BAL",
+          "pick": "BAL",
+          "result": "4-2",
+          "hit": false,
+          "confidence": 52.6,
+          "best_bet": true
+        }
+      ]
+    },
+    {
       "date": "2026-03-03",
       "spreads": {
         "wins": 3,
@@ -140,33 +203,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
       "pushes": 0,
       "pct": 100.0,
       "roi": 90.9
     },
     "totals": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1,
       "pushes": 0,
-      "pct": 66.7,
-      "roi": 27.3
+      "pct": 75.0,
+      "roi": 43.2
     },
     "moneylines": {
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "pushes": 0,
-      "pct": 66.7,
-      "roi": 27.3
+      "pct": 50.0,
+      "roi": -4.5
     },
     "best_bets": {
-      "wins": 4,
-      "losses": 1,
+      "wins": 6,
+      "losses": 2,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 75.0,
+      "roi": 43.2
     }
   },
-  "updated": "2026-03-03T23:31:22"
+  "updated": "2026-03-04T20:52:02"
 }
