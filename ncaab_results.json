@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-03T21:15:02",
+  "updated": "2026-03-03T21:30:02",
   "allTime": {
     "spreads": {
-      "wins": 211,
-      "losses": 161,
+      "wins": 212,
+      "losses": 162,
       "pushes": 10,
       "pct": 56.7,
-      "roi": 8.3
+      "roi": 8.2
     },
     "totals": {
-      "wins": 182,
+      "wins": 184,
       "losses": 197,
       "pushes": 3,
-      "pct": 48.0,
-      "roi": -8.3
+      "pct": 48.3,
+      "roi": -7.8
     },
     "moneylines": {
-      "wins": 248,
-      "losses": 134,
+      "wins": 249,
+      "losses": 135,
       "pushes": 0,
-      "pct": 64.9,
-      "roi": 23.9
+      "pct": 64.8,
+      "roi": 23.8
     },
     "best_bets": {
       "wins": 40,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-03",
       "spreads": {
-        "wins": 11,
-        "losses": 13,
+        "wins": 12,
+        "losses": 14,
         "pushes": 2,
-        "record": "11-13-2",
-        "pct": 45.8
+        "record": "12-14-2",
+        "pct": 46.2
       },
       "totals": {
-        "wins": 7,
+        "wins": 9,
         "losses": 19,
         "pushes": 0,
-        "record": "7-19",
-        "pct": 26.9
+        "record": "9-19",
+        "pct": 32.1
       },
       "moneylines": {
-        "wins": 19,
-        "losses": 7,
+        "wins": 20,
+        "losses": 8,
         "pushes": 0,
-        "record": "19-7",
-        "pct": 73.1
+        "record": "20-8",
+        "pct": 71.4
       },
       "best_bets": {
         "wins": 5,
@@ -364,6 +364,33 @@
         {
           "date": "2026-03-03",
           "type": "spread",
+          "game": "HAMP @ W&M",
+          "pick": "HAMP +4.0",
+          "result": "85-94",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "HAMP @ W&M",
+          "pick": "OVER 151.0",
+          "result": "85-94",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "HAMP @ W&M",
+          "pick": "W&M",
+          "result": "85-94",
+          "hit": true,
+          "confidence": 58
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
           "game": "NCAT @ CAM",
           "pick": "NCAT +6.5",
           "result": "72-90",
@@ -466,6 +493,33 @@
           "game": "AKR @ CMU",
           "pick": "CMU",
           "result": "77-64",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "BALL @ WMU",
+          "pick": "BALL +1.0",
+          "result": "74-71",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "BALL @ WMU",
+          "pick": "OVER 144.5",
+          "result": "74-71",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "BALL @ WMU",
+          "pick": "WMU",
+          "result": "74-71",
           "hit": false,
           "confidence": 56
         },
