@@ -1621,10 +1621,22 @@
 
       // Match prop bet against graded picks
       for (const p of allPicks) {
-        if (p.player && bet.player &&
-            p.player.toLowerCase() === bet.player.toLowerCase() &&
-            p.prop === bet.prop_type &&
-            parseFloat(p.line) === parseFloat(bet.line) &&
+        // Extract prop type: prefer p.prop, else parse from p.pick ("PRA OVER 24.5")
+        let pProp = p.prop;
+        let pPlayer = p.player;
+        let pLine = p.line;
+        if (!pProp && p.pick) {
+          const m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS)\s+(OVER|UNDER)\s+([\d.]+)/i);
+          if (m) {
+            if (!pPlayer && m[1]) pPlayer = m[1].trim();
+            pProp = m[2].toUpperCase();
+            if (pLine == null) pLine = parseFloat(m[4]);
+          }
+        }
+        if (pPlayer && bet.player &&
+            pPlayer.toLowerCase() === bet.player.toLowerCase() &&
+            pProp === bet.prop_type &&
+            parseFloat(pLine) === parseFloat(bet.line) &&
             p.hit !== undefined && p.hit !== null) {
           return { hit: p.hit, result: p.actual != null ? p.actual : p.result };
         }
