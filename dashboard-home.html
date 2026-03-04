@@ -2618,19 +2618,26 @@
       function collectPicks(data) {
         if (!data || !data.days) return;
         for (var i = 0; i < data.days.length; i++) {
+          var dayDate = data.days[i].date || '';
           var picks = data.days[i].picks || [];
-          for (var j = 0; j < picks.length; j++) allPicks.push(picks[j]);
+          for (var j = 0; j < picks.length; j++) {
+            var p = picks[j];
+            if (!p._date) p._date = p.date || dayDate;
+            allPicks.push(p);
+          }
         }
       }
       function collectPropPicks(data) {
         if (!data || !data.days) return;
         for (var i = 0; i < data.days.length; i++) {
+          var dayDate = data.days[i].date || '';
           var picks = data.days[i].picks || [];
           for (var j = 0; j < picks.length; j++) {
             var p = picks[j];
             if (p.result !== undefined && p.hit === undefined) {
               p.hit = p.result === 'WIN' ? true : p.result === 'LOSS' ? false : null;
             }
+            if (!p._date) p._date = p.date || dayDate;
             allPicks.push(p);
           }
         }
@@ -2644,10 +2651,13 @@
       for (var i = 0; i < bets.length; i++) {
         var bet = bets[i];
         if (bet.status !== 'pending') continue;
+        var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
         var matched = null;
         if (bet.type === 'prop') {
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
+            // Date gate: only grade against same-date results
+            if (betDate && p._date && p._date !== betDate) continue;
             // Extract prop type: prefer p.prop, else parse from p.pick ("PRA OVER 24.5")
             var pProp = p.prop;
             var pPlayer = p.player;
@@ -2669,6 +2679,8 @@
         } else {
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
+            // Date gate: only grade against same-date results
+            if (betDate && p._date && p._date !== betDate) continue;
             if (p.game && bet.game && p.game === bet.game &&
                 p.type === bet.type &&
                 p.hit !== undefined && p.hit !== null) { matched = p; break; }
@@ -2683,6 +2695,53 @@
         }
       }
       if (changed) BetStorage.saveBets(bets);
+
+      // Re-validate: ungrade bets that have no matching same-date result
+      var revalidated = false;
+      for (var i = 0; i < bets.length; i++) {
+        var bet = bets[i];
+        if (bet.status !== 'win' && bet.status !== 'loss') continue;
+        var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
+        if (!betDate) continue;
+        var found = false;
+        if (bet.type === 'prop') {
+          for (var j = 0; j < allPicks.length; j++) {
+            var p = allPicks[j];
+            if (p._date && p._date !== betDate) continue;
+            var pProp = p.prop;
+            var pPlayer = p.player;
+            var pLine = p.line;
+            if (!pProp && p.pick) {
+              var m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS)\s+(OVER|UNDER)\s+([\d.]+)/i);
+              if (m) {
+                if (!pPlayer && m[1]) pPlayer = m[1].trim();
+                pProp = m[2].toUpperCase();
+                if (pLine == null) pLine = parseFloat(m[4]);
+              }
+            }
+            if (pPlayer && bet.player &&
+                pPlayer.toLowerCase() === bet.player.toLowerCase() &&
+                pProp === bet.prop_type &&
+                parseFloat(pLine) === parseFloat(bet.line) &&
+                p.hit !== undefined && p.hit !== null) { found = true; break; }
+          }
+        } else {
+          for (var j = 0; j < allPicks.length; j++) {
+            var p = allPicks[j];
+            if (p._date && p._date !== betDate) continue;
+            if (p.game && bet.game && p.game === bet.game &&
+                p.type === bet.type &&
+                p.hit !== undefined && p.hit !== null) { found = true; break; }
+          }
+        }
+        if (!found) {
+          bet.status = 'pending';
+          bet.actual = null;
+          bet.profit_units = null;
+          revalidated = true;
+        }
+      }
+      if (revalidated) BetStorage.saveBets(bets);
     }
 
     // ── Calendar Rendering ──
