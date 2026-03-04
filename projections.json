@@ -2,7 +2,7 @@
   "date": "2026-03-04",
   "sport": "NBA",
   "locked_at": "2026-03-04T11:38:16",
-  "updated": "2026-03-04T11:38:16",
+  "updated": "2026-03-04T17:02:42",
   "projections": [
     {
       "player": "Kon Knueppel",
@@ -202,8 +202,7 @@
       "score_factors": [
         "+3.3% EV",
         "Favorable matchup (#6.0 DEF)"
-      ],
-      "top_pick_rank": 1
+      ]
     },
     {
       "player": "Karl-Anthony Towns",
@@ -402,8 +401,7 @@
       "pick_score": 21.6,
       "score_factors": [
         "+3.6% EV"
-      ],
-      "top_pick_rank": 3
+      ]
     },
     {
       "player": "Cason Wallace",
@@ -603,8 +601,7 @@
       "score_factors": [
         "+3.3% EV",
         "70% L10 hit rate"
-      ],
-      "top_pick_rank": 2
+      ]
     },
     {
       "player": "VJ Edgecombe",
@@ -800,11 +797,13 @@
       ],
       "opponent": "UTA",
       "h2h_total_games": 0,
-      "pick_score": 21.0,
+      "pick_score": 0,
       "score_factors": [
         "+3.5% EV"
       ],
-      "top_pick_rank": 4
+      "injury_status": "Out",
+      "injury_type": "back (bruise)",
+      "injury_headline": "back (bruise)"
     },
     {
       "player": "Tyrese Maxey",
@@ -1003,7 +1002,81 @@
       "pick_score": 18.6,
       "score_factors": [
         "Favorable matchup (#30.0 DEF)"
+      ]
+    }
+  ],
+  "top_picks": [
+    {
+      "type": "spread",
+      "game": "OKC @ NYK",
+      "away_team": "OKC",
+      "home_team": "NYK",
+      "pick": "NYK +4.5",
+      "confidence": 67.8,
+      "pick_score": 50.0,
+      "score_factors": [
+        "67.8% spread conf",
+        "High confidence"
       ],
+      "commence_time": "2026-03-05T00:10:00Z",
+      "top_pick_rank": 1
+    },
+    {
+      "type": "ml",
+      "game": "UTA @ PHI",
+      "away_team": "UTA",
+      "home_team": "PHI",
+      "pick": "PHI",
+      "confidence": 65.1,
+      "pick_score": 50.0,
+      "score_factors": [
+        "65.1% ML conf"
+      ],
+      "commence_time": "2026-03-05T00:40:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "spread",
+      "game": "POR @ MEM",
+      "away_team": "POR",
+      "home_team": "MEM",
+      "pick": "MEM +7.5",
+      "confidence": 72.1,
+      "pick_score": 50.0,
+      "score_factors": [
+        "72.1% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-03-05T01:10:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "spread",
+      "game": "IND @ LAC",
+      "away_team": "IND",
+      "home_team": "LAC",
+      "pick": "IND +12.5",
+      "confidence": 70.1,
+      "pick_score": 50.0,
+      "score_factors": [
+        "70.1% spread conf",
+        "High confidence"
+      ],
+      "commence_time": "2026-03-05T03:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "total",
+      "game": "UTA @ PHI",
+      "away_team": "UTA",
+      "home_team": "PHI",
+      "pick": "UNDER 239.5",
+      "confidence": 62.2,
+      "pick_score": 40.0,
+      "score_factors": [
+        "62.2% total conf"
+      ],
+      "commence_time": "2026-03-05T00:40:00Z",
       "top_pick_rank": 5
     }
   ]
