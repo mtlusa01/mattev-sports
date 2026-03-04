@@ -1,36 +1,99 @@
 {
-  "updated": "2026-03-04T06:18:48",
+  "updated": "2026-03-04T19:06:06",
   "allTime": {
     "spreads": {
       "wins": 225,
-      "losses": 174,
+      "losses": 175,
       "pushes": 10,
-      "pct": 56.4,
-      "roi": 7.7
+      "pct": 56.2,
+      "roi": 7.4
     },
     "totals": {
-      "wins": 197,
+      "wins": 198,
       "losses": 209,
       "pushes": 3,
-      "pct": 48.5,
-      "roi": -7.4
+      "pct": 48.6,
+      "roi": -7.1
     },
     "moneylines": {
       "wins": 266,
-      "losses": 143,
+      "losses": 144,
       "pushes": 0,
-      "pct": 65.0,
-      "roi": 24.2
+      "pct": 64.9,
+      "roi": 23.9
     },
     "best_bets": {
-      "wins": 40,
-      "losses": 10,
+      "wins": 41,
+      "losses": 12,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 77.4,
+      "roi": 47.7
     }
   },
   "days": [
+    {
+      "date": "2026-03-04",
+      "spreads": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "best_bets": {
+        "wins": 1,
+        "losses": 2,
+        "pushes": 0,
+        "record": "1-2",
+        "pct": 33.3
+      },
+      "picks": [
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "JAX @ BELL",
+          "pick": "JAX +1.5",
+          "result": "79-82",
+          "hit": false,
+          "confidence": 60,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "JAX @ BELL",
+          "pick": "OVER 147.5",
+          "result": "79-82",
+          "hit": true,
+          "confidence": 61,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "JAX @ BELL",
+          "pick": "JAX",
+          "result": "79-82",
+          "hit": false,
+          "confidence": 47,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-03-03",
       "spreads": {
