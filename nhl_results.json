@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-04T03:13:27",
+  "updated": "2026-03-04T04:49:36",
   "allTime": {
     "spreads": {
-      "wins": 27,
-      "losses": 12,
+      "wins": 28,
+      "losses": 14,
       "pushes": 0,
-      "pct": 69.2,
-      "roi": 32.2
+      "pct": 66.7,
+      "roi": 27.3
     },
     "totals": {
-      "wins": 22,
-      "losses": 16,
+      "wins": 23,
+      "losses": 18,
       "pushes": 0,
-      "pct": 57.9,
-      "roi": 10.5
+      "pct": 56.1,
+      "roi": 7.1
     },
     "moneylines": {
-      "wins": 29,
-      "losses": 10,
+      "wins": 31,
+      "losses": 11,
       "pushes": 0,
-      "pct": 74.4,
-      "roi": 42.0
+      "pct": 73.8,
+      "roi": 40.9
     },
     "best_bets": {
-      "wins": 25,
-      "losses": 5,
+      "wins": 24,
+      "losses": 6,
       "pushes": 0,
-      "pct": 83.3,
-      "roi": 59.1
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-03-03",
       "spreads": {
-        "wins": 3,
-        "losses": 1,
+        "wins": 4,
+        "losses": 3,
         "pushes": 0,
-        "record": "3-1",
-        "pct": 75.0
+        "record": "4-3",
+        "pct": 57.1
       },
       "totals": {
-        "wins": 2,
-        "losses": 2,
+        "wins": 3,
+        "losses": 4,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "3-4",
+        "pct": 42.9
       },
       "moneylines": {
-        "wins": 3,
-        "losses": 1,
+        "wins": 5,
+        "losses": 2,
         "pushes": 0,
-        "record": "3-1",
-        "pct": 75.0
+        "record": "5-2",
+        "pct": 71.4
       },
       "best_bets": {
-        "wins": 5,
-        "losses": 0,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "5-0",
-        "pct": 100.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -69,8 +69,7 @@
           "pick": "PIT +1.5",
           "result": "1-2",
           "hit": true,
-          "confidence": 55.3,
-          "best_bet": true
+          "confidence": 55.3
         },
         {
           "date": "2026-03-03",
@@ -98,8 +97,7 @@
           "pick": "VGK +1.5",
           "result": "2-3",
           "hit": true,
-          "confidence": 57.9,
-          "best_bet": true
+          "confidence": 57.9
         },
         {
           "date": "2026-03-03",
@@ -144,8 +142,7 @@
           "pick": "NJD",
           "result": "1-5",
           "hit": true,
-          "confidence": 55.4,
-          "best_bet": true
+          "confidence": 55.4
         },
         {
           "date": "2026-03-03",
@@ -174,6 +171,90 @@
           "hit": true,
           "confidence": 58.9,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "CHI @ WPG",
+          "pick": "WPG -1.5",
+          "result": "2-3",
+          "hit": false,
+          "confidence": 51.7
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "CHI @ WPG",
+          "pick": "OVER 5.5",
+          "result": "2-3",
+          "hit": false,
+          "confidence": 57.2
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "CHI @ WPG",
+          "pick": "WPG",
+          "result": "2-3",
+          "hit": true,
+          "confidence": 59.8,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "DAL @ CGY",
+          "pick": "CGY +1.5",
+          "result": "6-1",
+          "hit": false,
+          "confidence": 58.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "DAL @ CGY",
+          "pick": "UNDER 5.5",
+          "result": "6-1",
+          "hit": false,
+          "confidence": 52.0
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "DAL @ CGY",
+          "pick": "DAL",
+          "result": "6-1",
+          "hit": true,
+          "confidence": 50.1
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "OTT @ EDM",
+          "pick": "OTT +1.5",
+          "result": "4-5",
+          "hit": true,
+          "confidence": 59.0,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "OTT @ EDM",
+          "pick": "OVER 6.5",
+          "result": "4-5",
+          "hit": true,
+          "confidence": 50.7
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "OTT @ EDM",
+          "pick": "OTT",
+          "result": "4-5",
+          "hit": false,
+          "confidence": 50.0
         }
       ]
     },

@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-04T03:13:27",
+  "updated": "2026-03-04T04:49:36",
   "allTime": {
     "spreads": {
-      "wins": 22,
-      "losses": 29,
-      "pushes": 0,
-      "pct": 43.1,
-      "roi": -17.6
-    },
-    "totals": {
-      "wins": 29,
-      "losses": 23,
-      "pushes": 0,
-      "pct": 55.8,
-      "roi": 6.5
-    },
-    "moneylines": {
-      "wins": 56,
+      "wins": 24,
       "losses": 30,
       "pushes": 0,
-      "pct": 65.1,
-      "roi": 24.3
+      "pct": 44.4,
+      "roi": -15.2
+    },
+    "totals": {
+      "wins": 31,
+      "losses": 24,
+      "pushes": 0,
+      "pct": 56.4,
+      "roi": 7.6
+    },
+    "moneylines": {
+      "wins": 59,
+      "losses": 30,
+      "pushes": 0,
+      "pct": 66.3,
+      "roi": 26.6
     },
     "best_bets": {
-      "wins": 75,
-      "losses": 43,
+      "wins": 77,
+      "losses": 41,
       "pushes": 0,
-      "pct": 63.6,
-      "roi": 21.3
+      "pct": 65.3,
+      "roi": 24.6
     }
   },
   "days": [
     {
       "date": "2026-03-03",
       "spreads": {
-        "wins": 1,
-        "losses": 4,
+        "wins": 3,
+        "losses": 5,
         "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
+        "record": "3-5",
+        "pct": 37.5
       },
       "totals": {
-        "wins": 2,
-        "losses": 3,
+        "wins": 4,
+        "losses": 4,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "4-4",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 4,
+        "wins": 7,
         "losses": 1,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "7-1",
+        "pct": 87.5
       },
       "best_bets": {
-        "wins": 3,
-        "losses": 2,
+        "wins": 5,
+        "losses": 0,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -152,8 +152,7 @@
           "pick": "BKN +13.5",
           "result": "98-124",
           "hit": false,
-          "confidence": 64.4,
-          "best_bet": true
+          "confidence": 64.4
         },
         {
           "date": "2026-03-03",
@@ -190,8 +189,7 @@
           "pick": "OVER 221.5",
           "result": "111-95",
           "hit": false,
-          "confidence": 64.1,
-          "best_bet": true
+          "confidence": 64.1
         },
         {
           "date": "2026-03-03",
@@ -201,6 +199,89 @@
           "result": "111-95",
           "hit": false,
           "confidence": 49.6
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "SAS @ PHI",
+          "pick": "PHI +8.0",
+          "result": "131-91",
+          "hit": false,
+          "confidence": 62.3
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "SAS @ PHI",
+          "pick": "UNDER 232.5",
+          "result": "131-91",
+          "hit": true,
+          "confidence": 56.6
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "SAS @ PHI",
+          "pick": "SAS",
+          "result": "131-91",
+          "hit": true,
+          "confidence": 54.1
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "OKC @ CHI",
+          "pick": "CHI +10.5",
+          "result": "116-108",
+          "hit": true,
+          "confidence": 75.9,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "OKC @ CHI",
+          "pick": "OVER 227.5",
+          "result": "116-108",
+          "hit": false,
+          "confidence": 55.7
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "OKC @ CHI",
+          "pick": "OKC",
+          "result": "116-108",
+          "hit": true,
+          "confidence": 56.0
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "MEM @ MIN",
+          "pick": "MEM +13.5",
+          "result": "110-117",
+          "hit": true,
+          "confidence": 72.0,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "MEM @ MIN",
+          "pick": "UNDER 237.5",
+          "result": "110-117",
+          "hit": true,
+          "confidence": 58.3
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "MEM @ MIN",
+          "pick": "MIN",
+          "result": "110-117",
+          "hit": true,
+          "confidence": 65.7
         }
       ]
     },

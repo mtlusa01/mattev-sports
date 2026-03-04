@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-04T03:13:27",
+  "updated": "2026-03-04T04:49:36",
   "allTime": {
     "spreads": {
-      "wins": 213,
-      "losses": 167,
+      "wins": 222,
+      "losses": 172,
       "pushes": 10,
-      "pct": 56.1,
-      "roi": 7.0
+      "pct": 56.3,
+      "roi": 7.6
     },
     "totals": {
-      "wins": 188,
-      "losses": 199,
+      "wins": 193,
+      "losses": 208,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.3
+      "pct": 48.1,
+      "roi": -8.1
     },
     "moneylines": {
-      "wins": 254,
-      "losses": 136,
+      "wins": 264,
+      "losses": 140,
       "pushes": 0,
-      "pct": 65.1,
-      "roi": 24.3
+      "pct": 65.3,
+      "roi": 24.8
     },
     "best_bets": {
       "wins": 40,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-03",
       "spreads": {
-        "wins": 13,
-        "losses": 19,
+        "wins": 22,
+        "losses": 24,
         "pushes": 2,
-        "record": "13-19-2",
-        "pct": 40.6
+        "record": "22-24-2",
+        "pct": 47.8
       },
       "totals": {
-        "wins": 13,
-        "losses": 21,
+        "wins": 18,
+        "losses": 30,
         "pushes": 0,
-        "record": "13-21",
-        "pct": 38.2
+        "record": "18-30",
+        "pct": 37.5
       },
       "moneylines": {
-        "wins": 25,
-        "losses": 9,
+        "wins": 35,
+        "losses": 13,
         "pushes": 0,
-        "record": "25-9",
-        "pct": 73.5
+        "record": "35-13",
+        "pct": 72.9
       },
       "best_bets": {
         "wins": 5,
@@ -601,8 +601,7 @@
           "pick": "M-OH",
           "result": "72-74",
           "hit": true,
-          "confidence": 88,
-          "best_bet": true
+          "confidence": 88
         },
         {
           "date": "2026-03-03",
@@ -656,8 +655,7 @@
           "pick": "UVA",
           "result": "70-75",
           "hit": true,
-          "confidence": 84,
-          "best_bet": true
+          "confidence": 84
         },
         {
           "date": "2026-03-03",
@@ -934,6 +932,60 @@
         {
           "date": "2026-03-03",
           "type": "spread",
+          "game": "SOU @ ALST",
+          "pick": "SOU +1.5",
+          "result": "71-64",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "SOU @ ALST",
+          "pick": "OVER 144.5",
+          "result": "71-64",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "SOU @ ALST",
+          "pick": "ALST",
+          "result": "71-64",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "UAPB @ JKST",
+          "pick": "JKST +10.5",
+          "result": "78-81",
+          "hit": true,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "UAPB @ JKST",
+          "pick": "OVER 161.0",
+          "result": "78-81",
+          "hit": false,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "UAPB @ JKST",
+          "pick": "UAPB",
+          "result": "78-81",
+          "hit": false,
+          "confidence": 73
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
           "game": "WVU @ KSU",
           "pick": "WVU +1.5",
           "result": "63-65",
@@ -984,6 +1036,332 @@
           "result": "56-64",
           "hit": true,
           "confidence": 59
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "GRAM @ AAMU",
+          "pick": "GRAM +7.5",
+          "result": "63-77",
+          "hit": false,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "GRAM @ AAMU",
+          "pick": "OVER 151.0",
+          "result": "63-77",
+          "hit": false,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "GRAM @ AAMU",
+          "pick": "AAMU",
+          "result": "63-77",
+          "hit": true,
+          "confidence": 70
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "ULM @ ODU",
+          "pick": "ULM +10.5",
+          "result": "80-87",
+          "hit": true,
+          "confidence": 57
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "ULM @ ODU",
+          "pick": "OVER 158.0",
+          "result": "80-87",
+          "hit": true,
+          "confidence": 59
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "ULM @ ODU",
+          "pick": "ODU",
+          "result": "80-87",
+          "hit": true,
+          "confidence": 66
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "VAN @ MISS",
+          "pick": "MISS +5.5",
+          "result": "89-86",
+          "hit": true,
+          "confidence": 56
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "VAN @ MISS",
+          "pick": "OVER 156.0",
+          "result": "89-86",
+          "hit": true,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "VAN @ MISS",
+          "pick": "VAN",
+          "result": "89-86",
+          "hit": true,
+          "confidence": 66
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "GCU @ AF",
+          "pick": "AF +14.5",
+          "result": "86-60",
+          "hit": false,
+          "confidence": 66
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "GCU @ AF",
+          "pick": "OVER 145.5",
+          "result": "86-60",
+          "hit": true,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "GCU @ AF",
+          "pick": "GCU",
+          "result": "86-60",
+          "hit": true,
+          "confidence": 75
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "SYR @ LOU",
+          "pick": "SYR +20.5",
+          "result": "62-77",
+          "hit": true,
+          "confidence": 65
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "SYR @ LOU",
+          "pick": "OVER 161.5",
+          "result": "62-77",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "SYR @ LOU",
+          "pick": "LOU",
+          "result": "62-77",
+          "hit": true,
+          "confidence": 91,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "BC @ VT",
+          "pick": "BC +12.0",
+          "result": "63-72",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "BC @ VT",
+          "pick": "OVER 146.5",
+          "result": "63-72",
+          "hit": false,
+          "confidence": 49
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "BC @ VT",
+          "pick": "VT",
+          "result": "63-72",
+          "hit": true,
+          "confidence": 85
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "SDSU @ BOIS",
+          "pick": "BOIS +0.0",
+          "result": "77-86",
+          "hit": true,
+          "confidence": 50
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "SDSU @ BOIS",
+          "pick": "OVER 144.5",
+          "result": "77-86",
+          "hit": true,
+          "confidence": 50
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "SDSU @ BOIS",
+          "pick": "SDSU",
+          "result": "77-86",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "ORE @ ILL",
+          "pick": "ORE +16.5",
+          "result": "54-80",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "ORE @ ILL",
+          "pick": "OVER 150.5",
+          "result": "54-80",
+          "hit": false,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "ORE @ ILL",
+          "pick": "ILL",
+          "result": "54-80",
+          "hit": true,
+          "confidence": 89,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "KU @ ASU",
+          "pick": "ASU +7.0",
+          "result": "60-70",
+          "hit": true,
+          "confidence": 58
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "KU @ ASU",
+          "pick": "OVER 154.5",
+          "result": "60-70",
+          "hit": false,
+          "confidence": 64
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "KU @ ASU",
+          "pick": "KU",
+          "result": "60-70",
+          "hit": false,
+          "confidence": 76
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "BYU @ CIN",
+          "pick": "BYU +1.0",
+          "result": "68-90",
+          "hit": false,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "BYU @ CIN",
+          "pick": "OVER 152.0",
+          "result": "68-90",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "BYU @ CIN",
+          "pick": "CIN",
+          "result": "68-90",
+          "hit": true,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "SJSU @ FRES",
+          "pick": "SJSU +6.0",
+          "result": "68-82",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "SJSU @ FRES",
+          "pick": "OVER 154.5",
+          "result": "68-82",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "SJSU @ FRES",
+          "pick": "FRES",
+          "result": "68-82",
+          "hit": true,
+          "confidence": 58
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "MVSU @ ALCN",
+          "pick": "MVSU +11.0",
+          "result": "64-67",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "MVSU @ ALCN",
+          "pick": "OVER 146.5",
+          "result": "64-67",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "MVSU @ ALCN",
+          "pick": "ALCN",
+          "result": "64-67",
+          "hit": true,
+          "confidence": 81
         }
       ]
     },
