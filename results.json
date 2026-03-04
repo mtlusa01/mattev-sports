@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-04T05:36:03",
+  "updated": "2026-03-04T06:27:11",
   "allTime": {
     "spreads": {
       "wins": 24,
-      "losses": 30,
+      "losses": 32,
       "pushes": 0,
-      "pct": 44.4,
-      "roi": -15.2
+      "pct": 42.9,
+      "roi": -18.2
     },
     "totals": {
-      "wins": 31,
-      "losses": 24,
+      "wins": 32,
+      "losses": 25,
       "pushes": 0,
-      "pct": 56.4,
-      "roi": 7.6
+      "pct": 56.1,
+      "roi": 7.2
     },
     "moneylines": {
-      "wins": 59,
+      "wins": 61,
       "losses": 30,
       "pushes": 0,
-      "pct": 66.3,
-      "roi": 26.6
+      "pct": 67.0,
+      "roi": 28.0
     },
     "best_bets": {
       "wins": 77,
@@ -35,24 +35,24 @@
       "date": "2026-03-03",
       "spreads": {
         "wins": 3,
-        "losses": 5,
+        "losses": 7,
         "pushes": 0,
-        "record": "3-5",
-        "pct": 37.5
+        "record": "3-7",
+        "pct": 30.0
       },
       "totals": {
-        "wins": 4,
-        "losses": 4,
+        "wins": 5,
+        "losses": 5,
         "pushes": 0,
-        "record": "4-4",
+        "record": "5-5",
         "pct": 50.0
       },
       "moneylines": {
-        "wins": 7,
+        "wins": 9,
         "losses": 1,
         "pushes": 0,
-        "record": "7-1",
-        "pct": 87.5
+        "record": "9-1",
+        "pct": 90.0
       },
       "best_bets": {
         "wins": 5,
@@ -262,8 +262,7 @@
           "pick": "MEM +13.5",
           "result": "110-117",
           "hit": true,
-          "confidence": 72.0,
-          "best_bet": true
+          "confidence": 72.0
         },
         {
           "date": "2026-03-03",
@@ -282,6 +281,61 @@
           "result": "110-117",
           "hit": true,
           "confidence": 65.7
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "NOP @ LAL",
+          "pick": "NOP +8.5",
+          "result": "101-110",
+          "hit": false,
+          "confidence": 53.8
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "NOP @ LAL",
+          "pick": "UNDER 239.5",
+          "result": "101-110",
+          "hit": true,
+          "confidence": 76.5,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "NOP @ LAL",
+          "pick": "LAL",
+          "result": "101-110",
+          "hit": true,
+          "confidence": 66.6
+        },
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "PHX @ SAC",
+          "pick": "SAC +10.5",
+          "result": "114-103",
+          "hit": false,
+          "confidence": 57.5
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "PHX @ SAC",
+          "pick": "OVER 223.5",
+          "result": "114-103",
+          "hit": false,
+          "confidence": 56.7
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "PHX @ SAC",
+          "pick": "PHX",
+          "result": "114-103",
+          "hit": true,
+          "confidence": 62.5
         }
       ]
     },
