@@ -1083,6 +1083,20 @@
       renderBets();
     }
 
+    // ── Prop Type Labels ──
+    const PROP_TYPE_LABELS = {
+      'points': 'PTS', 'rebounds': 'REB', 'assists': 'AST', 'threes': '3PM',
+      'pts': 'PTS', 'reb': 'REB', 'ast': 'AST', 'pra': 'PRA', 'pr': 'P+R', 'pa': 'P+A',
+      'steals': 'STL', 'blocks': 'BLK', 'turnovers': 'TO',
+      'shots_on_goal': 'SOG', 'goals': 'Goals', 'saves': 'Saves',
+      'player_points': 'Pts', 'player_assists': 'Assists', 'player_shots_on_goal': 'SOG', 'player_goals': 'Goals',
+      'player_power_play_points': 'PP Pts', 'player_blocked_shots': 'Blocks'
+    };
+    function getPropLabel(bet) {
+      const pt = bet.prop_type || bet.market || bet.stat_type || '';
+      return PROP_TYPE_LABELS[pt] || (pt ? pt.toUpperCase() : '');
+    }
+
     // ── Render Bets ──
     function renderBets() {
       const allBets = getTrackedBets();
@@ -1112,8 +1126,9 @@
 
       const rows = bets.map((b) => {
         const typeClass = b.type === 'prop' ? 'prop' : b.type;
-        const typeLabel = b.type === 'prop' ? b.prop_type?.toUpperCase() || 'PROP' : b.type.toUpperCase();
-        const pickDesc = b.type === 'prop' ? `${b.player} ${b.pick} ${b.line}` : b.pick;
+        const propLbl = b.type === 'prop' ? getPropLabel(b) : '';
+        const typeLabel = b.type === 'prop' ? (propLbl || 'PROP') : b.type.toUpperCase();
+        const pickDesc = b.type === 'prop' ? `${b.player} ${propLbl ? propLbl + ' ' : ''}${b.pick} ${b.line}` : b.pick;
         const gameStr = b.game || '';
         const oddsStr = b.odds > 0 ? `+${b.odds}` : b.odds;
 

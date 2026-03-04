@@ -1946,6 +1946,20 @@
       renderDailyBriefing(currentProfile);
     }
 
+    // ── Prop Type Labels ──
+    var PROP_TYPE_LABELS = {
+      'points': 'PTS', 'rebounds': 'REB', 'assists': 'AST', 'threes': '3PM',
+      'pts': 'PTS', 'reb': 'REB', 'ast': 'AST', 'pra': 'PRA', 'pr': 'P+R', 'pa': 'P+A',
+      'steals': 'STL', 'blocks': 'BLK', 'turnovers': 'TO',
+      'shots_on_goal': 'SOG', 'goals': 'Goals', 'saves': 'Saves',
+      'player_points': 'Pts', 'player_assists': 'Assists', 'player_shots_on_goal': 'SOG', 'player_goals': 'Goals',
+      'player_power_play_points': 'PP Pts', 'player_blocked_shots': 'Blocks'
+    };
+    function getPropLabel(bet) {
+      var pt = bet.prop_type || bet.market || bet.stat_type || '';
+      return PROP_TYPE_LABELS[pt] || (pt ? pt.toUpperCase() : '');
+    }
+
     // ── Recommended Bets ──
     // Must match dashboard.html makeBetId format exactly:
     // parts.map(p => String(p||'').toLowerCase().replace(/\s+/g,'-')).join('_')
@@ -2380,9 +2394,10 @@
         var riskClass = p.edge >= 0.08 ? 'low' : p.edge >= 0.04 ? 'med' : 'high';
         var sportLabel = (p.sport === 'props' || p.sport === 'nhl-props') ? 'PROP' : p.sport.toUpperCase();
         var sportBadge = p.sport === 'props' ? 'props' : p.sport === 'nhl-props' ? 'nhl' : p.sport;
-        var matchup = p.type === 'prop' ? (p.player + ' ' + p.prop_type) : p.game;
-        var pickLabel = p.pick;
-        var typeLabel = p.type.charAt(0).toUpperCase() + p.type.slice(1);
+        var propLabel = p.type === 'prop' ? getPropLabel(p) : '';
+        var matchup = p.type === 'prop' ? (p.player + ' (' + (p.team || '') + ')') : p.game;
+        var pickLabel = p.type === 'prop' && propLabel ? (propLabel + ' ' + p.pick) : p.pick;
+        var typeLabel = p.type === 'prop' ? 'Prop' : p.type.charAt(0).toUpperCase() + p.type.slice(1);
         var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
         var betId = buildRecBetId(p);
         var isLocked = isRecBetTracked(p, existingBets);
@@ -2439,11 +2454,13 @@
       if (!lastRecommendations || !lastRecommendations.picks[idx]) return;
       var p = lastRecommendations.picks[idx];
       var unitSize = getUnitSize();
-      var matchup = p.type === 'prop' ? (p.player + ' ' + p.prop_type) : p.game;
+      var propLbl = p.type === 'prop' ? getPropLabel(p) : '';
+      var matchup = p.type === 'prop' ? (p.player + ' (' + (p.team || '') + ')') : p.game;
       var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
+      var pickLine = p.type === 'prop' && propLbl ? (propLbl + ' ' + p.pick) : p.pick;
       showBetModal({
         title: 'Confirm Bet \u2014 ' + matchup,
-        pickDesc: p.pick + ' (' + oddsStr + ')',
+        pickDesc: pickLine + ' (' + oddsStr + ')',
         suggestedStake: p.stake,
         suggestedUnits: p.units.toFixed(2),
         odds: String(p.odds),
@@ -2672,8 +2689,10 @@
         var sp = (bet.sport || '').toLowerCase();
         if (bet.type === 'prop') sp = 'props';
         var spLabel = bet.type === 'prop' ? 'PROP' : (bet.sport || '').toUpperCase();
-        var matchup = bet.game || ((bet.player || '') + ' ' + (bet.prop_type || ''));
-        var pick = bet.pick || '';
+        var propLbl = bet.type === 'prop' ? getPropLabel(bet) : '';
+        var matchup = bet.type === 'prop' ? ((bet.player || '') + (bet.team ? ' (' + bet.team + ')' : '')) : (bet.game || '');
+        if (bet.type === 'prop' && !matchup) matchup = bet.game || '';
+        var pick = bet.type === 'prop' && propLbl ? (propLbl + ' ' + (bet.pick || '')) : (bet.pick || '');
         if (bet.model_confidence) pick += ' (' + parseFloat(bet.model_confidence).toFixed(0) + '%)';
         var oddsStr = bet.odds ? (parseInt(bet.odds) > 0 ? '+' : '') + bet.odds : '';
         var profDollars = (parseFloat(bet.profit_units) || 0) * unitSize;
@@ -3222,8 +3241,10 @@
         var st = normalizeResult(b.status);
         var cls = st === 'win' ? 'win' : st === 'loss' ? 'loss' : st === 'push' ? 'push' : 'pending';
         var badge = st === 'win' ? 'W' : st === 'loss' ? 'L' : st === 'push' ? 'P' : '\u2014';
-        var matchup = b.type === 'prop' ? (b.player || '') + ' ' + (b.prop_type || '') : (b.game || '');
-        var pickDetail = (b.pick || '');
+        var propLbl = b.type === 'prop' ? getPropLabel(b) : '';
+        var matchup = b.type === 'prop' ? ((b.player || '') + (b.team ? ' (' + b.team + ')' : '')) : (b.game || '');
+        if (b.type === 'prop' && !matchup) matchup = b.game || '';
+        var pickDetail = b.type === 'prop' && propLbl ? (propLbl + ' ' + (b.pick || '')) : (b.pick || '');
         if (b.line) pickDetail += ' ' + b.line;
         if (b.odds) pickDetail += ' (' + b.odds + ')';
         var sport = (b.sport || '').toUpperCase();

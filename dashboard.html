@@ -3002,6 +3002,19 @@
       render();
     }
 
+    // ── Prop Type Labels ──
+    const PROP_TYPE_LABELS = {
+      'points': 'PTS', 'rebounds': 'REB', 'assists': 'AST', 'threes': '3PM',
+      'pts': 'PTS', 'reb': 'REB', 'ast': 'AST', 'pra': 'PRA', 'pr': 'P+R', 'pa': 'P+A',
+      'steals': 'STL', 'blocks': 'BLK', 'turnovers': 'TO',
+      'shots_on_goal': 'SOG', 'goals': 'Goals', 'saves': 'Saves',
+      'player_points': 'Pts', 'player_assists': 'Assists', 'player_shots_on_goal': 'SOG', 'player_goals': 'Goals',
+      'player_power_play_points': 'PP Pts', 'player_blocked_shots': 'Blocks'
+    };
+    function getPropLabel(propType) {
+      return PROP_TYPE_LABELS[propType] || (propType ? propType.toUpperCase() : '');
+    }
+
     function trackPropClick(origIdx) {
       const p = projections[origIdx];
       if (!p) return;
@@ -3020,7 +3033,7 @@
         propType: p.prop, pick: p.direction, line: p.line,
         confidence: p.confidence, ev: p.ev,
         defaultOdds: bestOdds,
-        pickDesc: p.player + ' ' + p.direction + ' ' + p.line + ' ' + p.prop.toUpperCase(),
+        pickDesc: p.player + ' ' + getPropLabel(p.prop) + ' ' + p.direction + ' ' + p.line,
         metaHtml: (p.confidence ? p.confidence.toFixed(1) + '% conf' : '') + (p.ev ? ' | +' + p.ev.toFixed(1) + '% EV' : '')
       });
     }
