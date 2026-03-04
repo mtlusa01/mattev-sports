@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-04T20:52:02",
+  "updated": "2026-03-04T21:24:10",
   "allTime": {
     "spreads": {
       "wins": 225,
-      "losses": 175,
+      "losses": 176,
       "pushes": 10,
-      "pct": 56.2,
-      "roi": 7.4
+      "pct": 56.1,
+      "roi": 7.1
     },
     "totals": {
       "wins": 198,
-      "losses": 209,
+      "losses": 210,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.1
+      "pct": 48.5,
+      "roi": -7.4
     },
     "moneylines": {
-      "wins": 266,
+      "wins": 267,
       "losses": 144,
       "pushes": 0,
-      "pct": 64.9,
-      "roi": 23.9
+      "pct": 65.0,
+      "roi": 24.0
     },
     "best_bets": {
-      "wins": 41,
-      "losses": 12,
+      "wins": 42,
+      "losses": 13,
       "pushes": 0,
-      "pct": 77.4,
-      "roi": 47.7
+      "pct": 76.4,
+      "roi": 45.8
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-03-04",
       "spreads": {
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "0-1",
+        "record": "0-2",
         "pct": 0.0
       },
       "totals": {
         "wins": 1,
-        "losses": 0,
-        "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
-      },
-      "moneylines": {
-        "wins": 0,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 1,
+        "pushes": 0,
+        "record": "1-1",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 1,
-        "losses": 2,
+        "wins": 2,
+        "losses": 3,
         "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
+        "record": "2-3",
+        "pct": 40.0
       },
       "picks": [
         {
@@ -89,7 +89,36 @@
           "pick": "JAX",
           "result": "79-82",
           "hit": false,
-          "confidence": 47,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "UNA @ FGCU",
+          "pick": "UNA +7.5",
+          "result": "58-69",
+          "hit": false,
+          "confidence": 69,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "UNA @ FGCU",
+          "pick": "OVER 139.5",
+          "result": "58-69",
+          "hit": false,
+          "confidence": 73,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "UNA @ FGCU",
+          "pick": "FGCU",
+          "result": "58-69",
+          "hit": true,
+          "confidence": 53,
           "best_bet": true
         }
       ]

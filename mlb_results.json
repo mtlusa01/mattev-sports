@@ -4,32 +4,32 @@
     {
       "date": "2026-03-04",
       "spreads": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "totals": {
-        "wins": 1,
+        "wins": 2,
         "losses": 0,
         "pushes": 0,
-        "record": "1-0",
+        "record": "2-0",
         "pct": 100.0
       },
       "moneylines": {
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "0-1",
+        "record": "0-2",
         "pct": 0.0
       },
       "best_bets": {
-        "wins": 2,
+        "wins": 4,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -61,6 +61,35 @@
           "hit": false,
           "confidence": 52.6,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "NYY @ BOS",
+          "pick": "NYY +1.5",
+          "result": "4-0",
+          "hit": true,
+          "confidence": 50.4,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "NYY @ BOS",
+          "pick": "UNDER 8.5",
+          "result": "4-0",
+          "hit": true,
+          "confidence": 51.5,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "NYY @ BOS",
+          "pick": "BOS",
+          "result": "4-0",
+          "hit": false,
+          "confidence": 50.4
         }
       ]
     },
@@ -203,33 +232,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 4,
+      "wins": 5,
       "losses": 0,
       "pushes": 0,
       "pct": 100.0,
       "roi": 90.9
     },
     "totals": {
-      "wins": 3,
+      "wins": 4,
       "losses": 1,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 80.0,
+      "roi": 52.7
     },
     "moneylines": {
       "wins": 2,
-      "losses": 2,
+      "losses": 3,
       "pushes": 0,
-      "pct": 50.0,
-      "roi": -4.5
+      "pct": 40.0,
+      "roi": -23.6
     },
     "best_bets": {
-      "wins": 6,
+      "wins": 8,
       "losses": 2,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
-  "updated": "2026-03-04T20:52:02"
+  "updated": "2026-03-04T21:24:10"
 }
