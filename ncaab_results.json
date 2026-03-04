@@ -1,36 +1,99 @@
 {
-  "updated": "2026-03-03T07:28:32",
+  "updated": "2026-03-03T19:45:02",
   "allTime": {
     "spreads": {
       "wins": 200,
-      "losses": 148,
+      "losses": 149,
       "pushes": 8,
-      "pct": 57.5,
-      "roi": 9.7
+      "pct": 57.3,
+      "roi": 9.4
     },
     "totals": {
       "wins": 175,
-      "losses": 178,
+      "losses": 179,
       "pushes": 3,
-      "pct": 49.6,
-      "roi": -5.4
+      "pct": 49.4,
+      "roi": -5.6
     },
     "moneylines": {
-      "wins": 229,
+      "wins": 230,
       "losses": 127,
       "pushes": 0,
-      "pct": 64.3,
-      "roi": 22.8
+      "pct": 64.4,
+      "roi": 23.0
     },
     "best_bets": {
-      "wins": 35,
-      "losses": 10,
+      "wins": 36,
+      "losses": 12,
       "pushes": 0,
-      "pct": 77.8,
-      "roi": 48.5
+      "pct": 75.0,
+      "roi": 43.2
     }
   },
   "days": [
+    {
+      "date": "2026-03-03",
+      "spreads": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "best_bets": {
+        "wins": 1,
+        "losses": 2,
+        "pushes": 0,
+        "record": "1-2",
+        "pct": 33.3
+      },
+      "picks": [
+        {
+          "date": "2026-03-03",
+          "type": "spread",
+          "game": "TENN @ SC",
+          "pick": "SC +16.5",
+          "result": "78-59",
+          "hit": false,
+          "confidence": 68,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "total",
+          "game": "TENN @ SC",
+          "pick": "OVER 151.5",
+          "result": "78-59",
+          "hit": false,
+          "confidence": 58,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-03",
+          "type": "ml",
+          "game": "TENN @ SC",
+          "pick": "TENN",
+          "result": "78-59",
+          "hit": true,
+          "confidence": 91,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-03-02",
       "spreads": {
