@@ -637,6 +637,7 @@
     let calViewYear = null;
     let calViewMonth = null;
     let calOpen = false;
+    let listenersAttached = false;
     let resultsTypeFilter = 'all';
     let resultsResultFilter = 'all';
     let daysByDate = {};
@@ -1038,51 +1039,56 @@
         renderResultsBanner(resultsData);
         renderSelectedDay();
 
-        // Prev/next day arrows
-        document.getElementById('cal-prev-day').addEventListener('click', () => stepDate(-1));
-        document.getElementById('cal-next-day').addEventListener('click', () => stepDate(1));
+        // Only attach listeners once (loadResults is called again on sport switch)
+        if (!listenersAttached) {
+          listenersAttached = true;
 
-        // Today jump
-        document.getElementById('cal-today-jump').addEventListener('click', () => {
-          const tk = todayKey();
-          if (daysByDate[tk]) {
-            selectDate(tk);
-          } else {
-            // Jump to most recent date with data
-            selectDate(sortedDates[sortedDates.length - 1] || tk);
-          }
-        });
+          // Prev/next day arrows
+          document.getElementById('cal-prev-day').addEventListener('click', () => stepDate(-1));
+          document.getElementById('cal-next-day').addEventListener('click', () => stepDate(1));
 
-        // Trigger toggle
-        document.getElementById('calendar-trigger').addEventListener('click', () => {
-          if (!calOpen) {
-            const sd = new Date(selectedDate + 'T12:00:00');
-            calViewYear = sd.getFullYear();
-            calViewMonth = sd.getMonth();
-          }
-          toggleCalendar();
-        });
-
-        // Click outside to close
-        document.addEventListener('click', (e) => {
-          if (calOpen && !document.getElementById('calendar-wrap').contains(e.target)) {
-            toggleCalendar(false);
-          }
-        });
-
-        // Filter pill listeners
-        document.querySelectorAll('[data-rtype]').forEach(pill => {
-          pill.addEventListener('click', () => {
-            resultsTypeFilter = pill.dataset.rtype;
-            renderSelectedDay();
+          // Today jump
+          document.getElementById('cal-today-jump').addEventListener('click', () => {
+            const tk = todayKey();
+            if (daysByDate[tk]) {
+              selectDate(tk);
+            } else {
+              // Jump to most recent date with data
+              selectDate(sortedDates[sortedDates.length - 1] || tk);
+            }
           });
-        });
-        document.querySelectorAll('[data-rresult]').forEach(pill => {
-          pill.addEventListener('click', () => {
-            resultsResultFilter = pill.dataset.rresult;
-            renderSelectedDay();
+
+          // Trigger toggle
+          document.getElementById('calendar-trigger').addEventListener('click', () => {
+            if (!calOpen) {
+              const sd = new Date(selectedDate + 'T12:00:00');
+              calViewYear = sd.getFullYear();
+              calViewMonth = sd.getMonth();
+            }
+            toggleCalendar();
           });
-        });
+
+          // Click outside to close
+          document.addEventListener('click', (e) => {
+            if (calOpen && !document.getElementById('calendar-wrap').contains(e.target)) {
+              toggleCalendar(false);
+            }
+          });
+
+          // Filter pill listeners
+          document.querySelectorAll('[data-rtype]').forEach(pill => {
+            pill.addEventListener('click', () => {
+              resultsTypeFilter = pill.dataset.rtype;
+              renderSelectedDay();
+            });
+          });
+          document.querySelectorAll('[data-rresult]').forEach(pill => {
+            pill.addEventListener('click', () => {
+              resultsResultFilter = pill.dataset.rresult;
+              renderSelectedDay();
+            });
+          });
+        }
       } catch (err) {
         console.error('Failed to load results:', err);
       }
