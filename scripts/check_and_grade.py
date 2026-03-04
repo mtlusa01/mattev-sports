@@ -651,6 +651,7 @@ def _fetch_espn_event_ids(sport, date_str):
             result[f"{away_abbr}@{home_abbr}"] = {
                 "id": eid,
                 "status": status,
+                "date": date_str,
             }
         return result
     except Exception as e:
@@ -768,6 +769,7 @@ def grade_nhl_props():
         return False
 
     # Fetch ESPN event IDs for today and yesterday
+    props_date = props_data.get("date", datetime.now().strftime("%Y-%m-%d"))
     today = datetime.now().strftime("%Y-%m-%d")
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
@@ -791,6 +793,10 @@ def grade_nhl_props():
             continue
         eid = event_info["id"]
         if event_info["status"] != "STATUS_FINAL":
+            continue
+        # Only grade against events from the same date as the props
+        event_date = event_info.get("date", "")
+        if event_date and event_date != props_date:
             continue
         if eid in fetched_events:
             # Already fetched — map this matchup pair too
@@ -1000,6 +1006,7 @@ def grade_nba_props():
         return False
 
     # Fetch ESPN event IDs for today and yesterday
+    props_date = props_data.get("date", datetime.now().strftime("%Y-%m-%d"))
     today = datetime.now().strftime("%Y-%m-%d")
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
@@ -1022,6 +1029,10 @@ def grade_nba_props():
             continue
         eid = event_info["id"]
         if event_info["status"] != "STATUS_FINAL":
+            continue
+        # Only grade against events from the same date as the props
+        event_date = event_info.get("date", "")
+        if event_date and event_date != props_date:
             continue
         if eid in fetched_events:
             for mk, bs in box_scores.items():
