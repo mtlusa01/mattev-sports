@@ -1001,6 +1001,74 @@
     .cal-bet-delete:hover { color: var(--loss); background: var(--loss-soft); }
 
     .rec-lockin-btn.locked:hover { background: var(--loss); border-color: var(--loss); color: #fff; }
+
+    /* ── Bet Detail Expand Panel ── */
+    .cal-bet-row { cursor: pointer; transition: background 0.15s; border-radius: 6px; padding-left: 6px; padding-right: 6px; margin: 0 -6px; }
+    .cal-bet-row:hover { background: rgba(0,212,255,0.03); }
+    .cal-bet-row.bet-expanded { background: rgba(0,212,255,0.05); border-left: 2px solid var(--accent); padding-left: 4px; }
+    .bet-detail-panel {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+    }
+    .bet-detail-panel.expanded { max-height: 600px; opacity: 1; }
+    .bet-detail-inner {
+      padding: 14px 14px 14px 40px;
+      margin-bottom: 6px; border-radius: 8px;
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+    }
+    .bd-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-bottom: 12px;
+    }
+    .bd-item-label {
+      font-size: 9px; font-weight: 600; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .bd-item-value {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-primary);
+    }
+    .bd-item-value.positive { color: var(--profit); }
+    .bd-item-value.negative { color: var(--loss); }
+    .bd-section {
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-subtle);
+    }
+    .bd-section h4 {
+      font-size: 10px; font-weight: 700; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 6px 0;
+    }
+    .bd-insights { list-style: none; padding: 0; margin: 0; }
+    .bd-insights li {
+      font-size: 12px; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;
+    }
+    .bd-insights li::before { content: '\2022'; position: absolute; left: 0; color: var(--accent); }
+    .bd-your-bet {
+      display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary);
+    }
+    .bd-field-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+    .bd-field-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-primary); }
+    .bd-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; margin-top: 10px;
+    }
+    .bd-status.pending { color: var(--warning); }
+    .bd-status.win { color: var(--profit); }
+    .bd-status.loss { color: var(--loss); }
+    .bd-status.push { color: var(--warning); }
+    .bd-actions {
+      display: flex; gap: 10px; margin-top: 12px;
+    }
+    .bd-actions button {
+      padding: 5px 14px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .bd-btn-edit { background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-primary); }
+    .bd-btn-edit:hover { border-color: var(--accent); color: var(--accent); }
+    .bd-btn-remove { background: transparent; border: 1px solid var(--loss); color: var(--loss); }
+    .bd-btn-remove:hover { background: var(--loss-soft); }
+    @media (max-width: 768px) {
+      .bet-detail-inner { padding: 12px; }
+      .bd-grid { gap: 8px 12px; }
+      .bd-your-bet { gap: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -2656,6 +2724,126 @@
       return '<div class="' + cls + '" data-date="' + dateStr + '"' + onclick + '>' + inner + '</div>';
     }
 
+    // ── Bet Detail Expand ──
+    var calExpandedBetId = null;
+
+    function toggleCalBetExpand(betId) {
+      calExpandedBetId = calExpandedBetId === betId ? null : betId;
+      // Re-render the open day
+      var selDay = document.querySelector('.cal-day.cal-selected');
+      if (selDay) openCalDay(selDay.getAttribute('data-date'));
+    }
+
+    function calcToWin(odds, stake) {
+      var o = parseInt(odds);
+      if (!o || !stake) return 0;
+      if (o > 0) return stake * (o / 100);
+      return stake * (100 / Math.abs(o));
+    }
+
+    function buildBetDetail(bet) {
+      var unitSize = getUnitSize();
+      var units = parseFloat(bet.units) || 1;
+      var stake = units * unitSize;
+      var propLbl = bet.type === 'prop' ? getPropLabel(bet) : '';
+      var bst = normalizeResult(bet.status);
+
+      var h = '<div class="bd-grid">';
+      // Pick
+      var pickStr = bet.type === 'prop' && propLbl ? (propLbl + ' ' + (bet.pick || '')) : (bet.pick || '');
+      h += '<div><div class="bd-item-label">Pick</div><div class="bd-item-value">' + pickStr + '</div></div>';
+      // Odds
+      var oddsStr = bet.odds ? (parseInt(bet.odds) > 0 ? '+' : '') + bet.odds : '--';
+      h += '<div><div class="bd-item-label">Odds</div><div class="bd-item-value">' + oddsStr + '</div></div>';
+      // Confidence
+      if (bet.model_confidence) {
+        var conf = parseFloat(bet.model_confidence);
+        h += '<div><div class="bd-item-label">Confidence</div><div class="bd-item-value">' + conf.toFixed(1) + '%</div></div>';
+      }
+      // Edge / EV
+      if (bet.model_ev) {
+        var ev = parseFloat(bet.model_ev);
+        h += '<div><div class="bd-item-label">Edge</div><div class="bd-item-value ' + (ev > 0 ? 'positive' : '') + '">' + (ev > 0 ? '+' : '') + ev.toFixed(1) + '%</div></div>';
+      }
+      // Line
+      if (bet.line != null) {
+        h += '<div><div class="bd-item-label">Line</div><div class="bd-item-value">' + bet.line + '</div></div>';
+      }
+      // Actual (if graded)
+      if (bet.actual != null) {
+        h += '<div><div class="bd-item-label">Actual</div><div class="bd-item-value">' + bet.actual + '</div></div>';
+      }
+      h += '</div>'; // bd-grid
+
+      // Insights
+      var insights = [];
+      if (bet.model_confidence && parseFloat(bet.model_confidence) >= 70) {
+        insights.push('High confidence pick (' + parseFloat(bet.model_confidence).toFixed(0) + '%)');
+      }
+      if (bet.model_ev && parseFloat(bet.model_ev) > 8) {
+        insights.push('Strong edge: +' + parseFloat(bet.model_ev).toFixed(1) + '% over market');
+      }
+      if (bet.type === 'prop' && propLbl) {
+        var dir = (bet.pick || '').match(/OVER|UNDER/i);
+        if (dir && bet.line) {
+          insights.push('Model projects ' + (dir[0].toUpperCase()) + ' ' + bet.line + ' ' + propLbl);
+        }
+      }
+      if (bet.type !== 'prop' && bet.pick) {
+        insights.push(bet.pick);
+      }
+      if (bet.notes) {
+        insights.push(bet.notes);
+      }
+      if (insights.length > 0) {
+        h += '<div class="bd-section"><h4>Analysis</h4><ul class="bd-insights">';
+        for (var n = 0; n < insights.length; n++) h += '<li>' + insights[n] + '</li>';
+        h += '</ul></div>';
+      }
+
+      // Your Bet
+      h += '<div class="bd-section"><h4>Your Bet</h4><div class="bd-your-bet">';
+      var stakeDisp = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.stake(stake) : ('$' + stake.toFixed(0));
+      h += '<div><div class="bd-field-label">Stake</div><div class="bd-field-value">' + stakeDisp + ' (' + units.toFixed(1) + 'u)</div></div>';
+      if (bet.book) {
+        h += '<div><div class="bd-field-label">Book</div><div class="bd-field-value">' + bet.book + '</div></div>';
+      }
+      h += '<div><div class="bd-field-label">Odds</div><div class="bd-field-value">' + oddsStr + '</div></div>';
+      var toWin = calcToWin(bet.odds, stake);
+      if (toWin > 0) {
+        h += '<div><div class="bd-field-label">To Win</div><div class="bd-field-value positive">' + formatSignedDollars(toWin) + '</div></div>';
+      }
+      if (bet.placed_at || bet.locked_at) {
+        var ts = bet.placed_at || bet.locked_at;
+        var placedStr = new Date(ts).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+        h += '<div><div class="bd-field-label">Placed</div><div class="bd-field-value">' + placedStr + '</div></div>';
+      }
+      h += '</div></div>';
+
+      // Result (if graded)
+      if (bst === 'win' || bst === 'loss' || bst === 'push') {
+        var profDollars = (parseFloat(bet.profit_units) || 0) * unitSize;
+        var profUnits = parseFloat(bet.profit_units) || 0;
+        h += '<div class="bd-section"><h4>Result</h4><div class="bd-grid">';
+        var resultLabel = bst === 'win' ? '\u2713 WIN' : bst === 'loss' ? '\u2717 LOSS' : 'PUSH';
+        h += '<div><div class="bd-item-label">Outcome</div><div class="bd-item-value ' + (bst === 'win' ? 'positive' : bst === 'loss' ? 'negative' : '') + '">' + resultLabel + '</div></div>';
+        h += '<div><div class="bd-item-label">Profit</div><div class="bd-item-value ' + (profDollars >= 0 ? 'positive' : 'negative') + '">' + formatSignedDollars(profDollars) + ' (' + (profUnits >= 0 ? '+' : '') + profUnits.toFixed(2) + 'u)</div></div>';
+        h += '</div></div>';
+      } else {
+        h += '<div class="bd-status pending">\u25CF PENDING</div>';
+      }
+
+      // Actions
+      if (bet.id) {
+        h += '<div class="bd-actions">';
+        h += '<button class="bd-btn-edit" onclick="event.stopPropagation();editBet(\'' + bet.id.replace(/'/g, "\\'") + '\')">Edit Bet</button>';
+        h += '<button class="bd-btn-remove" onclick="event.stopPropagation();deleteBet(\'' + bet.id.replace(/'/g, "\\'") + '\')">Remove</button>';
+        h += '</div>';
+      }
+
+      return h;
+    }
+
     // ── Day Detail Panel ──
     function openCalDay(dateStr) {
       var betsByDate = getBetsByDate();
@@ -2700,18 +2888,20 @@
         if (bet.status === 'win') { profStr = formatSignedDollars(profDollars); profCls = 'profit'; }
         else if (bet.status === 'loss') { profStr = formatSignedDollars(profDollars); profCls = 'loss'; }
         else { profStr = '\u2014'; }
-        var betActions = '';
-        if (bet.id) {
-          betActions = '<span class="cal-bet-actions">' +
-            '<button class="cal-bet-edit" onclick="event.stopPropagation();editBet(\'' + bet.id.replace(/'/g, "\\'") + '\')" title="Edit">&#9998;</button>' +
-            '<button class="cal-bet-delete" onclick="event.stopPropagation();deleteBet(\'' + bet.id.replace(/'/g, "\\'") + '\')" title="Remove">&times;</button>' +
-            '</span>';
-        }
-        h += '<div class="cal-bet-row"><span class="cal-bet-status ' + sc + '">' + sl + '</span>';
+        var isExpanded = bet.id && calExpandedBetId === bet.id;
+        var expandClick = bet.id ? 'onclick="toggleCalBetExpand(\'' + bet.id.replace(/'/g, "\\'") + '\')"' : '';
+        h += '<div class="cal-bet-row' + (isExpanded ? ' bet-expanded' : '') + '" ' + expandClick + '>';
+        h += '<span class="cal-bet-status ' + sc + '">' + sl + '</span>';
         h += '<span class="cal-bet-sport ' + sp + '">' + spLabel + '</span>';
         h += '<div class="cal-bet-info"><div class="cal-bet-matchup">' + matchup + '</div><div class="cal-bet-pick">' + pick + '</div></div>';
         h += '<span class="cal-bet-odds">' + oddsStr + '</span>';
-        h += '<span class="cal-bet-profit ' + profCls + '">' + profStr + '</span>' + betActions + '</div>';
+        h += '<span class="cal-bet-profit ' + profCls + '">' + profStr + '</span>';
+        h += '<span style="flex-shrink:0;font-size:10px;color:var(--text-muted);margin-left:4px">' + (isExpanded ? '\u25B2' : '\u25BC') + '</span>';
+        h += '</div>';
+        // Expand panel
+        h += '<div class="bet-detail-panel' + (isExpanded ? ' expanded' : '') + '"><div class="bet-detail-inner">';
+        h += buildBetDetail(bet);
+        h += '</div></div>';
       }
       var el = document.getElementById('cal-detail');
       el.style.display = 'none';

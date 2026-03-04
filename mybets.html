@@ -480,6 +480,66 @@
     .debug-log.visible { display: block; }
     .debug-log-line { margin: 2px 0; }
     .debug-log-line.error { color: #f66; }
+
+    /* ── Bet Detail Expand Panel ── */
+    .bets-table tbody tr.bet-main-row { cursor: pointer; transition: background 0.15s; }
+    .bets-table tbody tr.bet-main-row:hover { background: rgba(0,212,255,0.03); }
+    .bets-table tbody tr.bet-main-row.bet-expanded { background: rgba(0,212,255,0.05); }
+    .bets-table tbody tr.bet-detail-row td { padding: 0; }
+    .mb-detail-inner {
+      padding: 16px 20px; background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border); border-left: 2px solid var(--accent);
+    }
+    .mb-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-bottom: 12px;
+    }
+    .mb-item-label {
+      font-size: 9px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .mb-item-value {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-primary);
+    }
+    .mb-item-value.positive { color: var(--accent-light, #10b981); }
+    .mb-item-value.negative { color: var(--red-light, #ef4444); }
+    .mb-section {
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+    }
+    .mb-section h4 {
+      font-size: 10px; font-weight: 700; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 6px 0;
+    }
+    .mb-insights { list-style: none; padding: 0; margin: 0; }
+    .mb-insights li {
+      font-size: 12px; color: var(--text-secondary); padding: 2px 0 2px 14px; position: relative;
+    }
+    .mb-insights li::before { content: '\2022'; position: absolute; left: 0; color: var(--accent); }
+    .mb-your-bet {
+      display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary);
+    }
+    .mb-field-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+    .mb-field-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-primary); }
+    .mb-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; margin-top: 10px;
+    }
+    .mb-status.pending { color: #eab308; }
+    .mb-status.win { color: #10b981; }
+    .mb-status.loss { color: #ef4444; }
+    .mb-actions {
+      display: flex; gap: 10px; margin-top: 12px;
+    }
+    .mb-actions button {
+      padding: 5px 14px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .mb-btn-remove { background: transparent; border: 1px solid #ef4444; color: #ef4444; }
+    .mb-btn-remove:hover { background: rgba(239,68,68,0.1); }
+    @media (max-width: 768px) {
+      .mb-detail-inner { padding: 12px; }
+      .mb-grid { gap: 8px 12px; }
+      .mb-your-bet { gap: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -1097,6 +1157,105 @@
       return PROP_TYPE_LABELS[pt] || (pt ? pt.toUpperCase() : '');
     }
 
+    // ── Bet Detail Expand ──
+    let mbExpandedBetId = null;
+
+    function toggleMbBetExpand(betId) {
+      mbExpandedBetId = mbExpandedBetId === betId ? null : betId;
+      renderBets();
+    }
+
+    function calcToWin(odds, stake) {
+      const o = parseInt(odds);
+      if (!o || !stake) return 0;
+      return o > 0 ? stake * (o / 100) : stake * (100 / Math.abs(o));
+    }
+
+    function buildMbDetail(b, unitSize) {
+      const propLbl = b.type === 'prop' ? getPropLabel(b) : '';
+      const bst = (b.status || 'pending').toLowerCase();
+      const units = parseFloat(b.units) || 1;
+      const stake = units * unitSize;
+
+      let h = '<div class="mb-grid">';
+      // Pick
+      const pickStr = b.type === 'prop' && propLbl ? (propLbl + ' ' + (b.pick || '')) : (b.pick || '');
+      h += `<div><div class="mb-item-label">Pick</div><div class="mb-item-value">${pickStr}</div></div>`;
+      // Odds
+      const oddsStr = b.odds ? (parseInt(b.odds) > 0 ? '+' : '') + b.odds : '--';
+      h += `<div><div class="mb-item-label">Odds</div><div class="mb-item-value">${oddsStr}</div></div>`;
+      // Confidence
+      if (b.model_confidence) {
+        h += `<div><div class="mb-item-label">Confidence</div><div class="mb-item-value">${parseFloat(b.model_confidence).toFixed(1)}%</div></div>`;
+      }
+      // Edge / EV
+      if (b.model_ev) {
+        const ev = parseFloat(b.model_ev);
+        h += `<div><div class="mb-item-label">Edge</div><div class="mb-item-value ${ev > 0 ? 'positive' : ''}">${ev > 0 ? '+' : ''}${ev.toFixed(1)}%</div></div>`;
+      }
+      // Line
+      if (b.line != null) {
+        h += `<div><div class="mb-item-label">Line</div><div class="mb-item-value">${b.line}</div></div>`;
+      }
+      // Game
+      if (b.game) {
+        h += `<div><div class="mb-item-label">Game</div><div class="mb-item-value">${b.game}</div></div>`;
+      }
+      // Actual
+      if (b.actual != null) {
+        h += `<div><div class="mb-item-label">Actual</div><div class="mb-item-value">${b.actual}</div></div>`;
+      }
+      h += '</div>';
+
+      // Insights
+      const insights = [];
+      if (b.model_confidence && parseFloat(b.model_confidence) >= 70) {
+        insights.push('High confidence pick (' + parseFloat(b.model_confidence).toFixed(0) + '%)');
+      }
+      if (b.model_ev && parseFloat(b.model_ev) > 8) {
+        insights.push('Strong edge: +' + parseFloat(b.model_ev).toFixed(1) + '% over market');
+      }
+      if (b.notes) insights.push(b.notes);
+      if (insights.length > 0) {
+        h += '<div class="mb-section"><h4>Analysis</h4><ul class="mb-insights">';
+        insights.forEach(n => h += '<li>' + n + '</li>');
+        h += '</ul></div>';
+      }
+
+      // Your Bet
+      h += '<div class="mb-section"><h4>Your Bet</h4><div class="mb-your-bet">';
+      const stakeDisp = (typeof DisplayFormatter !== 'undefined') ? DisplayFormatter.stake(stake) : ('$' + stake.toFixed(0));
+      h += `<div><div class="mb-field-label">Stake</div><div class="mb-field-value">${stakeDisp} (${units.toFixed(1)}u)</div></div>`;
+      if (b.book) {
+        h += `<div><div class="mb-field-label">Book</div><div class="mb-field-value">${b.book}</div></div>`;
+      }
+      h += `<div><div class="mb-field-label">Odds</div><div class="mb-field-value">${oddsStr}</div></div>`;
+      const toWin = calcToWin(b.odds, stake);
+      if (toWin > 0) {
+        h += `<div><div class="mb-field-label">To Win</div><div class="mb-field-value positive">+$${toWin.toFixed(2)}</div></div>`;
+      }
+      if (b.placed_at || b.locked_at) {
+        const ts = b.placed_at || b.locked_at;
+        h += `<div><div class="mb-field-label">Placed</div><div class="mb-field-value">${new Date(ts).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</div></div>`;
+      }
+      h += '</div></div>';
+
+      // Result
+      if (bst === 'win' || bst === 'loss' || bst === 'push') {
+        const profDollars = (parseFloat(b.profit_units) || 0) * unitSize;
+        const profUnits = parseFloat(b.profit_units) || 0;
+        h += '<div class="mb-section"><h4>Result</h4><div class="mb-grid">';
+        const resultLabel = bst === 'win' ? '\u2713 WIN' : bst === 'loss' ? '\u2717 LOSS' : 'PUSH';
+        h += `<div><div class="mb-item-label">Outcome</div><div class="mb-item-value ${bst === 'win' ? 'positive' : bst === 'loss' ? 'negative' : ''}">${resultLabel}</div></div>`;
+        h += `<div><div class="mb-item-label">Profit</div><div class="mb-item-value ${profDollars >= 0 ? 'positive' : 'negative'}">$${profDollars.toFixed(2)} (${profUnits >= 0 ? '+' : ''}${profUnits.toFixed(2)}u)</div></div>`;
+        h += '</div></div>';
+      } else {
+        h += '<div class="mb-status pending">\u25CF PENDING</div>';
+      }
+
+      return h;
+    }
+
     // ── Render Bets ──
     function renderBets() {
       const allBets = getTrackedBets();
@@ -1147,9 +1306,11 @@
         }
 
         const origIdx = allBets.findIndex(x => x.id === b.id);
+        const isExpanded = b.id && mbExpandedBetId === b.id;
+        const betIdEsc = (b.id || '').replace(/'/g, "\\'");
 
-        return `
-          <tr>
+        let rowHtml = `
+          <tr class="bet-main-row${isExpanded ? ' bet-expanded' : ''}" onclick="toggleMbBetExpand('${betIdEsc}')">
             <td>
               <div class="bet-pick">${pickDesc}</div>
               <div class="bet-game">${gameStr}${b.actual ? ' | ' + b.actual : ''}</div>
@@ -1159,9 +1320,12 @@
             <td class="col-hide-mobile">${b.units}u</td>
             <td><span class="bet-status ${b.status}">${b.status}</span></td>
             <td><span class="bet-profit ${profitClass}">${profitStr}</span></td>
-            <td><button class="bet-delete" onclick="deleteBet(${origIdx})" title="Delete">&#10005;</button></td>
-          </tr>
-        `;
+            <td><button class="bet-delete" onclick="event.stopPropagation();deleteBet(${origIdx})" title="Delete">&#10005;</button></td>
+          </tr>`;
+        if (isExpanded) {
+          rowHtml += `<tr class="bet-detail-row"><td colspan="7"><div class="mb-detail-inner">${buildMbDetail(b, unitSize)}</div></td></tr>`;
+        }
+        return rowHtml;
       }).join('');
 
       document.getElementById('bets-container').innerHTML = `
