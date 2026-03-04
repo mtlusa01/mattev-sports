@@ -37,9 +37,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add results.json ncaab_results.json nhl_results.json mlb_results.json \
-                 game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
-                 nhl_player_props.json nhl_props_results.json projections.json
+          for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
+                   game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
+                   nhl_player_props.json nhl_props_results.json projections.json; do
+            [ -f "$f" ] && git add "$f"
+          done
           git diff --staged --quiet || {
             git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
             # Rebase with -X theirs keeps CI's data files on conflict
