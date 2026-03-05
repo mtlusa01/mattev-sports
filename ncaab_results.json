@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-04T21:15:03",
+  "updated": "2026-03-04T21:30:03",
   "allTime": {
     "spreads": {
       "wins": 237,
-      "losses": 185,
+      "losses": 186,
       "pushes": 10,
-      "pct": 56.2,
-      "roi": 7.2
+      "pct": 56.0,
+      "roi": 7.0
     },
     "totals": {
       "wins": 209,
-      "losses": 220,
+      "losses": 221,
       "pushes": 3,
-      "pct": 48.7,
-      "roi": -7.0
+      "pct": 48.6,
+      "roi": -7.2
     },
     "moneylines": {
-      "wins": 279,
+      "wins": 280,
       "losses": 153,
       "pushes": 0,
-      "pct": 64.6,
-      "roi": 23.3
+      "pct": 64.7,
+      "roi": 23.5
     },
     "best_bets": {
       "wins": 44,
@@ -35,24 +35,24 @@
       "date": "2026-03-04",
       "spreads": {
         "wins": 12,
-        "losses": 11,
+        "losses": 12,
         "pushes": 0,
-        "record": "12-11",
-        "pct": 52.2
+        "record": "12-12",
+        "pct": 50.0
       },
       "totals": {
         "wins": 12,
-        "losses": 11,
+        "losses": 12,
         "pushes": 0,
-        "record": "12-11",
-        "pct": 52.2
+        "record": "12-12",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 13,
+        "wins": 14,
         "losses": 10,
         "pushes": 0,
-        "record": "13-10",
-        "pct": 56.5
+        "record": "14-10",
+        "pct": 58.3
       },
       "best_bets": {
         "wins": 4,
@@ -392,6 +392,34 @@
         {
           "date": "2026-03-04",
           "type": "spread",
+          "game": "SBU @ GW",
+          "pick": "GW -9.5",
+          "result": "82-91",
+          "hit": false,
+          "confidence": 76
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "SBU @ GW",
+          "pick": "UNDER 158.0",
+          "result": "82-91",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "SBU @ GW",
+          "pick": "GW",
+          "result": "82-91",
+          "hit": true,
+          "confidence": 87,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
           "game": "MILW @ DETM",
           "pick": "DETM -2.0",
           "result": "63-84",
@@ -603,8 +631,7 @@
           "pick": "RMU",
           "result": "53-68",
           "hit": true,
-          "confidence": 79,
-          "best_bet": true
+          "confidence": 79
         },
         {
           "date": "2026-03-04",
