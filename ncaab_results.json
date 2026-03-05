@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-04T21:45:03",
+  "updated": "2026-03-04T22:00:03",
   "allTime": {
     "spreads": {
-      "wins": 238,
-      "losses": 187,
+      "wins": 239,
+      "losses": 188,
       "pushes": 10,
       "pct": 56.0,
       "roi": 6.9
     },
     "totals": {
-      "wins": 211,
-      "losses": 221,
+      "wins": 212,
+      "losses": 222,
       "pushes": 3,
       "pct": 48.8,
-      "roi": -6.8
+      "roi": -6.7
     },
     "moneylines": {
-      "wins": 282,
-      "losses": 153,
+      "wins": 283,
+      "losses": 154,
       "pushes": 0,
       "pct": 64.8,
-      "roi": 23.8
+      "roi": 23.6
     },
     "best_bets": {
-      "wins": 44,
-      "losses": 11,
+      "wins": 43,
+      "losses": 12,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 78.2,
+      "roi": 49.3
     }
   },
   "days": [
     {
       "date": "2026-03-04",
       "spreads": {
-        "wins": 13,
-        "losses": 13,
+        "wins": 14,
+        "losses": 14,
         "pushes": 0,
-        "record": "13-13",
+        "record": "14-14",
         "pct": 50.0
       },
       "totals": {
-        "wins": 14,
-        "losses": 12,
+        "wins": 15,
+        "losses": 13,
         "pushes": 0,
-        "record": "14-12",
-        "pct": 53.8
+        "record": "15-13",
+        "pct": 53.6
       },
       "moneylines": {
-        "wins": 16,
-        "losses": 10,
+        "wins": 17,
+        "losses": 11,
         "pushes": 0,
-        "record": "16-10",
-        "pct": 61.5
+        "record": "17-11",
+        "pct": 60.7
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -177,8 +177,7 @@
           "pick": "JMU -6.5",
           "result": "72-87",
           "hit": true,
-          "confidence": 82,
-          "best_bet": true
+          "confidence": 82
         },
         {
           "date": "2026-03-04",
@@ -224,8 +223,7 @@
           "pick": "IU",
           "result": "47-77",
           "hit": true,
-          "confidence": 79,
-          "best_bet": true
+          "confidence": 79
         },
         {
           "date": "2026-03-04",
@@ -768,6 +766,62 @@
           "result": "85-93",
           "hit": true,
           "confidence": 69
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "GWEB @ UPST",
+          "pick": "GWEB +15.0",
+          "result": "65-64",
+          "hit": true,
+          "confidence": 68
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "GWEB @ UPST",
+          "pick": "OVER 154.5",
+          "result": "65-64",
+          "hit": false,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "GWEB @ UPST",
+          "pick": "UPST",
+          "result": "65-64",
+          "hit": false,
+          "confidence": 88,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "LUC @ SLU",
+          "pick": "SLU -22.5",
+          "result": "65-79",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "LUC @ SLU",
+          "pick": "UNDER 155.5",
+          "result": "65-79",
+          "hit": true,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "LUC @ SLU",
+          "pick": "SLU",
+          "result": "65-79",
+          "hit": true,
+          "confidence": 97,
+          "best_bet": true
         }
       ]
     },
