@@ -2254,6 +2254,7 @@
 
         // Update the active game data and re-render
         updateActiveGameData();
+        updateCurrentDateHeader();
         updateTimestamp();
         updateStatsBar();
         if (updateHash !== false) updateLocationHash();
@@ -2375,6 +2376,31 @@
             month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
+      }
+    }
+
+    function updateCurrentDateHeader() {
+      const el = document.getElementById('current-date');
+      const d = new Date(selectedDate + 'T12:00:00');
+      const dateStr = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+      if (currentSport === 'nba') {
+        // NBA: show props count when on props view, games count when on games view
+        const isGameView = currentView === 'game-projections';
+        if (isGameView) {
+          const games = gameProjections.filter(g => g.game_date === selectedDate);
+          el.textContent = dateStr + ' \u00B7 ' + games.length + ' games';
+        } else {
+          const activeProps = projections._stale ? [] : projections;
+          el.textContent = dateStr + ' \u00B7 ' + activeProps.length + ' projections';
+        }
+      } else {
+        // NHL/NCAAB/MLB: show game count
+        const games = getActiveGameProjections().filter(g => {
+          const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+          return gd === selectedDate;
+        });
+        el.textContent = dateStr + ' \u00B7 ' + games.length + ' games';
       }
     }
 
@@ -5225,6 +5251,7 @@
       if (doUpdateHash !== false) {
         updateLocationHash();
       }
+      updateCurrentDateHeader();
       updateStatsBar();
       render();
     }
@@ -5530,6 +5557,7 @@
       if (selectedDate === today) {
         // Going back to today — use current data
         updateActiveGameData();
+        updateCurrentDateHeader();
         updateTimestamp();
         updateStatsBar();
         render();
@@ -5542,6 +5570,7 @@
       await loadHistoricalGames(selectedDate);
       isLoadingHistory = false;
       updateActiveGameData();
+      updateCurrentDateHeader();
       updateTimestamp();
       updateStatsBar();
       render();
@@ -5552,6 +5581,7 @@
       // Reload current projections for all sports (including player props)
       await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadNcaabGameProjections(), loadMlbGameProjections(), loadProjections(), loadNhlProjections()]);
       updateActiveGameData();
+      updateCurrentDateHeader();
       updateTimestamp();
       updateStatsBar();
       render();
@@ -5786,6 +5816,7 @@
 
       if (dateStr === today) {
         updateActiveGameData();
+        updateCurrentDateHeader();
         updateTimestamp();
         updateStatsBar();
         render();
@@ -5797,6 +5828,7 @@
       await loadHistoricalGames(selectedDate);
       isLoadingHistory = false;
       updateActiveGameData();
+      updateCurrentDateHeader();
       updateTimestamp();
       updateStatsBar();
       render();
@@ -6633,7 +6665,7 @@
         // Load locked recommendations for NBA games (await before rendering)
         await loadLockedRecommendations('nba', 'game');
 
-        if (currentSport === 'nba') updateStatsBar();
+        if (currentSport === 'nba') { updateCurrentDateHeader(); updateStatsBar(); }
         if (currentView === 'game-projections' && currentSport === 'nba') renderGameProjections();
         else if (currentSport === 'nba') render(); // re-render props with game pills + matchup info
         autoGradeTrackedBets();
@@ -6704,6 +6736,7 @@
 
         if (currentSport === 'nhl') {
           updateActiveGameData();
+          updateCurrentDateHeader();
           updateTimestamp();
           updateStatsBar();
           if (currentView === 'game-projections') renderGameProjections();
@@ -6753,6 +6786,7 @@
           await loadLockedRecommendations('ncaab', 'game');
 
           updateActiveGameData();
+          updateCurrentDateHeader();
           updateTimestamp();
           updateStatsBar();
           if (currentView === 'game-projections') renderGameProjections();
@@ -6800,6 +6834,7 @@
           await loadLockedRecommendations('mlb', 'game');
 
           updateActiveGameData();
+          updateCurrentDateHeader();
           updateTimestamp();
           updateStatsBar();
           if (currentView === 'game-projections') renderGameProjections();
@@ -6826,9 +6861,11 @@
           projections._stale = true;
           topPicks = [];
           recommendations = null;
-          document.getElementById('current-date').textContent = 'No games scheduled today';
-          var _nut = document.getElementById('nav-updated-time');
-          if (_nut) _nut.textContent = '';
+          if (currentSport === 'nba') {
+            document.getElementById('current-date').textContent = 'No games scheduled today';
+            var _nut = document.getElementById('nav-updated-time');
+            if (_nut) _nut.textContent = '';
+          }
           updateStatsBar();
           render();
           return;
@@ -6852,11 +6889,8 @@
           }
         }
 
-        if (data.date) {
-          const d = new Date(data.date + 'T12:00:00');
-          document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', {
-            weekday: 'long', month: 'short', day: 'numeric'
-          }) + ' \u00B7 ' + projections.length + ' projections';
+        if (data.date && currentSport === 'nba') {
+          updateCurrentDateHeader();
         }
         if (data.updated) {
           projections._updated = data.updated;
