@@ -1,43 +1,6 @@
 {
   "days": [
     {
-      "date": "2026-03-03",
-      "graded_at": "2026-03-04T20:00:00",
-      "total_props_graded": 2,
-      "overall": {
-        "wins": 2,
-        "losses": 0,
-        "pushes": 0,
-        "total": 2,
-        "record": "2-0-0",
-        "win_pct": 100.0
-      },
-      "picks": [
-        {
-          "player": "Jalen Duren",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 31.5,
-          "actual": 39.0,
-          "result": "WIN",
-          "confidence": 74.0,
-          "ev": 0,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Saddiq Bey",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 22.5,
-          "actual": 26.0,
-          "result": "WIN",
-          "confidence": 74.0,
-          "ev": 0,
-          "edge": "GOOD"
-        }
-      ]
-    },
-    {
       "date": "2026-02-10",
       "graded_at": "2026-02-11T07:26:50",
       "total_props_graded": 69,
@@ -1874,392 +1837,138 @@
           "error": 16.4
         }
       ]
-    },
-    {
-      "date": "2026-03-04",
-      "graded_at": "2026-03-05T05:29:01",
-      "total_props_graded": 26,
-      "overall": {
-        "wins": 13,
-        "losses": 13,
-        "pushes": 0,
-        "total": 26,
-        "record": "13-13-0",
-        "win_pct": 50.0
-      },
-      "by_stat_type": {
-        "AST": {
-          "wins": 2,
-          "losses": 5,
-          "pushes": 0
-        },
-        "REB": {
-          "wins": 1,
-          "losses": 5,
-          "pushes": 0
-        },
-        "PRA": {
-          "wins": 6,
-          "losses": 0,
-          "pushes": 0
-        },
-        "PTS": {
-          "wins": 4,
-          "losses": 3,
-          "pushes": 0
-        }
-      },
-      "picks": [
-        {
-          "player": "Nickeil Alexander-Walker",
-          "prop": "AST",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 3.5,
-          "projection": 4.6,
-          "actual": 2.0,
-          "result": "LOSS",
-          "confidence": 62.0,
-          "ev": 13.2,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Myles Turner",
-          "prop": "REB",
-          "team": "MIL",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 5.3,
-          "actual": 3.0,
-          "result": "LOSS",
-          "confidence": 63.1,
-          "ev": 9.5,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Nickeil Alexander-Walker",
-          "prop": "PRA",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 25.5,
-          "projection": 28.4,
-          "actual": 26.0,
-          "result": "WIN",
-          "confidence": 55.5,
-          "ev": 5.5,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Giannis Antetokounmpo",
-          "prop": "PTS",
-          "team": "MIL",
-          "direction": "UNDER",
-          "line": 26.5,
-          "projection": 24.6,
-          "actual": 24.0,
-          "result": "WIN",
-          "confidence": 56.1,
-          "ev": 4.0,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Giannis Antetokounmpo",
-          "prop": "PRA",
-          "team": "MIL",
-          "direction": "UNDER",
-          "line": 41.5,
-          "projection": 40.8,
-          "actual": 33.0,
-          "result": "WIN",
-          "confidence": 54.3,
-          "ev": 4.0,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Onyeka Okongwu",
-          "prop": "PRA",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 24.5,
-          "projection": 27.0,
-          "actual": 30.0,
-          "result": "WIN",
-          "confidence": 54.1,
-          "ev": 2.4,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Dyson Daniels",
-          "prop": "REB",
-          "team": "ATL",
-          "direction": "UNDER",
-          "line": 6.5,
-          "projection": 6.1,
-          "actual": 10.0,
-          "result": "LOSS",
-          "confidence": 57.6,
-          "ev": 1.9,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Ryan Rollins",
-          "prop": "PTS",
-          "team": "MIL",
-          "direction": "OVER",
-          "line": 16.5,
-          "projection": 16.5,
-          "actual": 13.0,
-          "result": "LOSS",
-          "confidence": 55.2,
-          "ev": 1.2,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Onyeka Okongwu",
-          "prop": "PTS",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 14.5,
-          "projection": 15.0,
-          "actual": 21.0,
-          "result": "WIN",
-          "confidence": 54.5,
-          "ev": 0.8,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Jalen Johnson",
-          "prop": "PTS",
-          "team": "ATL",
-          "direction": "UNDER",
-          "line": 21.5,
-          "projection": 19.3,
-          "actual": 20.0,
-          "result": "WIN",
-          "confidence": 55.4,
-          "ev": 0.4,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Dyson Daniels",
-          "prop": "AST",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.6,
-          "actual": 3.0,
-          "result": "LOSS",
-          "confidence": 52.6,
-          "ev": 0.1,
-          "edge": "LEAN"
-        },
-        {
-          "player": "Nickeil Alexander-Walker",
-          "prop": "PTS",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 18.5,
-          "projection": 19.2,
-          "actual": 23.0,
-          "result": "WIN",
-          "confidence": 51.7,
-          "ev": -0.8,
-          "edge": NaN
-        },
-        {
-          "player": "Giannis Antetokounmpo",
-          "prop": "REB",
-          "team": "MIL",
-          "direction": "OVER",
-          "line": 9.5,
-          "projection": 11.0,
-          "actual": 5.0,
-          "result": "LOSS",
-          "confidence": 56.1,
-          "ev": -1.3,
-          "edge": NaN
-        },
-        {
-          "player": "Jalen Johnson",
-          "prop": "AST",
-          "team": "ATL",
-          "direction": "UNDER",
-          "line": 7.5,
-          "projection": 6.8,
-          "actual": 9.0,
-          "result": "LOSS",
-          "confidence": 52.7,
-          "ev": -1.5,
-          "edge": NaN
-        },
-        {
-          "player": "Ryan Rollins",
-          "prop": "REB",
-          "team": "MIL",
-          "direction": "UNDER",
-          "line": 4.5,
-          "projection": 4.2,
-          "actual": 8.0,
-          "result": "LOSS",
-          "confidence": 51.0,
-          "ev": -1.7,
-          "edge": NaN
-        },
-        {
-          "player": "Jalen Johnson",
-          "prop": "REB",
-          "team": "ATL",
-          "direction": "UNDER",
-          "line": 10.5,
-          "projection": 10.0,
-          "actual": 5.0,
-          "result": "WIN",
-          "confidence": 53.8,
-          "ev": -1.7,
-          "edge": NaN
-        },
-        {
-          "player": "Jalen Johnson",
-          "prop": "PRA",
-          "team": "ATL",
-          "direction": "UNDER",
-          "line": 39.5,
-          "projection": 36.9,
-          "actual": 34.0,
-          "result": "WIN",
-          "confidence": 53.1,
-          "ev": -1.9,
-          "edge": NaN
-        },
-        {
-          "player": "Onyeka Okongwu",
-          "prop": "REB",
-          "team": "ATL",
-          "direction": "UNDER",
-          "line": 7.5,
-          "projection": 7.0,
-          "actual": 8.0,
-          "result": "LOSS",
-          "confidence": 53.2,
-          "ev": -2.9,
-          "edge": NaN
-        },
-        {
-          "player": "Dyson Daniels",
-          "prop": "PRA",
-          "team": "ATL",
-          "direction": "OVER",
-          "line": 22.5,
-          "projection": 22.7,
-          "actual": 27.0,
-          "result": "WIN",
-          "confidence": 51.9,
-          "ev": -3.0,
-          "edge": NaN
-        },
-        {
-          "player": "Ryan Rollins",
-          "prop": "PRA",
-          "team": "MIL",
-          "direction": "OVER",
-          "line": 27.5,
-          "projection": 27.8,
-          "actual": 33.0,
-          "result": "WIN",
-          "confidence": 51.5,
-          "ev": -3.7,
-          "edge": NaN
-        },
-        {
-          "player": "Giannis Antetokounmpo",
-          "prop": "AST",
-          "team": "MIL",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.9,
-          "actual": 4.0,
-          "result": "LOSS",
-          "confidence": 48.7,
-          "ev": -6.2,
-          "edge": NaN
-        },
-        {
-          "player": "Ryan Rollins",
-          "prop": "AST",
-          "team": "MIL",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.7,
-          "actual": 12.0,
-          "result": "WIN",
-          "confidence": 50.6,
-          "ev": -9.8,
-          "edge": NaN
-        },
-        {
-          "player": "Kon Knueppel",
-          "prop": "AST",
-          "team": "CHA",
-          "opponent": "BOS",
-          "direction": "UNDER",
-          "line": 3.5,
-          "projection": 3.4,
-          "actual": 0.0,
-          "result": "WIN",
-          "confidence": 60.705,
-          "ev": 3.3,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Karl-Anthony Towns",
-          "prop": "PTS",
-          "team": "NYK",
-          "opponent": "OKC",
-          "direction": "OVER",
-          "line": 18.5,
-          "projection": 19.2,
-          "actual": 17.0,
-          "result": "LOSS",
-          "confidence": 53.3,
-          "ev": 3.6,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Cason Wallace",
-          "prop": "AST",
-          "team": "OKC",
-          "opponent": "NYK",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 4.7,
-          "actual": 3.0,
-          "result": "LOSS",
-          "confidence": 57.6,
-          "ev": 3.3,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Tyrese Maxey",
-          "prop": "PTS",
-          "team": "PHI",
-          "opponent": "UTA",
-          "direction": "OVER",
-          "line": 29.5,
-          "projection": 29.7,
-          "actual": 25.0,
-          "result": "LOSS",
-          "confidence": 52.5,
-          "ev": 0.6,
-          "edge": "LEAN"
-        }
-      ]
     }
   ],
   "cumulative": {
-    "wins": 159,
-    "losses": 164,
-    "pushes": 0,
-    "total": 323,
-    "win_pct": 49.2
+    "total_days": 4,
+    "total_props_graded": 295,
+    "overall": {
+      "wins": 144,
+      "losses": 151,
+      "pushes": 0,
+      "total": 295,
+      "win_pct": 48.8,
+      "record": "144-151-0"
+    },
+    "by_stat_type": {
+      "PTS": {
+        "wins": 34,
+        "losses": 36,
+        "pushes": 0,
+        "total": 70,
+        "win_pct": 48.6,
+        "record": "34-36-0"
+      },
+      "REB": {
+        "wins": 48,
+        "losses": 37,
+        "pushes": 0,
+        "total": 85,
+        "win_pct": 56.5,
+        "record": "48-37-0"
+      },
+      "AST": {
+        "wins": 32,
+        "losses": 35,
+        "pushes": 0,
+        "total": 67,
+        "win_pct": 47.8,
+        "record": "32-35-0"
+      },
+      "PRA": {
+        "wins": 30,
+        "losses": 43,
+        "pushes": 0,
+        "total": 73,
+        "win_pct": 41.1,
+        "record": "30-43-0"
+      }
+    },
+    "by_confidence_bucket": {
+      "50-52": {
+        "wins": 37,
+        "losses": 32,
+        "pushes": 0,
+        "total": 69,
+        "win_pct": 53.6,
+        "record": "37-32-0"
+      },
+      "52-55": {
+        "wins": 48,
+        "losses": 41,
+        "pushes": 0,
+        "total": 89,
+        "win_pct": 53.9,
+        "record": "48-41-0"
+      },
+      "55-60": {
+        "wins": 19,
+        "losses": 23,
+        "pushes": 0,
+        "total": 42,
+        "win_pct": 45.2,
+        "record": "19-23-0"
+      },
+      "60-65": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "total": 3,
+        "win_pct": 66.7,
+        "record": "2-1-0"
+      }
+    },
+    "by_edge_category": {
+      "STRONG": {
+        "wins": 13,
+        "losses": 24,
+        "pushes": 0,
+        "total": 37,
+        "win_pct": 35.1,
+        "record": "13-24-0"
+      },
+      "GOOD": {
+        "wins": 13,
+        "losses": 14,
+        "pushes": 0,
+        "total": 27,
+        "win_pct": 48.1,
+        "record": "13-14-0"
+      },
+      "FAIR": {
+        "wins": 18,
+        "losses": 12,
+        "pushes": 0,
+        "total": 30,
+        "win_pct": 60.0,
+        "record": "18-12-0"
+      },
+      "AVOID": {
+        "wins": 100,
+        "losses": 101,
+        "pushes": 0,
+        "total": 201,
+        "win_pct": 49.8,
+        "record": "100-101-0"
+      }
+    },
+    "by_was_filtered": {
+      "other_props": {
+        "wins": 134,
+        "losses": 136,
+        "pushes": 0,
+        "total": 270,
+        "win_pct": 49.6,
+        "record": "134-136-0"
+      },
+      "best_bets": {
+        "wins": 10,
+        "losses": 15,
+        "pushes": 0,
+        "total": 25,
+        "win_pct": 40.0,
+        "record": "10-15-0"
+      }
+    }
   }
 }

@@ -1158,27 +1158,183 @@
           "edge": "FAIR"
         }
       ]
+    },
+    {
+      "date": "2026-03-05",
+      "wins": 6,
+      "losses": 2,
+      "pushes": 0,
+      "total": 8,
+      "pct": 75.0,
+      "by_type": {
+        "ASSISTS": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0
+        },
+        "SHOTS": {
+          "wins": 3,
+          "losses": 0,
+          "pushes": 0
+        },
+        "POINTS": {
+          "wins": 3,
+          "losses": 0,
+          "pushes": 0
+        }
+      },
+      "by_tier": {
+        "STRONG": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0
+        },
+        "GOOD": {
+          "wins": 6,
+          "losses": 0,
+          "pushes": 0
+        },
+        "FAIR": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0
+        }
+      },
+      "picks": [
+        {
+          "player": "Jack Hughes",
+          "team": "NJD",
+          "opponent": "TOR",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.03,
+          "actual": 0.0,
+          "result": "LOSS",
+          "confidence": 57.5,
+          "ev": 5.4,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Connor Brown",
+          "team": "NJD",
+          "opponent": "TOR",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 1.5,
+          "projection": 1.25,
+          "actual": 0.0,
+          "result": "WIN",
+          "confidence": 56.6,
+          "ev": 3.71,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Nico Hischier",
+          "team": "NJD",
+          "opponent": "TOR",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.23,
+          "actual": 2.0,
+          "result": "WIN",
+          "confidence": 64.5,
+          "ev": 4.26,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Shea Theodore",
+          "team": "VGK",
+          "opponent": "DET",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 1.5,
+          "projection": 1.26,
+          "actual": 0.0,
+          "result": "WIN",
+          "confidence": 55.3,
+          "ev": 4.28,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Mitch Marner",
+          "team": "VGK",
+          "opponent": "DET",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 2.5,
+          "projection": 1.98,
+          "actual": 0.0,
+          "result": "WIN",
+          "confidence": 62.8,
+          "ev": 2.03,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Timo Meier",
+          "team": "NJD",
+          "opponent": "TOR",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.89,
+          "actual": 1.0,
+          "result": "WIN",
+          "confidence": 55.2,
+          "ev": 3.15,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Pavel Dorofeyev",
+          "team": "VGK",
+          "opponent": "DET",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.91,
+          "actual": 1.0,
+          "result": "WIN",
+          "confidence": 55.3,
+          "ev": 3.47,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Tomas Hertl",
+          "team": "VGK",
+          "opponent": "DET",
+          "prop": "ASSISTS",
+          "direction": "UNDER",
+          "line": 0.5,
+          "projection": 0.32,
+          "actual": 1.0,
+          "result": "LOSS",
+          "confidence": 63.7,
+          "ev": 0.03,
+          "edge": "FAIR"
+        }
+      ]
     }
   ],
   "all_time": {
-    "wins": 47,
-    "losses": 48,
+    "wins": 53,
+    "losses": 50,
     "pushes": 0,
-    "pct": 49.5,
+    "pct": 51.5,
     "by_type": {
       "POINTS": {
-        "wins": 44,
-        "losses": 30,
+        "wins": 28,
+        "losses": 15,
         "pushes": 0
       },
       "ASSISTS": {
-        "wins": 24,
-        "losses": 12,
+        "wins": 12,
+        "losses": 10,
         "pushes": 0
       },
       "SHOTS": {
-        "wins": 14,
-        "losses": 50,
+        "wins": 13,
+        "losses": 25,
         "pushes": 0
       }
     }
