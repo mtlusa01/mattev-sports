@@ -528,19 +528,21 @@ jobs:
                   except Exception:
                       pass
 
-          # Extract props from projections.json
+          # Store full projections.json (with date field for dashboard lookup)
           if os.path.exists('projections.json'):
               try:
                   pdata = json.load(open('projections.json'))
-                  archive['player_props'] = pdata.get('projections', [])
+                  archive['player_props'] = pdata  # full object: {date, projections, ...}
                   archive['all_props'] = pdata.get('top_picks', [])
               except Exception:
                   pass
 
-          archive.setdefault('player_props', [])
+          archive.setdefault('player_props', {})
           archive.setdefault('all_props', [])
+          pp = archive.get('player_props', {})
+          pp_count = len(pp.get('projections', [])) if isinstance(pp, dict) else len(pp) if isinstance(pp, list) else 0
           archive['summary'] = {
-              'total_props': len(archive.get('player_props', [])),
+              'total_props': pp_count,
               'total_all_props': len(archive.get('all_props', [])),
               'total_games': len(archive.get('game_projections', {}).get('games', [])),
               'total_nhl_games': len(archive.get('nhl_game_projections', {}).get('games', [])),

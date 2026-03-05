@@ -2538,17 +2538,19 @@
     const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
     const NHL_PLAYER_PROPS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_player_props.json';
     const NHL_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_results.json';
+    const NBA_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/all_props_results.json';
     const NBA_PLAYER_PROJ_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nba_player_projections.json';
 
     // ── Historical Results ──
     let historicalResults = null;
     let nhlHistoricalResults = null;
     let nhlPropsHistoricalResults = null;
+    let nbaPropsHistoricalResults = null;
     let ncaabHistoricalResults = null;
     let mlbHistoricalResults = null;
 
     async function loadHistoricalResults(sport) {
-      const url = sport === 'nhl-props' ? NHL_PROPS_RESULTS_URL : sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : sport === 'mlb' ? MLB_RESULTS_URL : RESULTS_URL;
+      const url = sport === 'nba-props' ? NBA_PROPS_RESULTS_URL : sport === 'nhl-props' ? NHL_PROPS_RESULTS_URL : sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : sport === 'mlb' ? MLB_RESULTS_URL : RESULTS_URL;
       try {
         const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
@@ -2559,6 +2561,7 @@
           data.days = data.days.filter(day => day.date >= RESULTS_CUTOFF);
         }
         if (sport === 'ncaab') ncaabHistoricalResults = data;
+        else if (sport === 'nba-props') nbaPropsHistoricalResults = data;
         else if (sport === 'nhl-props') nhlPropsHistoricalResults = data;
         else if (sport === 'nhl') nhlHistoricalResults = data;
         else if (sport === 'mlb') mlbHistoricalResults = data;
@@ -5331,6 +5334,7 @@
         else if (games.length > 0 && !historicalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nba');
         if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
         else if (nhlGames.length > 0 && !nhlHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nhl');
+        if (!nbaPropsHistoricalResults) await loadHistoricalResults('nba-props');
         if (!nhlPropsHistoricalResults) await loadHistoricalResults('nhl-props');
         else if (archiveNhlProps.length > 0 && !nhlPropsHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nhl-props');
         if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
@@ -5352,11 +5356,9 @@
           mlbGames = mergeResultsIntoProjections(mlbGames, mlbHistoricalResults, date, 'mlb');
         }
 
-        // Merge grading results into archive props (also adds graded props missing from archive)
-        if (historicalResults) {
-          archiveProps = mergeResultsIntoProps(archiveProps, historicalResults, date);
-          // For historical dates, only show props that have been graded
-          archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
+        // Merge NBA props grading results from all_props_results.json
+        if (nbaPropsHistoricalResults) {
+          archiveProps = mergeNhlResultsIntoProps(archiveProps, nbaPropsHistoricalResults, date);
         }
 
         // Merge NHL props grading results from nhl_props_results.json
@@ -5378,10 +5380,7 @@
           if (mlbGames.some(g => !g.spread_result && !g.total_result && !g.ml_result)) {
             mergeResultsIntoProjections(mlbGames, embeddedResults, date, 'mlb');
           }
-          if (archiveProps.length === 0) {
-            archiveProps = mergeResultsIntoProps(archiveProps, embeddedResults, date);
-            archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
-          }
+          // NBA props are now handled via all_props_results.json above
         }
 
         // Final client-side grading pass for any remaining gaps
@@ -5414,6 +5413,9 @@
         if (!mlbHistoricalResults) {
           await loadHistoricalResults('mlb');
         }
+        if (!nbaPropsHistoricalResults) {
+          await loadHistoricalResults('nba-props');
+        }
         if (!nhlPropsHistoricalResults) {
           await loadHistoricalResults('nhl-props');
         }
@@ -5421,7 +5423,7 @@
         const nhlGames = transformResultsToGames(nhlHistoricalResults, date);
         const ncaabGames = transformResultsToGames(ncaabHistoricalResults, date);
         const mlbGames2 = transformResultsToGames(mlbHistoricalResults, date);
-        const fallbackProps = transformResultsToProps(historicalResults, date);
+        const fallbackProps = transformNhlResultsToProps(nbaPropsHistoricalResults, date);
         const fallbackNhlProps = transformNhlResultsToProps(nhlPropsHistoricalResults, date);
         historicalGamesCache[date] = nbaGames;
         historicalNhlCache[date] = nhlGames;
@@ -5692,14 +5694,16 @@
       if (calOpen) {
         // Eagerly load results data so calendar dots appear
         const needsNba = !historicalResults;
+        const needsNbaProps = !nbaPropsHistoricalResults;
         const needsNhl = !nhlHistoricalResults;
         const needsNhlProps = !nhlPropsHistoricalResults;
         const needsNcaab = !ncaabHistoricalResults;
         const needsMlb = !mlbHistoricalResults;
-        if (needsNba || needsNhl || needsNhlProps || needsNcaab || needsMlb) {
+        if (needsNba || needsNbaProps || needsNhl || needsNhlProps || needsNcaab || needsMlb) {
           renderCalendarGrid(); // show grid immediately (dots will fill in)
           const loads = [];
           if (needsNba) loads.push(loadHistoricalResults('nba'));
+          if (needsNbaProps) loads.push(loadHistoricalResults('nba-props'));
           if (needsNhl) loads.push(loadHistoricalResults('nhl'));
           if (needsNhlProps) loads.push(loadHistoricalResults('nhl-props'));
           if (needsNcaab) loads.push(loadHistoricalResults('ncaab'));
@@ -6766,9 +6770,9 @@
 
         // Merge grading results into props so W/L badges render
         if (projections.length > 0) {
-          if (!historicalResults) await loadHistoricalResults('nba');
-          if (historicalResults) {
-            mergeResultsIntoProps(projections, historicalResults, dataDate || today);
+          if (!nbaPropsHistoricalResults) await loadHistoricalResults('nba-props');
+          if (nbaPropsHistoricalResults) {
+            mergeNhlResultsIntoProps(projections, nbaPropsHistoricalResults, dataDate || today);
           }
         }
 
