@@ -4500,6 +4500,16 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
+                ${p.projection_source === 'sim' ? `
+                <div class="detail-card">
+                  <div class="dc-label">Projection Source</div>
+                  <div style="font-size:12px;color:#b0bec5;">
+                    <span style="color:#00e5ff;">SIM</span> ${p.sim_projection}
+                    <span style="color:#546e7a;margin:0 4px;">|</span>
+                    <span style="color:#78909c;">IND</span> ${p.independent_projection}
+                    ${p.projection_delta != null ? `<span style="color:${p.projection_delta >= 0 ? '#4caf50' : '#ef5350'};margin-left:4px;">(${p.projection_delta >= 0 ? '+' : ''}${p.projection_delta})</span>` : ''}
+                  </div>
+                </div>` : ''}
                 ${(p.redistribution_boost > 0 || p.opp_boost_val > 0) ? `
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;padding:0 4px;">
                   ${p.redistribution_boost > 0 ? `<span class="boost-badge" style="font-size:10px">&#9650; +${p.redistribution_boost.toFixed(1)} ${p.boost_source ? 'w/o ' + p.boost_source : 'boost'}${p.boost_method === 'proportional' ? ' (est)' : ''}</span>` : ''}
