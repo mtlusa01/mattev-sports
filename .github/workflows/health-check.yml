@@ -1,0 +1,76 @@
+name: Health Check (11 AM EST)
+
+on:
+  schedule:
+    - cron: '0 16 * * *'   # 11:00 AM EST
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write       # needed to trigger other workflows
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check projection freshness
+        id: check
+        run: |
+          python3 << 'HEALTH'
+          import json, os
+          from datetime import datetime, timezone, timedelta
+
+          # EST = UTC-5
+          est = timezone(timedelta(hours=-5))
+          today = datetime.now(est).strftime("%Y-%m-%d")
+
+          files = {
+              "game_projections.json": "NBA",
+              "nhl_game_projections.json": "NHL",
+              "ncaab_projections.json": "NCAAB",
+              "mlb_game_projections.json": "MLB",
+          }
+
+          stale = []
+          for fname, sport in files.items():
+              if not os.path.exists(fname):
+                  stale.append(f"{sport}: {fname} MISSING")
+                  continue
+              try:
+                  data = json.load(open(fname))
+                  fdate = data.get("date", "")
+                  games = len(data.get("games", data.get("predictions", [])))
+                  if fdate != today:
+                      stale.append(f"{sport}: date={fdate}, expected={today}")
+                  elif games == 0:
+                      stale.append(f"{sport}: 0 games")
+                  else:
+                      print(f"OK: {sport} — {games} games for {fdate}")
+              except Exception as e:
+                  stale.append(f"{sport}: error reading {fname} — {e}")
+
+          if stale:
+              print("\nSTALE FILES DETECTED:")
+              for s in stale:
+                  print(f"  {s}")
+              # Signal to trigger regeneration
+              with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a") as f:
+                  f.write("needs_regen=true\n")
+          else:
+              print("\nAll projections current.")
+              with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a") as f:
+                  f.write("needs_regen=false\n")
+          HEALTH
+
+      - name: Trigger regeneration if needed
+        if: steps.check.outputs.needs_regen == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          echo "Triggering daily-predictions workflow..."
+          gh workflow run daily-predictions.yml
+          echo "Triggered. Predictions will regenerate shortly."

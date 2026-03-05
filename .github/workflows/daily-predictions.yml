@@ -2,9 +2,12 @@ name: Daily Sports Predictions
 
 on:
   schedule:
-    - cron: '0 15 * * *'   # 10:00 AM EST — pre-game predictions
-    - cron: '0 5 * * *'    # 12:00 AM EST — post-game grading
+    - cron: '0 8 * * *'    # 3:00 AM EST — early morning predictions
   workflow_dispatch:         # manual trigger
+
+concurrency:
+  group: daily-predictions
+  cancel-in-progress: false
 
 jobs:
   # ─── Job 1: NBA game predictions + player props ───────────────────
@@ -52,11 +55,17 @@ jobs:
           key: nba-db-${{ github.run_id }}
           restore-keys: nba-db-
 
-      - name: Run NBA daily pipeline
+      - name: Run NBA daily pipeline (with retry)
+        continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../nba-predictor
-        run: python daily_run.py
+        run: |
+          for attempt in 1 2 3; do
+            python daily_run.py && break
+            echo "Attempt $attempt failed, retrying in $((attempt * 30))s..."
+            sleep $((attempt * 30))
+          done
 
       - name: Export game_projections.json
         working-directory: ../nba-predictor
@@ -176,12 +185,17 @@ jobs:
         working-directory: ../ncaab-predictor
         run: python get_data.py
 
-      - name: Fetch NCAAB odds
+      - name: Fetch NCAAB odds (with retry)
         continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../ncaab-predictor
-        run: python fetch_odds.py
+        run: |
+          for attempt in 1 2 3; do
+            python fetch_odds.py && break
+            echo "Attempt $attempt failed, retrying in $((attempt * 30))s..."
+            sleep $((attempt * 30))
+          done
 
       - name: Run NCAAB predictions
         working-directory: ../ncaab-predictor
@@ -205,6 +219,7 @@ jobs:
         run: |
           [ -f ../ncaab-predictor/ncaab_projections.json ] && cp ../ncaab-predictor/ncaab_projections.json . && echo "Copied ncaab_projections.json" || true
           [ -f ../ncaab-predictor/ncaab_results.json ] && cp ../ncaab-predictor/ncaab_results.json . && echo "Copied ncaab_results.json" || true
+          [ -f ../ncaab-predictor/ncaab_recommended.json ] && cp ../ncaab-predictor/ncaab_recommended.json . && echo "Copied ncaab_recommended.json" || true
 
       - name: Save ncaab_data.db to cache
         uses: actions/cache/save@v4
@@ -268,11 +283,17 @@ jobs:
             echo "Model found in cache — skipping training"
           fi
 
-      - name: Run NHL predictions
+      - name: Run NHL predictions (with retry)
+        continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../nhl-predictor
-        run: python nhl_model.py --today --json nhl_game_projections.json
+        run: |
+          for attempt in 1 2 3; do
+            python nhl_model.py --today --json nhl_game_projections.json && break
+            echo "Attempt $attempt failed, retrying in $((attempt * 30))s..."
+            sleep $((attempt * 30))
+          done
 
       - name: Grade yesterday's NHL games
         continue-on-error: true
@@ -283,6 +304,7 @@ jobs:
         run: |
           [ -f ../nhl-predictor/nhl_game_projections.json ] && cp ../nhl-predictor/nhl_game_projections.json . && echo "Copied nhl_game_projections.json" || true
           [ -f ../nhl-predictor/nhl_results.json ] && cp ../nhl-predictor/nhl_results.json . && echo "Copied nhl_results.json" || true
+          [ -f ../nhl-predictor/nhl_recommended.json ] && cp ../nhl-predictor/nhl_recommended.json . && echo "Copied nhl_recommended.json" || true
 
       - name: Save NHL model to cache
         uses: actions/cache/save@v4
@@ -335,12 +357,17 @@ jobs:
         working-directory: ../mlb-predictor
         run: python get_data.py
 
-      - name: Fetch MLB odds
+      - name: Fetch MLB odds (with retry)
         continue-on-error: true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         working-directory: ../mlb-predictor
-        run: python fetch_odds.py
+        run: |
+          for attempt in 1 2 3; do
+            python fetch_odds.py && break
+            echo "Attempt $attempt failed, retrying in $((attempt * 30))s..."
+            sleep $((attempt * 30))
+          done
 
       - name: Grade yesterday's MLB games
         continue-on-error: true
@@ -359,6 +386,7 @@ jobs:
         run: |
           [ -f ../mlb-predictor/mlb_game_projections.json ] && cp ../mlb-predictor/mlb_game_projections.json . && echo "Copied mlb_game_projections.json" || true
           [ -f ../mlb-predictor/mlb_results.json ] && cp ../mlb-predictor/mlb_results.json . && echo "Copied mlb_results.json" || true
+          [ -f ../mlb-predictor/mlb_recommended.json ] && cp ../mlb-predictor/mlb_recommended.json . && echo "Copied mlb_recommended.json" || true
 
       - name: Upload mattev-sports as artifact
         uses: actions/upload-artifact@v4
@@ -428,6 +456,7 @@ jobs:
         run: |
           [ -f ../nhl-props/nhl_player_props.json ] && cp ../nhl-props/nhl_player_props.json . && echo "Copied nhl_player_props.json" || true
           [ -f ../nhl-props/nhl_props_results.json ] && cp ../nhl-props/nhl_props_results.json . && echo "Copied nhl_props_results.json" || true
+          [ -f ../nhl-props/nhl_props_recommended.json ] && cp ../nhl-props/nhl_props_recommended.json . && echo "Copied nhl_props_recommended.json" || true
 
       - name: Upload mattev-sports as artifact
         uses: actions/upload-artifact@v4
@@ -575,6 +604,8 @@ jobs:
               "nba-outputs/all_props_results.json",
               "nba-outputs/nba_player_projections.json",
               "nba-outputs/injuries.json",
+              "nba-outputs/recommendations.json",
+              "nba-outputs/top_picks.json",
               "ncaab-outputs/ncaab_results.json",
               "nhl-outputs/nhl_results.json",
               "mlb-outputs/mlb_results.json",
@@ -675,6 +706,10 @@ jobs:
                    nhl_player_props.json nhl_props_results.json \
                    all_props.json all_props_results.json \
                    nba_player_projections.json injuries.json \
+                   nba_recommended.json nhl_recommended.json \
+                   ncaab_recommended.json mlb_recommended.json \
+                   nba_props_recommended.json nhl_props_recommended.json \
+                   recommendations.json top_picks.json \
                    archive/; do
             [ -e "$f" ] && git add "$f"
           done
@@ -682,6 +717,10 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Auto-update predictions $(date -u +'%Y-%m-%d %H:%M') UTC"
-            git pull --rebase --autostash origin main || true
-            git push
+            for attempt in 1 2 3; do
+              git pull --rebase -X theirs origin main && git push && break
+              echo "Push attempt $attempt failed, retrying in 10s..."
+              git rebase --abort 2>/dev/null || true
+              sleep 10
+            done
           fi
