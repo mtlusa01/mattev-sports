@@ -2611,10 +2611,48 @@
     }
 
     // ── Auto-Grading ──
+    // Self-grade a game bet from scores using the bet's own pick details
+    function selfGradeFromScores(bet, awayScore, homeScore) {
+      if (awayScore == null || homeScore == null) return null;
+      var gameParts = (bet.game || '').split(' @ ');
+      if (gameParts.length !== 2) return null;
+      if (bet.type === 'spread') {
+        var m = (bet.pick || '').match(/([A-Z]{2,4})\s*([+-]?\d+\.?\d*)/);
+        if (!m) return null;
+        var pickTeam = m[1], pickLine = parseFloat(m[2]);
+        var isHome = pickTeam === gameParts[1];
+        var margin = isHome ? (homeScore - awayScore + pickLine) : (awayScore - homeScore + pickLine);
+        return margin > 0 ? 'win' : margin < 0 ? 'loss' : 'push';
+      }
+      if (bet.type === 'total') {
+        var m = (bet.pick || '').match(/(OVER|UNDER)\s+([\d.]+)/i);
+        if (!m) return null;
+        var dir = m[1].toUpperCase(), line = parseFloat(m[2]);
+        var total = awayScore + homeScore;
+        if (dir === 'OVER') return total > line ? 'win' : total < line ? 'loss' : 'push';
+        return total < line ? 'win' : total > line ? 'loss' : 'push';
+      }
+      if (bet.type === 'ml') {
+        var winner = homeScore > awayScore ? gameParts[1] : gameParts[0];
+        return bet.pick === winner ? 'win' : 'loss';
+      }
+      return null;
+    }
+
     function autoGradeHomeTrackedBets() {
       var bets = getTrackedBets();
       var changed = false;
       var allPicks = [];
+
+      // Helper: check if two dates are within 1 day of each other
+      function datesClose(d1, d2) {
+        if (!d1 || !d2) return true; // no date = don't filter
+        if (d1 === d2) return true;
+        var t1 = new Date(d1 + 'T12:00:00').getTime();
+        var t2 = new Date(d2 + 'T12:00:00').getTime();
+        return Math.abs(t1 - t2) <= 86400000; // 1 day
+      }
+
       function collectPicks(data) {
         if (!data || !data.days) return;
         for (var i = 0; i < data.days.length; i++) {
@@ -2634,7 +2672,8 @@
           var picks = data.days[i].picks || [];
           for (var j = 0; j < picks.length; j++) {
             var p = picks[j];
-            if (p.result !== undefined && p.hit === undefined) {
+            // Convert result→hit if hit not set (covers both undefined and null)
+            if (p.result !== undefined && (p.hit === undefined || p.hit === null)) {
               p.hit = p.result === 'WIN' ? true : p.result === 'LOSS' ? false : null;
             }
             if (!p._date) p._date = p.date || dayDate;
@@ -2648,47 +2687,125 @@
       collectPicks(mlbResultsData);
       collectPropPicks(nbaPropsResultsData);
       collectPropPicks(nhlPropsResultsData);
+
+      // Also collect graded game picks from live projections (catches games
+      // that finished but haven't been written to results.json yet)
+      function collectFromProjections(data) {
+        if (!data || !data.games) return;
+        var projDate = data.date || '';
+        for (var i = 0; i < data.games.length; i++) {
+          var g = data.games[i];
+          if (g.status !== 'final' && g.status !== 'closed') continue;
+          if (g.away_score == null || g.home_score == null) continue;
+          var gameStr = g.away_team + ' @ ' + g.home_team;
+          var resultStr = g.away_score + '-' + g.home_score;
+          var types = ['spread', 'total', 'ml'];
+          for (var t = 0; t < types.length; t++) {
+            var tp = types[t];
+            var res = g[tp + '_result'];
+            if (!res) continue;
+            var hit = res === 'W' ? true : res === 'L' ? false : null;
+            if (hit === null) continue;
+            allPicks.push({
+              _date: projDate, game: gameStr, type: tp,
+              hit: hit, result: resultStr
+            });
+          }
+        }
+      }
+      collectFromProjections(gameJsonData);
+      collectFromProjections(nhlGameJsonData);
+      collectFromProjections(ncaabGameJsonData);
+
+      // Helper to extract prop fields from a pick
+      function extractPropFields(p) {
+        var pProp = p.prop, pPlayer = p.player, pLine = p.line;
+        if (!pProp && p.pick) {
+          var m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|PR|PA|RA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS|SOG|GOALS|SAVES)\s+(OVER|UNDER)\s+([\d.]+)/i);
+          if (m) {
+            if (!pPlayer && m[1]) pPlayer = m[1].trim();
+            pProp = m[2].toUpperCase();
+            if (pLine == null) pLine = parseFloat(m[4]);
+          }
+        }
+        return { prop: pProp, player: pPlayer, line: pLine };
+      }
+
+      // Helper to match prop fields
+      function propMatches(pf, bet) {
+        if (!pf.player || !bet.player) return false;
+        if (pf.player.toLowerCase() !== bet.player.toLowerCase()) return false;
+        if (pf.prop !== bet.prop_type) return false;
+        if (parseFloat(pf.line) !== parseFloat(bet.line)) return false;
+        return true;
+      }
+
       for (var i = 0; i < bets.length; i++) {
         var bet = bets[i];
         if (bet.status !== 'pending') continue;
         var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
         var matched = null;
         if (bet.type === 'prop') {
+          // Pass 1: exact date match
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
-            // Date gate: only grade against same-date results
             if (betDate && p._date && p._date !== betDate) continue;
-            // Extract prop type: prefer p.prop, else parse from p.pick ("PRA OVER 24.5")
-            var pProp = p.prop;
-            var pPlayer = p.player;
-            var pLine = p.line;
-            if (!pProp && p.pick) {
-              var m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS)\s+(OVER|UNDER)\s+([\d.]+)/i);
-              if (m) {
-                if (!pPlayer && m[1]) pPlayer = m[1].trim();
-                pProp = m[2].toUpperCase();
-                if (pLine == null) pLine = parseFloat(m[4]);
-              }
+            var pf = extractPropFields(p);
+            if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { matched = p; break; }
+          }
+          // Pass 2: ±1 day fuzzy date match (cross-midnight games, timezone diffs)
+          if (!matched) {
+            for (var j = 0; j < allPicks.length; j++) {
+              var p = allPicks[j];
+              if (!datesClose(betDate, p._date)) continue;
+              var pf = extractPropFields(p);
+              if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { matched = p; break; }
             }
-            if (pPlayer && bet.player &&
-                pPlayer.toLowerCase() === bet.player.toLowerCase() &&
-                pProp === bet.prop_type &&
-                parseFloat(pLine) === parseFloat(bet.line) &&
-                p.hit !== undefined && p.hit !== null) { matched = p; break; }
           }
         } else {
+          // Pass 1: exact date match
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
-            // Date gate: only grade against same-date results
             if (betDate && p._date && p._date !== betDate) continue;
             if (p.game && bet.game && p.game === bet.game &&
                 p.type === bet.type &&
                 p.hit !== undefined && p.hit !== null) { matched = p; break; }
           }
+          // Pass 2: ±1 day fuzzy date match
+          if (!matched) {
+            for (var j = 0; j < allPicks.length; j++) {
+              var p = allPicks[j];
+              if (!datesClose(betDate, p._date)) continue;
+              if (p.game && bet.game && p.game === bet.game &&
+                  p.type === bet.type &&
+                  p.hit !== undefined && p.hit !== null) { matched = p; break; }
+            }
+          }
+          // Pass 3: Self-grade from scores — for games that have scores
+          // in results but no matching pick type (e.g., late game missed by grading)
+          if (!matched && bet.game && bet.pick) {
+            var scoreResult = null;
+            for (var j = 0; j < allPicks.length; j++) {
+              var p = allPicks[j];
+              if (!datesClose(betDate, p._date)) continue;
+              if (p.game === bet.game && p.result && p.result.match(/^\d+-\d+$/)) {
+                scoreResult = p.result;
+                break;
+              }
+            }
+            if (scoreResult) {
+              var sc = scoreResult.split('-').map(Number);
+              var selfGrade = selfGradeFromScores(bet, sc[0], sc[1]);
+              if (selfGrade !== null) {
+                matched = { hit: selfGrade === 'win', result: scoreResult };
+              }
+            }
+          }
         }
         if (matched) {
-          bet.status = matched.hit === true ? 'win' : 'loss';
+          bet.status = matched.hit === true ? 'win' : (matched.hit === false ? 'loss' : 'push');
           bet.actual = matched.result != null ? String(matched.result) : null;
+          bet.graded_at = new Date().toISOString();
           var u = parseFloat(bet.units) || 1;
           bet.profit_units = bet.status === 'win' ? calcProfit(parseInt(bet.odds) || -110, u) : -u;
           changed = true;
@@ -2696,39 +2813,32 @@
       }
       if (changed) BetStorage.saveBets(bets);
 
-      // Re-validate: ungrade bets that have no matching same-date result
+      // Re-validate: only ungrade bets from TODAY that were graded recently.
+      // Never ungrade bets from previous days — those results are final.
+      var todayStr = new Date().toISOString().slice(0, 10);
       var revalidated = false;
       for (var i = 0; i < bets.length; i++) {
         var bet = bets[i];
         if (bet.status !== 'win' && bet.status !== 'loss') continue;
         var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
-        if (!betDate) continue;
+        // Only re-validate today's bets that were graded in the last 4 hours
+        if (!betDate || betDate !== todayStr) continue;
+        if (bet.graded_at) {
+          var hoursAgo = (Date.now() - new Date(bet.graded_at).getTime()) / 3600000;
+          if (hoursAgo > 4) continue;
+        }
         var found = false;
         if (bet.type === 'prop') {
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
-            if (p._date && p._date !== betDate) continue;
-            var pProp = p.prop;
-            var pPlayer = p.player;
-            var pLine = p.line;
-            if (!pProp && p.pick) {
-              var m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS)\s+(OVER|UNDER)\s+([\d.]+)/i);
-              if (m) {
-                if (!pPlayer && m[1]) pPlayer = m[1].trim();
-                pProp = m[2].toUpperCase();
-                if (pLine == null) pLine = parseFloat(m[4]);
-              }
-            }
-            if (pPlayer && bet.player &&
-                pPlayer.toLowerCase() === bet.player.toLowerCase() &&
-                pProp === bet.prop_type &&
-                parseFloat(pLine) === parseFloat(bet.line) &&
-                p.hit !== undefined && p.hit !== null) { found = true; break; }
+            if (!datesClose(betDate, p._date)) continue;
+            var pf = extractPropFields(p);
+            if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { found = true; break; }
           }
         } else {
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
-            if (p._date && p._date !== betDate) continue;
+            if (!datesClose(betDate, p._date)) continue;
             if (p.game && bet.game && p.game === bet.game &&
                 p.type === bet.type &&
                 p.hit !== undefined && p.hit !== null) { found = true; break; }

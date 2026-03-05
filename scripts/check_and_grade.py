@@ -265,8 +265,12 @@ def _sum_cat(days_list, cat):
 def load_json(path):
     if not os.path.exists(path):
         return None
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"  Warning: invalid JSON in {path}: {e}")
+        return None
 
 
 def save_json(path, data):
@@ -975,6 +979,7 @@ def _update_nhl_props_results(props, game_date, results_path):
                     "direction": p.get("direction"), "line": p.get("line"),
                     "projection": p.get("projection"),
                     "actual": p.get("actual"), "result": p.get("result"),
+                    "hit": True if p.get("result") == "WIN" else (False if p.get("result") == "LOSS" else None),
                     "confidence": p.get("confidence"), "ev": p.get("ev"),
                     "edge": p.get("edge")} for p in graded],
     }
@@ -1409,7 +1414,81 @@ def _update_nba_props_results(props, game_date, results_path):
     print(f"  Updated all_props_results.json")
 
 
-# ── Entry Point ──────────────────────────────────────────────────
+# ── Catch-Up Grading (late games from previous day) ─────────────
+
+
+def catchup_grade_previous_day():
+    """Add score-only entries for yesterday's games that are missing from
+    results.json. This catches late West Coast games that finished after
+    the daily pipeline already replaced projections with the next day's data.
+
+    Since the model's predictions are lost (projections overwritten), we
+    add entries with just the scores. The frontend uses selfGradeFromScores()
+    to grade tracked bets from the score using the bet's own pick details.
+    """
+    today = datetime.now().strftime("%Y-%m-%d")
+    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+
+    for cfg in SPORT_CONFIG:
+        results_path = os.path.join(REPO_ROOT, cfg["results_file"])
+
+        # Check which games from yesterday are already in results
+        results = load_json(results_path) or {"updated": "", "allTime": {}, "days": []}
+        existing_games = set()
+        for d in results.get("days", []):
+            if d.get("date") == yesterday:
+                for p in d.get("picks", []):
+                    g = p.get("game", "")
+                    if g:
+                        existing_games.add(g)
+                break
+
+        # Fetch yesterday's scores from ESPN
+        scores = fetch_espn_scores(cfg["label"], yesterday)
+        if not scores:
+            continue
+
+        # Find completed games missing from results
+        added = 0
+        for key, sc in scores.items():
+            if not sc.get("completed"):
+                continue
+            away, home = key.split("@")
+            matchup = f"{away} @ {home}"
+            if matchup in existing_games:
+                continue
+
+            away_score = sc.get("away_score")
+            home_score = sc.get("home_score")
+            if away_score is None or home_score is None:
+                continue
+
+            # Add a score-only entry (no model prediction, so hit is null)
+            result_str = f"{away_score}-{home_score}"
+            score_pick = {
+                "date": yesterday, "type": "score", "game": matchup,
+                "pick": "", "result": result_str, "hit": None,
+            }
+
+            # Find or create day entry
+            day = None
+            for d in results.get("days", []):
+                if d.get("date") == yesterday:
+                    day = d
+                    break
+            if not day:
+                day = {"date": yesterday, "picks": []}
+                results.setdefault("days", []).append(day)
+
+            day.setdefault("picks", []).append(score_pick)
+            added += 1
+            print(f"    Catch-up: {matchup} {result_str} (score-only)")
+
+        if added > 0:
+            results["days"].sort(key=lambda d: d.get("date", ""), reverse=True)
+            results["updated"] = datetime.now().isoformat(timespec="seconds")
+            save_json(results_path, results)
+            print(f"  {cfg['label']}: Added {added} score-only result(s) from {yesterday}")
 
 
 SPORT_CONFIG = [
@@ -1552,6 +1631,12 @@ def main():
         any_changes |= changed
         summaries.append(summary)
     t_phase3_end = time.time()
+
+    # ── Phase 3b: Catch-up grade late games from previous day ──
+    try:
+        catchup_grade_previous_day()
+    except Exception as e:
+        print(f"  Catch-up grading error (non-fatal): {e}")
 
     # ── Phase 4: Grade player props (NHL + NBA) ──
     t_phase4 = time.time()

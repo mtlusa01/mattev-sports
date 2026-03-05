@@ -1529,7 +1529,14 @@
       const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
       if (!betDate) return null;
 
-      const day = results.days.find(d => d.date === betDate);
+      // Try exact date first, then ±1 day for cross-midnight/timezone games
+      let day = results.days.find(d => d.date === betDate);
+      if (!day || !day.picks || !day.picks.some(p => p.game === bet.game)) {
+        var bt = new Date(betDate + 'T12:00:00');
+        var prev = new Date(bt.getTime() - 86400000).toISOString().slice(0, 10);
+        var next = new Date(bt.getTime() + 86400000).toISOString().slice(0, 10);
+        day = results.days.find(d => (d.date === prev || d.date === next) && d.picks && d.picks.some(p => p.game === bet.game)) || day;
+      }
       if (!day || !day.picks) return null;
 
       const gamePicks = day.picks.filter(p => p.game === bet.game);
@@ -1597,6 +1604,15 @@
     function gradePropBet(bet) {
       const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
 
+      // Helper: check if two dates are within 1 day of each other
+      function datesClose(d1, d2) {
+        if (!d1 || !d2) return true;
+        if (d1 === d2) return true;
+        var t1 = new Date(d1 + 'T12:00:00').getTime();
+        var t2 = new Date(d2 + 'T12:00:00').getTime();
+        return Math.abs(t1 - t2) <= 86400000;
+      }
+
       // Collect all picks from game results files (use hit field)
       const allResults = [resultsData, nhlResultsData, ncaabResultsData, mlbResultsData];
       const allPicks = [];
@@ -1618,7 +1634,8 @@
           const dayDate = day.date || '';
           for (const p of (day.picks || [])) {
             const copy = Object.assign({}, p);
-            if (copy.result !== undefined && copy.hit === undefined) {
+            // Convert result→hit if hit not set (covers both undefined and null)
+            if (copy.result !== undefined && (copy.hit === undefined || copy.hit === null)) {
               copy.hit = copy.result === 'WIN' ? true : copy.result === 'LOSS' ? false : null;
             }
             copy._date = copy._date || copy.date || dayDate;
@@ -1627,27 +1644,41 @@
         }
       }
 
-      // Match prop bet against graded picks (date must match)
-      for (const p of allPicks) {
-        // Date gate: only grade against same-date results
-        if (betDate && p._date && p._date !== betDate) continue;
-        // Extract prop type: prefer p.prop, else parse from p.pick ("PRA OVER 24.5")
-        let pProp = p.prop;
-        let pPlayer = p.player;
-        let pLine = p.line;
+      // Helper to extract prop fields
+      function extractPropFields(p) {
+        let pProp = p.prop, pPlayer = p.player, pLine = p.line;
         if (!pProp && p.pick) {
-          const m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS)\s+(OVER|UNDER)\s+([\d.]+)/i);
+          const m = p.pick.match(/^(?:(.+?)\s+)?(PTS|REB|AST|PRA|PR|PA|RA|3PM|STL|BLK|POINTS|ASSISTS|SHOTS|SOG|GOALS|SAVES)\s+(OVER|UNDER)\s+([\d.]+)/i);
           if (m) {
             if (!pPlayer && m[1]) pPlayer = m[1].trim();
             pProp = m[2].toUpperCase();
             if (pLine == null) pLine = parseFloat(m[4]);
           }
         }
-        if (pPlayer && bet.player &&
-            pPlayer.toLowerCase() === bet.player.toLowerCase() &&
-            pProp === bet.prop_type &&
-            parseFloat(pLine) === parseFloat(bet.line) &&
-            p.hit !== undefined && p.hit !== null) {
+        return { prop: pProp, player: pPlayer, line: pLine };
+      }
+
+      function propMatches(pf) {
+        if (!pf.player || !bet.player) return false;
+        if (pf.player.toLowerCase() !== bet.player.toLowerCase()) return false;
+        if (pf.prop !== bet.prop_type) return false;
+        if (parseFloat(pf.line) !== parseFloat(bet.line)) return false;
+        return true;
+      }
+
+      // Pass 1: exact date match
+      for (const p of allPicks) {
+        if (betDate && p._date && p._date !== betDate) continue;
+        const pf = extractPropFields(p);
+        if (propMatches(pf) && p.hit !== undefined && p.hit !== null) {
+          return { hit: p.hit, result: p.actual != null ? p.actual : p.result };
+        }
+      }
+      // Pass 2: ±1 day fuzzy date match (cross-midnight games, timezone diffs)
+      for (const p of allPicks) {
+        if (!datesClose(betDate, p._date)) continue;
+        const pf = extractPropFields(p);
+        if (propMatches(pf) && p.hit !== undefined && p.hit !== null) {
           return { hit: p.hit, result: p.actual != null ? p.actual : p.result };
         }
       }
@@ -1673,6 +1704,7 @@
           if (propResult) {
             bet.status = propResult.hit ? 'win' : 'loss';
             bet.actual = propResult.result != null ? String(propResult.result) : null;
+            bet.graded_at = new Date().toISOString();
             const u = parseFloat(bet.units) || 1;
             bet.profit_units = bet.status === 'win' ? calcProfit(parseInt(bet.odds) || -110, u) : -u;
             changed = true;
@@ -1689,6 +1721,7 @@
 
         bet.status = result;
         bet.actual = `${gameResult.awayScore}-${gameResult.homeScore}`;
+        bet.graded_at = new Date().toISOString();
 
         if (result === 'win') bet.profit_units = calcProfit(bet.odds, bet.units);
         else if (result === 'loss') bet.profit_units = -bet.units;
@@ -1698,20 +1731,24 @@
         gradedCount++;
       }
 
-      // Re-validate: ungrade bets that have no matching same-date result
+      // Re-validate: only ungrade TODAY's prop bets graded recently.
+      // Never ungrade bets from previous days — those results are final.
+      const todayStr = new Date().toISOString().slice(0, 10);
       for (const bet of bets) {
         if (bet.status !== 'win' && bet.status !== 'loss') continue;
-        if (bet.type === 'prop') {
-          const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
-          if (!betDate) continue;
-          // Try to find matching same-date result
-          const propResult = gradePropBet(bet);
-          if (!propResult) {
-            bet.status = 'pending';
-            bet.actual = null;
-            bet.profit_units = null;
-            changed = true;
-          }
+        if (bet.type !== 'prop') continue;
+        const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
+        if (!betDate || betDate !== todayStr) continue;
+        if (bet.graded_at) {
+          const hoursAgo = (Date.now() - new Date(bet.graded_at).getTime()) / 3600000;
+          if (hoursAgo > 4) continue;
+        }
+        const propResult = gradePropBet(bet);
+        if (!propResult) {
+          bet.status = 'pending';
+          bet.actual = null;
+          bet.profit_units = null;
+          changed = true;
         }
       }
 
