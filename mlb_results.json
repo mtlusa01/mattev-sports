@@ -4,32 +4,32 @@
     {
       "date": "2026-03-04",
       "spreads": {
-        "wins": 2,
+        "wins": 4,
         "losses": 0,
         "pushes": 0,
-        "record": "2-0",
+        "record": "4-0",
         "pct": 100.0
       },
       "totals": {
-        "wins": 2,
+        "wins": 4,
         "losses": 0,
         "pushes": 0,
-        "record": "2-0",
+        "record": "4-0",
         "pct": 100.0
       },
       "moneylines": {
-        "wins": 0,
+        "wins": 2,
         "losses": 2,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "2-2",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 5,
+        "losses": 0,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -40,7 +40,7 @@
           "result": "4-2",
           "hit": true,
           "confidence": 52.0,
-          "best_bet": true
+          "proj_score": "3.3-3.7"
         },
         {
           "date": "2026-03-04",
@@ -50,6 +50,7 @@
           "result": "4-2",
           "hit": true,
           "confidence": 54.4,
+          "proj_score": "3.3-3.7",
           "best_bet": true
         },
         {
@@ -60,7 +61,9 @@
           "result": "4-2",
           "hit": false,
           "confidence": 52.6,
-          "best_bet": true
+          "proj_score": "3.3-3.7",
+          "home_win_prob": 55.2,
+          "away_win_prob": 44.8
         },
         {
           "date": "2026-03-04",
@@ -70,7 +73,7 @@
           "result": "4-0",
           "hit": true,
           "confidence": 50.4,
-          "best_bet": true
+          "proj_score": "4.0-4.0"
         },
         {
           "date": "2026-03-04",
@@ -80,7 +83,7 @@
           "result": "4-0",
           "hit": true,
           "confidence": 51.5,
-          "best_bet": true
+          "proj_score": "4.0-4.0"
         },
         {
           "date": "2026-03-04",
@@ -89,7 +92,78 @@
           "pick": "BOS",
           "result": "4-0",
           "hit": false,
-          "confidence": 50.4
+          "confidence": 50.4,
+          "proj_score": "4.0-4.0",
+          "home_win_prob": 50.8,
+          "away_win_prob": 49.2
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "ARI @ ATH",
+          "pick": "ARI +1.5",
+          "result": "3-1",
+          "hit": true,
+          "confidence": 53.5,
+          "proj_score": "4.3-3.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "ARI @ ATH",
+          "pick": "UNDER 8.5",
+          "result": "3-1",
+          "hit": true,
+          "confidence": 51.7,
+          "proj_score": "4.3-3.6"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "ARI @ ATH",
+          "pick": "ARI",
+          "result": "3-1",
+          "hit": true,
+          "confidence": 54.0,
+          "proj_score": "4.3-3.6",
+          "home_win_prob": 41.9,
+          "away_win_prob": 58.1,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "CHC @ MIL",
+          "pick": "CHC +1.5",
+          "result": "4-1",
+          "hit": true,
+          "confidence": 53.3,
+          "proj_score": "4.2-3.5",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "CHC @ MIL",
+          "pick": "UNDER 8.5",
+          "result": "4-1",
+          "hit": true,
+          "confidence": 52.5,
+          "proj_score": "4.2-3.5"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "CHC @ MIL",
+          "pick": "CHC",
+          "result": "4-1",
+          "hit": true,
+          "confidence": 53.9,
+          "proj_score": "4.2-3.5",
+          "home_win_prob": 42.2,
+          "away_win_prob": 57.8,
+          "best_bet": true
         }
       ]
     },
@@ -232,33 +306,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 5,
+      "wins": 7,
       "losses": 0,
       "pushes": 0,
       "pct": 100.0,
       "roi": 90.9
     },
     "totals": {
-      "wins": 4,
+      "wins": 6,
       "losses": 1,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 85.7,
+      "roi": 63.6
     },
     "moneylines": {
-      "wins": 2,
+      "wins": 4,
       "losses": 3,
       "pushes": 0,
-      "pct": 40.0,
-      "roi": -23.6
+      "pct": 57.1,
+      "roi": 9.1
     },
     "best_bets": {
-      "wins": 8,
-      "losses": 2,
+      "wins": 9,
+      "losses": 1,
       "pushes": 0,
-      "pct": 80.0,
-      "roi": 52.7
+      "pct": 90.0,
+      "roi": 71.8
     }
   },
-  "updated": "2026-03-04T21:56:06"
+  "updated": "2026-03-04T23:00:33"
 }

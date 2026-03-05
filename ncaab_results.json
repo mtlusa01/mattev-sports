@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-04T18:00:02",
+  "updated": "2026-03-04T20:30:03",
   "allTime": {
     "spreads": {
-      "wins": 225,
-      "losses": 176,
+      "wins": 228,
+      "losses": 177,
       "pushes": 10,
-      "pct": 56.1,
-      "roi": 7.1
+      "pct": 56.3,
+      "roi": 7.5
     },
     "totals": {
-      "wins": 198,
-      "losses": 210,
+      "wins": 200,
+      "losses": 212,
       "pushes": 3,
       "pct": 48.5,
-      "roi": -7.4
+      "roi": -7.3
     },
     "moneylines": {
-      "wins": 267,
-      "losses": 144,
+      "wins": 269,
+      "losses": 146,
       "pushes": 0,
-      "pct": 65.0,
-      "roi": 24.0
+      "pct": 64.8,
+      "roi": 23.7
     },
     "best_bets": {
-      "wins": 42,
-      "losses": 13,
+      "wins": 44,
+      "losses": 11,
       "pushes": 0,
-      "pct": 76.4,
-      "roi": 45.8
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-03-04",
       "spreads": {
-        "wins": 0,
-        "losses": 2,
+        "wins": 3,
+        "losses": 3,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "3-3",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 3,
+        "losses": 3,
         "pushes": 0,
-        "record": "1-1",
+        "record": "3-3",
         "pct": 50.0
       },
       "moneylines": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 3,
+        "losses": 3,
         "pushes": 0,
-        "record": "1-1",
+        "record": "3-3",
         "pct": 50.0
       },
       "best_bets": {
-        "wins": 2,
-        "losses": 3,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -69,8 +69,7 @@
           "pick": "JAX +1.5",
           "result": "79-82",
           "hit": false,
-          "confidence": 60,
-          "best_bet": true
+          "confidence": 60
         },
         {
           "date": "2026-03-04",
@@ -79,8 +78,7 @@
           "pick": "OVER 147.5",
           "result": "79-82",
           "hit": true,
-          "confidence": 61,
-          "best_bet": true
+          "confidence": 61
         },
         {
           "date": "2026-03-04",
@@ -98,8 +96,7 @@
           "pick": "UNA +7.5",
           "result": "58-69",
           "hit": false,
-          "confidence": 69,
-          "best_bet": true
+          "confidence": 69
         },
         {
           "date": "2026-03-04",
@@ -118,7 +115,118 @@
           "pick": "FGCU",
           "result": "58-69",
           "hit": true,
-          "confidence": 53,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "STET @ EKU",
+          "pick": "STET +4.5",
+          "result": "92-76",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "STET @ EKU",
+          "pick": "UNDER 155.5",
+          "result": "92-76",
+          "hit": false,
+          "confidence": 45
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "STET @ EKU",
+          "pick": "EKU",
+          "result": "92-76",
+          "hit": false,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "CREI @ BUT",
+          "pick": "BUT -2.5",
+          "result": "76-59",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "CREI @ BUT",
+          "pick": "UNDER 155.5",
+          "result": "76-59",
+          "hit": true,
+          "confidence": 46
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "CREI @ BUT",
+          "pick": "BUT",
+          "result": "76-59",
+          "hit": false,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "UL @ JMU",
+          "pick": "JMU -6.5",
+          "result": "72-87",
+          "hit": true,
+          "confidence": 82,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "UL @ JMU",
+          "pick": "OVER 132.5",
+          "result": "72-87",
+          "hit": true,
+          "confidence": 71,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "UL @ JMU",
+          "pick": "JMU",
+          "result": "72-87",
+          "hit": true,
+          "confidence": 89,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "MINN @ IU",
+          "pick": "IU -6.5",
+          "result": "47-77",
+          "hit": true,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "MINN @ IU",
+          "pick": "OVER 136.5",
+          "result": "47-77",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "MINN @ IU",
+          "pick": "IU",
+          "result": "47-77",
+          "hit": true,
+          "confidence": 79,
           "best_bet": true
         }
       ]
