@@ -1752,6 +1752,24 @@
         }
       }
 
+      // Backend truth reconciliation: if a graded prop bet disagrees
+      // with the backend results file, the backend is the source of truth.
+      for (const bet of bets) {
+        if (bet.type !== 'prop') continue;
+        if (bet.status !== 'win' && bet.status !== 'loss') continue;
+        const propResult = gradePropBet(bet);
+        if (!propResult) continue;
+        const correctStatus = propResult.hit ? 'win' : 'loss';
+        if (bet.status !== correctStatus) {
+          bet.status = correctStatus;
+          bet.actual = propResult.result != null ? String(propResult.result) : bet.actual;
+          bet.graded_at = new Date().toISOString();
+          const u = parseFloat(bet.units) || 1;
+          bet.profit_units = correctStatus === 'win' ? calcProfit(parseInt(bet.odds) || -110, u) : -u;
+          changed = true;
+        }
+      }
+
       if (changed) {
         saveTrackedBets(bets); // This triggers cloud sync
         renderStats();

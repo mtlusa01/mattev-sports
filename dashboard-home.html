@@ -2852,6 +2852,44 @@
         }
       }
       if (revalidated) BetStorage.saveBets(bets);
+
+      // Backend truth reconciliation: if a graded prop bet disagrees
+      // with the backend results file, the backend is the source of truth.
+      var reconciled = false;
+      for (var i = 0; i < bets.length; i++) {
+        var bet = bets[i];
+        if (bet.type !== 'prop') continue;
+        if (bet.status !== 'win' && bet.status !== 'loss') continue;
+        var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
+        var backendMatch = null;
+        // Pass 1: exact date
+        for (var j = 0; j < allPicks.length; j++) {
+          var p = allPicks[j];
+          if (betDate && p._date && p._date !== betDate) continue;
+          var pf = extractPropFields(p);
+          if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { backendMatch = p; break; }
+        }
+        // Pass 2: fuzzy date
+        if (!backendMatch) {
+          for (var j = 0; j < allPicks.length; j++) {
+            var p = allPicks[j];
+            if (!datesClose(betDate, p._date)) continue;
+            var pf = extractPropFields(p);
+            if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { backendMatch = p; break; }
+          }
+        }
+        if (!backendMatch) continue;
+        var correctStatus = backendMatch.hit === true ? 'win' : 'loss';
+        if (bet.status !== correctStatus) {
+          bet.status = correctStatus;
+          bet.actual = backendMatch.actual != null ? String(backendMatch.actual) : (backendMatch.result != null ? String(backendMatch.result) : bet.actual);
+          bet.graded_at = new Date().toISOString();
+          var u = parseFloat(bet.units) || 1;
+          bet.profit_units = correctStatus === 'win' ? calcProfit(parseInt(bet.odds) || -110, u) : -u;
+          reconciled = true;
+        }
+      }
+      if (reconciled) BetStorage.saveBets(bets);
     }
 
     // ── Calendar Rendering ──
