@@ -4,25 +4,25 @@
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 2,
+        "wins": 4,
         "losses": 5,
         "pushes": 0,
-        "record": "2-5",
-        "pct": 28.6
+        "record": "4-5",
+        "pct": 44.4
       },
       "totals": {
-        "wins": 4,
-        "losses": 3,
+        "wins": 5,
+        "losses": 4,
         "pushes": 0,
-        "record": "4-3",
-        "pct": 57.1
+        "record": "5-4",
+        "pct": 55.6
       },
       "moneylines": {
-        "wins": 4,
-        "losses": 3,
+        "wins": 5,
+        "losses": 4,
         "pushes": 0,
-        "record": "4-3",
-        "pct": 57.1
+        "record": "5-4",
+        "pct": 55.6
       },
       "best_bets": {
         "wins": 2,
@@ -198,6 +198,38 @@
         {
           "date": "2026-03-05",
           "type": "spread",
+          "game": "LAD @ CIN",
+          "pick": "LAD +1.5",
+          "result": "13-14",
+          "hit": true,
+          "confidence": 55.6,
+          "proj_score": "5.1-4.0"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "LAD @ CIN",
+          "pick": "OVER 8.5",
+          "result": "13-14",
+          "hit": true,
+          "confidence": 51.6,
+          "proj_score": "5.1-4.0"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "LAD @ CIN",
+          "pick": "LAD",
+          "result": "13-14",
+          "hit": false,
+          "confidence": 55.6,
+          "proj_score": "5.1-4.0",
+          "home_win_prob": 38.9,
+          "away_win_prob": 61.1
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
           "game": "ARI @ CHC",
           "pick": "ARI +1.5",
           "result": "1-8",
@@ -260,6 +292,38 @@
           "proj_score": "6.2-4.6",
           "home_win_prob": 36.5,
           "away_win_prob": 63.5
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "SD @ SEA",
+          "pick": "SD +1.5",
+          "result": "27-6",
+          "hit": true,
+          "confidence": 51.9,
+          "proj_score": "4.0-3.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "SD @ SEA",
+          "pick": "UNDER 8.5",
+          "result": "27-6",
+          "hit": false,
+          "confidence": 52.9,
+          "proj_score": "4.0-3.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "SD @ SEA",
+          "pick": "SD",
+          "result": "27-6",
+          "hit": true,
+          "confidence": 52.3,
+          "proj_score": "4.0-3.6",
+          "home_win_prob": 45.4,
+          "away_win_prob": 54.6
         }
       ]
     },
@@ -600,25 +664,25 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 9,
+      "wins": 11,
       "losses": 6,
       "pushes": 0,
-      "pct": 60.0,
-      "roi": 14.5
+      "pct": 64.7,
+      "roi": 23.5
     },
     "totals": {
-      "wins": 10,
-      "losses": 5,
-      "pushes": 0,
-      "pct": 66.7,
-      "roi": 27.3
-    },
-    "moneylines": {
-      "wins": 9,
+      "wins": 11,
       "losses": 6,
       "pushes": 0,
-      "pct": 60.0,
-      "roi": 14.5
+      "pct": 64.7,
+      "roi": 23.5
+    },
+    "moneylines": {
+      "wins": 10,
+      "losses": 7,
+      "pushes": 0,
+      "pct": 58.8,
+      "roi": 12.3
     },
     "best_bets": {
       "wins": 10,
@@ -628,5 +692,5 @@
       "roi": 27.3
     }
   },
-  "updated": "2026-03-05T23:29:46"
+  "updated": "2026-03-05T23:31:50"
 }
