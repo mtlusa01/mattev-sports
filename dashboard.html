@@ -3492,11 +3492,15 @@
     // ── Game Filter Bar ──
     function renderGameFilterBar() {
       const bar = document.getElementById('game-filter-bar');
-      if (gameProjections.length === 0) { bar.style.display = 'none'; return; }
+      const activeGames = getActiveGameProjections().filter(g => {
+        const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        return gd === selectedDate;
+      });
+      if (activeGames.length === 0) { bar.style.display = 'none'; return; }
 
       // Sort: live first, then soon, then by commence_time
       const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
-      const sorted = [...gameProjections].sort((a, b) => {
+      const sorted = [...activeGames].sort((a, b) => {
         const sa = getGameStatus(a), sb = getGameStatus(b);
         if (statusOrder[sa] !== statusOrder[sb]) return statusOrder[sa] - statusOrder[sb];
         return (a.commence_time || '').localeCompare(b.commence_time || '');
@@ -3545,7 +3549,7 @@
       const el = document.getElementById('selected-game-card');
       if (!currentGameFilter) { el.classList.remove('visible'); return; }
 
-      const g = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
+      const g = getActiveGameProjections().find(gp => gameKey(gp) === currentGameFilter);
       if (!g) { el.classList.remove('visible'); return; }
 
       const confColor = c => c >= 60 ? 'var(--accent-light)' : c >= 50 ? 'var(--yellow)' : 'var(--red-light)';
@@ -4604,8 +4608,12 @@
       }
       html += '</div>';
 
-      // Game pills
-      const propsGameList = currentSport === 'nhl' ? nhlGameProjections : gameProjections;
+      // Game pills — use date-appropriate game list
+      const allGamesForPills = getActiveGameProjections();
+      const propsGameList = allGamesForPills.filter(g => {
+        const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
+        return gd === selectedDate;
+      });
       if (propsGameList.length > 0) {
         const statusOrder = { live: 0, soon: 1, scheduled: 2, final: 3 };
         const sorted = [...propsGameList].sort((a, b) => {
@@ -5045,7 +5053,7 @@
         const isGameOnly = currentGameFilter && currentConfFilter === 'all'
           && currentDirFilter === 'all' && currentPropCategory === 'all' && !currentSearch;
         if (isGameOnly) {
-          const selGame = gameProjections.find(gp => gameKey(gp) === currentGameFilter);
+          const selGame = getActiveGameProjections().find(gp => gameKey(gp) === currentGameFilter);
           const status = selGame ? getGameStatus(selGame) : 'unknown';
           const reason = status === 'live' || status === 'final'
             ? 'Player props are generated before tip-off. This game was already in progress when projections were last updated.'
