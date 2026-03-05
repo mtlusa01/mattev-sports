@@ -1373,7 +1373,36 @@
     .lock-in-btn:hover { background: #059669; }
     .lock-in-btn.locked { background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.12); cursor: default; }
 
+    /* ── List view expandable detail rows ── */
+    .bets-table tbody tr.list-row { cursor: pointer; }
+    .bets-table tbody tr.list-row:hover { background: var(--bg-elevated); }
+    .bets-table tbody tr.list-row.expanded { background: rgba(99,102,241,0.06); }
+    .bets-table tbody tr.list-detail-row { display: none; }
+    .bets-table tbody tr.list-detail-row.open { display: table-row; }
+    .bets-table tbody tr.list-detail-row td { padding: 0; }
+    .list-detail-panel {
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(99,102,241,0.15);
+      padding: 16px 20px;
+      animation: slideDown 0.15s ease;
+    }
+    .list-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px 24px;
+    }
+    .list-detail-stat { display: flex; flex-direction: column; gap: 2px; }
+    .list-detail-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .list-detail-value { font-size: 13px; font-weight: 600; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
+    .list-detail-value.edge-pos { color: var(--profit); }
+    .list-detail-value.edge-neg { color: var(--text-muted); }
+    .list-detail-actions { margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+    .list-row .row-chevron-list { display: inline-block; font-size: 9px; color: var(--text-muted); transition: transform 0.2s; margin-left: 4px; }
+    .list-row.expanded .row-chevron-list { transform: rotate(180deg); color: var(--accent-light); }
+
     @media (max-width: 767px) {
+      .list-detail-panel { padding: 12px; }
+      .list-detail-grid { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
       .bet-type { width: 36px; }
       .conf-bar { width: 40px; }
       .bet-detail.open { max-height: 140px; }
@@ -3271,7 +3300,8 @@
     let currentBetTypeFilter = 'all'; // all, spread, total, ml
     let currentSearch = '';
     let teamToGame = {};  // team abbr -> game object
-    let expandedRowId = null;  // currently expanded row
+    let expandedRowId = null;  // currently expanded row (props)
+    let expandedListRowId = null; // currently expanded row (game list view)
     let gameViewMode = 'grid'; // 'grid' or 'list'
     let betsSortBy = 'conf';   // 'conf', 'time', 'type'
     let betsSortDir = 'desc';  // 'asc' or 'desc'
@@ -3329,6 +3359,7 @@
       projExpandedId = null;
       // Shared
       expandedRowId = null;
+      expandedListRowId = null;
       // Reset advanced filters
       for (const k in advancedFilters) advancedFilters[k] = 'all';
     }
@@ -5988,6 +6019,33 @@
       return '';
     }
 
+    function toggleListRow(rowId) {
+      const detail = document.getElementById('list-detail-' + rowId);
+      const row = document.querySelector(`tr[data-list-row="${rowId}"]`);
+      if (!detail) return;
+      if (expandedListRowId === rowId) {
+        // Collapse current
+        detail.classList.remove('open');
+        if (row) row.classList.remove('expanded');
+        expandedListRowId = null;
+      } else {
+        // Collapse previous
+        if (expandedListRowId) {
+          const prev = document.getElementById('list-detail-' + expandedListRowId);
+          const prevRow = document.querySelector(`tr[data-list-row="${expandedListRowId}"]`);
+          if (prev) prev.classList.remove('open');
+          if (prevRow) prevRow.classList.remove('expanded');
+        }
+        // Expand new
+        detail.classList.add('open');
+        if (row) row.classList.add('expanded');
+        expandedListRowId = rowId;
+        if (window.innerWidth <= 768 && row) {
+          row.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
     function toggleBetDetail(el) {
       var card = el.closest('.game-card-picks');
       var detail = el.nextElementSibling;
@@ -6227,15 +6285,16 @@
 
         // Compute model values
         let mSpread = '--', mTotal = '--', mMl = '--';
+        let projAway = 0, projHome = 0;
         if (g.proj_score) {
           const pp = g.proj_score.split('-');
-          const pA = parseFloat(pp[0]) || 0;
-          const pH = parseFloat(pp[1]) || 0;
-          const margin = pH - pA;
+          projAway = parseFloat(pp[0]) || 0;
+          projHome = parseFloat(pp[1]) || 0;
+          const margin = projHome - projAway;
           if (margin === 0) mSpread = 'PK';
           else if (margin > 0) mSpread = '-' + margin.toFixed(1);
           else mSpread = '+' + Math.abs(margin).toFixed(1);
-          mTotal = (pA + pH).toFixed(1);
+          mTotal = (projAway + projHome).toFixed(1);
         }
         if (g.home_win_prob != null) {
           if (g.ml_pick === home) mMl = g.home_win_prob.toFixed(1) + '%';
@@ -6245,14 +6304,18 @@
           mMl = g.proj_score;
         }
 
+        const shared = { matchup, time, status, away, home, game: g, projAway, projHome, mSpread, mTotal, mMl };
+
         // Spread row
         if (g.spread_pick && g.spread_pick !== 'N/A' && g.spread_pick !== '\u2014') {
           rows.push({
-            type: 'spread', matchup, time, status, away, home,
+            ...shared,
+            type: 'spread',
             conf: g.spread_conf || 0,
             pick: g.spread_pick,
             vegas: g.spread_pick ? g.spread_pick.split(' ').pop() : '--',
             model: mSpread,
+            odds: g.spread_odds,
             result: g.spread_result || null,
             gameBestBet: g.best_bet || null
           });
@@ -6260,11 +6323,13 @@
         // Total row
         if (g.total_pick && g.total_pick !== 'N/A' && g.total_pick !== '\u2014') {
           rows.push({
-            type: 'total', matchup, time, status, away, home,
+            ...shared,
+            type: 'total',
             conf: g.total_conf || 0,
             pick: g.total_pick + ' ' + (g.total_line || ''),
             vegas: g.total_line != null ? '' + g.total_line : '--',
             model: mTotal,
+            odds: g.total_odds,
             result: g.total_result || null,
             gameBestBet: g.best_bet || null
           });
@@ -6272,11 +6337,13 @@
         // ML row
         if (g.ml_pick && g.ml_pick !== 'N/A' && g.ml_pick !== '\u2014') {
           rows.push({
-            type: 'ml', matchup, time, status, away, home,
+            ...shared,
+            type: 'ml',
             conf: g.ml_conf || 0,
             pick: g.ml_pick,
             vegas: '--',
             model: mMl,
+            odds: g.ml_odds,
             result: g.ml_result || null,
             gameBestBet: g.best_bet || null
           });
@@ -6318,24 +6385,130 @@
         return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
       };
 
-      const bodyRows = sorted.map(r => {
+      const fmtOdds = (odds) => {
+        if (odds == null) return '--';
+        return odds > 0 ? '+' + odds : '' + odds;
+      };
+
+      const buildListDetail = (r, rowId) => {
+        const g = r.game;
+        if (!g) return '';
+        const stats = [];
+
+        // Projected Score
+        if (g.proj_score) {
+          stats.push({ label: 'Projected Score', value: g.away_team + ' ' + r.projAway.toFixed(1) + ' - ' + g.home_team + ' ' + r.projHome.toFixed(1) });
+        }
+
+        // Bet-type-specific details
+        if (r.type === 'spread') {
+          stats.push({ label: 'Model Spread', value: r.mSpread });
+          const vegasNum = parseFloat(r.vegas);
+          const modelNum = parseFloat(r.mSpread);
+          if (!isNaN(vegasNum) && !isNaN(modelNum)) {
+            const edge = Math.abs(modelNum) - Math.abs(vegasNum);
+            const edgeCls = edge > 0 ? 'edge-pos' : 'edge-neg';
+            stats.push({ label: 'Edge', value: (edge > 0 ? '+' : '') + edge.toFixed(1) + ' pts', cls: edgeCls });
+          }
+          if (r.odds != null) stats.push({ label: 'Spread Odds', value: fmtOdds(r.odds) });
+        } else if (r.type === 'total') {
+          stats.push({ label: 'Model Total', value: r.mTotal });
+          const vegasTotal = parseFloat(r.vegas);
+          const modelTotal = parseFloat(r.mTotal);
+          if (!isNaN(vegasTotal) && !isNaN(modelTotal)) {
+            const edge = modelTotal - vegasTotal;
+            const pick = (g.total_pick || '').toUpperCase();
+            const edgeDir = pick === 'OVER' ? edge : -edge;
+            const edgeCls = edgeDir > 0 ? 'edge-pos' : 'edge-neg';
+            stats.push({ label: 'Edge', value: (edgeDir > 0 ? '+' : '') + edgeDir.toFixed(1) + ' pts', cls: edgeCls });
+          }
+          if (r.odds != null) stats.push({ label: 'Total Odds', value: fmtOdds(r.odds) });
+        } else if (r.type === 'ml') {
+          if (g.home_win_prob != null) {
+            stats.push({ label: 'Win Prob', value: r.mMl });
+            if (r.odds != null) {
+              const impliedProb = r.odds > 0 ? (100 / (r.odds + 100) * 100) : (-r.odds / (-r.odds + 100) * 100);
+              const modelProb = g.ml_pick === g.home_team ? g.home_win_prob : (100 - g.home_win_prob);
+              const edge = modelProb - impliedProb;
+              const edgeCls = edge > 0 ? 'edge-pos' : 'edge-neg';
+              stats.push({ label: 'Edge', value: (edge > 0 ? '+' : '') + edge.toFixed(1) + '%', cls: edgeCls });
+            }
+          }
+          if (r.odds != null) stats.push({ label: 'ML Odds', value: fmtOdds(r.odds) });
+        }
+
+        // Best book
+        const bestBookKey = r.type === 'ml' ? 'ml_best_book' : r.type === 'total' ? 'total_best_book' : 'spread_best_book';
+        if (g[bestBookKey]) stats.push({ label: 'Best Book', value: g[bestBookKey] });
+
+        // Best bet reasoning
+        const activeBB = getActiveBestBets();
+        const isBB = activeBB.length > 0
+          ? activeBB.some(b => b.game === r.matchup && b.type === r.type)
+          : g.best_bet === r.type;
+        if (isBB) {
+          stats.push({ label: 'Best Bet', value: r.conf.toFixed(1) + '% confidence', cls: 'edge-pos' });
+        }
+
+        // Kelly stake
+        let kellyHtml = '';
+        if (typeof KellyCalculator !== 'undefined' && r.odds != null && r.conf >= 50) {
+          const s = KellyCalculator.getSettings();
+          if (s.kellyFraction !== 'off' && s.bankroll) {
+            const k = KellyCalculator.calculate(r.conf, r.odds);
+            if (k.method !== 'no-edge' && k.amount > 0) {
+              const DF = typeof DisplayFormatter !== 'undefined' ? DisplayFormatter : null;
+              const fAmt = DF ? DF.stake(k.amount) : ('$' + k.amount);
+              stats.push({ label: 'Suggested Stake', value: fAmt });
+            }
+          }
+        }
+
+        const escA = (r.away || '').replace(/'/g, "\\'");
+        const escH = (r.home || '').replace(/'/g, "\\'");
+        const rDate = getLocalDateStr();
+        const rBetId = makeBetId(rDate, r.type, null, null, r.matchup, null, r.pick, r.type === 'total' ? r.vegas : null);
+        const isTracked = isBetTracked(rBetId);
+        const trackBtn = isTracked
+          ? '<button class="lock-in-btn locked" disabled>Locked</button>'
+          : `<button class="lock-in-btn" onclick="event.stopPropagation();trackGameClick('${escA}','${escH}','${r.type}')">Track Bet</button>`;
+
+        const statsHtml = stats.map(s =>
+          `<div class="list-detail-stat"><span class="list-detail-label">${s.label}</span><span class="list-detail-value${s.cls ? ' ' + s.cls : ''}">${s.value}</span></div>`
+        ).join('');
+
+        return `<tr class="list-detail-row${expandedListRowId === rowId ? ' open' : ''}" id="list-detail-${rowId}">
+          <td colspan="9">
+            <div class="list-detail-panel">
+              <div class="list-detail-grid">${statsHtml}</div>
+              <div class="list-detail-actions">${trackBtn}</div>
+            </div>
+          </td>
+        </tr>`;
+      };
+
+      const bodyRows = sorted.map((r, i) => {
+        const rowId = r.type + '-' + i + '-' + (r.away || '') + '-' + (r.home || '');
         const rDate = getLocalDateStr();
         const rBetId = makeBetId(rDate, r.type, null, null, r.matchup, null, r.pick, r.type === 'total' ? r.vegas : null);
         const rTracked = isBetTracked(rBetId);
         const escA = (r.away || '').replace(/'/g, "\\'");
         const escH = (r.home || '').replace(/'/g, "\\'");
+        const isExpanded = expandedListRowId === rowId;
+        const escRowId = rowId.replace(/'/g, "\\'");
         return `
-        <tr>
+        <tr class="list-row${isExpanded ? ' expanded' : ''}" data-list-row="${rowId}" onclick="toggleListRow('${escRowId}')">
           <td><span class="conf-badge ${confTier(r.conf)}">${r.conf.toFixed(1)}%</span></td>
           <td><span class="type-badge ${r.type}">${r.type === 'ml' ? 'ML' : r.type}</span></td>
-          <td style="font-weight:600">${r.matchup}</td>
+          <td style="font-weight:600">${r.matchup}<span class="row-chevron-list">\u25BC</span></td>
           <td style="font-weight:600;color:var(--text-primary)">${r.pick}</td>
           <td class="col-vegas" style="color:var(--text-secondary)">${r.vegas}</td>
           <td class="col-model" style="color:var(--text-secondary)">${r.model}</td>
           <td style="color:var(--text-muted)">${timeStr(r.time)}</td>
           <td>${resultBadge(r.result)}</td>
           <td><span class="track-icon ${rTracked ? 'tracked' : ''}" onclick="event.stopPropagation();trackGameClick('${escA}','${escH}','${r.type}')" title="${rTracked ? 'Tracked' : 'Track this bet'}">${rTracked ? '&#10003;' : '&#9733;'}</span></td>
-        </tr>`;
+        </tr>
+        ${buildListDetail(r, rowId)}`;
       }).join('');
 
       return `
