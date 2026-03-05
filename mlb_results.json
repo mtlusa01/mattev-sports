@@ -4,32 +4,32 @@
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 1,
-        "losses": 4,
+        "wins": 2,
+        "losses": 5,
         "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
+        "record": "2-5",
+        "pct": 28.6
       },
       "totals": {
-        "wins": 3,
-        "losses": 2,
+        "wins": 4,
+        "losses": 3,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-3",
+        "pct": 57.1
       },
       "moneylines": {
+        "wins": 4,
+        "losses": 3,
+        "pushes": 0,
+        "record": "4-3",
+        "pct": 57.1
+      },
+      "best_bets": {
         "wins": 2,
         "losses": 3,
         "pushes": 0,
         "record": "2-3",
         "pct": 40.0
-      },
-      "best_bets": {
-        "wins": 1,
-        "losses": 4,
-        "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
       },
       "picks": [
         {
@@ -148,8 +148,7 @@
           "result": "3-2",
           "hit": true,
           "confidence": 55.0,
-          "proj_score": "3.1-3.7",
-          "best_bet": true
+          "proj_score": "3.1-3.7"
         },
         {
           "date": "2026-03-05",
@@ -171,8 +170,7 @@
           "result": "0-2",
           "hit": false,
           "confidence": 56.4,
-          "proj_score": "4.1-2.9",
-          "best_bet": true
+          "proj_score": "4.1-2.9"
         },
         {
           "date": "2026-03-05",
@@ -196,6 +194,72 @@
           "home_win_prob": 33.8,
           "away_win_prob": 66.2,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "ARI @ CHC",
+          "pick": "ARI +1.5",
+          "result": "1-8",
+          "hit": false,
+          "confidence": 50.0,
+          "proj_score": "3.6-3.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "ARI @ CHC",
+          "pick": "UNDER 8.5",
+          "result": "1-8",
+          "hit": false,
+          "confidence": 54.2,
+          "proj_score": "3.6-3.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "ARI @ CHC",
+          "pick": "CHC",
+          "result": "1-8",
+          "hit": true,
+          "confidence": 50.0,
+          "proj_score": "3.6-3.6",
+          "home_win_prob": 50.0,
+          "away_win_prob": 50.0
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "MIL @ COL",
+          "pick": "MIL +1.5",
+          "result": "10-8",
+          "hit": true,
+          "confidence": 58.1,
+          "proj_score": "6.2-4.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "MIL @ COL",
+          "pick": "OVER 8.5",
+          "result": "10-8",
+          "hit": true,
+          "confidence": 56.7,
+          "proj_score": "6.2-4.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "MIL @ COL",
+          "pick": "MIL",
+          "result": "10-8",
+          "hit": true,
+          "confidence": 56.7,
+          "proj_score": "6.2-4.6",
+          "home_win_prob": 36.5,
+          "away_win_prob": 63.5
         }
       ]
     },
@@ -536,33 +600,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 8,
-      "losses": 5,
-      "pushes": 0,
-      "pct": 61.5,
-      "roi": 17.5
-    },
-    "totals": {
-      "wins": 9,
-      "losses": 4,
-      "pushes": 0,
-      "pct": 69.2,
-      "roi": 32.2
-    },
-    "moneylines": {
-      "wins": 7,
-      "losses": 6,
-      "pushes": 0,
-      "pct": 53.8,
-      "roi": 2.8
-    },
-    "best_bets": {
       "wins": 9,
       "losses": 6,
       "pushes": 0,
       "pct": 60.0,
       "roi": 14.5
+    },
+    "totals": {
+      "wins": 10,
+      "losses": 5,
+      "pushes": 0,
+      "pct": 66.7,
+      "roi": 27.3
+    },
+    "moneylines": {
+      "wins": 9,
+      "losses": 6,
+      "pushes": 0,
+      "pct": 60.0,
+      "roi": 14.5
+    },
+    "best_bets": {
+      "wins": 10,
+      "losses": 5,
+      "pushes": 0,
+      "pct": 66.7,
+      "roi": 27.3
     }
   },
-  "updated": "2026-03-05T22:14:39"
+  "updated": "2026-03-05T23:29:46"
 }
