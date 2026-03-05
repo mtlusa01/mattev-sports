@@ -17,7 +17,9 @@ Usage:
 import json
 import os
 import sys
+import time
 import requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 
 # ── Configuration ────────────────────────────────────────────────
@@ -798,13 +800,15 @@ def grade_nhl_props():
         print("  NHL Props: no team matchups found in props")
         return False
 
-    # Fetch ESPN event IDs for today and yesterday
+    # Fetch ESPN event IDs for today and yesterday (parallel)
     props_date = props_data.get("date", datetime.now().strftime("%Y-%m-%d"))
     today = datetime.now().strftime("%Y-%m-%d")
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
-    espn_events.update(_fetch_espn_event_ids("NHL", yesterday))
-    espn_events.update(_fetch_espn_event_ids("NHL", today))
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futs = [executor.submit(_fetch_espn_event_ids, "NHL", d) for d in [yesterday, today]]
+        for fut in as_completed(futs):
+            espn_events.update(fut.result())
 
     # Map team abbreviations to ESPN event IDs
     # Props have team + opponent but not home/away, so try both directions
@@ -897,7 +901,7 @@ def grade_nhl_props():
         player_name = p.get("player", "")
         prop_type = p.get("prop", "")
         line = p.get("line")
-        direction = p.get("direction", "OVER").upper()
+        direction = str(p.get("direction", "OVER")).upper()
         if line is None:
             continue
 
@@ -1037,13 +1041,15 @@ def grade_nba_props():
         print("  NBA Props: no team matchups found in props")
         return False
 
-    # Fetch ESPN event IDs for today and yesterday
+    # Fetch ESPN event IDs for today and yesterday (parallel)
     props_date = props_data.get("date", datetime.now().strftime("%Y-%m-%d"))
     today = datetime.now().strftime("%Y-%m-%d")
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
-    espn_events.update(_fetch_espn_event_ids("NBA", yesterday))
-    espn_events.update(_fetch_espn_event_ids("NBA", today))
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futs = [executor.submit(_fetch_espn_event_ids, "NBA", d) for d in [yesterday, today]]
+        for fut in as_completed(futs):
+            espn_events.update(fut.result())
 
     # Map team abbreviations to ESPN event IDs (both directions)
     team_to_event = {}
@@ -1147,7 +1153,7 @@ def grade_nba_props():
         player_name = p.get("player", "")
         prop_type = p.get("prop", "")
         line = p.get("line")
-        direction = p.get("direction", "OVER").upper()
+        direction = str(p.get("direction", "OVER")).upper()
         if line is None:
             continue
 
@@ -1276,7 +1282,21 @@ SPORT_CONFIG = [
 ]
 
 
+def _fetch_scores_for_sport(cfg, today, yesterday):
+    """Fetch ESPN scores for a single sport (designed for parallel execution)."""
+    sport = cfg["label"]
+    scores = {}
+    if sport == "NCAAB":
+        scores.update(fetch_espn_scores("NCAAB", yesterday))
+        scores.update(fetch_espn_scores("NCAAB", today))
+    else:
+        scores.update(fetch_espn_scores(sport, today))
+        scores.update(fetch_espn_scores(sport, yesterday))
+    return sport, scores
+
+
 def main():
+    t_start = time.time()
     print(f"\n{'=' * 60}")
     print(f"  Score Check & Auto-Grade — {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}")
     print(f"  Source: ESPN (free, 0 Odds API calls)")
@@ -1286,6 +1306,7 @@ def main():
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
     # ── Phase 1: Check which sports need grading ──
+    t_phase1 = time.time()
     print("Checking for ungraded games...")
     sports_to_check = []
     for cfg in SPORT_CONFIG:
@@ -1299,31 +1320,68 @@ def main():
                 print(f"  {cfg['label']}: no games today — skipping")
             else:
                 print(f"  {cfg['label']}: all {total} games graded — skipping")
+    t_phase1_end = time.time()
 
     if not sports_to_check:
+        elapsed = time.time() - t_start
         print(f"\n{'=' * 60}")
-        print(f"  SUMMARY: All games graded across all sports. Nothing to do.")
+        print(f"  SUMMARY: All games graded. Nothing to do. [{elapsed:.1f}s]")
         print(f"{'=' * 60}")
         return 0
 
-    # ── Phase 2: Fetch scores from ESPN (only for sports that need it) ──
-    print(f"\nFetching ESPN scores for {len(sports_to_check)} sport(s)...")
+    # ── Phase 2: Fetch scores from ESPN (parallel for all sports) ──
+    t_phase2 = time.time()
+    print(f"\nFetching ESPN scores for {len(sports_to_check)} sport(s) (parallel)...")
     score_map = {}
+    with ThreadPoolExecutor(max_workers=len(sports_to_check)) as executor:
+        futures = {
+            executor.submit(_fetch_scores_for_sport, cfg, today, yesterday): cfg
+            for cfg in sports_to_check
+        }
+        for future in as_completed(futures):
+            sport, scores = future.result()
+            score_map[sport] = scores
+    t_phase2_end = time.time()
+
+    # ── Quick check: any newly final games? ──
+    has_new_finals = False
     for cfg in sports_to_check:
         sport = cfg["label"]
-        scores = {}
-        if sport == "NCAAB":
-            # NCAAB games can span yesterday (late games) and today
-            scores.update(fetch_espn_scores("NCAAB", yesterday))
-            scores.update(fetch_espn_scores("NCAAB", today))
-        else:
-            # NBA/NHL — today's scoreboard includes games that started today
-            scores.update(fetch_espn_scores(sport, today))
-            # Also check yesterday for late-night games not yet graded
-            scores.update(fetch_espn_scores(sport, yesterday))
-        score_map[sport] = scores
+        scores = score_map.get(sport, {})
+        proj_path = os.path.join(REPO_ROOT, cfg["proj_file"])
+        proj_data = load_json(proj_path)
+        if not proj_data:
+            continue
+        for g in proj_data.get("games", []):
+            key = f"{g['away_team']}@{g['home_team']}"
+            sc = scores.get(key)
+            if not sc:
+                continue
+            # New final: ESPN says completed but we haven't graded yet
+            if sc["completed"] and g.get("status") != "final":
+                has_new_finals = True
+                break
+            # Live score change
+            if sc.get("in_progress") and g.get("status") != "final":
+                old_a = g.get("away_score")
+                old_h = g.get("home_score")
+                if old_a != sc["away_score"] or old_h != sc["home_score"]:
+                    has_new_finals = True  # treat live updates as worth processing
+                    break
+        if has_new_finals:
+            break
+
+    if not has_new_finals:
+        elapsed = time.time() - t_start
+        api_time = t_phase2_end - t_phase2
+        print(f"\n  No new finals or score changes detected.")
+        print(f"\n{'=' * 60}")
+        print(f"  SUMMARY: No changes [{elapsed:.1f}s total, API: {api_time:.1f}s]")
+        print(f"{'=' * 60}")
+        return 0
 
     # ── Phase 3: Grade ──
+    t_phase3 = time.time()
     print("\nGrading...")
     any_changes = False
     summaries = []
@@ -1335,14 +1393,17 @@ def main():
         )
         any_changes |= changed
         summaries.append(summary)
+    t_phase3_end = time.time()
 
     # ── Phase 4: Grade player props (NHL + NBA) ──
+    t_phase4 = time.time()
     print("\nGrading player props...")
     nhl_props_changed = grade_nhl_props()
     any_changes |= nhl_props_changed
 
     nba_props_changed = grade_nba_props()
     any_changes |= nba_props_changed
+    t_phase4_end = time.time()
 
     # Add skipped sports to summary
     checked_labels = {cfg["label"] for cfg in sports_to_check}
@@ -1350,11 +1411,19 @@ def main():
         if cfg["label"] not in checked_labels:
             summaries.append(f"{cfg['label']}: skipped (all graded)")
 
-    # ── Summary ──
+    # ── Summary with timing ──
+    t_end = time.time()
+    total_time = t_end - t_start
+    check_time = t_phase1_end - t_phase1
+    api_time = t_phase2_end - t_phase2
+    grade_time = t_phase3_end - t_phase3
+    props_time = t_phase4_end - t_phase4
+
     print(f"\n{'=' * 60}")
     print(f"  SUMMARY {'(files updated)' if any_changes else '(no changes)'}")
     for s in summaries:
         print(f"    {s}")
+    print(f"  Timing: {total_time:.1f}s total (check: {check_time:.1f}s, API: {api_time:.1f}s, grade: {grade_time:.1f}s, props: {props_time:.1f}s)")
     print(f"{'=' * 60}")
 
     return 0

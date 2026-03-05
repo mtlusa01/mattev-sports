@@ -3,15 +3,19 @@ name: Check Scores & Grade
 on:
   schedule:
     # Every 5 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
-    # Covers NCAAB daytime games through late NBA/NHL games
+    # Script loops internally for ~2-min effective grading interval
     - cron: '*/5 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
     - cron: '*/5 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
   workflow_dispatch:
 
+concurrency:
+  group: check-scores
+  cancel-in-progress: true
+
 jobs:
   check-scores:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
 
     permissions:
       contents: write
@@ -26,25 +30,46 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
         run: pip install requests
 
-      - name: Check scores and grade
-        run: python scripts/check_and_grade.py
-
-      - name: Commit and push if changed
+      - name: Grade loop (2 passes, ~2 min apart)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
-                   game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
-                   nhl_player_props.json nhl_props_results.json projections.json \
-                   all_props.json all_props_results.json; do
-            [ -f "$f" ] && git add "$f"
-          done
-          git diff --staged --quiet || {
-            git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
-            # Rebase with -X theirs keeps CI's data files on conflict
-            git pull --rebase -X theirs && git push
+
+          grade_and_push() {
+            python scripts/check_and_grade.py
+
+            # Stage all gradeable files
+            changed=false
+            for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
+                     game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
+                     nhl_player_props.json nhl_props_results.json projections.json \
+                     all_props.json all_props_results.json; do
+              [ -f "$f" ] && git add "$f"
+            done
+
+            if ! git diff --staged --quiet; then
+              git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
+              git pull --rebase -X theirs && git push
+              echo "PUSHED"
+            else
+              echo "NO_CHANGES"
+            fi
           }
+
+          echo "=== Pass 1/2 ==="
+          grade_and_push
+
+          echo ""
+          echo "Sleeping 120s before pass 2..."
+          sleep 120
+
+          # Pull latest before second pass (other workflows may have pushed)
+          git pull --rebase -X theirs 2>/dev/null || true
+
+          echo "=== Pass 2/2 ==="
+          grade_and_push
