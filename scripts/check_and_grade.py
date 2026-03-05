@@ -1214,17 +1214,133 @@ def grade_nba_props():
             print("  NBA all_props: no props could be graded (likely roster-only without lines)")
 
     # ── Grade projections.json ──
+    proj_graded = 0
     if proj_ungraded:
-        g, w, l = _grade_props_list(proj_props, box_scores, _get_nba_stat)
-        if g > 0:
-            print(f"  NBA projections: graded {g} props ({w}W-{l}L)")
+        proj_graded, w, l = _grade_props_list(proj_props, box_scores, _get_nba_stat)
+        if proj_graded > 0:
+            print(f"  NBA projections: graded {proj_graded} props ({w}W-{l}L)")
             proj_props_data["updated"] = datetime.now().isoformat(timespec="seconds")
             save_json(proj_props_path, proj_props_data)
             any_changes = True
         else:
             print("  NBA projections: no props could be graded")
 
+    # ── Write projections.json results to all_props_results.json too ──
+    # This gives the frontend a second data path via the merge function,
+    # so results show even if the CDN serves a cached projections.json.
+    proj_with_results = [p for p in proj_props if p.get("result")]
+    if proj_with_results:
+        _merge_proj_results_into_all_props_results(
+            proj_with_results, target_date, all_props_results_path
+        )
+
     return any_changes
+
+
+def _merge_proj_results_into_all_props_results(proj_graded, game_date, results_path):
+    """Merge projections.json graded props into all_props_results.json.
+
+    Adds projections.json results alongside all_props.json results so
+    the frontend merge function can find them.
+    """
+    results = load_json(results_path) or {"days": [], "cumulative": {}}
+    days = results.get("days", [])
+
+    # Find or create day entry
+    day = None
+    day_idx = None
+    for i, d in enumerate(days):
+        if d.get("date") == game_date:
+            day = d
+            day_idx = i
+            break
+
+    if not day:
+        day = {
+            "date": game_date,
+            "graded_at": datetime.now().isoformat(timespec="seconds"),
+            "total_props_graded": 0,
+            "overall": {"wins": 0, "losses": 0, "pushes": 0, "total": 0,
+                        "record": "0-0-0", "win_pct": 0},
+            "by_stat_type": {},
+            "picks": [],
+        }
+        days.append(day)
+        day_idx = len(days) - 1
+
+    # Build set of existing pick keys to avoid duplicates
+    existing_keys = set()
+    for pick in day.get("picks", []):
+        key = f"{pick.get('player')}|{pick.get('prop')}|{pick.get('direction')}|{pick.get('line')}"
+        existing_keys.add(key)
+
+    # Add projections results that aren't already present
+    added = 0
+    for p in proj_graded:
+        key = f"{p.get('player')}|{p.get('prop')}|{p.get('direction')}|{p.get('line')}"
+        if key in existing_keys:
+            continue
+        day["picks"].append({
+            "player": p.get("player"),
+            "prop": p.get("prop"),
+            "team": p.get("team"),
+            "opponent": p.get("opponent", ""),
+            "direction": p.get("direction"),
+            "line": p.get("line"),
+            "projection": p.get("projection"),
+            "actual": p.get("actual"),
+            "result": p.get("result"),
+            "confidence": p.get("confidence"),
+            "ev": p.get("ev"),
+            "edge": p.get("edge"),
+        })
+        added += 1
+
+    if added == 0:
+        return
+
+    # Recalculate day stats from all picks
+    all_picks = day["picks"]
+    wins = sum(1 for p in all_picks if p.get("result") == "WIN")
+    losses = sum(1 for p in all_picks if p.get("result") == "LOSS")
+    pushes = sum(1 for p in all_picks if p.get("result") == "PUSH")
+    day["total_props_graded"] = len(all_picks)
+    day["overall"] = {
+        "wins": wins, "losses": losses, "pushes": pushes,
+        "total": len(all_picks),
+        "record": f"{wins}-{losses}-{pushes}",
+        "win_pct": round(wins / (wins + losses) * 100, 1) if (wins + losses) > 0 else 0,
+    }
+    day["graded_at"] = datetime.now().isoformat(timespec="seconds")
+
+    # Recalculate by_stat_type
+    by_type = {}
+    for p in all_picks:
+        pt = p.get("prop", "?")
+        if pt not in by_type:
+            by_type[pt] = {"wins": 0, "losses": 0, "pushes": 0}
+        if p.get("result") == "WIN":
+            by_type[pt]["wins"] += 1
+        elif p.get("result") == "LOSS":
+            by_type[pt]["losses"] += 1
+        else:
+            by_type[pt]["pushes"] += 1
+    day["by_stat_type"] = by_type
+
+    days[day_idx] = day
+
+    # Recalculate cumulative
+    all_w = sum(d.get("overall", {}).get("wins", 0) for d in days)
+    all_l = sum(d.get("overall", {}).get("losses", 0) for d in days)
+    all_p = sum(d.get("overall", {}).get("pushes", 0) for d in days)
+    results["cumulative"] = {
+        "wins": all_w, "losses": all_l, "pushes": all_p,
+        "total": all_w + all_l + all_p,
+        "win_pct": round(all_w / (all_w + all_l) * 100, 1) if (all_w + all_l) > 0 else 0,
+    }
+    results["days"] = days
+    save_json(results_path, results)
+    print(f"  Merged {added} projections results into all_props_results.json")
 
 
 def _update_nba_props_results(props, game_date, results_path):
