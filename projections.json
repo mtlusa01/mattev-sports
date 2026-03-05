@@ -1,8 +1,8 @@
 {
   "date": "2026-03-05",
   "sport": "NBA",
-  "locked_at": "2026-03-05T08:20:48",
-  "updated": "2026-03-05T08:23:51",
+  "locked_at": "2026-03-05T08:32:16",
+  "updated": "2026-03-05T08:32:16",
   "projections": [
     {
       "player": "Ace Bailey",
@@ -11,12 +11,12 @@
       "direction": "UNDER",
       "line": 17.5,
       "projection": 16.3,
-      "confidence": 56.42999999999999,
-      "ev": 11.1,
+      "confidence": 56.62,
+      "ev": 11.4,
       "diff": -1.2,
       "market_odds": -115.0,
-      "fair_odds": -146.0,
-      "prob_edge": 5.9,
+      "fair_odds": -148.0,
+      "prob_edge": 6.1,
       "book_odds": {
         "draftkings": {
           "over": {
@@ -51,7 +51,7 @@
       },
       "best_book": "draftkings",
       "has_line": true,
-      "generated_at": "2026-03-05T08:20:48",
+      "generated_at": "2026-03-05T08:32:16",
       "edge": "GOOD",
       "l5_avg": 14.0,
       "l10_avg": 14.4,
@@ -216,9 +216,9 @@
       "h2h_avg": 12.0,
       "h2h_record": "1/1",
       "h2h_total_games": 1,
-      "model_probability": 77.2,
+      "model_probability": 78.0,
       "implied_probability": 53.5,
-      "true_ev": 44.3,
+      "true_ev": 45.8,
       "stdev": 5.73,
       "cv": 0.378,
       "var_trend": -0.8,
@@ -234,12 +234,13 @@
       "matchup_grade": "B",
       "game_total": 243.5,
       "teammates_out": 0,
-      "redistribution_boost": 0.0,
+      "redistribution_boost": 0,
       "pre_boost_projection": 15.4,
       "pick_score": 46.6,
       "score_factors": [
-        "+44.3% True EV"
-      ]
+        "+45.8% True EV"
+      ],
+      "top_pick_rank": 1
     },
     {
       "player": "Keyonte George",
@@ -248,12 +249,12 @@
       "direction": "OVER",
       "line": 25.5,
       "projection": 26.9,
-      "confidence": 54.1,
-      "ev": 0.3,
+      "confidence": 54.2,
+      "ev": 0.4,
       "diff": 1.4,
       "market_odds": -117.0,
       "fair_odds": -118.0,
-      "prob_edge": 0.2,
+      "prob_edge": 0.3,
       "book_odds": {
         "draftkings": {
           "over": {
@@ -288,7 +289,7 @@
       },
       "best_book": "fanduel",
       "has_line": true,
-      "generated_at": "2026-03-05T08:20:48",
+      "generated_at": "2026-03-05T08:32:16",
       "edge": "FAIR",
       "l5_avg": 22.8,
       "l10_avg": 24.8,
@@ -451,9 +452,9 @@
       "h2h_avg": 30.0,
       "h2h_record": "1/1",
       "h2h_total_games": 1,
-      "model_probability": 54.7,
+      "model_probability": 54.9,
       "implied_probability": 53.9,
-      "true_ev": 1.4,
+      "true_ev": 1.7,
       "stdev": 9.64,
       "cv": 0.408,
       "var_trend": -4.0,
@@ -469,85 +470,11 @@
       "matchup_grade": "B",
       "game_total": 243.5,
       "teammates_out": 0,
-      "redistribution_boost": 0.0,
+      "redistribution_boost": 0,
       "pre_boost_projection": 27.4,
-      "pick_score": 9.4,
-      "score_factors": []
-    }
-  ],
-  "top_picks": [
-    {
-      "type": "total",
-      "game": "UTA @ WAS",
-      "away_team": "UTA",
-      "home_team": "WAS",
-      "pick": "UNDER 243.5",
-      "confidence": 75.2,
-      "pick_score": 55.0,
-      "score_factors": [
-        "75.2% total conf",
-        "Very high confidence"
-      ],
-      "commence_time": "2026-03-06T00:10:00Z",
-      "top_pick_rank": 1
-    },
-    {
-      "type": "total",
-      "game": "GSW @ HOU",
-      "away_team": "GSW",
-      "home_team": "HOU",
-      "pick": "OVER 215.5",
-      "confidence": 77.9,
-      "pick_score": 55.0,
-      "score_factors": [
-        "77.9% total conf",
-        "Very high confidence"
-      ],
-      "commence_time": "2026-03-06T00:40:00Z",
+      "pick_score": 10.6,
+      "score_factors": [],
       "top_pick_rank": 2
-    },
-    {
-      "type": "total",
-      "game": "LAL @ DEN",
-      "away_team": "LAL",
-      "home_team": "DEN",
-      "pick": "UNDER 241.5",
-      "confidence": 78.6,
-      "pick_score": 55.0,
-      "score_factors": [
-        "78.6% total conf",
-        "Very high confidence"
-      ],
-      "commence_time": "2026-03-06T03:10:00Z",
-      "top_pick_rank": 3
-    },
-    {
-      "type": "ml",
-      "game": "BKN @ MIA",
-      "away_team": "BKN",
-      "home_team": "MIA",
-      "pick": "MIA",
-      "confidence": 85.7,
-      "pick_score": 50.0,
-      "score_factors": [
-        "85.7% ML conf"
-      ],
-      "commence_time": "2026-03-06T00:40:00Z",
-      "top_pick_rank": 4
-    },
-    {
-      "type": "ml",
-      "game": "LAL @ DEN",
-      "away_team": "LAL",
-      "home_team": "DEN",
-      "pick": "DEN",
-      "confidence": 70.6,
-      "pick_score": 50.0,
-      "score_factors": [
-        "70.6% ML conf"
-      ],
-      "commence_time": "2026-03-06T03:10:00Z",
-      "top_pick_rank": 5
     }
   ]
 }
