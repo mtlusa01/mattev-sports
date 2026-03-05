@@ -2389,10 +2389,10 @@
         const isGameView = currentView === 'game-projections';
         if (isGameView) {
           const games = gameProjections.filter(g => g.game_date === selectedDate);
-          el.textContent = dateStr + ' \u00B7 ' + games.length + ' games';
+          el.textContent = games.length > 0 ? dateStr + ' \u00B7 ' + games.length + ' games' : dateStr;
         } else {
           const activeProps = projections._stale ? [] : projections;
-          el.textContent = dateStr + ' \u00B7 ' + activeProps.length + ' projections';
+          el.textContent = activeProps.length > 0 ? dateStr + ' \u00B7 ' + activeProps.length + ' projections' : dateStr;
         }
       } else {
         // NHL/NCAAB/MLB: show game count
@@ -2400,7 +2400,7 @@
           const gd = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
           return gd === selectedDate;
         });
-        el.textContent = dateStr + ' \u00B7 ' + games.length + ' games';
+        el.textContent = games.length > 0 ? dateStr + ' \u00B7 ' + games.length + ' games' : dateStr;
       }
     }
 
