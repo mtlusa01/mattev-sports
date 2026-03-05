@@ -856,8 +856,8 @@
       const day = daysByDate[selectedDate];
       const today = todayKey();
 
-      // Don't show daily results for today — games haven't finished yet
-      if (selectedDate === today) {
+      // Show "no results yet" for today only if there's genuinely no graded data
+      if (selectedDate === today && (!day || !day.picks || day.picks.length === 0)) {
         document.getElementById('day-header').textContent = formatDateFull(selectedDate);
         document.getElementById('results-summary').innerHTML = '';
         document.getElementById('results-table-body').innerHTML =
