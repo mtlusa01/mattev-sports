@@ -1,15 +1,10 @@
 {
   "date": "2026-03-04",
-  "generated_at": "2026-03-04T08:54:44",
-  "game_bets": [
+  "sport": "NBA",
+  "type": "game",
+  "locked_at": "2026-03-04T08:54:44",
+  "recommendations": [
     {
-      "qualified": true,
-      "score": 177.0,
-      "reasons": [
-        "76.0% confidence",
-        "High confidence"
-      ],
-      "type": "spread",
       "bet_type": "SPREAD",
       "game": "OKC @ NYK",
       "away_team": "OKC",
@@ -17,15 +12,10 @@
       "pick": "NYK +4.5",
       "confidence": 76.0,
       "commence_time": "2026-03-05T00:10:00Z",
+      "reasons": ["76.0% confidence", "High confidence"],
       "rec_rank": 1
     },
     {
-      "qualified": true,
-      "score": 154.8,
-      "reasons": [
-        "69.9% confidence"
-      ],
-      "type": "ml",
       "bet_type": "ML",
       "game": "IND @ LAC",
       "away_team": "IND",
@@ -33,15 +23,10 @@
       "pick": "LAC",
       "confidence": 69.9,
       "commence_time": "2026-03-05T03:40:00Z",
+      "reasons": ["69.9% confidence"],
       "rec_rank": 2
     },
     {
-      "qualified": true,
-      "score": 154.4,
-      "reasons": [
-        "69.7% confidence"
-      ],
-      "type": "spread",
       "bet_type": "SPREAD",
       "game": "POR @ MEM",
       "away_team": "POR",
@@ -49,15 +34,10 @@
       "pick": "MEM +7.5",
       "confidence": 69.7,
       "commence_time": "2026-03-05T01:10:00Z",
+      "reasons": ["69.7% confidence"],
       "rec_rank": 3
     },
     {
-      "qualified": true,
-      "score": 151.4,
-      "reasons": [
-        "68.2% confidence"
-      ],
-      "type": "spread",
       "bet_type": "SPREAD",
       "game": "ATL @ MIL",
       "away_team": "ATL",
@@ -65,15 +45,10 @@
       "pick": "ATL +1.0",
       "confidence": 68.2,
       "commence_time": "2026-03-05T02:40:00Z",
+      "reasons": ["68.2% confidence"],
       "rec_rank": 4
     },
     {
-      "qualified": true,
-      "score": 147.4,
-      "reasons": [
-        "66.2% confidence"
-      ],
-      "type": "ml",
       "bet_type": "ML",
       "game": "ATL @ MIL",
       "away_team": "ATL",
@@ -81,12 +56,8 @@
       "pick": "ATL",
       "confidence": 66.2,
       "commence_time": "2026-03-05T02:40:00Z",
+      "reasons": ["66.2% confidence"],
       "rec_rank": 5
     }
-  ],
-  "props": [],
-  "game_count": 5,
-  "prop_count": 0,
-  "has_recommendations": true,
-  "message": null
+  ]
 }

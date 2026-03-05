@@ -2541,6 +2541,18 @@
     const NBA_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/all_props_results.json';
     const NBA_PLAYER_PROJ_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nba_player_projections.json';
 
+    // ── Locked Recommendation URLs ──
+    const NBA_REC_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nba_recommended.json';
+    const NHL_REC_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_recommended.json';
+    const NCAAB_REC_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_recommended.json';
+    const MLB_REC_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_recommended.json';
+    const NBA_PROPS_REC_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nba_props_recommended.json';
+    const NHL_PROPS_REC_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_recommended.json';
+
+    // ── Locked Recommendations (stable across pipeline re-runs) ──
+    const lockedGameRecs = {};   // { nba: {date, recommendations}, nhl: ..., ... }
+    const lockedPropsRecs = {};  // { nba: {date, recommendations}, nhl: ... }
+
     // ── Historical Results ──
     let historicalResults = null;
     let nhlHistoricalResults = null;
@@ -3620,6 +3632,30 @@
     // Cache best bets per sport+date so picks are persistent across re-renders
     const dailyBestBets = {};
 
+    async function loadLockedRecommendations(sport, type) {
+      const urlMap = {
+        'nba:game': NBA_REC_URL, 'nhl:game': NHL_REC_URL,
+        'ncaab:game': NCAAB_REC_URL, 'mlb:game': MLB_REC_URL,
+        'nba:props': NBA_PROPS_REC_URL, 'nhl:props': NHL_PROPS_REC_URL,
+      };
+      const url = urlMap[sport + ':' + type];
+      if (!url) return;
+      const store = type === 'props' ? lockedPropsRecs : lockedGameRecs;
+      // Skip if already loaded for this sport
+      if (store[sport]) return;
+      try {
+        const resp = await fetch(url + '?t=' + Date.now());
+        if (!resp.ok) return;
+        const data = await resp.json();
+        if (data && data.date && data.recommendations && data.recommendations.length > 0) {
+          store[sport] = data;
+          // Clear cached dynamic bets so locked data takes priority on next render
+          const cacheKey = sport + ':' + data.date;
+          delete dailyBestBets[cacheKey];
+        }
+      } catch (e) { /* silently fail — fallback to dynamic */ }
+    }
+
     function buildGameBestBets(games, thresholds) {
       // Build best bets dynamically from game projections
       // NOTE: includes final games so cached picks can be graded
@@ -3657,11 +3693,17 @@
         return gd === selectedDate;
       });
 
+      // Use locked recommendations if available for today's date
+      const locked = lockedGameRecs[currentSport];
+      const isLocked = locked && locked.date === selectedDate && locked.recommendations && locked.recommendations.length > 0;
+
       // Cache key: sport + date — only generate picks once per date
       const cacheKey = currentSport + ':' + selectedDate;
       if (!dailyBestBets[cacheKey]) {
         let gameRecs;
-        if (currentSport === 'nhl' || currentSport === 'ncaab' || currentSport === 'mlb') {
+        if (isLocked) {
+          gameRecs = locked.recommendations;
+        } else if (currentSport === 'nhl' || currentSport === 'ncaab' || currentSport === 'mlb') {
           gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 60, ml: 60 });
         } else {
           gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 65, ml: 58 });
@@ -3726,9 +3768,11 @@
         recordHtml = `<span class="rec-record">${parts.join(' - ')}</span>`;
       }
 
+      const lockBadge = isLocked ? ' <span title="Locked picks — stable all day" style="font-size:0.75em;opacity:0.6">&#128274;</span>' : '';
+
       return `<div class="rec-category" style="margin-bottom:20px">
         <div class="rec-header">
-          <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel}${typeLabel} Bets</span>
+          <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel}${typeLabel} Bets${lockBadge}</span>
           <span class="rec-count">${gameRecs.length} pick${gameRecs.length !== 1 ? 's' : ''} ${recordHtml}</span>
         </div>
         <div class="rec-cards">${gameCards}</div>
@@ -3736,8 +3780,16 @@
     }
 
     function renderPropRecommendations() {
+      // Check for locked prop recommendations first
+      const lockedProps = lockedPropsRecs[currentSport];
+      const today = getLocalDateStr();
+      const propsLocked = lockedProps && lockedProps.date === today && selectedDate === today
+        && lockedProps.recommendations && lockedProps.recommendations.length > 0;
+
       let propRecs;
-      if (currentSport === 'nhl') {
+      if (propsLocked) {
+        propRecs = lockedProps.recommendations;
+      } else if (currentSport === 'nhl') {
         propRecs = [...nhlProjections]
           .filter(r => (r.edge === 'STRONG' || r.edge === 'GOOD') && !r.result)
           .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
@@ -3749,6 +3801,7 @@
           .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
           .slice(0, MAX_RECOMMENDED);
       }
+      const propLockBadge = propsLocked ? ' <span title="Locked picks — stable all day" style="font-size:0.75em;opacity:0.6">&#128274;</span>' : '';
       if (propRecs.length === 0) {
         return `<div class="rec-category">
           <div class="rec-header">
@@ -3782,7 +3835,7 @@
       }).join('');
       return `<div class="rec-category">
         <div class="rec-header">
-          <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
+          <span class="rec-header-title prop-recs">&#128100; Recommended Player Props${propLockBadge}</span>
           <span class="rec-count">${propRecs.length} pick${propRecs.length !== 1 ? 's' : ''}</span>
         </div>
         <div class="rec-cards">${propCards}</div>
@@ -6577,6 +6630,9 @@
           }) + ' \u00B7 ' + gameProjections.length + ' games';
         }
 
+        // Load locked recommendations for NBA games (await before rendering)
+        await loadLockedRecommendations('nba', 'game');
+
         if (currentSport === 'nba') updateStatsBar();
         if (currentView === 'game-projections' && currentSport === 'nba') renderGameProjections();
         else if (currentSport === 'nba') render(); // re-render props with game pills + matchup info
@@ -6643,6 +6699,9 @@
           }
         }
 
+        // Load locked recommendations for NHL games (await before rendering)
+        await loadLockedRecommendations('nhl', 'game');
+
         if (currentSport === 'nhl') {
           updateActiveGameData();
           updateTimestamp();
@@ -6690,6 +6749,9 @@
               }
             }
           }
+          // Load locked recommendations for NCAAB games (await before rendering)
+          await loadLockedRecommendations('ncaab', 'game');
+
           updateActiveGameData();
           updateTimestamp();
           updateStatsBar();
@@ -6734,6 +6796,9 @@
               }
             }
           }
+          // Load locked recommendations for MLB games (await before rendering)
+          await loadLockedRecommendations('mlb', 'game');
+
           updateActiveGameData();
           updateTimestamp();
           updateStatsBar();
@@ -6775,6 +6840,9 @@
         projections._stale = false;
         topPicks = data.top_picks || [];
         recommendations = data.recommendations || null;
+
+        // Load locked recommendations for NBA props (await before rendering)
+        await loadLockedRecommendations('nba', 'props');
 
         // Merge grading results into props so W/L badges render
         if (projections.length > 0) {
@@ -6832,6 +6900,9 @@
           nhlProjections._date = dataDate || today;
           nhlProjections._stale = false;
         }
+
+        // Load locked recommendations for NHL props (await before rendering)
+        await loadLockedRecommendations('nhl', 'props');
 
         // Merge grading results so W/L badges render
         if (nhlProjections.length > 0) {
