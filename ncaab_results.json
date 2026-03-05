@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-04T20:45:03",
+  "updated": "2026-03-04T21:00:03",
   "allTime": {
     "spreads": {
-      "wins": 229,
-      "losses": 178,
+      "wins": 231,
+      "losses": 181,
       "pushes": 10,
-      "pct": 56.3,
-      "roi": 7.4
+      "pct": 56.1,
+      "roi": 7.0
     },
     "totals": {
-      "wins": 201,
-      "losses": 213,
+      "wins": 203,
+      "losses": 216,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.3
+      "pct": 48.4,
+      "roi": -7.5
     },
     "moneylines": {
-      "wins": 269,
-      "losses": 148,
+      "wins": 273,
+      "losses": 149,
       "pushes": 0,
-      "pct": 64.5,
-      "roi": 23.2
+      "pct": 64.7,
+      "roi": 23.5
     },
     "best_bets": {
-      "wins": 43,
-      "losses": 12,
+      "wins": 44,
+      "losses": 11,
       "pushes": 0,
-      "pct": 78.2,
-      "roi": 49.3
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
     {
       "date": "2026-03-04",
       "spreads": {
-        "wins": 4,
-        "losses": 4,
+        "wins": 6,
+        "losses": 7,
         "pushes": 0,
-        "record": "4-4",
-        "pct": 50.0
+        "record": "6-7",
+        "pct": 46.2
       },
       "totals": {
-        "wins": 4,
-        "losses": 4,
+        "wins": 6,
+        "losses": 7,
         "pushes": 0,
-        "record": "4-4",
-        "pct": 50.0
+        "record": "6-7",
+        "pct": 46.2
       },
       "moneylines": {
-        "wins": 3,
-        "losses": 5,
+        "wins": 7,
+        "losses": 6,
         "pushes": 0,
-        "record": "3-5",
-        "pct": 37.5
+        "record": "7-6",
+        "pct": 53.8
       },
       "best_bets": {
-        "wins": 3,
-        "losses": 2,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -253,8 +253,143 @@
           "pick": "FOR",
           "result": "84-87",
           "hit": false,
-          "confidence": 76,
+          "confidence": 76
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "MILW @ DETM",
+          "pick": "DETM -2.0",
+          "result": "63-84",
+          "hit": true,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "MILW @ DETM",
+          "pick": "OVER 152.0",
+          "result": "63-84",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "MILW @ DETM",
+          "pick": "DETM",
+          "result": "63-84",
+          "hit": true,
+          "confidence": 66
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "STO @ LEM",
+          "pick": "LEM -6.0",
+          "result": "81-71",
+          "hit": false,
+          "confidence": 61
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "STO @ LEM",
+          "pick": "OVER 136.5",
+          "result": "81-71",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "STO @ LEM",
+          "pick": "LEM",
+          "result": "81-71",
+          "hit": false,
+          "confidence": 74
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "CLE @ WRST",
+          "pick": "CLE +11.0",
+          "result": "61-90",
+          "hit": false,
+          "confidence": 60
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "CLE @ WRST",
+          "pick": "OVER 166.0",
+          "result": "61-90",
+          "hit": false,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "CLE @ WRST",
+          "pick": "WRST",
+          "result": "61-90",
+          "hit": true,
+          "confidence": 74
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "YSU @ RMU",
+          "pick": "YSU +9.5",
+          "result": "53-68",
+          "hit": false,
+          "confidence": 58
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "YSU @ RMU",
+          "pick": "OVER 153.5",
+          "result": "53-68",
+          "hit": false,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "YSU @ RMU",
+          "pick": "RMU",
+          "result": "53-68",
+          "hit": true,
+          "confidence": 79,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "CHST @ LIU",
+          "pick": "CHST +9.5",
+          "result": "75-79",
+          "hit": true,
+          "confidence": 60
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "CHST @ LIU",
+          "pick": "OVER 142.0",
+          "result": "75-79",
+          "hit": true,
+          "confidence": 51
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "CHST @ LIU",
+          "pick": "LIU",
+          "result": "75-79",
+          "hit": true,
+          "confidence": 73
         },
         {
           "date": "2026-03-04",
