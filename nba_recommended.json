@@ -1,72 +1,92 @@
 {
-  "date": "2026-03-04",
+  "date": "2026-03-05",
   "sport": "NBA",
   "type": "game",
-  "locked_at": "2026-03-04T08:04:50",
+  "locked_at": "2026-03-05T01:11:22",
   "recommendations": [
     {
-      "bet_type": "Spread",
-      "game": "POR @ MEM",
-      "pick": "MEM +8.5",
-      "confidence": 74.2,
-      "odds": -106,
-      "away_team": "POR",
-      "home_team": "MEM",
+      "qualified": true,
+      "score": 196.4,
       "reasons": [
-        "74.2% model confidence"
+        "85.7% confidence",
+        "High confidence"
       ],
+      "type": "ml",
+      "bet_type": "ML",
+      "game": "BKN @ MIA",
+      "away_team": "BKN",
+      "home_team": "MIA",
+      "pick": "MIA",
+      "confidence": 85.7,
+      "commence_time": "2026-03-06T00:40:00Z",
       "rec_rank": 1
     },
     {
-      "bet_type": "Spread",
-      "game": "OKC @ NYK",
-      "pick": "NYK +4.5",
-      "confidence": 68.9,
-      "odds": -110,
-      "away_team": "OKC",
-      "home_team": "NYK",
+      "qualified": true,
+      "score": 182.2,
       "reasons": [
-        "68.9% model confidence"
+        "78.6% confidence",
+        "High confidence"
       ],
+      "type": "total",
+      "bet_type": "TOTAL",
+      "game": "LAL @ DEN",
+      "away_team": "LAL",
+      "home_team": "DEN",
+      "pick": "UNDER 241.5",
+      "confidence": 78.6,
+      "commence_time": "2026-03-06T03:10:00Z",
       "rec_rank": 2
     },
     {
-      "bet_type": "Spread",
-      "game": "IND @ LAC",
-      "pick": "IND +12.5",
-      "confidence": 67.4,
-      "odds": -112,
-      "away_team": "IND",
-      "home_team": "LAC",
+      "qualified": true,
+      "score": 180.8,
       "reasons": [
-        "67.4% model confidence"
+        "77.9% confidence",
+        "High confidence"
       ],
+      "type": "total",
+      "bet_type": "TOTAL",
+      "game": "GSW @ HOU",
+      "away_team": "GSW",
+      "home_team": "HOU",
+      "pick": "OVER 215.5",
+      "confidence": 77.9,
+      "commence_time": "2026-03-06T00:40:00Z",
       "rec_rank": 3
     },
     {
-      "bet_type": "ML",
-      "game": "UTA @ PHI",
-      "pick": "PHI",
-      "confidence": 59.8,
-      "odds": -420,
-      "away_team": "UTA",
-      "home_team": "PHI",
+      "qualified": true,
+      "score": 175.4,
       "reasons": [
-        "59.8% model confidence"
+        "75.2% confidence",
+        "High confidence"
       ],
+      "type": "total",
+      "bet_type": "TOTAL",
+      "game": "UTA @ WAS",
+      "away_team": "UTA",
+      "home_team": "WAS",
+      "pick": "UNDER 243.5",
+      "confidence": 75.2,
+      "commence_time": "2026-03-06T00:10:00Z",
       "rec_rank": 4
     },
     {
-      "bet_type": "ML",
-      "game": "IND @ LAC",
-      "pick": "LAC",
-      "confidence": 58.8,
-      "odds": -670,
-      "away_team": "IND",
-      "home_team": "LAC",
+      "qualified": true,
+      "score": 166.2,
       "reasons": [
-        "58.8% model confidence"
+        "70.6% confidence",
+        "High confidence"
       ],
+      "type": "ml",
+      "bet_type": "ML",
+      "game": "LAL @ DEN",
+      "away_team": "LAL",
+      "home_team": "DEN",
+      "pick": "DEN",
+      "confidence": 70.6,
+      "commence_time": "2026-03-06T03:10:00Z",
       "rec_rank": 5
     }
   ]

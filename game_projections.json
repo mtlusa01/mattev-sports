@@ -1,179 +1,595 @@
 {
   "date": "2026-03-05",
   "sport": "NBA",
-  "locked_at": "2026-03-05T05:44:19",
-  "updated": "2026-03-05T05:44:19",
+  "locked_at": "2026-03-05T01:11:21",
+  "updated": "2026-03-05T01:11:21",
   "games": [
     {
       "away_team": "DAL",
       "home_team": "ORL",
       "game_date": "2026-03-05",
-      "proj_score": "112.4-117.1",
+      "proj_score": "109.5-116.3",
       "spread_pick": "DAL +8.5",
-      "spread_conf": 58.0,
+      "spread_conf": 56.5,
       "spread_odds": -110,
       "total_line": 228.5,
-      "total_pick": "OVER",
-      "total_conf": 50.9,
+      "total_pick": "UNDER",
+      "total_conf": 55.1,
       "total_odds": -110,
       "ml_pick": "ORL",
-      "ml_conf": 60.1,
+      "ml_conf": 64.9,
       "ml_odds": -360,
       "commence_time": "2026-03-06T00:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -3.6,
+        "away": -7.6,
+        "total": -11.2,
+        "home_injuries": [
+          {
+            "player": "Franz Wagner",
+            "status": "Out",
+            "impact": 3.5
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Kyrie Irving",
+            "status": "Out",
+            "impact": 5.0
+          },
+          {
+            "player": "Marvin Bagley III",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Cooper Flagg",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": 1.7,
+        "total": -2.7,
+        "spread_ev": 0.0,
+        "total_ev": 0.0,
+        "spread_prob": 0.5,
+        "total_prob": 0.5
+      }
     },
     {
       "away_team": "UTA",
       "home_team": "WAS",
       "game_date": "2026-03-05",
-      "proj_score": "115.4-119.7",
+      "proj_score": "116.0-117.6",
       "spread_pick": "UTA +2.5",
-      "spread_conf": 46.0,
-      "spread_odds": -112,
+      "spread_conf": 51.2,
+      "spread_odds": -115,
       "total_line": 243.5,
       "total_pick": "UNDER",
-      "total_conf": 73.0,
+      "total_conf": 75.2,
       "total_odds": -110,
       "ml_pick": "WAS",
-      "ml_conf": 62.3,
-      "ml_odds": -135,
+      "ml_conf": 55.4,
+      "ml_odds": -130,
       "commence_time": "2026-03-06T00:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -10.8,
+        "away": -8.8,
+        "total": -19.6,
+        "home_injuries": [
+          {
+            "player": "Anthony Davis",
+            "status": "Out",
+            "impact": 7.0
+          },
+          {
+            "player": "Kyshawn George",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Jamir Watkins",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Lauri Markkanen",
+            "status": "Out",
+            "impact": 4.5
+          },
+          {
+            "player": "Jaren Jackson Jr.",
+            "status": "Out",
+            "impact": 3.5
+          },
+          {
+            "player": "Vince Williams Jr.",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": 0.9,
+        "total": -9.9,
+        "spread_ev": 0.0,
+        "total_ev": 0.3745,
+        "spread_prob": 0.5,
+        "total_prob": 0.72
+      },
+      "total_rec": {
+        "pick": "UNDER 243.5",
+        "edge": -9.9,
+        "ev": 37.5,
+        "confidence": "high"
+      }
     },
     {
       "away_team": "BKN",
       "home_team": "MIA",
       "game_date": "2026-03-05",
-      "proj_score": "110.5-118.7",
-      "spread_pick": "BKN +12.5",
-      "spread_conf": 59.3,
-      "spread_odds": -105,
+      "proj_score": "107.4-117.5",
+      "spread_pick": "MIA -12.5",
+      "spread_conf": 39.9,
+      "spread_odds": -115,
       "total_line": 225.5,
-      "total_pick": "OVER",
-      "total_conf": 58.9,
-      "total_odds": -108,
+      "total_pick": "UNDER",
+      "total_conf": 51.6,
+      "total_odds": -112,
       "ml_pick": "MIA",
-      "ml_conf": 69.2,
-      "ml_odds": -720,
+      "ml_conf": 85.7,
+      "ml_odds": -750,
       "commence_time": "2026-03-06T00:40:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -3.2,
+        "away": -0.8,
+        "total": -4.0,
+        "home_injuries": [
+          {
+            "player": "Simone Fontecchio",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Nikola Jovic",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Norman Powell",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Egor Demin",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": 2.4,
+        "total": -0.6,
+        "spread_ev": 0.0911,
+        "total_ev": 0.0,
+        "spread_prob": 0.572,
+        "total_prob": 0.5
+      },
+      "spread_rec": {
+        "pick": "BKN +12.5",
+        "edge": 2.4,
+        "ev": 9.1,
+        "confidence": "low"
+      }
     },
     {
       "away_team": "GSW",
       "home_team": "HOU",
       "game_date": "2026-03-05",
-      "proj_score": "110.9-115.4",
+      "proj_score": "111.3-116.5",
       "spread_pick": "GSW +9.5",
-      "spread_conf": 62.6,
+      "spread_conf": 60.6,
       "spread_odds": -114,
       "total_line": 215.5,
       "total_pick": "OVER",
-      "total_conf": 75.6,
+      "total_conf": 77.9,
       "total_odds": -115,
       "ml_pick": "HOU",
-      "ml_conf": 61.0,
+      "ml_conf": 63.3,
       "ml_odds": -370,
       "commence_time": "2026-03-06T00:40:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -5.0,
+        "away": -13.2,
+        "total": -18.2,
+        "home_injuries": [
+          {
+            "player": "Alperen Sengun",
+            "status": "Day-To-Day",
+            "impact": 1.8
+          },
+          {
+            "player": "Jabari Smith Jr.",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Jae'Sean Tate",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Stephen Curry",
+            "status": "Out",
+            "impact": 7.0
+          },
+          {
+            "player": "Kristaps Porzingis",
+            "status": "Out",
+            "impact": 4.0
+          },
+          {
+            "player": "Seth Curry",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": 4.3,
+        "total": 12.3,
+        "spread_ev": 0.1955,
+        "total_ev": 0.3745,
+        "spread_prob": 0.626,
+        "total_prob": 0.72
+      },
+      "spread_rec": {
+        "pick": "GSW +9.5",
+        "edge": 4.3,
+        "ev": 19.6,
+        "confidence": "medium"
+      },
+      "total_rec": {
+        "pick": "OVER 215.5",
+        "edge": 12.3,
+        "ev": 37.5,
+        "confidence": "high"
+      }
     },
     {
       "away_team": "TOR",
       "home_team": "MIN",
       "game_date": "2026-03-05",
-      "proj_score": "112.6-116.1",
+      "proj_score": "109.5-115.1",
       "spread_pick": "TOR +6.0",
-      "spread_conf": 55.3,
+      "spread_conf": 51.4,
       "spread_odds": -110,
       "total_line": 227.5,
-      "total_pick": "OVER",
-      "total_conf": 52.8,
+      "total_pick": "UNDER",
+      "total_conf": 58.3,
       "total_odds": -110,
       "ml_pick": "MIN",
-      "ml_conf": 57.3,
-      "ml_odds": -250,
+      "ml_conf": 64.4,
+      "ml_odds": -245,
       "commence_time": "2026-03-06T01:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -0.8,
+        "away": -3.2,
+        "total": -4.0,
+        "home_injuries": [
+          {
+            "player": "Joe Ingles",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Brandon Ingram",
+            "status": "Day-To-Day",
+            "impact": 2.0
+          },
+          {
+            "player": "Collin Murray-Boyles",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Chucky Hepburn",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": 0.4,
+        "total": -2.9,
+        "spread_ev": 0.0,
+        "total_ev": 0.0,
+        "spread_prob": 0.5,
+        "total_prob": 0.5
+      }
     },
     {
       "away_team": "DET",
       "home_team": "SAS",
       "game_date": "2026-03-05",
-      "proj_score": "113.4-115.4",
+      "proj_score": "110.2-112.6",
       "spread_pick": "DET +3.5",
-      "spread_conf": 53.2,
+      "spread_conf": 52.4,
       "spread_odds": -114,
       "total_line": 228.5,
-      "total_pick": "OVER",
-      "total_conf": 51.5,
+      "total_pick": "UNDER",
+      "total_conf": 63.2,
       "total_odds": -110,
       "ml_pick": "SAS",
-      "ml_conf": 54.1,
+      "ml_conf": 55.6,
       "ml_odds": -156,
       "commence_time": "2026-03-06T01:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -2.8,
+        "away": 0.0,
+        "total": -2.8,
+        "home_injuries": [
+          {
+            "player": "Mason Plumlee",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Harrison Barnes",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "David Jones Garcia",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": []
+      },
+      "edge": {
+        "spread": 1.1,
+        "total": -5.7,
+        "spread_ev": 0.0,
+        "total_ev": 0.2195,
+        "spread_prob": 0.5,
+        "total_prob": 0.639
+      },
+      "total_rec": {
+        "pick": "UNDER 228.5",
+        "edge": -5.7,
+        "ev": 21.9,
+        "confidence": "medium"
+      }
     },
     {
       "away_team": "CHI",
       "home_team": "PHX",
       "game_date": "2026-03-05",
-      "proj_score": "111.9-117.7",
+      "proj_score": "109.5-114.5",
       "spread_pick": "CHI +11.5",
-      "spread_conf": 64.2,
+      "spread_conf": 64.4,
       "spread_odds": -110,
       "total_line": 224.5,
-      "total_pick": "OVER",
-      "total_conf": 61.5,
-      "total_odds": -114,
+      "total_pick": "UNDER",
+      "total_conf": 52.7,
+      "total_odds": -106,
       "ml_pick": "PHX",
-      "ml_conf": 64.0,
-      "ml_odds": -590,
+      "ml_conf": 60.7,
+      "ml_odds": -550,
       "commence_time": "2026-03-06T02:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -2.4,
+        "away": -7.2,
+        "total": -9.6,
+        "home_injuries": [
+          {
+            "player": "Mark Williams",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Jordan Goodwin",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Dillon Brooks",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Anfernee Simons",
+            "status": "Out",
+            "impact": 3.0
+          },
+          {
+            "player": "Patrick Williams",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Jalen Smith",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ]
+      },
+      "edge": {
+        "spread": 6.5,
+        "total": -0.5,
+        "spread_ev": 0.309,
+        "total_ev": 0.0,
+        "spread_prob": 0.686,
+        "total_prob": 0.5
+      },
+      "spread_rec": {
+        "pick": "CHI +11.5",
+        "edge": 6.5,
+        "ev": 30.9,
+        "confidence": "high"
+      }
     },
     {
       "away_team": "LAL",
       "home_team": "DEN",
       "game_date": "2026-03-05",
-      "proj_score": "113.9-119.2",
+      "proj_score": "111.8-119.2",
       "spread_pick": "LAL +5.0",
-      "spread_conf": 49.8,
+      "spread_conf": 41.6,
       "spread_odds": -106,
-      "total_line": 240.5,
+      "total_line": 241.5,
       "total_pick": "UNDER",
-      "total_conf": 64.9,
-      "total_odds": -108,
+      "total_conf": 78.6,
+      "total_odds": -110,
       "ml_pick": "DEN",
-      "ml_conf": 62.2,
+      "ml_conf": 70.6,
       "ml_odds": -200,
       "commence_time": "2026-03-06T03:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -4.0,
+        "away": -0.4,
+        "total": -4.4,
+        "home_injuries": [
+          {
+            "player": "Aaron Gordon",
+            "status": "Out",
+            "impact": 2.5
+          },
+          {
+            "player": "Spencer Jones",
+            "status": "Out",
+            "impact": 1.0
+          },
+          {
+            "player": "Peyton Watson",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": []
+      },
+      "edge": {
+        "spread": -2.4,
+        "total": -10.5,
+        "spread_ev": 0.0911,
+        "total_ev": 0.3745,
+        "spread_prob": 0.572,
+        "total_prob": 0.72
+      },
+      "spread_rec": {
+        "pick": "DEN -5.0",
+        "edge": -2.4,
+        "ev": 9.1,
+        "confidence": "low"
+      },
+      "total_rec": {
+        "pick": "UNDER 241.5",
+        "edge": -10.5,
+        "ev": 37.5,
+        "confidence": "high"
+      }
     },
     {
       "away_team": "NOP",
       "home_team": "SAC",
       "game_date": "2026-03-05",
-      "proj_score": "116.5-115.3",
+      "proj_score": "114.2-114.5",
       "spread_pick": "SAC +4.5",
-      "spread_conf": 58.4,
+      "spread_conf": 61.7,
       "spread_odds": -106,
       "total_line": 234.5,
       "total_pick": "UNDER",
-      "total_conf": 57.9,
+      "total_conf": 64.1,
       "total_odds": -114,
-      "ml_pick": "NOP",
-      "ml_conf": 55.6,
-      "ml_odds": -198,
+      "ml_pick": "SAC",
+      "ml_conf": 51.6,
+      "ml_odds": 160,
       "commence_time": "2026-03-06T03:10:00Z",
       "status": "scheduled",
-      "locked_at": "2026-03-05T05:44:19Z"
+      "locked_at": "2026-03-05T06:11:20Z",
+      "injury_impact": {
+        "home": -8.8,
+        "away": -5.4,
+        "total": -14.2,
+        "home_injuries": [
+          {
+            "player": "Domantas Sabonis",
+            "status": "Out",
+            "impact": 4.0
+          },
+          {
+            "player": "Zach LaVine",
+            "status": "Out",
+            "impact": 4.0
+          },
+          {
+            "player": "Keegan Murray",
+            "status": "Out",
+            "impact": 1.0
+          }
+        ],
+        "away_injuries": [
+          {
+            "player": "Dejounte Murray",
+            "status": "Out",
+            "impact": 3.5
+          },
+          {
+            "player": "Zion Williamson",
+            "status": "Day-To-Day",
+            "impact": 2.8
+          }
+        ]
+      },
+      "edge": {
+        "spread": -4.8,
+        "total": -5.8,
+        "spread_ev": 0.2221,
+        "total_ev": 0.2239,
+        "spread_prob": 0.64,
+        "total_prob": 0.641
+      },
+      "spread_rec": {
+        "pick": "SAC +4.5",
+        "edge": -4.8,
+        "ev": 22.2,
+        "confidence": "medium"
+      },
+      "total_rec": {
+        "pick": "UNDER 234.5",
+        "edge": -5.8,
+        "ev": 22.4,
+        "confidence": "medium"
+      }
     }
   ]
 }

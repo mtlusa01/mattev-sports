@@ -1,9 +1,480 @@
 {
   "date": "2026-03-05",
   "sport": "NBA",
-  "locked_at": "2026-03-01T15:16:24",
-  "updated": "2026-03-05T08:56:42",
-  "projections": [],
+  "locked_at": "2026-03-05T08:20:48",
+  "updated": "2026-03-05T08:23:51",
+  "projections": [
+    {
+      "player": "Ace Bailey",
+      "team": "UTA",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 17.5,
+      "projection": 16.3,
+      "confidence": 56.42999999999999,
+      "ev": 11.1,
+      "diff": -1.2,
+      "market_odds": -115.0,
+      "fair_odds": -146.0,
+      "prob_edge": 5.9,
+      "book_odds": {
+        "draftkings": {
+          "over": {
+            "line": 17.5,
+            "odds": -113
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -112
+          }
+        },
+        "fanduel": {
+          "over": {
+            "line": 17.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -114
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 18.5,
+            "odds": -110
+          },
+          "under": {
+            "line": 18.5,
+            "odds": -118
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "has_line": true,
+      "generated_at": "2026-03-05T08:20:48",
+      "edge": "GOOD",
+      "l5_avg": 14.0,
+      "l10_avg": 14.4,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 70.0,
+      "l5_hit_count": 3.0,
+      "l10_hit_count": 7.0,
+      "l10_median": 14.0,
+      "season_avg": 12.3,
+      "season_hit_count": 41.0,
+      "season_total": 58,
+      "streak": 1.0,
+      "home_avg": 16.0,
+      "away_avg": 11.5,
+      "insight": "Averaging 14.4 points over last 10 games (-3.1 below line).",
+      "insight_strength": "good",
+      "last_10_values": [
+        12,
+        18,
+        13,
+        23,
+        4,
+        20,
+        15,
+        13,
+        16,
+        10
+      ],
+      "last_10_games": [
+        {
+          "date": "3/05",
+          "opp": "@PHI",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "3/03",
+          "opp": "vs DEN",
+          "val": 18,
+          "hit": false
+        },
+        {
+          "date": "3/01",
+          "opp": "vs NO",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "2/27",
+          "opp": "vs NO",
+          "val": 23,
+          "hit": false
+        },
+        {
+          "date": "2/24",
+          "opp": "@HOU",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "2/21",
+          "opp": "@MEM",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "2/13",
+          "opp": "vs POR",
+          "val": 15,
+          "hit": true
+        },
+        {
+          "date": "2/12",
+          "opp": "vs SAC",
+          "val": 13,
+          "hit": true
+        },
+        {
+          "date": "2/10",
+          "opp": "@MIA",
+          "val": 16,
+          "hit": true
+        },
+        {
+          "date": "2/08",
+          "opp": "@ORL",
+          "val": 10,
+          "hit": true
+        },
+        {
+          "date": "2/06",
+          "opp": "@ATL",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "2/04",
+          "opp": "@IND",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "2/01",
+          "opp": "@TOR",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "1/31",
+          "opp": "vs BKN",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "vs GS",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "1/28",
+          "opp": "vs LAC",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "1/25",
+          "opp": "vs MIA",
+          "val": 12,
+          "hit": true
+        },
+        {
+          "date": "1/23",
+          "opp": "vs SA",
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "1/21",
+          "opp": "vs MIN",
+          "val": 20,
+          "hit": false
+        },
+        {
+          "date": "1/19",
+          "opp": "@SA",
+          "val": 8,
+          "hit": true
+        }
+      ],
+      "opponent": "PHI",
+      "h2h_games": [
+        {
+          "date": "Mar 05",
+          "value": 12,
+          "minutes": 31,
+          "result": null,
+          "hit": true,
+          "venue": "@"
+        }
+      ],
+      "h2h_avg": 12.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "model_probability": 77.2,
+      "implied_probability": 53.5,
+      "true_ev": 44.3,
+      "stdev": 5.73,
+      "cv": 0.378,
+      "var_trend": -0.8,
+      "var_floor": 7.6,
+      "var_ceiling": 20.3,
+      "consistency_score": 62.2,
+      "var_games_played": 20.0,
+      "recommended": true,
+      "raw_projection": 14.9,
+      "matchup_factor": 1.0,
+      "pace_factor": 1.064,
+      "adjusted_projection": 16.3,
+      "matchup_grade": "B",
+      "game_total": 243.5,
+      "teammates_out": 0,
+      "redistribution_boost": 0.0,
+      "pre_boost_projection": 15.4,
+      "pick_score": 46.6,
+      "score_factors": [
+        "+44.3% True EV"
+      ]
+    },
+    {
+      "player": "Keyonte George",
+      "team": "UTA",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 25.5,
+      "projection": 26.9,
+      "confidence": 54.1,
+      "ev": 0.3,
+      "diff": 1.4,
+      "market_odds": -117.0,
+      "fair_odds": -118.0,
+      "prob_edge": 0.2,
+      "book_odds": {
+        "draftkings": {
+          "over": {
+            "line": 24.5,
+            "odds": -123
+          },
+          "under": {
+            "line": 24.5,
+            "odds": -103
+          }
+        },
+        "fanduel": {
+          "over": {
+            "line": 25.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -122
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 25.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 25.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "has_line": true,
+      "generated_at": "2026-03-05T08:20:48",
+      "edge": "FAIR",
+      "l5_avg": 22.8,
+      "l10_avg": 24.8,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 50.0,
+      "l5_hit_count": 3.0,
+      "l10_hit_count": 5.0,
+      "l10_median": 24.5,
+      "season_avg": 23.3,
+      "season_hit_count": 25.0,
+      "season_total": 55,
+      "streak": 2.0,
+      "home_avg": 26.4,
+      "away_avg": 24.3,
+      "last_10_values": [
+        30,
+        36,
+        17,
+        5,
+        26,
+        19,
+        19,
+        23,
+        43,
+        30
+      ],
+      "last_10_games": [
+        {
+          "date": "3/05",
+          "opp": "@PHI",
+          "val": 30,
+          "hit": true
+        },
+        {
+          "date": "3/03",
+          "opp": "vs DEN",
+          "val": 36,
+          "hit": true
+        },
+        {
+          "date": "3/01",
+          "opp": "vs NO",
+          "val": 17,
+          "hit": false
+        },
+        {
+          "date": "2/08",
+          "opp": "@ORL",
+          "val": 5,
+          "hit": false
+        },
+        {
+          "date": "1/31",
+          "opp": "vs BKN",
+          "val": 26,
+          "hit": true
+        },
+        {
+          "date": "1/29",
+          "opp": "vs GS",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "1/25",
+          "opp": "vs MIA",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "1/23",
+          "opp": "vs SA",
+          "val": 23,
+          "hit": false
+        },
+        {
+          "date": "1/21",
+          "opp": "vs MIN",
+          "val": 43,
+          "hit": true
+        },
+        {
+          "date": "1/19",
+          "opp": "@SA",
+          "val": 30,
+          "hit": true
+        },
+        {
+          "date": "1/17",
+          "opp": "@DAL",
+          "val": 29,
+          "hit": true
+        },
+        {
+          "date": "1/16",
+          "opp": "@DAL",
+          "val": 17,
+          "hit": false
+        },
+        {
+          "date": "1/15",
+          "opp": "@CHI",
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "1/13",
+          "opp": "@CLE",
+          "val": 32,
+          "hit": true
+        },
+        {
+          "date": "1/11",
+          "opp": "vs CHA",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "1/09",
+          "opp": "vs DAL",
+          "val": 19,
+          "hit": false
+        },
+        {
+          "date": "1/08",
+          "opp": "@OKC",
+          "val": 25,
+          "hit": false
+        },
+        {
+          "date": "1/06",
+          "opp": "@POR",
+          "val": 15,
+          "hit": false
+        },
+        {
+          "date": "1/04",
+          "opp": "@GS",
+          "val": 22,
+          "hit": false
+        },
+        {
+          "date": "12/31",
+          "opp": "vs BOS",
+          "val": 37,
+          "hit": true
+        }
+      ],
+      "opponent": "PHI",
+      "h2h_games": [
+        {
+          "date": "Mar 05",
+          "value": 30,
+          "minutes": 30,
+          "result": null,
+          "hit": true,
+          "venue": "@"
+        }
+      ],
+      "h2h_avg": 30.0,
+      "h2h_record": "1/1",
+      "h2h_total_games": 1,
+      "model_probability": 54.7,
+      "implied_probability": 53.9,
+      "true_ev": 1.4,
+      "stdev": 9.64,
+      "cv": 0.408,
+      "var_trend": -4.0,
+      "var_floor": 14.0,
+      "var_ceiling": 36.1,
+      "consistency_score": 59.2,
+      "var_games_played": 20.0,
+      "recommended": false,
+      "raw_projection": 26.4,
+      "matchup_factor": 1.0,
+      "pace_factor": 1.064,
+      "adjusted_projection": 26.9,
+      "matchup_grade": "B",
+      "game_total": 243.5,
+      "teammates_out": 0,
+      "redistribution_boost": 0.0,
+      "pre_boost_projection": 27.4,
+      "pick_score": 9.4,
+      "score_factors": []
+    }
+  ],
   "top_picks": [
     {
       "type": "total",
@@ -11,10 +482,10 @@
       "away_team": "UTA",
       "home_team": "WAS",
       "pick": "UNDER 243.5",
-      "confidence": 77.5,
+      "confidence": 75.2,
       "pick_score": 55.0,
       "score_factors": [
-        "77.5% total conf",
+        "75.2% total conf",
         "Very high confidence"
       ],
       "commence_time": "2026-03-06T00:10:00Z",
@@ -26,10 +497,10 @@
       "away_team": "GSW",
       "home_team": "HOU",
       "pick": "OVER 215.5",
-      "confidence": 78.2,
+      "confidence": 77.9,
       "pick_score": 55.0,
       "score_factors": [
-        "78.2% total conf",
+        "77.9% total conf",
         "Very high confidence"
       ],
       "commence_time": "2026-03-06T00:40:00Z",
@@ -41,10 +512,10 @@
       "away_team": "LAL",
       "home_team": "DEN",
       "pick": "UNDER 241.5",
-      "confidence": 75.4,
+      "confidence": 78.6,
       "pick_score": 55.0,
       "score_factors": [
-        "75.4% total conf",
+        "78.6% total conf",
         "Very high confidence"
       ],
       "commence_time": "2026-03-06T03:10:00Z",
@@ -52,126 +523,31 @@
     },
     {
       "type": "ml",
-      "game": "DAL @ ORL",
-      "away_team": "DAL",
-      "home_team": "ORL",
-      "pick": "ORL",
-      "confidence": 69.7,
-      "pick_score": 50.0,
-      "score_factors": [
-        "69.7% ML conf"
-      ],
-      "commence_time": "2026-03-06T00:10:00Z",
-      "top_pick_rank": 4
-    },
-    {
-      "type": "ml",
       "game": "BKN @ MIA",
       "away_team": "BKN",
       "home_team": "MIA",
       "pick": "MIA",
-      "confidence": 83.2,
+      "confidence": 85.7,
       "pick_score": 50.0,
       "score_factors": [
-        "83.2% ML conf"
+        "85.7% ML conf"
       ],
       "commence_time": "2026-03-06T00:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "ml",
+      "game": "LAL @ DEN",
+      "away_team": "LAL",
+      "home_team": "DEN",
+      "pick": "DEN",
+      "confidence": 70.6,
+      "pick_score": 50.0,
+      "score_factors": [
+        "70.6% ML conf"
+      ],
+      "commence_time": "2026-03-06T03:10:00Z",
       "top_pick_rank": 5
     }
-  ],
-  "recommendations": {
-    "date": "2026-03-05",
-    "generated_at": "2026-03-05T08:56:42",
-    "game_bets": [
-      {
-        "qualified": true,
-        "score": 191.4,
-        "reasons": [
-          "83.2% confidence",
-          "High confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "BKN @ MIA",
-        "away_team": "BKN",
-        "home_team": "MIA",
-        "pick": "MIA",
-        "confidence": 83.2,
-        "commence_time": "2026-03-06T00:40:00Z",
-        "rec_rank": 1
-      },
-      {
-        "qualified": true,
-        "score": 181.4,
-        "reasons": [
-          "78.2% confidence",
-          "High confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "GSW @ HOU",
-        "away_team": "GSW",
-        "home_team": "HOU",
-        "pick": "OVER 215.5",
-        "confidence": 78.2,
-        "commence_time": "2026-03-06T00:40:00Z",
-        "rec_rank": 2
-      },
-      {
-        "qualified": true,
-        "score": 180.0,
-        "reasons": [
-          "77.5% confidence",
-          "High confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "UTA @ WAS",
-        "away_team": "UTA",
-        "home_team": "WAS",
-        "pick": "UNDER 243.5",
-        "confidence": 77.5,
-        "commence_time": "2026-03-06T00:10:00Z",
-        "rec_rank": 3
-      },
-      {
-        "qualified": true,
-        "score": 175.8,
-        "reasons": [
-          "75.4% confidence",
-          "High confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "LAL @ DEN",
-        "away_team": "LAL",
-        "home_team": "DEN",
-        "pick": "UNDER 241.5",
-        "confidence": 75.4,
-        "commence_time": "2026-03-06T03:10:00Z",
-        "rec_rank": 4
-      },
-      {
-        "qualified": true,
-        "score": 154.4,
-        "reasons": [
-          "69.7% confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "DAL @ ORL",
-        "away_team": "DAL",
-        "home_team": "ORL",
-        "pick": "ORL",
-        "confidence": 69.7,
-        "commence_time": "2026-03-06T00:10:00Z",
-        "rec_rank": 5
-      }
-    ],
-    "props": [],
-    "game_count": 5,
-    "prop_count": 0,
-    "has_recommendations": true,
-    "message": null
-  }
+  ]
 }
