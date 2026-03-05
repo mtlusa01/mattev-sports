@@ -1001,48 +1001,16 @@ def _update_nhl_props_results(props, game_date, results_path):
     print(f"  Updated nhl_props_results.json")
 
 
-def grade_nba_props():
-    """Grade NBA player props against actual box score stats via ESPN.
+def _fetch_nba_box_scores(matchups_needed, target_date):
+    """Fetch ESPN box scores for NBA final games matching the given matchups.
 
-    Reads all_props.json (player props with team/opponent),
-    fetches ESPN box scores for finished games, grades OVER/UNDER.
+    Args:
+        matchups_needed: set of (team, opponent) tuples
+        target_date: date string YYYY-MM-DD to match events against
+
+    Returns:
+        box_scores dict keyed by (team, opponent) tuples
     """
-    props_path = os.path.join(REPO_ROOT, "all_props.json")
-    results_path = os.path.join(REPO_ROOT, "all_props_results.json")
-
-    if not os.path.exists(props_path):
-        print("  NBA Props: no all_props.json found")
-        return False
-
-    with open(props_path, "r", encoding="utf-8") as f:
-        props_data = json.load(f)
-
-    props = props_data.get("props", [])
-    if not props:
-        print("  NBA Props: no props to grade")
-        return False
-
-    ungraded = [p for p in props if not p.get("result")]
-    if not ungraded:
-        print("  NBA Props: all props already graded")
-        return False
-
-    print(f"  NBA Props: {len(ungraded)} ungraded props")
-
-    # Build set of team matchups from ungraded props
-    matchups_needed = set()
-    for p in ungraded:
-        team = p.get("team", "")
-        opponent = p.get("opponent", "")
-        if team and opponent:
-            matchups_needed.add((team, opponent))
-
-    if not matchups_needed:
-        print("  NBA Props: no team matchups found in props")
-        return False
-
-    # Fetch ESPN event IDs for today and yesterday (parallel)
-    props_date = props_data.get("date", datetime.now().strftime("%Y-%m-%d"))
     today = datetime.now().strftime("%Y-%m-%d")
     yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
@@ -1058,7 +1026,6 @@ def grade_nba_props():
         team_to_event[(away, home)] = event_info
         team_to_event[(home, away)] = event_info
 
-    # Fetch box scores for matching final games
     box_scores = {}
     fetched_events = set()
     for team, opponent in matchups_needed:
@@ -1068,9 +1035,8 @@ def grade_nba_props():
         eid = event_info["id"]
         if event_info["status"] != "STATUS_FINAL":
             continue
-        # Only grade against events from the same date as the props
         event_date = event_info.get("date", "")
-        if event_date and event_date != props_date:
+        if event_date and target_date and event_date != target_date:
             continue
         if eid in fetched_events:
             for mk, bs in box_scores.items():
@@ -1087,62 +1053,66 @@ def grade_nba_props():
             box_scores[(opponent, team)] = stats
             print(f"    Game {eid} ({team} vs {opponent}): {len(stats) - 1} players")
 
-    if not box_scores:
-        print("  NBA Props: no finished games with box scores")
-        return False
+    return box_scores
 
+
+# ESPN NBA box score labels: MIN, PTS, FG, 3PT, FT, REB, AST, TO, STL, BLK, ...
+_NBA_STAT_MAP = {
+    "pts": ["PTS"],
+    "reb": ["REB"],
+    "ast": ["AST"],
+    "stl": ["STL"],
+    "blk": ["BLK"],
+    "to": ["TO"],
+    "3pm": ["3PT"],
+}
+
+
+def _get_nba_stat(actual_stats, prop_type):
+    """Get NBA stat value, handling compound stats like PRA."""
+    prop_lower = prop_type.lower()
+
+    if prop_lower == "pra":
+        pts = _get_nba_stat(actual_stats, "PTS")
+        reb = _get_nba_stat(actual_stats, "REB")
+        ast = _get_nba_stat(actual_stats, "AST")
+        if pts is not None and reb is not None and ast is not None:
+            return pts + reb + ast
+        return None
+    if prop_lower == "pr":
+        pts = _get_nba_stat(actual_stats, "PTS")
+        reb = _get_nba_stat(actual_stats, "REB")
+        if pts is not None and reb is not None:
+            return pts + reb
+        return None
+    if prop_lower == "pa":
+        pts = _get_nba_stat(actual_stats, "PTS")
+        ast = _get_nba_stat(actual_stats, "AST")
+        if pts is not None and ast is not None:
+            return pts + ast
+        return None
+    if prop_lower == "ra":
+        reb = _get_nba_stat(actual_stats, "REB")
+        ast = _get_nba_stat(actual_stats, "AST")
+        if reb is not None and ast is not None:
+            return reb + ast
+        return None
+
+    for key in _NBA_STAT_MAP.get(prop_lower, [prop_type]):
+        if key in actual_stats:
+            return actual_stats[key]
+    return None
+
+
+def _grade_props_list(props_list, box_scores, get_stat_fn):
+    """Grade a list of props against box scores. Modifies props in-place.
+
+    Returns (graded_count, wins, losses).
+    """
     graded = 0
     wins = 0
     losses = 0
-
-    # ESPN NBA box score labels: MIN, PTS, FG, 3PT, FT, REB, AST, TO, STL, BLK, ...
-    NBA_STAT_MAP = {
-        "pts": ["PTS"],
-        "reb": ["REB"],
-        "ast": ["AST"],
-        "stl": ["STL"],
-        "blk": ["BLK"],
-        "to": ["TO"],
-        "3pm": ["3PT"],  # ESPN uses "3PT" with format "made-attempted"
-    }
-
-    def _get_nba_stat(actual_stats, prop_type):
-        """Get NBA stat value, handling compound stats like PRA."""
-        prop_lower = prop_type.lower()
-
-        # Compound stats
-        if prop_lower == "pra":
-            pts = _get_nba_stat(actual_stats, "PTS")
-            reb = _get_nba_stat(actual_stats, "REB")
-            ast = _get_nba_stat(actual_stats, "AST")
-            if pts is not None and reb is not None and ast is not None:
-                return pts + reb + ast
-            return None
-        if prop_lower == "pr":
-            pts = _get_nba_stat(actual_stats, "PTS")
-            reb = _get_nba_stat(actual_stats, "REB")
-            if pts is not None and reb is not None:
-                return pts + reb
-            return None
-        if prop_lower == "pa":
-            pts = _get_nba_stat(actual_stats, "PTS")
-            ast = _get_nba_stat(actual_stats, "AST")
-            if pts is not None and ast is not None:
-                return pts + ast
-            return None
-        if prop_lower == "ra":
-            reb = _get_nba_stat(actual_stats, "REB")
-            ast = _get_nba_stat(actual_stats, "AST")
-            if reb is not None and ast is not None:
-                return reb + ast
-            return None
-
-        for key in NBA_STAT_MAP.get(prop_lower, [prop_type]):
-            if key in actual_stats:
-                return actual_stats[key]
-        return None
-
-    for p in props:
+    for p in props_list:
         if p.get("result"):
             continue
         team = p.get("team", "")
@@ -1154,14 +1124,14 @@ def grade_nba_props():
         prop_type = p.get("prop", "")
         line = p.get("line")
         direction = str(p.get("direction", "OVER")).upper()
-        if line is None:
+        if line is None or direction in ("NAN", "NONE", ""):
             continue
 
         actual_stats = _match_player(player_name, {k: v for k, v in bs.items() if k != "_eid"})
         if actual_stats is None:
             continue
 
-        actual_value = _get_nba_stat(actual_stats, prop_type)
+        actual_value = get_stat_fn(actual_stats, prop_type)
         if actual_value is None:
             continue
 
@@ -1173,16 +1143,88 @@ def grade_nba_props():
             wins += 1
         elif result == "LOSS":
             losses += 1
+    return graded, wins, losses
 
-    if graded == 0:
-        print("  NBA Props: no props could be graded")
+
+def grade_nba_props():
+    """Grade NBA player props against actual box score stats via ESPN.
+
+    Grades both all_props.json (comprehensive props) and projections.json
+    (top picks with betting lines) using shared ESPN box score data.
+    """
+    any_changes = False
+
+    # ── Load both prop files ──
+    all_props_path = os.path.join(REPO_ROOT, "all_props.json")
+    all_props_results_path = os.path.join(REPO_ROOT, "all_props_results.json")
+    proj_props_path = os.path.join(REPO_ROOT, "projections.json")
+
+    all_props_data = load_json(all_props_path)
+    proj_props_data = load_json(proj_props_path)
+
+    all_props = (all_props_data.get("props", []) if all_props_data else [])
+    proj_props = (proj_props_data.get("projections", []) if proj_props_data else [])
+
+    all_ungraded = [p for p in all_props if not p.get("result")]
+    proj_ungraded = [p for p in proj_props if not p.get("result")]
+
+    if not all_ungraded and not proj_ungraded:
+        print("  NBA Props: all props already graded")
         return False
 
-    print(f"  NBA Props: graded {graded} props ({wins}W-{losses}L)")
-    props_data["updated_at"] = datetime.now().isoformat(timespec="seconds")
-    save_json(props_path, props_data)
-    _update_nba_props_results(props, props_data.get("_date", datetime.now().strftime("%Y-%m-%d")), results_path)
-    return True
+    print(f"  NBA Props: {len(all_ungraded)} ungraded in all_props, {len(proj_ungraded)} in projections")
+
+    # ── Build matchups from BOTH files ──
+    matchups_needed = set()
+    for p in all_ungraded + proj_ungraded:
+        team = p.get("team", "")
+        opponent = p.get("opponent", "")
+        if team and opponent:
+            matchups_needed.add((team, opponent))
+
+    if not matchups_needed:
+        print("  NBA Props: no team matchups found")
+        return False
+
+    # ── Fetch box scores (shared across both files) ──
+    # Use _date (with underscore) for all_props.json, fall back to today
+    target_date = datetime.now().strftime("%Y-%m-%d")
+    if all_props_data:
+        target_date = all_props_data.get("_date", all_props_data.get("date", target_date))
+
+    box_scores = _fetch_nba_box_scores(matchups_needed, target_date)
+    if not box_scores:
+        print("  NBA Props: no finished games with box scores")
+        return False
+
+    # ── Grade all_props.json ──
+    if all_ungraded:
+        g, w, l = _grade_props_list(all_props, box_scores, _get_nba_stat)
+        if g > 0:
+            print(f"  NBA all_props: graded {g} props ({w}W-{l}L)")
+            all_props_data["updated_at"] = datetime.now().isoformat(timespec="seconds")
+            save_json(all_props_path, all_props_data)
+            _update_nba_props_results(
+                all_props,
+                all_props_data.get("_date", datetime.now().strftime("%Y-%m-%d")),
+                all_props_results_path,
+            )
+            any_changes = True
+        else:
+            print("  NBA all_props: no props could be graded (likely roster-only without lines)")
+
+    # ── Grade projections.json ──
+    if proj_ungraded:
+        g, w, l = _grade_props_list(proj_props, box_scores, _get_nba_stat)
+        if g > 0:
+            print(f"  NBA projections: graded {g} props ({w}W-{l}L)")
+            proj_props_data["updated"] = datetime.now().isoformat(timespec="seconds")
+            save_json(proj_props_path, proj_props_data)
+            any_changes = True
+        else:
+            print("  NBA projections: no props could be graded")
+
+    return any_changes
 
 
 def _update_nba_props_results(props, game_date, results_path):
