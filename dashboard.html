@@ -2297,6 +2297,12 @@
     function getActiveProps() {
       const today = getLocalDateStr();
       if (selectedDate !== today) {
+        if (currentSport === 'nhl') {
+          if (historicalNhlPropsCache[selectedDate] !== undefined) {
+            return historicalNhlPropsCache[selectedDate];
+          }
+          return [];
+        }
         if (historicalPropsCache[selectedDate] !== undefined) {
           return historicalPropsCache[selectedDate];
         }
@@ -2537,11 +2543,12 @@
     // ── Historical Results ──
     let historicalResults = null;
     let nhlHistoricalResults = null;
+    let nhlPropsHistoricalResults = null;
     let ncaabHistoricalResults = null;
     let mlbHistoricalResults = null;
 
     async function loadHistoricalResults(sport) {
-      const url = sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : sport === 'mlb' ? MLB_RESULTS_URL : RESULTS_URL;
+      const url = sport === 'nhl-props' ? NHL_PROPS_RESULTS_URL : sport === 'ncaab' ? NCAAB_RESULTS_URL : sport === 'nhl' ? NHL_RESULTS_URL : sport === 'mlb' ? MLB_RESULTS_URL : RESULTS_URL;
       try {
         const resp = await fetch(url + '?t=' + Date.now());
         if (!resp.ok) throw new Error('Failed to fetch results');
@@ -2552,6 +2559,7 @@
           data.days = data.days.filter(day => day.date >= RESULTS_CUTOFF);
         }
         if (sport === 'ncaab') ncaabHistoricalResults = data;
+        else if (sport === 'nhl-props') nhlPropsHistoricalResults = data;
         else if (sport === 'nhl') nhlHistoricalResults = data;
         else if (sport === 'mlb') mlbHistoricalResults = data;
         else historicalResults = data;
@@ -2822,6 +2830,78 @@
       }
 
       return props;
+    }
+
+    function mergeNhlResultsIntoProps(props, resultsData, dateStr) {
+      if (!resultsData || !resultsData.days) return props;
+      const day = resultsData.days.find(d => d.date === dateStr);
+      if (!day || !day.picks) return props;
+
+      // Build lookup: "player|prop|direction|line" -> pick
+      const resultsByKey = {};
+      for (const pick of day.picks) {
+        const key = (pick.player || '') + '|' + (pick.prop || '') + '|' + (pick.direction || '') + '|' + pick.line;
+        resultsByKey[key] = pick;
+      }
+
+      // Enrich existing archive props with grading data
+      const matchedKeys = new Set();
+      for (const p of props) {
+        const key = (p.player || '') + '|' + (p.prop || '') + '|' + (p.direction || '') + '|' + p.line;
+        const r = resultsByKey[key];
+        if (r && r.result) {
+          p.result = r.result;
+          p.actual = r.actual;
+          matchedKeys.add(key);
+        }
+      }
+
+      // Add graded props from results that aren't in the archive
+      for (const [key, pick] of Object.entries(resultsByKey)) {
+        if (matchedKeys.has(key)) continue;
+        if (!pick.result) continue;
+        props.push({
+          player: pick.player || 'Unknown',
+          team: pick.team || '',
+          opponent: pick.opponent || '',
+          prop: pick.prop || '',
+          direction: pick.direction || 'OVER',
+          line: pick.line,
+          projection: pick.projection || pick.line,
+          confidence: pick.confidence || 0,
+          ev: pick.ev || 0,
+          diff: 0,
+          actual: pick.actual,
+          result: pick.result,
+          edge: pick.edge || 'FAIR',
+          _isHistorical: true
+        });
+      }
+
+      return props;
+    }
+
+    function transformNhlResultsToProps(resultsData, dateStr) {
+      if (!resultsData || !resultsData.days) return [];
+      const day = resultsData.days.find(d => d.date === dateStr);
+      if (!day || !day.picks) return [];
+
+      return day.picks.filter(p => p.result).map(pick => ({
+        player: pick.player || 'Unknown',
+        team: pick.team || '',
+        opponent: pick.opponent || '',
+        prop: pick.prop || '',
+        direction: pick.direction || 'OVER',
+        line: pick.line,
+        projection: pick.projection || pick.line,
+        confidence: pick.confidence || 0,
+        ev: pick.ev || 0,
+        diff: 0,
+        actual: pick.actual,
+        result: pick.result,
+        edge: pick.edge || 'FAIR',
+        _isHistorical: true
+      }));
     }
 
     // ── Bet Tracking (localStorage) ──
@@ -5161,6 +5241,7 @@
     const historicalNcaabCache = {};
     const historicalMlbCache = {};
     const historicalPropsCache = {};
+    const historicalNhlPropsCache = {};
     const historicalBestBetsCache = {};
 
     async function loadHistoricalGames(date) {
@@ -5169,7 +5250,7 @@
       if (date === today) return null; // Use current data
 
       // Check cache first (use !== undefined to allow empty arrays)
-      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined && historicalNcaabCache[date] !== undefined && historicalMlbCache[date] !== undefined && historicalPropsCache[date] !== undefined) {
+      if (historicalGamesCache[date] !== undefined && historicalNhlCache[date] !== undefined && historicalNcaabCache[date] !== undefined && historicalMlbCache[date] !== undefined && historicalPropsCache[date] !== undefined && historicalNhlPropsCache[date] !== undefined) {
         return historicalGamesCache[date];
       }
 
@@ -5184,7 +5265,7 @@
       // Try next day's archive first (common case: archive dated X contains games for X-1)
       // Accumulate across archives — props may be in one, games in another
       const archivesToTry = [nextDay, date];
-      let foundGames = null, foundNhl = null, foundNcaab = null, foundMlb = null, foundProps = null;
+      let foundGames = null, foundNhl = null, foundNcaab = null, foundMlb = null, foundProps = null, foundNhlProps = null;
       let embeddedResults = null;
       for (const archiveDate of archivesToTry) {
         try {
@@ -5216,10 +5297,20 @@
             historicalBestBetsCache['mlb:' + date] = data.mlb_game_projections?.best_bets || [];
           }
 
-          // Extract player props from archive
+          // Extract NBA player props from archive
           const ppData = data.player_props;
           if (!foundProps && ppData && ppData.date === date && ppData.projections) {
             foundProps = ppData.projections;
+          }
+          // Also try: player_props might be a plain array (older archives)
+          if (!foundProps && Array.isArray(ppData) && ppData.length > 0) {
+            foundProps = ppData;
+          }
+
+          // Extract NHL player props from archive
+          const nhlPpData = data.nhl_player_props;
+          if (!foundNhlProps && nhlPpData && nhlPpData.date === date && nhlPpData.projections) {
+            foundNhlProps = nhlPpData.projections;
           }
         } catch (e) {
           console.log(`Archive fetch failed for ${archiveDate}:`, e.message);
@@ -5231,14 +5322,17 @@
       let ncaabGames = foundNcaab || [];
       let mlbGames = foundMlb || [];
       let archiveProps = foundProps || [];
+      let archiveNhlProps = foundNhlProps || [];
 
-      if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || mlbGames.length > 0 || archiveProps.length > 0) {
+      if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || mlbGames.length > 0 || archiveProps.length > 0 || archiveNhlProps.length > 0) {
         // Load results to merge actual outcomes into projections
         // Re-fetch if cached version doesn't have the requested date (results may have been updated)
         if (!historicalResults) await loadHistoricalResults('nba');
         else if (games.length > 0 && !historicalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nba');
         if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
         else if (nhlGames.length > 0 && !nhlHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nhl');
+        if (!nhlPropsHistoricalResults) await loadHistoricalResults('nhl-props');
+        else if (archiveNhlProps.length > 0 && !nhlPropsHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('nhl-props');
         if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
         else if (ncaabGames.length > 0 && !ncaabHistoricalResults.days?.find(d => d.date === date)) await loadHistoricalResults('ncaab');
         if (!mlbHistoricalResults) await loadHistoricalResults('mlb');
@@ -5263,6 +5357,11 @@
           archiveProps = mergeResultsIntoProps(archiveProps, historicalResults, date);
           // For historical dates, only show props that have been graded
           archiveProps = archiveProps.filter(p => p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH');
+        }
+
+        // Merge NHL props grading results from nhl_props_results.json
+        if (nhlPropsHistoricalResults) {
+          archiveNhlProps = mergeNhlResultsIntoProps(archiveNhlProps, nhlPropsHistoricalResults, date);
         }
 
         // Supplement: for any games still ungraded after merge, try the archive's embedded results
@@ -5296,6 +5395,7 @@
         historicalNcaabCache[date] = ncaabGames;
         historicalMlbCache[date] = mlbGames;
         historicalPropsCache[date] = archiveProps;
+        historicalNhlPropsCache[date] = archiveNhlProps;
         return games;
       }
 
@@ -5314,16 +5414,21 @@
         if (!mlbHistoricalResults) {
           await loadHistoricalResults('mlb');
         }
+        if (!nhlPropsHistoricalResults) {
+          await loadHistoricalResults('nhl-props');
+        }
         const nbaGames = transformResultsToGames(historicalResults, date);
         const nhlGames = transformResultsToGames(nhlHistoricalResults, date);
         const ncaabGames = transformResultsToGames(ncaabHistoricalResults, date);
         const mlbGames2 = transformResultsToGames(mlbHistoricalResults, date);
         const fallbackProps = transformResultsToProps(historicalResults, date);
+        const fallbackNhlProps = transformNhlResultsToProps(nhlPropsHistoricalResults, date);
         historicalGamesCache[date] = nbaGames;
         historicalNhlCache[date] = nhlGames;
         historicalNcaabCache[date] = ncaabGames;
         historicalMlbCache[date] = mlbGames2;
         historicalPropsCache[date] = fallbackProps;
+        historicalNhlPropsCache[date] = fallbackNhlProps;
         // Extract best bets from results.json picks with best_bet flag
         for (const [sport, rData] of [['nba', historicalResults], ['nhl', nhlHistoricalResults], ['ncaab', ncaabHistoricalResults], ['mlb', mlbHistoricalResults]]) {
           const key = sport + ':' + date;
@@ -5341,6 +5446,7 @@
         historicalNcaabCache[date] = [];
         historicalMlbCache[date] = [];
         historicalPropsCache[date] = [];
+        historicalNhlPropsCache[date] = [];
         return [];
       }
     }
@@ -5409,7 +5515,8 @@
           : currentSport === 'mlb'
           ? (mlbGameProjections && mlbGameProjections.length > 0)
           : (gameProjections && gameProjections.length > 0);
-        const hasProps = currentSport === 'nba' && projections && projections.length > 0 && !projections._stale;
+        const hasProps = (currentSport === 'nba' && projections && projections.length > 0 && !projections._stale)
+          || (currentSport === 'nhl' && nhlProjections && nhlProjections.length > 0 && !nhlProjections._stale);
         return hasGames || hasProps;
       }
       // Check results.json data first (covers all historical dates)
@@ -5422,7 +5529,8 @@
         : currentSport === 'mlb'
         ? (historicalMlbCache[dateStr] && historicalMlbCache[dateStr].length > 0)
         : (historicalGamesCache[dateStr] && historicalGamesCache[dateStr].length > 0);
-      const hasProps = historicalPropsCache[dateStr] && historicalPropsCache[dateStr].length > 0;
+      const hasProps = (historicalPropsCache[dateStr] && historicalPropsCache[dateStr].length > 0)
+        || (historicalNhlPropsCache[dateStr] && historicalNhlPropsCache[dateStr].length > 0);
       return hasGames || hasProps;
     }
 
@@ -5465,6 +5573,7 @@
         ? (historicalMlbCache[dateStr] || [])
         : (historicalGamesCache[dateStr] || []);
       const props = historicalPropsCache[dateStr] || [];
+      const nhlProps = historicalNhlPropsCache[dateStr] || [];
       let totalW = 0, totalL = 0;
       for (const g of games) {
         for (const t of ['spread', 'total', 'ml']) {
@@ -5473,7 +5582,7 @@
           else if (r === 'loss' || r === 'l') totalL++;
         }
       }
-      for (const p of props) {
+      for (const p of [...props, ...nhlProps]) {
         if (p.result === 'WIN') totalW++;
         else if (p.result === 'LOSS') totalL++;
       }
@@ -5584,13 +5693,15 @@
         // Eagerly load results data so calendar dots appear
         const needsNba = !historicalResults;
         const needsNhl = !nhlHistoricalResults;
+        const needsNhlProps = !nhlPropsHistoricalResults;
         const needsNcaab = !ncaabHistoricalResults;
         const needsMlb = !mlbHistoricalResults;
-        if (needsNba || needsNhl || needsNcaab || needsMlb) {
+        if (needsNba || needsNhl || needsNhlProps || needsNcaab || needsMlb) {
           renderCalendarGrid(); // show grid immediately (dots will fill in)
           const loads = [];
           if (needsNba) loads.push(loadHistoricalResults('nba'));
           if (needsNhl) loads.push(loadHistoricalResults('nhl'));
+          if (needsNhlProps) loads.push(loadHistoricalResults('nhl-props'));
           if (needsNcaab) loads.push(loadHistoricalResults('ncaab'));
           if (needsMlb) loads.push(loadHistoricalResults('mlb'));
           await Promise.all(loads);
