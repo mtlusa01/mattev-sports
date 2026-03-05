@@ -658,6 +658,10 @@
     .injury-insight-text { font-size: 0.78rem; color: var(--text-secondary); margin-top: 6px; line-height: 1.4; }
     .insight-type-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 6px; margin-right: 6px; vertical-align: middle; }
     .insight-type-badge.historical { background: rgba(0, 212, 255, 0.2); color: #38bdf8; border: 1px solid rgba(0, 212, 255, 0.3); }
+    .insight-type-badge.proportional { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .opp-boost-badge { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.25); padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+    .opp-injury-section { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .opp-injury-section .injury-team-label { color: #fb923c; }
 
     /* ── Game Log Chart (Outlier-style) ── */
     .gl-section {
@@ -3383,9 +3387,11 @@
       if (advancedFilters.injury !== 'all') {
         filtered = filtered.filter(p => {
           const hasInjuryImpact = p.has_boost || (p.teammate_injuries && p.teammate_injuries.length > 0);
+          const hasOppInjury = (p.opp_injuries && p.opp_injuries.length > 0) || (p.opp_boost_val > 0);
           const status = p.injury_status;
           if (advancedFilters.injury === 'healthy') return !status || status === 'Probable';
           if (advancedFilters.injury === 'boosted') return hasInjuryImpact;
+          if (advancedFilters.injury === 'opp_injured') return hasOppInjury;
           if (advancedFilters.injury === 'questionable') return status === 'Questionable' || status === 'Doubtful';
           return true;
         });
@@ -3800,6 +3806,7 @@
           { value: 'all', text: 'All' },
           { value: 'healthy', text: 'Healthy Only' },
           { value: 'boosted', text: 'Injury Boosted' },
+          { value: 'opp_injured', text: 'Opp Injured' },
           { value: 'questionable', text: 'Questionable' }
         ]},
         { key: 'sportsbook', icon: '&#128218;', label: 'Best Book', options: [
@@ -3995,7 +4002,9 @@
       html += '<div class="injury-header">';
       html += '<span class="injury-icon">&#9888;</span>';
       html += '<span class="injury-title">Injury Report</span>';
-      if (p.injury_boost) html += `<span class="boost-badge">+${p.injury_boost.toFixed(1)} boost</span>`;
+      const totalBoost = p.redistribution_boost || p.injury_boost || 0;
+      if (totalBoost > 0) html += `<span class="boost-badge">+${totalBoost.toFixed(1)} boost</span>`;
+      if (p.opp_boost_val > 0) html += `<span class="opp-boost-badge">OPP +${p.opp_boost_val.toFixed(1)}</span>`;
       if (injuriesData.updated_at) {
         const t = new Date(injuriesData.updated_at);
         if (!isNaN(t)) html += `<span class="injury-updated">${t.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})} ET</span>`;
@@ -4004,7 +4013,7 @@
 
       if (hasEspn) {
         if (teamSig.length > 0) {
-          html += `<div class="injury-team-label">${team}</div>`;
+          html += `<div class="injury-team-label">${team} (teammates)</div>`;
           html += `<div class="injury-list">${renderPlayers(teamSig)}</div>`;
         }
         if (oppSig.length > 0) {
@@ -4019,15 +4028,31 @@
           </div>`).join('') + '</div>';
       }
 
+      if (!hasEspn && p.opp_injuries && p.opp_injuries.length > 0) {
+        html += `<div class="opp-injury-section">`;
+        html += `<div class="injury-team-label opp">${opp || 'Opponent'} (opp)</div>`;
+        html += '<div class="injury-list">' + p.opp_injuries.map(inj => `
+          <div class="teammate-injury">
+            <span class="injury-status ${inj.status.toLowerCase().replace(/\\s/g,'-')}">${inj.status}</span>
+            <span class="injury-player">${inj.player}</span>
+          </div>`).join('') + '</div>';
+        html += '</div>';
+      }
+
       if (p.injury_insight) {
-        html += `<div class="injury-insight-text"><span class="insight-type-badge historical">Historical</span> ${p.injury_insight}</div>`;
-        if (p.injury_details) {
+        const methodBadge = p.boost_method === 'proportional' ? 'proportional' : 'historical';
+        const methodLabel = p.boost_method === 'proportional' ? 'Usage-Based' : 'Historical';
+        html += `<div class="injury-insight-text"><span class="insight-type-badge ${methodBadge}">${methodLabel}</span> ${p.injury_insight}</div>`;
+        if (p.injury_details && p.boost_method !== 'proportional') {
           html += `<div class="injury-stats-row">
             <div class="injury-stat-box without"><div class="injury-stat-label">Without</div><div class="injury-stat-value">${p.injury_details.avg_without}</div><div class="injury-stat-sub">${p.injury_details.games_without} games</div></div>
             <div class="injury-stat-arrow">&#x2192;</div>
             <div class="injury-stat-box with"><div class="injury-stat-label">With</div><div class="injury-stat-value">${p.injury_details.avg_with}</div></div>
-            <div class="injury-stat-box boost-box"><div class="injury-stat-label">Boost</div><div class="injury-stat-value ${p.injury_boost > 0 ? 'pos' : 'neg'}">${p.injury_boost > 0 ? '+' : ''}${p.injury_boost.toFixed(1)}</div></div>
+            <div class="injury-stat-box boost-box"><div class="injury-stat-label">Boost</div><div class="injury-stat-value ${(p.injury_boost || 0) > 0 ? 'pos' : 'neg'}">${(p.injury_boost || 0) > 0 ? '+' : ''}${(p.injury_boost || 0).toFixed(1)}</div></div>
           </div>`;
+        }
+        if (p.teammates_out > 1) {
+          html += `<div class="injury-note">${p.teammates_out} teammates out &mdash; diminishing returns applied</div>`;
         }
       } else if (p.boosted_by) {
         html += `<div class="injury-note">${p.boosted_by} out — may boost ${p.player}'s usage</div>`;
@@ -4190,6 +4215,7 @@
         const edgeColor = !isVal(pe) ? 'var(--text-muted)' : pe > 3 ? 'var(--accent-light)' : pe > 0 ? 'var(--accent)' : 'var(--red-light)';
 
         const injBadge = injuryBadge(p);
+        const oppBoostBadge = p.opp_boost_val > 0 ? `<span class="opp-boost-badge" title="Opponent missing ${(p.opp_injuries||[]).length} player(s)">OPP +${p.opp_boost_val.toFixed(1)}</span>` : '';
         const newBadge = p.added_live ? '<span class="new-badge">NEW</span>' : '';
         const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
 
@@ -4209,7 +4235,7 @@
 
         return `
           <tr data-row-id="${rowId}" class="${rowCls}" onclick="toggleRow('${rowId}')" style="cursor:pointer">
-            <td><span class="pt-player">${p.player}</span>${newBadge}${injBadge} ${edgeBadge}${trackBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
+            <td><span class="pt-player">${p.player}</span>${newBadge}${injBadge} ${edgeBadge}${oppBoostBadge}${trackBadge}<span class="row-chevron ${isExpanded ? 'open' : ''}">\u25BC</span><br><span class="pt-matchup">${matchupStr}</span></td>
             <td><span class="team-dot" style="background:${teamColor}"></span>${p.team}</td>
             <td><span class="pt-prop-badge">${p.prop}</span></td>
             <td><span class="pick-value ${dirClass}">${p.direction}</span></td>
@@ -4249,6 +4275,12 @@
                     ${p.edge ? `<span class="rating-badge ${p.edge.toLowerCase()}">${p.edge}</span>` : ''}
                   </div>
                 </div>
+                ${(p.redistribution_boost > 0 || p.opp_boost_val > 0) ? `
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;padding:0 4px;">
+                  ${p.redistribution_boost > 0 ? `<span class="boost-badge" style="font-size:10px">&#9650; +${p.redistribution_boost.toFixed(1)} ${p.boost_source ? 'w/o ' + p.boost_source : 'boost'}${p.boost_method === 'proportional' ? ' (est)' : ''}</span>` : ''}
+                  ${p.opp_boost_val > 0 ? `<span class="opp-boost-badge" style="font-size:10px">OPP &#9650; +${p.opp_boost_val.toFixed(1)}${p.opp_injuries && p.opp_injuries.length > 0 ? ' (' + p.opp_injuries.map(i => i.player.split(' ').pop()).join(', ') + ' out)' : ''}</span>` : ''}
+                  ${p.pre_boost_projection != null && p.projection != null && Math.abs(p.pre_boost_projection - p.projection) >= 0.3 ? `<span class="stat-badge" style="font-size:10px">Pre-boost: ${p.pre_boost_projection}</span>` : ''}
+                </div>` : ''}
                 ${buildGameLogChart(p)}
                 ${buildMatchupInsights(p)}
                 ${buildInjurySection(p)}
