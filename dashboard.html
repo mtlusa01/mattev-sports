@@ -2207,7 +2207,7 @@
         overlay.classList.remove('visible');
         mainEl.style.display = '';
         if (pageGradient) pageGradient.style.display = '';
-        currentGameSearch = ''; // Reset search when switching sports
+        resetAllFilters(); // Reset all filters when switching sports
         selectedDate = getLocalDateStr(); // Always start on today when switching sports
 
         // Update view tabs based on sport
@@ -3304,6 +3304,34 @@
     let currentPropCategory = 'all';
     let currentPropSort = 'ev'; // 'ev', 'confidence', 'edge'
     const advancedFilters = { ev: 'all', hitrate: 'all', matchup: 'all', odds: 'all', injury: 'all', sportsbook: 'all' };
+
+    function resetAllFilters() {
+      // Props filters
+      currentConfFilter = 'all';
+      currentDirFilter = 'all';
+      currentSourceFilter = 'all';
+      currentGameFilter = null;
+      currentSearch = '';
+      currentPropCategory = 'all';
+      currentPropSort = 'ev';
+      // Game projection filters
+      currentStatusFilter = 'all';
+      currentGameConfFilter = 'all';
+      currentBetTypeFilter = 'all';
+      currentGameSearch = '';
+      betsSortBy = 'conf';
+      betsSortDir = 'desc';
+      // Player projections filters
+      projSortCol = 'pts';
+      projSortAsc = false;
+      projSearchText = '';
+      projGameFilter = null;
+      projExpandedId = null;
+      // Shared
+      expandedRowId = null;
+      // Reset advanced filters
+      for (const k in advancedFilters) advancedFilters[k] = 'all';
+    }
 
     // NBA team colors
     const TEAM_COLORS = {
@@ -5244,7 +5272,7 @@
     // ── View Tabs (in sub-nav) ──
     function switchView(view, doUpdateHash) {
       currentView = view;
-      expandedRowId = null;
+      resetAllFilters(); // Reset all filters when switching views
       document.querySelectorAll('#view-tabs .view-tab').forEach(t => {
         t.classList.toggle('active', t.dataset.view === view);
       });
