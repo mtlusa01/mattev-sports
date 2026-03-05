@@ -1,6 +1,34 @@
 {
-  "updated": "2026-03-04T17:56:44",
+  "updated": "2026-03-04T22:59:05",
   "allTime": {
+    "spreads": {
+      "wins": 33,
+      "losses": 34,
+      "pushes": 0,
+      "pct": 49.3,
+      "roi": -6.0
+    },
+    "totals": {
+      "wins": 37,
+      "losses": 30,
+      "pushes": 0,
+      "pct": 55.2,
+      "roi": 5.4
+    },
+    "moneylines": {
+      "wins": 117,
+      "losses": 68,
+      "pushes": 0,
+      "pct": 63.2,
+      "roi": 20.7
+    },
+    "best_bets": {
+      "wins": 87,
+      "losses": 49,
+      "pushes": 0,
+      "pct": 64.0,
+      "roi": 22.1
+    },
     "props": {
       "wins": 23,
       "losses": 18,
@@ -8,38 +36,168 @@
       "pct": 56.1,
       "roi": 7.1
     },
-    "spreads": {
-      "wins": 29,
-      "losses": 34,
-      "pushes": 0,
-      "pct": 46.0,
-      "roi": -12.1
-    },
-    "totals": {
-      "wins": 35,
-      "losses": 28,
-      "pushes": 0,
-      "pct": 55.6,
-      "roi": 6.1
-    },
-    "moneylines": {
-      "wins": 116,
-      "losses": 65,
-      "pushes": 0,
-      "pct": 64.1,
-      "roi": 22.4
-    },
-    "best_bets": {
-      "wins": 83,
-      "losses": 48,
-      "pushes": 0,
-      "pct": 63.4,
-      "roi": 21.0
-    },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 52.5
   },
   "days": [
+    {
+      "date": "2026-03-04",
+      "spreads": {
+        "wins": 4,
+        "losses": 0,
+        "pushes": 0,
+        "record": "4-0",
+        "pct": 100.0
+      },
+      "totals": {
+        "wins": 2,
+        "losses": 2,
+        "pushes": 0,
+        "record": "2-2",
+        "pct": 50.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 3,
+        "pushes": 0,
+        "record": "1-3",
+        "pct": 25.0
+      },
+      "best_bets": {
+        "wins": 4,
+        "losses": 1,
+        "pushes": 0,
+        "record": "4-1",
+        "pct": 80.0
+      },
+      "picks": [
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "OKC @ NYK",
+          "pick": "NYK +4.5",
+          "result": "103-100",
+          "hit": true,
+          "confidence": 68.9,
+          "proj_score": "110.3-112.4",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "OKC @ NYK",
+          "pick": "OVER 222.5",
+          "result": "103-100",
+          "hit": false,
+          "confidence": 51.3,
+          "proj_score": "110.3-112.4"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "OKC @ NYK",
+          "pick": "NYK",
+          "result": "103-100",
+          "hit": false,
+          "confidence": 57.0,
+          "proj_score": "110.3-112.4"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "CHA @ BOS",
+          "pick": "CHA +6.5",
+          "result": "118-89",
+          "hit": true,
+          "confidence": 52.0,
+          "proj_score": "106.8-112.6"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "CHA @ BOS",
+          "pick": "OVER 212.5",
+          "result": "118-89",
+          "hit": false,
+          "confidence": 61.1,
+          "proj_score": "106.8-112.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "CHA @ BOS",
+          "pick": "BOS",
+          "result": "118-89",
+          "hit": false,
+          "confidence": 58.5,
+          "proj_score": "106.8-112.6"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "UTA @ PHI",
+          "pick": "UTA +9.5",
+          "result": "102-106",
+          "hit": true,
+          "confidence": 58.8,
+          "proj_score": "113.7-119.2"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "UTA @ PHI",
+          "pick": "UNDER 239.5",
+          "result": "102-106",
+          "hit": true,
+          "confidence": 63.3,
+          "proj_score": "113.7-119.2",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "UTA @ PHI",
+          "pick": "PHI",
+          "result": "102-106",
+          "hit": true,
+          "confidence": 59.8,
+          "proj_score": "113.7-119.2"
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "POR @ MEM",
+          "pick": "MEM +8.5",
+          "result": "122-114",
+          "hit": true,
+          "confidence": 74.2,
+          "proj_score": "115.9-116.7",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "POR @ MEM",
+          "pick": "UNDER 237.5",
+          "result": "122-114",
+          "hit": true,
+          "confidence": 62.7,
+          "proj_score": "115.9-116.7",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "POR @ MEM",
+          "pick": "MEM",
+          "result": "122-114",
+          "hit": false,
+          "confidence": 53.3,
+          "proj_score": "115.9-116.7"
+        }
+      ]
+    },
     {
       "date": "2026-03-03",
       "props": {
