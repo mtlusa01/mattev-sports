@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-04T21:30:03",
+  "updated": "2026-03-04T21:45:03",
   "allTime": {
     "spreads": {
-      "wins": 237,
-      "losses": 186,
+      "wins": 238,
+      "losses": 187,
       "pushes": 10,
       "pct": 56.0,
-      "roi": 7.0
+      "roi": 6.9
     },
     "totals": {
-      "wins": 209,
+      "wins": 211,
       "losses": 221,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.2
+      "pct": 48.8,
+      "roi": -6.8
     },
     "moneylines": {
-      "wins": 280,
+      "wins": 282,
       "losses": 153,
       "pushes": 0,
-      "pct": 64.7,
-      "roi": 23.5
+      "pct": 64.8,
+      "roi": 23.8
     },
     "best_bets": {
       "wins": 44,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-04",
       "spreads": {
-        "wins": 12,
-        "losses": 12,
+        "wins": 13,
+        "losses": 13,
         "pushes": 0,
-        "record": "12-12",
+        "record": "13-13",
         "pct": 50.0
       },
       "totals": {
-        "wins": 12,
+        "wins": 14,
         "losses": 12,
         "pushes": 0,
-        "record": "12-12",
-        "pct": 50.0
+        "record": "14-12",
+        "pct": 53.8
       },
       "moneylines": {
-        "wins": 14,
+        "wins": 16,
         "losses": 10,
         "pushes": 0,
-        "record": "14-10",
-        "pct": 58.3
+        "record": "16-10",
+        "pct": 61.5
       },
       "best_bets": {
         "wins": 4,
@@ -714,6 +714,60 @@
           "hit": false,
           "confidence": 87,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "OSU @ PSU",
+          "pick": "PSU +6.5",
+          "result": "94-62",
+          "hit": false,
+          "confidence": 58
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "OSU @ PSU",
+          "pick": "OVER 152.5",
+          "result": "94-62",
+          "hit": true,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "OSU @ PSU",
+          "pick": "OSU",
+          "result": "94-62",
+          "hit": true,
+          "confidence": 69
+        },
+        {
+          "date": "2026-03-04",
+          "type": "spread",
+          "game": "UNF @ WGA",
+          "pick": "WGA -3.0",
+          "result": "85-93",
+          "hit": true,
+          "confidence": 69
+        },
+        {
+          "date": "2026-03-04",
+          "type": "total",
+          "game": "UNF @ WGA",
+          "pick": "OVER 158.5",
+          "result": "85-93",
+          "hit": true,
+          "confidence": 53
+        },
+        {
+          "date": "2026-03-04",
+          "type": "ml",
+          "game": "UNF @ WGA",
+          "pick": "WGA",
+          "result": "85-93",
+          "hit": true,
+          "confidence": 69
         }
       ]
     },
