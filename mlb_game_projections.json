@@ -1,7 +1,7 @@
 {
   "date": "2026-03-05",
   "sport": "MLB",
-  "updated": "2026-03-06T02:07:36",
+  "updated": "2026-03-05T21:32:13",
   "games": [
     {
       "away_team": "TOR",
@@ -166,9 +166,12 @@
       "ml_conf": 51.2,
       "best_bet": "total",
       "best_bet_confidence": 55.4,
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null
+      "status": "final",
+      "away_score": 4,
+      "home_score": 3,
+      "spread_result": "W",
+      "total_result": "W",
+      "ml_result": "L"
     },
     {
       "away_team": "NYM",
@@ -197,9 +200,12 @@
       "ml_conf": 51.3,
       "best_bet": "total",
       "best_bet_confidence": 54.1,
-      "status": "scheduled",
-      "away_score": null,
-      "home_score": null
+      "status": "final",
+      "away_score": 4,
+      "home_score": 7,
+      "spread_result": "L",
+      "total_result": "L",
+      "ml_result": "W"
     },
     {
       "away_team": "HOU",
@@ -464,8 +470,8 @@
       "best_bet": "total",
       "best_bet_confidence": 54.1,
       "status": "live",
-      "away_score": 6,
-      "home_score": 7
+      "away_score": 8,
+      "home_score": 8
     }
   ],
   "best_bets": [],

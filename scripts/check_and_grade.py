@@ -103,9 +103,11 @@ def fetch_espn_scores(sport, date_str=None):
             home_abbr = home_comp.get("team", {}).get("abbreviation", "")
             away_abbr = away_comp.get("team", {}).get("abbreviation", "")
 
-            # Normalize ESPN abbreviations to our format
-            home_abbr = ESPN_ABBR_FIX.get(home_abbr, home_abbr)
-            away_abbr = ESPN_ABBR_FIX.get(away_abbr, away_abbr)
+            # Normalize ESPN abbreviations using sport-specific map
+            # (avoids cross-sport collisions like TB→TBL, WSH→WAS)
+            abbr_fix = ESPN_ABBR_FIX_BY_SPORT.get(sport, ESPN_ABBR_FIX)
+            home_abbr = abbr_fix.get(home_abbr, home_abbr)
+            away_abbr = abbr_fix.get(away_abbr, away_abbr)
 
             home_score = int(home_comp.get("score", 0) or 0)
             away_score = int(away_comp.get("score", 0) or 0)

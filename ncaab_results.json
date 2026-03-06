@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-05T19:15:03",
+  "updated": "2026-03-05T21:32:13",
   "allTime": {
     "spreads": {
-      "wins": 247,
-      "losses": 194,
+      "wins": 255,
+      "losses": 200,
       "pushes": 10,
       "pct": 56.0,
-      "roi": 6.9
+      "roi": 7.0
     },
     "totals": {
-      "wins": 217,
-      "losses": 231,
+      "wins": 224,
+      "losses": 238,
       "pushes": 3,
-      "pct": 48.4,
-      "roi": -7.5
+      "pct": 48.5,
+      "roi": -7.4
     },
     "moneylines": {
-      "wins": 294,
-      "losses": 157,
+      "wins": 304,
+      "losses": 161,
       "pushes": 0,
-      "pct": 65.2,
-      "roi": 24.5
+      "pct": 65.4,
+      "roi": 24.8
     },
     "best_bets": {
-      "wins": 45,
-      "losses": 15,
+      "wins": 49,
+      "losses": 11,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 81.7,
+      "roi": 55.9
     }
   },
   "days": [
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 1,
-        "losses": 1,
+        "wins": 9,
+        "losses": 7,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "9-7",
+        "pct": 56.2
       },
       "totals": {
-        "wins": 0,
-        "losses": 2,
+        "wins": 7,
+        "losses": 9,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "7-9",
+        "pct": 43.8
       },
       "moneylines": {
-        "wins": 0,
-        "losses": 2,
+        "wins": 10,
+        "losses": 6,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "10-6",
+        "pct": 62.5
       },
       "best_bets": {
-        "wins": 1,
-        "losses": 4,
+        "wins": 5,
+        "losses": 0,
         "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
+        "record": "5-0",
+        "pct": 100.0
       },
       "picks": [
         {
@@ -185,6 +185,36 @@
         {
           "date": "2026-03-05",
           "type": "spread",
+          "game": "SHSU @ DEL",
+          "pick": "SHSU -7.5",
+          "result": "80-83",
+          "hit": false,
+          "confidence": 57,
+          "proj_score": "86.4-73.1"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "SHSU @ DEL",
+          "pick": "OVER 148.5",
+          "result": "80-83",
+          "hit": true,
+          "confidence": 55,
+          "proj_score": "86.4-73.1"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "SHSU @ DEL",
+          "pick": "SHSU",
+          "result": "80-83",
+          "hit": false,
+          "confidence": 71,
+          "proj_score": "86.4-73.1"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
           "game": "LT @ LIB",
           "pick": "LT +9.5",
           "result": "76-71",
@@ -212,6 +242,36 @@
           "hit": false,
           "confidence": 41,
           "proj_score": "74.6-77.2"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "TLSA @ ECU",
+          "pick": "TLSA -9.5",
+          "result": "93-66",
+          "hit": true,
+          "confidence": 68,
+          "proj_score": "87.2-70.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "TLSA @ ECU",
+          "pick": "UNDER 157.0",
+          "result": "93-66",
+          "hit": false,
+          "confidence": 54,
+          "proj_score": "87.2-70.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "TLSA @ ECU",
+          "pick": "TLSA",
+          "result": "93-66",
+          "hit": true,
+          "confidence": 74,
+          "proj_score": "87.2-70.5"
         },
         {
           "date": "2026-03-05",
@@ -367,6 +427,36 @@
         {
           "date": "2026-03-05",
           "type": "spread",
+          "game": "MTSU @ FIU",
+          "pick": "MTSU +4.5",
+          "result": "73-65",
+          "hit": true,
+          "confidence": 54,
+          "proj_score": "72.9-79.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "MTSU @ FIU",
+          "pick": "OVER 150.5",
+          "result": "73-65",
+          "hit": false,
+          "confidence": 53,
+          "proj_score": "72.9-79.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "MTSU @ FIU",
+          "pick": "FIU",
+          "result": "73-65",
+          "hit": false,
+          "confidence": 66,
+          "proj_score": "72.9-79.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
           "game": "EIU @ UTM",
           "pick": "EIU +18.5",
           "result": "63-66",
@@ -455,35 +545,6 @@
           "hit": true,
           "confidence": 88,
           "proj_score": "63.9-82.2",
-          "best_bet": true
-        },
-        {
-          "date": "2026-03-05",
-          "type": "spread",
-          "game": "SCST @ NCCU",
-          "pick": "SCST +11.5",
-          "result": "80-64",
-          "hit": true,
-          "confidence": 60,
-          "best_bet": true
-        },
-        {
-          "date": "2026-03-05",
-          "type": "total",
-          "game": "SCST @ NCCU",
-          "pick": "OVER 144.5",
-          "result": "80-64",
-          "hit": false,
-          "confidence": 52
-        },
-        {
-          "date": "2026-03-05",
-          "type": "ml",
-          "game": "SCST @ NCCU",
-          "pick": "NCCU",
-          "result": "80-64",
-          "hit": false,
-          "confidence": 77,
           "best_bet": true
         }
       ]

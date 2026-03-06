@@ -4,24 +4,24 @@
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 4,
-        "losses": 6,
+        "wins": 5,
+        "losses": 7,
         "pushes": 0,
-        "record": "4-6",
-        "pct": 40.0
+        "record": "5-7",
+        "pct": 41.7
       },
       "totals": {
-        "wins": 5,
-        "losses": 5,
+        "wins": 6,
+        "losses": 6,
         "pushes": 0,
-        "record": "5-5",
+        "record": "6-6",
         "pct": 50.0
       },
       "moneylines": {
-        "wins": 5,
-        "losses": 5,
+        "wins": 6,
+        "losses": 6,
         "pushes": 0,
-        "record": "5-5",
+        "record": "6-6",
         "pct": 50.0
       },
       "best_bets": {
@@ -161,6 +161,70 @@
           "proj_score": "3.1-3.7",
           "home_win_prob": 58.0,
           "away_win_prob": 42.0
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "BAL @ TB",
+          "pick": "BAL +1.5",
+          "result": "4-3",
+          "hit": true,
+          "confidence": 50.9,
+          "proj_score": "3.3-3.4"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "BAL @ TB",
+          "pick": "UNDER 8.5",
+          "result": "4-3",
+          "hit": true,
+          "confidence": 55.4,
+          "proj_score": "3.3-3.4"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "BAL @ TB",
+          "pick": "TB",
+          "result": "4-3",
+          "hit": false,
+          "confidence": 51.2,
+          "proj_score": "3.3-3.4",
+          "home_win_prob": 52.5,
+          "away_win_prob": 47.5
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "NYM @ WSH",
+          "pick": "NYM +1.5",
+          "result": "4-7",
+          "hit": false,
+          "confidence": 51.0,
+          "proj_score": "3.5-3.7"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "NYM @ WSH",
+          "pick": "UNDER 8.5",
+          "result": "4-7",
+          "hit": false,
+          "confidence": 54.1,
+          "proj_score": "3.5-3.7"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "NYM @ WSH",
+          "pick": "WSH",
+          "result": "4-7",
+          "hit": true,
+          "confidence": 51.3,
+          "proj_score": "3.5-3.7",
+          "home_win_prob": 52.6,
+          "away_win_prob": 47.4
         },
         {
           "date": "2026-03-05",
@@ -356,22 +420,6 @@
           "proj_score": "4.0-3.6",
           "home_win_prob": 45.4,
           "away_win_prob": 54.6
-        },
-        {
-          "date": "2026-03-05",
-          "type": "score",
-          "game": "BAL @ TBL",
-          "pick": "",
-          "result": "4-3",
-          "hit": null
-        },
-        {
-          "date": "2026-03-05",
-          "type": "score",
-          "game": "NYM @ WAS",
-          "pick": "",
-          "result": "4-7",
-          "hit": null
         }
       ]
     },
@@ -712,25 +760,25 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 11,
-      "losses": 7,
-      "pushes": 0,
-      "pct": 61.1,
-      "roi": 16.7
-    },
-    "totals": {
-      "wins": 11,
-      "losses": 7,
-      "pushes": 0,
-      "pct": 61.1,
-      "roi": 16.7
-    },
-    "moneylines": {
-      "wins": 10,
+      "wins": 12,
       "losses": 8,
       "pushes": 0,
-      "pct": 55.6,
-      "roi": 6.1
+      "pct": 60.0,
+      "roi": 14.5
+    },
+    "totals": {
+      "wins": 12,
+      "losses": 8,
+      "pushes": 0,
+      "pct": 60.0,
+      "roi": 14.5
+    },
+    "moneylines": {
+      "wins": 11,
+      "losses": 9,
+      "pushes": 0,
+      "pct": 55.0,
+      "roi": 5.0
     },
     "best_bets": {
       "wins": 10,
@@ -740,5 +788,5 @@
       "roi": 27.3
     }
   },
-  "updated": "2026-03-06T02:07:36"
+  "updated": "2026-03-05T21:32:13"
 }
