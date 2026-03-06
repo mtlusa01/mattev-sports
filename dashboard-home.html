@@ -103,8 +103,9 @@
     .nav-inner {
       max-width: 1400px; margin: 0 auto; padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between; height: 100%;
+      position: relative;
     }
-    .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; position: relative; z-index: 2; }
     .logo-mark {
       width: 32px; height: 32px; border-radius: 8px;
       background: linear-gradient(135deg, #00d4ff, #38bdf8);
@@ -116,7 +117,7 @@
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
     .logo-text span { color: #00d4ff; }
 
-    .nav-center { display: flex; align-items: center; gap: 4px; }
+    .nav-center { display: flex; align-items: center; gap: 4px; position: absolute; left: 50%; transform: translateX(-50%); }
     .nav-link {
       color: var(--text-tertiary); text-decoration: none; font-size: 13px; font-weight: 500;
       padding: 8px 14px; border-radius: var(--radius-sm); transition: all 0.2s; position: relative;
@@ -128,7 +129,7 @@
       height: 2px; background: var(--accent); border-radius: 1px;
     }
 
-    .nav-actions { position: relative; }
+    .nav-actions { position: relative; z-index: 2; }
     .dropdown-trigger {
       display: flex; align-items: center; gap: 8px; padding: 5px 10px 5px 5px;
       background: var(--bg-card); border: 1px solid var(--border-subtle);

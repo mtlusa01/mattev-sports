@@ -57,7 +57,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-left { display: flex; align-items: center; gap: 12px; text-decoration: none; position: relative; z-index: 2; }
     .logo-mark {
       width: 32px; height: 32px; border-radius: 8px;
       background: linear-gradient(135deg, #00d4ff, #38bdf8);
@@ -68,7 +68,7 @@
     }
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
     .logo-text span { color: #00d4ff; }
-    .nav-center { display: flex; align-items: center; gap: 4px; }
+    .nav-center { display: flex; align-items: center; gap: 4px; position: absolute; left: 50%; transform: translateX(-50%); }
     .nav-link {
       color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;
       padding: 8px 14px; border-radius: 6px; transition: all 0.2s; position: relative;

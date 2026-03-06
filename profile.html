@@ -124,7 +124,7 @@
     }
     .logo-text { font-size: 15px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
     .logo-text span { color: #00d4ff; }
-    .nav-center { display: flex; align-items: center; gap: 4px; }
+    .nav-center { display: flex; align-items: center; gap: 4px; position: absolute; left: 50%; transform: translateX(-50%); }
 
     /* ── Mobile Drawer ── */
     .mobile-nav-backdrop {
@@ -299,7 +299,7 @@
 
   <header class="top-nav">
     <div class="top-nav-inner">
-      <a href="dashboard-home.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <a href="dashboard-home.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;position:relative;z-index:2;">
         <div class="logo-mark">EF</div>
         <span class="logo-text">Edge Factor <span>Elite</span></span>
       </a>
