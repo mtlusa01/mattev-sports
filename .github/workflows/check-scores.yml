@@ -2,10 +2,10 @@ name: Check Scores & Grade
 
 on:
   schedule:
-    # Every 15 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
-    # Each run loops internally for ~25 min, giving continuous coverage
-    - cron: '*/15 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
-    - cron: '*/15 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
+    # Every 10 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
+    # Each run loops internally for ~28 min, giving continuous coverage
+    - cron: '*/10 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
+    - cron: '*/10 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
   workflow_dispatch:
 
 concurrency:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   check-scores:
     runs-on: ubuntu-latest
-    timeout-minutes: 28
+    timeout-minutes: 30
 
     permissions:
       contents: write
@@ -40,8 +40,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          MAX_ITERS=12
-          SLEEP_SECS=120
+          MAX_ITERS=16
+          SLEEP_SECS=90
           PUSH_RETRIES=3
 
           grade_and_push() {
@@ -117,8 +117,13 @@ jobs:
 
             # Don't sleep after the last iteration
             if [ $i -lt $MAX_ITERS ]; then
-              echo "Sleeping ${SLEEP_SECS}s..."
-              sleep $SLEEP_SECS
+              if [ $py_exit -eq 3 ]; then
+                echo "Games ending soon — fast poll (30s)..."
+                sleep 30
+              else
+                echo "Sleeping ${SLEEP_SECS}s..."
+                sleep $SLEEP_SECS
+              fi
             fi
           done
 

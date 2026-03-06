@@ -115,12 +115,17 @@ def fetch_espn_scores(sport, date_str=None):
             completed = status_type == "STATUS_FINAL"
             in_progress = status_type == "STATUS_IN_PROGRESS"
 
+            period = event.get("status", {}).get("period", 0)
+            clock = event.get("status", {}).get("displayClock", "")
+
             key = f"{away_abbr}@{home_abbr}"
             scores[key] = {
                 "away_score": away_score,
                 "home_score": home_score,
                 "completed": completed,
                 "in_progress": in_progress,
+                "period": period,
+                "clock": clock,
             }
 
         label = f"{sport} {date_str}" if date_str else sport
@@ -131,6 +136,51 @@ def fetch_espn_scores(sport, date_str=None):
         label = f"{sport} {date_str}" if date_str else sport
         print(f"  [{label}] ESPN fetch error: {e}")
         return {}
+
+
+# ── Smart Polling ────────────────────────────────────────────────
+
+
+def _parse_clock_seconds(clock_str):
+    """Parse ESPN displayClock (e.g. '3:42') to total seconds."""
+    try:
+        parts = str(clock_str).split(":")
+        if len(parts) == 2:
+            return int(parts[0]) * 60 + int(parts[1])
+        elif len(parts) == 1:
+            return int(parts[0])
+    except (ValueError, TypeError):
+        pass
+    return 9999  # unknown → assume not ending soon
+
+
+def _games_ending_soon(score_map):
+    """Check if any in-progress game across all sports is near ending.
+
+    Thresholds:
+      NBA:   period >= 4, clock < 3:00
+      NHL:   period >= 3, clock < 5:00 (or OT period > 3)
+      NCAAB: period >= 2, clock < 3:00
+      MLB:   period (inning) >= 9
+
+    Returns True if any game is close to finishing.
+    """
+    for sport, scores in score_map.items():
+        for key, sc in scores.items():
+            if not sc.get("in_progress"):
+                continue
+            period = sc.get("period", 0)
+            clock_secs = _parse_clock_seconds(sc.get("clock", ""))
+
+            if sport == "NBA" and period >= 4 and clock_secs < 180:
+                return True
+            elif sport == "NHL" and ((period >= 3 and clock_secs < 300) or period > 3):
+                return True
+            elif sport == "NCAAB" and period >= 2 and clock_secs < 180:
+                return True
+            elif sport == "MLB" and period >= 9:
+                return True
+    return False
 
 
 # ── Smart Checking ───────────────────────────────────────────────
@@ -1627,6 +1677,11 @@ def main():
         elapsed = time.time() - t_start
         api_time = t_phase2_end - t_phase2
         print(f"\n  No new finals or score changes detected.")
+        if _games_ending_soon(score_map):
+            print(f"\n{'=' * 60}")
+            print(f"  SUMMARY: No changes but games ending soon — fast poll (exit 3) [{elapsed:.1f}s total, API: {api_time:.1f}s]")
+            print(f"{'=' * 60}")
+            return 3
         print(f"\n{'=' * 60}")
         print(f"  SUMMARY: No changes [{elapsed:.1f}s total, API: {api_time:.1f}s]")
         print(f"{'=' * 60}")
@@ -1706,7 +1761,13 @@ def main():
     print(f"{'=' * 60}")
 
     # Exit code 2 = all games graded (tells workflow loop to stop early)
-    return 2 if all_graded else 0
+    # Exit code 3 = games ending soon (tells workflow loop to fast poll 30s)
+    if all_graded:
+        return 2
+    if _games_ending_soon(score_map):
+        print(f"  Games ending soon — fast poll (exit 3)")
+        return 3
+    return 0
 
 
 if __name__ == "__main__":

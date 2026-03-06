@@ -145,6 +145,9 @@ jobs:
             all_props_results.json
             nba_player_projections.json
             injuries.json
+            top_picks.json
+            recommendations.json
+            nba_props_recommended.json
           if-no-files-found: warn
 
   # ─── Job 2: NCAAB game predictions ────────────────────────────────
@@ -235,6 +238,7 @@ jobs:
           path: |
             ncaab_projections.json
             ncaab_results.json
+            ncaab_recommended.json
           if-no-files-found: warn
 
   # ─── Job 3: NHL game predictions ──────────────────────────────────
@@ -320,6 +324,7 @@ jobs:
           path: |
             nhl_game_projections.json
             nhl_results.json
+            nhl_recommended.json
           if-no-files-found: warn
 
   # ─── Job 4: MLB game predictions ──────────────────────────────────
@@ -395,6 +400,7 @@ jobs:
           path: |
             mlb_game_projections.json
             mlb_results.json
+            mlb_recommended.json
           if-no-files-found: warn
 
   # ─── Job 5: NHL player props ────────────────────────────────────
@@ -465,6 +471,7 @@ jobs:
           path: |
             nhl_player_props.json
             nhl_props_results.json
+            nhl_props_recommended.json
           if-no-files-found: warn
 
   # ─── Job 6: Publish to mattev-sports (triggers GitHub Pages) ──────
@@ -611,6 +618,11 @@ jobs:
               "mlb-outputs/mlb_results.json",
               "nhl-props-outputs/nhl_player_props.json",
               "nhl-props-outputs/nhl_props_results.json",
+              "nba-outputs/nba_props_recommended.json",
+              "ncaab-outputs/ncaab_recommended.json",
+              "nhl-outputs/nhl_recommended.json",
+              "mlb-outputs/mlb_recommended.json",
+              "nhl-props-outputs/nhl_props_recommended.json",
           ]
 
           copied = 0
