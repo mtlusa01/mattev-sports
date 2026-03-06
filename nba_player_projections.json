@@ -2,7 +2,7 @@
   "sport": "NBA",
   "type": "player_projections",
   "date": "2026-03-06",
-  "updated": "2026-03-06T08:38:23",
+  "updated": "2026-03-06T15:32:23",
   "games": [
     {
       "game_id": "401810763",
@@ -1228,23 +1228,52 @@
           "team": "DAL",
           "opponent": "BOS",
           "is_home": false,
-          "proj_min": 0,
-          "pts": 0,
-          "reb": 0,
-          "ast": 0,
-          "fg3m": 0,
-          "stl": 0,
-          "blk": 0,
-          "tov": 0,
-          "pra": 0,
-          "pr": 0,
-          "pa": 0,
-          "dfs": 0,
-          "ci": {},
-          "minutes_stability": 0,
-          "games_played": 0,
+          "proj_min": 20.0,
+          "pts": 14.8,
+          "reb": 3.3,
+          "ast": 4.1,
+          "fg3m": 0.7,
+          "stl": 0.5,
+          "blk": 0.4,
+          "tov": 1.9,
+          "pra": 22.2,
+          "pr": 18.1,
+          "pa": 18.9,
+          "dfs": 26.3,
+          "ci": {
+            "pts": [
+              10.1,
+              20.5
+            ],
+            "reb": [
+              0.8,
+              6.0
+            ],
+            "ast": [
+              1.1,
+              7.5
+            ],
+            "fg3m": [
+              0,
+              1.7
+            ],
+            "stl": [
+              0,
+              1.5
+            ],
+            "blk": [
+              0,
+              1.2
+            ],
+            "tov": [
+              0.5,
+              3.5
+            ]
+          },
+          "minutes_stability": 0.2,
+          "games_played": 54,
           "b2b": false,
-          "status": "OUT",
+          "status": "GTD",
           "injury_note": "Williams (quadriceps) is out for Thursday's game against the Magic."
         }
       ]
@@ -2027,23 +2056,52 @@
           "team": "MIA",
           "opponent": "CHA",
           "is_home": false,
-          "proj_min": 0,
-          "pts": 0,
-          "reb": 0,
-          "ast": 0,
-          "fg3m": 0,
-          "stl": 0,
-          "blk": 0,
-          "tov": 0,
-          "pra": 0,
-          "pr": 0,
-          "pa": 0,
-          "dfs": 0,
-          "ci": {},
-          "minutes_stability": 0,
-          "games_played": 0,
-          "b2b": false,
-          "status": "OUT",
+          "proj_min": 9.6,
+          "pts": 4.8,
+          "reb": 1.8,
+          "ast": 0.8,
+          "fg3m": 0.8,
+          "stl": 0.6,
+          "blk": 0.1,
+          "tov": 0.4,
+          "pra": 7.4,
+          "pr": 6.6,
+          "pa": 5.6,
+          "dfs": 9.8,
+          "ci": {
+            "pts": [
+              0,
+              10.0
+            ],
+            "reb": [
+              0,
+              4.1
+            ],
+            "ast": [
+              0,
+              2.1
+            ],
+            "fg3m": [
+              0,
+              2.0
+            ],
+            "stl": [
+              0,
+              1.6
+            ],
+            "blk": [
+              0,
+              0.4
+            ],
+            "tov": [
+              0,
+              0.9
+            ]
+          },
+          "minutes_stability": 0.09,
+          "games_played": 61,
+          "b2b": true,
+          "status": "GTD",
           "injury_note": "Fontecchio has a left groin strain and will not play Thursday against the Nets."
         },
         {
@@ -6259,31 +6317,6 @@
           "status": "Active"
         },
         {
-          "player": "Dejounte Murray",
-          "player_id": 3907497,
-          "team": "NOP",
-          "opponent": "PHX",
-          "is_home": false,
-          "proj_min": 0,
-          "pts": 0,
-          "reb": 0,
-          "ast": 0,
-          "fg3m": 0,
-          "stl": 0,
-          "blk": 0,
-          "tov": 0,
-          "pra": 0,
-          "pr": 0,
-          "pa": 0,
-          "dfs": 0,
-          "ci": {},
-          "minutes_stability": 0,
-          "games_played": 0,
-          "b2b": false,
-          "status": "OUT",
-          "injury_note": "Murray (reconditioning) is out for Thursday's game against the Kings."
-        },
-        {
           "player": "Micah Peavy",
           "player_id": 4432185,
           "team": "NOP",
@@ -6508,23 +6541,52 @@
           "team": "SAS",
           "opponent": "LAC",
           "is_home": true,
-          "proj_min": 0,
-          "pts": 0,
-          "reb": 0,
-          "ast": 0,
-          "fg3m": 0,
-          "stl": 0,
-          "blk": 0,
-          "tov": 0,
-          "pra": 0,
-          "pr": 0,
-          "pa": 0,
-          "dfs": 0,
-          "ci": {},
-          "minutes_stability": 0,
-          "games_played": 0,
+          "proj_min": 16.4,
+          "pts": 7.8,
+          "reb": 2.0,
+          "ast": 1.9,
+          "fg3m": 1.8,
+          "stl": 1.0,
+          "blk": 0.1,
+          "tov": 0.7,
+          "pra": 11.7,
+          "pr": 9.8,
+          "pa": 9.7,
+          "dfs": 15.9,
+          "ci": {
+            "pts": [
+              2.2,
+              12.0
+            ],
+            "reb": [
+              0,
+              3.8
+            ],
+            "ast": [
+              0.3,
+              3.1
+            ],
+            "fg3m": [
+              0.3,
+              3.1
+            ],
+            "stl": [
+              0,
+              2.5
+            ],
+            "blk": [
+              0,
+              0.5
+            ],
+            "tov": [
+              0,
+              1.8
+            ]
+          },
+          "minutes_stability": 0.16,
+          "games_played": 66,
           "b2b": false,
-          "status": "OUT",
+          "status": "GTD",
           "injury_note": "Barnes (ankle) is out for Thursday's game against the Pistons."
         },
         {
@@ -7984,31 +8046,6 @@
           "status": "Active"
         },
         {
-          "player": "Maxi Kleber",
-          "player_id": 2960236,
-          "team": "LAL",
-          "opponent": "IND",
-          "is_home": true,
-          "proj_min": 0,
-          "pts": 0,
-          "reb": 0,
-          "ast": 0,
-          "fg3m": 0,
-          "stl": 0,
-          "blk": 0,
-          "tov": 0,
-          "pra": 0,
-          "pr": 0,
-          "pa": 0,
-          "dfs": 0,
-          "ci": {},
-          "minutes_stability": 0,
-          "games_played": 0,
-          "b2b": false,
-          "status": "OUT",
-          "injury_note": "Kleber (back) has been ruled out for Thursday's game against the Nuggets, Trevor Lane of LakersNation.com reports."
-        },
-        {
           "player": "Dalton Knecht",
           "player_id": 4897943,
           "team": "LAL",
@@ -9150,9 +9187,9 @@
     }
   ],
   "meta": {
-    "total_players": 191,
+    "total_players": 189,
     "total_games": 7,
     "model": "rate_v1",
-    "avg_proj_minutes": 17.3
+    "avg_proj_minutes": 17.7
   }
 }
