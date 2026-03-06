@@ -75,6 +75,40 @@ jobs:
       # CI's export_results.py has an empty accuracy_log and would overwrite
       # real grading data with an empty file. Skipped intentionally.
 
+      - name: Restore v9 props model from cache
+        id: props-model-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.nba_props_v9.pkl
+            ~/.nba_minutes_model.joblib
+            ~/.nba_prob_calibrator.joblib
+          key: nba-props-model-v9
+          restore-keys: nba-props-model-
+
+      - name: Train props model if not cached
+        if: steps.props-model-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        working-directory: ../nba-props
+        run: |
+          echo "No cached model — training from scratch..."
+          python -c "
+          from nba_player_props_v9 import Projector
+          p = Projector()
+          p.train()
+          print('Model trained and saved')
+          "
+
+      - name: Save props model to cache
+        if: steps.props-model-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.nba_props_v9.pkl
+            ~/.nba_minutes_model.joblib
+            ~/.nba_prob_calibrator.joblib
+          key: nba-props-model-v9
+
       - name: Generate NBA player props (all_props.json + projections.json)
         continue-on-error: true
         env:
