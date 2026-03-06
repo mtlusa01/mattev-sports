@@ -109,6 +109,17 @@ jobs:
             ~/.nba_prob_calibrator.joblib
           key: nba-props-model-v9
 
+      - name: Generate NBA player projections (nba_player_projections.json)
+        continue-on-error: true
+        working-directory: ../nba-props
+        run: |
+          python -c "
+          from player_projections import PlayerProjectionEngine
+          engine = PlayerProjectionEngine()
+          engine.run()
+          print('Generated nba_player_projections.json')
+          "
+
       - name: Generate NBA player props (all_props.json + projections.json)
         continue-on-error: true
         env:
@@ -124,17 +135,6 @@ jobs:
               print('Generated projections.json + all_props.json')
           else:
               print('No props generated (no games today?)')
-          "
-
-      - name: Generate NBA player projections (nba_player_projections.json)
-        continue-on-error: true
-        working-directory: ../nba-props
-        run: |
-          python -c "
-          from player_projections import PlayerProjectionEngine
-          engine = PlayerProjectionEngine()
-          engine.run()
-          print('Generated nba_player_projections.json')
           "
 
       - name: Fetch NBA injuries
