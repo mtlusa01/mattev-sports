@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-05T22:15:03",
+  "updated": "2026-03-05T22:30:03",
   "allTime": {
     "spreads": {
-      "wins": 257,
+      "wins": 261,
       "losses": 202,
       "pushes": 10,
-      "pct": 56.0,
-      "roi": 6.9
+      "pct": 56.4,
+      "roi": 7.6
     },
     "totals": {
-      "wins": 226,
-      "losses": 240,
+      "wins": 229,
+      "losses": 241,
       "pushes": 3,
-      "pct": 48.5,
-      "roi": -7.4
+      "pct": 48.7,
+      "roi": -7.0
     },
     "moneylines": {
-      "wins": 307,
-      "losses": 162,
+      "wins": 310,
+      "losses": 163,
       "pushes": 0,
       "pct": 65.5,
-      "roi": 25.0
+      "roi": 25.1
     },
     "best_bets": {
       "wins": 49,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 11,
+        "wins": 15,
         "losses": 9,
         "pushes": 0,
-        "record": "11-9",
-        "pct": 55.0
+        "record": "15-9",
+        "pct": 62.5
       },
       "totals": {
-        "wins": 9,
-        "losses": 11,
+        "wins": 12,
+        "losses": 12,
         "pushes": 0,
-        "record": "9-11",
-        "pct": 45.0
+        "record": "12-12",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 13,
-        "losses": 7,
+        "wins": 16,
+        "losses": 8,
         "pushes": 0,
-        "record": "13-7",
-        "pct": 65.0
+        "record": "16-8",
+        "pct": 66.7
       },
       "best_bets": {
         "wins": 5,
@@ -418,6 +418,33 @@
         {
           "date": "2026-03-05",
           "type": "spread",
+          "game": "DSU @ UMES",
+          "pick": "DSU +2.0",
+          "result": "57-56",
+          "hit": true,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "DSU @ UMES",
+          "pick": "UNDER 140.0",
+          "result": "57-56",
+          "hit": true,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "DSU @ UMES",
+          "pick": "UMES",
+          "result": "57-56",
+          "hit": false,
+          "confidence": 50
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
           "game": "EIU @ UTM",
           "pick": "EIU +18.5",
           "result": "63-66",
@@ -495,8 +522,7 @@
           "pick": "NDSU",
           "result": "65-76",
           "hit": true,
-          "confidence": 88,
-          "best_bet": true
+          "confidence": 88
         },
         {
           "date": "2026-03-05",
@@ -606,6 +632,88 @@
           "result": "65-60",
           "hit": true,
           "confidence": 66
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "RUTG @ MSU",
+          "pick": "RUTG +19.5",
+          "result": "87-91",
+          "hit": true,
+          "confidence": 75
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "RUTG @ MSU",
+          "pick": "OVER 151.5",
+          "result": "87-91",
+          "hit": true,
+          "confidence": 63
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "RUTG @ MSU",
+          "pick": "MSU",
+          "result": "87-91",
+          "hit": true,
+          "confidence": 95,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "UVU @ SUU",
+          "pick": "SUU +9.0",
+          "result": "92-88",
+          "hit": true,
+          "confidence": 62
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "UVU @ SUU",
+          "pick": "OVER 151.5",
+          "result": "92-88",
+          "hit": true,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "UVU @ SUU",
+          "pick": "UVU",
+          "result": "92-88",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "MAN @ FAIR",
+          "pick": "FAIR -5.5",
+          "result": "60-71",
+          "hit": true,
+          "confidence": 72
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "MAN @ FAIR",
+          "pick": "OVER 149.0",
+          "result": "60-71",
+          "hit": false,
+          "confidence": 55
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "MAN @ FAIR",
+          "pick": "FAIR",
+          "result": "60-71",
+          "hit": true,
+          "confidence": 78
         }
       ]
     },
