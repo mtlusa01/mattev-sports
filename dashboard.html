@@ -2607,6 +2607,8 @@
     // ── Locked Recommendations (stable across pipeline re-runs) ──
     const lockedGameRecs = {};   // { nba: {date, recommendations}, nhl: ..., ... }
     const lockedPropsRecs = {};  // { nba: {date, recommendations}, nhl: ... }
+    const historicalGameRecsCache = {};   // { 'nba:2026-03-05': [{...}], ... }
+    const historicalPropsRecsCache = {};  // { 'nba:2026-03-05': [{...}], ... }
 
     // ── Historical Results ──
     let historicalResults = null;
@@ -3792,9 +3794,14 @@
         return gd === selectedDate;
       });
 
-      // Use locked recommendations if available for today's date
+      // Use locked recommendations if available for selected date
       const locked = lockedGameRecs[currentSport];
       const isLocked = locked && locked.date === selectedDate && locked.recommendations && locked.recommendations.length > 0;
+
+      // Check archived recommendations for historical dates
+      const histKey = currentSport + ':' + selectedDate;
+      const archivedGameRecs = historicalGameRecsCache[histKey];
+      const hasArchivedRecs = archivedGameRecs && archivedGameRecs.length > 0;
 
       // Cache key: sport + date — only generate picks once per date
       const cacheKey = currentSport + ':' + selectedDate;
@@ -3802,6 +3809,8 @@
         let gameRecs;
         if (isLocked) {
           gameRecs = locked.recommendations;
+        } else if (hasArchivedRecs) {
+          gameRecs = archivedGameRecs;
         } else if (currentSport === 'nhl' || currentSport === 'ncaab' || currentSport === 'mlb') {
           gameRecs = buildGameBestBets(dateGames, { spread: 60, total: 60, ml: 60 });
         } else {
@@ -3867,7 +3876,7 @@
         recordHtml = `<span class="rec-record">${parts.join(' - ')}</span>`;
       }
 
-      const lockBadge = isLocked ? ' <span title="Locked picks — stable all day" style="font-size:0.75em;opacity:0.6">&#128274;</span>' : '';
+      const lockBadge = (isLocked || hasArchivedRecs) ? ' <span title="Locked picks — stable all day" style="font-size:0.75em;opacity:0.6">&#128274;</span>' : '';
 
       return `<div class="rec-category" style="margin-bottom:20px">
         <div class="rec-header">
@@ -3882,12 +3891,19 @@
       // Check for locked prop recommendations first
       const lockedProps = lockedPropsRecs[currentSport];
       const today = getSportsDate();
-      const propsLocked = lockedProps && lockedProps.date === today && selectedDate === today
+      const propsLocked = lockedProps && lockedProps.date === selectedDate
         && lockedProps.recommendations && lockedProps.recommendations.length > 0;
+
+      // Check archived prop recommendations for historical dates
+      const histKey = currentSport + ':' + selectedDate;
+      const archivedPropRecs = historicalPropsRecsCache[histKey];
+      const hasArchivedPropRecs = archivedPropRecs && archivedPropRecs.length > 0;
 
       let propRecs;
       if (propsLocked) {
         propRecs = lockedProps.recommendations;
+      } else if (hasArchivedPropRecs) {
+        propRecs = archivedPropRecs;
       } else if (currentSport === 'nhl') {
         propRecs = [...nhlProjections]
           .filter(r => (r.edge === 'STRONG' || r.edge === 'GOOD') && !r.result)
@@ -3900,14 +3916,14 @@
           .sort((a, b) => (parseFloat(b.ev) || 0) - (parseFloat(a.ev) || 0))
           .slice(0, MAX_RECOMMENDED);
       }
-      const propLockBadge = propsLocked ? ' <span title="Locked picks — stable all day" style="font-size:0.75em;opacity:0.6">&#128274;</span>' : '';
+      const propLockBadge = (propsLocked || hasArchivedPropRecs) ? ' <span title="Locked picks — stable all day" style="font-size:0.75em;opacity:0.6">&#128274;</span>' : '';
       if (propRecs.length === 0) {
         return `<div class="rec-category">
           <div class="rec-header">
             <span class="rec-header-title prop-recs">&#128100; Recommended Player Props</span>
             <span class="rec-count">0 picks</span>
           </div>
-          <div class="no-recs">No player props meet our quality criteria today.</div>
+          <div class="no-recs">No player props meet our quality criteria${selectedDate === getSportsDate() ? ' today' : ' for this date'}.</div>
         </div>`;
       }
       const propCards = propRecs.map((r, i) => {
@@ -5187,12 +5203,12 @@
 
       const filtered = applyFilters(activeProps);
 
-      // Recommendations (skip for historical dates — not relevant for graded props)
+      // Recommendations (show locked/archived recs for any date)
       let recsHtml = '';
-      if (!isHistorical) {
-        recsHtml = currentGameFilter
-          ? renderGameSpecificProps(filtered)
-          : renderPropRecommendations();
+      if (currentGameFilter) {
+        recsHtml = renderGameSpecificProps(filtered);
+      } else {
+        recsHtml = renderPropRecommendations();
       }
 
       // Inline search + filters (always visible)
@@ -5498,6 +5514,34 @@
           const nhlPpData = data.nhl_player_props;
           if (!foundNhlProps && nhlPpData && nhlPpData.date === date && nhlPpData.projections) {
             foundNhlProps = nhlPpData.projections;
+          }
+
+          // Extract archived recommendations for historical date navigation
+          const recSports = [
+            { key: 'nba_recommended', sport: 'nba', type: 'game' },
+            { key: 'nhl_recommended', sport: 'nhl', type: 'game' },
+            { key: 'ncaab_recommended', sport: 'ncaab', type: 'game' },
+            { key: 'mlb_recommended', sport: 'mlb', type: 'game' },
+            { key: 'nba_props_recommended', sport: 'nba', type: 'props' },
+            { key: 'nhl_props_recommended', sport: 'nhl', type: 'props' },
+          ];
+          for (const rs of recSports) {
+            const recData = data[rs.key];
+            if (recData && recData.date === date && recData.recommendations && recData.recommendations.length > 0) {
+              const cacheKey = rs.sport + ':' + date;
+              const store = rs.type === 'props' ? historicalPropsRecsCache : historicalGameRecsCache;
+              if (!store[cacheKey]) store[cacheKey] = recData.recommendations;
+            }
+          }
+          // Also check player_props.recommendations (older archive format)
+          if (ppData && ppData.date === date && ppData.recommendations) {
+            const ppRecs = ppData.recommendations;
+            if (ppRecs.game_bets && ppRecs.game_bets.length > 0 && !historicalGameRecsCache['nba:' + date]) {
+              historicalGameRecsCache['nba:' + date] = ppRecs.game_bets;
+            }
+            if (ppRecs.props && ppRecs.props.length > 0 && !historicalPropsRecsCache['nba:' + date]) {
+              historicalPropsRecsCache['nba:' + date] = ppRecs.props;
+            }
           }
         } catch (e) {
           console.log(`Archive fetch failed for ${archiveDate}:`, e.message);

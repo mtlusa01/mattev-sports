@@ -603,6 +603,12 @@ jobs:
               'player_props': None,  # extracted from projections.json
               'all_props': None,
               'results': 'results.json',
+              'nba_recommended': 'nba_recommended.json',
+              'nhl_recommended': 'nhl_recommended.json',
+              'ncaab_recommended': 'ncaab_recommended.json',
+              'mlb_recommended': 'mlb_recommended.json',
+              'nba_props_recommended': 'nba_props_recommended.json',
+              'nhl_props_recommended': 'nhl_props_recommended.json',
           }
           for key, fname in files.items():
               if fname and os.path.exists(fname):
