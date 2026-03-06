@@ -409,8 +409,10 @@ def grade_sport(sport_label, proj_filename, results_filename, scores, is_nba=Fal
             changed = True
 
         else:
-            # Live game — update scores only
-            if g.get("status") != "final":
+            # Non-final game — update scores only if actually in progress
+            # ESPN returns score=0 for scheduled games; skip those to avoid
+            # prematurely marking games as "live" (None != 0 was triggering updates)
+            if g.get("status") != "final" and (sc.get("in_progress") or away_score > 0 or home_score > 0):
                 old_away = g.get("away_score")
                 if old_away != away_score or g.get("home_score") != home_score:
                     g["away_score"] = away_score
