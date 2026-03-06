@@ -5,24 +5,24 @@
       "date": "2026-03-05",
       "spreads": {
         "wins": 4,
-        "losses": 5,
+        "losses": 6,
         "pushes": 0,
-        "record": "4-5",
-        "pct": 44.4
+        "record": "4-6",
+        "pct": 40.0
       },
       "totals": {
         "wins": 5,
-        "losses": 4,
+        "losses": 5,
         "pushes": 0,
-        "record": "5-4",
-        "pct": 55.6
+        "record": "5-5",
+        "pct": 50.0
       },
       "moneylines": {
         "wins": 5,
-        "losses": 4,
+        "losses": 5,
         "pushes": 0,
-        "record": "5-4",
-        "pct": 55.6
+        "record": "5-5",
+        "pct": 50.0
       },
       "best_bets": {
         "wins": 2,
@@ -296,6 +296,38 @@
         {
           "date": "2026-03-05",
           "type": "spread",
+          "game": "ATH @ LAA",
+          "pick": "LAA -1.5",
+          "result": "16-11",
+          "hit": false,
+          "confidence": 55.1,
+          "proj_score": "3.3-4.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "ATH @ LAA",
+          "pick": "UNDER 8.5",
+          "result": "16-11",
+          "hit": false,
+          "confidence": 52.9,
+          "proj_score": "3.3-4.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "ATH @ LAA",
+          "pick": "LAA",
+          "result": "16-11",
+          "hit": false,
+          "confidence": 56.2,
+          "proj_score": "3.3-4.3",
+          "home_win_prob": 62.3,
+          "away_win_prob": 37.7
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
           "game": "SD @ SEA",
           "pick": "SD +1.5",
           "result": "27-6",
@@ -324,6 +356,22 @@
           "proj_score": "4.0-3.6",
           "home_win_prob": 45.4,
           "away_win_prob": 54.6
+        },
+        {
+          "date": "2026-03-05",
+          "type": "score",
+          "game": "BAL @ TBL",
+          "pick": "",
+          "result": "4-3",
+          "hit": null
+        },
+        {
+          "date": "2026-03-05",
+          "type": "score",
+          "game": "NYM @ WAS",
+          "pick": "",
+          "result": "4-7",
+          "hit": null
         }
       ]
     },
@@ -665,24 +713,24 @@
   "allTime": {
     "spreads": {
       "wins": 11,
-      "losses": 6,
+      "losses": 7,
       "pushes": 0,
-      "pct": 64.7,
-      "roi": 23.5
+      "pct": 61.1,
+      "roi": 16.7
     },
     "totals": {
       "wins": 11,
-      "losses": 6,
+      "losses": 7,
       "pushes": 0,
-      "pct": 64.7,
-      "roi": 23.5
+      "pct": 61.1,
+      "roi": 16.7
     },
     "moneylines": {
       "wins": 10,
-      "losses": 7,
+      "losses": 8,
       "pushes": 0,
-      "pct": 58.8,
-      "roi": 12.3
+      "pct": 55.6,
+      "roi": 6.1
     },
     "best_bets": {
       "wins": 10,
@@ -692,5 +740,5 @@
       "roi": 27.3
     }
   },
-  "updated": "2026-03-05T23:31:50"
+  "updated": "2026-03-06T00:04:58"
 }
