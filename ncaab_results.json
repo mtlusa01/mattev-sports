@@ -1,23 +1,23 @@
 {
-  "updated": "2026-03-05T22:00:03",
+  "updated": "2026-03-05T22:15:03",
   "allTime": {
     "spreads": {
-      "wins": 256,
-      "losses": 200,
+      "wins": 257,
+      "losses": 202,
       "pushes": 10,
-      "pct": 56.1,
-      "roi": 7.2
+      "pct": 56.0,
+      "roi": 6.9
     },
     "totals": {
-      "wins": 225,
-      "losses": 238,
+      "wins": 226,
+      "losses": 240,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.2
+      "pct": 48.5,
+      "roi": -7.4
     },
     "moneylines": {
-      "wins": 305,
-      "losses": 161,
+      "wins": 307,
+      "losses": 162,
       "pushes": 0,
       "pct": 65.5,
       "roi": 25.0
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 10,
-        "losses": 7,
-        "pushes": 0,
-        "record": "10-7",
-        "pct": 58.8
-      },
-      "totals": {
-        "wins": 8,
+        "wins": 11,
         "losses": 9,
         "pushes": 0,
-        "record": "8-9",
-        "pct": 47.1
+        "record": "11-9",
+        "pct": 55.0
+      },
+      "totals": {
+        "wins": 9,
+        "losses": 11,
+        "pushes": 0,
+        "record": "9-11",
+        "pct": 45.0
       },
       "moneylines": {
-        "wins": 11,
-        "losses": 6,
+        "wins": 13,
+        "losses": 7,
         "pushes": 0,
-        "record": "11-6",
-        "pct": 64.7
+        "record": "13-7",
+        "pct": 65.0
       },
       "best_bets": {
         "wins": 5,
@@ -468,8 +468,7 @@
           "pick": "BU",
           "result": "73-75",
           "hit": true,
-          "confidence": 83,
-          "best_bet": true
+          "confidence": 83
         },
         {
           "date": "2026-03-05",
@@ -525,6 +524,88 @@
           "result": "77-81",
           "hit": true,
           "confidence": 67
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "MICH @ IOWA",
+          "pick": "MICH -8.5",
+          "result": "71-68",
+          "hit": false,
+          "confidence": 65
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "MICH @ IOWA",
+          "pick": "OVER 145.5",
+          "result": "71-68",
+          "hit": false,
+          "confidence": 66
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "MICH @ IOWA",
+          "pick": "MICH",
+          "result": "71-68",
+          "hit": true,
+          "confidence": 91,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "WKU @ MOST",
+          "pick": "MOST +3.5",
+          "result": "74-87",
+          "hit": true,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "WKU @ MOST",
+          "pick": "OVER 152.5",
+          "result": "74-87",
+          "hit": true,
+          "confidence": 58
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "WKU @ MOST",
+          "pick": "WKU",
+          "result": "74-87",
+          "hit": false,
+          "confidence": 59
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "UTA @ TAR",
+          "pick": "TAR +4.0",
+          "result": "65-60",
+          "hit": false,
+          "confidence": 54
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "UTA @ TAR",
+          "pick": "OVER 140.5",
+          "result": "65-60",
+          "hit": false,
+          "confidence": 47
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "UTA @ TAR",
+          "pick": "UTA",
+          "result": "65-60",
+          "hit": true,
+          "confidence": 66
         }
       ]
     },
