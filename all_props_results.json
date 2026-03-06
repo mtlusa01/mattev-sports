@@ -1,979 +1,484 @@
 {
   "days": [
     {
-      "date": "2026-03-04",
-      "graded_at": "2026-03-05T07:52:14",
-      "total_props_graded": 4,
+      "date": "2026-02-10",
+      "graded_at": "2026-02-11T07:26:50",
+      "total_props_graded": 69,
       "overall": {
-        "wins": 1,
-        "losses": 3,
+        "wins": 36,
+        "losses": 33,
         "pushes": 0,
-        "pct": 25.0
-      },
-      "by_stat_type": {},
-      "picks": [
-        {
-          "player": "Kon Knueppel",
-          "team": "",
-          "opponent": "",
-          "prop": "AST",
-          "direction": "UNDER",
-          "line": 3.5,
-          "actual": 0.0,
-          "result": "WIN",
-          "hit": true,
-          "confidence": 0,
-          "ev": 0,
-          "edge": ""
-        },
-        {
-          "player": "Karl-Anthony Towns",
-          "team": "",
-          "opponent": "",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 18.5,
-          "actual": 17.0,
-          "result": "LOSS",
-          "hit": false,
-          "confidence": 0,
-          "ev": 0,
-          "edge": ""
-        },
-        {
-          "player": "Cason Wallace",
-          "team": "",
-          "opponent": "",
-          "prop": "AST",
-          "direction": "OVER",
-          "line": 4.5,
-          "actual": 3.0,
-          "result": "LOSS",
-          "hit": false,
-          "confidence": 0,
-          "ev": 0,
-          "edge": ""
-        },
-        {
-          "player": "Tyrese Maxey",
-          "team": "",
-          "opponent": "",
-          "prop": "PTS",
-          "direction": "OVER",
-          "line": 29.5,
-          "actual": 25.0,
-          "result": "LOSS",
-          "hit": false,
-          "confidence": 0,
-          "ev": 0,
-          "edge": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-03-03",
-      "graded_at": "2026-03-05T07:51:33",
-      "total_props_graded": 2,
-      "overall": {
-        "wins": 2,
-        "losses": 0,
-        "pushes": 0,
-        "pct": 100.0
-      },
-      "by_stat_type": {},
-      "picks": [
-        {
-          "player": "Jalen Duren",
-          "team": "DET",
-          "opponent": "CLE",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 31.5,
-          "actual": 39.0,
-          "result": "WIN",
-          "hit": true,
-          "confidence": 0,
-          "ev": 0,
-          "edge": ""
-        },
-        {
-          "player": "Saddiq Bey",
-          "team": "NO",
-          "opponent": "LAL",
-          "prop": "PRA",
-          "direction": "OVER",
-          "line": 22.5,
-          "actual": 26.0,
-          "result": "WIN",
-          "hit": true,
-          "confidence": 0,
-          "ev": 0,
-          "edge": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-02-19",
-      "graded_at": "2026-03-02T01:06:37",
-      "total_props_graded": 17,
-      "overall": {
-        "wins": 5,
-        "losses": 12,
-        "pushes": 0,
-        "total": 17,
-        "record": "5-12-0",
-        "win_pct": 29.4,
-        "avg_projection_error": 5.92
+        "total": 69,
+        "record": "36-33-0",
+        "win_pct": 52.2,
+        "avg_projection_error": 4.92
       },
       "by_stat_type": {
         "PTS": {
-          "wins": 2,
-          "losses": 3,
-          "pushes": 0,
-          "total": 5,
-          "record": "2-3-0",
-          "win_pct": 40.0,
-          "avg_projection_error": 7.88
-        },
-        "REB": {
-          "wins": 2,
-          "losses": 2,
-          "pushes": 0,
-          "total": 4,
-          "record": "2-2-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 2.25
-        },
-        "AST": {
-          "wins": 0,
-          "losses": 4,
-          "pushes": 0,
-          "total": 4,
-          "record": "0-4-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 2.9
-        },
-        "PRA": {
-          "wins": 1,
-          "losses": 3,
-          "pushes": 0,
-          "total": 4,
-          "record": "1-3-0",
-          "win_pct": 25.0,
-          "avg_projection_error": 10.15
-        }
-      },
-      "by_confidence_bucket": {
-        "50-52": {
-          "wins": 0,
-          "losses": 2,
-          "pushes": 0,
-          "total": 2,
-          "record": "0-2-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 8.25
-        },
-        "52-55": {
-          "wins": 0,
-          "losses": 4,
-          "pushes": 0,
-          "total": 4,
-          "record": "0-4-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 7.8
-        },
-        "55-60": {
-          "wins": 3,
-          "losses": 2,
-          "pushes": 0,
-          "total": 5,
-          "record": "3-2-0",
-          "win_pct": 60.0,
-          "avg_projection_error": 4.88
-        },
-        "60-65": {
-          "wins": 2,
-          "losses": 1,
-          "pushes": 0,
-          "total": 3,
-          "record": "2-1-0",
-          "win_pct": 66.7,
-          "avg_projection_error": 4.1
-        }
-      },
-      "by_direction": {
-        "OVER": {
-          "wins": 1,
-          "losses": 7,
-          "pushes": 0,
-          "total": 8,
-          "record": "1-7-0",
-          "win_pct": 12.5,
-          "avg_projection_error": 4.53
-        },
-        "UNDER": {
-          "wins": 4,
+          "wins": 12,
           "losses": 5,
-          "pushes": 0,
-          "total": 9,
-          "record": "4-5-0",
-          "win_pct": 44.4,
-          "avg_projection_error": 7.16
-        }
-      },
-      "by_edge_category": {
-        "STRONG": {
-          "wins": 4,
-          "losses": 2,
-          "pushes": 0,
-          "total": 6,
-          "record": "4-2-0",
-          "win_pct": 66.7,
-          "avg_projection_error": 5.0
-        },
-        "GOOD": {
-          "wins": 1,
-          "losses": 2,
-          "pushes": 0,
-          "total": 3,
-          "record": "1-2-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 4.27
-        },
-        "FAIR": {
-          "wins": 0,
-          "losses": 2,
-          "pushes": 0,
-          "total": 2,
-          "record": "0-2-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 8.85
-        },
-        "AVOID": {
-          "wins": 0,
-          "losses": 6,
-          "pushes": 0,
-          "total": 6,
-          "record": "0-6-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 6.68
-        }
-      },
-      "by_h2h_status": {
-        "no_h2h": {
-          "wins": 3,
-          "losses": 1,
-          "pushes": 0,
-          "total": 4,
-          "record": "3-1-0",
-          "win_pct": 75.0,
-          "avg_projection_error": 6.25
-        }
-      },
-      "by_edge_size": {
-        "0-1": {
-          "wins": 2,
-          "losses": 6,
-          "pushes": 0,
-          "total": 8,
-          "record": "2-6-0",
-          "win_pct": 25.0,
-          "avg_projection_error": 5.21
-        },
-        "1-2": {
-          "wins": 2,
-          "losses": 4,
-          "pushes": 0,
-          "total": 6,
-          "record": "2-4-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 6.27
-        },
-        "2-3": {
-          "wins": 0,
-          "losses": 1,
-          "pushes": 0,
-          "total": 1,
-          "record": "0-1-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 4.7
-        },
-        "3+": {
-          "wins": 1,
-          "losses": 1,
-          "pushes": 0,
-          "total": 2,
-          "record": "1-1-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 8.3
-        }
-      },
-      "by_was_filtered": {
-        "other_props": {
-          "wins": 5,
-          "losses": 12,
           "pushes": 0,
           "total": 17,
-          "record": "5-12-0",
-          "win_pct": 29.4,
-          "avg_projection_error": 5.92
-        }
-      },
-      "by_matchup_favorability": {
-        "favorable": {
-          "wins": 3,
-          "losses": 5,
-          "pushes": 0,
-          "total": 8,
-          "record": "3-5-0",
-          "win_pct": 37.5,
-          "avg_projection_error": 5.44
-        },
-        "neutral": {
-          "wins": 1,
-          "losses": 1,
-          "pushes": 0,
-          "total": 2,
-          "record": "1-1-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 1.4
-        },
-        "unfavorable": {
-          "wins": 1,
-          "losses": 6,
-          "pushes": 0,
-          "total": 7,
-          "record": "1-6-0",
-          "win_pct": 14.3,
-          "avg_projection_error": 7.76
-        }
-      },
-      "by_l10_hit_rate": {
-        "below_avg (30-50%)": {
-          "wins": 1,
-          "losses": 3,
-          "pushes": 0,
-          "total": 4,
-          "record": "1-3-0",
-          "win_pct": 25.0,
-          "avg_projection_error": 3.53
-        },
-        "above_avg (50-70%)": {
-          "wins": 3,
-          "losses": 7,
-          "pushes": 0,
-          "total": 10,
-          "record": "3-7-0",
-          "win_pct": 30.0,
-          "avg_projection_error": 6.8
-        },
-        "hot (70%+)": {
-          "wins": 1,
-          "losses": 2,
-          "pushes": 0,
-          "total": 3,
-          "record": "1-2-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 6.17
-        }
-      },
-      "top_performers": [
-        {
-          "player": "Josh Giddey",
-          "record": "3-1",
-          "win_pct": 75.0,
-          "total": 4
-        },
-        {
-          "player": "Immanuel Quickley",
-          "record": "1-2",
-          "win_pct": 33.3,
-          "total": 3
-        },
-        {
-          "player": "Scottie Barnes",
-          "record": "1-3",
-          "win_pct": 25.0,
-          "total": 4
-        },
-        {
-          "player": "Brandon Ingram",
-          "record": "0-4",
-          "win_pct": 0.0,
-          "total": 4
-        },
-        {
-          "player": "Matas Buzelis",
-          "record": "0-2",
-          "win_pct": 0.0,
-          "total": 2
-        }
-      ],
-      "worst_performers": [
-        {
-          "player": "Brandon Ingram",
-          "record": "0-4",
-          "win_pct": 0.0,
-          "total": 4
-        },
-        {
-          "player": "Matas Buzelis",
-          "record": "0-2",
-          "win_pct": 0.0,
-          "total": 2
-        },
-        {
-          "player": "Scottie Barnes",
-          "record": "1-3",
-          "win_pct": 25.0,
-          "total": 4
-        },
-        {
-          "player": "Immanuel Quickley",
-          "record": "1-2",
-          "win_pct": 33.3,
-          "total": 3
-        },
-        {
-          "player": "Josh Giddey",
-          "record": "3-1",
-          "win_pct": 75.0,
-          "total": 4
-        }
-      ],
-      "best_projections": [
-        {
-          "player": "Scottie Barnes",
-          "prop": "REB",
-          "projection": 9.3,
-          "actual": 9,
-          "error": 0.3000000000000007
-        },
-        {
-          "player": "Matas Buzelis",
-          "prop": "REB",
-          "projection": 4.7,
-          "actual": 6,
-          "error": 1.2999999999999998
-        },
-        {
-          "player": "Josh Giddey",
-          "prop": "REB",
-          "projection": 5.5,
-          "actual": 4,
-          "error": 1.5
-        },
-        {
-          "player": "Scottie Barnes",
-          "prop": "AST",
-          "projection": 6.5,
-          "actual": 5,
-          "error": 1.5
-        },
-        {
-          "player": "Immanuel Quickley",
-          "prop": "PTS",
-          "projection": 16.0,
-          "actual": 14,
-          "error": 2.0
-        }
-      ],
-      "worst_projections": [
-        {
-          "player": "Josh Giddey",
-          "prop": "PTS",
-          "projection": 15.1,
-          "actual": 5,
-          "error": 10.1
-        },
-        {
-          "player": "Josh Giddey",
-          "prop": "PRA",
-          "projection": 24.7,
-          "actual": 14,
-          "error": 10.7
-        },
-        {
-          "player": "Matas Buzelis",
-          "prop": "PTS",
-          "projection": 14.8,
-          "actual": 4,
-          "error": 10.8
-        },
-        {
-          "player": "Brandon Ingram",
-          "prop": "PTS",
-          "projection": 19.2,
-          "actual": 31,
-          "error": 11.8
-        },
-        {
-          "player": "Brandon Ingram",
-          "prop": "PRA",
-          "projection": 28.6,
-          "actual": 45,
-          "error": 16.4
-        }
-      ]
-    },
-    {
-      "date": "2026-02-12",
-      "graded_at": "2026-02-20T16:54:58",
-      "total_props_graded": 38,
-      "overall": {
-        "wins": 15,
-        "losses": 23,
-        "pushes": 0,
-        "total": 38,
-        "record": "15-23-0",
-        "win_pct": 39.5,
-        "avg_projection_error": 4.79
-      },
-      "by_stat_type": {
-        "PTS": {
-          "wins": 5,
-          "losses": 4,
-          "pushes": 0,
-          "total": 9,
-          "record": "5-4-0",
-          "win_pct": 55.6,
-          "avg_projection_error": 4.37
+          "record": "12-5-0",
+          "win_pct": 70.6,
+          "avg_projection_error": 7.02
         },
         "REB": {
-          "wins": 5,
-          "losses": 8,
-          "pushes": 0,
-          "total": 13,
-          "record": "5-8-0",
-          "win_pct": 38.5,
-          "avg_projection_error": 3.04
-        },
-        "AST": {
-          "wins": 2,
-          "losses": 5,
-          "pushes": 0,
-          "total": 7,
-          "record": "2-5-0",
-          "win_pct": 28.6,
-          "avg_projection_error": 1.69
-        },
-        "PRA": {
-          "wins": 3,
-          "losses": 6,
-          "pushes": 0,
-          "total": 9,
-          "record": "3-6-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 10.17
-        }
-      },
-      "by_confidence_bucket": {
-        "50-52": {
-          "wins": 4,
-          "losses": 4,
-          "pushes": 0,
-          "total": 8,
-          "record": "4-4-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 6.2
-        },
-        "52-55": {
-          "wins": 7,
-          "losses": 3,
-          "pushes": 0,
-          "total": 10,
-          "record": "7-3-0",
-          "win_pct": 70.0,
-          "avg_projection_error": 3.31
-        },
-        "55-60": {
-          "wins": 2,
-          "losses": 6,
-          "pushes": 0,
-          "total": 8,
-          "record": "2-6-0",
-          "win_pct": 25.0,
-          "avg_projection_error": 7.4
-        }
-      },
-      "by_direction": {
-        "OVER": {
-          "wins": 7,
-          "losses": 9,
-          "pushes": 0,
-          "total": 16,
-          "record": "7-9-0",
-          "win_pct": 43.8,
-          "avg_projection_error": 6.26
-        },
-        "UNDER": {
-          "wins": 8,
-          "losses": 14,
-          "pushes": 0,
-          "total": 22,
-          "record": "8-14-0",
-          "win_pct": 36.4,
-          "avg_projection_error": 3.72
-        }
-      },
-      "by_edge_category": {
-        "STRONG": {
-          "wins": 3,
-          "losses": 6,
-          "pushes": 0,
-          "total": 9,
-          "record": "3-6-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 5.58
-        },
-        "GOOD": {
-          "wins": 1,
-          "losses": 0,
-          "pushes": 0,
-          "total": 1,
-          "record": "1-0-0",
-          "win_pct": 100.0,
-          "avg_projection_error": 13.3
-        },
-        "FAIR": {
-          "wins": 2,
-          "losses": 1,
-          "pushes": 0,
-          "total": 3,
-          "record": "2-1-0",
-          "win_pct": 66.7,
-          "avg_projection_error": 3.67
-        },
-        "AVOID": {
-          "wins": 9,
-          "losses": 16,
-          "pushes": 0,
-          "total": 25,
-          "record": "9-16-0",
-          "win_pct": 36.0,
-          "avg_projection_error": 4.3
-        }
-      },
-      "by_h2h_status": {
-        "good_h2h": {
-          "wins": 6,
-          "losses": 8,
-          "pushes": 0,
-          "total": 14,
-          "record": "6-8-0",
-          "win_pct": 42.9,
-          "avg_projection_error": 4.89
-        },
-        "bad_h2h": {
-          "wins": 1,
-          "losses": 0,
-          "pushes": 0,
-          "total": 1,
-          "record": "1-0-0",
-          "win_pct": 100.0,
-          "avg_projection_error": 3.4
-        },
-        "no_h2h": {
-          "wins": 2,
-          "losses": 2,
-          "pushes": 0,
-          "total": 4,
-          "record": "2-2-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 4.62
-        }
-      },
-      "by_edge_size": {
-        "0-1": {
-          "wins": 8,
-          "losses": 13,
-          "pushes": 0,
-          "total": 21,
-          "record": "8-13-0",
-          "win_pct": 38.1,
-          "avg_projection_error": 3.25
-        },
-        "1-2": {
-          "wins": 2,
-          "losses": 5,
-          "pushes": 0,
-          "total": 7,
-          "record": "2-5-0",
-          "win_pct": 28.6,
-          "avg_projection_error": 5.36
-        },
-        "2-3": {
-          "wins": 2,
-          "losses": 1,
-          "pushes": 0,
-          "total": 3,
-          "record": "2-1-0",
-          "win_pct": 66.7,
-          "avg_projection_error": 2.6
-        },
-        "3+": {
-          "wins": 3,
-          "losses": 4,
-          "pushes": 0,
-          "total": 7,
-          "record": "3-4-0",
-          "win_pct": 42.9,
-          "avg_projection_error": 9.8
-        }
-      },
-      "by_was_filtered": {
-        "other_props": {
-          "wins": 15,
-          "losses": 23,
-          "pushes": 0,
-          "total": 38,
-          "record": "15-23-0",
-          "win_pct": 39.5,
-          "avg_projection_error": 4.79
-        }
-      },
-      "by_matchup_favorability": {
-        "favorable": {
-          "wins": 7,
-          "losses": 7,
-          "pushes": 0,
-          "total": 14,
-          "record": "7-7-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 7.09
-        },
-        "neutral": {
-          "wins": 3,
-          "losses": 4,
-          "pushes": 0,
-          "total": 7,
-          "record": "3-4-0",
-          "win_pct": 42.9,
-          "avg_projection_error": 3.51
-        },
-        "unfavorable": {
-          "wins": 5,
-          "losses": 12,
-          "pushes": 0,
-          "total": 17,
-          "record": "5-12-0",
-          "win_pct": 29.4,
-          "avg_projection_error": 3.42
-        }
-      },
-      "by_l10_hit_rate": {
-        "below_avg (30-50%)": {
-          "wins": 2,
-          "losses": 8,
-          "pushes": 0,
-          "total": 10,
-          "record": "2-8-0",
-          "win_pct": 20.0,
-          "avg_projection_error": 4.92
-        },
-        "above_avg (50-70%)": {
           "wins": 9,
           "losses": 9,
           "pushes": 0,
           "total": 18,
           "record": "9-9-0",
           "win_pct": 50.0,
-          "avg_projection_error": 4.78
+          "avg_projection_error": 1.93
         },
-        "hot (70%+)": {
+        "AST": {
+          "wins": 8,
+          "losses": 9,
+          "pushes": 0,
+          "total": 17,
+          "record": "8-9-0",
+          "win_pct": 47.1,
+          "avg_projection_error": 2.07
+        },
+        "PRA": {
+          "wins": 7,
+          "losses": 10,
+          "pushes": 0,
+          "total": 17,
+          "record": "7-10-0",
+          "win_pct": 41.2,
+          "avg_projection_error": 8.82
+        }
+      },
+      "by_confidence_bucket": {
+        "50-52": {
+          "wins": 12,
+          "losses": 8,
+          "pushes": 0,
+          "total": 20,
+          "record": "12-8-0",
+          "win_pct": 60.0,
+          "avg_projection_error": 3.44
+        },
+        "52-55": {
+          "wins": 10,
+          "losses": 10,
+          "pushes": 0,
+          "total": 20,
+          "record": "10-10-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 6.88
+        },
+        "55-60": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0,
+          "total": 4,
+          "record": "1-3-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 5.83
+        }
+      },
+      "by_direction": {
+        "OVER": {
+          "wins": 17,
+          "losses": 12,
+          "pushes": 0,
+          "total": 29,
+          "record": "17-12-0",
+          "win_pct": 58.6,
+          "avg_projection_error": 4.66
+        },
+        "UNDER": {
+          "wins": 19,
+          "losses": 21,
+          "pushes": 0,
+          "total": 40,
+          "record": "19-21-0",
+          "win_pct": 47.5,
+          "avg_projection_error": 5.1
+        }
+      },
+      "by_edge_category": {
+        "STRONG": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0,
+          "total": 3,
+          "record": "0-3-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 6.87
+        },
+        "GOOD": {
           "wins": 4,
           "losses": 6,
           "pushes": 0,
           "total": 10,
           "record": "4-6-0",
           "win_pct": 40.0,
-          "avg_projection_error": 4.69
+          "avg_projection_error": 7.36
+        },
+        "FAIR": {
+          "wins": 4,
+          "losses": 2,
+          "pushes": 0,
+          "total": 6,
+          "record": "4-2-0",
+          "win_pct": 66.7,
+          "avg_projection_error": 4.45
+        },
+        "AVOID": {
+          "wins": 28,
+          "losses": 22,
+          "pushes": 0,
+          "total": 50,
+          "record": "28-22-0",
+          "win_pct": 56.0,
+          "avg_projection_error": 4.37
+        }
+      },
+      "by_h2h_status": {
+        "good_h2h": {
+          "wins": 12,
+          "losses": 12,
+          "pushes": 0,
+          "total": 24,
+          "record": "12-12-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 4.45
+        },
+        "bad_h2h": {
+          "wins": 5,
+          "losses": 0,
+          "pushes": 0,
+          "total": 5,
+          "record": "5-0-0",
+          "win_pct": 100.0,
+          "avg_projection_error": 1.92
+        },
+        "no_h2h": {
+          "wins": 2,
+          "losses": 4,
+          "pushes": 0,
+          "total": 6,
+          "record": "2-4-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 5.15
+        }
+      },
+      "by_edge_size": {
+        "0-1": {
+          "wins": 21,
+          "losses": 19,
+          "pushes": 0,
+          "total": 40,
+          "record": "21-19-0",
+          "win_pct": 52.5,
+          "avg_projection_error": 3.48
+        },
+        "1-2": {
+          "wins": 9,
+          "losses": 12,
+          "pushes": 0,
+          "total": 21,
+          "record": "9-12-0",
+          "win_pct": 42.9,
+          "avg_projection_error": 6.91
+        },
+        "2-3": {
+          "wins": 5,
+          "losses": 0,
+          "pushes": 0,
+          "total": 5,
+          "record": "5-0-0",
+          "win_pct": 100.0,
+          "avg_projection_error": 5.92
+        },
+        "3+": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0,
+          "total": 3,
+          "record": "1-2-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 8.5
+        }
+      },
+      "by_was_filtered": {
+        "other_props": {
+          "wins": 36,
+          "losses": 33,
+          "pushes": 0,
+          "total": 69,
+          "record": "36-33-0",
+          "win_pct": 52.2,
+          "avg_projection_error": 4.92
+        }
+      },
+      "by_matchup_favorability": {
+        "favorable": {
+          "wins": 19,
+          "losses": 14,
+          "pushes": 0,
+          "total": 33,
+          "record": "19-14-0",
+          "win_pct": 57.6,
+          "avg_projection_error": 3.33
+        },
+        "neutral": {
+          "wins": 7,
+          "losses": 7,
+          "pushes": 0,
+          "total": 14,
+          "record": "7-7-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 7.48
+        },
+        "unfavorable": {
+          "wins": 10,
+          "losses": 12,
+          "pushes": 0,
+          "total": 22,
+          "record": "10-12-0",
+          "win_pct": 45.5,
+          "avg_projection_error": 5.67
+        }
+      },
+      "by_l10_hit_rate": {
+        "cold (<30%)": {
+          "wins": 2,
+          "losses": 2,
+          "pushes": 0,
+          "total": 4,
+          "record": "2-2-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 2.08
+        },
+        "below_avg (30-50%)": {
+          "wins": 5,
+          "losses": 11,
+          "pushes": 0,
+          "total": 16,
+          "record": "5-11-0",
+          "win_pct": 31.2,
+          "avg_projection_error": 5.84
+        },
+        "above_avg (50-70%)": {
+          "wins": 15,
+          "losses": 11,
+          "pushes": 0,
+          "total": 26,
+          "record": "15-11-0",
+          "win_pct": 57.7,
+          "avg_projection_error": 5.15
+        },
+        "hot (70%+)": {
+          "wins": 14,
+          "losses": 9,
+          "pushes": 0,
+          "total": 23,
+          "record": "14-9-0",
+          "win_pct": 60.9,
+          "avg_projection_error": 4.51
         }
       },
       "top_performers": [
         {
-          "player": "Jrue Holiday",
+          "player": "Naji Marshall",
+          "record": "4-0",
+          "win_pct": 100.0,
+          "total": 4
+        },
+        {
+          "player": "Jake LaRavia",
+          "record": "2-0",
+          "win_pct": 100.0,
+          "total": 2
+        },
+        {
+          "player": "Rui Hachimura",
+          "record": "2-0",
+          "win_pct": 100.0,
+          "total": 2
+        },
+        {
+          "player": "Dillon Brooks",
+          "record": "2-0",
+          "win_pct": 100.0,
+          "total": 2
+        },
+        {
+          "player": "Cooper Flagg",
           "record": "3-1",
           "win_pct": 75.0,
           "total": 4
         },
         {
-          "player": "Kevin Porter Jr.",
-          "record": "2-2",
-          "win_pct": 50.0,
+          "player": "Kawhi Leonard",
+          "record": "3-1",
+          "win_pct": 75.0,
           "total": 4
         },
         {
-          "player": "Naji Marshall",
-          "record": "2-2",
-          "win_pct": 50.0,
+          "player": "Alperen Sengun",
+          "record": "3-1",
+          "win_pct": 75.0,
           "total": 4
         },
         {
-          "player": "Donovan Clingan",
-          "record": "1-1",
-          "win_pct": 50.0,
-          "total": 2
-        },
-        {
-          "player": "Ace Bailey",
-          "record": "1-2",
-          "win_pct": 33.3,
+          "player": "Karl-Anthony Towns",
+          "record": "2-1",
+          "win_pct": 66.7,
           "total": 3
         },
         {
-          "player": "Chet Holmgren",
-          "record": "1-2",
-          "win_pct": 33.3,
+          "player": "De'Aaron Fox",
+          "record": "2-1",
+          "win_pct": 66.7,
           "total": 3
         },
         {
-          "player": "LeBron James",
-          "record": "0-4",
-          "win_pct": 0.0,
+          "player": "Amen Thompson",
+          "record": "2-2",
+          "win_pct": 50.0,
           "total": 4
-        },
-        {
-          "player": "Austin Reaves",
-          "record": "0-4",
-          "win_pct": 0.0,
-          "total": 4
-        },
-        {
-          "player": "Jerami Grant",
-          "record": "0-2",
-          "win_pct": 0.0,
-          "total": 2
         }
       ],
       "worst_performers": [
         {
-          "player": "LeBron James",
-          "record": "0-4",
+          "player": "Josh Hart",
+          "record": "0-3",
           "win_pct": 0.0,
-          "total": 4
+          "total": 3
         },
         {
-          "player": "Austin Reaves",
-          "record": "0-4",
+          "player": "Jalen Brunson",
+          "record": "0-3",
           "win_pct": 0.0,
-          "total": 4
+          "total": 3
         },
         {
-          "player": "Jerami Grant",
-          "record": "0-2",
+          "player": "Victor Wembanyama",
+          "record": "0-3",
           "win_pct": 0.0,
-          "total": 2
+          "total": 3
         },
         {
-          "player": "Ace Bailey",
+          "player": "Devin Booker",
           "record": "1-2",
           "win_pct": 33.3,
           "total": 3
         },
         {
-          "player": "Chet Holmgren",
+          "player": "Andrew Nembhard",
           "record": "1-2",
           "win_pct": 33.3,
           "total": 3
         },
         {
-          "player": "Kevin Porter Jr.",
+          "player": "Amen Thompson",
           "record": "2-2",
           "win_pct": 50.0,
           "total": 4
         },
         {
-          "player": "Naji Marshall",
+          "player": "Kevin Durant",
           "record": "2-2",
           "win_pct": 50.0,
           "total": 4
         },
         {
-          "player": "Donovan Clingan",
-          "record": "1-1",
+          "player": "Mikal Bridges",
+          "record": "2-2",
           "win_pct": 50.0,
-          "total": 2
+          "total": 4
         },
         {
-          "player": "Jrue Holiday",
-          "record": "3-1",
-          "win_pct": 75.0,
+          "player": "Pascal Siakam",
+          "record": "2-2",
+          "win_pct": 50.0,
+          "total": 4
+        },
+        {
+          "player": "Stephon Castle",
+          "record": "2-2",
+          "win_pct": 50.0,
           "total": 4
         }
       ],
       "best_projections": [
         {
-          "player": "Jake LaRavia",
-          "prop": "REB",
-          "projection": 3.0,
-          "actual": 3,
-          "error": 0.0
-        },
-        {
-          "player": "Chet Holmgren",
-          "prop": "PTS",
-          "projection": 15.9,
-          "actual": 16,
-          "error": 0.09999999999999964
-        },
-        {
-          "player": "Cason Wallace",
+          "player": "De'Aaron Fox",
           "prop": "AST",
-          "projection": 3.1,
-          "actual": 3,
-          "error": 0.10000000000000009
+          "projection": 6.3,
+          "actual": 6,
+          "error": 0.2999999999999998
         },
         {
-          "player": "Naji Marshall",
-          "prop": "PTS",
-          "projection": 18.6,
-          "actual": 19,
-          "error": 0.3999999999999986
+          "player": "Stephon Castle",
+          "prop": "AST",
+          "projection": 6.7,
+          "actual": 7,
+          "error": 0.2999999999999998
         },
         {
-          "player": "Ace Bailey",
+          "player": "Karl-Anthony Towns",
+          "prop": "REB",
+          "projection": 13.7,
+          "actual": 14,
+          "error": 0.3000000000000007
+        },
+        {
+          "player": "Amen Thompson",
           "prop": "PTS",
-          "projection": 14.4,
-          "actual": 15,
-          "error": 0.5999999999999996
+          "projection": 15.7,
+          "actual": 16,
+          "error": 0.3000000000000007
+        },
+        {
+          "player": "Devin Booker",
+          "prop": "AST",
+          "projection": 6.5,
+          "actual": 6,
+          "error": 0.5
         }
       ],
       "worst_projections": [
         {
-          "player": "Austin Reaves",
-          "prop": "PTS",
-          "projection": 27.8,
-          "actual": 18,
-          "error": 9.8
-        },
-        {
-          "player": "Jrue Holiday",
+          "player": "Stephon Castle",
           "prop": "PTS",
           "projection": 17.7,
-          "actual": 31,
-          "error": 13.3
+          "actual": 2,
+          "error": 15.7
         },
         {
-          "player": "LeBron James",
+          "player": "Victor Wembanyama",
+          "prop": "PTS",
+          "projection": 22.5,
+          "actual": 40,
+          "error": 17.5
+        },
+        {
+          "player": "Jalen Brunson",
           "prop": "PRA",
           "projection": 34.7,
-          "actual": 50,
-          "error": 15.299999999999997
+          "actual": 53,
+          "error": 18.299999999999997
         },
         {
-          "player": "Jrue Holiday",
+          "player": "Victor Wembanyama",
           "prop": "PRA",
-          "projection": 30.6,
-          "actual": 47,
-          "error": 16.4
+          "projection": 34.7,
+          "actual": 54,
+          "error": 19.299999999999997
         },
         {
-          "player": "Donovan Clingan",
+          "player": "Stephon Castle",
           "prop": "PRA",
-          "projection": 27.9,
-          "actual": 48,
-          "error": 20.1
+          "projection": 30.7,
+          "actual": 10,
+          "error": 20.7
         }
       ]
     },
@@ -1469,1016 +974,1001 @@
       ]
     },
     {
-      "date": "2026-02-10",
-      "graded_at": "2026-02-11T07:26:50",
-      "total_props_graded": 69,
+      "date": "2026-02-12",
+      "graded_at": "2026-02-20T16:54:58",
+      "total_props_graded": 38,
       "overall": {
-        "wins": 36,
-        "losses": 33,
+        "wins": 15,
+        "losses": 23,
         "pushes": 0,
-        "total": 69,
-        "record": "36-33-0",
-        "win_pct": 52.2,
-        "avg_projection_error": 4.92
+        "total": 38,
+        "record": "15-23-0",
+        "win_pct": 39.5,
+        "avg_projection_error": 4.79
       },
       "by_stat_type": {
         "PTS": {
-          "wins": 12,
-          "losses": 5,
+          "wins": 5,
+          "losses": 4,
           "pushes": 0,
-          "total": 17,
-          "record": "12-5-0",
-          "win_pct": 70.6,
-          "avg_projection_error": 7.02
+          "total": 9,
+          "record": "5-4-0",
+          "win_pct": 55.6,
+          "avg_projection_error": 4.37
         },
         "REB": {
-          "wins": 9,
-          "losses": 9,
+          "wins": 5,
+          "losses": 8,
           "pushes": 0,
-          "total": 18,
-          "record": "9-9-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 1.93
+          "total": 13,
+          "record": "5-8-0",
+          "win_pct": 38.5,
+          "avg_projection_error": 3.04
         },
         "AST": {
-          "wins": 8,
-          "losses": 9,
+          "wins": 2,
+          "losses": 5,
           "pushes": 0,
-          "total": 17,
-          "record": "8-9-0",
-          "win_pct": 47.1,
-          "avg_projection_error": 2.07
+          "total": 7,
+          "record": "2-5-0",
+          "win_pct": 28.6,
+          "avg_projection_error": 1.69
         },
         "PRA": {
-          "wins": 7,
-          "losses": 10,
+          "wins": 3,
+          "losses": 6,
           "pushes": 0,
-          "total": 17,
-          "record": "7-10-0",
-          "win_pct": 41.2,
-          "avg_projection_error": 8.82
+          "total": 9,
+          "record": "3-6-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 10.17
         }
       },
       "by_confidence_bucket": {
         "50-52": {
-          "wins": 12,
-          "losses": 8,
+          "wins": 4,
+          "losses": 4,
           "pushes": 0,
-          "total": 20,
-          "record": "12-8-0",
-          "win_pct": 60.0,
-          "avg_projection_error": 3.44
+          "total": 8,
+          "record": "4-4-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 6.2
         },
         "52-55": {
-          "wins": 10,
-          "losses": 10,
-          "pushes": 0,
-          "total": 20,
-          "record": "10-10-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 6.88
-        },
-        "55-60": {
-          "wins": 1,
+          "wins": 7,
           "losses": 3,
           "pushes": 0,
-          "total": 4,
-          "record": "1-3-0",
+          "total": 10,
+          "record": "7-3-0",
+          "win_pct": 70.0,
+          "avg_projection_error": 3.31
+        },
+        "55-60": {
+          "wins": 2,
+          "losses": 6,
+          "pushes": 0,
+          "total": 8,
+          "record": "2-6-0",
           "win_pct": 25.0,
-          "avg_projection_error": 5.83
+          "avg_projection_error": 7.4
         }
       },
       "by_direction": {
         "OVER": {
-          "wins": 17,
-          "losses": 12,
+          "wins": 7,
+          "losses": 9,
           "pushes": 0,
-          "total": 29,
-          "record": "17-12-0",
-          "win_pct": 58.6,
-          "avg_projection_error": 4.66
+          "total": 16,
+          "record": "7-9-0",
+          "win_pct": 43.8,
+          "avg_projection_error": 6.26
         },
         "UNDER": {
-          "wins": 19,
-          "losses": 21,
+          "wins": 8,
+          "losses": 14,
           "pushes": 0,
-          "total": 40,
-          "record": "19-21-0",
-          "win_pct": 47.5,
-          "avg_projection_error": 5.1
+          "total": 22,
+          "record": "8-14-0",
+          "win_pct": 36.4,
+          "avg_projection_error": 3.72
         }
       },
       "by_edge_category": {
         "STRONG": {
-          "wins": 0,
-          "losses": 3,
-          "pushes": 0,
-          "total": 3,
-          "record": "0-3-0",
-          "win_pct": 0.0,
-          "avg_projection_error": 6.87
-        },
-        "GOOD": {
-          "wins": 4,
+          "wins": 3,
           "losses": 6,
           "pushes": 0,
-          "total": 10,
-          "record": "4-6-0",
-          "win_pct": 40.0,
-          "avg_projection_error": 7.36
+          "total": 9,
+          "record": "3-6-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 5.58
+        },
+        "GOOD": {
+          "wins": 1,
+          "losses": 0,
+          "pushes": 0,
+          "total": 1,
+          "record": "1-0-0",
+          "win_pct": 100.0,
+          "avg_projection_error": 13.3
         },
         "FAIR": {
-          "wins": 4,
-          "losses": 2,
+          "wins": 2,
+          "losses": 1,
           "pushes": 0,
-          "total": 6,
-          "record": "4-2-0",
+          "total": 3,
+          "record": "2-1-0",
           "win_pct": 66.7,
-          "avg_projection_error": 4.45
+          "avg_projection_error": 3.67
         },
         "AVOID": {
-          "wins": 28,
-          "losses": 22,
+          "wins": 9,
+          "losses": 16,
           "pushes": 0,
-          "total": 50,
-          "record": "28-22-0",
-          "win_pct": 56.0,
-          "avg_projection_error": 4.37
+          "total": 25,
+          "record": "9-16-0",
+          "win_pct": 36.0,
+          "avg_projection_error": 4.3
         }
       },
       "by_h2h_status": {
         "good_h2h": {
-          "wins": 12,
-          "losses": 12,
-          "pushes": 0,
-          "total": 24,
-          "record": "12-12-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 4.45
-        },
-        "bad_h2h": {
-          "wins": 5,
-          "losses": 0,
-          "pushes": 0,
-          "total": 5,
-          "record": "5-0-0",
-          "win_pct": 100.0,
-          "avg_projection_error": 1.92
-        },
-        "no_h2h": {
-          "wins": 2,
-          "losses": 4,
-          "pushes": 0,
-          "total": 6,
-          "record": "2-4-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 5.15
-        }
-      },
-      "by_edge_size": {
-        "0-1": {
-          "wins": 21,
-          "losses": 19,
-          "pushes": 0,
-          "total": 40,
-          "record": "21-19-0",
-          "win_pct": 52.5,
-          "avg_projection_error": 3.48
-        },
-        "1-2": {
-          "wins": 9,
-          "losses": 12,
-          "pushes": 0,
-          "total": 21,
-          "record": "9-12-0",
-          "win_pct": 42.9,
-          "avg_projection_error": 6.91
-        },
-        "2-3": {
-          "wins": 5,
-          "losses": 0,
-          "pushes": 0,
-          "total": 5,
-          "record": "5-0-0",
-          "win_pct": 100.0,
-          "avg_projection_error": 5.92
-        },
-        "3+": {
-          "wins": 1,
-          "losses": 2,
-          "pushes": 0,
-          "total": 3,
-          "record": "1-2-0",
-          "win_pct": 33.3,
-          "avg_projection_error": 8.5
-        }
-      },
-      "by_was_filtered": {
-        "other_props": {
-          "wins": 36,
-          "losses": 33,
-          "pushes": 0,
-          "total": 69,
-          "record": "36-33-0",
-          "win_pct": 52.2,
-          "avg_projection_error": 4.92
-        }
-      },
-      "by_matchup_favorability": {
-        "favorable": {
-          "wins": 19,
-          "losses": 14,
-          "pushes": 0,
-          "total": 33,
-          "record": "19-14-0",
-          "win_pct": 57.6,
-          "avg_projection_error": 3.33
-        },
-        "neutral": {
-          "wins": 7,
-          "losses": 7,
+          "wins": 6,
+          "losses": 8,
           "pushes": 0,
           "total": 14,
-          "record": "7-7-0",
-          "win_pct": 50.0,
-          "avg_projection_error": 7.48
+          "record": "6-8-0",
+          "win_pct": 42.9,
+          "avg_projection_error": 4.89
         },
-        "unfavorable": {
-          "wins": 10,
-          "losses": 12,
+        "bad_h2h": {
+          "wins": 1,
+          "losses": 0,
           "pushes": 0,
-          "total": 22,
-          "record": "10-12-0",
-          "win_pct": 45.5,
-          "avg_projection_error": 5.67
-        }
-      },
-      "by_l10_hit_rate": {
-        "cold (<30%)": {
+          "total": 1,
+          "record": "1-0-0",
+          "win_pct": 100.0,
+          "avg_projection_error": 3.4
+        },
+        "no_h2h": {
           "wins": 2,
           "losses": 2,
           "pushes": 0,
           "total": 4,
           "record": "2-2-0",
           "win_pct": 50.0,
-          "avg_projection_error": 2.08
-        },
-        "below_avg (30-50%)": {
-          "wins": 5,
-          "losses": 11,
+          "avg_projection_error": 4.62
+        }
+      },
+      "by_edge_size": {
+        "0-1": {
+          "wins": 8,
+          "losses": 13,
           "pushes": 0,
-          "total": 16,
-          "record": "5-11-0",
-          "win_pct": 31.2,
-          "avg_projection_error": 5.84
+          "total": 21,
+          "record": "8-13-0",
+          "win_pct": 38.1,
+          "avg_projection_error": 3.25
+        },
+        "1-2": {
+          "wins": 2,
+          "losses": 5,
+          "pushes": 0,
+          "total": 7,
+          "record": "2-5-0",
+          "win_pct": 28.6,
+          "avg_projection_error": 5.36
+        },
+        "2-3": {
+          "wins": 2,
+          "losses": 1,
+          "pushes": 0,
+          "total": 3,
+          "record": "2-1-0",
+          "win_pct": 66.7,
+          "avg_projection_error": 2.6
+        },
+        "3+": {
+          "wins": 3,
+          "losses": 4,
+          "pushes": 0,
+          "total": 7,
+          "record": "3-4-0",
+          "win_pct": 42.9,
+          "avg_projection_error": 9.8
+        }
+      },
+      "by_was_filtered": {
+        "other_props": {
+          "wins": 15,
+          "losses": 23,
+          "pushes": 0,
+          "total": 38,
+          "record": "15-23-0",
+          "win_pct": 39.5,
+          "avg_projection_error": 4.79
+        }
+      },
+      "by_matchup_favorability": {
+        "favorable": {
+          "wins": 7,
+          "losses": 7,
+          "pushes": 0,
+          "total": 14,
+          "record": "7-7-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 7.09
+        },
+        "neutral": {
+          "wins": 3,
+          "losses": 4,
+          "pushes": 0,
+          "total": 7,
+          "record": "3-4-0",
+          "win_pct": 42.9,
+          "avg_projection_error": 3.51
+        },
+        "unfavorable": {
+          "wins": 5,
+          "losses": 12,
+          "pushes": 0,
+          "total": 17,
+          "record": "5-12-0",
+          "win_pct": 29.4,
+          "avg_projection_error": 3.42
+        }
+      },
+      "by_l10_hit_rate": {
+        "below_avg (30-50%)": {
+          "wins": 2,
+          "losses": 8,
+          "pushes": 0,
+          "total": 10,
+          "record": "2-8-0",
+          "win_pct": 20.0,
+          "avg_projection_error": 4.92
         },
         "above_avg (50-70%)": {
-          "wins": 15,
-          "losses": 11,
-          "pushes": 0,
-          "total": 26,
-          "record": "15-11-0",
-          "win_pct": 57.7,
-          "avg_projection_error": 5.15
-        },
-        "hot (70%+)": {
-          "wins": 14,
+          "wins": 9,
           "losses": 9,
           "pushes": 0,
-          "total": 23,
-          "record": "14-9-0",
-          "win_pct": 60.9,
-          "avg_projection_error": 4.51
+          "total": 18,
+          "record": "9-9-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 4.78
+        },
+        "hot (70%+)": {
+          "wins": 4,
+          "losses": 6,
+          "pushes": 0,
+          "total": 10,
+          "record": "4-6-0",
+          "win_pct": 40.0,
+          "avg_projection_error": 4.69
         }
       },
       "top_performers": [
         {
-          "player": "Naji Marshall",
-          "record": "4-0",
-          "win_pct": 100.0,
-          "total": 4
-        },
-        {
-          "player": "Jake LaRavia",
-          "record": "2-0",
-          "win_pct": 100.0,
-          "total": 2
-        },
-        {
-          "player": "Rui Hachimura",
-          "record": "2-0",
-          "win_pct": 100.0,
-          "total": 2
-        },
-        {
-          "player": "Dillon Brooks",
-          "record": "2-0",
-          "win_pct": 100.0,
-          "total": 2
-        },
-        {
-          "player": "Cooper Flagg",
+          "player": "Jrue Holiday",
           "record": "3-1",
           "win_pct": 75.0,
           "total": 4
         },
         {
-          "player": "Kawhi Leonard",
-          "record": "3-1",
-          "win_pct": 75.0,
-          "total": 4
-        },
-        {
-          "player": "Alperen Sengun",
-          "record": "3-1",
-          "win_pct": 75.0,
-          "total": 4
-        },
-        {
-          "player": "Karl-Anthony Towns",
-          "record": "2-1",
-          "win_pct": 66.7,
-          "total": 3
-        },
-        {
-          "player": "De'Aaron Fox",
-          "record": "2-1",
-          "win_pct": 66.7,
-          "total": 3
-        },
-        {
-          "player": "Amen Thompson",
+          "player": "Kevin Porter Jr.",
           "record": "2-2",
           "win_pct": 50.0,
           "total": 4
+        },
+        {
+          "player": "Naji Marshall",
+          "record": "2-2",
+          "win_pct": 50.0,
+          "total": 4
+        },
+        {
+          "player": "Donovan Clingan",
+          "record": "1-1",
+          "win_pct": 50.0,
+          "total": 2
+        },
+        {
+          "player": "Ace Bailey",
+          "record": "1-2",
+          "win_pct": 33.3,
+          "total": 3
+        },
+        {
+          "player": "Chet Holmgren",
+          "record": "1-2",
+          "win_pct": 33.3,
+          "total": 3
+        },
+        {
+          "player": "LeBron James",
+          "record": "0-4",
+          "win_pct": 0.0,
+          "total": 4
+        },
+        {
+          "player": "Austin Reaves",
+          "record": "0-4",
+          "win_pct": 0.0,
+          "total": 4
+        },
+        {
+          "player": "Jerami Grant",
+          "record": "0-2",
+          "win_pct": 0.0,
+          "total": 2
         }
       ],
       "worst_performers": [
         {
-          "player": "Josh Hart",
-          "record": "0-3",
+          "player": "LeBron James",
+          "record": "0-4",
           "win_pct": 0.0,
-          "total": 3
+          "total": 4
         },
         {
-          "player": "Jalen Brunson",
-          "record": "0-3",
+          "player": "Austin Reaves",
+          "record": "0-4",
           "win_pct": 0.0,
-          "total": 3
+          "total": 4
         },
         {
-          "player": "Victor Wembanyama",
-          "record": "0-3",
+          "player": "Jerami Grant",
+          "record": "0-2",
           "win_pct": 0.0,
-          "total": 3
+          "total": 2
         },
         {
-          "player": "Devin Booker",
+          "player": "Ace Bailey",
           "record": "1-2",
           "win_pct": 33.3,
           "total": 3
         },
         {
-          "player": "Andrew Nembhard",
+          "player": "Chet Holmgren",
           "record": "1-2",
           "win_pct": 33.3,
           "total": 3
         },
         {
-          "player": "Amen Thompson",
+          "player": "Kevin Porter Jr.",
           "record": "2-2",
           "win_pct": 50.0,
           "total": 4
         },
         {
-          "player": "Kevin Durant",
+          "player": "Naji Marshall",
           "record": "2-2",
           "win_pct": 50.0,
           "total": 4
         },
         {
-          "player": "Mikal Bridges",
-          "record": "2-2",
+          "player": "Donovan Clingan",
+          "record": "1-1",
           "win_pct": 50.0,
-          "total": 4
+          "total": 2
         },
         {
-          "player": "Pascal Siakam",
-          "record": "2-2",
-          "win_pct": 50.0,
-          "total": 4
-        },
-        {
-          "player": "Stephon Castle",
-          "record": "2-2",
-          "win_pct": 50.0,
+          "player": "Jrue Holiday",
+          "record": "3-1",
+          "win_pct": 75.0,
           "total": 4
         }
       ],
       "best_projections": [
         {
-          "player": "De'Aaron Fox",
-          "prop": "AST",
-          "projection": 6.3,
-          "actual": 6,
-          "error": 0.2999999999999998
-        },
-        {
-          "player": "Stephon Castle",
-          "prop": "AST",
-          "projection": 6.7,
-          "actual": 7,
-          "error": 0.2999999999999998
-        },
-        {
-          "player": "Karl-Anthony Towns",
+          "player": "Jake LaRavia",
           "prop": "REB",
-          "projection": 13.7,
-          "actual": 14,
-          "error": 0.3000000000000007
+          "projection": 3.0,
+          "actual": 3,
+          "error": 0.0
         },
         {
-          "player": "Amen Thompson",
+          "player": "Chet Holmgren",
           "prop": "PTS",
-          "projection": 15.7,
+          "projection": 15.9,
           "actual": 16,
-          "error": 0.3000000000000007
+          "error": 0.09999999999999964
         },
         {
-          "player": "Devin Booker",
+          "player": "Cason Wallace",
           "prop": "AST",
-          "projection": 6.5,
-          "actual": 6,
-          "error": 0.5
-        }
-      ],
-      "worst_projections": [
+          "projection": 3.1,
+          "actual": 3,
+          "error": 0.10000000000000009
+        },
         {
-          "player": "Stephon Castle",
+          "player": "Naji Marshall",
           "prop": "PTS",
-          "projection": 17.7,
-          "actual": 2,
-          "error": 15.7
-        },
-        {
-          "player": "Victor Wembanyama",
-          "prop": "PTS",
-          "projection": 22.5,
-          "actual": 40,
-          "error": 17.5
-        },
-        {
-          "player": "Jalen Brunson",
-          "prop": "PRA",
-          "projection": 34.7,
-          "actual": 53,
-          "error": 18.299999999999997
-        },
-        {
-          "player": "Victor Wembanyama",
-          "prop": "PRA",
-          "projection": 34.7,
-          "actual": 54,
-          "error": 19.299999999999997
-        },
-        {
-          "player": "Stephon Castle",
-          "prop": "PRA",
-          "projection": 30.7,
-          "actual": 10,
-          "error": 20.7
-        }
-      ]
-    },
-    {
-      "date": "2026-03-05",
-      "graded_at": "2026-03-06T06:01:44",
-      "total_props_graded": 35,
-      "overall": {
-        "wins": 20,
-        "losses": 15,
-        "pushes": 0,
-        "total": 35,
-        "record": "20-15-0",
-        "win_pct": 57.1
-      },
-      "by_stat_type": {
-        "PTS": {
-          "wins": 10,
-          "losses": 7,
-          "pushes": 0
-        },
-        "REB": {
-          "wins": 7,
-          "losses": 5,
-          "pushes": 0
-        },
-        "AST": {
-          "wins": 3,
-          "losses": 3,
-          "pushes": 0
-        }
-      },
-      "picks": [
-        {
-          "player": "Cooper Flagg",
-          "prop": "PTS",
-          "team": "DAL",
-          "opponent": "ORL",
-          "direction": "OVER",
-          "line": 16.5,
-          "projection": 26.1,
-          "actual": 18.0,
-          "result": "WIN",
-          "confidence": 56.4,
-          "ev": 10.5,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Cooper Flagg",
-          "prop": "REB",
-          "team": "DAL",
-          "opponent": "ORL",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 6.6,
-          "actual": 5.0,
-          "result": "WIN",
-          "confidence": 60.7,
-          "ev": 4.3,
-          "edge": "GOOD"
-        },
-        {
-          "player": "P.J. Washington",
-          "prop": "REB",
-          "team": "DAL",
-          "opponent": "ORL",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.8,
-          "actual": 5.0,
-          "result": "LOSS",
-          "confidence": 60.0,
-          "ev": 0.8,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Tobias Harris",
-          "prop": "REB",
-          "team": "DET",
-          "opponent": "SAS",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 6.7,
-          "actual": 4.0,
-          "result": "LOSS",
-          "confidence": 61.7,
-          "ev": 13.6,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Jalen Duren",
-          "prop": "PTS",
-          "team": "DET",
-          "opponent": "SAS",
-          "direction": "OVER",
-          "line": 17.5,
           "projection": 18.6,
-          "actual": 7.0,
-          "result": "LOSS",
-          "confidence": 57.4,
-          "ev": 11.6,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Cade Cunningham",
-          "prop": "PTS",
-          "team": "DET",
-          "opponent": "SAS",
-          "direction": "UNDER",
-          "line": 24.5,
-          "projection": 22.4,
-          "actual": 26.0,
-          "result": "LOSS",
-          "confidence": 55.099999999999994,
-          "ev": 6.8,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Brandin Podziemski",
-          "prop": "REB",
-          "team": "GSW",
-          "opponent": "HOU",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.8,
-          "actual": 9.0,
-          "result": "WIN",
-          "confidence": 61.4,
-          "ev": 9.4,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Brandin Podziemski",
-          "prop": "PTS",
-          "team": "GSW",
-          "opponent": "HOU",
-          "direction": "UNDER",
-          "line": 16.5,
-          "projection": 12.5,
-          "actual": 26.0,
-          "result": "LOSS",
-          "confidence": 53.39,
-          "ev": 2.3,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Amen Thompson",
-          "prop": "REB",
-          "team": "HOU",
-          "opponent": "GSW",
-          "direction": "OVER",
-          "line": 7.5,
-          "projection": 7.6,
-          "actual": 10.0,
-          "result": "WIN",
-          "confidence": 54.7,
-          "ev": 6.8,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Amen Thompson",
-          "prop": "PTS",
-          "team": "HOU",
-          "opponent": "GSW",
-          "direction": "OVER",
-          "line": 15.5,
-          "projection": 16.0,
-          "actual": 18.0,
-          "result": "WIN",
-          "confidence": 55.7,
-          "ev": 3.8,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Kevin Durant",
-          "prop": "REB",
-          "team": "HOU",
-          "opponent": "GSW",
-          "direction": "UNDER",
-          "line": 5.5,
-          "projection": 4.9,
-          "actual": 6.0,
-          "result": "LOSS",
-          "confidence": 53.48499999999999,
-          "ev": 3.1,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Andrew Wiggins",
-          "prop": "REB",
-          "team": "MIA",
-          "opponent": "BKN",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 5.7,
-          "actual": 4.0,
-          "result": "LOSS",
-          "confidence": 58.4,
-          "ev": 6.4,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Rudy Gobert",
-          "prop": "REB",
-          "team": "MIN",
-          "opponent": "TOR",
-          "direction": "OVER",
-          "line": 11.5,
-          "projection": 11.6,
-          "actual": 12.0,
-          "result": "WIN",
-          "confidence": 53.2,
-          "ev": 8.4,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Julius Randle",
-          "prop": "REB",
-          "team": "MIN",
-          "opponent": "TOR",
-          "direction": "OVER",
-          "line": 6.5,
-          "projection": 7.4,
-          "actual": 8.0,
-          "result": "WIN",
-          "confidence": 52.9,
-          "ev": 0.1,
-          "edge": "LEAN"
-        },
-        {
-          "player": "Desmond Bane",
-          "prop": "PTS",
-          "team": "ORL",
-          "opponent": "DAL",
-          "direction": "OVER",
-          "line": 21.5,
-          "projection": 26.7,
-          "actual": 14.0,
-          "result": "LOSS",
-          "confidence": 56.2,
-          "ev": 8.2,
-          "edge": "STRONG"
-        },
-        {
-          "player": "Paolo Banchero",
-          "prop": "REB",
-          "team": "ORL",
-          "opponent": "DAL",
-          "direction": "UNDER",
-          "line": 8.5,
-          "projection": 7.6,
-          "actual": 12.0,
-          "result": "LOSS",
-          "confidence": 55.29,
-          "ev": 6.3,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Anthony Black",
-          "prop": "PTS",
-          "team": "ORL",
-          "opponent": "DAL",
-          "direction": "UNDER",
-          "line": 14.5,
-          "projection": 14.1,
-          "actual": 8.0,
-          "result": "WIN",
-          "confidence": 53.769999999999996,
-          "ev": 6.3,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Desmond Bane",
-          "prop": "AST",
-          "team": "ORL",
-          "opponent": "DAL",
-          "direction": "OVER",
-          "line": 3.5,
-          "projection": 4.6,
-          "actual": 3.0,
-          "result": "LOSS",
-          "confidence": 57.6,
-          "ev": 0.9,
-          "edge": "FAIR"
-        },
-        {
-          "player": "De'Aaron Fox",
-          "prop": "AST",
-          "team": "SAS",
-          "opponent": "DET",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.6,
-          "actual": 3.0,
-          "result": "LOSS",
-          "confidence": 53.4,
-          "ev": 3.3,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Victor Wembanyama",
-          "prop": "PTS",
-          "team": "SAS",
-          "opponent": "DET",
-          "direction": "UNDER",
-          "line": 23.5,
-          "projection": 18.2,
-          "actual": 38.0,
-          "result": "LOSS",
-          "confidence": 52.82,
-          "ev": 1.6,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Immanuel Quickley",
-          "prop": "PTS",
-          "team": "TOR",
-          "opponent": "MIN",
-          "direction": "OVER",
-          "line": 16.5,
-          "projection": 19.3,
-          "actual": 18.0,
-          "result": "WIN",
-          "confidence": 58.1,
-          "ev": 10.5,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Immanuel Quickley",
-          "prop": "AST",
-          "team": "TOR",
-          "opponent": "MIN",
-          "direction": "OVER",
-          "line": 5.5,
-          "projection": 5.8,
-          "actual": 7.0,
-          "result": "WIN",
-          "confidence": 57.9,
-          "ev": 4.5,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Scottie Barnes",
-          "prop": "REB",
-          "team": "TOR",
-          "opponent": "MIN",
-          "direction": "UNDER",
-          "line": 7.5,
-          "projection": 6.3,
-          "actual": 2.0,
-          "result": "WIN",
-          "confidence": 53.48499999999999,
-          "ev": 2.8,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Scottie Barnes",
-          "prop": "PTS",
-          "team": "TOR",
-          "opponent": "MIN",
-          "direction": "UNDER",
-          "line": 17.5,
-          "projection": 15.6,
-          "actual": 16.0,
-          "result": "WIN",
-          "confidence": 52.25,
-          "ev": 0.9,
-          "edge": "FAIR"
+          "actual": 19,
+          "error": 0.3999999999999986
         },
         {
           "player": "Ace Bailey",
           "prop": "PTS",
-          "team": "UTA",
-          "opponent": "WAS",
-          "direction": "UNDER",
-          "line": 18.5,
-          "projection": 12.3,
-          "actual": 32.0,
-          "result": "LOSS",
-          "confidence": 60.324999999999996,
-          "ev": 16.4,
-          "edge": "GOOD"
-        },
+          "projection": 14.4,
+          "actual": 15,
+          "error": 0.5999999999999996
+        }
+      ],
+      "worst_projections": [
         {
-          "player": "Devin Booker",
+          "player": "Austin Reaves",
           "prop": "PTS",
-          "team": "PHX",
-          "opponent": "CHI",
-          "direction": "UNDER",
-          "line": 24.5,
-          "projection": 10.4,
-          "actual": 27.0,
-          "result": "LOSS",
-          "confidence": 56.809999999999995,
-          "ev": 11.7,
-          "edge": "FAIR"
+          "projection": 27.8,
+          "actual": 18,
+          "error": 9.8
         },
         {
-          "player": "Collin Gillespie",
-          "prop": "AST",
-          "team": "PHX",
-          "opponent": "CHI",
-          "direction": "UNDER",
-          "line": 5.5,
-          "projection": 4.1,
-          "actual": 5.0,
-          "result": "WIN",
-          "confidence": 57.285,
-          "ev": 6.3,
-          "edge": "FAIR"
-        },
-        {
-          "player": "Collin Gillespie",
+          "player": "Jrue Holiday",
           "prop": "PTS",
-          "team": "PHX",
-          "opponent": "CHI",
-          "direction": "UNDER",
-          "line": 14.5,
-          "projection": 13.3,
-          "actual": 5.0,
-          "result": "WIN",
-          "confidence": 53.01,
-          "ev": 3.1,
-          "edge": "GOOD"
+          "projection": 17.7,
+          "actual": 31,
+          "error": 13.3
         },
         {
-          "player": "Christian Braun",
+          "player": "LeBron James",
+          "prop": "PRA",
+          "projection": 34.7,
+          "actual": 50,
+          "error": 15.299999999999997
+        },
+        {
+          "player": "Jrue Holiday",
+          "prop": "PRA",
+          "projection": 30.6,
+          "actual": 47,
+          "error": 16.4
+        },
+        {
+          "player": "Donovan Clingan",
+          "prop": "PRA",
+          "projection": 27.9,
+          "actual": 48,
+          "error": 20.1
+        }
+      ]
+    },
+    {
+      "date": "2026-02-19",
+      "graded_at": "2026-03-02T01:06:37",
+      "total_props_graded": 17,
+      "overall": {
+        "wins": 5,
+        "losses": 12,
+        "pushes": 0,
+        "total": 17,
+        "record": "5-12-0",
+        "win_pct": 29.4,
+        "avg_projection_error": 5.92
+      },
+      "by_stat_type": {
+        "PTS": {
+          "wins": 2,
+          "losses": 3,
+          "pushes": 0,
+          "total": 5,
+          "record": "2-3-0",
+          "win_pct": 40.0,
+          "avg_projection_error": 7.88
+        },
+        "REB": {
+          "wins": 2,
+          "losses": 2,
+          "pushes": 0,
+          "total": 4,
+          "record": "2-2-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 2.25
+        },
+        "AST": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "total": 4,
+          "record": "0-4-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 2.9
+        },
+        "PRA": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0,
+          "total": 4,
+          "record": "1-3-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 10.15
+        }
+      },
+      "by_confidence_bucket": {
+        "50-52": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0,
+          "total": 2,
+          "record": "0-2-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 8.25
+        },
+        "52-55": {
+          "wins": 0,
+          "losses": 4,
+          "pushes": 0,
+          "total": 4,
+          "record": "0-4-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 7.8
+        },
+        "55-60": {
+          "wins": 3,
+          "losses": 2,
+          "pushes": 0,
+          "total": 5,
+          "record": "3-2-0",
+          "win_pct": 60.0,
+          "avg_projection_error": 4.88
+        },
+        "60-65": {
+          "wins": 2,
+          "losses": 1,
+          "pushes": 0,
+          "total": 3,
+          "record": "2-1-0",
+          "win_pct": 66.7,
+          "avg_projection_error": 4.1
+        }
+      },
+      "by_direction": {
+        "OVER": {
+          "wins": 1,
+          "losses": 7,
+          "pushes": 0,
+          "total": 8,
+          "record": "1-7-0",
+          "win_pct": 12.5,
+          "avg_projection_error": 4.53
+        },
+        "UNDER": {
+          "wins": 4,
+          "losses": 5,
+          "pushes": 0,
+          "total": 9,
+          "record": "4-5-0",
+          "win_pct": 44.4,
+          "avg_projection_error": 7.16
+        }
+      },
+      "by_edge_category": {
+        "STRONG": {
+          "wins": 4,
+          "losses": 2,
+          "pushes": 0,
+          "total": 6,
+          "record": "4-2-0",
+          "win_pct": 66.7,
+          "avg_projection_error": 5.0
+        },
+        "GOOD": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0,
+          "total": 3,
+          "record": "1-2-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 4.27
+        },
+        "FAIR": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0,
+          "total": 2,
+          "record": "0-2-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 8.85
+        },
+        "AVOID": {
+          "wins": 0,
+          "losses": 6,
+          "pushes": 0,
+          "total": 6,
+          "record": "0-6-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 6.68
+        }
+      },
+      "by_h2h_status": {
+        "no_h2h": {
+          "wins": 3,
+          "losses": 1,
+          "pushes": 0,
+          "total": 4,
+          "record": "3-1-0",
+          "win_pct": 75.0,
+          "avg_projection_error": 6.25
+        }
+      },
+      "by_edge_size": {
+        "0-1": {
+          "wins": 2,
+          "losses": 6,
+          "pushes": 0,
+          "total": 8,
+          "record": "2-6-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 5.21
+        },
+        "1-2": {
+          "wins": 2,
+          "losses": 4,
+          "pushes": 0,
+          "total": 6,
+          "record": "2-4-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 6.27
+        },
+        "2-3": {
+          "wins": 0,
+          "losses": 1,
+          "pushes": 0,
+          "total": 1,
+          "record": "0-1-0",
+          "win_pct": 0.0,
+          "avg_projection_error": 4.7
+        },
+        "3+": {
+          "wins": 1,
+          "losses": 1,
+          "pushes": 0,
+          "total": 2,
+          "record": "1-1-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 8.3
+        }
+      },
+      "by_was_filtered": {
+        "other_props": {
+          "wins": 5,
+          "losses": 12,
+          "pushes": 0,
+          "total": 17,
+          "record": "5-12-0",
+          "win_pct": 29.4,
+          "avg_projection_error": 5.92
+        }
+      },
+      "by_matchup_favorability": {
+        "favorable": {
+          "wins": 3,
+          "losses": 5,
+          "pushes": 0,
+          "total": 8,
+          "record": "3-5-0",
+          "win_pct": 37.5,
+          "avg_projection_error": 5.44
+        },
+        "neutral": {
+          "wins": 1,
+          "losses": 1,
+          "pushes": 0,
+          "total": 2,
+          "record": "1-1-0",
+          "win_pct": 50.0,
+          "avg_projection_error": 1.4
+        },
+        "unfavorable": {
+          "wins": 1,
+          "losses": 6,
+          "pushes": 0,
+          "total": 7,
+          "record": "1-6-0",
+          "win_pct": 14.3,
+          "avg_projection_error": 7.76
+        }
+      },
+      "by_l10_hit_rate": {
+        "below_avg (30-50%)": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0,
+          "total": 4,
+          "record": "1-3-0",
+          "win_pct": 25.0,
+          "avg_projection_error": 3.53
+        },
+        "above_avg (50-70%)": {
+          "wins": 3,
+          "losses": 7,
+          "pushes": 0,
+          "total": 10,
+          "record": "3-7-0",
+          "win_pct": 30.0,
+          "avg_projection_error": 6.8
+        },
+        "hot (70%+)": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0,
+          "total": 3,
+          "record": "1-2-0",
+          "win_pct": 33.3,
+          "avg_projection_error": 6.17
+        }
+      },
+      "top_performers": [
+        {
+          "player": "Josh Giddey",
+          "record": "3-1",
+          "win_pct": 75.0,
+          "total": 4
+        },
+        {
+          "player": "Immanuel Quickley",
+          "record": "1-2",
+          "win_pct": 33.3,
+          "total": 3
+        },
+        {
+          "player": "Scottie Barnes",
+          "record": "1-3",
+          "win_pct": 25.0,
+          "total": 4
+        },
+        {
+          "player": "Brandon Ingram",
+          "record": "0-4",
+          "win_pct": 0.0,
+          "total": 4
+        },
+        {
+          "player": "Matas Buzelis",
+          "record": "0-2",
+          "win_pct": 0.0,
+          "total": 2
+        }
+      ],
+      "worst_performers": [
+        {
+          "player": "Brandon Ingram",
+          "record": "0-4",
+          "win_pct": 0.0,
+          "total": 4
+        },
+        {
+          "player": "Matas Buzelis",
+          "record": "0-2",
+          "win_pct": 0.0,
+          "total": 2
+        },
+        {
+          "player": "Scottie Barnes",
+          "record": "1-3",
+          "win_pct": 25.0,
+          "total": 4
+        },
+        {
+          "player": "Immanuel Quickley",
+          "record": "1-2",
+          "win_pct": 33.3,
+          "total": 3
+        },
+        {
+          "player": "Josh Giddey",
+          "record": "3-1",
+          "win_pct": 75.0,
+          "total": 4
+        }
+      ],
+      "best_projections": [
+        {
+          "player": "Scottie Barnes",
           "prop": "REB",
-          "team": "DEN",
-          "opponent": "LAL",
-          "direction": "OVER",
-          "line": 4.5,
-          "projection": 5.8,
-          "actual": 5.0,
-          "result": "WIN",
-          "confidence": 59.6,
-          "ev": 9.7,
-          "edge": "FAIR"
+          "projection": 9.3,
+          "actual": 9,
+          "error": 0.3000000000000007
         },
         {
-          "player": "Nikola Jokic",
-          "prop": "PTS",
-          "team": "DEN",
-          "opponent": "LAL",
-          "direction": "UNDER",
-          "line": 28.5,
-          "projection": 27.4,
-          "actual": 28.0,
-          "result": "WIN",
-          "confidence": 54.815,
-          "ev": 9.2,
-          "edge": "GOOD"
+          "player": "Matas Buzelis",
+          "prop": "REB",
+          "projection": 4.7,
+          "actual": 6,
+          "error": 1.2999999999999998
         },
         {
-          "player": "Nikola Jokic",
+          "player": "Josh Giddey",
+          "prop": "REB",
+          "projection": 5.5,
+          "actual": 4,
+          "error": 1.5
+        },
+        {
+          "player": "Scottie Barnes",
           "prop": "AST",
-          "team": "DEN",
-          "opponent": "LAL",
-          "direction": "UNDER",
-          "line": 10.5,
-          "projection": 9.4,
-          "actual": 13.0,
-          "result": "LOSS",
-          "confidence": 59.945,
-          "ev": 8.1,
-          "edge": "GOOD"
+          "projection": 6.5,
+          "actual": 5,
+          "error": 1.5
         },
         {
-          "player": "Jamal Murray",
-          "prop": "AST",
-          "team": "DEN",
-          "opponent": "LAL",
-          "direction": "UNDER",
-          "line": 7.5,
-          "projection": 4.9,
-          "actual": 7.0,
-          "result": "WIN",
-          "confidence": 59.279999999999994,
-          "ev": 6.1,
-          "edge": "GOOD"
-        },
-        {
-          "player": "Luka Doncic",
+          "player": "Immanuel Quickley",
           "prop": "PTS",
-          "team": "LAL",
-          "opponent": "DEN",
-          "direction": "UNDER",
-          "line": 30.5,
-          "projection": 26.9,
-          "actual": 27.0,
-          "result": "WIN",
-          "confidence": 52.44,
-          "ev": 1.9,
-          "edge": "GOOD"
+          "projection": 16.0,
+          "actual": 14,
+          "error": 2.0
+        }
+      ],
+      "worst_projections": [
+        {
+          "player": "Josh Giddey",
+          "prop": "PTS",
+          "projection": 15.1,
+          "actual": 5,
+          "error": 10.1
         },
         {
-          "player": "DeMar DeRozan",
-          "prop": "PTS",
-          "team": "SAC",
-          "opponent": "NOP",
-          "direction": "UNDER",
-          "line": 15.5,
-          "projection": 11.2,
-          "actual": 15.0,
-          "result": "WIN",
-          "confidence": 54.15,
-          "ev": 5.8,
-          "edge": "FAIR"
+          "player": "Josh Giddey",
+          "prop": "PRA",
+          "projection": 24.7,
+          "actual": 14,
+          "error": 10.7
         },
         {
-          "player": "Russell Westbrook",
+          "player": "Matas Buzelis",
           "prop": "PTS",
-          "team": "SAC",
-          "opponent": "NOP",
-          "direction": "OVER",
-          "line": 14.5,
-          "projection": 15.0,
-          "actual": 19.0,
-          "result": "WIN",
-          "confidence": 53.5,
-          "ev": 2.2,
-          "edge": "GOOD"
+          "projection": 14.8,
+          "actual": 4,
+          "error": 10.8
+        },
+        {
+          "player": "Brandon Ingram",
+          "prop": "PTS",
+          "projection": 19.2,
+          "actual": 31,
+          "error": 11.8
+        },
+        {
+          "player": "Brandon Ingram",
+          "prop": "PRA",
+          "projection": 28.6,
+          "actual": 45,
+          "error": 16.4
         }
       ]
     }
   ],
   "cumulative": {
-    "wins": 167,
-    "losses": 169,
-    "pushes": 0,
-    "total": 336,
-    "win_pct": 49.7
-  },
-  "updated": "2026-03-05T07:52:14"
+    "total_days": 4,
+    "total_props_graded": 295,
+    "overall": {
+      "wins": 144,
+      "losses": 151,
+      "pushes": 0,
+      "total": 295,
+      "win_pct": 48.8,
+      "record": "144-151-0"
+    },
+    "by_stat_type": {
+      "PTS": {
+        "wins": 34,
+        "losses": 36,
+        "pushes": 0,
+        "total": 70,
+        "win_pct": 48.6,
+        "record": "34-36-0"
+      },
+      "REB": {
+        "wins": 48,
+        "losses": 37,
+        "pushes": 0,
+        "total": 85,
+        "win_pct": 56.5,
+        "record": "48-37-0"
+      },
+      "AST": {
+        "wins": 32,
+        "losses": 35,
+        "pushes": 0,
+        "total": 67,
+        "win_pct": 47.8,
+        "record": "32-35-0"
+      },
+      "PRA": {
+        "wins": 30,
+        "losses": 43,
+        "pushes": 0,
+        "total": 73,
+        "win_pct": 41.1,
+        "record": "30-43-0"
+      }
+    },
+    "by_confidence_bucket": {
+      "50-52": {
+        "wins": 37,
+        "losses": 32,
+        "pushes": 0,
+        "total": 69,
+        "win_pct": 53.6,
+        "record": "37-32-0"
+      },
+      "52-55": {
+        "wins": 48,
+        "losses": 41,
+        "pushes": 0,
+        "total": 89,
+        "win_pct": 53.9,
+        "record": "48-41-0"
+      },
+      "55-60": {
+        "wins": 19,
+        "losses": 23,
+        "pushes": 0,
+        "total": 42,
+        "win_pct": 45.2,
+        "record": "19-23-0"
+      },
+      "60-65": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "total": 3,
+        "win_pct": 66.7,
+        "record": "2-1-0"
+      }
+    },
+    "by_edge_category": {
+      "STRONG": {
+        "wins": 13,
+        "losses": 24,
+        "pushes": 0,
+        "total": 37,
+        "win_pct": 35.1,
+        "record": "13-24-0"
+      },
+      "GOOD": {
+        "wins": 13,
+        "losses": 14,
+        "pushes": 0,
+        "total": 27,
+        "win_pct": 48.1,
+        "record": "13-14-0"
+      },
+      "FAIR": {
+        "wins": 18,
+        "losses": 12,
+        "pushes": 0,
+        "total": 30,
+        "win_pct": 60.0,
+        "record": "18-12-0"
+      },
+      "AVOID": {
+        "wins": 100,
+        "losses": 101,
+        "pushes": 0,
+        "total": 201,
+        "win_pct": 49.8,
+        "record": "100-101-0"
+      }
+    },
+    "by_was_filtered": {
+      "other_props": {
+        "wins": 134,
+        "losses": 136,
+        "pushes": 0,
+        "total": 270,
+        "win_pct": 49.6,
+        "record": "134-136-0"
+      },
+      "best_bets": {
+        "wins": 10,
+        "losses": 15,
+        "pushes": 0,
+        "total": 25,
+        "win_pct": 40.0,
+        "record": "10-15-0"
+      }
+    }
+  }
 }
