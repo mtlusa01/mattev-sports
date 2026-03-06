@@ -2237,7 +2237,7 @@
         mainEl.style.display = '';
         if (pageGradient) pageGradient.style.display = '';
         resetAllFilters(); // Reset all filters when switching sports
-        selectedDate = getLocalDateStr(); // Always start on today when switching sports
+        selectedDate = getSportsDate(); // Always start on sports-today when switching sports
 
         // Update view tabs based on sport
         const propsTab = viewTabs.querySelector('[data-view="player-props"]');
@@ -2270,7 +2270,7 @@
 
         // Auto-navigate to data date if today has no games for this sport
         // Only if data is from yesterday (post-midnight case), not stale old data
-        const today = getLocalDateStr();
+        const today = getSportsDate();
         const sportGames = sport === 'nhl' ? nhlGameProjections : sport === 'ncaab' ? ncaabGameProjections : sport === 'mlb' ? mlbGameProjections : gameProjections;
         const todayGames = sportGames.filter(g => g.game_date === today);
         if (todayGames.length === 0 && sportGames._dataDate && sportGames._dataDate !== today) {
@@ -2294,7 +2294,7 @@
     }
 
     function getActiveGameProjections() {
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       // For historical dates, check cache first
       if (selectedDate !== today) {
         if (currentSport === 'nhl') {
@@ -2325,7 +2325,7 @@
     }
 
     function getActiveProps() {
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       if (selectedDate !== today) {
         if (currentSport === 'nhl') {
           if (historicalNhlPropsCache[selectedDate] !== undefined) {
@@ -2355,7 +2355,7 @@
     function updateTimestamp() {
       const updatedEl = document.getElementById('game-proj-updated');
       const navUpdated = document.getElementById('nav-updated-time');
-      const today = getLocalDateStr();
+      const today = getSportsDate();
 
       // For historical dates, show date context instead of "Updated" timestamp
       if (selectedDate !== today) {
@@ -2523,7 +2523,7 @@
         const activeProps = getActiveProps();
         if (activeProps.length === 0 || activeProps._stale) { statsBar.style.display = 'none'; return; }
 
-        const today = getLocalDateStr();
+        const today = getSportsDate();
         const isHistorical = selectedDate !== today;
 
         // Hide stats bar when today has no games (stale props from prior date)
@@ -2990,6 +2990,20 @@
         String(now.getMonth() + 1).padStart(2, '0') + '-' +
         String(now.getDate()).padStart(2, '0');
     }
+    function getSportsDate() {
+      // "Sports day" — before 6 AM, the sports day is still yesterday.
+      // This matches ESPN/Vegas convention: late West Coast games that
+      // finish after midnight are still part of the previous day's slate.
+      const now = new Date();
+      if (now.getHours() < 6) {
+        const yesterday = new Date(now);
+        yesterday.setDate(yesterday.getDate() - 1);
+        return yesterday.getFullYear() + '-' +
+          String(yesterday.getMonth() + 1).padStart(2, '0') + '-' +
+          String(yesterday.getDate()).padStart(2, '0');
+      }
+      return getLocalDateStr();
+    }
     function getUnitSize() { return getBetSettings().unit_size || 10; }
     function getDisplayMode() { return getBetSettings().display_mode || 'units'; }
 
@@ -3176,7 +3190,7 @@
       const opp = getOpponent(p.team);
       const game = opp ? (p.team + ' @ ' + opp) : p.team;
       // Use local date for bet tracking (not UTC)
-      const date = getLocalDateStr();
+      const date = getSportsDate();
       const betId = makeBetId(date, 'prop', p.player, p.team, game, p.prop, p.direction, p.line);
       if (isBetTracked(betId)) return;
 
@@ -3200,7 +3214,7 @@
 
       const game = away + ' @ ' + home;
       // Use local date for bet tracking (not UTC from commence_time)
-      const date = getLocalDateStr();
+      const date = getSportsDate();
       let pick, line, conf;
       if (betType === 'spread') { pick = g.spread_pick; line = null; conf = g.spread_conf; }
       else if (betType === 'total') { pick = g.total_pick + ' ' + g.total_line; line = g.total_line; conf = g.total_conf; }
@@ -3306,7 +3320,7 @@
     let betsSortBy = 'conf';   // 'conf', 'time', 'type'
     let betsSortDir = 'desc';  // 'asc' or 'desc'
     let currentGameSearch = '';
-    let selectedDate = getLocalDateStr(); // YYYY-MM-DD in local timezone
+    let selectedDate = getSportsDate(); // YYYY-MM-DD — sports day (before 6 AM = yesterday)
 
     // ── Player Projections State ──
     let playerProjectionsData = null;
@@ -3389,8 +3403,8 @@
       return (currentSport === 'nhl' ? NHL_TEAM_COLORS[team] : TEAM_COLORS[team]) || '#666';
     }
 
-    // Set current date
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+    // Set current date (use sports date so late-night games show correct day)
+    document.getElementById('current-date').textContent = new Date(getSportsDate() + 'T12:00:00').toLocaleDateString('en-US', {
       weekday: 'long', month: 'short', day: 'numeric'
     });
 
@@ -3427,7 +3441,7 @@
 
       // Historical games are always final
       const gameDate = g.game_date || (g.commence_time ? g.commence_time.slice(0, 10) : null);
-      if (gameDate && gameDate < getLocalDateStr()) return 'final';
+      if (gameDate && gameDate < getSportsDate()) return 'final';
 
       // Check for real scores (non-zero)
       const aw = parseInt(g.away_score) || 0;
@@ -3469,7 +3483,7 @@
     }
 
     function getActiveBestBets() {
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       const liveBB = currentSport === 'ncaab' ? ncaabBestBets : currentSport === 'nhl' ? nhlBestBets : currentSport === 'mlb' ? mlbBestBets : nbaBestBets;
       const histBB = historicalBestBetsCache[currentSport + ':' + selectedDate];
       return (selectedDate !== today && histBB) ? histBB : liveBB;
@@ -3812,7 +3826,7 @@
             <span class="rec-header-title game-recs">&#127919; Recommended ${sportLabel}${typeLabel} Bets</span>
             <span class="rec-count">0 picks</span>
           </div>
-          <div class="no-recs">No ${sportLabel}${typeLabel} bets meet our quality criteria${selectedDate === getLocalDateStr() ? ' today' : ''}.</div>
+          <div class="no-recs">No ${sportLabel}${typeLabel} bets meet our quality criteria${selectedDate === getSportsDate() ? ' today' : ''}.</div>
         </div>`;
       }
 
@@ -3867,7 +3881,7 @@
     function renderPropRecommendations() {
       // Check for locked prop recommendations first
       const lockedProps = lockedPropsRecs[currentSport];
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       const propsLocked = lockedProps && lockedProps.date === today && selectedDate === today
         && lockedProps.recommendations && lockedProps.recommendations.length > 0;
 
@@ -4445,7 +4459,7 @@
         const rowCls = p.injury_status === 'Out' ? ' player-out' : p.injury_status === 'Questionable' ? ' player-questionable' : '';
 
         // Track bet icon (use local date to match trackPropClick)
-        const propDate = getLocalDateStr();
+        const propDate = getSportsDate();
         const propOpp = getOpponent(p.team);
         const propGame = propOpp ? (p.team + ' @ ' + propOpp) : p.team;
         const propBetId = makeBetId(propDate, 'prop', p.player, p.team, propGame, p.prop, p.direction, p.line);
@@ -4860,7 +4874,7 @@
       // Stale notice
       let staleHtml = '';
       if (data.date) {
-        const today = getLocalDateStr();
+        const today = getSportsDate();
         if (data.date !== today) {
           staleHtml = '<div class="proj-stale-notice">Projections from ' + data.date + ' (not yet updated for today)</div>';
         }
@@ -5127,7 +5141,7 @@
       propsView.style.display = 'block';
       gameView.style.display = 'none';
 
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       const isHistorical = selectedDate !== today;
       const activeProps = getActiveProps();
       const datePickerHtml = renderDatePicker();
@@ -5381,18 +5395,18 @@
     // ── Date Picker ──
     function formatDateDisplay(dateStr) {
       const date = new Date(dateStr + 'T12:00:00');
-      const today = new Date();
-      today.setHours(12, 0, 0, 0);
-      const tomorrow = new Date(today);
+      // Use sports date for "Today" label so late-night games show correctly
+      const sportsToday = new Date(getSportsDate() + 'T12:00:00');
+      const tomorrow = new Date(sportsToday);
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const yesterday = new Date(today);
+      const yesterday = new Date(sportsToday);
       yesterday.setDate(yesterday.getDate() - 1);
 
       const dateOnly = new Date(date);
       dateOnly.setHours(12, 0, 0, 0);
 
       let label = '';
-      if (dateOnly.getTime() === today.getTime()) label = 'Today';
+      if (dateOnly.getTime() === sportsToday.getTime()) label = 'Today';
       else if (dateOnly.getTime() === tomorrow.getTime()) label = 'Tomorrow';
       else if (dateOnly.getTime() === yesterday.getTime()) label = 'Yesterday';
 
@@ -5419,7 +5433,7 @@
 
     async function loadHistoricalGames(date) {
       // If it's today, use current gameProjections
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       if (date === today) return null; // Use current data
 
       // Check cache first (use !== undefined to allow empty arrays)
@@ -5631,7 +5645,7 @@
         String(current.getDate()).padStart(2, '0');
 
       // Don't navigate past today
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       if (newDate > today) return;
 
       selectedDate = newDate;
@@ -5659,7 +5673,7 @@
     }
 
     async function goToToday() {
-      selectedDate = getLocalDateStr();
+      selectedDate = getSportsDate();
       // Reload current projections for all sports (including player props)
       await Promise.all([loadGameProjections(), loadNhlGameProjections(), loadNcaabGameProjections(), loadMlbGameProjections(), loadProjections(), loadNhlProjections()]);
       updateActiveGameData();
@@ -5681,7 +5695,7 @@
     }
 
     function calHasData(dateStr) {
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       if (dateStr === today) {
         const hasGames = currentSport === 'nhl'
           ? (nhlGameProjections && nhlGameProjections.length > 0)
@@ -5710,7 +5724,7 @@
     }
 
     function calDotHtml(dateStr) {
-      const today = getLocalDateStr();
+      const today = getSportsDate();
 
       // Today: show a green dot if data exists
       if (dateStr === today) {
@@ -5789,7 +5803,7 @@
     function renderCalendarGrid() {
       const container = document.getElementById('calendar-dropdown');
       if (!container) return;
-      const today = getLocalDateStr();
+      const today = getSportsDate();
 
       let html = `<div class="calendar-header">
         <span class="calendar-title">${CAL_MONTH_NAMES[calViewMonth]} ${calViewYear}</span>
@@ -5891,7 +5905,7 @@
 
     async function calSelectDate(dateStr) {
       toggleCalendar(false);
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       if (dateStr === selectedDate) return;
 
       selectedDate = dateStr;
@@ -5917,7 +5931,7 @@
     }
 
     function renderDatePicker() {
-      const today = getLocalDateStr();
+      const today = getSportsDate();
       const isToday = selectedDate === today;
       const triggerDate = new Date(selectedDate + 'T12:00:00').toLocaleDateString('en-US', {
         weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
@@ -6137,7 +6151,7 @@
       var mlOddsStr = fmtOdds(g.ml_odds);
 
       // Track icons for game bets (use local date to match trackGameClick)
-      var gDate = getLocalDateStr();
+      var gDate = getSportsDate();
       var gGame = g.away_team + ' @ ' + g.home_team;
       var escAway = g.away_team.replace(/'/g, "\\'");
       var escHome = g.home_team.replace(/'/g, "\\'");
@@ -6489,7 +6503,7 @@
 
         const escA = (r.away || '').replace(/'/g, "\\'");
         const escH = (r.home || '').replace(/'/g, "\\'");
-        const rDate = getLocalDateStr();
+        const rDate = getSportsDate();
         const rBetId = makeBetId(rDate, r.type, null, null, r.matchup, null, r.pick, r.type === 'total' ? r.vegas : null);
         const isTracked = isBetTracked(rBetId);
         const trackBtn = isTracked
@@ -6512,7 +6526,7 @@
 
       const bodyRows = sorted.map((r, i) => {
         const rowId = r.type + '-' + i + '-' + (r.away || '') + '-' + (r.home || '');
-        const rDate = getLocalDateStr();
+        const rDate = getSportsDate();
         const rBetId = makeBetId(rDate, r.type, null, null, r.matchup, null, r.pick, r.type === 'total' ? r.vegas : null);
         const rTracked = isBetTracked(rBetId);
         const escA = (r.away || '').replace(/'/g, "\\'");
@@ -6596,7 +6610,7 @@
       const container = document.getElementById('game-cards-container');
       const updatedEl = document.getElementById('game-proj-updated');
       const activeGames = getActiveGameProjections();
-      const today = getLocalDateStr();
+      const today = getSportsDate();
 
       // Hide the static filter element — we render filters inline now
       document.getElementById('game-status-filter').innerHTML = '';
@@ -6865,7 +6879,7 @@
         if (gameProjections.length > 0) {
           if (!historicalResults) await loadHistoricalResults('nba');
           if (historicalResults) {
-            const gpDate = data.date || getLocalDateStr();
+            const gpDate = data.date || getSportsDate();
             mergeResultsIntoProjections(gameProjections, historicalResults, gpDate, 'nba');
           }
         }
@@ -6950,7 +6964,7 @@
         if (nhlGameProjections.length > 0) {
           if (!nhlHistoricalResults) await loadHistoricalResults('nhl');
           if (nhlHistoricalResults) {
-            const gpDate = data.date || getLocalDateStr();
+            const gpDate = data.date || getSportsDate();
             mergeResultsIntoProjections(nhlGameProjections, nhlHistoricalResults, gpDate, 'nhl');
           }
         }
@@ -6987,14 +7001,14 @@
         if (ncaabGameProjections.length > 0) {
           if (!ncaabHistoricalResults) await loadHistoricalResults('ncaab');
           if (ncaabHistoricalResults) {
-            const gpDate = data.date || getLocalDateStr();
+            const gpDate = data.date || getSportsDate();
             mergeResultsIntoProjections(ncaabGameProjections, ncaabHistoricalResults, gpDate, 'ncaab');
           }
         }
 
         if (currentSport === 'ncaab') {
           // Auto-navigate to data date only if it's yesterday (post-midnight)
-          const today = getLocalDateStr();
+          const today = getSportsDate();
           const dataDate = data.date || '';
           if (selectedDate === today && dataDate && dataDate !== today) {
             const diffMs = new Date(today + 'T12:00:00') - new Date(dataDate + 'T12:00:00');
@@ -7036,13 +7050,13 @@
         if (mlbGameProjections.length > 0) {
           if (!mlbHistoricalResults) await loadHistoricalResults('mlb');
           if (mlbHistoricalResults) {
-            const gpDate = data.date || getLocalDateStr();
+            const gpDate = data.date || getSportsDate();
             mergeResultsIntoProjections(mlbGameProjections, mlbHistoricalResults, gpDate, 'mlb');
           }
         }
 
         if (currentSport === 'mlb') {
-          const today = getLocalDateStr();
+          const today = getSportsDate();
           const dataDate = data.date || '';
           if (selectedDate === today && dataDate && dataDate !== today) {
             const diffMs = new Date(today + 'T12:00:00') - new Date(dataDate + 'T12:00:00');
@@ -7078,7 +7092,7 @@
 
         // Check if data is from today — don't show stale props during off-days
         const dataDate = data.date || '';
-        const today = getLocalDateStr();
+        const today = getSportsDate();
         if (dataDate && dataDate !== today) {
           projections = [];
           projections._date = dataDate;
@@ -7147,7 +7161,7 @@
         const data = await resp.json();
 
         const dataDate = data.date || '';
-        const today = getLocalDateStr();
+        const today = getSportsDate();
         if (dataDate && dataDate !== today) {
           nhlProjections = [];
           nhlProjections._date = dataDate;

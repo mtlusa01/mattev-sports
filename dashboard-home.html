@@ -1415,6 +1415,16 @@
     function getLocalDateStr(d) {
       return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
     }
+    function getSportsDate() {
+      // "Sports day" — before 6 AM, the sports day is still yesterday.
+      var now = new Date();
+      if (now.getHours() < 6) {
+        var y = new Date(now);
+        y.setDate(y.getDate() - 1);
+        return getLocalDateStr(y);
+      }
+      return getLocalDateStr(now);
+    }
     function calcProfit(odds, units) {
       var o = parseInt(odds);
       if (isNaN(o)) return 0;
@@ -1453,7 +1463,7 @@
       var bets = getTrackedBets();
       var now = new Date();
       var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
-      var today = getLocalDateStr(now);
+      var today = getSportsDate();
       var unitSize = getUnitSize();
 
       // All-time and monthly totals
@@ -1681,7 +1691,7 @@
       var daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
       var daysRemaining = daysInMonth - dayOfMonth + 1;
       var monthStart = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-01';
-      var today = getLocalDateStr(now);
+      var today = getSportsDate();
       var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
       var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       var dayName = dayNames[now.getDay()];
@@ -2039,7 +2049,7 @@
       return parts.map(function(p) { return String(p || '').toLowerCase().replace(/\s+/g, '-'); }).join('_');
     }
     function buildRecBetId(pick) {
-      var ds = getLocalDateStr(new Date());
+      var ds = getSportsDate();
       if (pick.type === 'prop') {
         return makeBetId(ds, 'prop', pick.player, null, null, pick.prop_type, pick.pick, pick.line);
       }
@@ -2051,7 +2061,7 @@
       // Exact ID match (covers bets tracked from either dashboard)
       if (existingBets.some(function(b) { return b.id === betId; })) return true;
       // Fuzzy match: same date + similar game + same pick
-      var ds = getLocalDateStr(new Date());
+      var ds = getSportsDate();
       var pickLower = (pick.pick || '').toLowerCase().replace(/\s+/g, '');
       var gameLower = (pick.game || '').toLowerCase().replace(/\s+/g, '');
       return existingBets.some(function(b) {
@@ -2906,7 +2916,7 @@
       var firstDay = new Date(calYear, calMonth, 1).getDay();
       var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
       var daysInPrev = new Date(calYear, calMonth, 0).getDate();
-      var today = getLocalDateStr(new Date());
+      var today = getSportsDate();
       var betsByDate = getBetsByDate();
       var unitSize = getUnitSize();
       var html = '';
@@ -3640,7 +3650,7 @@
       // Fuzzy match: find the stored bet by game + pick
       var p = lastRecommendations && lastRecommendations.picks[idx];
       if (!p) return;
-      var ds = getLocalDateStr(new Date());
+      var ds = getSportsDate();
       var pickLower = (p.pick || '').toLowerCase().replace(/\s+/g, '');
       var gameLower = (p.game || '').toLowerCase().replace(/\s+/g, '');
       var match = bets.find(function(b) {

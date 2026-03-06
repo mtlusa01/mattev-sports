@@ -665,6 +665,16 @@
       const t = new Date();
       return dateKey(t.getFullYear(), t.getMonth(), t.getDate());
     }
+    function getSportsDate() {
+      // "Sports day" — before 6 AM, the sports day is still yesterday.
+      const now = new Date();
+      if (now.getHours() < 6) {
+        const y = new Date(now);
+        y.setDate(y.getDate() - 1);
+        return dateKey(y.getFullYear(), y.getMonth(), y.getDate());
+      }
+      return todayKey();
+    }
 
     const MONTH_NAMES = ['January','February','March','April','May','June',
                          'July','August','September','October','November','December'];
@@ -709,7 +719,7 @@
     // ── Calendar grid ──
     function renderCalendarGrid() {
       const container = document.getElementById('calendar-dropdown');
-      const today = todayKey();
+      const today = getSportsDate();
 
       let html = `<div class="calendar-header">
         <span class="calendar-title">${MONTH_NAMES[calViewMonth]} ${calViewYear}</span>
@@ -854,7 +864,7 @@
     function renderSelectedDay() {
       const dayView = document.getElementById('day-view');
       const day = daysByDate[selectedDate];
-      const today = todayKey();
+      const today = getSportsDate();
 
       // Show "no results yet" for today only if there's genuinely no graded data
       if (selectedDate === today && (!day || !day.picks || day.picks.length === 0)) {
@@ -1025,7 +1035,7 @@
         }
 
         // Default selected date: most recent past day with data (skip today — results aren't final)
-        const today = todayKey();
+        const today = getSportsDate();
         const pastDates = sortedDates.filter(d => d < today);
         selectedDate = pastDates.length > 0 ? pastDates[pastDates.length - 1] : (sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : today);
 
@@ -1049,7 +1059,7 @@
 
           // Today jump
           document.getElementById('cal-today-jump').addEventListener('click', () => {
-            const tk = todayKey();
+            const tk = getSportsDate();
             if (daysByDate[tk]) {
               selectDate(tk);
             } else {
@@ -1184,7 +1194,7 @@
         }
       }
 
-      selectedDate = sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : todayKey();
+      selectedDate = sortedDates.length > 0 ? sortedDates[sortedDates.length - 1] : getSportsDate();
       const sd = new Date(selectedDate + 'T12:00:00');
       calViewYear = sd.getFullYear();
       calViewMonth = sd.getMonth();
