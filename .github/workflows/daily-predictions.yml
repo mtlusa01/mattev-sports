@@ -137,6 +137,22 @@ jobs:
               print('No props generated (no games today?)')
           "
 
+      - name: Verify NBA props were generated
+        continue-on-error: true
+        working-directory: ../nba-props
+        run: |
+          python -c "
+          import json, sys
+          try:
+              d = json.load(open('projections.json'))
+              n = len(d.get('projections', []))
+              print(f'projections.json: {n} props')
+              if n == 0:
+                  print('::warning::ZERO props generated — model may not be trained or no games today')
+          except Exception as e:
+              print(f'::warning::Cannot read projections.json: {e}')
+          "
+
       - name: Fetch NBA injuries
         continue-on-error: true
         working-directory: ../nba-props

@@ -54,17 +54,37 @@ jobs:
               except Exception as e:
                   stale.append(f"{sport}: error reading {fname} — {e}")
 
+          # Check NBA props specifically
+          props_stale = False
+          try:
+              pdata = json.load(open("projections.json"))
+              pdate = pdata.get("date", "")
+              nprops = len(pdata.get("projections", []))
+              if pdate != today:
+                  props_stale = True
+                  stale.append(f"NBA Props: date={pdate}, expected={today}")
+              elif nprops == 0:
+                  props_stale = True
+                  stale.append(f"NBA Props: 0 props in projections.json")
+              else:
+                  print(f"OK: NBA Props — {nprops} props for {pdate}")
+          except Exception as e:
+              props_stale = True
+              stale.append(f"NBA Props: error — {e}")
+
           if stale:
               print("\nSTALE FILES DETECTED:")
               for s in stale:
                   print(f"  {s}")
-              # Signal to trigger regeneration
               with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a") as f:
                   f.write("needs_regen=true\n")
+                  if props_stale:
+                      f.write("needs_props=true\n")
           else:
               print("\nAll projections current.")
               with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a") as f:
                   f.write("needs_regen=false\n")
+                  f.write("needs_props=false\n")
           HEALTH
 
       - name: Trigger regeneration if needed
@@ -75,3 +95,12 @@ jobs:
           echo "Triggering daily-predictions workflow..."
           gh workflow run daily-predictions.yml
           echo "Triggered. Predictions will regenerate shortly."
+
+      - name: Trigger props refresh if needed
+        if: steps.check.outputs.needs_props == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          echo "NBA props missing/stale — triggering props_refresh..."
+          gh workflow run props_refresh.yml -R mtlusa01/nba-props
+          echo "Triggered. Props will regenerate shortly."
