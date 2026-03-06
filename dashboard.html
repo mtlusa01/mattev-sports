@@ -4918,6 +4918,15 @@
         { key: 'dfs', label: 'DFS' }
       ];
 
+      // Helper: matchup grade color
+      function gradeColor(g) {
+        if (!g) return '#78909c';
+        if (g.startsWith('A')) return '#4caf50';
+        if (g.startsWith('B')) return '#8bc34a';
+        if (g === 'C+' || g === 'C') return '#ffb74d';
+        return '#ef5350';
+      }
+
       // Helper: stat color class based on CI position
       function statClass(p, key) {
         if (!p.ci || !p.ci[key]) return '';
@@ -4965,7 +4974,7 @@
           let cls = '';
           if (['pts','reb','ast','fg3m','stl','blk','tov'].includes(c.key)) cls = statClass(p, c.key);
           if (c.key === 'player') {
-            html += '<td>' + val + (p.b2b ? ' <span style="color:#ef4444;font-size:10px" title="Back-to-back">B2B</span>' : '') + '</td>';
+            html += '<td>' + val + (p.b2b ? ' <span style="color:#ef4444;font-size:10px" title="Back-to-back">B2B</span>' : '') + (p.form_trend === 'hot' ? ' <span style="color:#4caf50;font-size:10px" title="Hot streak">HOT</span>' : '') + (p.form_trend === 'cold' ? ' <span style="color:#ef5350;font-size:10px" title="Cold streak">COLD</span>' : '') + '</td>';
           } else if (c.key === 'team' || c.key === 'opponent') {
             html += '<td>' + (val || '') + '</td>';
           } else {
@@ -5013,6 +5022,19 @@
           const stability = p.minutes_stability != null ? (p.minutes_stability * 100).toFixed(0) + '%' : '--';
           html += '<div class="detail-context-item"><span>MIN Stability</span><span>' + stability + '</span></div>';
           html += '<div class="detail-context-item"><span>Games Played</span><span>' + (p.games_played != null ? p.games_played : '--') + '</span></div>';
+
+          // v2 context fields
+          html += '<div class="detail-context-item"><span>Recent Form</span><span>' +
+            (p.form_trend === 'hot' ? '<span style="color:#4caf50">&#x1F525; Hot</span>' :
+              p.form_trend === 'cold' ? '<span style="color:#ef5350">&#x2744; Cold</span>' :
+              '<span style="color:#78909c">Steady</span>') +
+            (p.recent_form ? ' (' + (p.recent_form > 1 ? '+' : '') + ((p.recent_form - 1) * 100).toFixed(0) + '%)' : '') +
+            '</span></div>';
+          html += '<div class="detail-context-item"><span>Matchup Grade</span><span style="color:' + gradeColor(p.matchup_grade) + '">' + (p.matchup_grade || '--') + '</span></div>';
+          if (p.h2h_games) {
+            html += '<div class="detail-context-item"><span>vs ' + p.opponent + ' (' + p.h2h_games + 'G)</span><span>' + (p.h2h_avg ? p.h2h_avg.pts.toFixed(1) + '/' + p.h2h_avg.reb.toFixed(1) + '/' + p.h2h_avg.ast.toFixed(1) : '--') + '</span></div>';
+          }
+          html += '<div class="detail-context-item"><span>Rest</span><span>' + (p.rest_days != null ? p.rest_days + ' days' : '--') + (p.rest_days >= 3 ? ' (rested)' : '') + '</span></div>';
 
           // Combo stats
           html += '<div style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border)">';
