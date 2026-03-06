@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-05T22:48:07",
+  "updated": "2026-03-06T05:01:38",
   "allTime": {
     "spreads": {
       "wins": 32,
-      "losses": 20,
-      "pushes": 0,
-      "pct": 61.5,
-      "roi": 17.5
-    },
-    "totals": {
-      "wins": 29,
       "losses": 22,
       "pushes": 0,
-      "pct": 56.9,
-      "roi": 8.6
+      "pct": 59.3,
+      "roi": 13.1
+    },
+    "totals": {
+      "wins": 31,
+      "losses": 22,
+      "pushes": 0,
+      "pct": 58.5,
+      "roi": 11.7
     },
     "moneylines": {
       "wins": 34,
-      "losses": 18,
+      "losses": 20,
       "pushes": 0,
-      "pct": 65.4,
-      "roi": 24.8
+      "pct": 63.0,
+      "roi": 20.2
     },
     "best_bets": {
-      "wins": 28,
-      "losses": 12,
+      "wins": 29,
+      "losses": 11,
       "pushes": 0,
-      "pct": 70.0,
-      "roi": 33.6
+      "pct": 72.5,
+      "roi": 38.4
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-03-05",
       "spreads": {
         "wins": 1,
-        "losses": 4,
+        "losses": 6,
         "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
+        "record": "1-6",
+        "pct": 14.3
       },
       "totals": {
-        "wins": 2,
+        "wins": 4,
         "losses": 3,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "4-3",
+        "pct": 57.1
       },
       "moneylines": {
         "wins": 2,
+        "losses": 5,
+        "pushes": 0,
+        "record": "2-5",
+        "pct": 28.6
+      },
+      "best_bets": {
+        "wins": 2,
         "losses": 3,
         "pushes": 0,
         "record": "2-3",
         "pct": 40.0
-      },
-      "best_bets": {
-        "wins": 1,
-        "losses": 4,
-        "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
       },
       "picks": [
         {
@@ -193,6 +193,37 @@
         {
           "date": "2026-03-05",
           "type": "spread",
+          "game": "BOS @ NSH",
+          "pick": "BOS +1.5",
+          "result": "3-6",
+          "hit": false,
+          "confidence": 55.4,
+          "proj_score": "4.0-3.4"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "BOS @ NSH",
+          "pick": "OVER 6.5",
+          "result": "3-6",
+          "hit": true,
+          "confidence": 55.6,
+          "proj_score": "4.0-3.4"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "BOS @ NSH",
+          "pick": "BOS",
+          "result": "3-6",
+          "hit": false,
+          "confidence": 54.8,
+          "proj_score": "4.0-3.4",
+          "home_win_prob": 39.9
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
           "game": "TBL @ WPG",
           "pick": "WPG +1.5",
           "result": "1-4",
@@ -219,8 +250,39 @@
           "hit": false,
           "confidence": 57.4,
           "proj_score": "3.6-2.7",
-          "home_win_prob": 18.5,
+          "home_win_prob": 18.5
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "OTT @ CGY",
+          "pick": "CGY +1.5",
+          "result": "4-1",
+          "hit": false,
+          "confidence": 54.3,
+          "proj_score": "2.0-2.8"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "OTT @ CGY",
+          "pick": "UNDER 6.5",
+          "result": "4-1",
+          "hit": true,
+          "confidence": 60.0,
+          "proj_score": "2.0-2.8",
           "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "OTT @ CGY",
+          "pick": "CGY",
+          "result": "4-1",
+          "hit": false,
+          "confidence": 56.2,
+          "proj_score": "2.0-2.8",
+          "home_win_prob": 57.8
         }
       ]
     },

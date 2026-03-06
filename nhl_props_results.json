@@ -1260,20 +1260,20 @@
     },
     {
       "date": "2026-03-05",
-      "wins": 21,
-      "losses": 16,
+      "wins": 24,
+      "losses": 28,
       "pushes": 0,
-      "total": 37,
-      "pct": 56.8,
+      "total": 52,
+      "pct": 46.2,
       "by_type": {
         "POINTS": {
-          "wins": 13,
-          "losses": 6,
+          "wins": 16,
+          "losses": 9,
           "pushes": 0
         },
         "SHOTS": {
           "wins": 2,
-          "losses": 10,
+          "losses": 19,
           "pushes": 0
         },
         "ASSISTS": {
@@ -1284,22 +1284,52 @@
       },
       "by_tier": {
         "STRONG": {
-          "wins": 5,
-          "losses": 8,
+          "wins": 7,
+          "losses": 12,
           "pushes": 0
         },
         "GOOD": {
           "wins": 6,
-          "losses": 6,
+          "losses": 8,
           "pushes": 0
         },
         "FAIR": {
-          "wins": 10,
-          "losses": 2,
+          "wins": 11,
+          "losses": 8,
           "pushes": 0
         }
       },
       "picks": [
+        {
+          "player": "Charlie McAvoy",
+          "team": "BOS",
+          "opponent": "NSH",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.17,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 59.6,
+          "ev": 7.29,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Morgan Geekie",
+          "team": "BOS",
+          "opponent": "NSH",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.26,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 64.0,
+          "ev": 5.49,
+          "edge": "STRONG"
+        },
         {
           "player": "Darren Raddysh",
           "team": "TBL",
@@ -1316,6 +1346,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Matvei Gridin",
+          "team": "CGY",
+          "opponent": "OTT",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.07,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 67.2,
+          "ev": 5.56,
+          "edge": "STRONG"
+        },
+        {
           "player": "Adam Fox",
           "team": "NYR",
           "opponent": "TOR",
@@ -1328,6 +1373,21 @@
           "hit": true,
           "confidence": 65.0,
           "ev": 7.19,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Charlie McAvoy",
+          "team": "BOS",
+          "opponent": "NSH",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.76,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 55.2,
+          "ev": 7.73,
           "edge": "STRONG"
         },
         {
@@ -1388,6 +1448,21 @@
           "hit": false,
           "confidence": 65.3,
           "ev": 7.73,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Thomas Chabot",
+          "team": "OTT",
+          "opponent": "CGY",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.05,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 65.7,
+          "ev": 6.33,
           "edge": "STRONG"
         },
         {
@@ -1556,6 +1631,21 @@
           "edge": "FAIR"
         },
         {
+          "player": "Steven Stamkos",
+          "team": "NSH",
+          "opponent": "BOS",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 2.92,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 57.4,
+          "ev": 5.22,
+          "edge": "STRONG"
+        },
+        {
           "player": "Clayton Keller",
           "team": "UTA",
           "opponent": "PHI",
@@ -1616,6 +1706,21 @@
           "edge": "GOOD"
         },
         {
+          "player": "Roman Josi",
+          "team": "NSH",
+          "opponent": "BOS",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 3.11,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 63.9,
+          "ev": 3.39,
+          "edge": "GOOD"
+        },
+        {
           "player": "Trevor Zegras",
           "team": "PHI",
           "opponent": "UTA",
@@ -1643,6 +1748,36 @@
           "hit": true,
           "confidence": 52.9,
           "ev": 0.97,
+          "edge": "FAIR"
+        },
+        {
+          "player": "David Pastrnak",
+          "team": "BOS",
+          "opponent": "NSH",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 3.86,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 56.7,
+          "ev": 1.98,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Elias Lindholm",
+          "team": "BOS",
+          "opponent": "NSH",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.83,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 64.8,
+          "ev": 1.77,
           "edge": "FAIR"
         },
         {
@@ -1674,6 +1809,21 @@
           "confidence": 71.6,
           "ev": 0.19,
           "edge": "FAIR"
+        },
+        {
+          "player": "Nazem Kadri",
+          "team": "CGY",
+          "opponent": "OTT",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.05,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 60.5,
+          "ev": 3.17,
+          "edge": "GOOD"
         },
         {
           "player": "Darren Raddysh",
@@ -1751,6 +1901,36 @@
           "edge": "FAIR"
         },
         {
+          "player": "Drake Batherson",
+          "team": "OTT",
+          "opponent": "CGY",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.96,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 60.3,
+          "ev": 0.97,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Yegor Sharangovich",
+          "team": "CGY",
+          "opponent": "OTT",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.71,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 59.7,
+          "ev": 1.73,
+          "edge": "FAIR"
+        },
+        {
           "player": "Josh Doan",
           "team": "BUF",
           "opponent": "PIT",
@@ -1796,6 +1976,36 @@
           "edge": "FAIR"
         },
         {
+          "player": "Jake Sanderson",
+          "team": "OTT",
+          "opponent": "CGY",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.89,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 58.7,
+          "ev": 0.03,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Dylan Cozens",
+          "team": "OTT",
+          "opponent": "CGY",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.91,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.7,
+          "ev": 0.67,
+          "edge": "FAIR"
+        },
+        {
           "player": "Nikita Kucherov",
           "team": "TBL",
           "opponent": "WPG",
@@ -1823,6 +2033,21 @@
           "hit": false,
           "confidence": 60.9,
           "ev": 0.47,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Brady Tkachuk",
+          "team": "OTT",
+          "opponent": "CGY",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 3.64,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 53.6,
+          "ev": 0.19,
           "edge": "FAIR"
         },
         {
@@ -1859,10 +2084,10 @@
     }
   ],
   "all_time": {
-    "wins": 68,
-    "losses": 64,
+    "wins": 71,
+    "losses": 76,
     "pushes": 0,
-    "pct": 51.5,
+    "pct": 48.3,
     "by_type": {
       "POINTS": {
         "wins": 28,
@@ -1881,5 +2106,5 @@
       }
     }
   },
-  "updated": "2026-03-05T22:48:09"
+  "updated": "2026-03-06T05:01:39"
 }
