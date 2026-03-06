@@ -1952,30 +1952,30 @@
     },
     {
       "date": "2026-03-05",
-      "graded_at": "2026-03-06T05:01:39",
-      "total_props_graded": 28,
+      "graded_at": "2026-03-06T06:01:44",
+      "total_props_graded": 35,
       "overall": {
-        "wins": 14,
-        "losses": 14,
+        "wins": 20,
+        "losses": 15,
         "pushes": 0,
-        "total": 28,
-        "record": "14-14-0",
-        "win_pct": 50.0
+        "total": 35,
+        "record": "20-15-0",
+        "win_pct": 57.1
       },
       "by_stat_type": {
         "PTS": {
-          "wins": 6,
+          "wins": 10,
           "losses": 7,
           "pushes": 0
         },
         "REB": {
-          "wins": 6,
+          "wins": 7,
           "losses": 5,
           "pushes": 0
         },
         "AST": {
-          "wins": 2,
-          "losses": 2,
+          "wins": 3,
+          "losses": 3,
           "pushes": 0
         }
       },
@@ -2371,16 +2371,114 @@
           "confidence": 53.01,
           "ev": 3.1,
           "edge": "GOOD"
+        },
+        {
+          "player": "Christian Braun",
+          "prop": "REB",
+          "team": "DEN",
+          "opponent": "LAL",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.8,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 59.6,
+          "ev": 9.7,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Nikola Jokic",
+          "prop": "PTS",
+          "team": "DEN",
+          "opponent": "LAL",
+          "direction": "UNDER",
+          "line": 28.5,
+          "projection": 27.4,
+          "actual": 28.0,
+          "result": "WIN",
+          "confidence": 54.815,
+          "ev": 9.2,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Nikola Jokic",
+          "prop": "AST",
+          "team": "DEN",
+          "opponent": "LAL",
+          "direction": "UNDER",
+          "line": 10.5,
+          "projection": 9.4,
+          "actual": 13.0,
+          "result": "LOSS",
+          "confidence": 59.945,
+          "ev": 8.1,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Jamal Murray",
+          "prop": "AST",
+          "team": "DEN",
+          "opponent": "LAL",
+          "direction": "UNDER",
+          "line": 7.5,
+          "projection": 4.9,
+          "actual": 7.0,
+          "result": "WIN",
+          "confidence": 59.279999999999994,
+          "ev": 6.1,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Luka Doncic",
+          "prop": "PTS",
+          "team": "LAL",
+          "opponent": "DEN",
+          "direction": "UNDER",
+          "line": 30.5,
+          "projection": 26.9,
+          "actual": 27.0,
+          "result": "WIN",
+          "confidence": 52.44,
+          "ev": 1.9,
+          "edge": "GOOD"
+        },
+        {
+          "player": "DeMar DeRozan",
+          "prop": "PTS",
+          "team": "SAC",
+          "opponent": "NOP",
+          "direction": "UNDER",
+          "line": 15.5,
+          "projection": 11.2,
+          "actual": 15.0,
+          "result": "WIN",
+          "confidence": 54.15,
+          "ev": 5.8,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Russell Westbrook",
+          "prop": "PTS",
+          "team": "SAC",
+          "opponent": "NOP",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 15.0,
+          "actual": 19.0,
+          "result": "WIN",
+          "confidence": 53.5,
+          "ev": 2.2,
+          "edge": "GOOD"
         }
       ]
     }
   ],
   "cumulative": {
-    "wins": 161,
-    "losses": 168,
+    "wins": 167,
+    "losses": 169,
     "pushes": 0,
-    "total": 329,
-    "win_pct": 48.9
+    "total": 336,
+    "win_pct": 49.7
   },
   "updated": "2026-03-05T07:52:14"
 }

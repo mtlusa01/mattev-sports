@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-06T05:01:38",
+  "updated": "2026-03-06T06:01:42",
   "allTime": {
     "spreads": {
+      "wins": 32,
+      "losses": 23,
+      "pushes": 0,
+      "pct": 58.2,
+      "roi": 11.1
+    },
+    "totals": {
       "wins": 32,
       "losses": 22,
       "pushes": 0,
       "pct": 59.3,
       "roi": 13.1
     },
-    "totals": {
-      "wins": 31,
-      "losses": 22,
-      "pushes": 0,
-      "pct": 58.5,
-      "roi": 11.7
-    },
     "moneylines": {
       "wins": 34,
-      "losses": 20,
+      "losses": 21,
       "pushes": 0,
-      "pct": 63.0,
-      "roi": 20.2
+      "pct": 61.8,
+      "roi": 18.0
     },
     "best_bets": {
       "wins": 29,
@@ -35,24 +35,24 @@
       "date": "2026-03-05",
       "spreads": {
         "wins": 1,
-        "losses": 6,
+        "losses": 7,
         "pushes": 0,
-        "record": "1-6",
-        "pct": 14.3
+        "record": "1-7",
+        "pct": 12.5
       },
       "totals": {
-        "wins": 4,
+        "wins": 5,
         "losses": 3,
         "pushes": 0,
-        "record": "4-3",
-        "pct": 57.1
+        "record": "5-3",
+        "pct": 62.5
       },
       "moneylines": {
         "wins": 2,
-        "losses": 5,
+        "losses": 6,
         "pushes": 0,
-        "record": "2-5",
-        "pct": 28.6
+        "record": "2-6",
+        "pct": 25.0
       },
       "best_bets": {
         "wins": 2,
@@ -283,6 +283,37 @@
           "confidence": 56.2,
           "proj_score": "2.0-2.8",
           "home_win_prob": 57.8
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "NYI @ LAK",
+          "pick": "NYI +1.5",
+          "result": "3-5",
+          "hit": false,
+          "confidence": 55.1,
+          "proj_score": "3.1-2.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "NYI @ LAK",
+          "pick": "OVER 5.5",
+          "result": "3-5",
+          "hit": true,
+          "confidence": 50.7,
+          "proj_score": "3.1-2.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "NYI @ LAK",
+          "pick": "NYI",
+          "result": "3-5",
+          "hit": false,
+          "confidence": 55.2,
+          "proj_score": "3.1-2.5",
+          "home_win_prob": 22.5
         }
       ]
     },

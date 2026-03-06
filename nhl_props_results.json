@@ -1260,42 +1260,42 @@
     },
     {
       "date": "2026-03-05",
-      "wins": 24,
-      "losses": 28,
+      "wins": 25,
+      "losses": 35,
       "pushes": 0,
-      "total": 52,
-      "pct": 46.2,
+      "total": 60,
+      "pct": 41.7,
       "by_type": {
         "POINTS": {
-          "wins": 16,
-          "losses": 9,
+          "wins": 17,
+          "losses": 10,
           "pushes": 0
         },
         "SHOTS": {
           "wins": 2,
-          "losses": 19,
+          "losses": 24,
           "pushes": 0
         },
         "ASSISTS": {
           "wins": 6,
-          "losses": 0,
+          "losses": 1,
           "pushes": 0
         }
       },
       "by_tier": {
         "STRONG": {
           "wins": 7,
-          "losses": 12,
+          "losses": 14,
           "pushes": 0
         },
         "GOOD": {
           "wins": 6,
-          "losses": 8,
+          "losses": 11,
           "pushes": 0
         },
         "FAIR": {
-          "wins": 11,
-          "losses": 8,
+          "wins": 12,
+          "losses": 10,
           "pushes": 0
         }
       },
@@ -1479,6 +1479,36 @@
           "confidence": 73.5,
           "ev": 4.91,
           "edge": "GOOD"
+        },
+        {
+          "player": "Adrian Kempe",
+          "team": "LAK",
+          "opponent": "NYI",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 3.46,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 66.0,
+          "ev": 6.68,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Anders Lee",
+          "team": "NYI",
+          "opponent": "LAK",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.14,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 68.4,
+          "ev": 5.92,
+          "edge": "STRONG"
         },
         {
           "player": "Jake Guentzel",
@@ -1826,6 +1856,66 @@
           "edge": "GOOD"
         },
         {
+          "player": "Alex Laferriere",
+          "team": "LAK",
+          "opponent": "NYI",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 2.87,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 57.0,
+          "ev": 4.45,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Trevor Moore",
+          "team": "LAK",
+          "opponent": "NYI",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.92,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 65.1,
+          "ev": 3.87,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Bo Horvat",
+          "team": "NYI",
+          "opponent": "LAK",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.1,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 64.6,
+          "ev": 1.48,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Brandt Clarke",
+          "team": "LAK",
+          "opponent": "NYI",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.89,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 64.2,
+          "ev": 3.82,
+          "edge": "GOOD"
+        },
+        {
           "player": "Darren Raddysh",
           "team": "TBL",
           "opponent": "WPG",
@@ -1883,6 +1973,21 @@
           "hit": true,
           "confidence": 72.1,
           "ev": 0.88,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Brandt Clarke",
+          "team": "LAK",
+          "opponent": "NYI",
+          "prop": "ASSISTS",
+          "direction": "UNDER",
+          "line": 0.5,
+          "projection": 0.25,
+          "actual": 2.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 68.0,
+          "ev": 0.44,
           "edge": "FAIR"
         },
         {
@@ -2006,6 +2111,21 @@
           "edge": "FAIR"
         },
         {
+          "player": "Brandt Clarke",
+          "team": "LAK",
+          "opponent": "NYI",
+          "prop": "POINTS",
+          "direction": "UNDER",
+          "line": 0.5,
+          "projection": 0.36,
+          "actual": 2.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 60.2,
+          "ev": 0.8,
+          "edge": "FAIR"
+        },
+        {
           "player": "Nikita Kucherov",
           "team": "TBL",
           "opponent": "WPG",
@@ -2084,10 +2204,10 @@
     }
   ],
   "all_time": {
-    "wins": 71,
-    "losses": 76,
+    "wins": 72,
+    "losses": 83,
     "pushes": 0,
-    "pct": 48.3,
+    "pct": 46.5,
     "by_type": {
       "POINTS": {
         "wins": 28,
@@ -2106,5 +2226,5 @@
       }
     }
   },
-  "updated": "2026-03-06T05:01:39"
+  "updated": "2026-03-06T06:01:43"
 }
