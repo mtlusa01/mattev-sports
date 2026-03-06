@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-06T02:09:39",
+  "updated": "2026-03-05T19:15:03",
   "allTime": {
     "spreads": {
-      "wins": 253,
-      "losses": 199,
+      "wins": 247,
+      "losses": 194,
       "pushes": 10,
       "pct": 56.0,
       "roi": 6.9
     },
     "totals": {
-      "wins": 223,
-      "losses": 236,
+      "wins": 217,
+      "losses": 231,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.2
+      "pct": 48.4,
+      "roi": -7.5
     },
     "moneylines": {
-      "wins": 303,
-      "losses": 159,
+      "wins": 294,
+      "losses": 157,
       "pushes": 0,
-      "pct": 65.6,
-      "roi": 25.2
+      "pct": 65.2,
+      "roi": 24.5
     },
     "best_bets": {
-      "wins": 49,
-      "losses": 11,
+      "wins": 45,
+      "losses": 15,
       "pushes": 0,
-      "pct": 81.7,
-      "roi": 55.9
+      "pct": 75.0,
+      "roi": 43.2
     }
   },
   "days": [
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 7,
-        "losses": 6,
+        "wins": 1,
+        "losses": 1,
         "pushes": 0,
-        "record": "7-6",
-        "pct": 53.8
+        "record": "1-1",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 6,
-        "losses": 7,
+        "wins": 0,
+        "losses": 2,
         "pushes": 0,
-        "record": "6-7",
-        "pct": 46.2
+        "record": "0-2",
+        "pct": 0.0
       },
       "moneylines": {
-        "wins": 9,
-        "losses": 4,
+        "wins": 0,
+        "losses": 2,
         "pushes": 0,
-        "record": "9-4",
-        "pct": 69.2
+        "record": "0-2",
+        "pct": 0.0
       },
       "best_bets": {
-        "wins": 5,
-        "losses": 0,
+        "wins": 1,
+        "losses": 4,
         "pushes": 0,
-        "record": "5-0",
-        "pct": 100.0
+        "record": "1-4",
+        "pct": 20.0
       },
       "picks": [
         {
@@ -455,6 +455,35 @@
           "hit": true,
           "confidence": 88,
           "proj_score": "63.9-82.2",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "SCST @ NCCU",
+          "pick": "SCST +11.5",
+          "result": "80-64",
+          "hit": true,
+          "confidence": 60,
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "SCST @ NCCU",
+          "pick": "OVER 144.5",
+          "result": "80-64",
+          "hit": false,
+          "confidence": 52
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "SCST @ NCCU",
+          "pick": "NCCU",
+          "result": "80-64",
+          "hit": false,
+          "confidence": 77,
           "best_bet": true
         }
       ]
