@@ -3796,7 +3796,17 @@
 
       // Use locked recommendations if available for selected date
       const locked = lockedGameRecs[currentSport];
-      const isLocked = locked && locked.date === selectedDate && locked.recommendations && locked.recommendations.length > 0;
+      let isLocked = locked && locked.date === selectedDate && locked.recommendations && locked.recommendations.length > 0;
+      // Cross-validate: ensure locked game matchups exist in current projections
+      // (prevents stale lock files with yesterday's games stamped as today)
+      if (isLocked && dateGames.length > 0) {
+        const gameSet = new Set(dateGames.map(g => g.away_team + ' @ ' + g.home_team));
+        const matchCount = locked.recommendations.filter(r => gameSet.has(r.game)).length;
+        if (matchCount === 0) {
+          console.log(`Lock file stale: 0/${locked.recommendations.length} games match current projections`);
+          isLocked = false;
+        }
+      }
 
       // Check archived recommendations for historical dates
       const histKey = currentSport + ':' + selectedDate;
