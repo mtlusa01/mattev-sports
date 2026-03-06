@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-05T21:32:13",
+  "updated": "2026-03-05T22:40:23",
   "allTime": {
     "spreads": {
-      "wins": 25,
-      "losses": 28,
+      "wins": 28,
+      "losses": 30,
       "pushes": 0,
-      "pct": 47.2,
-      "roi": -9.9
+      "pct": 48.3,
+      "roi": -7.8
     },
     "totals": {
-      "wins": 28,
-      "losses": 24,
+      "wins": 31,
+      "losses": 26,
       "pushes": 0,
-      "pct": 53.8,
-      "roi": 2.8
+      "pct": 54.4,
+      "roi": 3.8
     },
     "moneylines": {
-      "wins": 65,
-      "losses": 33,
+      "wins": 69,
+      "losses": 34,
       "pushes": 0,
-      "pct": 66.3,
-      "roi": 26.6
+      "pct": 67.0,
+      "roi": 27.9
     },
     "best_bets": {
-      "wins": 88,
-      "losses": 51,
+      "wins": 91,
+      "losses": 50,
       "pushes": 0,
-      "pct": 63.3,
-      "roi": 20.9
+      "pct": 64.5,
+      "roi": 23.2
     },
     "props": {
       "wins": 21,
@@ -43,34 +43,65 @@
     {
       "date": "2026-03-05",
       "spreads": {
-        "wins": 1,
-        "losses": 0,
+        "wins": 4,
+        "losses": 2,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
-      },
-      "totals": {
-        "wins": 1,
-        "losses": 0,
-        "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
-      },
-      "moneylines": {
-        "wins": 0,
-        "losses": 1,
-        "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
-      },
-      "best_bets": {
-        "wins": 2,
-        "losses": 1,
-        "pushes": 0,
-        "record": "2-1",
+        "record": "4-2",
         "pct": 66.7
       },
+      "totals": {
+        "wins": 4,
+        "losses": 2,
+        "pushes": 0,
+        "record": "4-2",
+        "pct": 66.7
+      },
+      "moneylines": {
+        "wins": 4,
+        "losses": 2,
+        "pushes": 0,
+        "record": "4-2",
+        "pct": 66.7
+      },
+      "best_bets": {
+        "wins": 5,
+        "losses": 0,
+        "pushes": 0,
+        "record": "5-0",
+        "pct": 100.0
+      },
       "picks": [
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "DAL @ ORL",
+          "pick": "DAL +8.5",
+          "result": "114-115",
+          "hit": true,
+          "confidence": 56.5,
+          "proj_score": "109.5-116.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "DAL @ ORL",
+          "pick": "UNDER 228.5",
+          "result": "114-115",
+          "hit": false,
+          "confidence": 55.1,
+          "proj_score": "109.5-116.3"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "DAL @ ORL",
+          "pick": "ORL",
+          "result": "114-115",
+          "hit": true,
+          "confidence": 64.9,
+          "proj_score": "109.5-116.3",
+          "best_bet": true
+        },
         {
           "date": "2026-03-05",
           "type": "spread",
@@ -79,8 +110,7 @@
           "result": "122-112",
           "hit": true,
           "confidence": 51.2,
-          "proj_score": "116.0-117.6",
-          "best_bet": true
+          "proj_score": "116.0-117.6"
         },
         {
           "date": "2026-03-05",
@@ -101,8 +131,130 @@
           "result": "122-112",
           "hit": false,
           "confidence": 55.4,
-          "proj_score": "116.0-117.6",
+          "proj_score": "116.0-117.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "BKN @ MIA",
+          "pick": "MIA -12.5",
+          "result": "110-126",
+          "hit": true,
+          "confidence": 39.9,
+          "proj_score": "107.4-117.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "BKN @ MIA",
+          "pick": "UNDER 225.5",
+          "result": "110-126",
+          "hit": false,
+          "confidence": 51.6,
+          "proj_score": "107.4-117.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "BKN @ MIA",
+          "pick": "MIA",
+          "result": "110-126",
+          "hit": true,
+          "confidence": 85.7,
+          "proj_score": "107.4-117.5",
           "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "GSW @ HOU",
+          "pick": "GSW +9.5",
+          "result": "115-113",
+          "hit": true,
+          "confidence": 60.6,
+          "proj_score": "111.3-116.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "GSW @ HOU",
+          "pick": "OVER 215.5",
+          "result": "115-113",
+          "hit": true,
+          "confidence": 77.9,
+          "proj_score": "111.3-116.5",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "GSW @ HOU",
+          "pick": "HOU",
+          "result": "115-113",
+          "hit": false,
+          "confidence": 63.3,
+          "proj_score": "111.3-116.5"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "TOR @ MIN",
+          "pick": "TOR +6.0",
+          "result": "107-115",
+          "hit": false,
+          "confidence": 51.4,
+          "proj_score": "109.5-115.1"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "TOR @ MIN",
+          "pick": "UNDER 227.5",
+          "result": "107-115",
+          "hit": true,
+          "confidence": 58.3,
+          "proj_score": "109.5-115.1"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "TOR @ MIN",
+          "pick": "MIN",
+          "result": "107-115",
+          "hit": true,
+          "confidence": 64.4,
+          "proj_score": "109.5-115.1",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-05",
+          "type": "spread",
+          "game": "DET @ SAS",
+          "pick": "DET +3.5",
+          "result": "106-121",
+          "hit": false,
+          "confidence": 52.4,
+          "proj_score": "110.2-112.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "total",
+          "game": "DET @ SAS",
+          "pick": "UNDER 228.5",
+          "result": "106-121",
+          "hit": true,
+          "confidence": 63.2,
+          "proj_score": "110.2-112.6"
+        },
+        {
+          "date": "2026-03-05",
+          "type": "ml",
+          "game": "DET @ SAS",
+          "pick": "SAS",
+          "result": "106-121",
+          "hit": true,
+          "confidence": 55.6,
+          "proj_score": "110.2-112.6"
         }
       ]
     },
