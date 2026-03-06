@@ -738,10 +738,12 @@ def _fetch_espn_event_ids(sport, date_str):
             home_abbr = abbr_fix.get(home_raw, home_raw)
             away_abbr = abbr_fix.get(away_raw, away_raw)
             status = event.get("status", {}).get("type", {}).get("name", "")
+            # Use ESPN's scheduled date (ET) — date_str is the ET date we queried
             result[f"{away_abbr}@{home_abbr}"] = {
                 "id": eid,
                 "status": status,
                 "date": date_str,
+                "query_date": date_str,
             }
         return result
     except Exception as e:
@@ -845,26 +847,42 @@ def grade_nhl_props():
 
     print(f"  NHL Props: {len(ungraded)} ungraded props")
 
+    # Cross-reference against game projections to get today's valid matchups
+    nhl_proj_path = os.path.join(REPO_ROOT, "nhl_game_projections.json")
+    valid_matchups = set()
+    if os.path.exists(nhl_proj_path):
+        with open(nhl_proj_path, "r", encoding="utf-8") as f:
+            nhl_proj = json.load(f)
+        for g in nhl_proj.get("games", []):
+            away = g.get("away_team", "")
+            home = g.get("home_team", "")
+            if away and home:
+                valid_matchups.add((away, home))
+                valid_matchups.add((home, away))
+
     # Build set of team matchups from ungraded props
     matchups_needed = set()
     for p in ungraded:
         team = p.get("team", "")
         opponent = p.get("opponent", "")
         if team and opponent:
-            # Props may not specify home/away, so check both directions
+            # Only include matchups that exist in today's game projections
+            if valid_matchups and (team, opponent) not in valid_matchups:
+                continue
             matchups_needed.add((team, opponent))
 
     if not matchups_needed:
-        print("  NHL Props: no team matchups found in props")
+        print("  NHL Props: no valid matchups found (cross-ref with game projections)")
         return False
 
-    # Fetch ESPN event IDs for today and yesterday (parallel)
+    # Fetch ESPN event IDs for props date ONLY (not yesterday — prevents cross-day contamination)
     props_date = props_data.get("date", datetime.now().strftime("%Y-%m-%d"))
-    today = datetime.now().strftime("%Y-%m-%d")
-    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    # Query both the props date and next day to handle UTC offset
+    # (7 PM ET game = next day UTC) but always validate against game projections
+    next_day = (datetime.strptime(props_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
     with ThreadPoolExecutor(max_workers=2) as executor:
-        futs = [executor.submit(_fetch_espn_event_ids, "NHL", d) for d in [yesterday, today]]
+        futs = [executor.submit(_fetch_espn_event_ids, "NHL", d) for d in [props_date, next_day]]
         for fut in as_completed(futs):
             espn_events.update(fut.result())
 
@@ -876,6 +894,17 @@ def grade_nhl_props():
         team_to_event[(away, home)] = event_info
         team_to_event[(home, away)] = event_info
 
+    # Safety check: only grade if at least one game for our matchups is FINAL
+    any_final = False
+    for team, opponent in matchups_needed:
+        event_info = team_to_event.get((team, opponent))
+        if event_info and event_info["status"] == "STATUS_FINAL":
+            any_final = True
+            break
+    if not any_final:
+        print("  NHL Props: no games FINAL for today's matchups — skipping")
+        return False
+
     # Fetch box scores for matching final games
     box_scores = {}  # keyed by (team, opponent)
     fetched_events = set()
@@ -885,10 +914,6 @@ def grade_nhl_props():
             continue
         eid = event_info["id"]
         if event_info["status"] != "STATUS_FINAL":
-            continue
-        # Only grade against events from the same date as the props
-        event_date = event_info.get("date", "")
-        if event_date and event_date != props_date:
             continue
         if eid in fetched_events:
             # Already fetched — map this matchup pair too
@@ -1070,11 +1095,13 @@ def _fetch_nba_box_scores(matchups_needed, target_date):
     Returns:
         box_scores dict keyed by (team, opponent) tuples
     """
-    today = datetime.now().strftime("%Y-%m-%d")
-    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    if not target_date:
+        target_date = datetime.now().strftime("%Y-%m-%d")
+    # Query the target date + next day (handles UTC offset for late ET games)
+    next_day = (datetime.strptime(target_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
     espn_events = {}
     with ThreadPoolExecutor(max_workers=2) as executor:
-        futs = [executor.submit(_fetch_espn_event_ids, "NBA", d) for d in [yesterday, today]]
+        futs = [executor.submit(_fetch_espn_event_ids, "NBA", d) for d in [target_date, next_day]]
         for fut in as_completed(futs):
             espn_events.update(fut.result())
 
@@ -1094,11 +1121,6 @@ def _fetch_nba_box_scores(matchups_needed, target_date):
         eid = event_info["id"]
         if event_info["status"] != "STATUS_FINAL":
             continue
-        # Only filter by date if a target_date was provided
-        if target_date:
-            event_date = event_info.get("date", "")
-            if event_date and event_date != target_date:
-                continue
         if eid in fetched_events:
             for mk, bs in box_scores.items():
                 if bs.get("_eid") == eid:
@@ -1235,35 +1257,41 @@ def grade_nba_props():
 
     print(f"  NBA Props: {len(all_ungraded)} ungraded in all_props, {len(proj_ungraded)} in projections")
 
+    # Cross-reference against game projections to get today's valid matchups
+    nba_proj_path = os.path.join(REPO_ROOT, "game_projections.json")
+    valid_matchups = set()
+    if os.path.exists(nba_proj_path):
+        with open(nba_proj_path, "r", encoding="utf-8") as f:
+            nba_proj = json.load(f)
+        for g in nba_proj.get("games", []):
+            away = g.get("away_team", "")
+            home = g.get("home_team", "")
+            if away and home:
+                valid_matchups.add((away, home))
+                valid_matchups.add((home, away))
+
     # ── Build matchups from BOTH files ──
     matchups_needed = set()
     for p in all_ungraded + proj_ungraded:
         team = p.get("team", "")
         opponent = p.get("opponent", "")
         if team and opponent:
+            # Only include matchups that exist in today's game projections
+            if valid_matchups and (team, opponent) not in valid_matchups:
+                continue
             matchups_needed.add((team, opponent))
 
     if not matchups_needed:
-        print("  NBA Props: no team matchups found")
+        print("  NBA Props: no valid matchups found (cross-ref with game projections)")
         return False
 
     # ── Fetch box scores (shared across both files) ──
-    # Use projections.json date (always today's props) as primary target.
-    # all_props.json may be stale (e.g. _date from weeks ago), so we
-    # fetch box scores for today regardless and let player matching filter.
     today = datetime.now().strftime("%Y-%m-%d")
     proj_date = proj_props_data.get("date", today) if proj_props_data else today
-    all_props_date = all_props_data.get("_date", all_props_data.get("date", "")) if all_props_data else ""
+    print(f"  NBA Props: target date = {proj_date}")
 
-    # Determine which dates we need box scores for
-    dates_needed = {today, proj_date}
-    if all_props_date and all_props_date != today:
-        dates_needed.add(all_props_date)
-    print(f"  NBA Props: target dates = {sorted(dates_needed)}")
-
-    # Fetch box scores with no date filter (None) — let matchup matching handle it.
-    # This avoids the bug where a stale _date caused ALL events to be skipped.
-    box_scores = _fetch_nba_box_scores(matchups_needed, None)
+    # Fetch box scores for today's date only (cross-ref prevents yesterday contamination)
+    box_scores = _fetch_nba_box_scores(matchups_needed, proj_date)
     if not box_scores:
         print("  NBA Props: no finished games with box scores")
         return False
