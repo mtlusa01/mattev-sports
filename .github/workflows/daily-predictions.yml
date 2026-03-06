@@ -93,8 +93,8 @@ jobs:
         run: |
           echo "Downloading model from GitHub release..."
           gh release download v9-model -R mtlusa01/nba-props --dir /tmp/model --clobber
-          cp /tmp/model/.nba_props_v9.pkl ~/
-          cp /tmp/model/.nba_minutes_model.joblib ~/
+          cp /tmp/model/nba_props_v9.pkl ~/.nba_props_v9.pkl
+          cp /tmp/model/nba_minutes_model.joblib ~/.nba_minutes_model.joblib
           ls -lh ~/.nba_props_v9.pkl ~/.nba_minutes_model.joblib
 
       - name: Save props model to cache
