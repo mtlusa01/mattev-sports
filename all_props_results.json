@@ -1949,139 +1949,396 @@
           "error": 20.7
         }
       ]
+    },
+    {
+      "date": "2026-03-05",
+      "graded_at": "2026-03-05T22:48:12",
+      "total_props_graded": 25,
+      "overall": {
+        "wins": 12,
+        "losses": 13,
+        "pushes": 0,
+        "total": 25,
+        "record": "12-13-0",
+        "win_pct": 48.0
+      },
+      "by_stat_type": {
+        "PTS": {
+          "wins": 5,
+          "losses": 6,
+          "pushes": 0
+        },
+        "REB": {
+          "wins": 6,
+          "losses": 5,
+          "pushes": 0
+        },
+        "AST": {
+          "wins": 1,
+          "losses": 2,
+          "pushes": 0
+        }
+      },
+      "picks": [
+        {
+          "player": "Cooper Flagg",
+          "prop": "PTS",
+          "team": "DAL",
+          "opponent": "ORL",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 26.1,
+          "actual": 18.0,
+          "result": "WIN",
+          "confidence": 56.4,
+          "ev": 10.5,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Cooper Flagg",
+          "prop": "REB",
+          "team": "DAL",
+          "opponent": "ORL",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 6.6,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 60.7,
+          "ev": 4.3,
+          "edge": "GOOD"
+        },
+        {
+          "player": "P.J. Washington",
+          "prop": "REB",
+          "team": "DAL",
+          "opponent": "ORL",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 5.0,
+          "result": "LOSS",
+          "confidence": 60.0,
+          "ev": 0.8,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Tobias Harris",
+          "prop": "REB",
+          "team": "DET",
+          "opponent": "SAS",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 6.7,
+          "actual": 4.0,
+          "result": "LOSS",
+          "confidence": 61.7,
+          "ev": 13.6,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Jalen Duren",
+          "prop": "PTS",
+          "team": "DET",
+          "opponent": "SAS",
+          "direction": "OVER",
+          "line": 17.5,
+          "projection": 18.6,
+          "actual": 7.0,
+          "result": "LOSS",
+          "confidence": 57.4,
+          "ev": 11.6,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Cade Cunningham",
+          "prop": "PTS",
+          "team": "DET",
+          "opponent": "SAS",
+          "direction": "UNDER",
+          "line": 24.5,
+          "projection": 22.4,
+          "actual": 26.0,
+          "result": "LOSS",
+          "confidence": 55.099999999999994,
+          "ev": 6.8,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Brandin Podziemski",
+          "prop": "REB",
+          "team": "GSW",
+          "opponent": "HOU",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 9.0,
+          "result": "WIN",
+          "confidence": 61.4,
+          "ev": 9.4,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Brandin Podziemski",
+          "prop": "PTS",
+          "team": "GSW",
+          "opponent": "HOU",
+          "direction": "UNDER",
+          "line": 16.5,
+          "projection": 12.5,
+          "actual": 26.0,
+          "result": "LOSS",
+          "confidence": 53.39,
+          "ev": 2.3,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Amen Thompson",
+          "prop": "REB",
+          "team": "HOU",
+          "opponent": "GSW",
+          "direction": "OVER",
+          "line": 7.5,
+          "projection": 7.6,
+          "actual": 10.0,
+          "result": "WIN",
+          "confidence": 54.7,
+          "ev": 6.8,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Amen Thompson",
+          "prop": "PTS",
+          "team": "HOU",
+          "opponent": "GSW",
+          "direction": "OVER",
+          "line": 15.5,
+          "projection": 16.0,
+          "actual": 18.0,
+          "result": "WIN",
+          "confidence": 55.7,
+          "ev": 3.8,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Kevin Durant",
+          "prop": "REB",
+          "team": "HOU",
+          "opponent": "GSW",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.9,
+          "actual": 6.0,
+          "result": "LOSS",
+          "confidence": 53.48499999999999,
+          "ev": 3.1,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Andrew Wiggins",
+          "prop": "REB",
+          "team": "MIA",
+          "opponent": "BKN",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 5.7,
+          "actual": 4.0,
+          "result": "LOSS",
+          "confidence": 58.4,
+          "ev": 6.4,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Rudy Gobert",
+          "prop": "REB",
+          "team": "MIN",
+          "opponent": "TOR",
+          "direction": "OVER",
+          "line": 11.5,
+          "projection": 11.6,
+          "actual": 12.0,
+          "result": "WIN",
+          "confidence": 53.2,
+          "ev": 8.4,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Julius Randle",
+          "prop": "REB",
+          "team": "MIN",
+          "opponent": "TOR",
+          "direction": "OVER",
+          "line": 6.5,
+          "projection": 7.4,
+          "actual": 8.0,
+          "result": "WIN",
+          "confidence": 52.9,
+          "ev": 0.1,
+          "edge": "LEAN"
+        },
+        {
+          "player": "Desmond Bane",
+          "prop": "PTS",
+          "team": "ORL",
+          "opponent": "DAL",
+          "direction": "OVER",
+          "line": 21.5,
+          "projection": 26.7,
+          "actual": 14.0,
+          "result": "LOSS",
+          "confidence": 56.2,
+          "ev": 8.2,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Paolo Banchero",
+          "prop": "REB",
+          "team": "ORL",
+          "opponent": "DAL",
+          "direction": "UNDER",
+          "line": 8.5,
+          "projection": 7.6,
+          "actual": 12.0,
+          "result": "LOSS",
+          "confidence": 55.29,
+          "ev": 6.3,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Anthony Black",
+          "prop": "PTS",
+          "team": "ORL",
+          "opponent": "DAL",
+          "direction": "UNDER",
+          "line": 14.5,
+          "projection": 14.1,
+          "actual": 8.0,
+          "result": "WIN",
+          "confidence": 53.769999999999996,
+          "ev": 6.3,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Desmond Bane",
+          "prop": "AST",
+          "team": "ORL",
+          "opponent": "DAL",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 4.6,
+          "actual": 3.0,
+          "result": "LOSS",
+          "confidence": 57.6,
+          "ev": 0.9,
+          "edge": "FAIR"
+        },
+        {
+          "player": "De'Aaron Fox",
+          "prop": "AST",
+          "team": "SAS",
+          "opponent": "DET",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.6,
+          "actual": 3.0,
+          "result": "LOSS",
+          "confidence": 53.4,
+          "ev": 3.3,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Victor Wembanyama",
+          "prop": "PTS",
+          "team": "SAS",
+          "opponent": "DET",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 18.2,
+          "actual": 38.0,
+          "result": "LOSS",
+          "confidence": 52.82,
+          "ev": 1.6,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Immanuel Quickley",
+          "prop": "PTS",
+          "team": "TOR",
+          "opponent": "MIN",
+          "direction": "OVER",
+          "line": 16.5,
+          "projection": 19.3,
+          "actual": 18.0,
+          "result": "WIN",
+          "confidence": 58.1,
+          "ev": 10.5,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Immanuel Quickley",
+          "prop": "AST",
+          "team": "TOR",
+          "opponent": "MIN",
+          "direction": "OVER",
+          "line": 5.5,
+          "projection": 5.8,
+          "actual": 7.0,
+          "result": "WIN",
+          "confidence": 57.9,
+          "ev": 4.5,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Scottie Barnes",
+          "prop": "REB",
+          "team": "TOR",
+          "opponent": "MIN",
+          "direction": "UNDER",
+          "line": 7.5,
+          "projection": 6.3,
+          "actual": 2.0,
+          "result": "WIN",
+          "confidence": 53.48499999999999,
+          "ev": 2.8,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Scottie Barnes",
+          "prop": "PTS",
+          "team": "TOR",
+          "opponent": "MIN",
+          "direction": "UNDER",
+          "line": 17.5,
+          "projection": 15.6,
+          "actual": 16.0,
+          "result": "WIN",
+          "confidence": 52.25,
+          "ev": 0.9,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Ace Bailey",
+          "prop": "PTS",
+          "team": "UTA",
+          "opponent": "WAS",
+          "direction": "UNDER",
+          "line": 18.5,
+          "projection": 12.3,
+          "actual": 32.0,
+          "result": "LOSS",
+          "confidence": 60.324999999999996,
+          "ev": 16.4,
+          "edge": "GOOD"
+        }
+      ]
     }
   ],
   "cumulative": {
-    "total_days": 4,
-    "total_props_graded": 295,
-    "overall": {
-      "wins": 144,
-      "losses": 151,
-      "pushes": 0,
-      "total": 295,
-      "win_pct": 48.8,
-      "record": "144-151-0"
-    },
-    "by_stat_type": {
-      "PTS": {
-        "wins": 34,
-        "losses": 36,
-        "pushes": 0,
-        "total": 70,
-        "win_pct": 48.6,
-        "record": "34-36-0"
-      },
-      "REB": {
-        "wins": 48,
-        "losses": 37,
-        "pushes": 0,
-        "total": 85,
-        "win_pct": 56.5,
-        "record": "48-37-0"
-      },
-      "AST": {
-        "wins": 32,
-        "losses": 35,
-        "pushes": 0,
-        "total": 67,
-        "win_pct": 47.8,
-        "record": "32-35-0"
-      },
-      "PRA": {
-        "wins": 30,
-        "losses": 43,
-        "pushes": 0,
-        "total": 73,
-        "win_pct": 41.1,
-        "record": "30-43-0"
-      }
-    },
-    "by_confidence_bucket": {
-      "50-52": {
-        "wins": 37,
-        "losses": 32,
-        "pushes": 0,
-        "total": 69,
-        "win_pct": 53.6,
-        "record": "37-32-0"
-      },
-      "52-55": {
-        "wins": 48,
-        "losses": 41,
-        "pushes": 0,
-        "total": 89,
-        "win_pct": 53.9,
-        "record": "48-41-0"
-      },
-      "55-60": {
-        "wins": 19,
-        "losses": 23,
-        "pushes": 0,
-        "total": 42,
-        "win_pct": 45.2,
-        "record": "19-23-0"
-      },
-      "60-65": {
-        "wins": 2,
-        "losses": 1,
-        "pushes": 0,
-        "total": 3,
-        "win_pct": 66.7,
-        "record": "2-1-0"
-      }
-    },
-    "by_edge_category": {
-      "STRONG": {
-        "wins": 13,
-        "losses": 24,
-        "pushes": 0,
-        "total": 37,
-        "win_pct": 35.1,
-        "record": "13-24-0"
-      },
-      "GOOD": {
-        "wins": 13,
-        "losses": 14,
-        "pushes": 0,
-        "total": 27,
-        "win_pct": 48.1,
-        "record": "13-14-0"
-      },
-      "FAIR": {
-        "wins": 18,
-        "losses": 12,
-        "pushes": 0,
-        "total": 30,
-        "win_pct": 60.0,
-        "record": "18-12-0"
-      },
-      "AVOID": {
-        "wins": 100,
-        "losses": 101,
-        "pushes": 0,
-        "total": 201,
-        "win_pct": 49.8,
-        "record": "100-101-0"
-      }
-    },
-    "by_was_filtered": {
-      "other_props": {
-        "wins": 134,
-        "losses": 136,
-        "pushes": 0,
-        "total": 270,
-        "win_pct": 49.6,
-        "record": "134-136-0"
-      },
-      "best_bets": {
-        "wins": 10,
-        "losses": 15,
-        "pushes": 0,
-        "total": 25,
-        "win_pct": 40.0,
-        "record": "10-15-0"
-      }
-    }
+    "wins": 159,
+    "losses": 167,
+    "pushes": 0,
+    "total": 326,
+    "win_pct": 48.8
   },
   "updated": "2026-03-05T07:52:14"
 }

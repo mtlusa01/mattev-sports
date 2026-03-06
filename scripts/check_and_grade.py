@@ -1042,9 +1042,11 @@ def _fetch_nba_box_scores(matchups_needed, target_date):
         eid = event_info["id"]
         if event_info["status"] != "STATUS_FINAL":
             continue
-        event_date = event_info.get("date", "")
-        if event_date and target_date and event_date != target_date:
-            continue
+        # Only filter by date if a target_date was provided
+        if target_date:
+            event_date = event_info.get("date", "")
+            if event_date and event_date != target_date:
+                continue
         if eid in fetched_events:
             for mk, bs in box_scores.items():
                 if bs.get("_eid") == eid:
@@ -1194,12 +1196,22 @@ def grade_nba_props():
         return False
 
     # ── Fetch box scores (shared across both files) ──
-    # Use _date (with underscore) for all_props.json, fall back to today
-    target_date = datetime.now().strftime("%Y-%m-%d")
-    if all_props_data:
-        target_date = all_props_data.get("_date", all_props_data.get("date", target_date))
+    # Use projections.json date (always today's props) as primary target.
+    # all_props.json may be stale (e.g. _date from weeks ago), so we
+    # fetch box scores for today regardless and let player matching filter.
+    today = datetime.now().strftime("%Y-%m-%d")
+    proj_date = proj_props_data.get("date", today) if proj_props_data else today
+    all_props_date = all_props_data.get("_date", all_props_data.get("date", "")) if all_props_data else ""
 
-    box_scores = _fetch_nba_box_scores(matchups_needed, target_date)
+    # Determine which dates we need box scores for
+    dates_needed = {today, proj_date}
+    if all_props_date and all_props_date != today:
+        dates_needed.add(all_props_date)
+    print(f"  NBA Props: target dates = {sorted(dates_needed)}")
+
+    # Fetch box scores with no date filter (None) — let matchup matching handle it.
+    # This avoids the bug where a stale _date caused ALL events to be skipped.
+    box_scores = _fetch_nba_box_scores(matchups_needed, None)
     if not box_scores:
         print("  NBA Props: no finished games with box scores")
         return False
@@ -1213,7 +1225,7 @@ def grade_nba_props():
             save_json(all_props_path, all_props_data)
             _update_nba_props_results(
                 all_props,
-                all_props_data.get("_date", datetime.now().strftime("%Y-%m-%d")),
+                all_props_date or today,
                 all_props_results_path,
             )
             any_changes = True
@@ -1238,7 +1250,7 @@ def grade_nba_props():
     proj_with_results = [p for p in proj_props if p.get("result")]
     if proj_with_results:
         _merge_proj_results_into_all_props_results(
-            proj_with_results, target_date, all_props_results_path
+            proj_with_results, proj_date, all_props_results_path
         )
 
     return any_changes
