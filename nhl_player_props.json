@@ -2,8 +2,8 @@
   "date": "2026-03-06",
   "sport": "NHL",
   "type": "player_props",
-  "locked_at": "2026-03-06T08:38:13.494671",
-  "updated": "2026-03-06T08:38:13.607663",
+  "locked_at": "2026-03-06T14:36:17.009925",
+  "updated": "2026-03-06T14:36:17.135432",
   "projections": [
     {
       "player": "Sam Rinzel",
@@ -13,19 +13,20 @@
       "direction": "OVER",
       "line": 1.5,
       "projection": 2.37,
-      "confidence": 71.3,
-      "ev": 6.93,
+      "confidence": 71.1,
+      "ev": 7.05,
       "diff": 0.87,
-      "market_odds": -200,
-      "fair_odds": -248,
-      "prob_edge": 4.6,
+      "market_odds": -198,
+      "fair_odds": -246,
+      "prob_edge": 4.7,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -198,
         "MGM": -200
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.296046",
+      "generated_at": "2026-03-06T14:36:16.807116",
       "l5_avg": 3.0,
       "l10_avg": 2.1,
       "season_avg": 1.64,
@@ -147,7 +148,7 @@
         "MGM": -160
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.258701",
+      "generated_at": "2026-03-06T14:36:16.767501",
       "l5_avg": 2.6,
       "l10_avg": 2.1,
       "season_avg": 1.72,
@@ -263,12 +264,13 @@
       "fair_odds": -126,
       "prob_edge": 3.3,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -110,
         "MGM": -110
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.433993",
+      "generated_at": "2026-03-06T14:36:16.944417",
       "l5_avg": 0.6,
       "l10_avg": 0.7,
       "season_avg": 0.69,
@@ -370,6 +372,127 @@
       "top_pick_rank": 3
     },
     {
+      "player": "Robert Thomas",
+      "team": "STL",
+      "opponent": "SJS",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 1.24,
+      "confidence": 62.4,
+      "ev": 6.27,
+      "diff": 0.74,
+      "market_odds": -142,
+      "fair_odds": -166,
+      "prob_edge": 3.7,
+      "edge": "STRONG",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -142,
+        "MGM": -145
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.966816",
+      "l5_avg": 1.4,
+      "l10_avg": 1.0,
+      "season_avg": 0.84,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 60.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 6,
+      "streak": 4,
+      "last_10_values": [
+        2,
+        2,
+        2,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "SEA",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "MIN",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-10",
+          "opp": "VGK",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-09",
+          "opp": "UTA",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-07",
+          "opp": "CHI",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-03",
+          "opp": "MTL",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-02",
+          "opp": "VGK",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2025-12-31",
+          "opp": "COL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2025-12-29",
+          "opp": "BUF",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2025-12-27",
+          "opp": "NSH",
+          "val": 2,
+          "hit": true
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 31,
+      "games_played": 44,
+      "avg_toi": 18.87,
+      "position": "C",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020989,
+      "insight": "4-game streak, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 70.7,
+      "score_factors": [
+        "4-game streak",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 4
+    },
+    {
       "player": "Jackson LaCombe",
       "team": "ANA",
       "opponent": "MTL",
@@ -384,12 +507,13 @@
       "fair_odds": -153,
       "prob_edge": 3.9,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -130,
         "MGM": -130
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.245494",
+      "generated_at": "2026-03-06T14:36:16.742893",
       "l5_avg": 0.8,
       "l10_avg": 0.9,
       "season_avg": 0.67,
@@ -487,368 +611,7 @@
         "80% L10 hit rate",
         "Favorable matchup"
       ],
-      "top_pick_rank": 4
-    },
-    {
-      "player": "Robert Thomas",
-      "team": "STL",
-      "opponent": "SJS",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.24,
-      "confidence": 62.7,
-      "ev": 5.96,
-      "diff": 0.74,
-      "market_odds": -145,
-      "fair_odds": -168,
-      "prob_edge": 3.5,
-      "edge": "STRONG",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -145
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.455439",
-      "l5_avg": 1.4,
-      "l10_avg": 1.0,
-      "season_avg": 0.84,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 6,
-      "streak": 4,
-      "last_10_values": [
-        2,
-        2,
-        2,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        2
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "SEA",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "MIN",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-10",
-          "opp": "VGK",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-09",
-          "opp": "UTA",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-07",
-          "opp": "CHI",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-03",
-          "opp": "MTL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-02",
-          "opp": "VGK",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2025-12-31",
-          "opp": "COL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2025-12-29",
-          "opp": "BUF",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2025-12-27",
-          "opp": "NSH",
-          "val": 2,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 31,
-      "games_played": 44,
-      "avg_toi": 18.87,
-      "position": "C",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020989,
-      "insight": "4-game streak, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 70.5,
-      "score_factors": [
-        "4-game streak",
-        "Favorable matchup"
-      ],
       "top_pick_rank": 5
-    },
-    {
-      "player": "Jackson LaCombe",
-      "team": "ANA",
-      "opponent": "MTL",
-      "prop": "ASSISTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.04,
-      "confidence": 55.2,
-      "ev": 7.87,
-      "diff": 0.54,
-      "market_odds": -105,
-      "fair_odds": -123,
-      "prob_edge": 4.0,
-      "edge": "STRONG",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -105
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.244896",
-      "l5_avg": 0.8,
-      "l10_avg": 0.9,
-      "season_avg": 0.57,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 80.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 8,
-      "streak": 0,
-      "last_10_values": [
-        0,
-        1,
-        1,
-        1,
-        1,
-        2,
-        1,
-        0,
-        1,
-        1
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "NYI",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-03-03",
-          "opp": "COL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "CGY",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "WPG",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-25",
-          "opp": "EDM",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-03",
-          "opp": "SEA",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-02-01",
-          "opp": "VGK",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "VAN",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-26",
-          "opp": "EDM",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-25",
-          "opp": "CGY",
-          "val": 1,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 24,
-      "games_played": 61,
-      "avg_toi": 24.38,
-      "position": "D",
-      "game_time": "2026-03-07T02:00:00Z",
-      "game_id": 2025020987,
-      "insight": "80% L10 hit rate, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 69.7,
-      "score_factors": [
-        "80% L10 hit rate",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 6
-    },
-    {
-      "player": "Connor Bedard",
-      "team": "CHI",
-      "opponent": "VAN",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.89,
-      "confidence": 75.4,
-      "ev": 5.63,
-      "diff": 1.39,
-      "market_odds": -250,
-      "fair_odds": -307,
-      "prob_edge": 4.0,
-      "edge": "STRONG",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -250
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.299065",
-      "l5_avg": 0.8,
-      "l10_avg": 0.9,
-      "season_avg": 1.19,
-      "l5_hit_rate": 60.0,
-      "l10_hit_rate": 70.0,
-      "l5_hit_count": 3,
-      "l10_hit_count": 7,
-      "streak": 1,
-      "last_10_values": [
-        2,
-        0,
-        1,
-        1,
-        0,
-        1,
-        2,
-        1,
-        1,
-        0
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-03",
-          "opp": "WPG",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "UTA",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "COL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "NSH",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "CBJ",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "SJS",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-30",
-          "opp": "CBJ",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "PIT",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "MIN",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-25",
-          "opp": "FLA",
-          "val": 0,
-          "hit": false
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 32,
-      "games_played": 48,
-      "avg_toi": 20.88,
-      "position": "C",
-      "game_time": "2026-03-07T01:30:00Z",
-      "game_id": 2025020985,
-      "insight": "70% L10 hit rate, Favorable matchup, +1.4 edge",
-      "insight_strength": "high",
-      "pick_score": 68.1,
-      "score_factors": [
-        "70% L10 hit rate",
-        "Favorable matchup",
-        "+1.4 edge"
-      ],
-      "top_pick_rank": 7
     },
     {
       "player": "Nick Suzuki",
@@ -867,10 +630,11 @@
       "edge": "STRONG",
       "best_book": "MGM",
       "book_odds": {
+        "DK": -162,
         "MGM": -160
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.409336",
+      "generated_at": "2026-03-06T14:36:16.924886",
       "l5_avg": 0.8,
       "l10_avg": 1.0,
       "season_avg": 0.83,
@@ -968,6 +732,248 @@
         "70% L10 hit rate",
         "Favorable matchup"
       ],
+      "top_pick_rank": 6
+    },
+    {
+      "player": "Beckett Sennecke",
+      "team": "ANA",
+      "opponent": "MTL",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 1.33,
+      "confidence": 64.5,
+      "ev": 6.41,
+      "diff": 0.83,
+      "market_odds": -154,
+      "fair_odds": -182,
+      "prob_edge": 3.9,
+      "edge": "STRONG",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -154,
+        "MGM": -155
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.762836",
+      "l5_avg": 1.4,
+      "l10_avg": 1.3,
+      "season_avg": 0.84,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 70.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "streak": 1,
+      "last_10_values": [
+        2,
+        0,
+        1,
+        3,
+        1,
+        0,
+        1,
+        0,
+        2,
+        3
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "NYI",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-03-03",
+          "opp": "COL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "CGY",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-27",
+          "opp": "WPG",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-02-25",
+          "opp": "EDM",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-03",
+          "opp": "SEA",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-01",
+          "opp": "VGK",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "VAN",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-26",
+          "opp": "EDM",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-25",
+          "opp": "CGY",
+          "val": 3,
+          "hit": true
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 24,
+      "games_played": 61,
+      "avg_toi": 17.5,
+      "position": "R",
+      "game_time": "2026-03-07T02:00:00Z",
+      "game_id": 2025020987,
+      "insight": "70% L10 hit rate, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 67.2,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 7
+    },
+    {
+      "player": "Teuvo Teravainen",
+      "team": "CHI",
+      "opponent": "VAN",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 0.99,
+      "confidence": 55.5,
+      "ev": 5.97,
+      "diff": 0.49,
+      "market_odds": -110,
+      "fair_odds": -125,
+      "prob_edge": 3.1,
+      "edge": "STRONG",
+      "best_book": "MGM",
+      "book_odds": {
+        "DK": -125,
+        "MGM": -110
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.792734",
+      "l5_avg": 1.0,
+      "l10_avg": 0.7,
+      "season_avg": 0.52,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 60.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 6,
+      "streak": 4,
+      "last_10_values": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-03",
+          "opp": "WPG",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "UTA",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-02-28",
+          "opp": "COL",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "NSH",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "CBJ",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "SJS",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-30",
+          "opp": "CBJ",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "PIT",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "MIN",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-12",
+          "opp": "EDM",
+          "val": 0,
+          "hit": false
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 32,
+      "games_played": 54,
+      "avg_toi": 18.13,
+      "position": "C",
+      "game_time": "2026-03-07T01:30:00Z",
+      "game_id": 2025020985,
+      "insight": "4-game streak, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 66.8,
+      "score_factors": [
+        "4-game streak",
+        "Favorable matchup"
+      ],
       "top_pick_rank": 8
     },
     {
@@ -985,12 +991,13 @@
       "fair_odds": -218,
       "prob_edge": 5.0,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -175,
         "MGM": -175
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.448974",
+      "generated_at": "2026-03-06T14:36:16.960078",
       "l5_avg": 1.6,
       "l10_avg": 2.5,
       "season_avg": 1.84,
@@ -1091,126 +1098,6 @@
       "top_pick_rank": 9
     },
     {
-      "player": "Beckett Sennecke",
-      "team": "ANA",
-      "opponent": "MTL",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.33,
-      "confidence": 65.2,
-      "ev": 5.87,
-      "diff": 0.83,
-      "market_odds": -160,
-      "fair_odds": -187,
-      "prob_edge": 3.7,
-      "edge": "STRONG",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -160
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.255898",
-      "l5_avg": 1.4,
-      "l10_avg": 1.3,
-      "season_avg": 0.84,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 70.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 7,
-      "streak": 1,
-      "last_10_values": [
-        2,
-        0,
-        1,
-        3,
-        1,
-        0,
-        1,
-        0,
-        2,
-        3
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "NYI",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-03",
-          "opp": "COL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "CGY",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "WPG",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-02-25",
-          "opp": "EDM",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-03",
-          "opp": "SEA",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-01",
-          "opp": "VGK",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "VAN",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-26",
-          "opp": "EDM",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-25",
-          "opp": "CGY",
-          "val": 3,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 24,
-      "games_played": 61,
-      "avg_toi": 17.5,
-      "position": "R",
-      "game_time": "2026-03-07T02:00:00Z",
-      "game_id": 2025020987,
-      "insight": "70% L10 hit rate, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 66.5,
-      "score_factors": [
-        "70% L10 hit rate",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 10
-    },
-    {
       "player": "Quinn Hughes",
       "team": "MIN",
       "opponent": "VGK",
@@ -1218,19 +1105,20 @@
       "direction": "OVER",
       "line": 0.5,
       "projection": 1.49,
-      "confidence": 66.8,
-      "ev": 7.28,
+      "confidence": 67.8,
+      "ev": 6.47,
       "diff": 0.99,
-      "market_odds": -165,
-      "fair_odds": -201,
-      "prob_edge": 4.5,
+      "market_odds": -175,
+      "fair_odds": -211,
+      "prob_edge": 4.2,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
-        "MGM": -165
+        "DK": -175,
+        "MGM": -175
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.395364",
+      "generated_at": "2026-03-06T14:36:16.910161",
       "l5_avg": 1.2,
       "l10_avg": 1.4,
       "season_avg": 1.09,
@@ -1327,7 +1215,7 @@
       "score_factors": [
         "90% L10 hit rate"
       ],
-      "top_pick_rank": 11
+      "top_pick_rank": 10
     },
     {
       "player": "Nathan MacKinnon",
@@ -1350,7 +1238,7 @@
         "MGM": -185
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.310410",
+      "generated_at": "2026-03-06T14:36:16.822740",
       "l5_avg": 1.6,
       "l10_avg": 1.0,
       "season_avg": 1.0,
@@ -1449,7 +1337,7 @@
         "5-game streak",
         "Tough matchup"
       ],
-      "top_pick_rank": 12
+      "top_pick_rank": 11
     },
     {
       "player": "Cutter Gauthier",
@@ -1459,19 +1347,20 @@
       "direction": "OVER",
       "line": 0.5,
       "projection": 1.27,
-      "confidence": 67.0,
-      "ev": 3.29,
+      "confidence": 67.3,
+      "ev": 3.1,
       "diff": 0.77,
-      "market_odds": -185,
-      "fair_odds": -203,
-      "prob_edge": 2.1,
+      "market_odds": -188,
+      "fair_odds": -206,
+      "prob_edge": 2.0,
       "edge": "GOOD",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
-        "MGM": -185
+        "DK": -188,
+        "MGM": -190
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.251555",
+      "generated_at": "2026-03-06T14:36:16.754604",
       "l5_avg": 1.2,
       "l10_avg": 1.0,
       "season_avg": 0.92,
@@ -1564,66 +1453,67 @@
       "game_id": 2025020987,
       "insight": "80% L10 hit rate, 3-game streak, Favorable matchup",
       "insight_strength": "high",
-      "pick_score": 63.3,
+      "pick_score": 62.4,
       "score_factors": [
         "80% L10 hit rate",
         "3-game streak",
         "Favorable matchup"
       ],
-      "top_pick_rank": 13
+      "top_pick_rank": 12
     },
     {
-      "player": "Cole Caufield",
+      "player": "Brendan Gallagher",
       "team": "MTL",
       "opponent": "ANA",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.52,
-      "confidence": 69.3,
-      "ev": 5.77,
-      "diff": 1.02,
-      "market_odds": -190,
-      "fair_odds": -226,
-      "prob_edge": 3.8,
+      "prop": "SHOTS",
+      "direction": "UNDER",
+      "line": 1.5,
+      "projection": 1.15,
+      "confidence": 59.8,
+      "ev": 5.82,
+      "diff": -0.35,
+      "market_odds": -130,
+      "fair_odds": -149,
+      "prob_edge": 3.3,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
-        "MGM": -190
+        "DK": 100,
+        "MGM": -105
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.415869",
-      "l5_avg": 0.6,
-      "l10_avg": 1.1,
-      "season_avg": 1.0,
-      "l5_hit_rate": 40.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 2,
-      "l10_hit_count": 6,
+      "generated_at": "2026-03-06T14:36:16.917615",
+      "l5_avg": 1.4,
+      "l10_avg": 1.2,
+      "season_avg": 1.65,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 70.0,
+      "l5_hit_count": 3,
+      "l10_hit_count": 7,
       "streak": 0,
       "last_10_values": [
+        3,
         0,
+        1,
+        1,
         2,
-        1,
         0,
-        0,
-        3,
         0,
         1,
-        3,
-        1
+        1,
+        3
       ],
       "last_10_games": [
         {
           "date": "2026-03-03",
           "opp": "SJS",
-          "val": 0,
+          "val": 3,
           "hit": false
         },
         {
           "date": "2026-02-28",
           "opp": "WSH",
-          "val": 2,
+          "val": 0,
           "hit": true
         },
         {
@@ -1635,26 +1525,26 @@
         {
           "date": "2026-02-04",
           "opp": "WPG",
-          "val": 0,
-          "hit": false
+          "val": 1,
+          "hit": true
         },
         {
           "date": "2026-02-02",
           "opp": "MIN",
-          "val": 0,
+          "val": 2,
           "hit": false
         },
         {
           "date": "2026-01-31",
           "opp": "BUF",
-          "val": 3,
+          "val": 0,
           "hit": true
         },
         {
           "date": "2026-01-29",
           "opp": "COL",
           "val": 0,
-          "hit": false
+          "hit": true
         },
         {
           "date": "2026-01-27",
@@ -1665,32 +1555,32 @@
         {
           "date": "2026-01-24",
           "opp": "BOS",
-          "val": 3,
+          "val": 1,
           "hit": true
         },
         {
           "date": "2026-01-22",
           "opp": "BUF",
-          "val": 1,
-          "hit": true
+          "val": 3,
+          "hit": false
         }
       ],
       "l10_median": 1.0,
       "matchup_favorability": "favorable",
       "opp_def_rank": 29,
       "games_played": 60,
-      "avg_toi": 18.27,
+      "avg_toi": 12.78,
       "position": "R",
       "game_time": "2026-03-07T02:00:00Z",
       "game_id": 2025020987,
-      "insight": "Favorable matchup, +1.0 edge",
+      "insight": "70% L10 hit rate, Favorable matchup",
       "insight_strength": "high",
-      "pick_score": 62.9,
+      "pick_score": 62.1,
       "score_factors": [
-        "Favorable matchup",
-        "+1.0 edge"
+        "70% L10 hit rate",
+        "Favorable matchup"
       ],
-      "top_pick_rank": 14
+      "top_pick_rank": 13
     },
     {
       "player": "Tyler Bertuzzi",
@@ -1707,12 +1597,13 @@
       "fair_odds": -138,
       "prob_edge": 3.5,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -120,
         "MGM": -120
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.286336",
+      "generated_at": "2026-03-06T14:36:16.796964",
       "l5_avg": 0.6,
       "l10_avg": 0.7,
       "season_avg": 0.78,
@@ -1809,127 +1700,7 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 15
-    },
-    {
-      "player": "Mason McTavish",
-      "team": "ANA",
-      "opponent": "MTL",
-      "prop": "SHOTS",
-      "direction": "UNDER",
-      "line": 2.5,
-      "projection": 1.81,
-      "confidence": 67.9,
-      "ev": 3.67,
-      "diff": -0.69,
-      "market_odds": -190,
-      "fair_odds": -212,
-      "prob_edge": 2.4,
-      "edge": "GOOD",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": 140
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.247564",
-      "l5_avg": 1.2,
-      "l10_avg": 2.1,
-      "season_avg": 2.05,
-      "l5_hit_rate": 100.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 5,
-      "l10_hit_count": 6,
-      "streak": 5,
-      "last_10_values": [
-        2,
-        2,
-        0,
-        1,
-        1,
-        3,
-        3,
-        4,
-        4,
-        1
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "NYI",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-03",
-          "opp": "COL",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "CGY",
-          "val": 0,
-          "hit": true
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "WPG",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-25",
-          "opp": "EDM",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-03",
-          "opp": "SEA",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "2026-02-01",
-          "opp": "VGK",
-          "val": 3,
-          "hit": false
-        },
-        {
-          "date": "2026-01-19",
-          "opp": "NYR",
-          "val": 4,
-          "hit": false
-        },
-        {
-          "date": "2026-01-17",
-          "opp": "LAK",
-          "val": 4,
-          "hit": false
-        },
-        {
-          "date": "2026-01-16",
-          "opp": "LAK",
-          "val": 1,
-          "hit": true
-        }
-      ],
-      "l10_median": 2.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 24,
-      "games_played": 56,
-      "avg_toi": 16.15,
-      "position": "C",
-      "game_time": "2026-03-07T02:00:00Z",
-      "game_id": 2025020987,
-      "insight": "5-game streak, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 60.8,
-      "score_factors": [
-        "5-game streak",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 16
+      "top_pick_rank": 14
     },
     {
       "player": "Justin Faulk",
@@ -1939,19 +1710,20 @@
       "direction": "OVER",
       "line": 1.5,
       "projection": 2.08,
-      "confidence": 68.6,
-      "ev": 4.67,
+      "confidence": 67.9,
+      "ev": 5.19,
       "diff": 0.58,
-      "market_odds": -190,
-      "fair_odds": -218,
-      "prob_edge": 3.1,
-      "edge": "GOOD",
-      "best_book": "MGM",
+      "market_odds": -182,
+      "fair_odds": -212,
+      "prob_edge": 3.4,
+      "edge": "STRONG",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -182,
         "MGM": -190
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.444826",
+      "generated_at": "2026-03-06T14:36:16.955700",
       "l5_avg": 1.6,
       "l10_avg": 2.0,
       "season_avg": 1.9,
@@ -2044,9 +1816,251 @@
       "game_id": 2025020989,
       "insight": "70% L10 hit rate, Favorable matchup",
       "insight_strength": "high",
-      "pick_score": 59.2,
+      "pick_score": 61.9,
       "score_factors": [
         "70% L10 hit rate",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 15
+    },
+    {
+      "player": "Mason McTavish",
+      "team": "ANA",
+      "opponent": "MTL",
+      "prop": "SHOTS",
+      "direction": "UNDER",
+      "line": 2.5,
+      "projection": 1.81,
+      "confidence": 67.8,
+      "ev": 3.81,
+      "diff": -0.69,
+      "market_odds": -188,
+      "fair_odds": -211,
+      "prob_edge": 2.5,
+      "edge": "GOOD",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": 145,
+        "MGM": 140
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.746877",
+      "l5_avg": 1.2,
+      "l10_avg": 2.1,
+      "season_avg": 2.05,
+      "l5_hit_rate": 100.0,
+      "l10_hit_rate": 60.0,
+      "l5_hit_count": 5,
+      "l10_hit_count": 6,
+      "streak": 5,
+      "last_10_values": [
+        2,
+        2,
+        0,
+        1,
+        1,
+        3,
+        3,
+        4,
+        4,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "NYI",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-03-03",
+          "opp": "COL",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "CGY",
+          "val": 0,
+          "hit": true
+        },
+        {
+          "date": "2026-02-27",
+          "opp": "WPG",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-25",
+          "opp": "EDM",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-03",
+          "opp": "SEA",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "2026-02-01",
+          "opp": "VGK",
+          "val": 3,
+          "hit": false
+        },
+        {
+          "date": "2026-01-19",
+          "opp": "NYR",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2026-01-17",
+          "opp": "LAK",
+          "val": 4,
+          "hit": false
+        },
+        {
+          "date": "2026-01-16",
+          "opp": "LAK",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "l10_median": 2.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 24,
+      "games_played": 56,
+      "avg_toi": 16.15,
+      "position": "C",
+      "game_time": "2026-03-07T02:00:00Z",
+      "game_id": 2025020987,
+      "insight": "5-game streak, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 61.5,
+      "score_factors": [
+        "5-game streak",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 16
+    },
+    {
+      "player": "Marco Kasper",
+      "team": "DET",
+      "opponent": "FLA",
+      "prop": "SHOTS",
+      "direction": "OVER",
+      "line": 1.5,
+      "projection": 1.79,
+      "confidence": 59.3,
+      "ev": 4.89,
+      "diff": 0.29,
+      "market_odds": -130,
+      "fair_odds": -146,
+      "prob_edge": 2.8,
+      "edge": "GOOD",
+      "best_book": "MGM",
+      "book_odds": {
+        "DK": -135,
+        "MGM": -130
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.877067",
+      "l5_avg": 2.0,
+      "l10_avg": 2.1,
+      "season_avg": 1.61,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 80.0,
+      "l5_hit_count": 3,
+      "l10_hit_count": 8,
+      "streak": 0,
+      "last_10_values": [
+        1,
+        1,
+        2,
+        2,
+        4,
+        2,
+        2,
+        2,
+        2,
+        3
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "VGK",
+          "val": 1,
+          "hit": false
+        },
+        {
+          "date": "2026-03-02",
+          "opp": "NSH",
+          "val": 1,
+          "hit": false
+        },
+        {
+          "date": "2026-02-28",
+          "opp": "CAR",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "OTT",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "UTA",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "COL",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "COL",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "WSH",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "LAK",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-24",
+          "opp": "WPG",
+          "val": 3,
+          "hit": true
+        }
+      ],
+      "l10_median": 2.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 25,
+      "games_played": 61,
+      "avg_toi": 13.8,
+      "position": "C",
+      "game_time": "2026-03-07T00:00:00Z",
+      "game_id": 2025020983,
+      "insight": "80% L10 hit rate, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 61.5,
+      "score_factors": [
+        "80% L10 hit rate",
         "Favorable matchup"
       ],
       "top_pick_rank": 17
@@ -2059,19 +2073,20 @@
       "direction": "UNDER",
       "line": 0.5,
       "projection": 0.19,
-      "confidence": 68.6,
-      "ev": 2.85,
+      "confidence": 68.4,
+      "ev": 2.97,
       "diff": -0.31,
-      "market_odds": -200,
-      "fair_odds": -218,
-      "prob_edge": 1.9,
+      "market_odds": -198,
+      "fair_odds": -216,
+      "prob_edge": 2.0,
       "edge": "GOOD",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": 150,
         "MGM": 150
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.477109",
+      "generated_at": "2026-03-06T14:36:16.991816",
       "l5_avg": null,
       "l10_avg": null,
       "season_avg": 0.12,
@@ -2164,7 +2179,7 @@
       "game_id": 2025020985,
       "insight": "100% L10 hit rate, 10-game streak",
       "insight_strength": "high",
-      "pick_score": 59.2,
+      "pick_score": 59.9,
       "score_factors": [
         "100% L10 hit rate",
         "10-game streak"
@@ -2192,7 +2207,7 @@
         "MGM": -185
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.358224",
+      "generated_at": "2026-03-06T14:36:16.870813",
       "l5_avg": 1.4,
       "l10_avg": 1.6,
       "season_avg": 2.08,
@@ -2292,122 +2307,123 @@
       "top_pick_rank": 19
     },
     {
-      "player": "Marco Kasper",
-      "team": "DET",
-      "opponent": "FLA",
-      "prop": "SHOTS",
+      "player": "Will Smith",
+      "team": "SJS",
+      "opponent": "STL",
+      "prop": "POINTS",
       "direction": "OVER",
-      "line": 1.5,
-      "projection": 1.79,
-      "confidence": 59.9,
-      "ev": 4.33,
-      "diff": 0.29,
-      "market_odds": -135,
-      "fair_odds": -149,
-      "prob_edge": 2.5,
+      "line": 0.5,
+      "projection": 1.19,
+      "confidence": 66.1,
+      "ev": 2.39,
+      "diff": 0.69,
+      "market_odds": -182,
+      "fair_odds": -195,
+      "prob_edge": 1.6,
       "edge": "GOOD",
       "best_book": "DK",
       "book_odds": {
-        "DK": -135,
-        "MGM": -140
+        "DK": -182,
+        "MGM": -185
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.364365",
-      "l5_avg": 2.0,
-      "l10_avg": 2.1,
-      "season_avg": 1.61,
+      "generated_at": "2026-03-06T14:36:16.947054",
+      "l5_avg": 0.8,
+      "l10_avg": 1.2,
+      "season_avg": 0.94,
       "l5_hit_rate": 60.0,
       "l10_hit_rate": 80.0,
       "l5_hit_count": 3,
       "l10_hit_count": 8,
-      "streak": 0,
+      "streak": 3,
       "last_10_values": [
+        2,
         1,
         1,
-        2,
-        2,
-        4,
-        2,
-        2,
-        2,
-        2,
-        3
+        0,
+        0,
+        1,
+        1,
+        1,
+        3,
+        2
       ],
       "last_10_games": [
         {
-          "date": "2026-03-04",
-          "opp": "VGK",
-          "val": 1,
-          "hit": false
+          "date": "2026-03-03",
+          "opp": "MTL",
+          "val": 2,
+          "hit": true
         },
         {
-          "date": "2026-03-02",
-          "opp": "NSH",
+          "date": "2026-03-01",
+          "opp": "WPG",
           "val": 1,
-          "hit": false
+          "hit": true
         },
         {
           "date": "2026-02-28",
-          "opp": "CAR",
-          "val": 2,
+          "opp": "EDM",
+          "val": 1,
           "hit": true
         },
         {
           "date": "2026-02-26",
-          "opp": "OTT",
-          "val": 2,
-          "hit": true
+          "opp": "CGY",
+          "val": 0,
+          "hit": false
         },
         {
           "date": "2026-02-04",
-          "opp": "UTA",
-          "val": 4,
-          "hit": true
+          "opp": "COL",
+          "val": 0,
+          "hit": false
         },
         {
           "date": "2026-02-02",
-          "opp": "COL",
-          "val": 2,
+          "opp": "CHI",
+          "val": 1,
           "hit": true
         },
         {
           "date": "2026-01-31",
-          "opp": "COL",
-          "val": 2,
+          "opp": "CGY",
+          "val": 1,
           "hit": true
         },
         {
           "date": "2026-01-29",
-          "opp": "WSH",
-          "val": 2,
+          "opp": "EDM",
+          "val": 1,
           "hit": true
         },
         {
           "date": "2026-01-27",
-          "opp": "LAK",
-          "val": 2,
+          "opp": "VAN",
+          "val": 3,
           "hit": true
         },
         {
-          "date": "2026-01-24",
-          "opp": "WPG",
-          "val": 3,
+          "date": "2026-01-23",
+          "opp": "NYR",
+          "val": 2,
           "hit": true
         }
       ],
-      "l10_median": 2.0,
+      "l10_median": 1.0,
       "matchup_favorability": "favorable",
-      "opp_def_rank": 25,
-      "games_played": 61,
-      "avg_toi": 13.8,
+      "opp_def_rank": 28,
+      "games_played": 46,
+      "avg_toi": 18.15,
       "position": "C",
-      "game_time": "2026-03-07T00:00:00Z",
-      "game_id": 2025020983,
-      "insight": "80% L10 hit rate, Favorable matchup",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020989,
+      "insight": "80% L10 hit rate, 3-game streak, Favorable matchup",
       "insight_strength": "high",
-      "pick_score": 58.6,
+      "pick_score": 58.4,
       "score_factors": [
         "80% L10 hit rate",
+        "3-game streak",
         "Favorable matchup"
       ],
       "top_pick_rank": 20
@@ -2433,7 +2449,7 @@
         "MGM": -145
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.278512",
+      "generated_at": "2026-03-06T14:36:16.788902",
       "l5_avg": 2.0,
       "l10_avg": 1.8,
       "season_avg": 1.97,
@@ -2541,20 +2557,20 @@
       "direction": "OVER",
       "line": 2.5,
       "projection": 3.09,
-      "confidence": 59.4,
-      "ev": 6.9,
+      "confidence": 60.1,
+      "ev": 6.27,
       "diff": 0.59,
-      "market_odds": -125,
-      "fair_odds": -146,
-      "prob_edge": 3.8,
+      "market_odds": -130,
+      "fair_odds": -151,
+      "prob_edge": 3.6,
       "edge": "STRONG",
       "best_book": "DK",
       "book_odds": {
-        "DK": -125,
-        "MGM": -130
+        "DK": -130,
+        "MGM": -140
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.375326",
+      "generated_at": "2026-03-06T14:36:16.888529",
       "l5_avg": 3.2,
       "l10_avg": 2.3,
       "season_avg": 2.63,
@@ -2654,247 +2670,6 @@
       "top_pick_rank": 22
     },
     {
-      "player": "Will Smith",
-      "team": "SJS",
-      "opponent": "STL",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.19,
-      "confidence": 66.3,
-      "ev": 2.2,
-      "diff": 0.69,
-      "market_odds": -185,
-      "fair_odds": -197,
-      "prob_edge": 1.4,
-      "edge": "GOOD",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -185
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.436582",
-      "l5_avg": 0.8,
-      "l10_avg": 1.2,
-      "season_avg": 0.94,
-      "l5_hit_rate": 60.0,
-      "l10_hit_rate": 80.0,
-      "l5_hit_count": 3,
-      "l10_hit_count": 8,
-      "streak": 3,
-      "last_10_values": [
-        2,
-        1,
-        1,
-        0,
-        0,
-        1,
-        1,
-        1,
-        3,
-        2
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-03",
-          "opp": "MTL",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "WPG",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "EDM",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "CGY",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "COL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "CHI",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "CGY",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "EDM",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "VAN",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-23",
-          "opp": "NYR",
-          "val": 2,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 28,
-      "games_played": 46,
-      "avg_toi": 18.15,
-      "position": "C",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020989,
-      "insight": "80% L10 hit rate, 3-game streak, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 57.5,
-      "score_factors": [
-        "80% L10 hit rate",
-        "3-game streak",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 23
-    },
-    {
-      "player": "Teuvo Teravainen",
-      "team": "CHI",
-      "opponent": "VAN",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 0.99,
-      "confidence": 53.8,
-      "ev": 7.69,
-      "diff": 0.49,
-      "market_odds": 100,
-      "fair_odds": -116,
-      "prob_edge": 3.8,
-      "edge": "STRONG",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": 100
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.282231",
-      "l5_avg": 1.0,
-      "l10_avg": 0.7,
-      "season_avg": 0.52,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 6,
-      "streak": 4,
-      "last_10_values": [
-        1,
-        2,
-        1,
-        1,
-        0,
-        1,
-        0,
-        0,
-        1,
-        0
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-03",
-          "opp": "WPG",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "UTA",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "COL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "NSH",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "CBJ",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "SJS",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-30",
-          "opp": "CBJ",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "PIT",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "MIN",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-12",
-          "opp": "EDM",
-          "val": 0,
-          "hit": false
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 32,
-      "games_played": 54,
-      "avg_toi": 18.13,
-      "position": "C",
-      "game_time": "2026-03-07T01:30:00Z",
-      "game_id": 2025020985,
-      "insight": "4-game streak, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 57.0,
-      "score_factors": [
-        "4-game streak",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 24
-    },
-    {
       "player": "Valeri Nichushkin",
       "team": "COL",
       "opponent": "DAL",
@@ -2915,7 +2690,7 @@
         "MGM": 145
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.311382",
+      "generated_at": "2026-03-06T14:36:16.823732",
       "l5_avg": 1.6,
       "l10_avg": 1.5,
       "season_avg": 2.25,
@@ -3014,7 +2789,128 @@
         "3-game streak",
         "Tough matchup"
       ],
-      "top_pick_rank": 25
+      "top_pick_rank": 23
+    },
+    {
+      "player": "Robert Thomas",
+      "team": "STL",
+      "opponent": "SJS",
+      "prop": "SHOTS",
+      "direction": "OVER",
+      "line": 1.5,
+      "projection": 1.76,
+      "confidence": 58.2,
+      "ev": 4.78,
+      "diff": 0.26,
+      "market_odds": -125,
+      "fair_odds": -139,
+      "prob_edge": 2.6,
+      "edge": "GOOD",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -125,
+        "MGM": -130
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.965395",
+      "l5_avg": 1.6,
+      "l10_avg": 1.2,
+      "season_avg": 1.48,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 40.0,
+      "l5_hit_count": 3,
+      "l10_hit_count": 4,
+      "streak": 3,
+      "last_10_values": [
+        2,
+        3,
+        2,
+        0,
+        1,
+        2,
+        0,
+        0,
+        1,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "SEA",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "MIN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-10",
+          "opp": "VGK",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-09",
+          "opp": "UTA",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-07",
+          "opp": "CHI",
+          "val": 1,
+          "hit": false
+        },
+        {
+          "date": "2026-01-03",
+          "opp": "MTL",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-02",
+          "opp": "VGK",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2025-12-31",
+          "opp": "COL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2025-12-29",
+          "opp": "BUF",
+          "val": 1,
+          "hit": false
+        },
+        {
+          "date": "2025-12-27",
+          "opp": "NSH",
+          "val": 1,
+          "hit": false
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 31,
+      "games_played": 44,
+      "avg_toi": 18.87,
+      "position": "C",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020989,
+      "insight": "3-game streak, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 54.9,
+      "score_factors": [
+        "3-game streak",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 24
     },
     {
       "player": "Sean Walker",
@@ -3034,10 +2930,10 @@
       "best_book": "DK",
       "book_odds": {
         "DK": -130,
-        "MGM": -135
+        "MGM": -130
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.270550",
+      "generated_at": "2026-03-06T14:36:16.779965",
       "l5_avg": 1.6,
       "l10_avg": 1.3,
       "season_avg": 2.12,
@@ -3134,7 +3030,7 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 26
+      "top_pick_rank": 25
     },
     {
       "player": "Alexander Wennberg",
@@ -3151,12 +3047,13 @@
       "fair_odds": -124,
       "prob_edge": 3.0,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -110,
         "MGM": -110
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.424033",
+      "generated_at": "2026-03-06T14:36:16.933967",
       "l5_avg": 0.6,
       "l10_avg": 0.5,
       "season_avg": 0.66,
@@ -3253,7 +3150,7 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 27
+      "top_pick_rank": 26
     },
     {
       "player": "Dylan Larkin",
@@ -3276,7 +3173,7 @@
         "MGM": -165
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.352457",
+      "generated_at": "2026-03-06T14:36:16.865955",
       "l5_avg": 0.8,
       "l10_avg": 0.7,
       "season_avg": 0.87,
@@ -3373,7 +3270,7 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 28
+      "top_pick_rank": 27
     },
     {
       "player": "Seth Jarvis",
@@ -3396,7 +3293,7 @@
         "MGM": -190
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.277219",
+      "generated_at": "2026-03-06T14:36:16.787585",
       "l5_avg": 1.0,
       "l10_avg": 1.1,
       "season_avg": 0.91,
@@ -3494,127 +3391,127 @@
         "70% L10 hit rate",
         "Favorable matchup"
       ],
-      "top_pick_rank": 29
+      "top_pick_rank": 28
     },
     {
-      "player": "Robert Thomas",
-      "team": "STL",
-      "opponent": "SJS",
-      "prop": "SHOTS",
+      "player": "Connor Bedard",
+      "team": "CHI",
+      "opponent": "VAN",
+      "prop": "ASSISTS",
       "direction": "OVER",
-      "line": 1.5,
-      "projection": 1.76,
-      "confidence": 58.9,
-      "ev": 4.19,
-      "diff": 0.26,
-      "market_odds": -130,
-      "fair_odds": -143,
-      "prob_edge": 2.4,
-      "edge": "GOOD",
+      "line": 0.5,
+      "projection": 0.95,
+      "confidence": 55.1,
+      "ev": 5.21,
+      "diff": 0.45,
+      "market_odds": -110,
+      "fair_odds": -123,
+      "prob_edge": 2.7,
+      "edge": "STRONG",
       "best_book": "MGM",
       "book_odds": {
-        "MGM": -130
+        "DK": -125,
+        "MGM": -110
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.454123",
-      "l5_avg": 1.6,
-      "l10_avg": 1.2,
-      "season_avg": 1.48,
-      "l5_hit_rate": 60.0,
-      "l10_hit_rate": 40.0,
-      "l5_hit_count": 3,
-      "l10_hit_count": 4,
-      "streak": 3,
+      "generated_at": "2026-03-06T14:36:16.809708",
+      "l5_avg": 0.4,
+      "l10_avg": 0.4,
+      "season_avg": 0.67,
+      "l5_hit_rate": 20.0,
+      "l10_hit_rate": 30.0,
+      "l5_hit_count": 1,
+      "l10_hit_count": 3,
+      "streak": 1,
       "last_10_values": [
         2,
-        3,
-        2,
+        0,
+        0,
+        0,
+        0,
         0,
         1,
-        2,
-        0,
         0,
         1,
-        1
+        0
       ],
       "last_10_games": [
         {
-          "date": "2026-03-04",
-          "opp": "SEA",
+          "date": "2026-03-03",
+          "opp": "WPG",
           "val": 2,
           "hit": true
         },
         {
           "date": "2026-03-01",
-          "opp": "MIN",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-10",
-          "opp": "VGK",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-09",
           "opp": "UTA",
           "val": 0,
           "hit": false
         },
         {
-          "date": "2026-01-07",
-          "opp": "CHI",
-          "val": 1,
-          "hit": false
-        },
-        {
-          "date": "2026-01-03",
-          "opp": "MTL",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-02",
-          "opp": "VGK",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2025-12-31",
+          "date": "2026-02-28",
           "opp": "COL",
           "val": 0,
           "hit": false
         },
         {
-          "date": "2025-12-29",
-          "opp": "BUF",
-          "val": 1,
+          "date": "2026-02-26",
+          "opp": "NSH",
+          "val": 0,
           "hit": false
         },
         {
-          "date": "2025-12-27",
-          "opp": "NSH",
+          "date": "2026-02-04",
+          "opp": "CBJ",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "SJS",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-30",
+          "opp": "CBJ",
           "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "PIT",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "MIN",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-25",
+          "opp": "FLA",
+          "val": 0,
           "hit": false
         }
       ],
-      "l10_median": 1.0,
+      "l10_median": 0.0,
       "matchup_favorability": "favorable",
-      "opp_def_rank": 31,
-      "games_played": 44,
-      "avg_toi": 18.87,
+      "opp_def_rank": 32,
+      "games_played": 48,
+      "avg_toi": 20.88,
       "position": "C",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020989,
-      "insight": "3-game streak, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 52.0,
+      "game_time": "2026-03-07T01:30:00Z",
+      "game_id": 2025020985,
+      "insight": "Favorable matchup",
+      "insight_strength": "medium",
+      "pick_score": 51.0,
       "score_factors": [
-        "3-game streak",
         "Favorable matchup"
       ],
-      "top_pick_rank": 30
+      "top_pick_rank": 29
     },
     {
       "player": "Miro Heiskanen",
@@ -3637,7 +3534,7 @@
         "MGM": -125
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.341812",
+      "generated_at": "2026-03-06T14:36:16.856424",
       "l5_avg": 1.2,
       "l10_avg": 1.1,
       "season_avg": 0.85,
@@ -3735,7 +3632,7 @@
         "80% L10 hit rate",
         "Tough matchup"
       ],
-      "top_pick_rank": 31
+      "top_pick_rank": 30
     },
     {
       "player": "Moritz Seider",
@@ -3758,7 +3655,7 @@
         "MGM": -115
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.359590",
+      "generated_at": "2026-03-06T14:36:16.872146",
       "l5_avg": 0.8,
       "l10_avg": 0.6,
       "season_avg": 0.66,
@@ -3855,7 +3752,7 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 32
+      "top_pick_rank": 31
     },
     {
       "player": "Ryan Hartman",
@@ -3865,19 +3762,20 @@
       "direction": "OVER",
       "line": 1.5,
       "projection": 2.01,
-      "confidence": 65.2,
-      "ev": 5.93,
+      "confidence": 64.6,
+      "ev": 6.47,
       "diff": 0.51,
-      "market_odds": -160,
-      "fair_odds": -187,
-      "prob_edge": 3.7,
+      "market_odds": -154,
+      "fair_odds": -182,
+      "prob_edge": 4.0,
       "edge": "STRONG",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -154,
         "MGM": -160
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.387093",
+      "generated_at": "2026-03-06T14:36:16.900894",
       "l5_avg": 2.0,
       "l10_avg": 1.9,
       "season_avg": 2.0,
@@ -3970,9 +3868,251 @@
       "game_id": 2025020988,
       "insight": "",
       "insight_strength": "low",
-      "pick_score": 47.2,
+      "pick_score": 47.5,
       "score_factors": [],
+      "top_pick_rank": 32
+    },
+    {
+      "player": "Ivan Barbashev",
+      "team": "VGK",
+      "opponent": "MIN",
+      "prop": "SHOTS",
+      "direction": "OVER",
+      "line": 1.5,
+      "projection": 2.0,
+      "confidence": 66.6,
+      "ev": 4.6,
+      "diff": 0.5,
+      "market_odds": -175,
+      "fair_odds": -199,
+      "prob_edge": 3.0,
+      "edge": "GOOD",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -175,
+        "MGM": -185
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:17.006727",
+      "l5_avg": 2.0,
+      "l10_avg": 2.3,
+      "season_avg": 1.56,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 80.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 8,
+      "streak": 2,
+      "last_10_values": [
+        3,
+        3,
+        0,
+        2,
+        2,
+        0,
+        3,
+        3,
+        3,
+        4
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "DET",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-03-03",
+          "opp": "BUF",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "PIT",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-27",
+          "opp": "WSH",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-02-25",
+          "opp": "LAK",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-02-05",
+          "opp": "LAK",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "VAN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-02-01",
+          "opp": "ANA",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "SEA",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "DAL",
+          "val": 4,
+          "hit": true
+        }
+      ],
+      "l10_median": 3.0,
+      "matchup_favorability": "unfavorable",
+      "opp_def_rank": 7,
+      "games_played": 62,
+      "avg_toi": 16.23,
+      "position": "L",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020988,
+      "insight": "80% L10 hit rate, Tough matchup",
+      "insight_strength": "high",
+      "pick_score": 47.5,
+      "score_factors": [
+        "80% L10 hit rate",
+        "Tough matchup"
+      ],
       "top_pick_rank": 33
+    },
+    {
+      "player": "Jordan Kyrou",
+      "team": "STL",
+      "opponent": "SJS",
+      "prop": "SHOTS",
+      "direction": "OVER",
+      "line": 2.5,
+      "projection": 2.9,
+      "confidence": 60.8,
+      "ev": 1.92,
+      "diff": 0.4,
+      "market_odds": -148,
+      "fair_odds": -155,
+      "prob_edge": 1.1,
+      "edge": "FAIR",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -148,
+        "MGM": -150
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.963603",
+      "l5_avg": 2.6,
+      "l10_avg": 3.2,
+      "season_avg": 2.59,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 80.0,
+      "l5_hit_count": 3,
+      "l10_hit_count": 8,
+      "streak": 0,
+      "last_10_values": [
+        2,
+        3,
+        0,
+        4,
+        4,
+        3,
+        6,
+        3,
+        3,
+        4
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "SEA",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "MIN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-02-28",
+          "opp": "NJD",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "SEA",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "DAL",
+          "val": 4,
+          "hit": true
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "NSH",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "CBJ",
+          "val": 6,
+          "hit": true
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "FLA",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "DAL",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-24",
+          "opp": "LAK",
+          "val": 4,
+          "hit": true
+        }
+      ],
+      "l10_median": 3.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 31,
+      "games_played": 51,
+      "avg_toi": 16.2,
+      "position": "R",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020989,
+      "insight": "80% L10 hit rate, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 46.6,
+      "score_factors": [
+        "80% L10 hit rate",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 34
     },
     {
       "player": "Andrei Svechnikov",
@@ -3995,7 +4135,7 @@
         "MGM": -165
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.275489",
+      "generated_at": "2026-03-06T14:36:16.785823",
       "l5_avg": 1.0,
       "l10_avg": 1.1,
       "season_avg": 0.87,
@@ -4093,7 +4233,128 @@
         "70% L10 hit rate",
         "Favorable matchup"
       ],
-      "top_pick_rank": 34
+      "top_pick_rank": 35
+    },
+    {
+      "player": "Nikolaj Ehlers",
+      "team": "CAR",
+      "opponent": "EDM",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 0.9,
+      "confidence": 56.0,
+      "ev": 2.64,
+      "diff": 0.4,
+      "market_odds": -120,
+      "fair_odds": -127,
+      "prob_edge": 1.5,
+      "edge": "GOOD",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -120,
+        "MGM": -120
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.776870",
+      "l5_avg": 1.2,
+      "l10_avg": 0.9,
+      "season_avg": 0.79,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 70.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "streak": 2,
+      "last_10_values": [
+        3,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "VAN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-03-02",
+          "opp": "SEA",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-28",
+          "opp": "DET",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "TBL",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-05",
+          "opp": "NYR",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-03",
+          "opp": "OTT",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-01",
+          "opp": "LAK",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "WSH",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "UTA",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-24",
+          "opp": "OTT",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 26,
+      "games_played": 61,
+      "avg_toi": 16.68,
+      "position": "L",
+      "game_time": "2026-03-07T02:00:00Z",
+      "game_id": 2025020986,
+      "insight": "70% L10 hit rate, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 46.2,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 36
     },
     {
       "player": "Alex DeBrincat",
@@ -4116,7 +4377,7 @@
         "MGM": -200
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.356128",
+      "generated_at": "2026-03-06T14:36:16.868609",
       "l5_avg": 1.0,
       "l10_avg": 1.0,
       "season_avg": 1.0,
@@ -4214,127 +4475,7 @@
         "3-game streak",
         "Favorable matchup"
       ],
-      "top_pick_rank": 35
-    },
-    {
-      "player": "Jordan Kyrou",
-      "team": "STL",
-      "opponent": "SJS",
-      "prop": "SHOTS",
-      "direction": "OVER",
-      "line": 2.5,
-      "projection": 2.9,
-      "confidence": 61.0,
-      "ev": 1.74,
-      "diff": 0.4,
-      "market_odds": -150,
-      "fair_odds": -156,
-      "prob_edge": 1.0,
-      "edge": "FAIR",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -150
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.452402",
-      "l5_avg": 2.6,
-      "l10_avg": 3.2,
-      "season_avg": 2.59,
-      "l5_hit_rate": 60.0,
-      "l10_hit_rate": 80.0,
-      "l5_hit_count": 3,
-      "l10_hit_count": 8,
-      "streak": 0,
-      "last_10_values": [
-        2,
-        3,
-        0,
-        4,
-        4,
-        3,
-        6,
-        3,
-        3,
-        4
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "SEA",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "MIN",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "NJD",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "SEA",
-          "val": 4,
-          "hit": true
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "DAL",
-          "val": 4,
-          "hit": true
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "NSH",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "CBJ",
-          "val": 6,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "FLA",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "DAL",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-24",
-          "opp": "LAK",
-          "val": 4,
-          "hit": true
-        }
-      ],
-      "l10_median": 3.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 31,
-      "games_played": 51,
-      "avg_toi": 16.2,
-      "position": "R",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020989,
-      "insight": "80% L10 hit rate, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 45.7,
-      "score_factors": [
-        "80% L10 hit rate",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 36
+      "top_pick_rank": 37
     },
     {
       "player": "Andrei Svechnikov",
@@ -4354,10 +4495,10 @@
       "best_book": "DK",
       "book_odds": {
         "DK": -105,
-        "MGM": -110
+        "MGM": -105
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.274093",
+      "generated_at": "2026-03-06T14:36:16.784471",
       "l5_avg": 2.8,
       "l10_avg": 2.4,
       "season_avg": 2.67,
@@ -4454,367 +4595,7 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 37
-    },
-    {
-      "player": "Connor Bedard",
-      "team": "CHI",
-      "opponent": "VAN",
-      "prop": "ASSISTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 0.95,
-      "confidence": 53.4,
-      "ev": 6.89,
-      "diff": 0.45,
-      "market_odds": 100,
-      "fair_odds": -115,
-      "prob_edge": 3.4,
-      "edge": "STRONG",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": 100
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.298533",
-      "l5_avg": 0.4,
-      "l10_avg": 0.4,
-      "season_avg": 0.67,
-      "l5_hit_rate": 20.0,
-      "l10_hit_rate": 30.0,
-      "l5_hit_count": 1,
-      "l10_hit_count": 3,
-      "streak": 1,
-      "last_10_values": [
-        2,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        1,
-        0
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-03",
-          "opp": "WPG",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "UTA",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "COL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "NSH",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "CBJ",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "SJS",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-30",
-          "opp": "CBJ",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "PIT",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "MIN",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-25",
-          "opp": "FLA",
-          "val": 0,
-          "hit": false
-        }
-      ],
-      "l10_median": 0.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 32,
-      "games_played": 48,
-      "avg_toi": 20.88,
-      "position": "C",
-      "game_time": "2026-03-07T01:30:00Z",
-      "game_id": 2025020985,
-      "insight": "Favorable matchup",
-      "insight_strength": "medium",
-      "pick_score": 45.0,
-      "score_factors": [
-        "Favorable matchup"
-      ],
       "top_pick_rank": 38
-    },
-    {
-      "player": "Ivan Barbashev",
-      "team": "VGK",
-      "opponent": "MIN",
-      "prop": "SHOTS",
-      "direction": "OVER",
-      "line": 1.5,
-      "projection": 2.0,
-      "confidence": 67.5,
-      "ev": 3.92,
-      "diff": 0.5,
-      "market_odds": -185,
-      "fair_odds": -208,
-      "prob_edge": 2.6,
-      "edge": "GOOD",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -185
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.491552",
-      "l5_avg": 2.0,
-      "l10_avg": 2.3,
-      "season_avg": 1.56,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 80.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 8,
-      "streak": 2,
-      "last_10_values": [
-        3,
-        3,
-        0,
-        2,
-        2,
-        0,
-        3,
-        3,
-        3,
-        4
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "DET",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-03-03",
-          "opp": "BUF",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "PIT",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "WSH",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-02-25",
-          "opp": "LAK",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-02-05",
-          "opp": "LAK",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "VAN",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-02-01",
-          "opp": "ANA",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "SEA",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "DAL",
-          "val": 4,
-          "hit": true
-        }
-      ],
-      "l10_median": 3.0,
-      "matchup_favorability": "unfavorable",
-      "opp_def_rank": 7,
-      "games_played": 62,
-      "avg_toi": 16.23,
-      "position": "L",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020988,
-      "insight": "80% L10 hit rate, Tough matchup",
-      "insight_strength": "high",
-      "pick_score": 44.1,
-      "score_factors": [
-        "80% L10 hit rate",
-        "Tough matchup"
-      ],
-      "top_pick_rank": 39
-    },
-    {
-      "player": "Nikolaj Ehlers",
-      "team": "CAR",
-      "opponent": "EDM",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 0.9,
-      "confidence": 56.7,
-      "ev": 2.04,
-      "diff": 0.4,
-      "market_odds": -125,
-      "fair_odds": -131,
-      "prob_edge": 1.1,
-      "edge": "GOOD",
-      "best_book": "DK",
-      "book_odds": {
-        "DK": -125,
-        "MGM": -125
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.267549",
-      "l5_avg": 1.2,
-      "l10_avg": 0.9,
-      "season_avg": 0.79,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 70.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 7,
-      "streak": 2,
-      "last_10_values": [
-        3,
-        1,
-        0,
-        1,
-        1,
-        1,
-        0,
-        0,
-        1,
-        1
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "VAN",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-03-02",
-          "opp": "SEA",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "DET",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "TBL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-05",
-          "opp": "NYR",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-03",
-          "opp": "OTT",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-01",
-          "opp": "LAK",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "WSH",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "UTA",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-24",
-          "opp": "OTT",
-          "val": 1,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 26,
-      "games_played": 61,
-      "avg_toi": 16.68,
-      "position": "L",
-      "game_time": "2026-03-07T02:00:00Z",
-      "game_id": 2025020986,
-      "insight": "70% L10 hit rate, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 43.2,
-      "score_factors": [
-        "70% L10 hit rate",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 40
     },
     {
       "player": "Martin Necas",
@@ -4837,7 +4618,7 @@
         "MGM": -118
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.318806",
+      "generated_at": "2026-03-06T14:36:16.831548",
       "l5_avg": 1.0,
       "l10_avg": 0.7,
       "season_avg": 0.79,
@@ -4934,6 +4715,243 @@
       "score_factors": [
         "Tough matchup"
       ],
+      "top_pick_rank": 39
+    },
+    {
+      "player": "Frank Vatrano",
+      "team": "ANA",
+      "opponent": "MTL",
+      "prop": "SHOTS",
+      "direction": "UNDER",
+      "line": 1.5,
+      "projection": 1.28,
+      "confidence": 52.8,
+      "ev": 5.58,
+      "diff": -0.22,
+      "market_odds": 100,
+      "fair_odds": -112,
+      "prob_edge": 2.8,
+      "edge": "STRONG",
+      "best_book": "MGM",
+      "book_odds": {
+        "MGM": -135
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.734584",
+      "l5_avg": 1.4,
+      "l10_avg": 1.6,
+      "season_avg": 1.79,
+      "l5_hit_rate": 40.0,
+      "l10_hit_rate": 30.0,
+      "l5_hit_count": 2,
+      "l10_hit_count": 3,
+      "streak": 0,
+      "last_10_values": [
+        2,
+        1,
+        2,
+        2,
+        0,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "NYI",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-27",
+          "opp": "LAK",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2025-12-22",
+          "opp": "SEA",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-20",
+          "opp": "CBJ",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-19",
+          "opp": "DAL",
+          "val": 0,
+          "hit": true
+        },
+        {
+          "date": "2025-12-16",
+          "opp": "CBJ",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-15",
+          "opp": "NYR",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-13",
+          "opp": "NJD",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-11",
+          "opp": "NYI",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2025-12-09",
+          "opp": "PIT",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "l10_median": 2.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 24,
+      "games_played": 39,
+      "avg_toi": 12.37,
+      "position": "R",
+      "game_time": "2026-03-07T02:00:00Z",
+      "game_id": 2025020987,
+      "insight": "Favorable matchup",
+      "insight_strength": "medium",
+      "pick_score": 42.9,
+      "score_factors": [
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 40
+    },
+    {
+      "player": "Mats Zuccarello",
+      "team": "MIN",
+      "opponent": "VGK",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 1.1,
+      "confidence": 61.1,
+      "ev": 4.13,
+      "diff": 0.6,
+      "market_odds": -142,
+      "fair_odds": -157,
+      "prob_edge": 2.4,
+      "edge": "GOOD",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -142,
+        "MGM": -145
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.896033",
+      "l5_avg": 1.0,
+      "l10_avg": 0.8,
+      "season_avg": 0.88,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 60.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 6,
+      "streak": 1,
+      "last_10_values": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-03",
+          "opp": "TBL",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "STL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-27",
+          "opp": "UTA",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "COL",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "NSH",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "MTL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "EDM",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "CGY",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "CHI",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-24",
+          "opp": "FLA",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "neutral",
+      "opp_def_rank": 21,
+      "games_played": 42,
+      "avg_toi": 18.85,
+      "position": "R",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020988,
+      "insight": "",
+      "insight_strength": "low",
+      "pick_score": 42.6,
+      "score_factors": [],
       "top_pick_rank": 41
     },
     {
@@ -4957,7 +4975,7 @@
         "MGM": 100
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.341259",
+      "generated_at": "2026-03-06T14:36:16.855843",
       "l5_avg": 1.2,
       "l10_avg": 1.1,
       "season_avg": 0.73,
@@ -5078,7 +5096,7 @@
         "MGM": -130
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.319787",
+      "generated_at": "2026-03-06T14:36:16.832595",
       "l5_avg": 2.8,
       "l10_avg": 2.4,
       "season_avg": 2.7,
@@ -5178,6 +5196,247 @@
       "top_pick_rank": 43
     },
     {
+      "player": "Pavel Buchnevich",
+      "team": "STL",
+      "opponent": "SJS",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 0.88,
+      "confidence": 56.5,
+      "ev": 1.64,
+      "diff": 0.38,
+      "market_odds": -125,
+      "fair_odds": -130,
+      "prob_edge": 0.9,
+      "edge": "FAIR",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -125,
+        "MGM": -130
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.961433",
+      "l5_avg": 1.0,
+      "l10_avg": 1.1,
+      "season_avg": 0.62,
+      "l5_hit_rate": 80.0,
+      "l10_hit_rate": 70.0,
+      "l5_hit_count": 4,
+      "l10_hit_count": 7,
+      "streak": 0,
+      "last_10_values": [
+        0,
+        2,
+        1,
+        1,
+        1,
+        3,
+        0,
+        2,
+        0,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "SEA",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "MIN",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-02-28",
+          "opp": "NJD",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "SEA",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "DAL",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "NSH",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "CBJ",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "FLA",
+          "val": 2,
+          "hit": true
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "DAL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-24",
+          "opp": "LAK",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "l10_median": 1.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 31,
+      "games_played": 61,
+      "avg_toi": 18.25,
+      "position": "L",
+      "game_time": "2026-03-07T03:00:00Z",
+      "game_id": 2025020989,
+      "insight": "70% L10 hit rate, Favorable matchup",
+      "insight_strength": "high",
+      "pick_score": 41.2,
+      "score_factors": [
+        "70% L10 hit rate",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 44
+    },
+    {
+      "player": "Beckett Sennecke",
+      "team": "ANA",
+      "opponent": "MTL",
+      "prop": "SHOTS",
+      "direction": "OVER",
+      "line": 2.5,
+      "projection": 2.73,
+      "confidence": 55.4,
+      "ev": 2.33,
+      "diff": 0.23,
+      "market_odds": -118,
+      "fair_odds": -124,
+      "prob_edge": 1.3,
+      "edge": "GOOD",
+      "best_book": "MGM",
+      "book_odds": {
+        "DK": -120,
+        "MGM": -118
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.760403",
+      "l5_avg": 2.0,
+      "l10_avg": 2.9,
+      "season_avg": 2.28,
+      "l5_hit_rate": 40.0,
+      "l10_hit_rate": 60.0,
+      "l5_hit_count": 2,
+      "l10_hit_count": 6,
+      "streak": 1,
+      "last_10_values": [
+        3,
+        2,
+        0,
+        3,
+        2,
+        5,
+        1,
+        3,
+        7,
+        3
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "NYI",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-03-03",
+          "opp": "COL",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "CGY",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-27",
+          "opp": "WPG",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-02-25",
+          "opp": "EDM",
+          "val": 2,
+          "hit": false
+        },
+        {
+          "date": "2026-02-03",
+          "opp": "SEA",
+          "val": 5,
+          "hit": true
+        },
+        {
+          "date": "2026-02-01",
+          "opp": "VGK",
+          "val": 1,
+          "hit": false
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "VAN",
+          "val": 3,
+          "hit": true
+        },
+        {
+          "date": "2026-01-26",
+          "opp": "EDM",
+          "val": 7,
+          "hit": true
+        },
+        {
+          "date": "2026-01-25",
+          "opp": "CGY",
+          "val": 3,
+          "hit": true
+        }
+      ],
+      "l10_median": 3.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 24,
+      "games_played": 61,
+      "avg_toi": 17.5,
+      "position": "R",
+      "game_time": "2026-03-07T02:00:00Z",
+      "game_id": 2025020987,
+      "insight": "Favorable matchup",
+      "insight_strength": "medium",
+      "pick_score": 40.6,
+      "score_factors": [
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 45
+    },
+    {
       "player": "Sebastian Aho",
       "team": "CAR",
       "opponent": "EDM",
@@ -5198,7 +5457,7 @@
         "MGM": -220
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.269251",
+      "generated_at": "2026-03-06T14:36:16.778628",
       "l5_avg": 0.8,
       "l10_avg": 0.9,
       "season_avg": 1.0,
@@ -5295,243 +5554,6 @@
       "score_factors": [
         "Favorable matchup"
       ],
-      "top_pick_rank": 44
-    },
-    {
-      "player": "Mats Zuccarello",
-      "team": "MIN",
-      "opponent": "VGK",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.1,
-      "confidence": 62.0,
-      "ev": 3.37,
-      "diff": 0.6,
-      "market_odds": -150,
-      "fair_odds": -163,
-      "prob_edge": 2.0,
-      "edge": "GOOD",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -150
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.382458",
-      "l5_avg": 1.0,
-      "l10_avg": 0.8,
-      "season_avg": 0.88,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 6,
-      "streak": 1,
-      "last_10_values": [
-        2,
-        0,
-        1,
-        1,
-        1,
-        0,
-        2,
-        0,
-        0,
-        1
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-03",
-          "opp": "TBL",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "STL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "UTA",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "COL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "NSH",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "MTL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "EDM",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "CGY",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "CHI",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-24",
-          "opp": "FLA",
-          "val": 1,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "neutral",
-      "opp_def_rank": 21,
-      "games_played": 42,
-      "avg_toi": 18.85,
-      "position": "R",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020988,
-      "insight": "",
-      "insight_strength": "low",
-      "pick_score": 38.9,
-      "score_factors": [],
-      "top_pick_rank": 45
-    },
-    {
-      "player": "Pavel Buchnevich",
-      "team": "STL",
-      "opponent": "SJS",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 0.88,
-      "confidence": 57.1,
-      "ev": 1.1,
-      "diff": 0.38,
-      "market_odds": -130,
-      "fair_odds": -133,
-      "prob_edge": 0.6,
-      "edge": "FAIR",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -130
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.450290",
-      "l5_avg": 1.0,
-      "l10_avg": 1.1,
-      "season_avg": 0.62,
-      "l5_hit_rate": 80.0,
-      "l10_hit_rate": 70.0,
-      "l5_hit_count": 4,
-      "l10_hit_count": 7,
-      "streak": 0,
-      "last_10_values": [
-        0,
-        2,
-        1,
-        1,
-        1,
-        3,
-        0,
-        2,
-        0,
-        1
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "SEA",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "MIN",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "NJD",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "SEA",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "DAL",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "NSH",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "CBJ",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "FLA",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "DAL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-24",
-          "opp": "LAK",
-          "val": 1,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 31,
-      "games_played": 61,
-      "avg_toi": 18.25,
-      "position": "L",
-      "game_time": "2026-03-07T03:00:00Z",
-      "game_id": 2025020989,
-      "insight": "70% L10 hit rate, Favorable matchup",
-      "insight_strength": "high",
-      "pick_score": 38.5,
-      "score_factors": [
-        "70% L10 hit rate",
-        "Favorable matchup"
-      ],
       "top_pick_rank": 46
     },
     {
@@ -5549,12 +5571,13 @@
       "fair_odds": -139,
       "prob_edge": 0.7,
       "edge": "FAIR",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": 105,
         "MGM": 100
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.486378",
+      "generated_at": "2026-03-06T14:36:17.001427",
       "l5_avg": 2.0,
       "l10_avg": 1.4,
       "season_avg": 2.52,
@@ -5656,243 +5679,6 @@
       "top_pick_rank": 47
     },
     {
-      "player": "Sam Reinhart",
-      "team": "FLA",
-      "opponent": "DET",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.15,
-      "confidence": 63.8,
-      "ev": 3.12,
-      "diff": 0.65,
-      "market_odds": -162,
-      "fair_odds": -176,
-      "prob_edge": 2.0,
-      "edge": "GOOD",
-      "best_book": "DK",
-      "book_odds": {
-        "DK": -162,
-        "MGM": -165
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.374891",
-      "l5_avg": 0.6,
-      "l10_avg": 0.8,
-      "season_avg": 0.94,
-      "l5_hit_rate": 60.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 3,
-      "l10_hit_count": 6,
-      "streak": 1,
-      "last_10_values": [
-        1,
-        0,
-        1,
-        0,
-        1,
-        0,
-        1,
-        2,
-        0,
-        2
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-05",
-          "opp": "CBJ",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-03-03",
-          "opp": "NJD",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "NYI",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "BUF",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-26",
-          "opp": "TOR",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-05",
-          "opp": "TBL",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-04",
-          "opp": "BOS",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-02-02",
-          "opp": "BUF",
-          "val": 2,
-          "hit": true
-        },
-        {
-          "date": "2026-01-31",
-          "opp": "WPG",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "STL",
-          "val": 2,
-          "hit": true
-        }
-      ],
-      "l10_median": 1.0,
-      "matchup_favorability": "neutral",
-      "opp_def_rank": 14,
-      "games_played": 62,
-      "avg_toi": 21.37,
-      "position": "C",
-      "game_time": "2026-03-07T00:00:00Z",
-      "game_id": 2025020983,
-      "insight": "",
-      "insight_strength": "low",
-      "pick_score": 37.9,
-      "score_factors": [],
-      "top_pick_rank": 48
-    },
-    {
-      "player": "Beckett Sennecke",
-      "team": "ANA",
-      "opponent": "MTL",
-      "prop": "SHOTS",
-      "direction": "OVER",
-      "line": 2.5,
-      "projection": 2.73,
-      "confidence": 56.4,
-      "ev": 1.5,
-      "diff": 0.23,
-      "market_odds": -125,
-      "fair_odds": -129,
-      "prob_edge": 0.8,
-      "edge": "FAIR",
-      "best_book": "MGM",
-      "book_odds": {
-        "MGM": -125
-      },
-      "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.254583",
-      "l5_avg": 2.0,
-      "l10_avg": 2.9,
-      "season_avg": 2.28,
-      "l5_hit_rate": 40.0,
-      "l10_hit_rate": 60.0,
-      "l5_hit_count": 2,
-      "l10_hit_count": 6,
-      "streak": 1,
-      "last_10_values": [
-        3,
-        2,
-        0,
-        3,
-        2,
-        5,
-        1,
-        3,
-        7,
-        3
-      ],
-      "last_10_games": [
-        {
-          "date": "2026-03-04",
-          "opp": "NYI",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-03-03",
-          "opp": "COL",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "2026-03-01",
-          "opp": "CGY",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-27",
-          "opp": "WPG",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-02-25",
-          "opp": "EDM",
-          "val": 2,
-          "hit": false
-        },
-        {
-          "date": "2026-02-03",
-          "opp": "SEA",
-          "val": 5,
-          "hit": true
-        },
-        {
-          "date": "2026-02-01",
-          "opp": "VGK",
-          "val": 1,
-          "hit": false
-        },
-        {
-          "date": "2026-01-29",
-          "opp": "VAN",
-          "val": 3,
-          "hit": true
-        },
-        {
-          "date": "2026-01-26",
-          "opp": "EDM",
-          "val": 7,
-          "hit": true
-        },
-        {
-          "date": "2026-01-25",
-          "opp": "CGY",
-          "val": 3,
-          "hit": true
-        }
-      ],
-      "l10_median": 3.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 24,
-      "games_played": 61,
-      "avg_toi": 17.5,
-      "position": "R",
-      "game_time": "2026-03-07T02:00:00Z",
-      "game_id": 2025020987,
-      "insight": "Favorable matchup",
-      "insight_strength": "medium",
-      "pick_score": 36.5,
-      "score_factors": [
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 49
-    },
-    {
       "player": "Jake DeBrusk",
       "team": "VAN",
       "opponent": "CHI",
@@ -5907,12 +5693,13 @@
       "fair_odds": -137,
       "prob_edge": 0.4,
       "edge": "FAIR",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": 105,
         "MGM": 100
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.460068",
+      "generated_at": "2026-03-06T14:36:16.972588",
       "l5_avg": 1.4,
       "l10_avg": 2.4,
       "season_avg": 2.68,
@@ -6010,127 +5797,125 @@
         "70% L10 hit rate",
         "6-game streak"
       ],
-      "top_pick_rank": 50
+      "top_pick_rank": 48
     },
     {
-      "player": "Patrick Kane",
-      "team": "DET",
-      "opponent": "FLA",
+      "player": "Sam Reinhart",
+      "team": "FLA",
+      "opponent": "DET",
       "prop": "POINTS",
       "direction": "OVER",
       "line": 0.5,
-      "projection": 0.88,
-      "confidence": 55.7,
-      "ev": 2.1,
-      "diff": 0.38,
-      "market_odds": -120,
-      "fair_odds": -126,
-      "prob_edge": 1.2,
+      "projection": 1.15,
+      "confidence": 64.4,
+      "ev": 2.67,
+      "diff": 0.65,
+      "market_odds": -168,
+      "fair_odds": -181,
+      "prob_edge": 1.7,
       "edge": "GOOD",
       "best_book": "DK",
       "book_odds": {
-        "DK": -120,
-        "MGM": -120
+        "DK": -168,
+        "MGM": -175
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.344469",
-      "l5_avg": 0.2,
-      "l10_avg": 0.4,
-      "season_avg": 0.7,
-      "l5_hit_rate": 20.0,
-      "l10_hit_rate": 40.0,
-      "l5_hit_count": 1,
-      "l10_hit_count": 4,
-      "streak": 0,
+      "generated_at": "2026-03-06T14:36:16.888082",
+      "l5_avg": 0.6,
+      "l10_avg": 0.8,
+      "season_avg": 0.94,
+      "l5_hit_rate": 60.0,
+      "l10_hit_rate": 60.0,
+      "l5_hit_count": 3,
+      "l10_hit_count": 6,
+      "streak": 1,
       "last_10_values": [
-        0,
+        1,
         0,
         1,
         0,
-        0,
-        0,
+        1,
         0,
         1,
-        1,
-        1
+        2,
+        0,
+        2
       ],
       "last_10_games": [
         {
-          "date": "2026-03-04",
-          "opp": "VGK",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-03-02",
-          "opp": "NSH",
-          "val": 0,
-          "hit": false
-        },
-        {
-          "date": "2026-02-28",
-          "opp": "CAR",
+          "date": "2026-03-05",
+          "opp": "CBJ",
           "val": 1,
           "hit": true
         },
         {
+          "date": "2026-03-03",
+          "opp": "NJD",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-03-01",
+          "opp": "NYI",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-27",
+          "opp": "BUF",
+          "val": 0,
+          "hit": false
+        },
+        {
           "date": "2026-02-26",
-          "opp": "OTT",
+          "opp": "TOR",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-05",
+          "opp": "TBL",
           "val": 0,
           "hit": false
         },
         {
           "date": "2026-02-04",
-          "opp": "UTA",
-          "val": 0,
-          "hit": false
+          "opp": "BOS",
+          "val": 1,
+          "hit": true
         },
         {
           "date": "2026-02-02",
-          "opp": "COL",
-          "val": 0,
-          "hit": false
+          "opp": "BUF",
+          "val": 2,
+          "hit": true
         },
         {
           "date": "2026-01-31",
-          "opp": "COL",
+          "opp": "WPG",
           "val": 0,
           "hit": false
         },
         {
           "date": "2026-01-29",
-          "opp": "WSH",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-27",
-          "opp": "LAK",
-          "val": 1,
-          "hit": true
-        },
-        {
-          "date": "2026-01-24",
-          "opp": "WPG",
-          "val": 1,
+          "opp": "STL",
+          "val": 2,
           "hit": true
         }
       ],
-      "l10_median": 0.0,
-      "matchup_favorability": "favorable",
-      "opp_def_rank": 25,
-      "games_played": 47,
-      "avg_toi": 17.13,
-      "position": "R",
+      "l10_median": 1.0,
+      "matchup_favorability": "neutral",
+      "opp_def_rank": 14,
+      "games_played": 62,
+      "avg_toi": 21.37,
+      "position": "C",
       "game_time": "2026-03-07T00:00:00Z",
       "game_id": 2025020983,
-      "insight": "Favorable matchup",
-      "insight_strength": "medium",
-      "pick_score": 35.5,
-      "score_factors": [
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 51
+      "insight": "",
+      "insight_strength": "low",
+      "pick_score": 35.6,
+      "score_factors": [],
+      "top_pick_rank": 49
     },
     {
       "player": "Ross Colton",
@@ -6153,7 +5938,7 @@
         "MGM": 175
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.317665",
+      "generated_at": "2026-03-06T14:36:16.830349",
       "l5_avg": null,
       "l10_avg": 0.2,
       "season_avg": 0.39,
@@ -6252,7 +6037,7 @@
         "7-game streak",
         "Tough matchup"
       ],
-      "top_pick_rank": 52
+      "top_pick_rank": 50
     },
     {
       "player": "Ivan Barbashev",
@@ -6269,12 +6054,13 @@
       "fair_odds": -109,
       "prob_edge": 2.1,
       "edge": "GOOD",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": 100,
         "MGM": 100
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.492861",
+      "generated_at": "2026-03-06T14:36:17.008089",
       "l5_avg": 0.6,
       "l10_avg": 0.9,
       "season_avg": 0.71,
@@ -6372,7 +6158,7 @@
         "80% L10 hit rate",
         "Tough matchup"
       ],
-      "top_pick_rank": 53
+      "top_pick_rank": 51
     },
     {
       "player": "Kirill Kaprizov",
@@ -6382,19 +6168,20 @@
       "direction": "OVER",
       "line": 0.5,
       "projection": 0.92,
-      "confidence": 54.7,
-      "ev": 4.33,
+      "confidence": 53.8,
+      "ev": 5.11,
       "diff": 0.42,
-      "market_odds": -110,
-      "fair_odds": -121,
-      "prob_edge": 2.3,
-      "edge": "GOOD",
-      "best_book": "MGM",
+      "market_odds": -105,
+      "fair_odds": -116,
+      "prob_edge": 2.6,
+      "edge": "STRONG",
+      "best_book": "DK",
       "book_odds": {
-        "MGM": -110
+        "DK": -105,
+        "MGM": -105
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.393118",
+      "generated_at": "2026-03-06T14:36:16.907868",
       "l5_avg": 0.6,
       "l10_avg": 0.5,
       "season_avg": 0.65,
@@ -6487,9 +6274,129 @@
       "game_id": 2025020988,
       "insight": "",
       "insight_strength": "low",
-      "pick_score": 26.6,
+      "pick_score": 30.6,
       "score_factors": [],
-      "top_pick_rank": 54
+      "top_pick_rank": 52
+    },
+    {
+      "player": "Patrick Kane",
+      "team": "DET",
+      "opponent": "FLA",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 0.88,
+      "confidence": 57.1,
+      "ev": 0.98,
+      "diff": 0.38,
+      "market_odds": -130,
+      "fair_odds": -133,
+      "prob_edge": 0.6,
+      "edge": "FAIR",
+      "best_book": "DK",
+      "book_odds": {
+        "DK": -130,
+        "MGM": -135
+      },
+      "has_line": true,
+      "generated_at": "2026-03-06T14:36:16.859991",
+      "l5_avg": 0.2,
+      "l10_avg": 0.4,
+      "season_avg": 0.7,
+      "l5_hit_rate": 20.0,
+      "l10_hit_rate": 40.0,
+      "l5_hit_count": 1,
+      "l10_hit_count": 4,
+      "streak": 0,
+      "last_10_values": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "last_10_games": [
+        {
+          "date": "2026-03-04",
+          "opp": "VGK",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-03-02",
+          "opp": "NSH",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-28",
+          "opp": "CAR",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-02-26",
+          "opp": "OTT",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-04",
+          "opp": "UTA",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-02-02",
+          "opp": "COL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-31",
+          "opp": "COL",
+          "val": 0,
+          "hit": false
+        },
+        {
+          "date": "2026-01-29",
+          "opp": "WSH",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-27",
+          "opp": "LAK",
+          "val": 1,
+          "hit": true
+        },
+        {
+          "date": "2026-01-24",
+          "opp": "WPG",
+          "val": 1,
+          "hit": true
+        }
+      ],
+      "l10_median": 0.0,
+      "matchup_favorability": "favorable",
+      "opp_def_rank": 25,
+      "games_played": 47,
+      "avg_toi": 17.13,
+      "position": "R",
+      "game_time": "2026-03-07T00:00:00Z",
+      "game_id": 2025020983,
+      "insight": "Favorable matchup",
+      "insight_strength": "medium",
+      "pick_score": 29.9,
+      "score_factors": [
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 53
     },
     {
       "player": "Brock Nelson",
@@ -6512,7 +6419,7 @@
         "MGM": -155
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.305039",
+      "generated_at": "2026-03-06T14:36:16.817084",
       "l5_avg": 0.6,
       "l10_avg": 0.7,
       "season_avg": 0.87,
@@ -6609,7 +6516,7 @@
       "score_factors": [
         "Tough matchup"
       ],
-      "top_pick_rank": 55
+      "top_pick_rank": 54
     },
     {
       "player": "Vladimir Tarasenko",
@@ -6626,12 +6533,13 @@
       "fair_odds": -108,
       "prob_edge": 0.8,
       "edge": "FAIR",
-      "best_book": "MGM",
+      "best_book": "DK",
       "book_odds": {
+        "DK": -105,
         "MGM": -105
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.382874",
+      "generated_at": "2026-03-06T14:36:16.896463",
       "l5_avg": 1.6,
       "l10_avg": 1.7,
       "season_avg": 1.93,
@@ -6726,7 +6634,7 @@
       "insight_strength": "low",
       "pick_score": 12.7,
       "score_factors": [],
-      "top_pick_rank": 56
+      "top_pick_rank": 55
     },
     {
       "player": "Matt Duchene",
@@ -6749,7 +6657,7 @@
         "MGM": -135
       },
       "has_line": true,
-      "generated_at": "2026-03-06T08:38:13.328043",
+      "generated_at": "2026-03-06T14:36:16.841188",
       "l5_avg": 1.8,
       "l10_avg": 1.9,
       "season_avg": 1.56,
@@ -6846,7 +6754,7 @@
       "score_factors": [
         "Tough matchup"
       ],
-      "top_pick_rank": 57
+      "top_pick_rank": 56
     }
   ],
   "top_picks": [
@@ -6857,8 +6765,8 @@
       "prop": "SHOTS",
       "direction": "OVER",
       "line": 1.5,
-      "confidence": 71.3,
-      "ev": 6.93,
+      "confidence": 71.1,
+      "ev": 7.05,
       "pick_score": 77.3,
       "score_factors": [
         "70% L10 hit rate",
@@ -6903,6 +6811,22 @@
     },
     {
       "type": "prop",
+      "player": "Robert Thomas",
+      "team": "STL",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "confidence": 62.4,
+      "ev": 6.27,
+      "pick_score": 70.7,
+      "score_factors": [
+        "4-game streak",
+        "Favorable matchup"
+      ],
+      "top_pick_rank": 4
+    },
+    {
+      "type": "prop",
       "player": "Jackson LaCombe",
       "team": "ANA",
       "prop": "POINTS",
@@ -6913,22 +6837,6 @@
       "pick_score": 70.5,
       "score_factors": [
         "80% L10 hit rate",
-        "Favorable matchup"
-      ],
-      "top_pick_rank": 4
-    },
-    {
-      "type": "prop",
-      "player": "Robert Thomas",
-      "team": "STL",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "confidence": 62.7,
-      "ev": 5.96,
-      "pick_score": 70.5,
-      "score_factors": [
-        "4-game streak",
         "Favorable matchup"
       ],
       "top_pick_rank": 5
@@ -6944,19 +6852,20 @@
         "direction": "OVER",
         "line": 1.5,
         "projection": 2.37,
-        "confidence": 71.3,
-        "ev": 6.93,
+        "confidence": 71.1,
+        "ev": 7.05,
         "diff": 0.87,
-        "market_odds": -200,
-        "fair_odds": -248,
-        "prob_edge": 4.6,
+        "market_odds": -198,
+        "fair_odds": -246,
+        "prob_edge": 4.7,
         "edge": "STRONG",
-        "best_book": "MGM",
+        "best_book": "DK",
         "book_odds": {
+          "DK": -198,
           "MGM": -200
         },
         "has_line": true,
-        "generated_at": "2026-03-06T08:38:13.296046",
+        "generated_at": "2026-03-06T14:36:16.807116",
         "l5_avg": 3.0,
         "l10_avg": 2.1,
         "season_avg": 1.64,
@@ -7078,7 +6987,7 @@
           "MGM": -160
         },
         "has_line": true,
-        "generated_at": "2026-03-06T08:38:13.258701",
+        "generated_at": "2026-03-06T14:36:16.767501",
         "l5_avg": 2.6,
         "l10_avg": 2.1,
         "season_avg": 1.72,
@@ -7194,12 +7103,13 @@
         "fair_odds": -126,
         "prob_edge": 3.3,
         "edge": "STRONG",
-        "best_book": "MGM",
+        "best_book": "DK",
         "book_odds": {
+          "DK": -110,
           "MGM": -110
         },
         "has_line": true,
-        "generated_at": "2026-03-06T08:38:13.433993",
+        "generated_at": "2026-03-06T14:36:16.944417",
         "l5_avg": 0.6,
         "l10_avg": 0.7,
         "season_avg": 0.69,
@@ -7301,6 +7211,127 @@
         "top_pick_rank": 3
       },
       {
+        "player": "Robert Thomas",
+        "team": "STL",
+        "opponent": "SJS",
+        "prop": "POINTS",
+        "direction": "OVER",
+        "line": 0.5,
+        "projection": 1.24,
+        "confidence": 62.4,
+        "ev": 6.27,
+        "diff": 0.74,
+        "market_odds": -142,
+        "fair_odds": -166,
+        "prob_edge": 3.7,
+        "edge": "STRONG",
+        "best_book": "DK",
+        "book_odds": {
+          "DK": -142,
+          "MGM": -145
+        },
+        "has_line": true,
+        "generated_at": "2026-03-06T14:36:16.966816",
+        "l5_avg": 1.4,
+        "l10_avg": 1.0,
+        "season_avg": 0.84,
+        "l5_hit_rate": 80.0,
+        "l10_hit_rate": 60.0,
+        "l5_hit_count": 4,
+        "l10_hit_count": 6,
+        "streak": 4,
+        "last_10_values": [
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          2
+        ],
+        "last_10_games": [
+          {
+            "date": "2026-03-04",
+            "opp": "SEA",
+            "val": 2,
+            "hit": true
+          },
+          {
+            "date": "2026-03-01",
+            "opp": "MIN",
+            "val": 2,
+            "hit": true
+          },
+          {
+            "date": "2026-01-10",
+            "opp": "VGK",
+            "val": 2,
+            "hit": true
+          },
+          {
+            "date": "2026-01-09",
+            "opp": "UTA",
+            "val": 1,
+            "hit": true
+          },
+          {
+            "date": "2026-01-07",
+            "opp": "CHI",
+            "val": 0,
+            "hit": false
+          },
+          {
+            "date": "2026-01-03",
+            "opp": "MTL",
+            "val": 1,
+            "hit": true
+          },
+          {
+            "date": "2026-01-02",
+            "opp": "VGK",
+            "val": 0,
+            "hit": false
+          },
+          {
+            "date": "2025-12-31",
+            "opp": "COL",
+            "val": 0,
+            "hit": false
+          },
+          {
+            "date": "2025-12-29",
+            "opp": "BUF",
+            "val": 0,
+            "hit": false
+          },
+          {
+            "date": "2025-12-27",
+            "opp": "NSH",
+            "val": 2,
+            "hit": true
+          }
+        ],
+        "l10_median": 1.0,
+        "matchup_favorability": "favorable",
+        "opp_def_rank": 31,
+        "games_played": 44,
+        "avg_toi": 18.87,
+        "position": "C",
+        "game_time": "2026-03-07T03:00:00Z",
+        "game_id": 2025020989,
+        "insight": "4-game streak, Favorable matchup",
+        "insight_strength": "high",
+        "pick_score": 70.7,
+        "score_factors": [
+          "4-game streak",
+          "Favorable matchup"
+        ],
+        "top_pick_rank": 4
+      },
+      {
         "player": "Jackson LaCombe",
         "team": "ANA",
         "opponent": "MTL",
@@ -7315,12 +7346,13 @@
         "fair_odds": -153,
         "prob_edge": 3.9,
         "edge": "STRONG",
-        "best_book": "MGM",
+        "best_book": "DK",
         "book_odds": {
+          "DK": -130,
           "MGM": -130
         },
         "has_line": true,
-        "generated_at": "2026-03-06T08:38:13.245494",
+        "generated_at": "2026-03-06T14:36:16.742893",
         "l5_avg": 0.8,
         "l10_avg": 0.9,
         "season_avg": 0.67,
@@ -7416,126 +7448,6 @@
         "pick_score": 70.5,
         "score_factors": [
           "80% L10 hit rate",
-          "Favorable matchup"
-        ],
-        "top_pick_rank": 4
-      },
-      {
-        "player": "Robert Thomas",
-        "team": "STL",
-        "opponent": "SJS",
-        "prop": "POINTS",
-        "direction": "OVER",
-        "line": 0.5,
-        "projection": 1.24,
-        "confidence": 62.7,
-        "ev": 5.96,
-        "diff": 0.74,
-        "market_odds": -145,
-        "fair_odds": -168,
-        "prob_edge": 3.5,
-        "edge": "STRONG",
-        "best_book": "MGM",
-        "book_odds": {
-          "MGM": -145
-        },
-        "has_line": true,
-        "generated_at": "2026-03-06T08:38:13.455439",
-        "l5_avg": 1.4,
-        "l10_avg": 1.0,
-        "season_avg": 0.84,
-        "l5_hit_rate": 80.0,
-        "l10_hit_rate": 60.0,
-        "l5_hit_count": 4,
-        "l10_hit_count": 6,
-        "streak": 4,
-        "last_10_values": [
-          2,
-          2,
-          2,
-          1,
-          0,
-          1,
-          0,
-          0,
-          0,
-          2
-        ],
-        "last_10_games": [
-          {
-            "date": "2026-03-04",
-            "opp": "SEA",
-            "val": 2,
-            "hit": true
-          },
-          {
-            "date": "2026-03-01",
-            "opp": "MIN",
-            "val": 2,
-            "hit": true
-          },
-          {
-            "date": "2026-01-10",
-            "opp": "VGK",
-            "val": 2,
-            "hit": true
-          },
-          {
-            "date": "2026-01-09",
-            "opp": "UTA",
-            "val": 1,
-            "hit": true
-          },
-          {
-            "date": "2026-01-07",
-            "opp": "CHI",
-            "val": 0,
-            "hit": false
-          },
-          {
-            "date": "2026-01-03",
-            "opp": "MTL",
-            "val": 1,
-            "hit": true
-          },
-          {
-            "date": "2026-01-02",
-            "opp": "VGK",
-            "val": 0,
-            "hit": false
-          },
-          {
-            "date": "2025-12-31",
-            "opp": "COL",
-            "val": 0,
-            "hit": false
-          },
-          {
-            "date": "2025-12-29",
-            "opp": "BUF",
-            "val": 0,
-            "hit": false
-          },
-          {
-            "date": "2025-12-27",
-            "opp": "NSH",
-            "val": 2,
-            "hit": true
-          }
-        ],
-        "l10_median": 1.0,
-        "matchup_favorability": "favorable",
-        "opp_def_rank": 31,
-        "games_played": 44,
-        "avg_toi": 18.87,
-        "position": "C",
-        "game_time": "2026-03-07T03:00:00Z",
-        "game_id": 2025020989,
-        "insight": "4-game streak, Favorable matchup",
-        "insight_strength": "high",
-        "pick_score": 70.5,
-        "score_factors": [
-          "4-game streak",
           "Favorable matchup"
         ],
         "top_pick_rank": 5
