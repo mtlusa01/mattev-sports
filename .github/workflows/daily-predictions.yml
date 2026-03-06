@@ -82,22 +82,20 @@ jobs:
           path: |
             ~/.nba_props_v9.pkl
             ~/.nba_minutes_model.joblib
-            ~/.nba_prob_calibrator.joblib
-          key: nba-props-model-v9
+          key: nba-props-model-v9-rel
           restore-keys: nba-props-model-
 
-      - name: Train props model if not cached
+      - name: Download props model from release if not cached
         if: steps.props-model-cache.outputs.cache-hit != 'true'
         continue-on-error: true
-        working-directory: ../nba-props
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          echo "No cached model — training from scratch..."
-          python -c "
-          from nba_player_props_v9 import Projector
-          p = Projector()
-          p.train()
-          print('Model trained and saved')
-          "
+          echo "Downloading model from GitHub release..."
+          gh release download v9-model -R mtlusa01/nba-props --dir /tmp/model --clobber
+          cp /tmp/model/.nba_props_v9.pkl ~/
+          cp /tmp/model/.nba_minutes_model.joblib ~/
+          ls -lh ~/.nba_props_v9.pkl ~/.nba_minutes_model.joblib
 
       - name: Save props model to cache
         if: steps.props-model-cache.outputs.cache-hit != 'true'
@@ -106,8 +104,7 @@ jobs:
           path: |
             ~/.nba_props_v9.pkl
             ~/.nba_minutes_model.joblib
-            ~/.nba_prob_calibrator.joblib
-          key: nba-props-model-v9
+          key: nba-props-model-v9-rel
 
       - name: Generate NBA player projections (nba_player_projections.json)
         continue-on-error: true
