@@ -2,20 +2,20 @@ name: Check Scores & Grade
 
 on:
   schedule:
-    # Every 5 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
-    # Script loops internally for ~2-min effective grading interval
-    - cron: '*/5 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
-    - cron: '*/5 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
+    # Every 15 min during game windows (12 PM - 2 AM EST = 5 PM - 7 AM UTC)
+    # Each run loops internally for ~25 min, giving continuous coverage
+    - cron: '*/15 17-23 * * *'  # 5 PM - 11:59 PM UTC (12 PM - 7 PM EST)
+    - cron: '*/15 0-7 * * *'    # 12 AM - 7 AM UTC (7 PM - 2 AM EST)
   workflow_dispatch:
 
 concurrency:
   group: check-scores
-  cancel-in-progress: true
+  cancel-in-progress: false  # queue next run instead of cancelling
 
 jobs:
   check-scores:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 28
 
     permissions:
       contents: write
@@ -35,16 +35,30 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Grade loop (2 passes, ~2 min apart)
+      - name: Self-healing grade loop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          MAX_ITERS=12
+          SLEEP_SECS=120
+          PUSH_RETRIES=3
+
           grade_and_push() {
+            echo ""
+            echo "--- $(date -u +%H:%M:%S) ---"
+
+            # Always pull latest before grading
+            git pull --rebase -X theirs 2>/dev/null || {
+              echo "Rebase failed — resetting to remote"
+              git fetch origin main
+              git reset --hard origin/main
+            }
+
             python scripts/check_and_grade.py
+            py_exit=$?
 
             # Stage all gradeable files
-            changed=false
             for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
                      game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
                      nhl_player_props.json nhl_props_results.json projections.json \
@@ -54,22 +68,59 @@ jobs:
 
             if ! git diff --staged --quiet; then
               git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
-              git pull --rebase -X theirs && git push
-              echo "PUSHED"
+
+              # Resilient push with retry
+              pushed=false
+              for attempt in $(seq 1 $PUSH_RETRIES); do
+                if git push 2>/dev/null; then
+                  pushed=true
+                  echo "PUSHED (attempt $attempt)"
+                  break
+                fi
+                echo "Push failed (attempt $attempt/$PUSH_RETRIES) — pulling & retrying..."
+                git pull --rebase -X theirs 2>/dev/null || {
+                  echo "Rebase conflict — resetting to remote and re-applying"
+                  git fetch origin main
+                  git reset --hard origin/main
+                  # Re-run grading to regenerate changes on top of latest
+                  python scripts/check_and_grade.py
+                  for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
+                           game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
+                           nhl_player_props.json nhl_props_results.json projections.json \
+                           all_props.json all_props_results.json; do
+                    [ -f "$f" ] && git add "$f"
+                  done
+                  git diff --staged --quiet || git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
+                }
+              done
+              if [ "$pushed" = false ]; then
+                echo "WARNING: All push attempts failed — changes will be picked up next iteration"
+              fi
             else
               echo "NO_CHANGES"
             fi
+
+            return $py_exit
           }
 
-          echo "=== Pass 1/2 ==="
-          grade_and_push
+          for i in $(seq 1 $MAX_ITERS); do
+            echo ""
+            echo "=== Iteration $i/$MAX_ITERS ==="
+            grade_and_push
+            py_exit=$?
+
+            # Exit code 2 = all games graded, no need to continue
+            if [ $py_exit -eq 2 ]; then
+              echo "All games graded — stopping loop early (iter $i/$MAX_ITERS)"
+              break
+            fi
+
+            # Don't sleep after the last iteration
+            if [ $i -lt $MAX_ITERS ]; then
+              echo "Sleeping ${SLEEP_SECS}s..."
+              sleep $SLEEP_SECS
+            fi
+          done
 
           echo ""
-          echo "Sleeping 120s before pass 2..."
-          sleep 120
-
-          # Pull latest before second pass (other workflows may have pushed)
-          git pull --rebase -X theirs 2>/dev/null || true
-
-          echo "=== Pass 2/2 ==="
-          grade_and_push
+          echo "=== Loop complete ($i iterations) ==="

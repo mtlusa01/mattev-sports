@@ -1565,8 +1565,9 @@ def main():
         elapsed = time.time() - t_start
         print(f"\n{'=' * 60}")
         print(f"  SUMMARY: All games graded. Nothing to do. [{elapsed:.1f}s]")
+        print(f"  Signaling loop to stop (exit 2)")
         print(f"{'=' * 60}")
-        return 0
+        return 2  # all graded — tells workflow loop to stop early
 
     # ── Phase 2: Fetch scores from ESPN (parallel for all sports) ──
     t_phase2 = time.time()
@@ -1619,19 +1620,23 @@ def main():
         print(f"{'=' * 60}")
         return 0
 
-    # ── Phase 3: Grade ──
+    # ── Phase 3: Grade (isolated per sport) ──
     t_phase3 = time.time()
     print("\nGrading...")
     any_changes = False
     summaries = []
     for cfg in sports_to_check:
         sport = cfg["label"]
-        changed, summary = grade_sport(
-            sport, cfg["proj_file"], cfg["results_file"],
-            score_map.get(sport, {}), is_nba=cfg["is_nba"]
-        )
-        any_changes |= changed
-        summaries.append(summary)
+        try:
+            changed, summary = grade_sport(
+                sport, cfg["proj_file"], cfg["results_file"],
+                score_map.get(sport, {}), is_nba=cfg["is_nba"]
+            )
+            any_changes |= changed
+            summaries.append(summary)
+        except Exception as e:
+            print(f"  ERROR grading {sport} (non-fatal): {e}")
+            summaries.append(f"{sport}: ERROR — {e}")
     t_phase3_end = time.time()
 
     # ── Phase 3b: Catch-up grade late games from previous day ──
@@ -1640,14 +1645,20 @@ def main():
     except Exception as e:
         print(f"  Catch-up grading error (non-fatal): {e}")
 
-    # ── Phase 4: Grade player props (NHL + NBA) ──
+    # ── Phase 4: Grade player props (isolated per sport) ──
     t_phase4 = time.time()
     print("\nGrading player props...")
-    nhl_props_changed = grade_nhl_props()
-    any_changes |= nhl_props_changed
+    try:
+        nhl_props_changed = grade_nhl_props()
+        any_changes |= nhl_props_changed
+    except Exception as e:
+        print(f"  ERROR grading NHL props (non-fatal): {e}")
 
-    nba_props_changed = grade_nba_props()
-    any_changes |= nba_props_changed
+    try:
+        nba_props_changed = grade_nba_props()
+        any_changes |= nba_props_changed
+    except Exception as e:
+        print(f"  ERROR grading NBA props (non-fatal): {e}")
     t_phase4_end = time.time()
 
     # Add skipped sports to summary
@@ -1664,14 +1675,26 @@ def main():
     grade_time = t_phase3_end - t_phase3
     props_time = t_phase4_end - t_phase4
 
+    # ── Check if all games are now graded (for loop exit signal) ──
+    all_graded = True
+    for cfg in SPORT_CONFIG:
+        proj_path = os.path.join(REPO_ROOT, cfg["proj_file"])
+        has_ungraded, total, ungraded = has_ungraded_games(proj_path)
+        if has_ungraded:
+            all_graded = False
+            break
+
     print(f"\n{'=' * 60}")
     print(f"  SUMMARY {'(files updated)' if any_changes else '(no changes)'}")
     for s in summaries:
         print(f"    {s}")
     print(f"  Timing: {total_time:.1f}s total (check: {check_time:.1f}s, API: {api_time:.1f}s, grade: {grade_time:.1f}s, props: {props_time:.1f}s)")
+    if all_graded:
+        print(f"  All games graded — signaling loop to stop (exit 2)")
     print(f"{'=' * 60}")
 
-    return 0
+    # Exit code 2 = all games graded (tells workflow loop to stop early)
+    return 2 if all_graded else 0
 
 
 if __name__ == "__main__":
