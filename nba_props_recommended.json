@@ -2,130 +2,58 @@
   "date": "2026-03-07",
   "sport": "NBA",
   "type": "props",
-  "locked_at": "2026-03-07T19:20:52",
+  "locked_at": "2026-03-07T14:51:19",
   "recommendations": [
     {
       "qualified": true,
-      "score": 28.834999999999997,
+      "score": 43.37,
       "reasons": [
-        "80% L10 hit rate",
-        "+2.2 edge"
+        "+10.2% EV",
+        "90% L10 hit rate"
       ],
       "type": "prop",
       "player": "Darius Garland",
       "team": "LAC",
-      "prop": "PTS",
+      "prop": "AST",
       "direction": "OVER",
-      "line": 14.5,
-      "projection": 16.7,
-      "diff": 2.2,
-      "confidence": 55.9,
-      "ev": 4.9,
-      "edge": 2.1999999999999993,
-      "pick_score": 58.6,
+      "line": 5.5,
+      "projection": 6.8,
+      "diff": 1.3,
+      "confidence": 53.8,
+      "ev": 10.2,
+      "edge": 1.2999999999999998,
+      "pick_score": 49.9,
       "score_factors": [
-        "+19.7% True EV",
-        "80% L10 hit rate",
-        "+2.2 edge"
+        "+40.8% True EV",
+        "90% L10 hit rate"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 14.5,
-            "odds": -106
+            "line": 5.5,
+            "odds": 110
           },
           "under": {
-            "line": 14.5,
-            "odds": -125
+            "line": 5.5,
+            "odds": -146
           }
         },
         "draftkings": {
           "over": {
-            "line": 14.5,
-            "odds": -111
+            "line": 5.5,
+            "odds": -100
           },
           "under": {
-            "line": 14.5,
-            "odds": -115
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 13.5,
-            "odds": -125
-          },
-          "under": {
-            "line": 13.5,
-            "odds": -105
+            "line": 5.5,
+            "odds": -132
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
+      "insight": "Has gone OVER 5.5 assists in 9 of last 10 games (6.5 avg).",
       "matchup_favorability": "neutral",
-      "l10_hit_rate": 80.0,
+      "l10_hit_rate": 90.0,
       "rec_rank": 1
-    },
-    {
-      "qualified": true,
-      "score": 26.92225,
-      "reasons": [
-        "+6.2% EV",
-        "+3.2 edge"
-      ],
-      "type": "prop",
-      "player": "Bennedict Mathurin",
-      "team": "LAC",
-      "prop": "PTS",
-      "direction": "UNDER",
-      "line": 17.5,
-      "projection": 14.3,
-      "diff": -3.2,
-      "confidence": 54.815,
-      "ev": 6.2,
-      "edge": 3.1999999999999993,
-      "pick_score": 42.6,
-      "score_factors": [
-        "+24.9% True EV",
-        "+3.2 edge"
-      ],
-      "book_odds": {
-        "fanduel": {
-          "over": {
-            "line": 17.5,
-            "odds": -104
-          },
-          "under": {
-            "line": 17.5,
-            "odds": -128
-          }
-        },
-        "draftkings": {
-          "over": {
-            "line": 17.5,
-            "odds": -112
-          },
-          "under": {
-            "line": 17.5,
-            "odds": -114
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 17.5,
-            "odds": -118
-          },
-          "under": {
-            "line": 17.5,
-            "odds": -115
-          }
-        }
-      },
-      "best_book": "draftkings",
-      "insight": "On a back-to-back \u2014 rest impact may limit production.",
-      "matchup_favorability": "neutral",
-      "l10_hit_rate": 50.0,
-      "rec_rank": 2
     }
   ]
 }
