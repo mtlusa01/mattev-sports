@@ -2,56 +2,113 @@
   "date": "2026-03-07",
   "sport": "NBA",
   "type": "props",
-  "locked_at": "2026-03-07T06:28:36",
+  "locked_at": "2026-03-07T14:36:33",
   "recommendations": [
     {
       "qualified": true,
-      "score": 23.8215,
+      "score": 32.135,
       "reasons": [
-        "56.8% confidence"
+        "+6.2% EV",
+        "80% L10 hit rate",
+        "+2.4 edge"
       ],
       "type": "prop",
-      "player": "Kawhi Leonard",
+      "player": "Darius Garland",
       "team": "LAC",
-      "prop": "REB",
-      "direction": "UNDER",
-      "line": 6.5,
-      "projection": 5.2,
-      "diff": -1.3,
-      "confidence": 56.809999999999995,
-      "ev": 4.8,
-      "edge": 1.2999999999999998,
-      "pick_score": 43.9,
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 14.5,
+      "projection": 16.9,
+      "diff": 2.4,
+      "confidence": 54.9,
+      "ev": 6.2,
+      "edge": 2.3999999999999986,
+      "pick_score": 34.4,
       "score_factors": [
-        "+19.0% True EV"
+        "+24.6% True EV",
+        "80% L10 hit rate",
+        "+2.4 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 6.5,
-            "odds": 108
+            "line": 14.5,
+            "odds": -106
           },
           "under": {
-            "line": 6.5,
-            "odds": -144
+            "line": 14.5,
+            "odds": -125
           }
         },
         "draftkings": {
           "over": {
-            "line": 6.5,
-            "odds": -107
+            "line": 14.5,
+            "odds": -108
           },
           "under": {
-            "line": 6.5,
-            "odds": -123
+            "line": 14.5,
+            "odds": -118
           }
         }
       },
-      "best_book": "draftkings",
-      "insight": "On a back-to-back \u2014 rest impact may limit production.",
-      "matchup_favorability": "neutral",
-      "l10_hit_rate": 60.0,
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 80.0,
       "rec_rank": 1
+    },
+    {
+      "qualified": true,
+      "score": 28.8585,
+      "reasons": [
+        "+6.5% EV",
+        "Favorable matchup",
+        "+3.1 edge"
+      ],
+      "type": "prop",
+      "player": "Bennedict Mathurin",
+      "team": "LAC",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 17.5,
+      "projection": 14.4,
+      "diff": -3.1,
+      "confidence": 53.39,
+      "ev": 6.5,
+      "edge": 3.0999999999999996,
+      "pick_score": 57.3,
+      "score_factors": [
+        "+25.8% True EV",
+        "Favorable matchup (#7.0 DEF)",
+        "+3.1 edge"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 17.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -112
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 17.5,
+            "odds": -114
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -112
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "SAS ranks #7 in points defense \u2014 favorable for unders.",
+      "matchup_favorability": "favorable",
+      "l10_hit_rate": 50.0,
+      "rec_rank": 2
     }
   ]
 }

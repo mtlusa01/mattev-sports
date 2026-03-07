@@ -1,114 +1,134 @@
 {
   "date": "2026-03-07",
-  "generated_at": "2026-03-07T06:28:36",
+  "generated_at": "2026-03-07T14:36:33",
   "picks": [
     {
-      "type": "ml",
-      "game": "BKN @ DET",
-      "away_team": "BKN",
-      "home_team": "DET",
-      "pick": "DET",
-      "confidence": 89.1,
-      "pick_score": 50.0,
-      "score_factors": [
-        "89.1% ML conf"
-      ],
-      "commence_time": "2026-03-07T23:10:00Z",
-      "top_pick_rank": 1
-    },
-    {
-      "type": "spread",
-      "game": "LAC @ MEM",
-      "away_team": "LAC",
-      "home_team": "MEM",
-      "pick": "MEM +6.0",
-      "confidence": 65.0,
-      "pick_score": 50.0,
-      "score_factors": [
-        "65.0% spread conf",
-        "High confidence"
-      ],
-      "commence_time": "2026-03-08T01:10:00Z",
-      "top_pick_rank": 2
-    },
-    {
-      "type": "ml",
-      "game": "UTA @ MIL",
-      "away_team": "UTA",
-      "home_team": "MIL",
-      "pick": "MIL",
-      "confidence": 65.8,
-      "pick_score": 50.0,
-      "score_factors": [
-        "65.8% ML conf"
-      ],
-      "commence_time": "2026-03-08T01:10:00Z",
-      "top_pick_rank": 3
-    },
-    {
-      "type": "ml",
-      "game": "GSW @ OKC",
-      "away_team": "GSW",
-      "home_team": "OKC",
-      "pick": "OKC",
-      "confidence": 76.8,
-      "pick_score": 50.0,
-      "score_factors": [
-        "76.8% ML conf"
-      ],
-      "commence_time": "2026-03-08T01:40:00Z",
-      "top_pick_rank": 4
-    },
-    {
       "type": "prop",
-      "player": "Kawhi Leonard",
+      "player": "Bennedict Mathurin",
       "team": "LAC",
       "prop": "PTS",
       "direction": "UNDER",
-      "line": 27.5,
-      "projection": 22.5,
-      "diff": -5.0,
-      "ev": 5.6,
-      "confidence": 52.535,
-      "pick_score": 45.0,
+      "line": 17.5,
+      "projection": 14.4,
+      "diff": -3.1,
+      "ev": 6.5,
+      "confidence": 53.39,
+      "pick_score": 57.3,
       "score_factors": [
-        "+22.2% True EV",
-        "+5.0 edge"
+        "+25.8% True EV",
+        "Favorable matchup (#7.0 DEF)",
+        "+3.1 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 27.5,
-            "odds": -110
+            "line": 17.5,
+            "odds": -118
           },
           "under": {
-            "line": 27.5,
-            "odds": -120
+            "line": 17.5,
+            "odds": -112
           }
         },
         "draftkings": {
           "over": {
-            "line": 27.5,
-            "odds": -120
+            "line": 17.5,
+            "odds": -114
           },
           "under": {
-            "line": 27.5,
-            "odds": -106
-          }
-        },
-        "betmgm": {
-          "over": {
-            "line": 27.5,
-            "odds": -125
-          },
-          "under": {
-            "line": 27.5,
-            "odds": -105
+            "line": 17.5,
+            "odds": -112
           }
         }
       },
-      "best_book": "betmgm",
-      "insight": "Averaging 23.0 points over last 10 games (-4.5 below line).",
+      "best_book": "fanduel",
+      "insight": "SAS ranks #7 in points defense \u2014 favorable for unders.",
+      "top_pick_rank": 1
+    },
+    {
+      "type": "total",
+      "game": "IND @ LAL",
+      "away_team": "IND",
+      "home_team": "LAL",
+      "pick": "UNDER 235.5",
+      "confidence": 75.3,
+      "pick_score": 55.0,
+      "score_factors": [
+        "75.3% total conf",
+        "Very high confidence"
+      ],
+      "commence_time": "2026-03-07T03:40:00Z",
+      "top_pick_rank": 2
+    },
+    {
+      "type": "ml",
+      "game": "POR @ HOU",
+      "away_team": "POR",
+      "home_team": "HOU",
+      "pick": "HOU",
+      "confidence": 70.6,
+      "pick_score": 50.0,
+      "score_factors": [
+        "70.6% ML conf"
+      ],
+      "commence_time": "2026-03-07T01:10:00Z",
+      "top_pick_rank": 3
+    },
+    {
+      "type": "ml",
+      "game": "IND @ LAL",
+      "away_team": "IND",
+      "home_team": "LAL",
+      "pick": "LAL",
+      "confidence": 73.3,
+      "pick_score": 50.0,
+      "score_factors": [
+        "73.3% ML conf"
+      ],
+      "commence_time": "2026-03-07T03:40:00Z",
+      "top_pick_rank": 4
+    },
+    {
+      "type": "prop",
+      "player": "Darius Garland",
+      "team": "LAC",
+      "prop": "PTS",
+      "direction": "OVER",
+      "line": 14.5,
+      "projection": 16.9,
+      "diff": 2.4,
+      "ev": 6.2,
+      "confidence": 54.9,
+      "pick_score": 49.2,
+      "score_factors": [
+        "+24.6% True EV",
+        "80% L10 hit rate",
+        "+2.4 edge"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 14.5,
+            "odds": -106
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -125
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 14.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -118
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
       "top_pick_rank": 5
     }
   ]
