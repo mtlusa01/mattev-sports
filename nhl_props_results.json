@@ -1424,41 +1424,61 @@
     },
     {
       "date": "2026-03-06",
-      "wins": 4,
-      "losses": 4,
+      "wins": 11,
+      "losses": 6,
       "pushes": 0,
-      "total": 8,
-      "pct": 50.0,
+      "total": 17,
+      "pct": 64.7,
       "by_type": {
+        "ASSISTS": {
+          "wins": 3,
+          "losses": 0,
+          "pushes": 0
+        },
         "SHOTS": {
-          "wins": 0,
-          "losses": 3,
+          "wins": 1,
+          "losses": 5,
           "pushes": 0
         },
         "POINTS": {
-          "wins": 4,
+          "wins": 7,
           "losses": 1,
           "pushes": 0
         }
       },
       "by_tier": {
-        "GOOD": {
-          "wins": 2,
-          "losses": 2,
+        "STRONG": {
+          "wins": 3,
+          "losses": 3,
           "pushes": 0
         },
-        "STRONG": {
-          "wins": 0,
+        "GOOD": {
+          "wins": 4,
           "losses": 2,
           "pushes": 0
         },
         "FAIR": {
-          "wins": 2,
-          "losses": 0,
+          "wins": 4,
+          "losses": 1,
           "pushes": 0
         }
       },
       "picks": [
+        {
+          "player": "Nathan MacKinnon",
+          "team": "COL",
+          "opponent": "DAL",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.6,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 69.1,
+          "ev": 7.06,
+          "edge": "STRONG"
+        },
         {
           "player": "Marco Kasper",
           "team": "DET",
@@ -1505,6 +1525,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Valeri Nichushkin",
+          "team": "COL",
+          "opponent": "DAL",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 2.5,
+          "projection": 1.76,
+          "actual": 0.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 69.2,
+          "ev": 4.19,
+          "edge": "GOOD"
+        },
+        {
           "player": "Dylan Larkin",
           "team": "DET",
           "opponent": "FLA",
@@ -1517,6 +1552,21 @@
           "hit": true,
           "confidence": 65.3,
           "ev": 4.93,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Miro Heiskanen",
+          "team": "DAL",
+          "opponent": "COL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.03,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.2,
+          "ev": 4.74,
           "edge": "GOOD"
         },
         {
@@ -1550,6 +1600,51 @@
           "edge": "FAIR"
         },
         {
+          "player": "Martin Necas",
+          "team": "COL",
+          "opponent": "DAL",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.14,
+          "actual": 3.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.3,
+          "ev": 7.75,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Miro Heiskanen",
+          "team": "DAL",
+          "opponent": "COL",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.92,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 52.2,
+          "ev": 6.94,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Cale Makar",
+          "team": "COL",
+          "opponent": "DAL",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 3.01,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 58.8,
+          "ev": 5.86,
+          "edge": "STRONG"
+        },
+        {
           "player": "Sam Reinhart",
           "team": "FLA",
           "opponent": "DET",
@@ -1565,6 +1660,21 @@
           "edge": "GOOD"
         },
         {
+          "player": "Ross Colton",
+          "team": "COL",
+          "opponent": "DAL",
+          "prop": "POINTS",
+          "direction": "UNDER",
+          "line": 0.5,
+          "projection": 0.21,
+          "actual": 0.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 70.6,
+          "ev": 0.58,
+          "edge": "FAIR"
+        },
+        {
           "player": "Patrick Kane",
           "team": "DET",
           "opponent": "FLA",
@@ -1578,15 +1688,45 @@
           "confidence": 57.1,
           "ev": 0.98,
           "edge": "FAIR"
+        },
+        {
+          "player": "Brock Nelson",
+          "team": "COL",
+          "opponent": "DAL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.97,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 61.1,
+          "ev": 0.74,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Matt Duchene",
+          "team": "DAL",
+          "opponent": "COL",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.62,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 56.8,
+          "ev": 0.44,
+          "edge": "FAIR"
         }
       ]
     }
   ],
   "all_time": {
-    "wins": 57,
-    "losses": 54,
+    "wins": 64,
+    "losses": 56,
     "pushes": 0,
-    "pct": 51.4,
+    "pct": 53.3,
     "by_type": {
       "POINTS": {
         "wins": 46,
@@ -1605,5 +1745,5 @@
       }
     }
   },
-  "updated": "2026-03-07T03:51:31"
+  "updated": "2026-03-07T03:59:30"
 }
