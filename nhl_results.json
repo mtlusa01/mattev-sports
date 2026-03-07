@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-07T04:29:56",
+  "updated": "2026-03-07T04:31:02",
   "allTime": {
     "spreads": {
+      "wins": 35,
+      "losses": 24,
+      "pushes": 0,
+      "pct": 59.3,
+      "roi": 13.3
+    },
+    "totals": {
       "wins": 34,
       "losses": 24,
       "pushes": 0,
       "pct": 58.6,
       "roi": 11.9
     },
-    "totals": {
-      "wins": 33,
-      "losses": 24,
-      "pushes": 0,
-      "pct": 57.9,
-      "roi": 10.5
-    },
     "moneylines": {
-      "wins": 36,
+      "wins": 37,
       "losses": 22,
       "pushes": 0,
-      "pct": 62.1,
-      "roi": 18.5
+      "pct": 62.7,
+      "roi": 19.7
     },
     "best_bets": {
-      "wins": 31,
-      "losses": 14,
+      "wins": 33,
+      "losses": 12,
       "pushes": 0,
-      "pct": 68.9,
-      "roi": 31.5
+      "pct": 73.3,
+      "roi": 40.0
     }
   },
   "days": [
     {
       "date": "2026-03-06",
       "spreads": {
-        "wins": 2,
+        "wins": 3,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "3-1",
+        "pct": 75.0
       },
       "totals": {
-        "wins": 1,
+        "wins": 2,
         "losses": 2,
         "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
+        "record": "2-2",
+        "pct": 50.0
       },
       "moneylines": {
-        "wins": 2,
+        "wins": 3,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "3-1",
+        "pct": 75.0
       },
       "best_bets": {
-        "wins": 2,
-        "losses": 3,
+        "wins": 4,
+        "losses": 1,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "picks": [
         {
@@ -80,8 +80,7 @@
           "result": "3-1",
           "hit": false,
           "confidence": 55.6,
-          "proj_score": "2.6-3.8",
-          "best_bet": true
+          "proj_score": "2.6-3.8"
         },
         {
           "date": "2026-03-06",
@@ -114,8 +113,7 @@
           "result": "5-4",
           "hit": false,
           "confidence": 56.2,
-          "proj_score": "2.8-2.7",
-          "best_bet": true
+          "proj_score": "2.8-2.7"
         },
         {
           "date": "2026-03-06",
@@ -159,6 +157,39 @@
           "confidence": 50.3,
           "proj_score": "3.0-2.9",
           "home_win_prob": 35.3
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "CAR @ EDM",
+          "pick": "CAR -1.5",
+          "result": "6-3",
+          "hit": true,
+          "confidence": 53.7,
+          "proj_score": "5.1-2.9"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "CAR @ EDM",
+          "pick": "OVER 6.5",
+          "result": "6-3",
+          "hit": true,
+          "confidence": 59.0,
+          "proj_score": "5.1-2.9",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "CAR @ EDM",
+          "pick": "CAR",
+          "result": "6-3",
+          "hit": true,
+          "confidence": 67.0,
+          "proj_score": "5.1-2.9",
+          "home_win_prob": 37.0,
+          "best_bet": true
         }
       ]
     },
