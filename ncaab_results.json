@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-07T06:28:48",
+  "updated": "2026-03-07T06:31:52",
   "allTime": {
     "spreads": {
-      "wins": 286,
+      "wins": 287,
       "losses": 231,
       "pushes": 12,
-      "pct": 55.3,
-      "roi": 5.6
+      "pct": 55.4,
+      "roi": 5.8
     },
     "totals": {
       "wins": 258,
-      "losses": 268,
+      "losses": 269,
       "pushes": 3,
       "pct": 49.0,
-      "roi": -6.4
+      "roi": -6.5
     },
     "moneylines": {
-      "wins": 343,
+      "wins": 344,
       "losses": 186,
       "pushes": 0,
-      "pct": 64.8,
-      "roi": 23.8
+      "pct": 64.9,
+      "roi": 23.9
     },
     "best_bets": {
       "wins": 51,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-06",
       "spreads": {
-        "wins": 11,
+        "wins": 12,
         "losses": 24,
         "pushes": 1,
-        "record": "11-24-1",
-        "pct": 31.4
+        "record": "12-24-1",
+        "pct": 33.3
       },
       "totals": {
         "wins": 20,
-        "losses": 16,
-        "pushes": 0,
-        "record": "20-16",
-        "pct": 55.6
-      },
-      "moneylines": {
-        "wins": 19,
         "losses": 17,
         "pushes": 0,
-        "record": "19-17",
-        "pct": 52.8
+        "record": "20-17",
+        "pct": 54.1
+      },
+      "moneylines": {
+        "wins": 20,
+        "losses": 17,
+        "pushes": 0,
+        "record": "20-17",
+        "pct": 54.1
       },
       "best_bets": {
         "wins": 2,
@@ -1146,6 +1146,36 @@
           "hit": true,
           "confidence": 67,
           "proj_score": "72.7-77.9"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "USD @ SEA",
+          "pick": "USD +7.5",
+          "result": "56-58",
+          "hit": true,
+          "confidence": 59,
+          "proj_score": "70.0-76.4"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "USD @ SEA",
+          "pick": "OVER 140.5",
+          "result": "56-58",
+          "hit": false,
+          "confidence": 51,
+          "proj_score": "70.0-76.4"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "USD @ SEA",
+          "pick": "SEA",
+          "result": "56-58",
+          "hit": true,
+          "confidence": 69,
+          "proj_score": "70.0-76.4"
         }
       ]
     },
