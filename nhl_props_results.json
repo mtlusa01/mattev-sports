@@ -3076,13 +3076,192 @@
           "edge": "FAIR"
         }
       ]
+    },
+    {
+      "date": "2026-03-07",
+      "wins": 3,
+      "losses": 6,
+      "pushes": 0,
+      "total": 9,
+      "pct": 33.3,
+      "by_type": {
+        "SHOTS": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0
+        },
+        "POINTS": {
+          "wins": 1,
+          "losses": 3,
+          "pushes": 0
+        },
+        "ASSISTS": {
+          "wins": 1,
+          "losses": 0,
+          "pushes": 0
+        }
+      },
+      "by_tier": {
+        "STRONG": {
+          "wins": 1,
+          "losses": 0,
+          "pushes": 0
+        },
+        "GOOD": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0
+        },
+        "FAIR": {
+          "wins": 2,
+          "losses": 4,
+          "pushes": 0
+        }
+      },
+      "picks": [
+        {
+          "player": "Charlie McAvoy",
+          "team": "BOS",
+          "opponent": "WSH",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.78,
+          "actual": 3.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.5,
+          "ev": 5.26,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Dylan Strome",
+          "team": "WSH",
+          "opponent": "BOS",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.83,
+          "actual": 1.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 62.0,
+          "ev": 3.88,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Charlie McAvoy",
+          "team": "BOS",
+          "opponent": "WSH",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.92,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.3,
+          "ev": 1.43,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Morgan Geekie",
+          "team": "BOS",
+          "opponent": "WSH",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.95,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 60.2,
+          "ev": 0.87,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Pavel Zacha",
+          "team": "BOS",
+          "opponent": "WSH",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 1.5,
+          "projection": 1.29,
+          "actual": 3.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 57.6,
+          "ev": 0.19,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Viktor Arvidsson",
+          "team": "BOS",
+          "opponent": "WSH",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 2.5,
+          "projection": 2.13,
+          "actual": 3.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 53.7,
+          "ev": 4.76,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Charlie McAvoy",
+          "team": "BOS",
+          "opponent": "WSH",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.78,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 52.1,
+          "ev": 1.72,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Dylan Strome",
+          "team": "WSH",
+          "opponent": "BOS",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.91,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 58.1,
+          "ev": 1.2,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Alex Ovechkin",
+          "team": "WSH",
+          "opponent": "BOS",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.91,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 59.0,
+          "ev": 0.57,
+          "edge": "FAIR"
+        }
+      ]
     }
   ],
   "all_time": {
-    "wins": 128,
-    "losses": 90,
+    "wins": 131,
+    "losses": 96,
     "pushes": 0,
-    "pct": 58.7,
+    "pct": 57.7,
     "by_type": {
       "POINTS": {
         "wins": 62,
@@ -3101,5 +3280,5 @@
       }
     }
   },
-  "updated": "2026-03-07T09:58:51"
+  "updated": "2026-03-07T20:06:13"
 }
