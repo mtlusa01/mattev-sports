@@ -4,25 +4,25 @@
     {
       "date": "2026-03-07",
       "spreads": {
-        "wins": 4,
+        "wins": 5,
         "losses": 2,
         "pushes": 0,
-        "record": "4-2",
-        "pct": 66.7
+        "record": "5-2",
+        "pct": 71.4
       },
       "totals": {
-        "wins": 5,
+        "wins": 6,
         "losses": 1,
         "pushes": 0,
-        "record": "5-1",
-        "pct": 83.3
+        "record": "6-1",
+        "pct": 85.7
       },
       "moneylines": {
-        "wins": 2,
+        "wins": 3,
         "losses": 4,
         "pushes": 0,
-        "record": "2-4",
-        "pct": 33.3
+        "record": "3-4",
+        "pct": 42.9
       },
       "best_bets": {
         "wins": 4,
@@ -228,6 +228,38 @@
           "home_win_prob": 59.6,
           "away_win_prob": 40.4,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "NYM @ STL",
+          "pick": "NYM +1.5",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 53.3,
+          "proj_score": "4.3-3.6"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "NYM @ STL",
+          "pick": "UNDER 8.5",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 51.8,
+          "proj_score": "4.3-3.6"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "NYM @ STL",
+          "pick": "NYM",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 53.8,
+          "proj_score": "4.3-3.6",
+          "home_win_prob": 42.5,
+          "away_win_prob": 57.5
         }
       ]
     },
@@ -1604,25 +1636,25 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 27,
+      "wins": 28,
       "losses": 17,
       "pushes": 0,
-      "pct": 61.4,
-      "roi": 17.1
+      "pct": 62.2,
+      "roi": 18.8
     },
     "totals": {
-      "wins": 26,
+      "wins": 27,
       "losses": 18,
       "pushes": 0,
-      "pct": 59.1,
-      "roi": 12.8
+      "pct": 60.0,
+      "roi": 14.5
     },
     "moneylines": {
-      "wins": 24,
+      "wins": 25,
       "losses": 20,
       "pushes": 0,
-      "pct": 54.5,
-      "roi": 4.1
+      "pct": 55.6,
+      "roi": 6.1
     },
     "best_bets": {
       "wins": 18,
@@ -1632,5 +1664,5 @@
       "roi": 37.5
     }
   },
-  "updated": "2026-03-07T20:47:44"
+  "updated": "2026-03-07T20:52:46"
 }
