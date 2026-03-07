@@ -1421,13 +1421,172 @@
           "hit": false
         }
       ]
+    },
+    {
+      "date": "2026-03-06",
+      "wins": 4,
+      "losses": 4,
+      "pushes": 0,
+      "total": 8,
+      "pct": 50.0,
+      "by_type": {
+        "SHOTS": {
+          "wins": 0,
+          "losses": 3,
+          "pushes": 0
+        },
+        "POINTS": {
+          "wins": 4,
+          "losses": 1,
+          "pushes": 0
+        }
+      },
+      "by_tier": {
+        "GOOD": {
+          "wins": 2,
+          "losses": 2,
+          "pushes": 0
+        },
+        "STRONG": {
+          "wins": 0,
+          "losses": 2,
+          "pushes": 0
+        },
+        "FAIR": {
+          "wins": 2,
+          "losses": 0,
+          "pushes": 0
+        }
+      },
+      "picks": [
+        {
+          "player": "Marco Kasper",
+          "team": "DET",
+          "opponent": "FLA",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.79,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 59.3,
+          "ev": 4.89,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Moritz Seider",
+          "team": "DET",
+          "opponent": "FLA",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.24,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 68.4,
+          "ev": 7.51,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Sam Bennett",
+          "team": "FLA",
+          "opponent": "DET",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 3.09,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 60.1,
+          "ev": 6.27,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Dylan Larkin",
+          "team": "DET",
+          "opponent": "FLA",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.29,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 65.3,
+          "ev": 4.93,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Moritz Seider",
+          "team": "DET",
+          "opponent": "FLA",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.92,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 55.5,
+          "ev": 3.76,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Alex DeBrincat",
+          "team": "DET",
+          "opponent": "FLA",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.19,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 67.4,
+          "ev": 1.46,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Sam Reinhart",
+          "team": "FLA",
+          "opponent": "DET",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.15,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 64.4,
+          "ev": 2.67,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Patrick Kane",
+          "team": "DET",
+          "opponent": "FLA",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.88,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 57.1,
+          "ev": 0.98,
+          "edge": "FAIR"
+        }
+      ]
     }
   ],
   "all_time": {
-    "wins": 91,
-    "losses": 72,
+    "wins": 57,
+    "losses": 54,
     "pushes": 0,
-    "pct": 55.8,
+    "pct": 51.4,
     "by_type": {
       "POINTS": {
         "wins": 46,
@@ -1446,5 +1605,5 @@
       }
     }
   },
-  "updated": "2026-03-05T07:52:21"
+  "updated": "2026-03-07T03:51:31"
 }

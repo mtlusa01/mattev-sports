@@ -1,7 +1,7 @@
 {
   "date": "2026-03-06",
   "sport": "NHL",
-  "updated": "2026-03-07T01:55:40",
+  "updated": "2026-03-07T03:51:30",
   "games": [
     {
       "away_team": "FLA",
@@ -23,7 +23,7 @@
       "ml_odds": -150,
       "home_win_prob": 66.9,
       "commence_time": "2026-03-07T00:00:00Z",
-      "status": "live",
+      "status": "final",
       "odds": {
         "FD": {
           "spread": {
@@ -82,8 +82,11 @@
       },
       "home_goalie": "John Gibson",
       "away_goalie": "Sergei Bobrovsky",
-      "away_score": 1,
-      "home_score": 1
+      "away_score": 3,
+      "home_score": 1,
+      "spread_result": "L",
+      "total_result": "L",
+      "ml_result": "L"
     },
     {
       "away_team": "COL",
@@ -164,8 +167,8 @@
       },
       "home_goalie": "Jake Oettinger",
       "away_goalie": "Scott Wedgewood",
-      "away_score": 2,
-      "home_score": 3
+      "away_score": 4,
+      "home_score": 4
     },
     {
       "away_team": "VAN",
@@ -246,8 +249,8 @@
       },
       "home_goalie": "Spencer Knight",
       "away_goalie": "Kevin Lankinen",
-      "away_score": 2,
-      "home_score": 1
+      "away_score": 4,
+      "home_score": 3
     },
     {
       "away_team": "CAR",
@@ -269,7 +272,7 @@
       "ml_odds": -114,
       "home_win_prob": 37.0,
       "commence_time": "2026-03-07T02:00:00Z",
-      "status": "scheduled",
+      "status": "live",
       "odds": {
         "FD": {
           "spread": {
@@ -327,7 +330,9 @@
         }
       },
       "home_goalie": "Tristan Jarry",
-      "away_goalie": "Brandon Bussi"
+      "away_goalie": "Brandon Bussi",
+      "away_score": 3,
+      "home_score": 2
     },
     {
       "away_team": "MTL",
@@ -349,10 +354,12 @@
       "ml_odds": null,
       "home_win_prob": 60.5,
       "commence_time": "2026-03-07T02:00:00Z",
-      "status": "scheduled",
+      "status": "live",
       "odds": {},
       "home_goalie": "Lukas Dostal",
-      "away_goalie": "Jakub Dobes"
+      "away_goalie": "Jakub Dobes",
+      "away_score": 2,
+      "home_score": 3
     },
     {
       "away_team": "MIN",
@@ -454,7 +461,7 @@
       "ml_odds": -135,
       "home_win_prob": 84.7,
       "commence_time": "2026-03-07T03:00:00Z",
-      "status": "scheduled",
+      "status": "live",
       "odds": {
         "FD": {
           "spread": {
@@ -512,7 +519,9 @@
         }
       },
       "home_goalie": "Yaroslav Askarov",
-      "away_goalie": "Jordan Binnington"
+      "away_goalie": "Jordan Binnington",
+      "away_score": 1,
+      "home_score": 0
     }
   ]
 }

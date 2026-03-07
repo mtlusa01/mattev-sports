@@ -1,36 +1,103 @@
 {
-  "updated": "2026-03-06T06:01:42",
+  "updated": "2026-03-07T03:51:30",
   "allTime": {
     "spreads": {
+      "wins": 32,
+      "losses": 24,
+      "pushes": 0,
+      "pct": 57.1,
+      "roi": 9.1
+    },
+    "totals": {
       "wins": 32,
       "losses": 23,
       "pushes": 0,
       "pct": 58.2,
       "roi": 11.1
     },
-    "totals": {
-      "wins": 32,
-      "losses": 22,
-      "pushes": 0,
-      "pct": 59.3,
-      "roi": 13.1
-    },
     "moneylines": {
       "wins": 34,
-      "losses": 21,
+      "losses": 22,
       "pushes": 0,
-      "pct": 61.8,
-      "roi": 18.0
+      "pct": 60.7,
+      "roi": 15.9
     },
     "best_bets": {
       "wins": 29,
-      "losses": 11,
+      "losses": 14,
       "pushes": 0,
-      "pct": 72.5,
-      "roi": 38.4
+      "pct": 67.4,
+      "roi": 28.8
     }
   },
   "days": [
+    {
+      "date": "2026-03-06",
+      "spreads": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "moneylines": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "best_bets": {
+        "wins": 0,
+        "losses": 3,
+        "pushes": 0,
+        "record": "0-3",
+        "pct": 0.0
+      },
+      "picks": [
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "FLA @ DET",
+          "pick": "DET -1.5",
+          "result": "3-1",
+          "hit": false,
+          "confidence": 51.5,
+          "proj_score": "2.6-3.8",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "FLA @ DET",
+          "pick": "OVER 5.5",
+          "result": "3-1",
+          "hit": false,
+          "confidence": 55.6,
+          "proj_score": "2.6-3.8",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "FLA @ DET",
+          "pick": "DET",
+          "result": "3-1",
+          "hit": false,
+          "confidence": 60.0,
+          "proj_score": "2.6-3.8",
+          "home_win_prob": 66.9,
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-03-05",
       "spreads": {

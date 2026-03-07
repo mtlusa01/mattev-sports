@@ -1,6 +1,34 @@
 {
-  "updated": "2026-03-06T17:04:11",
+  "updated": "2026-03-07T03:51:30",
   "allTime": {
+    "spreads": {
+      "wins": 29,
+      "losses": 30,
+      "pushes": 0,
+      "pct": 49.2,
+      "roi": -6.2
+    },
+    "totals": {
+      "wins": 33,
+      "losses": 28,
+      "pushes": 0,
+      "pct": 54.1,
+      "roi": 3.3
+    },
+    "moneylines": {
+      "wins": 72,
+      "losses": 37,
+      "pushes": 0,
+      "pct": 66.1,
+      "roi": 26.1
+    },
+    "best_bets": {
+      "wins": 98,
+      "losses": 56,
+      "pushes": 0,
+      "pct": 63.6,
+      "roi": 21.5
+    },
     "props": {
       "wins": 18,
       "losses": 14,
@@ -8,38 +36,138 @@
       "pct": 56.2,
       "roi": 7.4
     },
-    "spreads": {
-      "wins": 27,
-      "losses": 29,
-      "pushes": 0,
-      "pct": 48.2,
-      "roi": -8.0
-    },
-    "totals": {
-      "wins": 32,
-      "losses": 26,
-      "pushes": 0,
-      "pct": 55.2,
-      "roi": 5.3
-    },
-    "moneylines": {
-      "wins": 70,
-      "losses": 36,
-      "pushes": 0,
-      "pct": 66.0,
-      "roi": 26.1
-    },
-    "best_bets": {
-      "wins": 95,
-      "losses": 54,
-      "pushes": 0,
-      "pct": 63.8,
-      "roi": 21.7
-    },
     "best_prop_type": "pts_rebs_asts",
     "best_prop_pct": 52.5
   },
   "days": [
+    {
+      "date": "2026-03-06",
+      "spreads": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 2,
+        "pushes": 0,
+        "record": "1-2",
+        "pct": 33.3
+      },
+      "moneylines": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "best_bets": {
+        "wins": 3,
+        "losses": 2,
+        "pushes": 0,
+        "record": "3-2",
+        "pct": 60.0
+      },
+      "picks": [
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "DAL @ BOS",
+          "pick": "DAL +15.5",
+          "result": "100-120",
+          "hit": false,
+          "confidence": 57.1,
+          "proj_score": "105.3-115.7"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "DAL @ BOS",
+          "pick": "UNDER 223.5",
+          "result": "100-120",
+          "hit": true,
+          "confidence": 53.6,
+          "proj_score": "105.3-115.7"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "DAL @ BOS",
+          "pick": "BOS",
+          "result": "100-120",
+          "hit": true,
+          "confidence": 64.7,
+          "proj_score": "105.3-115.7",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "MIA @ CHA",
+          "pick": "MIA +7.5",
+          "result": "128-120",
+          "hit": true,
+          "confidence": 63.1,
+          "proj_score": "111.7-115.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "MIA @ CHA",
+          "pick": "UNDER 229.5",
+          "result": "128-120",
+          "hit": false,
+          "confidence": 55.9,
+          "proj_score": "111.7-115.6"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "MIA @ CHA",
+          "pick": "CHA",
+          "result": "128-120",
+          "hit": false,
+          "confidence": 61.5,
+          "proj_score": "111.7-115.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "POR @ HOU",
+          "pick": "HOU -6.0",
+          "result": "99-106",
+          "hit": true,
+          "confidence": 55.1,
+          "proj_score": "108.6-117.1"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "POR @ HOU",
+          "pick": "OVER 220.5",
+          "result": "99-106",
+          "hit": false,
+          "confidence": 62.9,
+          "proj_score": "108.6-117.1",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "POR @ HOU",
+          "pick": "HOU",
+          "result": "99-106",
+          "hit": true,
+          "confidence": 70.6,
+          "proj_score": "108.6-117.1",
+          "best_bet": true
+        }
+      ]
+    },
     {
       "date": "2026-03-05",
       "props": {
