@@ -19,6 +19,7 @@ jobs:
 
     permissions:
       contents: write
+      actions: write
 
     steps:
       - name: Checkout mattev-sports
@@ -36,6 +37,8 @@ jobs:
         run: pip install requests
 
       - name: Self-healing grade loop
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           # CRITICAL: Disable set -e so non-zero exit codes don't kill the loop.
           # GitHub Actions runs bash with set -eo pipefail by default.
@@ -150,4 +153,14 @@ jobs:
 
           echo ""
           echo "=== Loop complete ($i iterations, last exit: $last_exit) ==="
+
+          # Self-re-trigger: if games are still active, chain another run
+          # This makes grading independent of cron reliability
+          if [ $last_exit -ne 2 ] && [ $last_exit -ne 1 ]; then
+            echo "Games still active (exit $last_exit) — re-triggering workflow..."
+            gh workflow run check-scores.yml 2>/dev/null && echo "Re-trigger: queued" || echo "Re-trigger: skipped (already queued or rate limited)"
+          else
+            echo "All games graded or no games — not re-triggering"
+          fi
+
           exit 0
