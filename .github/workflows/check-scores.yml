@@ -37,12 +37,23 @@ jobs:
 
       - name: Self-healing grade loop
         run: |
+          # CRITICAL: Disable set -e so non-zero exit codes don't kill the loop.
+          # GitHub Actions runs bash with set -eo pipefail by default.
+          # Our Python script uses exit codes 2 (all graded) and 3 (fast poll)
+          # as informational signals, NOT errors.
+          set +e
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           MAX_ITERS=16
           SLEEP_SECS=90
           PUSH_RETRIES=3
+
+          GRADE_FILES="results.json ncaab_results.json nhl_results.json mlb_results.json \
+                       game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
+                       nhl_player_props.json nhl_props_results.json projections.json \
+                       all_props.json all_props_results.json"
 
           grade_and_push() {
             echo ""
@@ -55,14 +66,13 @@ jobs:
               git reset --hard origin/main
             }
 
-            python scripts/check_and_grade.py
-            py_exit=$?
+            # Run grading — capture exit code without letting it kill anything
+            python scripts/check_and_grade.py 2>&1
+            local py_exit=$?
+            echo "  [script exit code: $py_exit]"
 
             # Stage all gradeable files
-            for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
-                     game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
-                     nhl_player_props.json nhl_props_results.json projections.json \
-                     all_props.json all_props_results.json; do
+            for f in $GRADE_FILES; do
               [ -f "$f" ] && git add "$f"
             done
 
@@ -83,11 +93,8 @@ jobs:
                   git fetch origin main
                   git reset --hard origin/main
                   # Re-run grading to regenerate changes on top of latest
-                  python scripts/check_and_grade.py
-                  for f in results.json ncaab_results.json nhl_results.json mlb_results.json \
-                           game_projections.json nhl_game_projections.json ncaab_projections.json mlb_game_projections.json \
-                           nhl_player_props.json nhl_props_results.json projections.json \
-                           all_props.json all_props_results.json; do
+                  python scripts/check_and_grade.py 2>&1 || true
+                  for f in $GRADE_FILES; do
                     [ -f "$f" ] && git add "$f"
                   done
                   git diff --staged --quiet || git commit -m "Auto-grade: $(date -u +%Y-%m-%d_%H:%M)"
@@ -100,16 +107,23 @@ jobs:
               echo "NO_CHANGES"
             fi
 
+            # Write heartbeat for monitoring
+            echo "{\"last_run\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"iteration\":$1,\"exit_code\":$py_exit}" > grading_heartbeat.json
+
             return $py_exit
           }
 
+          last_exit=0
           for i in $(seq 1 $MAX_ITERS); do
             echo ""
-            echo "=== Iteration $i/$MAX_ITERS ==="
-            grade_and_push
-            py_exit=$?
+            echo "=== Iteration $i/$MAX_ITERS at $(date -u +%H:%M:%S) ==="
 
-            # Exit code 2 = all games graded, no need to continue
+            # Call function — capture exit code safely (set +e already active)
+            grade_and_push $i
+            py_exit=$?
+            last_exit=$py_exit
+
+            # Exit code 2 = all games graded across all sports — stop early
             if [ $py_exit -eq 2 ]; then
               echo "All games graded — stopping loop early (iter $i/$MAX_ITERS)"
               break
@@ -127,6 +141,13 @@ jobs:
             fi
           done
 
+          # Push heartbeat file
+          git add grading_heartbeat.json 2>/dev/null
+          git diff --staged --quiet || {
+            git commit -m "Heartbeat: $(date -u +%Y-%m-%d_%H:%M)"
+            git push 2>/dev/null || true
+          }
+
           echo ""
-          echo "=== Loop complete ($i iterations) ==="
+          echo "=== Loop complete ($i iterations, last exit: $last_exit) ==="
           exit 0
