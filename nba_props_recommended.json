@@ -2,13 +2,138 @@
   "date": "2026-03-07",
   "sport": "NBA",
   "type": "props",
-  "locked_at": "2026-03-07T10:36:28",
+  "locked_at": "2026-03-07T10:42:38",
   "recommendations": [
     {
       "qualified": true,
-      "score": 38.825,
+      "score": 52.557,
       "reasons": [
-        "+8.4% EV",
+        "+12.1% EV",
+        "70% L10 hit rate",
+        "+8.7 edge"
+      ],
+      "type": "prop",
+      "player": "Cade Cunningham",
+      "team": "DET",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 26.5,
+      "projection": 17.8,
+      "diff": -8.7,
+      "confidence": 57.379999999999995,
+      "ev": 12.1,
+      "edge": 8.7,
+      "pick_score": 38.5,
+      "score_factors": [
+        "+48.4% True EV",
+        "+8.7 edge"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 26.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 26.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 26.5,
+            "odds": -102
+          },
+          "under": {
+            "line": 26.5,
+            "odds": -124
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 26.5,
+            "odds": -130
+          },
+          "under": {
+            "line": 26.5,
+            "odds": -105
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Averaging 20.6 points over last 10 games (-5.9 below line).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 70.0,
+      "rec_rank": 1
+    },
+    {
+      "qualified": true,
+      "score": 40.24225,
+      "reasons": [
+        "+9.5% EV",
+        "70% L10 hit rate",
+        "+2.2 edge"
+      ],
+      "type": "prop",
+      "player": "Tyrese Maxey",
+      "team": "PHI",
+      "prop": "AST",
+      "direction": "UNDER",
+      "line": 7.5,
+      "projection": 5.3,
+      "diff": -2.2,
+      "confidence": 58.615,
+      "ev": 9.5,
+      "edge": 2.2,
+      "pick_score": 52.6,
+      "score_factors": [
+        "+38.1% True EV",
+        "+2.2 edge",
+        "3.0-game streak"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 6.5,
+            "odds": -154
+          },
+          "under": {
+            "line": 6.5,
+            "odds": 116
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 7.5,
+            "odds": 115
+          },
+          "under": {
+            "line": 7.5,
+            "odds": -151
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 7.5,
+            "odds": 125
+          },
+          "under": {
+            "line": 7.5,
+            "odds": -165
+          }
+        }
+      },
+      "best_book": "fanduel",
+      "insight": "Averaging 5.2 assists over last 10 games (-2.3 below line).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 70.0,
+      "rec_rank": 2
+    },
+    {
+      "qualified": true,
+      "score": 38.31,
+      "reasons": [
+        "+8.2% EV",
         "80% L10 hit rate",
         "+3.2 edge"
       ],
@@ -20,12 +145,12 @@
       "line": 14.5,
       "projection": 17.7,
       "diff": 3.2,
-      "confidence": 57.5,
-      "ev": 8.4,
+      "confidence": 57.4,
+      "ev": 8.2,
       "edge": 3.1999999999999993,
       "pick_score": 43.1,
       "score_factors": [
-        "+33.5% True EV",
+        "+32.9% True EV",
         "80% L10 hit rate",
         "+3.2 edge"
       ],
@@ -63,9 +188,134 @@
       },
       "best_book": "fanduel",
       "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
-      "matchup_favorability": "unfavorable",
+      "matchup_favorability": "neutral",
       "l10_hit_rate": 80.0,
-      "rec_rank": 1
+      "rec_rank": 3
+    },
+    {
+      "qualified": true,
+      "score": 37.551249999999996,
+      "reasons": [
+        "+6.4% EV",
+        "80% L10 hit rate",
+        "+6.0 edge"
+      ],
+      "type": "prop",
+      "player": "Jalen Johnson",
+      "team": "ATL",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 22.5,
+      "projection": 16.5,
+      "diff": -6.0,
+      "confidence": 53.675,
+      "ev": 6.4,
+      "edge": 6.0,
+      "pick_score": 51.0,
+      "score_factors": [
+        "+42.7% True EV",
+        "+6.0 edge",
+        "3.0-game streak"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 22.5,
+            "odds": -118
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -112
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 22.5,
+            "odds": -109
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -117
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 22.5,
+            "odds": -120
+          },
+          "under": {
+            "line": 22.5,
+            "odds": -110
+          }
+        }
+      },
+      "best_book": "betmgm",
+      "insight": "Averaging 14.0 points over last 10 games (-8.5 below line).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 80.0,
+      "rec_rank": 4
+    },
+    {
+      "qualified": true,
+      "score": 34.73625,
+      "reasons": [
+        "+7.2% EV",
+        "70% L10 hit rate",
+        "+4.4 edge"
+      ],
+      "type": "prop",
+      "player": "Quentin Grimes",
+      "team": "PHI",
+      "prop": "PTS",
+      "direction": "UNDER",
+      "line": 14.5,
+      "projection": 10.1,
+      "diff": -4.4,
+      "confidence": 55.574999999999996,
+      "ev": 7.2,
+      "edge": 4.4,
+      "pick_score": 56.2,
+      "score_factors": [
+        "+48.5% True EV",
+        "+4.4 edge"
+      ],
+      "book_odds": {
+        "fanduel": {
+          "over": {
+            "line": 14.5,
+            "odds": -108
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -122
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 14.5,
+            "odds": -112
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -113
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 14.5,
+            "odds": -105
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -125
+          }
+        }
+      },
+      "best_book": "draftkings",
+      "insight": "Averaging 10.1 points over last 10 games (-4.4 below line).",
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 70.0,
+      "rec_rank": 5
     }
   ]
 }
