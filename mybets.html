@@ -1759,7 +1759,21 @@
         if (bet.type !== 'prop') continue;
         if (bet.status !== 'win' && bet.status !== 'loss') continue;
         const propResult = gradePropBet(bet);
-        if (!propResult) continue;
+        if (!propResult) {
+          // No backend confirmation — if bet is recent (≤48h), revert to pending.
+          const betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
+          const todayStr2 = new Date().toISOString().slice(0, 10);
+          if (betDate) {
+            const diff = Math.abs(new Date(todayStr2) - new Date(betDate));
+            if (diff <= 2 * 86400000) {
+              bet.status = 'pending';
+              bet.actual = null;
+              bet.profit_units = null;
+              changed = true;
+            }
+          }
+          continue;
+        }
         const correctStatus = propResult.hit ? 'win' : 'loss';
         if (bet.status !== correctStatus) {
           bet.status = correctStatus;

@@ -2891,7 +2891,17 @@
             if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { backendMatch = p; break; }
           }
         }
-        if (!backendMatch) continue;
+        if (!backendMatch) {
+          // No backend confirmation — if bet is recent (≤48h), revert to pending.
+          // This catches premature grading from bugs (e.g. wrong-date attribution).
+          if (betDate && datesClose(betDate, todayStr)) {
+            bet.status = 'pending';
+            bet.actual = null;
+            bet.profit_units = null;
+            reconciled = true;
+          }
+          continue;
+        }
         var correctStatus = backendMatch.hit === true ? 'win' : 'loss';
         if (bet.status !== correctStatus) {
           bet.status = correctStatus;
