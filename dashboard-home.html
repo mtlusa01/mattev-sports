@@ -2240,7 +2240,8 @@
               game: (p.player || '') + ' (' + (p.team || '') + ')',
               pick: (p.direction || 'OVER') + ' ' + p.line,
               line: p.line || '', odds: propOdds, confidence: conf, ev: ev,
-              player: p.player || '', prop_type: p.prop || p.market || '',
+              player: p.player || '', team: p.team || '', opponent: p.opponent || '',
+              prop_type: p.prop || p.market || '',
               commenceTime: p.commence_time || null,
               spreadSide: '', totalDir: '', mlSide: '' });
           }
@@ -2261,7 +2262,8 @@
             game: (p.player || '') + ' (' + (p.team || '') + ')',
             pick: (p.direction || 'OVER') + ' ' + p.line,
             line: p.line || '', odds: propOdds, confidence: conf, ev: ev,
-            player: p.player || '', prop_type: p.prop || '',
+            player: p.player || '', team: p.team || '', opponent: p.opponent || '',
+            prop_type: p.prop || '',
             commenceTime: p.commence_time || null,
             spreadSide: '', totalDir: '', mlSide: '' });
         }
@@ -2475,7 +2477,7 @@
         var sportLabel = (p.sport === 'props' || p.sport === 'nhl-props') ? 'PROP' : p.sport.toUpperCase();
         var sportBadge = p.sport === 'props' ? 'props' : p.sport === 'nhl-props' ? 'nhl' : p.sport;
         var propLabel = p.type === 'prop' ? getPropLabel(p) : '';
-        var matchup = p.type === 'prop' ? (p.player + ' (' + (p.team || '') + ')') : p.game;
+        var matchup = p.type === 'prop' ? (p.player + ' (' + (p.team || '') + (p.opponent ? ' vs ' + p.opponent : '') + ')') : p.game;
         var pickLabel = p.type === 'prop' && propLabel ? (propLabel + ' ' + p.pick) : p.pick;
         var typeLabel = p.type === 'prop' ? 'Prop' : p.type.charAt(0).toUpperCase() + p.type.slice(1);
         var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
@@ -2535,7 +2537,7 @@
       var p = lastRecommendations.picks[idx];
       var unitSize = getUnitSize();
       var propLbl = p.type === 'prop' ? getPropLabel(p) : '';
-      var matchup = p.type === 'prop' ? (p.player + ' (' + (p.team || '') + ')') : p.game;
+      var matchup = p.type === 'prop' ? (p.player + ' (' + (p.team || '') + (p.opponent ? ' vs ' + p.opponent : '') + ')') : p.game;
       var oddsStr = parseInt(p.odds) > 0 ? '+' + p.odds : String(p.odds);
       var pickLine = p.type === 'prop' && propLbl ? (propLbl + ' ' + p.pick) : p.pick;
       showBetModal({
