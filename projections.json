@@ -1,8 +1,8 @@
 {
   "date": "2026-03-07",
   "sport": "NBA",
-  "locked_at": "2026-03-07T14:36:33",
-  "updated": "2026-03-07T14:36:33",
+  "locked_at": "2026-03-07T15:18:25",
+  "updated": "2026-03-07T15:18:25",
   "projections": [
     {
       "player": "Bennedict Mathurin",
@@ -10,38 +10,38 @@
       "prop": "PTS",
       "direction": "UNDER",
       "line": 17.5,
-      "projection": 14.4,
-      "confidence": 53.39,
-      "ev": 6.5,
-      "diff": -3.1,
-      "market_odds": -112.0,
-      "fair_odds": -128.0,
+      "projection": 14.3,
+      "confidence": 53.675,
+      "ev": 6.4,
+      "diff": -3.2,
+      "market_odds": -113.0,
+      "fair_odds": -130.0,
       "prob_edge": 3.4,
       "book_odds": {
         "fanduel": {
-          "over": {
-            "line": 17.5,
-            "odds": -118
-          },
-          "under": {
-            "line": 17.5,
-            "odds": -112
-          }
-        },
-        "draftkings": {
           "over": {
             "line": 17.5,
             "odds": -114
           },
           "under": {
             "line": 17.5,
-            "odds": -112
+            "odds": -114
+          }
+        },
+        "draftkings": {
+          "over": {
+            "line": 17.5,
+            "odds": -113
+          },
+          "under": {
+            "line": 17.5,
+            "odds": -113
           }
         }
       },
-      "best_book": "fanduel",
+      "best_book": "draftkings",
       "has_line": true,
-      "generated_at": "2026-03-07T14:36:33",
+      "generated_at": "2026-03-07T15:18:25",
       "edge": "GOOD",
       "l5_avg": 16.8,
       "l10_avg": 19.8,
@@ -56,12 +56,8 @@
       "streak": 0.0,
       "home_avg": 17.7,
       "away_avg": 17.7,
-      "opp_def_rank": 7.0,
-      "matchup_favorability": "favorable",
-      "vs_top10_avg": 17.1,
-      "vs_bot10_avg": 20.8,
-      "insight": "SAS ranks #7 in points defense \u2014 favorable for unders.",
-      "insight_strength": "good",
+      "insight": "On a back-to-back \u2014 rest impact may limit production.",
+      "insight_strength": "lean",
       "last_10_values": [
         23,
         17,
@@ -198,8 +194,8 @@
       ],
       "opponent": "SAS",
       "h2h_total_games": 0,
-      "model_probability": 66.5,
-      "implied_probability": 52.8,
+      "model_probability": 66.7,
+      "implied_probability": 53.1,
       "true_ev": 25.8,
       "stdev": 7.59,
       "cv": 0.435,
@@ -210,23 +206,21 @@
       "var_games_played": 20.0,
       "recommended": false,
       "raw_projection": 18.6,
-      "matchup_factor": 0.978,
+      "matchup_factor": 1.0,
       "pace_factor": 1.0,
-      "adjusted_projection": 14.4,
-      "opponent_rank": 7,
-      "matchup_grade": "D",
+      "adjusted_projection": 14.3,
+      "matchup_grade": "C",
       "teammates_out": 0,
       "redistribution_boost": 0.0,
-      "pre_boost_projection": 14.4,
-      "sim_projection": 14.4,
-      "independent_projection": 18.4,
+      "pre_boost_projection": 14.3,
+      "sim_projection": 14.3,
+      "independent_projection": 18.6,
       "projection_source": "sim",
-      "projection_delta": -4.0,
-      "pick_score": 57.3,
+      "projection_delta": -4.3,
+      "pick_score": 42.6,
       "score_factors": [
         "+25.8% True EV",
-        "Favorable matchup (#7.0 DEF)",
-        "+3.1 edge"
+        "+3.2 edge"
       ],
       "top_pick_rank": 1
     },
@@ -236,13 +230,13 @@
       "prop": "PTS",
       "direction": "OVER",
       "line": 14.5,
-      "projection": 16.9,
-      "confidence": 54.9,
-      "ev": 6.2,
-      "diff": 2.4,
+      "projection": 16.7,
+      "confidence": 54.5,
+      "ev": 5.4,
+      "diff": 2.2,
       "market_odds": -107.0,
-      "fair_odds": -122.0,
-      "prob_edge": 3.2,
+      "fair_odds": -120.0,
+      "prob_edge": 2.8,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -267,7 +261,7 @@
       },
       "best_book": "fanduel",
       "has_line": true,
-      "generated_at": "2026-03-07T14:36:33",
+      "generated_at": "2026-03-07T15:18:25",
       "edge": "STRONG",
       "l5_avg": 17.8,
       "l10_avg": 18.7,
@@ -282,10 +276,6 @@
       "streak": 0.0,
       "home_avg": 18.7,
       "away_avg": 16.9,
-      "opp_def_rank": 7.0,
-      "matchup_favorability": "unfavorable",
-      "vs_top10_avg": 18.4,
-      "vs_bot10_avg": 18.9,
       "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
       "insight_strength": "strong",
       "last_10_values": [
@@ -424,9 +414,9 @@
       ],
       "opponent": "SAS",
       "h2h_total_games": 0,
-      "model_probability": 64.4,
+      "model_probability": 62.8,
       "implied_probability": 51.7,
-      "true_ev": 24.6,
+      "true_ev": 21.6,
       "stdev": 6.24,
       "cv": 0.327,
       "var_trend": -1.8,
@@ -435,24 +425,23 @@
       "consistency_score": 67.3,
       "var_games_played": 20.0,
       "recommended": true,
-      "raw_projection": 16.6,
-      "matchup_factor": 0.978,
+      "raw_projection": 16.7,
+      "matchup_factor": 1.0,
       "pace_factor": 1.0,
-      "adjusted_projection": 16.9,
-      "opponent_rank": 7,
-      "matchup_grade": "D",
+      "adjusted_projection": 16.7,
+      "matchup_grade": "C",
       "teammates_out": 0,
       "redistribution_boost": 0.0,
-      "pre_boost_projection": 16.9,
-      "sim_projection": 16.9,
-      "independent_projection": 16.4,
+      "pre_boost_projection": 16.7,
+      "sim_projection": 16.7,
+      "independent_projection": 16.7,
       "projection_source": "sim",
-      "projection_delta": 0.5,
-      "pick_score": 34.4,
+      "projection_delta": 0.0,
+      "pick_score": 34.0,
       "score_factors": [
-        "+24.6% True EV",
+        "+21.6% True EV",
         "80% L10 hit rate",
-        "+2.4 edge"
+        "+2.2 edge"
       ],
       "injury_status": "Questionable",
       "injury_type": "Left toe",
@@ -465,13 +454,13 @@
       "prop": "AST",
       "direction": "UNDER",
       "line": 5.5,
-      "projection": 4.9,
-      "confidence": 54.625,
-      "ev": 2.4,
-      "diff": -0.6,
-      "market_odds": -128.0,
-      "fair_odds": -135.0,
-      "prob_edge": 1.4,
+      "projection": 4.8,
+      "confidence": 55.195,
+      "ev": 3.1,
+      "diff": -0.7,
+      "market_odds": -129.0,
+      "fair_odds": -139.0,
+      "prob_edge": 1.8,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -486,17 +475,17 @@
         "draftkings": {
           "over": {
             "line": 4.5,
-            "odds": -154
+            "odds": -153
           },
           "under": {
             "line": 4.5,
-            "odds": 117
+            "odds": 116
           }
         },
         "betmgm": {
           "over": {
             "line": 5.5,
-            "odds": 110
+            "odds": 105
           },
           "under": {
             "line": 5.5,
@@ -506,7 +495,7 @@
       },
       "best_book": "draftkings",
       "has_line": true,
-      "generated_at": "2026-03-07T14:36:33",
+      "generated_at": "2026-03-07T15:18:25",
       "edge": "FAIR",
       "l5_avg": 4.2,
       "l10_avg": 5.6,
@@ -521,10 +510,6 @@
       "streak": 1.0,
       "home_avg": 3.7,
       "away_avg": 5.0,
-      "opp_def_rank": 11.0,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 4.8,
-      "vs_bot10_avg": 3.9,
       "insight": "Has stayed UNDER 5.5 assists in 7 of last 10 games (5.6 avg).",
       "insight_strength": "strong",
       "last_10_values": [
@@ -663,9 +648,9 @@
       ],
       "opponent": "SAS",
       "h2h_total_games": 0,
-      "model_probability": 61.6,
-      "implied_probability": 56.1,
-      "true_ev": 9.8,
+      "model_probability": 63.4,
+      "implied_probability": 56.3,
+      "true_ev": 12.6,
       "stdev": 2.32,
       "cv": 0.482,
       "var_trend": -2.8,
@@ -674,22 +659,21 @@
       "consistency_score": 51.8,
       "var_games_played": 20.0,
       "recommended": false,
-      "raw_projection": 4.5,
-      "matchup_factor": 0.991,
+      "raw_projection": 4.7,
+      "matchup_factor": 1.0,
       "pace_factor": 1.0,
-      "adjusted_projection": 4.9,
-      "opponent_rank": 11,
+      "adjusted_projection": 4.8,
       "matchup_grade": "C",
       "teammates_out": 0,
       "redistribution_boost": 0.0,
-      "pre_boost_projection": 4.9,
-      "sim_projection": 4.9,
-      "independent_projection": 4.5,
+      "pre_boost_projection": 4.8,
+      "sim_projection": 4.8,
+      "independent_projection": 4.7,
       "projection_source": "sim",
-      "projection_delta": 0.4,
-      "pick_score": 46.0,
+      "projection_delta": 0.1,
+      "pick_score": 51.0,
       "score_factors": [
-        "+9.8% True EV",
+        "+12.6% True EV",
         "70% L10 hit rate"
       ]
     },
@@ -699,13 +683,13 @@
       "prop": "REB",
       "direction": "OVER",
       "line": 4.5,
-      "projection": 5.0,
-      "confidence": 53.3,
-      "ev": 1.8,
-      "diff": 0.5,
-      "market_odds": -110.0,
-      "fair_odds": -114.0,
-      "prob_edge": 0.9,
+      "projection": 4.9,
+      "confidence": 52.4,
+      "ev": 1.0,
+      "diff": 0.4,
+      "market_odds": -108.0,
+      "fair_odds": -110.0,
+      "prob_edge": 0.5,
       "book_odds": {
         "fanduel": {
           "over": {
@@ -720,17 +704,17 @@
         "draftkings": {
           "over": {
             "line": 4.5,
-            "odds": -115
+            "odds": -110
           },
           "under": {
             "line": 4.5,
-            "odds": -114
+            "odds": -120
           }
         }
       },
       "best_book": "fanduel",
       "has_line": true,
-      "generated_at": "2026-03-07T14:36:33",
+      "generated_at": "2026-03-07T15:18:25",
       "edge": "FAIR",
       "l5_avg": 5.4,
       "l10_avg": 4.9,
@@ -745,10 +729,6 @@
       "streak": 2.0,
       "home_avg": 3.8,
       "away_avg": 3.4,
-      "opp_def_rank": 11.0,
-      "matchup_favorability": "neutral",
-      "vs_top10_avg": 3.7,
-      "vs_bot10_avg": 3.6,
       "insight": "Has gone OVER 4.5 rebounds in 7 of last 10 games (4.9 avg).",
       "insight_strength": "strong",
       "last_10_values": [
@@ -887,9 +867,9 @@
       ],
       "opponent": "SAS",
       "h2h_total_games": 0,
-      "model_probability": 56.1,
-      "implied_probability": 52.4,
-      "true_ev": 7.0,
+      "model_probability": 54.0,
+      "implied_probability": 51.9,
+      "true_ev": 3.9,
       "stdev": 1.94,
       "cv": 0.49,
       "var_trend": 1.0,
@@ -898,22 +878,21 @@
       "consistency_score": 51.0,
       "var_games_played": 20.0,
       "recommended": false,
-      "raw_projection": 3.6,
-      "matchup_factor": 0.995,
+      "raw_projection": 3.5,
+      "matchup_factor": 1.0,
       "pace_factor": 1.0,
-      "adjusted_projection": 5.0,
-      "opponent_rank": 11,
+      "adjusted_projection": 4.9,
       "matchup_grade": "C",
       "teammates_out": 0,
       "redistribution_boost": 0.0,
-      "pre_boost_projection": 5.0,
-      "sim_projection": 5.0,
+      "pre_boost_projection": 4.9,
+      "sim_projection": 4.9,
       "independent_projection": 3.5,
       "projection_source": "sim",
-      "projection_delta": 1.5,
-      "pick_score": 42.2,
+      "projection_delta": 1.4,
+      "pick_score": 25.6,
       "score_factors": [
-        "+7.0% True EV",
+        "+3.9% True EV",
         "70% L10 hit rate"
       ]
     }
@@ -1048,211 +1027,5 @@
       "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
       "top_pick_rank": 5
     }
-  ],
-  "recommendations": {
-    "date": "2026-03-07",
-    "generated_at": "2026-03-07T14:36:33",
-    "game_bets": [
-      {
-        "qualified": true,
-        "score": 175.6,
-        "reasons": [
-          "75.3% confidence",
-          "High confidence"
-        ],
-        "type": "total",
-        "bet_type": "TOTAL",
-        "game": "IND @ LAL",
-        "away_team": "IND",
-        "home_team": "LAL",
-        "pick": "UNDER 235.5",
-        "odds": -110,
-        "confidence": 75.3,
-        "commence_time": "2026-03-07T03:40:00Z",
-        "rec_rank": 1
-      },
-      {
-        "qualified": true,
-        "score": 171.6,
-        "reasons": [
-          "73.3% confidence",
-          "High confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "IND @ LAL",
-        "away_team": "IND",
-        "home_team": "LAL",
-        "pick": "LAL",
-        "odds": -460,
-        "confidence": 73.3,
-        "commence_time": "2026-03-07T03:40:00Z",
-        "rec_rank": 2
-      },
-      {
-        "qualified": true,
-        "score": 166.2,
-        "reasons": [
-          "70.6% confidence",
-          "High confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "POR @ HOU",
-        "away_team": "POR",
-        "home_team": "HOU",
-        "pick": "HOU",
-        "odds": -230,
-        "confidence": 70.6,
-        "commence_time": "2026-03-07T01:10:00Z",
-        "rec_rank": 3
-      },
-      {
-        "qualified": true,
-        "score": 129.4,
-        "reasons": [
-          "64.7% confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "DAL @ BOS",
-        "away_team": "DAL",
-        "home_team": "BOS",
-        "pick": "BOS",
-        "odds": -900,
-        "confidence": 64.7,
-        "commence_time": "2026-03-07T00:10:00Z",
-        "rec_rank": 4
-      },
-      {
-        "qualified": true,
-        "score": 127.6,
-        "reasons": [
-          "63.8% confidence"
-        ],
-        "type": "ml",
-        "bet_type": "ML",
-        "game": "NOP @ PHX",
-        "away_team": "NOP",
-        "home_team": "PHX",
-        "pick": "PHX",
-        "odds": -225,
-        "confidence": 63.8,
-        "commence_time": "2026-03-07T02:10:00Z",
-        "rec_rank": 5
-      }
-    ],
-    "props": [
-      {
-        "qualified": true,
-        "score": 32.135,
-        "reasons": [
-          "+6.2% EV",
-          "80% L10 hit rate",
-          "+2.4 edge"
-        ],
-        "type": "prop",
-        "player": "Darius Garland",
-        "team": "LAC",
-        "prop": "PTS",
-        "direction": "OVER",
-        "line": 14.5,
-        "projection": 16.9,
-        "diff": 2.4,
-        "confidence": 54.9,
-        "ev": 6.2,
-        "edge": 2.3999999999999986,
-        "pick_score": 34.4,
-        "score_factors": [
-          "+24.6% True EV",
-          "80% L10 hit rate",
-          "+2.4 edge"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 14.5,
-              "odds": -106
-            },
-            "under": {
-              "line": 14.5,
-              "odds": -125
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 14.5,
-              "odds": -108
-            },
-            "under": {
-              "line": 14.5,
-              "odds": -118
-            }
-          }
-        },
-        "best_book": "fanduel",
-        "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
-        "matchup_favorability": "unfavorable",
-        "l10_hit_rate": 80.0,
-        "rec_rank": 1
-      },
-      {
-        "qualified": true,
-        "score": 28.8585,
-        "reasons": [
-          "+6.5% EV",
-          "Favorable matchup",
-          "+3.1 edge"
-        ],
-        "type": "prop",
-        "player": "Bennedict Mathurin",
-        "team": "LAC",
-        "prop": "PTS",
-        "direction": "UNDER",
-        "line": 17.5,
-        "projection": 14.4,
-        "diff": -3.1,
-        "confidence": 53.39,
-        "ev": 6.5,
-        "edge": 3.0999999999999996,
-        "pick_score": 57.3,
-        "score_factors": [
-          "+25.8% True EV",
-          "Favorable matchup (#7.0 DEF)",
-          "+3.1 edge"
-        ],
-        "book_odds": {
-          "fanduel": {
-            "over": {
-              "line": 17.5,
-              "odds": -118
-            },
-            "under": {
-              "line": 17.5,
-              "odds": -112
-            }
-          },
-          "draftkings": {
-            "over": {
-              "line": 17.5,
-              "odds": -114
-            },
-            "under": {
-              "line": 17.5,
-              "odds": -112
-            }
-          }
-        },
-        "best_book": "fanduel",
-        "insight": "SAS ranks #7 in points defense \u2014 favorable for unders.",
-        "matchup_favorability": "favorable",
-        "l10_hit_rate": 50.0,
-        "rec_rank": 2
-      }
-    ],
-    "game_count": 5,
-    "prop_count": 2,
-    "has_recommendations": true,
-    "message": null
-  }
+  ]
 }
