@@ -4,34 +4,68 @@
     {
       "date": "2026-03-07",
       "spreads": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "totals": {
         "wins": 1,
-        "losses": 0,
+        "losses": 1,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "moneylines": {
         "wins": 1,
-        "losses": 0,
+        "losses": 1,
         "pushes": 0,
-        "record": "1-0",
-        "pct": 100.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "best_bets": {
         "wins": 2,
-        "losses": 1,
+        "losses": 3,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "2-3",
+        "pct": 40.0
       },
       "picks": [
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "MIA @ HOU",
+          "pick": "MIA +1.5",
+          "result": "4-5",
+          "hit": true,
+          "confidence": 51.3,
+          "proj_score": "3.8-3.6"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "MIA @ HOU",
+          "pick": "UNDER 8.5",
+          "result": "4-5",
+          "hit": false,
+          "confidence": 53.3,
+          "proj_score": "3.8-3.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "MIA @ HOU",
+          "pick": "MIA",
+          "result": "4-5",
+          "hit": false,
+          "confidence": 51.6,
+          "proj_score": "3.8-3.6",
+          "home_win_prob": 46.8,
+          "away_win_prob": 53.2,
+          "best_bet": true
+        },
         {
           "date": "2026-03-07",
           "type": "spread",
@@ -1442,33 +1476,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 23,
+      "wins": 24,
       "losses": 16,
       "pushes": 0,
-      "pct": 59.0,
-      "roi": 12.6
+      "pct": 60.0,
+      "roi": 14.5
     },
     "totals": {
       "wins": 22,
-      "losses": 17,
+      "losses": 18,
       "pushes": 0,
-      "pct": 56.4,
-      "roi": 7.7
+      "pct": 55.0,
+      "roi": 5.0
     },
     "moneylines": {
       "wins": 23,
-      "losses": 16,
+      "losses": 17,
       "pushes": 0,
-      "pct": 59.0,
-      "roi": 12.6
+      "pct": 57.5,
+      "roi": 9.8
     },
     "best_bets": {
       "wins": 16,
-      "losses": 7,
+      "losses": 9,
       "pushes": 0,
-      "pct": 69.6,
-      "roi": 32.8
+      "pct": 64.0,
+      "roi": 22.2
     }
   },
-  "updated": "2026-03-07T20:08:34"
+  "updated": "2026-03-07T20:10:09"
 }
