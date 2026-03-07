@@ -1840,39 +1840,78 @@
     },
     {
       "date": "2026-03-06",
-      "graded_at": "2026-03-07T04:27:58",
-      "total_props_graded": 79,
+      "graded_at": "2026-03-07T04:43:23",
+      "total_props_graded": 99,
       "overall": {
-        "wins": 39,
-        "losses": 40,
+        "wins": 47,
+        "losses": 52,
         "pushes": 0,
-        "total": 79,
-        "record": "39-40-0",
-        "win_pct": 49.4
+        "total": 99,
+        "record": "47-52-0",
+        "win_pct": 47.5
       },
       "by_stat_type": {
-        "REB": {
-          "wins": 14,
-          "losses": 7,
+        "PTS": {
+          "wins": 11,
+          "losses": 15,
           "pushes": 0
         },
         "PRA": {
-          "wins": 9,
-          "losses": 11,
-          "pushes": 0
-        },
-        "PTS": {
-          "wins": 9,
-          "losses": 12,
+          "wins": 10,
+          "losses": 16,
           "pushes": 0
         },
         "AST": {
-          "wins": 7,
+          "wins": 10,
+          "losses": 11,
+          "pushes": 0
+        },
+        "REB": {
+          "wins": 16,
           "losses": 10,
           "pushes": 0
         }
       },
       "picks": [
+        {
+          "player": "Devin Booker",
+          "prop": "PTS",
+          "team": "PHX",
+          "direction": "UNDER",
+          "line": 24.5,
+          "projection": 12.6,
+          "actual": 32.0,
+          "result": "LOSS",
+          "confidence": 62.7,
+          "ev": 18.6,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Devin Booker",
+          "prop": "PRA",
+          "team": "PHX",
+          "direction": "UNDER",
+          "line": 34.5,
+          "projection": 20.3,
+          "actual": 40.0,
+          "result": "LOSS",
+          "confidence": 62.6,
+          "ev": 15.3,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Devin Booker",
+          "prop": "AST",
+          "team": "PHX",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 3.3,
+          "actual": 4.0,
+          "result": "WIN",
+          "confidence": 59.2,
+          "ev": 13.4,
+          "edge": "FAIR"
+        },
         {
           "player": "Nikola Vucevic",
           "prop": "REB",
@@ -1991,6 +2030,19 @@
           "edge": "FAIR"
         },
         {
+          "player": "Collin Gillespie",
+          "prop": "PRA",
+          "team": "PHX",
+          "direction": "UNDER",
+          "line": 22.5,
+          "projection": 18.5,
+          "actual": 24.0,
+          "result": "LOSS",
+          "confidence": 59.9,
+          "ev": 8.5,
+          "edge": "STRONG"
+        },
+        {
           "player": "Payton Pritchard",
           "prop": "PTS",
           "team": "BOS",
@@ -2095,6 +2147,19 @@
           "edge": "GOOD"
         },
         {
+          "player": "Zion Williamson",
+          "prop": "PRA",
+          "team": "NOP",
+          "direction": "UNDER",
+          "line": 28.5,
+          "projection": 25.3,
+          "actual": 31.0,
+          "result": "LOSS",
+          "confidence": 54.5,
+          "ev": 6.9,
+          "edge": "STRONG"
+        },
+        {
           "player": "Jaylen Brown",
           "prop": "PRA",
           "team": "BOS",
@@ -2131,6 +2196,19 @@
           "result": "WIN",
           "confidence": 56.5,
           "ev": 6.5,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Collin Gillespie",
+          "prop": "REB",
+          "team": "PHX",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.1,
+          "actual": 6.0,
+          "result": "LOSS",
+          "confidence": 64.4,
+          "ev": 6.3,
           "edge": "GOOD"
         },
         {
@@ -2183,6 +2261,19 @@
           "result": "WIN",
           "confidence": 55.0,
           "ev": 5.9,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Saddiq Bey",
+          "prop": "REB",
+          "team": "NOP",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.7,
+          "actual": 6.0,
+          "result": "LOSS",
+          "confidence": 56.5,
+          "ev": 5.7,
           "edge": "FAIR"
         },
         {
@@ -2316,6 +2407,19 @@
           "edge": "FAIR"
         },
         {
+          "player": "Zion Williamson",
+          "prop": "REB",
+          "team": "NOP",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.4,
+          "actual": 10.0,
+          "result": "LOSS",
+          "confidence": 59.0,
+          "ev": 4.4,
+          "edge": "FAIR"
+        },
+        {
           "player": "Kevin Durant",
           "prop": "PTS",
           "team": "HOU",
@@ -2433,6 +2537,45 @@
           "edge": "FAIR"
         },
         {
+          "player": "Grayson Allen",
+          "prop": "PTS",
+          "team": "PHX",
+          "direction": "OVER",
+          "line": 18.5,
+          "projection": 19.7,
+          "actual": 12.0,
+          "result": "LOSS",
+          "confidence": 53.1,
+          "ev": 3.2,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Grayson Allen",
+          "prop": "AST",
+          "team": "PHX",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 4.3,
+          "actual": 8.0,
+          "result": "WIN",
+          "confidence": 57.1,
+          "ev": 3.2,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Grayson Allen",
+          "prop": "PRA",
+          "team": "PHX",
+          "direction": "OVER",
+          "line": 25.5,
+          "projection": 27.1,
+          "actual": 22.0,
+          "result": "LOSS",
+          "confidence": 54.4,
+          "ev": 3.0,
+          "edge": "STRONG"
+        },
+        {
           "player": "Kon Knueppel",
           "prop": "PTS",
           "team": "CHA",
@@ -2444,6 +2587,19 @@
           "confidence": 55.5,
           "ev": 2.9,
           "edge": "GOOD"
+        },
+        {
+          "player": "Collin Gillespie",
+          "prop": "AST",
+          "team": "PHX",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.0,
+          "actual": 6.0,
+          "result": "LOSS",
+          "confidence": 55.2,
+          "ev": 2.8,
+          "edge": "FAIR"
         },
         {
           "player": "Bam Adebayo",
@@ -2483,6 +2639,32 @@
           "confidence": 50.6,
           "ev": 2.3,
           "edge": "FAIR"
+        },
+        {
+          "player": "Trey Murphy III",
+          "prop": "AST",
+          "team": "NOP",
+          "direction": "OVER",
+          "line": 3.5,
+          "projection": 4.2,
+          "actual": 4.0,
+          "result": "WIN",
+          "confidence": 51.8,
+          "ev": 2.0,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Zion Williamson",
+          "prop": "PTS",
+          "team": "NOP",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 18.1,
+          "actual": 19.0,
+          "result": "WIN",
+          "confidence": 55.2,
+          "ev": 2.0,
+          "edge": "GOOD"
         },
         {
           "player": "Mikal Bridges",
@@ -2784,6 +2966,19 @@
           "edge": null
         },
         {
+          "player": "Royce O'Neale",
+          "prop": "REB",
+          "team": "PHX",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 4.9,
+          "actual": 6.0,
+          "result": "WIN",
+          "confidence": 54.2,
+          "ev": -1.4,
+          "edge": null
+        },
+        {
           "player": "Amen Thompson",
           "prop": "PRA",
           "team": "HOU",
@@ -2795,6 +2990,19 @@
           "confidence": 52.8,
           "ev": -1.6,
           "edge": "FAIR"
+        },
+        {
+          "player": "Trey Murphy III",
+          "prop": "PRA",
+          "team": "NOP",
+          "direction": "OVER",
+          "line": 27.5,
+          "projection": 27.9,
+          "actual": 28.0,
+          "result": "WIN",
+          "confidence": 53.2,
+          "ev": -1.6,
+          "edge": null
         },
         {
           "player": "Jrue Holiday",
@@ -2821,6 +3029,19 @@
           "confidence": 48.8,
           "ev": -2.0,
           "edge": "GOOD"
+        },
+        {
+          "player": "Trey Murphy III",
+          "prop": "PTS",
+          "team": "NOP",
+          "direction": "UNDER",
+          "line": 19.5,
+          "projection": 19.3,
+          "actual": 22.0,
+          "result": "LOSS",
+          "confidence": 53.1,
+          "ev": -2.2,
+          "edge": null
         },
         {
           "player": "Amen Thompson",
@@ -2875,6 +3096,19 @@
           "edge": null
         },
         {
+          "player": "Trey Murphy III",
+          "prop": "REB",
+          "team": "NOP",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.4,
+          "actual": 2.0,
+          "result": "WIN",
+          "confidence": 51.2,
+          "ev": -6.8,
+          "edge": null
+        },
+        {
           "player": "Kevin Durant",
           "prop": "AST",
           "team": "HOU",
@@ -2886,6 +3120,32 @@
           "confidence": 46.6,
           "ev": -10.2,
           "edge": "FAIR"
+        },
+        {
+          "player": "Saddiq Bey",
+          "prop": "PTS",
+          "team": "NOP",
+          "direction": "OVER",
+          "line": 17.5,
+          "projection": 20.3,
+          "actual": 19.0,
+          "result": "WIN",
+          "confidence": 44.7,
+          "ev": -13.9,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Saddiq Bey",
+          "prop": "PRA",
+          "team": "NOP",
+          "direction": "OVER",
+          "line": 25.5,
+          "projection": 28.0,
+          "actual": 25.0,
+          "result": "LOSS",
+          "confidence": 44.9,
+          "ev": -15.7,
+          "edge": "STRONG"
         },
         {
           "player": "Brandon Miller",
@@ -2904,10 +3164,10 @@
     }
   ],
   "cumulative": {
-    "wins": 183,
-    "losses": 191,
+    "wins": 191,
+    "losses": 203,
     "pushes": 0,
-    "total": 374,
-    "win_pct": 48.9
+    "total": 394,
+    "win_pct": 48.5
   }
 }
