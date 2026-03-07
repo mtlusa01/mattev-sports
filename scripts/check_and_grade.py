@@ -838,6 +838,15 @@ def grade_nhl_props():
 
     Uses team matchup to find ESPN event IDs (NHL API game IDs differ from ESPN).
     """
+    # ABSOLUTE GUARD: if zero NHL games are FINAL today, skip ALL prop grading.
+    # This prevents yesterday's results from being re-attributed to today.
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    today_events = _fetch_espn_event_ids("NHL", today_str)
+    finals_today = sum(1 for e in today_events.values() if e["status"] == "STATUS_FINAL")
+    if finals_today == 0:
+        print(f"  NHL Props: ABSOLUTE GUARD — 0 FINAL NHL games today ({today_str}), skipping all prop grading")
+        return False
+
     props_path = os.path.join(REPO_ROOT, "nhl_player_props.json")
     results_path = os.path.join(REPO_ROOT, "nhl_props_results.json")
 
