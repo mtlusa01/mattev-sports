@@ -3911,11 +3911,15 @@
       const archivedPropRecs = historicalPropsRecsCache[histKey];
       const hasArchivedPropRecs = archivedPropRecs && archivedPropRecs.length > 0;
 
+      const isHistorical = selectedDate !== getSportsDate();
       let propRecs;
       if (propsLocked) {
         propRecs = lockedProps.recommendations;
       } else if (hasArchivedPropRecs) {
         propRecs = archivedPropRecs;
+      } else if (isHistorical) {
+        // Historical date with no archived prop recs — show empty, don't fall back to today's live data
+        propRecs = [];
       } else if (currentSport === 'nhl') {
         propRecs = [...nhlProjections]
           .filter(r => (r.edge === 'STRONG' || r.edge === 'GOOD') && !r.result)
