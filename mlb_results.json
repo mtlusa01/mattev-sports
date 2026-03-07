@@ -4,32 +4,32 @@
     {
       "date": "2026-03-07",
       "spreads": {
-        "wins": 3,
+        "wins": 4,
         "losses": 2,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-2",
+        "pct": 66.7
       },
       "totals": {
+        "wins": 5,
+        "losses": 1,
+        "pushes": 0,
+        "record": "5-1",
+        "pct": 83.3
+      },
+      "moneylines": {
+        "wins": 2,
+        "losses": 4,
+        "pushes": 0,
+        "record": "2-4",
+        "pct": 33.3
+      },
+      "best_bets": {
         "wins": 4,
         "losses": 1,
         "pushes": 0,
         "record": "4-1",
         "pct": 80.0
-      },
-      "moneylines": {
-        "wins": 2,
-        "losses": 3,
-        "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
-      },
-      "best_bets": {
-        "wins": 3,
-        "losses": 2,
-        "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
       },
       "picks": [
         {
@@ -166,13 +166,45 @@
         {
           "date": "2026-03-07",
           "type": "spread",
+          "game": "PIT @ DET",
+          "pick": "PIT +1.5",
+          "result": "5-3",
+          "hit": true,
+          "confidence": 50.8,
+          "proj_score": "3.3-3.4"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "PIT @ DET",
+          "pick": "UNDER 8.5",
+          "result": "5-3",
+          "hit": true,
+          "confidence": 55.4,
+          "proj_score": "3.3-3.4",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "PIT @ DET",
+          "pick": "DET",
+          "result": "5-3",
+          "hit": false,
+          "confidence": 51.0,
+          "proj_score": "3.3-3.4",
+          "home_win_prob": 52.1,
+          "away_win_prob": 47.9
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
           "game": "TOR @ PHI",
           "pick": "PHI -1.5",
           "result": "1-0",
           "hit": false,
           "confidence": 53.9,
-          "proj_score": "3.3-4.1",
-          "best_bet": true
+          "proj_score": "3.3-4.1"
         },
         {
           "date": "2026-03-07",
@@ -1572,33 +1604,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 26,
+      "wins": 27,
       "losses": 17,
       "pushes": 0,
-      "pct": 60.5,
-      "roi": 15.4
+      "pct": 61.4,
+      "roi": 17.1
     },
     "totals": {
-      "wins": 25,
+      "wins": 26,
       "losses": 18,
       "pushes": 0,
-      "pct": 58.1,
-      "roi": 11.0
+      "pct": 59.1,
+      "roi": 12.8
     },
     "moneylines": {
       "wins": 24,
-      "losses": 19,
+      "losses": 20,
       "pushes": 0,
-      "pct": 55.8,
-      "roi": 6.6
+      "pct": 54.5,
+      "roi": 4.1
     },
     "best_bets": {
-      "wins": 17,
-      "losses": 8,
+      "wins": 18,
+      "losses": 7,
       "pushes": 0,
-      "pct": 68.0,
-      "roi": 29.8
+      "pct": 72.0,
+      "roi": 37.5
     }
   },
-  "updated": "2026-03-07T20:35:12"
+  "updated": "2026-03-07T20:35:44"
 }
