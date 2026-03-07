@@ -624,6 +624,8 @@
     const NCAAB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/ncaab_results.json';
     const MLB_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/mlb_results.json';
     const NHL_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/nhl_props_results.json';
+    const NBA_PROPS_RESULTS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/all_props_results.json';
+    const NBA_PROJECTIONS_URL = 'https://raw.githubusercontent.com/mtlusa01/mattev-sports/main/projections.json';
 
     let currentSport = 'nba';
     let nbaResultsData = null;
@@ -631,6 +633,7 @@
     let ncaabResultsData = null;
     let mlbResultsData = null;
     let nhlPropsResultsData = null;
+    let nbaPropsResultsData = null;
     let resultsData = null;
     let selectedDate = null;
     let calViewYear = null;
@@ -1031,6 +1034,102 @@
               }
             }
           } catch (e) { /* no NHL props results yet */ }
+        }
+
+        // Load and merge NBA props results (format: overall.wins or wins, cumulative or all_time)
+        if (sport === 'nba') {
+          try {
+            const propsResp = await fetch(NBA_PROPS_RESULTS_URL + '?t=' + Date.now());
+            if (propsResp.ok) {
+              nbaPropsResultsData = await propsResp.json();
+              if (nbaPropsResultsData && nbaPropsResultsData.days) {
+                for (const propsDay of nbaPropsResultsData.days) {
+                  const date = propsDay.date;
+                  if (!daysByDate[date]) {
+                    daysByDate[date] = { date: date, picks: [], spreads: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, totals: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, moneylines: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, best_bets: {wins:0,losses:0,pushes:0,record:'0-0',pct:0} };
+                  }
+                  // Remove any existing prop picks from results.json for this date (avoid dupes)
+                  daysByDate[date].picks = (daysByDate[date].picks || []).filter(function(p) { return p.type !== 'prop'; });
+                  const propPicks = (propsDay.picks || []).map(function(p) {
+                    return {
+                      date: date, type: 'prop', player: p.player || '', team: p.prop || p.market || '',
+                      game: (p.player || '') + ' \u2014 ' + (p.prop || p.market || ''),
+                      pick: (p.direction || 'OVER') + ' ' + (p.line || ''),
+                      result: p.actual != null ? String(p.actual) : '',
+                      hit: p.result === 'WIN' ? true : p.result === 'LOSS' ? false : (p.hit != null ? p.hit : null),
+                      confidence: p.confidence || 0,
+                    };
+                  });
+                  daysByDate[date].picks = daysByDate[date].picks.concat(propPicks);
+                  // Handle both formats: {wins,losses} or {overall:{wins,losses}}
+                  const ov = propsDay.overall || propsDay;
+                  const pw = ov.wins || 0, pl = ov.losses || 0, pp = ov.pushes || 0;
+                  daysByDate[date].props = {
+                    wins: pw, losses: pl, pushes: pp,
+                    record: pw + '-' + pl,
+                    pct: (pw + pl) > 0 ? Math.round(pw / (pw + pl) * 1000) / 10 : 0,
+                  };
+                }
+                sortedDates = Object.keys(daysByDate).sort();
+                // Merge props allTime into results (handle both cumulative and all_time keys)
+                const atProps = nbaPropsResultsData.all_time || nbaPropsResultsData.cumulative;
+                if (atProps) {
+                  resultsData.allTime = resultsData.allTime || {};
+                  const atOv = atProps.overall || atProps;
+                  resultsData.allTime.props = {
+                    wins: atOv.wins || 0,
+                    losses: atOv.losses || 0,
+                    pushes: atOv.pushes || 0,
+                    pct: atOv.pct || atOv.win_pct || 0,
+                    roi: 0,
+                  };
+                }
+              }
+            }
+          } catch (e) { /* no NBA props results yet */ }
+
+          // Also load graded props from projections.json (live grading source)
+          try {
+            const projResp = await fetch(NBA_PROJECTIONS_URL + '?t=' + Date.now());
+            if (projResp.ok) {
+              const projData = await projResp.json();
+              const projDate = projData.date || '';
+              const graded = (projData.projections || []).filter(function(p) {
+                return p.result === 'WIN' || p.result === 'LOSS' || p.result === 'PUSH';
+              });
+              if (graded.length > 0 && projDate) {
+                if (!daysByDate[projDate]) {
+                  daysByDate[projDate] = { date: projDate, picks: [], spreads: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, totals: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, moneylines: {wins:0,losses:0,pushes:0,record:'0-0',pct:0}, best_bets: {wins:0,losses:0,pushes:0,record:'0-0',pct:0} };
+                }
+                // Only add if this date doesn't already have prop picks
+                var existingProps = (daysByDate[projDate].picks || []).filter(function(p) { return p.type === 'prop'; });
+                if (existingProps.length === 0) {
+                  var pw = 0, pl = 0, pp = 0;
+                  var projPropPicks = graded.map(function(p) {
+                    var hit = p.result === 'WIN' ? true : p.result === 'LOSS' ? false : null;
+                    if (hit === true) pw++;
+                    else if (hit === false) pl++;
+                    else pp++;
+                    return {
+                      date: projDate, type: 'prop', player: p.player || '', team: p.prop || '',
+                      game: (p.player || '') + ' \u2014 ' + (p.prop || ''),
+                      pick: (p.direction || 'OVER') + ' ' + (p.line || ''),
+                      result: p.actual != null ? String(p.actual) : '',
+                      hit: hit,
+                      confidence: p.confidence || 0,
+                    };
+                  });
+                  daysByDate[projDate].picks = (daysByDate[projDate].picks || []).concat(projPropPicks);
+                  daysByDate[projDate].props = {
+                    wins: pw, losses: pl, pushes: pp,
+                    record: pw + '-' + pl,
+                    pct: (pw + pl) > 0 ? Math.round(pw / (pw + pl) * 1000) / 10 : 0,
+                  };
+                  sortedDates = Object.keys(daysByDate).sort();
+                }
+              }
+            }
+          } catch (e) { /* projections not available */ }
         }
 
         // Default selected date: most recent past day with data (skip today — results aren't final)
