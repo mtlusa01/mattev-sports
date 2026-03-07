@@ -4,25 +4,25 @@
     {
       "date": "2026-03-07",
       "spreads": {
-        "wins": 1,
+        "wins": 2,
         "losses": 2,
         "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
+        "record": "2-2",
+        "pct": 50.0
       },
       "totals": {
-        "wins": 2,
+        "wins": 3,
         "losses": 1,
         "pushes": 0,
-        "record": "2-1",
-        "pct": 66.7
+        "record": "3-1",
+        "pct": 75.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 2,
         "pushes": 0,
-        "record": "1-2",
-        "pct": 33.3
+        "record": "2-2",
+        "pct": 50.0
       },
       "best_bets": {
         "wins": 2,
@@ -64,6 +64,39 @@
           "proj_score": "3.8-3.6",
           "home_win_prob": 46.8,
           "away_win_prob": 53.2
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "MIN @ BAL",
+          "pick": "MIN +1.5",
+          "result": "2-3",
+          "hit": true,
+          "confidence": 51.8,
+          "proj_score": "3.2-3.5"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "MIN @ BAL",
+          "pick": "UNDER 8.5",
+          "result": "2-3",
+          "hit": true,
+          "confidence": 55.4,
+          "proj_score": "3.2-3.5",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "MIN @ BAL",
+          "pick": "BAL",
+          "result": "2-3",
+          "hit": true,
+          "confidence": 52.4,
+          "proj_score": "3.2-3.5",
+          "home_win_prob": 54.8,
+          "away_win_prob": 45.2
         },
         {
           "date": "2026-03-07",
@@ -117,8 +150,7 @@
           "result": "1-0",
           "hit": true,
           "confidence": 53.2,
-          "proj_score": "3.3-4.1",
-          "best_bet": true
+          "proj_score": "3.3-4.1"
         },
         {
           "date": "2026-03-07",
@@ -1508,25 +1540,25 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 24,
+      "wins": 25,
       "losses": 17,
       "pushes": 0,
-      "pct": 58.5,
-      "roi": 11.8
+      "pct": 59.5,
+      "roi": 13.6
     },
     "totals": {
-      "wins": 23,
+      "wins": 24,
       "losses": 18,
       "pushes": 0,
-      "pct": 56.1,
-      "roi": 7.1
+      "pct": 57.1,
+      "roi": 9.1
     },
     "moneylines": {
-      "wins": 23,
+      "wins": 24,
       "losses": 18,
       "pushes": 0,
-      "pct": 56.1,
-      "roi": 7.1
+      "pct": 57.1,
+      "roi": 9.1
     },
     "best_bets": {
       "wins": 16,
@@ -1536,5 +1568,5 @@
       "roi": 22.2
     }
   },
-  "updated": "2026-03-07T20:15:13"
+  "updated": "2026-03-07T20:16:18"
 }
