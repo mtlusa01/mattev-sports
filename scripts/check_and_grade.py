@@ -325,6 +325,19 @@ def load_json(path):
         return None
 
 
+def _sanitize_nans(obj):
+    """Recursively replace float NaN/Inf with None for JSON safety."""
+    if isinstance(obj, float):
+        if obj != obj or obj == float('inf') or obj == float('-inf'):
+            return None
+        return obj
+    if isinstance(obj, dict):
+        return {k: _sanitize_nans(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_sanitize_nans(v) for v in obj]
+    return obj
+
+
 def save_json(path, data):
     # Safety guard: never reduce game count in projection files
     if "games" in data and os.path.exists(path):
@@ -340,7 +353,7 @@ def save_json(path, data):
         except Exception:
             pass  # can't read existing file, proceed with save
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+        json.dump(_sanitize_nans(data), f, indent=2)
     return True
 
 
@@ -1305,7 +1318,7 @@ def grade_nba_props():
             save_json(all_props_path, all_props_data)
             _update_nba_props_results(
                 all_props,
-                all_props_date or today,
+                (all_props_data.get("_date") or all_props_data.get("date") or today),
                 all_props_results_path,
             )
             any_changes = True
