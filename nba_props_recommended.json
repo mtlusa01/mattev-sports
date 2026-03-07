@@ -2,57 +2,69 @@
   "date": "2026-03-07",
   "sport": "NBA",
   "type": "props",
-  "locked_at": "2026-03-07T10:34:47",
+  "locked_at": "2026-03-07T10:36:28",
   "recommendations": [
     {
       "qualified": true,
-      "score": 42.24,
+      "score": 38.825,
       "reasons": [
-        "+9.8% EV",
-        "90% L10 hit rate"
+        "+8.4% EV",
+        "80% L10 hit rate",
+        "+3.2 edge"
       ],
       "type": "prop",
       "player": "Darius Garland",
       "team": "LAC",
-      "prop": "AST",
+      "prop": "PTS",
       "direction": "OVER",
-      "line": 5.5,
-      "projection": 6.7,
-      "diff": 1.2,
-      "confidence": 53.6,
-      "ev": 9.8,
-      "edge": 1.2000000000000002,
-      "pick_score": 38.2,
+      "line": 14.5,
+      "projection": 17.7,
+      "diff": 3.2,
+      "confidence": 57.5,
+      "ev": 8.4,
+      "edge": 3.1999999999999993,
+      "pick_score": 43.1,
       "score_factors": [
-        "+39.2% True EV",
-        "90% L10 hit rate"
+        "+33.5% True EV",
+        "80% L10 hit rate",
+        "+3.2 edge"
       ],
       "book_odds": {
         "fanduel": {
           "over": {
-            "line": 5.5,
-            "odds": 110
+            "line": 14.5,
+            "odds": -106
           },
           "under": {
-            "line": 5.5,
-            "odds": -146
+            "line": 14.5,
+            "odds": -125
           }
         },
         "draftkings": {
           "over": {
-            "line": 5.5,
-            "odds": -100
+            "line": 14.5,
+            "odds": -108
           },
           "under": {
-            "line": 5.5,
-            "odds": -132
+            "line": 14.5,
+            "odds": -118
+          }
+        },
+        "betmgm": {
+          "over": {
+            "line": 14.5,
+            "odds": -125
+          },
+          "under": {
+            "line": 14.5,
+            "odds": -105
           }
         }
       },
       "best_book": "fanduel",
-      "insight": "Has gone OVER 5.5 assists in 9 of last 10 games (6.5 avg).",
-      "matchup_favorability": "neutral",
-      "l10_hit_rate": 90.0,
+      "insight": "Has gone OVER 14.5 points in 8 of last 10 games (18.7 avg).",
+      "matchup_favorability": "unfavorable",
+      "l10_hit_rate": 80.0,
       "rec_rank": 1
     }
   ]
