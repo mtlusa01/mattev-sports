@@ -2418,11 +2418,12 @@
         // NBA: show props count when on props view, games count when on games view
         const isGameView = currentView === 'game-projections';
         if (isGameView) {
-          const games = gameProjections.filter(g => g.game_date === selectedDate);
+          const games = getActiveGameProjections().filter(g => g.game_date === selectedDate);
           el.textContent = games.length > 0 ? dateStr + ' \u00B7 ' + games.length + ' games' : dateStr;
         } else {
-          const activeProps = projections._stale ? [] : projections;
-          el.textContent = activeProps.length > 0 ? dateStr + ' \u00B7 ' + activeProps.length + ' projections' : dateStr;
+          const activeProps = getActiveProps();
+          const count = Array.isArray(activeProps) ? activeProps.length : 0;
+          el.textContent = count > 0 ? dateStr + ' \u00B7 ' + count + ' projections' : dateStr;
         }
       } else {
         // NHL/NCAAB/MLB: show game count
@@ -5204,6 +5205,7 @@
 
       // Empty state for historical dates with no props
       if (isHistorical && activeProps.length === 0) {
+        console.log('[Props Debug] Historical date', selectedDate, 'activeProps empty. Cache:', historicalPropsCache[selectedDate] !== undefined ? (historicalPropsCache[selectedDate].length + ' cached') : 'undefined', 'Sport:', currentSport);
         const { formatted } = formatDateDisplay(selectedDate);
         propsView.innerHTML = datePickerHtml + `<div class="empty-state" style="padding: 60px 20px;"><div class="empty-state-icon" style="font-size: 48px;">&#128202;</div><div class="empty-state-title" style="font-size: 18px; font-weight: 600; margin: 12px 0 8px;">No props available for this date</div><div class="empty-state-text">No archived player prop projections were found for ${formatted}.</div></div>`;
         attachCalendarHandlers();
@@ -5520,6 +5522,15 @@
           if (!foundProps && Array.isArray(ppData) && ppData.length > 0) {
             foundProps = ppData;
           }
+          // Fallback: check all_props key (alternative archive format)
+          if (!foundProps && data.all_props) {
+            const ap = data.all_props;
+            if ((ap._date === date || ap.date === date) && ap.props && ap.props.length > 0) {
+              // Filter to only props with lines (matching player_props quality)
+              foundProps = ap.props.filter(p => p.has_line || p.line != null);
+              if (foundProps.length === 0) foundProps = null;
+            }
+          }
 
           // Extract NHL player props from archive
           const nhlPpData = data.nhl_player_props;
@@ -5564,6 +5575,7 @@
       let ncaabGames = foundNcaab || [];
       let mlbGames = foundMlb || [];
       let archiveProps = foundProps || [];
+      console.log(`[Archive] ${date}: NBA games=${games.length}, NHL=${nhlGames.length}, props=${archiveProps.length}, foundProps=${!!foundProps}`);
       let archiveNhlProps = foundNhlProps || [];
 
       if (games.length > 0 || nhlGames.length > 0 || ncaabGames.length > 0 || mlbGames.length > 0 || archiveProps.length > 0 || archiveNhlProps.length > 0) {
@@ -5599,10 +5611,18 @@
         if (nbaPropsHistoricalResults) {
           archiveProps = mergeNhlResultsIntoProps(archiveProps, nbaPropsHistoricalResults, date);
         }
+        // If NBA props archive was empty, reconstruct from results data
+        if (archiveProps.length === 0 && nbaPropsHistoricalResults) {
+          archiveProps = transformNhlResultsToProps(nbaPropsHistoricalResults, date);
+        }
 
         // Merge NHL props grading results from nhl_props_results.json
         if (nhlPropsHistoricalResults) {
           archiveNhlProps = mergeNhlResultsIntoProps(archiveNhlProps, nhlPropsHistoricalResults, date);
+        }
+        // If NHL props archive was empty, reconstruct from results data
+        if (archiveNhlProps.length === 0 && nhlPropsHistoricalResults) {
+          archiveNhlProps = transformNhlResultsToProps(nhlPropsHistoricalResults, date);
         }
 
         // Supplement: for any games still ungraded after merge, try the archive's embedded results
