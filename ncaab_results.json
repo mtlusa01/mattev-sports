@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-07T20:49:04",
+  "updated": "2026-03-07T20:49:36",
   "allTime": {
     "spreads": {
       "wins": 297,
-      "losses": 239,
+      "losses": 240,
       "pushes": 12,
-      "pct": 55.4,
-      "roi": 5.8
+      "pct": 55.3,
+      "roi": 5.6
     },
     "totals": {
       "wins": 265,
-      "losses": 280,
+      "losses": 281,
       "pushes": 3,
-      "pct": 48.6,
-      "roi": -7.2
+      "pct": 48.5,
+      "roi": -7.3
     },
     "moneylines": {
-      "wins": 355,
+      "wins": 356,
       "losses": 193,
       "pushes": 0,
       "pct": 64.8,
-      "roi": 23.7
+      "roi": 23.8
     },
     "best_bets": {
-      "wins": 55,
-      "losses": 15,
+      "wins": 54,
+      "losses": 16,
       "pushes": 0,
-      "pct": 78.6,
-      "roi": 50.0
+      "pct": 77.1,
+      "roi": 47.3
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-03-07",
       "spreads": {
         "wins": 10,
-        "losses": 8,
+        "losses": 9,
         "pushes": 0,
-        "record": "10-8",
-        "pct": 55.6
+        "record": "10-9",
+        "pct": 52.6
       },
       "totals": {
         "wins": 7,
-        "losses": 11,
+        "losses": 12,
         "pushes": 0,
-        "record": "7-11",
-        "pct": 38.9
+        "record": "7-12",
+        "pct": 36.8
       },
       "moneylines": {
-        "wins": 11,
+        "wins": 12,
         "losses": 7,
         "pushes": 0,
-        "record": "11-7",
-        "pct": 61.1
+        "record": "12-7",
+        "pct": 63.2
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -100,8 +100,7 @@
           "result": "72-76",
           "hit": true,
           "confidence": 79,
-          "proj_score": "80.6-84.0",
-          "best_bet": true
+          "proj_score": "80.6-84.0"
         },
         {
           "date": "2026-03-07",
@@ -606,6 +605,37 @@
           "hit": false,
           "confidence": 62,
           "proj_score": "75.6-78.4"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "PRIN @ YALE",
+          "pick": "PRIN +14.0",
+          "result": "53-78",
+          "hit": false,
+          "confidence": 86,
+          "proj_score": "76.7-80.4",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "PRIN @ YALE",
+          "pick": "OVER 136.0",
+          "result": "53-78",
+          "hit": false,
+          "confidence": 74,
+          "proj_score": "76.7-80.4"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "PRIN @ YALE",
+          "pick": "YALE",
+          "result": "53-78",
+          "hit": true,
+          "confidence": 65,
+          "proj_score": "76.7-80.4"
         }
       ]
     },
