@@ -6362,6 +6362,28 @@
 
       var projHtml = g.proj_score ? '<span class="game-card-proj">Proj: ' + g.proj_score + '</span>' : '';
 
+      // ── Blowout risk indicator (NCAAB only) ──
+      var blowoutHtml = '';
+      if (currentSport === 'ncaab' && g.blowout_risk != null && g.blowout_risk > 0) {
+        var br = g.blowout_risk;
+        var brColor, brIcon, brLabel;
+        if (br >= 40) { brColor = '#ff4444'; brIcon = '\u{1F534}'; brLabel = 'HIGH'; }
+        else if (br >= 20) { brColor = '#ffaa00'; brIcon = '\u{1F7E1}'; brLabel = 'MED'; }
+        else { brColor = '#44cc44'; brIcon = '\u{1F7E2}'; brLabel = 'LOW'; }
+        if (br >= 20) {
+          blowoutHtml = '<div class="blowout-indicator" style="padding:4px 8px;background:rgba('
+            + (br >= 40 ? '255,68,68' : '255,170,0') + ',0.12);border-radius:6px;margin-top:4px;font-size:11px;display:flex;align-items:center;gap:6px;cursor:pointer" '
+            + 'onclick="this.querySelector(\'.blowout-detail\').style.display=this.querySelector(\'.blowout-detail\').style.display===\'none\'?\'block\':\'none\'">'
+            + '<span>' + brIcon + ' Blowout Risk: <strong style="color:' + brColor + '">' + br + '%</strong> <span style="color:' + brColor + ';font-size:10px">' + brLabel + '</span></span>'
+            + (g.fav_value ? '<span style="margin-left:auto;color:var(--accent-light);font-size:10px;font-weight:600">FAV VALUE</span>' : '')
+            + '<div class="blowout-detail" style="display:none;margin-top:6px;font-size:10.5px;color:var(--text-dim);line-height:1.5;width:100%">'
+            + (g.blowout_factors || []).map(function(f) { return '<div style="padding:1px 0">\u2022 ' + f + '</div>'; }).join('')
+            + (g.talent_gap ? '<div style="margin-top:3px;color:var(--text-secondary)">Talent gap: ' + g.talent_gap + ' | Pace diff: ' + (g.pace_differential||0) + ' | Conf: ' + (g.conf_gap||'') + '</div>' : '')
+            + '</div>'
+            + '</div>';
+        }
+      }
+
       // ── Assemble card ──
       var html = '<div class="game-card' + cardCls + '">'
         + '<div class="game-card-header">'
@@ -6373,6 +6395,7 @@
         +     scoreInlineHtml
         +     projHtml
         +   '</div>'
+        +   blowoutHtml
         + '</div>'
         + '<div class="game-card-picks">'
         + renderBetRow('Spread', spreadStr, spreadOddsStr, spreadConfStr, g.spread_conf, g.spread_result, isSpreadTracked, 'spread', g.spread_odds, modelSpread)
