@@ -1840,39 +1840,52 @@
     },
     {
       "date": "2026-03-06",
-      "graded_at": "2026-03-07T04:59:37",
-      "total_props_graded": 118,
+      "graded_at": "2026-03-07T05:55:31",
+      "total_props_graded": 133,
       "overall": {
-        "wins": 55,
-        "losses": 63,
+        "wins": 62,
+        "losses": 71,
         "pushes": 0,
-        "total": 118,
-        "record": "55-63-0",
+        "total": 133,
+        "record": "62-71-0",
         "win_pct": 46.6
       },
       "by_stat_type": {
-        "PTS": {
-          "wins": 13,
-          "losses": 18,
+        "PRA": {
+          "wins": 14,
+          "losses": 21,
           "pushes": 0
         },
-        "PRA": {
-          "wins": 13,
-          "losses": 18,
+        "PTS": {
+          "wins": 14,
+          "losses": 21,
           "pushes": 0
         },
         "AST": {
-          "wins": 12,
-          "losses": 13,
+          "wins": 15,
+          "losses": 14,
           "pushes": 0
         },
         "REB": {
-          "wins": 17,
-          "losses": 14,
+          "wins": 19,
+          "losses": 15,
           "pushes": 0
         }
       },
       "picks": [
+        {
+          "player": "Austin Reaves",
+          "prop": "PRA",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 34.5,
+          "projection": 23.8,
+          "actual": 26.0,
+          "result": "WIN",
+          "confidence": 64.1,
+          "ev": 18.8,
+          "edge": "GOOD"
+        },
         {
           "player": "Devin Booker",
           "prop": "PTS",
@@ -1884,6 +1897,19 @@
           "result": "LOSS",
           "confidence": 62.7,
           "ev": 18.6,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Austin Reaves",
+          "prop": "PTS",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 24.5,
+          "projection": 16.4,
+          "actual": 19.0,
+          "result": "WIN",
+          "confidence": 64.0,
+          "ev": 17.8,
           "edge": "FAIR"
         },
         {
@@ -1924,6 +1950,45 @@
           "confidence": 60.1,
           "ev": 11.1,
           "edge": "GOOD"
+        },
+        {
+          "player": "Luka Doncic",
+          "prop": "PRA",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 51.5,
+          "projection": 41.4,
+          "actual": 58.0,
+          "result": "LOSS",
+          "confidence": 58.8,
+          "ev": 10.9,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Luka Doncic",
+          "prop": "REB",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 8.5,
+          "projection": 7.0,
+          "actual": 9.0,
+          "result": "LOSS",
+          "confidence": 56.1,
+          "ev": 10.6,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Luka Doncic",
+          "prop": "PTS",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 33.5,
+          "projection": 27.1,
+          "actual": 44.0,
+          "result": "LOSS",
+          "confidence": 58.9,
+          "ev": 10.2,
+          "edge": "STRONG"
         },
         {
           "player": "Cooper Flagg",
@@ -2002,6 +2067,19 @@
           "confidence": 59.5,
           "ev": 8.7,
           "edge": "FAIR"
+        },
+        {
+          "player": "Luka Doncic",
+          "prop": "AST",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 9.5,
+          "projection": 7.3,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 59.8,
+          "ev": 8.7,
+          "edge": "GOOD"
         },
         {
           "player": "Amen Thompson",
@@ -2108,6 +2186,19 @@
           "edge": "STRONG"
         },
         {
+          "player": "Austin Reaves",
+          "prop": "REB",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 3.4,
+          "actual": 2.0,
+          "result": "WIN",
+          "confidence": 55.3,
+          "ev": 7.5,
+          "edge": "FAIR"
+        },
+        {
           "player": "Coby White",
           "prop": "AST",
           "team": "CHA",
@@ -2145,6 +2236,19 @@
           "confidence": 55.4,
           "ev": 7.2,
           "edge": "GOOD"
+        },
+        {
+          "player": "Austin Reaves",
+          "prop": "AST",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.0,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 60.8,
+          "ev": 7.2,
+          "edge": "FAIR"
         },
         {
           "player": "Josh Hart",
@@ -2342,6 +2446,19 @@
           "edge": "GOOD"
         },
         {
+          "player": "Pascal Siakam",
+          "prop": "REB",
+          "team": "IND",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.8,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 52.4,
+          "ev": 5.9,
+          "edge": "FAIR"
+        },
+        {
           "player": "Saddiq Bey",
           "prop": "REB",
           "team": "NOP",
@@ -2353,6 +2470,19 @@
           "confidence": 56.5,
           "ev": 5.7,
           "edge": "FAIR"
+        },
+        {
+          "player": "Andrew Nembhard",
+          "prop": "PRA",
+          "team": "IND",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 21.2,
+          "actual": 27.0,
+          "result": "LOSS",
+          "confidence": 55.1,
+          "ev": 5.7,
+          "edge": "STRONG"
         },
         {
           "player": "De'Aaron Fox",
@@ -2433,6 +2563,19 @@
           "edge": "GOOD"
         },
         {
+          "player": "Pascal Siakam",
+          "prop": "PRA",
+          "team": "IND",
+          "direction": "UNDER",
+          "line": 30.5,
+          "projection": 26.0,
+          "actual": 34.0,
+          "result": "LOSS",
+          "confidence": 54.7,
+          "ev": 5.4,
+          "edge": "STRONG"
+        },
+        {
           "player": "Derrick White",
           "prop": "PRA",
           "team": "BOS",
@@ -2494,6 +2637,19 @@
           "actual": 9.0,
           "result": "LOSS",
           "confidence": 59.8,
+          "ev": 4.8,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Andrew Nembhard",
+          "prop": "AST",
+          "team": "IND",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 5.6,
+          "actual": 8.0,
+          "result": "LOSS",
+          "confidence": 58.4,
           "ev": 4.8,
           "edge": "GOOD"
         },
@@ -2613,6 +2769,19 @@
           "confidence": 53.3,
           "ev": 4.1,
           "edge": "GOOD"
+        },
+        {
+          "player": "Pascal Siakam",
+          "prop": "PTS",
+          "team": "IND",
+          "direction": "UNDER",
+          "line": 21.5,
+          "projection": 18.7,
+          "actual": 26.0,
+          "result": "LOSS",
+          "confidence": 55.5,
+          "ev": 4.1,
+          "edge": "STRONG"
         },
         {
           "player": "Jerami Grant",
@@ -2793,6 +2962,19 @@
           "actual": 5.0,
           "result": "WIN",
           "confidence": 53.4,
+          "ev": 2.5,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Andrew Nembhard",
+          "prop": "PTS",
+          "team": "IND",
+          "direction": "UNDER",
+          "line": 14.5,
+          "projection": 13.5,
+          "actual": 17.0,
+          "result": "LOSS",
+          "confidence": 55.0,
           "ev": 2.5,
           "edge": "FAIR"
         },
@@ -3015,6 +3197,19 @@
           "result": "LOSS",
           "confidence": 54.4,
           "ev": 0.9,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Marcus Smart",
+          "prop": "AST",
+          "team": "LAL",
+          "direction": "UNDER",
+          "line": 3.5,
+          "projection": 3.0,
+          "actual": 3.0,
+          "result": "WIN",
+          "confidence": 57.3,
+          "ev": 0.8,
           "edge": "FAIR"
         },
         {
@@ -3411,10 +3606,10 @@
     }
   ],
   "cumulative": {
-    "wins": 199,
-    "losses": 214,
+    "wins": 206,
+    "losses": 222,
     "pushes": 0,
-    "total": 413,
-    "win_pct": 48.2
+    "total": 428,
+    "win_pct": 48.1
   }
 }
