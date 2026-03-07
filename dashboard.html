@@ -3870,7 +3870,7 @@
           <div class="rec-rank">#${i + 1}</div>
           <div class="rec-badge ${(r.bet_type || '').toLowerCase()}">${r.bet_type}</div>
           <div class="rec-matchup">${r.game || ''}</div>
-          <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds || ''}</span>${resultBadge}</div>
+          <div class="rec-pick">${r.pick} <span class="rec-odds">${r.odds != null ? (typeof r.odds === 'number' ? (r.odds > 0 ? '(+' + r.odds + ')' : '(' + r.odds + ')') : r.odds) : ''}</span>${resultBadge}</div>
           <div class="rec-conf ${confLvl}">${(r.confidence || 0).toFixed(1)}% conf</div>
           ${kellyRecDetail(r.confidence, r.odds)}
         </div>`;
