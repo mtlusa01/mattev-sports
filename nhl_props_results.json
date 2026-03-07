@@ -1424,46 +1424,76 @@
     },
     {
       "date": "2026-03-06",
-      "wins": 11,
-      "losses": 6,
+      "wins": 13,
+      "losses": 10,
       "pushes": 0,
-      "total": 17,
-      "pct": 64.7,
+      "total": 23,
+      "pct": 56.5,
       "by_type": {
-        "ASSISTS": {
-          "wins": 3,
-          "losses": 0,
-          "pushes": 0
-        },
         "SHOTS": {
-          "wins": 1,
-          "losses": 5,
+          "wins": 2,
+          "losses": 6,
           "pushes": 0
         },
         "POINTS": {
-          "wins": 7,
-          "losses": 1,
+          "wins": 8,
+          "losses": 2,
+          "pushes": 0
+        },
+        "ASSISTS": {
+          "wins": 3,
+          "losses": 2,
           "pushes": 0
         }
       },
       "by_tier": {
         "STRONG": {
-          "wins": 3,
-          "losses": 3,
+          "wins": 4,
+          "losses": 6,
           "pushes": 0
         },
         "GOOD": {
           "wins": 4,
-          "losses": 2,
+          "losses": 3,
           "pushes": 0
         },
         "FAIR": {
-          "wins": 4,
+          "wins": 5,
           "losses": 1,
           "pushes": 0
         }
       },
       "picks": [
+        {
+          "player": "Sam Rinzel",
+          "team": "CHI",
+          "opponent": "VAN",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.37,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 71.1,
+          "ev": 7.05,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Teuvo Teravainen",
+          "team": "CHI",
+          "opponent": "VAN",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.99,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 55.5,
+          "ev": 5.97,
+          "edge": "STRONG"
+        },
         {
           "player": "Nathan MacKinnon",
           "team": "COL",
@@ -1480,6 +1510,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Tyler Bertuzzi",
+          "team": "CHI",
+          "opponent": "VAN",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.08,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.0,
+          "ev": 6.28,
+          "edge": "STRONG"
+        },
+        {
           "player": "Marco Kasper",
           "team": "DET",
           "opponent": "FLA",
@@ -1492,6 +1537,21 @@
           "hit": false,
           "confidence": 59.3,
           "ev": 4.89,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Elias Pettersson",
+          "team": "VAN",
+          "opponent": "CHI",
+          "prop": "ASSISTS",
+          "direction": "UNDER",
+          "line": 0.5,
+          "projection": 0.19,
+          "actual": 1.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 68.4,
+          "ev": 2.97,
           "edge": "GOOD"
         },
         {
@@ -1553,6 +1613,21 @@
           "confidence": 65.3,
           "ev": 4.93,
           "edge": "GOOD"
+        },
+        {
+          "player": "Connor Bedard",
+          "team": "CHI",
+          "opponent": "VAN",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.95,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 55.1,
+          "ev": 5.21,
+          "edge": "STRONG"
         },
         {
           "player": "Miro Heiskanen",
@@ -1645,6 +1720,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Jake DeBrusk",
+          "team": "VAN",
+          "opponent": "CHI",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 2.5,
+          "projection": 2.13,
+          "actual": 0.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 57.8,
+          "ev": 0.69,
+          "edge": "FAIR"
+        },
+        {
           "player": "Sam Reinhart",
           "team": "FLA",
           "opponent": "DET",
@@ -1723,10 +1813,10 @@
     }
   ],
   "all_time": {
-    "wins": 64,
-    "losses": 56,
+    "wins": 66,
+    "losses": 60,
     "pushes": 0,
-    "pct": 53.3,
+    "pct": 52.4,
     "by_type": {
       "POINTS": {
         "wins": 46,
@@ -1745,5 +1835,5 @@
       }
     }
   },
-  "updated": "2026-03-07T03:59:30"
+  "updated": "2026-03-07T04:15:16"
 }
