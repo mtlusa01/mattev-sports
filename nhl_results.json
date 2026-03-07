@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-07T03:58:26",
+  "updated": "2026-03-07T03:58:57",
   "allTime": {
     "spreads": {
+      "wins": 33,
+      "losses": 24,
+      "pushes": 0,
+      "pct": 57.9,
+      "roi": 10.5
+    },
+    "totals": {
       "wins": 32,
       "losses": 24,
       "pushes": 0,
       "pct": 57.1,
       "roi": 9.1
     },
-    "totals": {
-      "wins": 32,
-      "losses": 23,
-      "pushes": 0,
-      "pct": 58.2,
-      "roi": 11.1
-    },
     "moneylines": {
-      "wins": 34,
+      "wins": 35,
       "losses": 22,
       "pushes": 0,
-      "pct": 60.7,
-      "roi": 15.9
+      "pct": 61.4,
+      "roi": 17.2
     },
     "best_bets": {
-      "wins": 29,
-      "losses": 14,
+      "wins": 30,
+      "losses": 15,
       "pushes": 0,
-      "pct": 67.4,
-      "roi": 28.8
+      "pct": 66.7,
+      "roi": 27.3
     }
   },
   "days": [
     {
       "date": "2026-03-06",
       "spreads": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "totals": {
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "0-1",
+        "record": "0-2",
         "pct": 0.0
       },
       "moneylines": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 0,
-        "losses": 3,
+        "wins": 1,
+        "losses": 4,
         "pushes": 0,
-        "record": "0-3",
-        "pct": 0.0
+        "record": "1-4",
+        "pct": 20.0
       },
       "picks": [
         {
@@ -95,6 +95,39 @@
           "proj_score": "2.6-3.8",
           "home_win_prob": 66.9,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "COL @ DAL",
+          "pick": "DAL +1.5",
+          "result": "5-4",
+          "hit": true,
+          "confidence": 58.8,
+          "proj_score": "2.8-2.7",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "COL @ DAL",
+          "pick": "UNDER 6.5",
+          "result": "5-4",
+          "hit": false,
+          "confidence": 56.2,
+          "proj_score": "2.8-2.7",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "COL @ DAL",
+          "pick": "COL",
+          "result": "5-4",
+          "hit": true,
+          "confidence": 50.3,
+          "proj_score": "2.8-2.7",
+          "home_win_prob": 75.4
         }
       ]
     },
