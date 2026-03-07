@@ -1840,35 +1840,35 @@
     },
     {
       "date": "2026-03-06",
-      "graded_at": "2026-03-07T03:51:31",
-      "total_props_graded": 57,
+      "graded_at": "2026-03-07T04:27:58",
+      "total_props_graded": 79,
       "overall": {
-        "wins": 29,
-        "losses": 28,
+        "wins": 39,
+        "losses": 40,
         "pushes": 0,
-        "total": 57,
-        "record": "29-28-0",
-        "win_pct": 50.9
+        "total": 79,
+        "record": "39-40-0",
+        "win_pct": 49.4
       },
       "by_stat_type": {
         "REB": {
-          "wins": 12,
-          "losses": 4,
-          "pushes": 0
-        },
-        "PRA": {
-          "wins": 7,
+          "wins": 14,
           "losses": 7,
           "pushes": 0
         },
+        "PRA": {
+          "wins": 9,
+          "losses": 11,
+          "pushes": 0
+        },
         "PTS": {
-          "wins": 6,
-          "losses": 9,
+          "wins": 9,
+          "losses": 12,
           "pushes": 0
         },
         "AST": {
-          "wins": 4,
-          "losses": 8,
+          "wins": 7,
+          "losses": 10,
           "pushes": 0
         }
       },
@@ -1898,6 +1898,19 @@
           "confidence": 57.6,
           "ev": 9.5,
           "edge": "GOOD"
+        },
+        {
+          "player": "Christian Braun",
+          "prop": "REB",
+          "team": "DEN",
+          "direction": "OVER",
+          "line": 4.5,
+          "projection": 6.2,
+          "actual": 4.0,
+          "result": "LOSS",
+          "confidence": 58.7,
+          "ev": 9.4,
+          "edge": "FAIR"
         },
         {
           "player": "Jaylen Brown",
@@ -1937,6 +1950,19 @@
           "confidence": 59.6,
           "ev": 8.8,
           "edge": "STRONG"
+        },
+        {
+          "player": "Jalen Brunson",
+          "prop": "PTS",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 26.5,
+          "projection": 21.2,
+          "actual": 9.0,
+          "result": "WIN",
+          "confidence": 59.5,
+          "ev": 8.7,
+          "edge": "FAIR"
         },
         {
           "player": "Amen Thompson",
@@ -1991,6 +2017,19 @@
           "edge": "FAIR"
         },
         {
+          "player": "Jalen Brunson",
+          "prop": "PRA",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 36.5,
+          "projection": 31.1,
+          "actual": 27.0,
+          "result": "WIN",
+          "confidence": 56.0,
+          "ev": 7.8,
+          "edge": "FAIR"
+        },
+        {
           "player": "LaMelo Ball",
           "prop": "AST",
           "team": "CHA",
@@ -2015,6 +2054,45 @@
           "confidence": 47.1,
           "ev": 7.4,
           "edge": "FAIR"
+        },
+        {
+          "player": "Jamal Murray",
+          "prop": "PRA",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 34.5,
+          "projection": 29.6,
+          "actual": 16.0,
+          "result": "WIN",
+          "confidence": 55.4,
+          "ev": 7.2,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Josh Hart",
+          "prop": "PRA",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 21.0,
+          "actual": 25.0,
+          "result": "LOSS",
+          "confidence": 56.8,
+          "ev": 7.1,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Jamal Murray",
+          "prop": "AST",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 5.3,
+          "actual": 3.0,
+          "result": "WIN",
+          "confidence": 56.7,
+          "ev": 6.9,
+          "edge": "GOOD"
         },
         {
           "player": "Jaylen Brown",
@@ -2082,6 +2160,32 @@
           "edge": "GOOD"
         },
         {
+          "player": "Nikola Jokic",
+          "prop": "AST",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 9.5,
+          "projection": 8.9,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 52.4,
+          "ev": 5.9,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Jamal Murray",
+          "prop": "PTS",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 21.0,
+          "actual": 12.0,
+          "result": "WIN",
+          "confidence": 55.0,
+          "ev": 5.9,
+          "edge": "FAIR"
+        },
+        {
           "player": "Derrick White",
           "prop": "PTS",
           "team": "BOS",
@@ -2091,6 +2195,19 @@
           "actual": 20.0,
           "result": "WIN",
           "confidence": 53.5,
+          "ev": 5.5,
+          "edge": "GOOD"
+        },
+        {
+          "player": "OG Anunoby",
+          "prop": "PRA",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 23.5,
+          "projection": 19.9,
+          "actual": 46.0,
+          "result": "LOSS",
+          "confidence": 58.6,
           "ev": 5.5,
           "edge": "GOOD"
         },
@@ -2173,6 +2290,19 @@
           "edge": "GOOD"
         },
         {
+          "player": "OG Anunoby",
+          "prop": "REB",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 4.5,
+          "projection": 4.0,
+          "actual": 7.0,
+          "result": "LOSS",
+          "confidence": 52.0,
+          "ev": 4.6,
+          "edge": "FAIR"
+        },
+        {
           "player": "LaMelo Ball",
           "prop": "REB",
           "team": "CHA",
@@ -2212,6 +2342,32 @@
           "edge": "GOOD"
         },
         {
+          "player": "OG Anunoby",
+          "prop": "PTS",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 16.5,
+          "projection": 14.5,
+          "actual": 34.0,
+          "result": "LOSS",
+          "confidence": 56.6,
+          "ev": 4.1,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "prop": "PTS",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 17.5,
+          "projection": 16.4,
+          "actual": 17.0,
+          "result": "WIN",
+          "confidence": 53.3,
+          "ev": 4.1,
+          "edge": "GOOD"
+        },
+        {
           "player": "Jerami Grant",
           "prop": "PTS",
           "team": "POR",
@@ -2223,6 +2379,19 @@
           "confidence": 54.7,
           "ev": 4.0,
           "edge": "GOOD"
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "prop": "PRA",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 31.5,
+          "projection": 28.9,
+          "actual": 32.0,
+          "result": "LOSS",
+          "confidence": 55.2,
+          "ev": 4.0,
+          "edge": "STRONG"
         },
         {
           "player": "Alperen Sengun",
@@ -2249,6 +2418,19 @@
           "confidence": 56.3,
           "ev": 3.6,
           "edge": "GOOD"
+        },
+        {
+          "player": "Josh Hart",
+          "prop": "AST",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 5.5,
+          "projection": 4.8,
+          "actual": 2.0,
+          "result": "WIN",
+          "confidence": 58.5,
+          "ev": 3.5,
+          "edge": "FAIR"
         },
         {
           "player": "Kon Knueppel",
@@ -2303,6 +2485,19 @@
           "edge": "FAIR"
         },
         {
+          "player": "Mikal Bridges",
+          "prop": "PTS",
+          "team": "NYK",
+          "direction": "OVER",
+          "line": 14.5,
+          "projection": 16.1,
+          "actual": 9.0,
+          "result": "LOSS",
+          "confidence": 54.5,
+          "ev": 1.9,
+          "edge": "GOOD"
+        },
+        {
           "player": "Alperen Sengun",
           "prop": "PTS",
           "team": "HOU",
@@ -2327,6 +2522,32 @@
           "confidence": 55.8,
           "ev": 1.8,
           "edge": "FAIR"
+        },
+        {
+          "player": "Jalen Brunson",
+          "prop": "AST",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 6.5,
+          "projection": 6.5,
+          "actual": 15.0,
+          "result": "LOSS",
+          "confidence": 52.6,
+          "ev": 1.8,
+          "edge": "FAIR"
+        },
+        {
+          "player": "Josh Hart",
+          "prop": "REB",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 7.5,
+          "projection": 6.7,
+          "actual": 5.0,
+          "result": "WIN",
+          "confidence": 60.7,
+          "ev": 1.7,
+          "edge": "GOOD"
         },
         {
           "player": "Bam Adebayo",
@@ -2355,6 +2576,32 @@
           "edge": "FAIR"
         },
         {
+          "player": "Nikola Jokic",
+          "prop": "PRA",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 49.5,
+          "projection": 47.8,
+          "actual": 51.0,
+          "result": "LOSS",
+          "confidence": 54.5,
+          "ev": 1.1,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "prop": "REB",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 11.5,
+          "projection": 10.5,
+          "actual": 13.0,
+          "result": "LOSS",
+          "confidence": 59.5,
+          "ev": 1.1,
+          "edge": "GOOD"
+        },
+        {
           "player": "Naji Marshall",
           "prop": "PTS",
           "team": "DAL",
@@ -2366,6 +2613,19 @@
           "confidence": 50.2,
           "ev": 1.0,
           "edge": "LEAN"
+        },
+        {
+          "player": "Nikola Jokic",
+          "prop": "PTS",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 26.5,
+          "projection": 26.4,
+          "actual": 38.0,
+          "result": "LOSS",
+          "confidence": 54.4,
+          "ev": 0.9,
+          "edge": "FAIR"
         },
         {
           "player": "Naji Marshall",
@@ -2472,6 +2732,19 @@
           "edge": null
         },
         {
+          "player": "Nikola Jokic",
+          "prop": "REB",
+          "team": "DEN",
+          "direction": "UNDER",
+          "line": 12.5,
+          "projection": 12.5,
+          "actual": 8.0,
+          "result": "WIN",
+          "confidence": 55.7,
+          "ev": -1.1,
+          "edge": null
+        },
+        {
           "player": "Toumani Camara",
           "prop": "REB",
           "team": "POR",
@@ -2495,6 +2768,19 @@
           "result": "WIN",
           "confidence": 51.9,
           "ev": -1.3,
+          "edge": null
+        },
+        {
+          "player": "Mikal Bridges",
+          "prop": "AST",
+          "team": "NYK",
+          "direction": "UNDER",
+          "line": 3.5,
+          "projection": 3.5,
+          "actual": 4.0,
+          "result": "LOSS",
+          "confidence": 54.2,
+          "ev": -1.4,
           "edge": null
         },
         {
@@ -2618,10 +2904,10 @@
     }
   ],
   "cumulative": {
-    "wins": 173,
-    "losses": 179,
+    "wins": 183,
+    "losses": 191,
     "pushes": 0,
-    "total": 352,
-    "win_pct": 49.1
+    "total": 374,
+    "win_pct": 48.9
   }
 }
