@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-07T19:01:47",
+  "updated": "2026-03-07T19:02:19",
   "allTime": {
     "spreads": {
-      "wins": 287,
+      "wins": 288,
       "losses": 233,
       "pushes": 12,
-      "pct": 55.2,
-      "roi": 5.4
+      "pct": 55.3,
+      "roi": 5.5
     },
     "totals": {
       "wins": 258,
-      "losses": 271,
+      "losses": 272,
       "pushes": 3,
-      "pct": 48.8,
-      "roi": -6.9
+      "pct": 48.7,
+      "roi": -7.1
     },
     "moneylines": {
-      "wins": 345,
+      "wins": 346,
       "losses": 187,
       "pushes": 0,
-      "pct": 64.8,
-      "roi": 23.8
+      "pct": 64.9,
+      "roi": 23.9
     },
     "best_bets": {
       "wins": 52,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-07",
       "spreads": {
-        "wins": 0,
+        "wins": 1,
         "losses": 2,
         "pushes": 0,
-        "record": "0-2",
-        "pct": 0.0
+        "record": "1-2",
+        "pct": 33.3
       },
       "totals": {
         "wins": 0,
-        "losses": 2,
+        "losses": 3,
         "pushes": 0,
-        "record": "0-2",
+        "record": "0-3",
         "pct": 0.0
       },
       "moneylines": {
-        "wins": 1,
+        "wins": 2,
         "losses": 1,
         "pushes": 0,
-        "record": "1-1",
-        "pct": 50.0
+        "record": "2-1",
+        "pct": 66.7
       },
       "best_bets": {
         "wins": 1,
@@ -81,8 +81,7 @@
           "result": "81-38",
           "hit": false,
           "confidence": 56,
-          "proj_score": "67.1-71.6",
-          "best_bet": true
+          "proj_score": "67.1-71.6"
         },
         {
           "date": "2026-03-07",
@@ -93,6 +92,38 @@
           "hit": false,
           "confidence": 64,
           "proj_score": "67.1-71.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "STO @ MERC",
+          "pick": "STO +6.0",
+          "result": "51-56",
+          "hit": true,
+          "confidence": 60,
+          "proj_score": "67.2-70.7"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "STO @ MERC",
+          "pick": "OVER 131.0",
+          "result": "51-56",
+          "hit": false,
+          "confidence": 63,
+          "proj_score": "67.2-70.7",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "STO @ MERC",
+          "pick": "MERC",
+          "result": "51-56",
+          "hit": true,
+          "confidence": 63,
+          "proj_score": "67.2-70.7",
           "best_bet": true
         },
         {
@@ -124,8 +155,7 @@
           "result": "78-91",
           "hit": true,
           "confidence": 62,
-          "proj_score": "77.6-80.5",
-          "best_bet": true
+          "proj_score": "77.6-80.5"
         }
       ]
     },
