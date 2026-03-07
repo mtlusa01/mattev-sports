@@ -2,6 +2,74 @@
   "sport": "MLB",
   "days": [
     {
+      "date": "2026-03-07",
+      "spreads": {
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "record": "0-1",
+        "pct": 0.0
+      },
+      "totals": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "moneylines": {
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "record": "1-0",
+        "pct": 100.0
+      },
+      "best_bets": {
+        "wins": 2,
+        "losses": 1,
+        "pushes": 0,
+        "record": "2-1",
+        "pct": 66.7
+      },
+      "picks": [
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "TB @ BOS",
+          "pick": "TB +1.5",
+          "result": "0-2",
+          "hit": false,
+          "confidence": 51.7,
+          "proj_score": "3.3-3.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "TB @ BOS",
+          "pick": "UNDER 8.5",
+          "result": "0-2",
+          "hit": true,
+          "confidence": 54.8,
+          "proj_score": "3.3-3.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "TB @ BOS",
+          "pick": "BOS",
+          "result": "0-2",
+          "hit": true,
+          "confidence": 52.2,
+          "proj_score": "3.3-3.6",
+          "home_win_prob": 54.4,
+          "away_win_prob": 45.6,
+          "best_bet": true
+        }
+      ]
+    },
+    {
       "date": "2026-03-06",
       "spreads": {
         "wins": 10,
@@ -1375,32 +1443,32 @@
   "allTime": {
     "spreads": {
       "wins": 23,
-      "losses": 15,
-      "pushes": 0,
-      "pct": 60.5,
-      "roi": 15.6
-    },
-    "totals": {
-      "wins": 21,
-      "losses": 17,
-      "pushes": 0,
-      "pct": 55.3,
-      "roi": 5.5
-    },
-    "moneylines": {
-      "wins": 22,
       "losses": 16,
       "pushes": 0,
-      "pct": 57.9,
-      "roi": 10.5
+      "pct": 59.0,
+      "roi": 12.6
+    },
+    "totals": {
+      "wins": 22,
+      "losses": 17,
+      "pushes": 0,
+      "pct": 56.4,
+      "roi": 7.7
+    },
+    "moneylines": {
+      "wins": 23,
+      "losses": 16,
+      "pushes": 0,
+      "pct": 59.0,
+      "roi": 12.6
     },
     "best_bets": {
-      "wins": 14,
-      "losses": 6,
+      "wins": 16,
+      "losses": 7,
       "pushes": 0,
-      "pct": 70.0,
-      "roi": 33.6
+      "pct": 69.6,
+      "roi": 32.8
     }
   },
-  "updated": "2026-03-07T03:51:30"
+  "updated": "2026-03-07T20:02:27"
 }
