@@ -1667,17 +1667,10 @@
         return true;
       }
 
-      // Pass 1: exact date match
+      // Props: exact date only (fuzzy match causes cross-day contamination —
+      // same player/prop/line on consecutive days is common in NHL/NBA)
       for (const p of allPicks) {
         if (betDate && p._date && p._date !== betDate) continue;
-        const pf = extractPropFields(p);
-        if (propMatches(pf) && p.hit !== undefined && p.hit !== null) {
-          return { hit: p.hit, result: p.actual != null ? p.actual : p.result };
-        }
-      }
-      // Pass 2: ±1 day fuzzy date match (cross-midnight games, timezone diffs)
-      for (const p of allPicks) {
-        if (!datesClose(betDate, p._date)) continue;
         const pf = extractPropFields(p);
         if (propMatches(pf) && p.hit !== undefined && p.hit !== null) {
           return { hit: p.hit, result: p.actual != null ? p.actual : p.result };

@@ -2759,21 +2759,13 @@
         var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
         var matched = null;
         if (bet.type === 'prop') {
-          // Pass 1: exact date match
+          // Props: exact date only. Fuzzy matching causes cross-day contamination
+          // (same player/prop/line on consecutive days is common in NHL/NBA).
           for (var j = 0; j < allPicks.length; j++) {
             var p = allPicks[j];
             if (betDate && p._date && p._date !== betDate) continue;
             var pf = extractPropFields(p);
             if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { matched = p; break; }
-          }
-          // Pass 2: ±1 day fuzzy date match (cross-midnight games, timezone diffs)
-          if (!matched) {
-            for (var j = 0; j < allPicks.length; j++) {
-              var p = allPicks[j];
-              if (!datesClose(betDate, p._date)) continue;
-              var pf = extractPropFields(p);
-              if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { matched = p; break; }
-            }
           }
         } else {
           // Pass 1: exact date match
@@ -2875,21 +2867,12 @@
         if (bet.status !== 'win' && bet.status !== 'loss') continue;
         var betDate = bet.date || (bet.placed_at ? bet.placed_at.slice(0, 10) : null);
         var backendMatch = null;
-        // Pass 1: exact date
+        // Props: exact date only (fuzzy match causes cross-day contamination)
         for (var j = 0; j < allPicks.length; j++) {
           var p = allPicks[j];
           if (betDate && p._date && p._date !== betDate) continue;
           var pf = extractPropFields(p);
           if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { backendMatch = p; break; }
-        }
-        // Pass 2: fuzzy date
-        if (!backendMatch) {
-          for (var j = 0; j < allPicks.length; j++) {
-            var p = allPicks[j];
-            if (!datesClose(betDate, p._date)) continue;
-            var pf = extractPropFields(p);
-            if (propMatches(pf, bet) && p.hit !== undefined && p.hit !== null) { backendMatch = p; break; }
-          }
         }
         if (!backendMatch) {
           // No backend confirmation — if bet is recent (≤48h), revert to pending.
