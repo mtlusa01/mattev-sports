@@ -971,41 +971,41 @@
     },
     {
       "date": "2026-03-06",
-      "wins": 30,
-      "losses": 17,
+      "wins": 36,
+      "losses": 19,
       "pushes": 0,
-      "total": 47,
-      "pct": 63.8,
+      "total": 55,
+      "pct": 65.5,
       "by_type": {
         "SHOTS": {
-          "wins": 12,
+          "wins": 16,
           "losses": 7,
           "pushes": 0
         },
         "POINTS": {
-          "wins": 14,
-          "losses": 8,
+          "wins": 16,
+          "losses": 9,
           "pushes": 0
         },
         "ASSISTS": {
           "wins": 4,
-          "losses": 2,
+          "losses": 3,
           "pushes": 0
         }
       },
       "by_tier": {
         "STRONG": {
-          "wins": 14,
-          "losses": 9,
+          "wins": 16,
+          "losses": 10,
           "pushes": 0
         },
         "GOOD": {
-          "wins": 10,
-          "losses": 5,
+          "wins": 12,
+          "losses": 6,
           "pushes": 0
         },
         "FAIR": {
-          "wins": 6,
+          "wins": 8,
           "losses": 3,
           "pushes": 0
         }
@@ -1144,6 +1144,21 @@
           "hit": true,
           "confidence": 68.6,
           "ev": 7.8,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Quinn Hughes",
+          "team": "MIN",
+          "opponent": "VGK",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.49,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 67.8,
+          "ev": 6.47,
           "edge": "STRONG"
         },
         {
@@ -1447,6 +1462,36 @@
           "edge": "GOOD"
         },
         {
+          "player": "Ryan Hartman",
+          "team": "MIN",
+          "opponent": "VGK",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.01,
+          "actual": 4.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 64.6,
+          "ev": 6.47,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Ivan Barbashev",
+          "team": "VGK",
+          "opponent": "MIN",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.0,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 66.6,
+          "ev": 4.6,
+          "edge": "GOOD"
+        },
+        {
           "player": "Jordan Kyrou",
           "team": "STL",
           "opponent": "SJS",
@@ -1552,6 +1597,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Mats Zuccarello",
+          "team": "MIN",
+          "opponent": "VGK",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.1,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 61.1,
+          "ev": 4.13,
+          "edge": "GOOD"
+        },
+        {
           "player": "Miro Heiskanen",
           "team": "DAL",
           "opponent": "COL",
@@ -1627,6 +1687,21 @@
           "edge": "FAIR"
         },
         {
+          "player": "Tomas Hertl",
+          "team": "VGK",
+          "opponent": "MIN",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 2.5,
+          "projection": 2.11,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.1,
+          "ev": 1.19,
+          "edge": "FAIR"
+        },
+        {
           "player": "Jake DeBrusk",
           "team": "VAN",
           "opponent": "CHI",
@@ -1672,6 +1747,36 @@
           "edge": "FAIR"
         },
         {
+          "player": "Ivan Barbashev",
+          "team": "VGK",
+          "opponent": "MIN",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.84,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 52.1,
+          "ev": 4.22,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Kirill Kaprizov",
+          "team": "MIN",
+          "opponent": "VGK",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.92,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 53.8,
+          "ev": 5.11,
+          "edge": "STRONG"
+        },
+        {
           "player": "Patrick Kane",
           "team": "DET",
           "opponent": "FLA",
@@ -1702,6 +1807,21 @@
           "edge": "FAIR"
         },
         {
+          "player": "Vladimir Tarasenko",
+          "team": "MIN",
+          "opponent": "VGK",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.56,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 52.0,
+          "ev": 1.53,
+          "edge": "FAIR"
+        },
+        {
           "player": "Matt Duchene",
           "team": "DAL",
           "opponent": "COL",
@@ -1720,12 +1840,12 @@
     }
   ],
   "all_time": {
-    "wins": 83,
-    "losses": 67,
+    "wins": 89,
+    "losses": 69,
     "pushes": 0,
     "total": 84,
     "win_rate": 64.3,
-    "pct": 55.3
+    "pct": 56.3
   },
-  "updated": "2026-03-07T05:35:27"
+  "updated": "2026-03-07T05:42:51"
 }
