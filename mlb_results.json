@@ -4,32 +4,32 @@
     {
       "date": "2026-03-07",
       "spreads": {
-        "wins": 2,
+        "wins": 3,
         "losses": 2,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "totals": {
-        "wins": 3,
+        "wins": 4,
         "losses": 1,
         "pushes": 0,
-        "record": "3-1",
-        "pct": 75.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "moneylines": {
-        "wins": 2,
-        "losses": 2,
-        "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
-      },
-      "best_bets": {
         "wins": 2,
         "losses": 3,
         "pushes": 0,
         "record": "2-3",
         "pct": 40.0
+      },
+      "best_bets": {
+        "wins": 3,
+        "losses": 2,
+        "pushes": 0,
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -50,8 +50,7 @@
           "result": "4-5",
           "hit": false,
           "confidence": 53.3,
-          "proj_score": "3.8-3.6",
-          "best_bet": true
+          "proj_score": "3.8-3.6"
         },
         {
           "date": "2026-03-07",
@@ -64,6 +63,39 @@
           "proj_score": "3.8-3.6",
           "home_win_prob": 46.8,
           "away_win_prob": 53.2
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "BAL @ ATL",
+          "pick": "BAL +1.5",
+          "result": "2-2",
+          "hit": true,
+          "confidence": 50.9,
+          "proj_score": "3.4-3.5"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "BAL @ ATL",
+          "pick": "UNDER 8.5",
+          "result": "2-2",
+          "hit": true,
+          "confidence": 54.8,
+          "proj_score": "3.4-3.5",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "BAL @ ATL",
+          "pick": "ATL",
+          "result": "2-2",
+          "hit": false,
+          "confidence": 51.2,
+          "proj_score": "3.4-3.5",
+          "home_win_prob": 52.4,
+          "away_win_prob": 47.6
         },
         {
           "date": "2026-03-07",
@@ -1540,33 +1572,33 @@
   },
   "allTime": {
     "spreads": {
-      "wins": 25,
+      "wins": 26,
       "losses": 17,
       "pushes": 0,
-      "pct": 59.5,
-      "roi": 13.6
+      "pct": 60.5,
+      "roi": 15.4
     },
     "totals": {
-      "wins": 24,
+      "wins": 25,
       "losses": 18,
       "pushes": 0,
-      "pct": 57.1,
-      "roi": 9.1
+      "pct": 58.1,
+      "roi": 11.0
     },
     "moneylines": {
       "wins": 24,
-      "losses": 18,
+      "losses": 19,
       "pushes": 0,
-      "pct": 57.1,
-      "roi": 9.1
+      "pct": 55.8,
+      "roi": 6.6
     },
     "best_bets": {
-      "wins": 16,
-      "losses": 9,
+      "wins": 17,
+      "losses": 8,
       "pushes": 0,
-      "pct": 64.0,
-      "roi": 22.2
+      "pct": 68.0,
+      "roi": 29.8
     }
   },
-  "updated": "2026-03-07T20:23:50"
+  "updated": "2026-03-07T20:34:39"
 }
