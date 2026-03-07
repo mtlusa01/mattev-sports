@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-07T04:38:29",
+  "updated": "2026-03-07T04:59:36",
   "allTime": {
     "spreads": {
+      "wins": 36,
+      "losses": 24,
+      "pushes": 0,
+      "pct": 60.0,
+      "roi": 14.5
+    },
+    "totals": {
       "wins": 35,
       "losses": 24,
       "pushes": 0,
       "pct": 59.3,
       "roi": 13.3
     },
-    "totals": {
-      "wins": 34,
-      "losses": 24,
-      "pushes": 0,
-      "pct": 58.6,
-      "roi": 11.9
-    },
     "moneylines": {
       "wins": 37,
-      "losses": 22,
+      "losses": 23,
       "pushes": 0,
-      "pct": 62.7,
-      "roi": 19.7
+      "pct": 61.7,
+      "roi": 17.7
     },
     "best_bets": {
       "wins": 33,
@@ -34,25 +34,25 @@
     {
       "date": "2026-03-06",
       "spreads": {
-        "wins": 3,
+        "wins": 4,
         "losses": 1,
         "pushes": 0,
-        "record": "3-1",
-        "pct": 75.0
+        "record": "4-1",
+        "pct": 80.0
       },
       "totals": {
-        "wins": 2,
+        "wins": 3,
         "losses": 2,
         "pushes": 0,
-        "record": "2-2",
-        "pct": 50.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "moneylines": {
         "wins": 3,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "3-1",
-        "pct": 75.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "best_bets": {
         "wins": 4,
@@ -190,6 +190,37 @@
           "proj_score": "5.1-2.9",
           "home_win_prob": 37.0,
           "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "MTL @ ANA",
+          "pick": "MTL +1.5",
+          "result": "5-5",
+          "hit": true,
+          "confidence": 58.0,
+          "proj_score": "3.8-3.6"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "MTL @ ANA",
+          "pick": "OVER 5.5",
+          "result": "5-5",
+          "hit": true,
+          "confidence": 52,
+          "proj_score": "3.8-3.6"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "MTL @ ANA",
+          "pick": "MTL",
+          "result": "5-5",
+          "hit": false,
+          "confidence": 51.4,
+          "proj_score": "3.8-3.6",
+          "home_win_prob": 60.5
         }
       ]
     },

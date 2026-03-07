@@ -971,36 +971,36 @@
     },
     {
       "date": "2026-03-06",
-      "wins": 21,
-      "losses": 10,
+      "wins": 27,
+      "losses": 12,
       "pushes": 0,
-      "total": 31,
-      "pct": 67.7,
+      "total": 39,
+      "pct": 69.2,
       "by_type": {
         "SHOTS": {
-          "wins": 7,
-          "losses": 5,
+          "wins": 10,
+          "losses": 6,
           "pushes": 0
         },
         "POINTS": {
-          "wins": 11,
-          "losses": 3,
+          "wins": 13,
+          "losses": 4,
           "pushes": 0
         },
         "ASSISTS": {
-          "wins": 3,
+          "wins": 4,
           "losses": 2,
           "pushes": 0
         }
       },
       "by_tier": {
         "STRONG": {
-          "wins": 9,
-          "losses": 5,
+          "wins": 12,
+          "losses": 7,
           "pushes": 0
         },
         "GOOD": {
-          "wins": 6,
+          "wins": 9,
           "losses": 4,
           "pushes": 0
         },
@@ -1042,6 +1042,51 @@
           "edge": "STRONG"
         },
         {
+          "player": "Jackson LaCombe",
+          "team": "ANA",
+          "opponent": "MTL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.19,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 60.4,
+          "ev": 6.91,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Nick Suzuki",
+          "team": "MTL",
+          "opponent": "ANA",
+          "prop": "ASSISTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.39,
+          "actual": 1.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 65.6,
+          "ev": 6.65,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Beckett Sennecke",
+          "team": "ANA",
+          "opponent": "MTL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.33,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 64.5,
+          "ev": 6.41,
+          "edge": "STRONG"
+        },
+        {
           "player": "Teuvo Teravainen",
           "team": "CHI",
           "opponent": "VAN",
@@ -1072,6 +1117,36 @@
           "edge": "STRONG"
         },
         {
+          "player": "Cutter Gauthier",
+          "team": "ANA",
+          "opponent": "MTL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.27,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 67.3,
+          "ev": 3.1,
+          "edge": "GOOD"
+        },
+        {
+          "player": "Brendan Gallagher",
+          "team": "MTL",
+          "opponent": "ANA",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 1.5,
+          "projection": 1.15,
+          "actual": 3.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 59.8,
+          "ev": 5.82,
+          "edge": "STRONG"
+        },
+        {
           "player": "Tyler Bertuzzi",
           "team": "CHI",
           "opponent": "VAN",
@@ -1085,6 +1160,21 @@
           "confidence": 58.0,
           "ev": 6.28,
           "edge": "STRONG"
+        },
+        {
+          "player": "Mason McTavish",
+          "team": "ANA",
+          "opponent": "MTL",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 2.5,
+          "projection": 1.81,
+          "actual": 0.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 67.8,
+          "ev": 3.81,
+          "edge": "GOOD"
         },
         {
           "player": "Marco Kasper",
@@ -1342,6 +1432,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Frank Vatrano",
+          "team": "ANA",
+          "opponent": "MTL",
+          "prop": "SHOTS",
+          "direction": "UNDER",
+          "line": 1.5,
+          "projection": 1.28,
+          "actual": 0.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 52.8,
+          "ev": 5.58,
+          "edge": "STRONG"
+        },
+        {
           "player": "Miro Heiskanen",
           "team": "DAL",
           "opponent": "COL",
@@ -1370,6 +1475,21 @@
           "confidence": 58.8,
           "ev": 5.86,
           "edge": "STRONG"
+        },
+        {
+          "player": "Beckett Sennecke",
+          "team": "ANA",
+          "opponent": "MTL",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 2.73,
+          "actual": 5.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 55.4,
+          "ev": 2.33,
+          "edge": "GOOD"
         },
         {
           "player": "Sebastian Aho",
@@ -1480,12 +1600,12 @@
     }
   ],
   "all_time": {
-    "wins": 74,
-    "losses": 60,
+    "wins": 80,
+    "losses": 62,
     "pushes": 0,
     "total": 84,
     "win_rate": 64.3,
-    "pct": 55.2
+    "pct": 56.3
   },
-  "updated": "2026-03-06T23:52:56"
+  "updated": "2026-03-07T04:59:36"
 }

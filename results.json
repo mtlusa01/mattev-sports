@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-07T04:58:00",
+  "updated": "2026-03-07T04:59:36",
   "allTime": {
     "spreads": {
-      "wins": 29,
+      "wins": 30,
       "losses": 32,
       "pushes": 0,
-      "pct": 47.5,
-      "roi": -9.2
+      "pct": 48.4,
+      "roi": -7.6
     },
     "totals": {
       "wins": 33,
-      "losses": 30,
+      "losses": 31,
       "pushes": 0,
-      "pct": 52.4,
-      "roi": 0.0
+      "pct": 51.6,
+      "roi": -1.6
     },
     "moneylines": {
-      "wins": 73,
+      "wins": 74,
       "losses": 38,
       "pushes": 0,
-      "pct": 65.8,
-      "roi": 25.6
+      "pct": 66.1,
+      "roi": 26.1
     },
     "best_bets": {
       "wins": 99,
@@ -43,25 +43,25 @@
     {
       "date": "2026-03-06",
       "spreads": {
-        "wins": 2,
+        "wins": 3,
         "losses": 3,
         "pushes": 0,
-        "record": "2-3",
-        "pct": 40.0
+        "record": "3-3",
+        "pct": 50.0
       },
       "totals": {
         "wins": 1,
-        "losses": 4,
+        "losses": 5,
         "pushes": 0,
-        "record": "1-4",
-        "pct": 20.0
+        "record": "1-5",
+        "pct": 16.7
       },
       "moneylines": {
-        "wins": 3,
+        "wins": 4,
         "losses": 2,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-2",
+        "pct": 66.7
       },
       "best_bets": {
         "wins": 4,
@@ -225,6 +225,36 @@
           "confidence": 63.8,
           "proj_score": "108.8-115.4",
           "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "LAC @ SAS",
+          "pick": "LAC +8.0",
+          "result": "112-116",
+          "hit": true,
+          "confidence": 52.2,
+          "proj_score": "107.7-114.2"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "LAC @ SAS",
+          "pick": "UNDER 224.5",
+          "result": "112-116",
+          "hit": false,
+          "confidence": 55.3,
+          "proj_score": "107.7-114.2"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "LAC @ SAS",
+          "pick": "SAS",
+          "result": "112-116",
+          "hit": true,
+          "confidence": 62.5,
+          "proj_score": "107.7-114.2"
         }
       ]
     },
