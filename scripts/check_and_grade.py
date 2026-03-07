@@ -956,7 +956,7 @@ def grade_nhl_props():
     # ESPN NHL labels: G, A, SOG, S, BS, HT, TK, SV, SA, etc.
     # "points" in NHL = Goals + Assists (computed)
     NHL_STAT_MAP = {
-        "shots": ["SOG", "S"],
+        "shots": ["S", "SOG"],
         "goals": ["G"],
         "assists": ["A"],
         "saves": ["SV"],
