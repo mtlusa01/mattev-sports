@@ -2,26 +2,44 @@
   "date": "2026-03-07",
   "sport": "NHL",
   "type": "props",
-  "locked_at": "2026-03-07T08:32:38",
+  "locked_at": "2026-03-07T14:24:14",
   "recommendations": [
     {
-      "player": "Tage Thompson",
-      "team": "BUF",
+      "player": "Jack Hughes",
+      "team": "NJD",
       "prop": "SHOTS",
       "direction": "OVER",
       "line": 3.5,
-      "projection": 4.16,
-      "ev": 6.69,
+      "projection": 3.93,
+      "ev": 6.47,
       "edge": "STRONG",
-      "diff": 0.66,
-      "confidence": 57.1,
-      "pick_score": 62.3,
-      "score_factors": [
-        "Favorable matchup"
-      ],
-      "matchup_favorability": "favorable",
-      "l10_hit_rate": 60.0,
+      "diff": 0.43,
+      "confidence": 53.2,
+      "pick_score": 35.0,
+      "score_factors": [],
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 30.0,
       "rec_rank": 1
+    },
+    {
+      "player": "Jesper Bratt",
+      "team": "NJD",
+      "prop": "POINTS",
+      "direction": "OVER",
+      "line": 0.5,
+      "projection": 1.28,
+      "ev": 6.28,
+      "edge": "STRONG",
+      "diff": 0.78,
+      "confidence": 63.4,
+      "pick_score": 62.9,
+      "score_factors": [
+        "70% L10 hit rate",
+        "3-game streak"
+      ],
+      "matchup_favorability": "neutral",
+      "l10_hit_rate": 70.0,
+      "rec_rank": 2
     },
     {
       "player": "Ryan McLeod",
@@ -41,27 +59,27 @@
       ],
       "matchup_favorability": "favorable",
       "l10_hit_rate": 70.0,
-      "rec_rank": 2
+      "rec_rank": 3
     },
     {
-      "player": "Jesper Bratt",
-      "team": "NJD",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.28,
-      "ev": 6.08,
+      "player": "Owen Tippett",
+      "team": "PHI",
+      "prop": "SHOTS",
+      "direction": "UNDER",
+      "line": 2.5,
+      "projection": 2.12,
+      "ev": 5.96,
       "edge": "STRONG",
-      "diff": 0.78,
-      "confidence": 63.7,
-      "pick_score": 62.9,
+      "diff": -0.38,
+      "confidence": 53.0,
+      "pick_score": 56.8,
       "score_factors": [
-        "70% L10 hit rate",
-        "3-game streak"
+        "80% L10 hit rate",
+        "6-game streak"
       ],
       "matchup_favorability": "neutral",
-      "l10_hit_rate": 70.0,
-      "rec_rank": 3
+      "l10_hit_rate": 80.0,
+      "rec_rank": 4
     },
     {
       "player": "Alex Tuch",
@@ -82,23 +100,6 @@
       ],
       "matchup_favorability": "favorable",
       "l10_hit_rate": 70.0,
-      "rec_rank": 4
-    },
-    {
-      "player": "Erik Karlsson",
-      "team": "PIT",
-      "prop": "POINTS",
-      "direction": "OVER",
-      "line": 0.5,
-      "projection": 1.02,
-      "ev": 5.8,
-      "edge": "STRONG",
-      "diff": 0.52,
-      "confidence": 56.6,
-      "pick_score": 46.6,
-      "score_factors": [],
-      "matchup_favorability": "neutral",
-      "l10_hit_rate": 50.0,
       "rec_rank": 5
     }
   ]
