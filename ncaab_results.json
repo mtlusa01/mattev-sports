@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-07T00:28:46",
+  "updated": "2026-03-07T01:21:28",
   "allTime": {
     "spreads": {
       "wins": 278,
-      "losses": 213,
+      "losses": 216,
       "pushes": 11,
-      "pct": 56.6,
-      "roi": 8.1
+      "pct": 56.3,
+      "roi": 7.4
     },
     "totals": {
-      "wins": 240,
+      "wins": 243,
       "losses": 259,
       "pushes": 3,
-      "pct": 48.1,
-      "roi": -8.2
+      "pct": 48.4,
+      "roi": -7.6
     },
     "moneylines": {
-      "wins": 328,
-      "losses": 174,
+      "wins": 330,
+      "losses": 175,
       "pushes": 0,
       "pct": 65.3,
-      "roi": 24.7
+      "roi": 24.8
     },
     "best_bets": {
-      "wins": 53,
-      "losses": 12,
+      "wins": 52,
+      "losses": 13,
       "pushes": 0,
-      "pct": 81.5,
-      "roi": 55.7
+      "pct": 80.0,
+      "roi": 52.7
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-03-06",
       "spreads": {
         "wins": 3,
-        "losses": 6,
+        "losses": 9,
         "pushes": 0,
-        "record": "3-6",
-        "pct": 33.3
+        "record": "3-9",
+        "pct": 25.0
       },
       "totals": {
-        "wins": 2,
+        "wins": 5,
         "losses": 7,
         "pushes": 0,
-        "record": "2-7",
-        "pct": 22.2
+        "record": "5-7",
+        "pct": 41.7
       },
       "moneylines": {
-        "wins": 4,
-        "losses": 5,
+        "wins": 6,
+        "losses": 6,
         "pushes": 0,
-        "record": "4-5",
-        "pct": 44.4
+        "record": "6-6",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 4,
-        "losses": 1,
+        "wins": 3,
+        "losses": 2,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "3-2",
+        "pct": 60.0
       },
       "picks": [
         {
@@ -120,8 +120,7 @@
           "result": "59-81",
           "hit": true,
           "confidence": 69,
-          "proj_score": "74.4-80.7",
-          "best_bet": true
+          "proj_score": "74.4-80.7"
         },
         {
           "date": "2026-03-06",
@@ -152,8 +151,7 @@
           "result": "100-79",
           "hit": false,
           "confidence": 68,
-          "proj_score": "76.9-83.0",
-          "best_bet": true
+          "proj_score": "76.9-83.0"
         },
         {
           "date": "2026-03-06",
@@ -314,8 +312,7 @@
           "result": "88-85",
           "hit": true,
           "confidence": 65,
-          "proj_score": "72.9-76.4",
-          "best_bet": true
+          "proj_score": "72.9-76.4"
         },
         {
           "date": "2026-03-06",
@@ -336,6 +333,99 @@
           "hit": false,
           "confidence": 63,
           "proj_score": "72.9-76.4"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "NIU @ AKR",
+          "pick": "NIU +23.5",
+          "result": "55-94",
+          "hit": false,
+          "confidence": 88,
+          "proj_score": "77.2-81.1",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "NIU @ AKR",
+          "pick": "UNDER 155.5",
+          "result": "55-94",
+          "hit": true,
+          "confidence": 46,
+          "proj_score": "77.2-81.1"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "NIU @ AKR",
+          "pick": "AKR",
+          "result": "55-94",
+          "hit": true,
+          "confidence": 63,
+          "proj_score": "77.2-81.1"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "SHU @ MRMK",
+          "pick": "SHU +6.5",
+          "result": "48-70",
+          "hit": false,
+          "confidence": 56,
+          "proj_score": "70.2-76.5"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "SHU @ MRMK",
+          "pick": "UNDER 145.5",
+          "result": "48-70",
+          "hit": true,
+          "confidence": 45,
+          "proj_score": "70.2-76.5"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "SHU @ MRMK",
+          "pick": "MRMK",
+          "result": "48-70",
+          "hit": true,
+          "confidence": 70,
+          "proj_score": "70.2-76.5",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "USM @ TXST",
+          "pick": "TXST +1.5",
+          "result": "81-77",
+          "hit": false,
+          "confidence": 77,
+          "proj_score": "70.3-76.8",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "USM @ TXST",
+          "pick": "OVER 141.5",
+          "result": "81-77",
+          "hit": true,
+          "confidence": 55,
+          "proj_score": "70.3-76.8"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "USM @ TXST",
+          "pick": "TXST",
+          "result": "81-77",
+          "hit": false,
+          "confidence": 70,
+          "proj_score": "70.3-76.8"
         }
       ]
     },
