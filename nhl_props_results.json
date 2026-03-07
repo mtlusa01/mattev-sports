@@ -971,20 +971,20 @@
     },
     {
       "date": "2026-03-06",
-      "wins": 27,
-      "losses": 12,
+      "wins": 30,
+      "losses": 17,
       "pushes": 0,
-      "total": 39,
-      "pct": 69.2,
+      "total": 47,
+      "pct": 63.8,
       "by_type": {
         "SHOTS": {
-          "wins": 10,
-          "losses": 6,
+          "wins": 12,
+          "losses": 7,
           "pushes": 0
         },
         "POINTS": {
-          "wins": 13,
-          "losses": 4,
+          "wins": 14,
+          "losses": 8,
           "pushes": 0
         },
         "ASSISTS": {
@@ -995,18 +995,18 @@
       },
       "by_tier": {
         "STRONG": {
-          "wins": 12,
-          "losses": 7,
+          "wins": 14,
+          "losses": 9,
           "pushes": 0
         },
         "GOOD": {
-          "wins": 9,
-          "losses": 4,
+          "wins": 10,
+          "losses": 5,
           "pushes": 0
         },
         "FAIR": {
           "wins": 6,
-          "losses": 1,
+          "losses": 3,
           "pushes": 0
         }
       },
@@ -1039,6 +1039,36 @@
           "hit": true,
           "confidence": 64.5,
           "ev": 6.32,
+          "edge": "STRONG"
+        },
+        {
+          "player": "William Eklund",
+          "team": "SJS",
+          "opponent": "STL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.01,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 55.7,
+          "ev": 6.41,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Robert Thomas",
+          "team": "STL",
+          "opponent": "SJS",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.24,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 62.4,
+          "ev": 6.27,
           "edge": "STRONG"
         },
         {
@@ -1099,6 +1129,21 @@
           "hit": false,
           "confidence": 55.5,
           "ev": 5.97,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Pavel Buchnevich",
+          "team": "STL",
+          "opponent": "SJS",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 2.27,
+          "actual": 2.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 68.6,
+          "ev": 7.8,
           "edge": "STRONG"
         },
         {
@@ -1222,6 +1267,21 @@
           "edge": "STRONG"
         },
         {
+          "player": "Will Smith",
+          "team": "SJS",
+          "opponent": "STL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 1.19,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 66.1,
+          "ev": 2.39,
+          "edge": "GOOD"
+        },
+        {
           "player": "Logan Stankoven",
           "team": "CAR",
           "opponent": "EDM",
@@ -1267,6 +1327,21 @@
           "edge": "GOOD"
         },
         {
+          "player": "Robert Thomas",
+          "team": "STL",
+          "opponent": "SJS",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 1.5,
+          "projection": 1.76,
+          "actual": 5.0,
+          "result": "WIN",
+          "hit": true,
+          "confidence": 58.2,
+          "ev": 4.78,
+          "edge": "GOOD"
+        },
+        {
           "player": "Sean Walker",
           "team": "CAR",
           "opponent": "EDM",
@@ -1279,6 +1354,21 @@
           "hit": true,
           "confidence": 59.8,
           "ev": 5.77,
+          "edge": "STRONG"
+        },
+        {
+          "player": "Alexander Wennberg",
+          "team": "SJS",
+          "opponent": "STL",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.98,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 55.4,
+          "ev": 5.73,
           "edge": "STRONG"
         },
         {
@@ -1355,6 +1445,21 @@
           "confidence": 55.5,
           "ev": 3.76,
           "edge": "GOOD"
+        },
+        {
+          "player": "Jordan Kyrou",
+          "team": "STL",
+          "opponent": "SJS",
+          "prop": "SHOTS",
+          "direction": "OVER",
+          "line": 2.5,
+          "projection": 2.9,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 60.8,
+          "ev": 1.92,
+          "edge": "FAIR"
         },
         {
           "player": "Andrei Svechnikov",
@@ -1475,6 +1580,21 @@
           "confidence": 58.8,
           "ev": 5.86,
           "edge": "STRONG"
+        },
+        {
+          "player": "Pavel Buchnevich",
+          "team": "STL",
+          "opponent": "SJS",
+          "prop": "POINTS",
+          "direction": "OVER",
+          "line": 0.5,
+          "projection": 0.88,
+          "actual": 0.0,
+          "result": "LOSS",
+          "hit": false,
+          "confidence": 56.5,
+          "ev": 1.64,
+          "edge": "FAIR"
         },
         {
           "player": "Beckett Sennecke",
@@ -1600,12 +1720,12 @@
     }
   ],
   "all_time": {
-    "wins": 80,
-    "losses": 62,
+    "wins": 83,
+    "losses": 67,
     "pushes": 0,
     "total": 84,
     "win_rate": 64.3,
-    "pct": 56.3
+    "pct": 55.3
   },
-  "updated": "2026-03-07T04:59:36"
+  "updated": "2026-03-07T05:35:27"
 }

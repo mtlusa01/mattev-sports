@@ -1,65 +1,65 @@
 {
-  "updated": "2026-03-07T05:34:21",
+  "updated": "2026-03-07T05:35:27",
   "allTime": {
     "spreads": {
+      "wins": 37,
+      "losses": 24,
+      "pushes": 0,
+      "pct": 60.7,
+      "roi": 15.8
+    },
+    "totals": {
       "wins": 36,
       "losses": 24,
       "pushes": 0,
       "pct": 60.0,
       "roi": 14.5
     },
-    "totals": {
-      "wins": 35,
-      "losses": 24,
-      "pushes": 0,
-      "pct": 59.3,
-      "roi": 13.3
-    },
     "moneylines": {
       "wins": 37,
-      "losses": 23,
+      "losses": 24,
       "pushes": 0,
-      "pct": 61.7,
-      "roi": 17.7
+      "pct": 60.7,
+      "roi": 15.8
     },
     "best_bets": {
-      "wins": 33,
-      "losses": 12,
+      "wins": 32,
+      "losses": 13,
       "pushes": 0,
-      "pct": 73.3,
-      "roi": 40.0
+      "pct": 71.1,
+      "roi": 35.8
     }
   },
   "days": [
     {
       "date": "2026-03-06",
       "spreads": {
-        "wins": 4,
+        "wins": 5,
         "losses": 1,
         "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
+        "record": "5-1",
+        "pct": 83.3
       },
       "totals": {
-        "wins": 3,
+        "wins": 4,
         "losses": 2,
         "pushes": 0,
-        "record": "3-2",
-        "pct": 60.0
+        "record": "4-2",
+        "pct": 66.7
       },
       "moneylines": {
         "wins": 3,
+        "losses": 3,
+        "pushes": 0,
+        "record": "3-3",
+        "pct": 50.0
+      },
+      "best_bets": {
+        "wins": 3,
         "losses": 2,
         "pushes": 0,
         "record": "3-2",
         "pct": 60.0
-      },
-      "best_bets": {
-        "wins": 4,
-        "losses": 1,
-        "pushes": 0,
-        "record": "4-1",
-        "pct": 80.0
       },
       "picks": [
         {
@@ -134,8 +134,7 @@
           "result": "6-3",
           "hit": true,
           "confidence": 58.8,
-          "proj_score": "3.0-2.9",
-          "best_bet": true
+          "proj_score": "3.0-2.9"
         },
         {
           "date": "2026-03-06",
@@ -221,6 +220,38 @@
           "confidence": 51.4,
           "proj_score": "3.8-3.6",
           "home_win_prob": 60.5
+        },
+        {
+          "date": "2026-03-06",
+          "type": "spread",
+          "game": "STL @ SJS",
+          "pick": "STL +1.5",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 52.2,
+          "proj_score": "2.5-3.7"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "total",
+          "game": "STL @ SJS",
+          "pick": "UNDER 6.5",
+          "result": "3-2",
+          "hit": true,
+          "confidence": 51.7,
+          "proj_score": "2.5-3.7"
+        },
+        {
+          "date": "2026-03-06",
+          "type": "ml",
+          "game": "STL @ SJS",
+          "pick": "SJS",
+          "result": "3-2",
+          "hit": false,
+          "confidence": 59.0,
+          "proj_score": "2.5-3.7",
+          "home_win_prob": 84.7,
+          "best_bet": true
         }
       ]
     },
