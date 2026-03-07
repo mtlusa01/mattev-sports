@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-07T18:58:01",
+  "updated": "2026-03-07T18:58:34",
   "allTime": {
     "spreads": {
       "wins": 287,
-      "losses": 232,
+      "losses": 233,
       "pushes": 12,
-      "pct": 55.3,
-      "roi": 5.6
+      "pct": 55.2,
+      "roi": 5.4
     },
     "totals": {
       "wins": 258,
-      "losses": 270,
+      "losses": 271,
       "pushes": 3,
-      "pct": 48.9,
-      "roi": -6.7
+      "pct": 48.8,
+      "roi": -6.9
     },
     "moneylines": {
-      "wins": 344,
+      "wins": 345,
       "losses": 187,
       "pushes": 0,
       "pct": 64.8,
-      "roi": 23.7
+      "roi": 23.8
     },
     "best_bets": {
-      "wins": 51,
-      "losses": 17,
+      "wins": 52,
+      "losses": 18,
       "pushes": 0,
-      "pct": 75.0,
-      "roi": 43.2
+      "pct": 74.3,
+      "roi": 41.8
     }
   },
   "days": [
@@ -35,31 +35,31 @@
       "date": "2026-03-07",
       "spreads": {
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "0-1",
+        "record": "0-2",
         "pct": 0.0
       },
       "totals": {
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "pushes": 0,
-        "record": "0-1",
+        "record": "0-2",
         "pct": 0.0
       },
       "moneylines": {
-        "wins": 0,
+        "wins": 1,
         "losses": 1,
         "pushes": 0,
-        "record": "0-1",
-        "pct": 0.0
+        "record": "1-1",
+        "pct": 50.0
       },
       "best_bets": {
-        "wins": 0,
-        "losses": 3,
+        "wins": 1,
+        "losses": 4,
         "pushes": 0,
-        "record": "0-3",
-        "pct": 0.0
+        "record": "1-4",
+        "pct": 20.0
       },
       "picks": [
         {
@@ -93,6 +93,38 @@
           "hit": false,
           "confidence": 64,
           "proj_score": "67.1-71.6",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "spread",
+          "game": "XAV @ VILL",
+          "pick": "XAV +11.5",
+          "result": "78-91",
+          "hit": false,
+          "confidence": 77,
+          "proj_score": "77.6-80.5",
+          "best_bet": true
+        },
+        {
+          "date": "2026-03-07",
+          "type": "total",
+          "game": "XAV @ VILL",
+          "pick": "UNDER 154.5",
+          "result": "78-91",
+          "hit": false,
+          "confidence": 46,
+          "proj_score": "77.6-80.5"
+        },
+        {
+          "date": "2026-03-07",
+          "type": "ml",
+          "game": "XAV @ VILL",
+          "pick": "VILL",
+          "result": "78-91",
+          "hit": true,
+          "confidence": 62,
+          "proj_score": "77.6-80.5",
           "best_bet": true
         }
       ]
